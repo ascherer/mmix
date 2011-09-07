@@ -1661,7 +1661,7 @@ tetra support[8]; /* big-endian bitmap for all opcodes supported */
 
 @<Determine the flags, |f|, and the internal opcode, |i|@>=
 if (!(support[op>>5]&(sign_bit>>(op&31)))) {
-  /* oops, this opcode isn't supported by any function unit */
+  /* oops, this opcode isn't supported by any functional unit */
   f=flags[TRAP], i=trap;
 }@+else f=flags[op], i=internal_op[op];
 if (i==trip && (head->loc.h&sign_bit)) f=0,i=noop;
@@ -2672,7 +2672,10 @@ fields contain valid information that should become officially known.
 
 @<Finish execution of an operation@>=
 fin_ex:@+if (data->ren_x) data->x.known=true;
-else if (data->mem_x) data->x.known=true, data->x.addr.l&=-8;
+else if (data->mem_x) {
+  data->x.known=true;
+  if (!(data->x.addr.h&0xffff0000)) data->x.addr.l&=-8;
+}
 if (data->ren_a) data->a.known=true;
 if (data->loc.h&sign_bit)
   data->ra.o.l=0; /* no trips enabled for the operating system */
@@ -3629,6 +3632,8 @@ static cacheblock* alloc_slot(c,alf)
   register cacheset s;
   register cacheblock *p,*q;
   if (cache_search(c,alf)) return NULL;
+  if (c->flusher.next && c->outbuf.tag.h==alf.h &&
+        !((c->outbuf.tag.l^alf.l)&c->tagmask)) return NULL;
   s=cache_addr(c,alf); /* the set corresponding to |alf| */
   if (c->victim) p=choose_victim(c->victim,c->vv,c->vrepl);
   else p=choose_victim(s,c->aa,c->repl);
@@ -3694,11 +3699,14 @@ Extern chunknode *mem_hash; /* the simulated main memory */
 
 @ The separately compiled procedures |spec_read()| and |spec_write()| have the
 same calling conventions as the general procedures
-|mem_read()| and |mem_write()|.
+|mem_read()| and |mem_write()|, but with an additional |size| parameter,
+which specifies that |1<<size| bytes should be read or written.
 
 @<Sub...@>=
-extern octa spec_read @,@,@[ARGS((octa addr))@]; /* for memory mapped I/O */
-extern void spec_write @,@,@[ARGS((octa addr,octa val))@]; /* likewise */
+extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
+ /* for memory mapped I/O */
+extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
+ /* likewise */
 
 @ If the program tries to read from a chunk that hasn't been allocated,
 the value zero is returned, optionally with a comment to the user.
@@ -3720,7 +3728,6 @@ octa mem_read(addr)
 {
   register tetra off,key;
   register int h;
-  if (addr.h>=(1<<16)) return spec_read(addr);
   off=(addr.l&0xffff)>>3;
   key=(addr.l&0xffff0000)+addr.h;
   for (h=key%hash_prime;mem_hash[h].tag!=key;h--) {
@@ -3748,7 +3755,6 @@ void mem_write(addr,val)
 {
   register tetra off,key;
   register int h;
-  if (addr.h>=(1<<16)) {@+spec_write(addr,val);@+return;@+}
   off=(addr.l&0xffff)>>3;
   key=(addr.l&0xffff0000)+addr.h;
   for (h=key%hash_prime;mem_hash[h].tag!=key;h--) {
@@ -4422,6 +4428,7 @@ typedef struct{
   octa addr; /* its physical address */
   tetra stamp; /* when last committed (mod $2^{32}$) */
   internal_opcode i; /* is this write special? */
+  int size; /* parameter for |spec_write| */
 } write_node;
 
 @ We represent the buffer in the usual way as a circular list, with elements
@@ -4547,6 +4554,11 @@ or vice versa, we believe the most recent hint.
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
   if (hot->interrupt&(F_BIT+0xff)) goto done_with_write;
+  if (hot->x.addr.h&0xffff0000) {
+    if (hot->op>=STB && hot->op<STSF) q->size=(hot->op&0xf)>>2;
+    else if (hot->op>=STSF && hot->op<STCO) q->size=2;
+    else q->size=3;
+  }
   if (hot->i!=sync) for (;;) {
     if (q==write_head) break;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
@@ -4582,10 +4594,10 @@ case write_from_wbuf:
   case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
     if (write_head==write_tail) wait(1); /* write buffer is empty */
     if (write_head->i==sync) @<Ignore the item in |write_head|@>;
+    if (write_head->addr.h&0xffff0000) goto mem_direct;
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
       wait(1); /* data too raw */
-    if (!Dcache || (write_head->addr.h&0xffff0000)) goto mem_direct;
-          /* not cached */
+    if (!Dcache) goto mem_direct; /* not cached */
     if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1); /* D-cache busy */
     startup(&Dcache->reader[j],Dcache->access_time);
     @<Write the data into the D-cache and set |state=4|,
@@ -4623,7 +4635,9 @@ if (mem_lock) wait(1);
 set_lock(self,wbuf_lock);
 set_lock(&mem_locker,mem_lock); /* a coroutine of type |vanish| */
 startup(&mem_locker,mem_addr_time+mem_write_time);
-mem_write(write_head->addr,write_head->o);
+if (write_head->addr.h&0xffff0000)
+  spec_write(write_head->addr,write_head->o,write_head->size);
+else mem_write(write_head->addr,write_head->o);
 data->state=5;@+ wait(mem_addr_time+mem_write_time);
 
 @ A subtlety needs to be mentioned here: While we're trying to
@@ -4844,17 +4858,34 @@ data->z.o=phys_addr(data->y.o,data->z.o);
     goto fin_ex;
   }
   data->z.o=data->y.o;@+ data->z.o.h -= sign_bit;
-  if (data->i>=st && data->i<=syncid) {
+  if (data->z.o.h&0xffff0000) {
+    switch (data->i) {
+  case ldvts: case preld: case prest: case prego: case syncd: case syncid:
+      goto fin_ex;
+  case ld: case ldunc:@+if (mem_lock) wait(1);
+    if (data->op<LDSF) i=(data->op&0xf)>>2;
+    else if (data->op<CSWAP) i=2;
+    else i=3;
+    data->x.o=spec_read(data->z.o,i);
+    goto make_ld_ready;
+  case pst: if ((data->op^CSWAP)<=1) {
+     data->x.o=spec_read(data->z.o,3);@+goto make_ld_ready;
+    }
+    data->x.o=zero_octa;
+  case st: data->state=st_ready;@+pass_after(1);@+goto passit;
+    }
+  }@+else if (data->i>=st && data->i<=syncid) {
     data->state=st_ready;@+pass_after(1);@+goto passit;
   }
   m=write_search(data,data->z.o);
   if (m) {
     if (m==DUNNO) data->state=DT_hit;
     else data->x.o=*m, data->state=ld_ready;
-  }@+ else if ((data->z.o.h&0xffff0000) || !Dcache) {
+    pass_after(1);@+goto passit;
+  }@+ else if (!Dcache) {
     if (mem_lock) wait(1);
-    set_lock(&mem_locker,mem_lock);
     data->x.o=mem_read(data->z.o);
+make_ld_ready: set_lock(&mem_locker,mem_lock);
     data->state=ld_ready;
     startup(&mem_locker,mem_addr_time+mem_read_time);
     pass_after(mem_addr_time+mem_read_time);@+ goto passit;
@@ -6524,7 +6555,7 @@ if (!zz) halted=true;
 else if (zz==1) {
   octa trap_loc;
   trap_loc=incr(g[rWW].o,-4);
-  if (!(trap_loc.h || trap_loc.l>=0x90))
+  if (!(trap_loc.h || trap_loc.l>=0xf0))
     print_trip_warning(trap_loc.l>>4,incr(g[rW].o,-4));
 }
 

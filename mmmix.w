@@ -310,6 +310,8 @@ understands the following terse commands:
 \bull\.{@@}\<hexadecimal integer>: Set the instruction pointer
 to this virtual address; successive instructions will be fetched from here.
 
+\bull\.{k}: Toggle the sign bit of the instruction pointer.
+
 \bull\.{b}\<hexadecimal integer>: Set the breakpoint
 to this virtual address; simulation will pause when an instruction from the
 breakpoint address enters the fetch buffer.
@@ -372,6 +374,7 @@ done:@;
 case 'h': case '?': printf("The interactive commands are as follows:\n");
   printf(" <n> to run for n cycles\n");
   printf(" @@<x> to take next instruction from location x\n");
+  printf(" k    to change the sign bit of the instruction location\n");
   printf(" b<x> to pause when location x is fetched\n");
   printf(" v<x> to print specified diagnostics when running;\n");
   printf("    x=1[insts enter/leave pipe]+2[whole pipeline each cycle]+\n");
@@ -402,7 +405,12 @@ case '5': case '6': case '7': case '8': case '9':
   if (bp.h==(tetra)-1 && bp.l==(tetra)-1) printf("\n");
   else printf(" with breakpoint %08x%08x\n",bp.h,bp.l);
   MMIX_run(n,bp);@+continue;
-case '@@': inst_ptr.o=read_hex(buffer+1);@+inst_ptr.p=NULL;@+continue;
+case '@@': inst_ptr.o=read_hex(buffer+1);@+goto new_inst_ptr;
+case 'k': inst_ptr.o.h^=0x80000000; /* shortcut to kernel mode */
+  if (!ticks.l && head) head->loc.h^=0x80000000; /* fix the \.{UNSAVE} loc */
+new_inst_ptr:@+if (inst_ptr.o.h&0x80000000)
+    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+  inst_ptr.p=NULL;@+continue;
 case 'b': bp=read_hex(buffer+1);@+continue;
 case 'v': verbose=read_hex(buffer+1).l;@+continue;
 
@@ -526,7 +534,7 @@ it simply lists the functional unit names.
 But I might decide to put other stuff here when giving a demo.
 
 @<Cases...@>=
-case 'k':@+ { register int j;
+case '!':@+ { register int j;
    for (j=0;j<funit_count;j++)
      printf("unit %s %d\n",funit[j].name,funit[j].k);
  }
