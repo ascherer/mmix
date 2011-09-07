@@ -6562,19 +6562,19 @@ void magic_write(addr,val)
   if (Dcache) {
     p=cache_search(Dcache,addr);
     if (p) p->data[(addr.l&(Dcache->bb-1))>>3]=val;
-    if (((Dcache->inbuf.tag.l^addr.l)&Dcache->tagmask)==0 &&
+    if (((Dcache->inbuf.tag.l^addr.l)&-Dcache->bb)==0 &&
           Dcache->inbuf.tag.h==addr.h)
       Dcache->inbuf.data[(addr.l&(Dcache->bb-1))>>3]=val;
-    if (((Dcache->outbuf.tag.l^addr.l)&Dcache->tagmask)==0 &&
+    if (((Dcache->outbuf.tag.l^addr.l)&-Dcache->bb)==0 &&
           Dcache->outbuf.tag.h==addr.h)
       Dcache->outbuf.data[(addr.l&(Dcache->bb-1))>>3]=val;
     if (Scache) {
       p=cache_search(Scache,addr);
       if (p) p->data[(addr.l&(Scache->bb-1))>>3]=val;
-      if (((Scache->inbuf.tag.l^addr.l)&Scache->tagmask)==0 &&
+      if (((Scache->inbuf.tag.l^addr.l)&-Scache->bb)==0 &&
             Scache->inbuf.tag.h==addr.h)
         Scache->inbuf.data[(addr.l&(Scache->bb-1))>>3]=val;
-      if (((Scache->outbuf.tag.l^addr.l)&Scache->tagmask)==0 &&
+      if (((Scache->outbuf.tag.l^addr.l)&-Scache->bb)==0 &&
             Scache->outbuf.tag.h==addr.h)
         Scache->outbuf.data[(addr.l&(Scache->bb-1))>>3]=val;
     }
