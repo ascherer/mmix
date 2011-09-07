@@ -1419,7 +1419,8 @@ $$\vbox{\halign{&\tt#\hfil\ \cr
   &CSNN &\$0,\$3,0&\% set \$0=0 if \$3>=0\cr
   &OR  &\$0,\$2,\$0&\% attach sign of \$Z to \$0\cr
 1H\ &FADD &\$1,\$Z,\$0&\% \$1=\$Z+\$0\cr
-  &FSUB &\$X,\$1,\$0&\% \$X=\$1-\$0\cr}}$$
+  &FSUB &\$1,\$1,\$0&\% \$X=\$1-\$0\cr
+  &OR   &\$X,\$1,\$2&\% make sure minus zero isn't lost\cr}}$$
 This program handles most cases of interest by adding and subtracting
 $\pm2^{52}$ using floating point arithmetic.
 It would be incorrect to do this in all cases;
@@ -2917,6 +2918,13 @@ $b_4=5$, then $r+1$ is used both for PTPs of segment~0 and PTEs of
 segment~2. And if $b_2=b_3<b_4$, then $r+b_2$ is used for the PTE of
 page~0 segments 2 and~3; page~1 of segment~2 is not allowed, but there
 is a page~1 in segment~3.
+
+A {\it default page\/} of $2^{13}$ bytes is permanently allocated
+at the top end of physical memory, in order to give the operating system
+some ``breathing room'' as it is processing interrupts. When a write-protection
+fault occurs, on an instruction with \.w interrupts disabled, \MMIX\ completes
+the instruction that triggered it by writing into the default page.
+@^default page@>
 
 I know these rules look extremely complicated, and I sincerely wish I could
 have found an alternative that would be both simple and efficient in practice.

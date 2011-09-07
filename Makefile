@@ -92,6 +92,9 @@ mmix:   mmix-arith.o mmix-io.o mmix-sim.c abstime
 	$(CC) $(CFLAGS) mmix-sim.c mmix-arith.o mmix-io.o -o mmix
 	rm abstime.h
 
+mmotype: mmotype.c
+	$(CC) $(CFLAGS) mmotype.c -o mmotype
+
 tarfile: $(ALL)
 	tar cvf /tmp/mmix.tar $(ALL)
 	gzip -9 /tmp/mmix.tar

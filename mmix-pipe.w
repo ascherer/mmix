@@ -1742,7 +1742,7 @@ unsigned char flags[256]={
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{ZSNN}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{LDB}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{LDT}, \dots\ */
-0x2a, 0x29, 0x2a, 0x29, 0x1a, 0x19, 0x2a, 0x29, /* \.{LDSF}, \dots\ */
+0x2a, 0x29, 0x2a, 0x29, 0x3a, 0x39, 0x2a, 0x29, /* \.{LDSF}, \dots\ */
 0x2a, 0x29, 0x0a, 0x09, 0x0a, 0x09, 0xaa, 0xa9, /* \.{LDVTS}, \dots\ */
 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, /* \.{STB}, \dots\ */
 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, /* \.{STT}, \dots\ */
@@ -4507,14 +4507,15 @@ it will also increase the number of buffered items when writes are to
 different locations.
 
 A store instruction that sets any of the eight interrupt bits
-\.{rwxnkbsp} will not affect memory, even if it doesn't cause an interrupt.
+\.{rwxnkbsp} except~\.w
+will not affect memory, even if it doesn't cause an interrupt.
 
 When ``store'' is followed by ``store uncached'' at the same address,
 or vice versa, we believe the most recent hint.
 
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
-  if (hot->interrupt&(F_BIT+0xff)) goto done_with_write;
+  if (hot->interrupt&(F_BIT+0xbf)) goto done_with_write;
   if (hot->i!=sync) for (;;) {
     if (q==write_head) break;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
@@ -4878,6 +4879,11 @@ square_one: data->state=DT_retry;
    if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
      if (data->i==syncd || data->i==syncid) goto sync_check;
      data->interrupt |= j&~(data->z.o.l<<PROT_OFFSET);
+     if ((j&PW_BIT)&&(data->i==st || data->i==pst)) {
+       data->z.o.l=data->y.o.l | 0xffffe000, data->z.o.h=0xffff;
+       goto finish_store; /* write on the default page */
+@^default page@>
+     }
      goto fin_ex;
    }
    data->z.o=phys_addr(data->y.o,data->z.o);
@@ -5423,6 +5429,8 @@ might have already been deissued.
   @<Restart the fetch coroutine@>;
   cool_hist=data->hist;
   for (i=j&data->ra.o.l,m=16;!(i&D_BIT);i<<=1,m+=16);
+  data->arith_exc |= (j & ~(0x10000 >> (m >> 4))) >> 8;
+      /* trips taken are not logged as events */
   data->go.o.h=0, data->go.o.l=m;
   inst_ptr.o=data->go.o, inst_ptr.p=NULL;
   data->interrupt |= H_BIT;
@@ -5627,7 +5635,7 @@ if (hot->interrupt&H_BIT) { /* trip */
 j=hot->interrupt&H_BIT;
 if ((hot->interrupt&F_BIT) && hot->op==SWYM) g[rYY].o=hot->go.o;
 else g[j?rY:rYY].o=hot->y.o;
-if (hot->i==st || hot->i==pst) g[j?rZ:rZZ].o=hot->x.o;
+if (hot->i==st || hot->i==pst) g[j?rZ:rZZ].o=hot->b.o;
 else g[j?rZ:rZZ].o=hot->z.o;
 if (verbose&issue_bit) {
   if (j) {
