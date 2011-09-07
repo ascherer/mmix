@@ -2001,7 +2001,7 @@ case MUL: case MULI: x=signed_omult(y,z);
 test_overflow:@+if (overflow) exc|=V_BIT;
  goto store_x;
 case MULU: case MULUI: x=omult(y,z);@+a=g[rH]=aux;@+goto store_x;
-case DIV: case DIVI:@+if (!z.l && !z.h) aux=y, exc|=D_BIT;
+case DIV: case DIVI:@+if (!z.l && !z.h) aux=y, exc|=D_BIT, overflow=false;
  else x=signed_odiv(y,z);
  a=g[rR]=aux;@+goto test_overflow;
 case DIVU: case DIVUI: x=odiv(b,y,z);@+a=g[rR]=aux;@+goto store_x;
