@@ -263,10 +263,10 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
 
 @<Cases...@>=
 case lop_file:@+if (file_name[y]) {
-   if (z) err("Two file names with the same number");
-@.Two file names...@>
    for (j=z;j>0;j--) read_tet();
    cur_file=y;
+   if (z) err("Two file names with the same number");
+@.Two file names...@>
  }@+else {
    if (!z) err("No name given for newly selected file");
 @.No name given...@>
@@ -334,7 +334,7 @@ if (buf[0]!=mm || buf[1]!=lop_pre) {
   exit(-5);
 }
 if (y!=1) fprintf(stderr,
-    "Warning: I'm reading this file as version 1, not version %d!",y);
+    "Warning: I'm reading this file as version 1, not version %d!\n",y);
 @.I'm reading this file...@>
 if (z>0) {
   j=z;

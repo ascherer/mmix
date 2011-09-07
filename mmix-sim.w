@@ -3377,7 +3377,7 @@ if (dump_file) {
   x.l=1;
   dump(mem_root);
   dump_tet(0),dump_tet(0);
-  exit(1);
+  exit(0);
 }
 
 @ The special option `\.{-D<filename>}' can be used to prepare binary files

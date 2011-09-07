@@ -1607,7 +1607,7 @@ commands.
 @^illegal instructions@>
 
 @* Subroutine linkage.
-\MMIX\ has a several special operations designed to facilitate the process of
+\MMIX\ has several special operations designed to facilitate the process of
 calling and implementing subroutines. The key notion is the idea of a
 hardware-supported {\it register stack}, which can coexist with a
 software-supported stack of variables that are not maintained in registers.

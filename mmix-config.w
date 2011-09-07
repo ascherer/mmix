@@ -391,14 +391,16 @@ static void get_token() /* set |token| to the next token of the configuration fi
 }
 
 @ The |get_int| routine is called when we wish to input a decimal value.
-It returns $-1$ if the next token isn't a valid decimal integer.
+It returns $-1$ if the next token isn't a string of decimal digits.
 
 @<Sub...@>=
 static int get_int @,@,@[ARGS((void))@];@+@t}\6{@>
 static int get_int()
 {@+ int v;
+  char *p;
   get_token();
-  if (sscanf(token,"%d",&v)!=1) return -1;
+  for (p=token,v=0; *p>='0' && *p<='9'; p++) v=10*v+*p-'0';
+  if (*p) return -1;
   return v;
 }
 

@@ -12,7 +12,7 @@ CFLAGS = -g
 PDFTEX = dvipdfm
 #PDFTEX = pdftex
 
-.SUFFIXES: .dvi .tex .w .ps .pdf
+.SUFFIXES: .dvi .tex .w .ps .pdf .mmo .mmb .mms
 
 .tex.dvi:
 	tex $*.tex
@@ -48,6 +48,12 @@ PDFTEX = dvipdfm
 	 dvipdfm ) tex "\let\pdf+ \input $*"; dvipdfm $* ;; \
 	 pdftex ) pdftex $* ;; \
 	esac
+
+.mmb.mmo:
+	mmix -D$*.mmb $*.mmo
+
+.mmo.mms:
+	mmixal -x -b 250 -l $*.mml $*.mms
 
 WEBFILES = abstime.w boilerplate.w mmix-arith.w mmix-config.w mmix-doc.w \
 	mmix-io.w mmix-mem.w mmix-pipe.w mmix-sim.w mmixal.w mmmix.w mmotype.w
