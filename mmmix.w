@@ -353,7 +353,7 @@ speed of instruction issue.
 
 @<Run the simulation interactively@>=
 while (1) {
-  printf("mmmix> ");
+  printf("mmmix> ");@+fflush(stdout);
 @.mmmix>@>
   fgets(buffer,BUF_SIZE,stdin);
   switch (buffer[0]) {

@@ -6535,9 +6535,15 @@ octa magic_read(addr)
   if (Dcache) {
     p=cache_search(Dcache,addr);
     if (p) return p->data[(addr.l&(Dcache->bb-1))>>3];
+    if (((Dcache->outbuf.tag.l^addr.l)&-Dcache->bb)==0 &&
+          Dcache->outbuf.tag.h==addr.h)
+      return Dcache->outbuf.data[(addr.l&(Dcache->bb-1))>>3];
     if (Scache) {
       p=cache_search(Scache,addr);
       if (p) return p->data[(addr.l&(Scache->bb-1))>>3];
+      if (((Scache->outbuf.tag.l^addr.l)&-Scache->bb)==0 &&
+            Scache->outbuf.tag.h==addr.h)
+        return Scache->outbuf.data[(addr.l&(Scache->bb-1))>>3];
     }
   }
   return mem_read(addr);

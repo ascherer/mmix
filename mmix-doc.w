@@ -3009,6 +3009,7 @@ $$\vbox{\halign{&\tt#\hfil\ \cr
 &SETH  &mask,\#8000 \cr
 &ORL   &mask,\#1ff8&\% mask=(sign bit and n field)\cr 
 &ORH   &\$7,\#8000      &\% set sign bit for PTP validation below\cr
+&ANDNH &virt,\#e000     &\% zero out the segment number\cr
 &SRU    &\$0,virt,s     &\% \$0=a4a3a2a1a0 (page number of virt)\cr
 &ZSZ   &\$1,\$0,1       &\% \$1=[page number is zero]\cr
 &ADD    &limit,limit,\$1&\% increase limit if page number is zero\cr
@@ -3087,8 +3088,8 @@ $$\chardef\_=`\_
 &ANDNL &base,\#1fff &\% remove low 13 bits of PTP\cr
 1H &8ADDU &\$6,\$0,base \cr
 &LDO  &base,\$6,0  &\% base=PTE\cr
-&XOR &base,base,\$7\cr
-&ANDN&\$6,base,\#7\cr
+&XOR &\$6,base,\$7\cr
+&ANDN&\$6,\$6,\#7\cr
 &SLU &\$6,\$6,51\cr
 &BNZ &\$6,Fail &\% branch if n doesn't match\cr
 &CMP &\$6,\$5,limit \cr
