@@ -4273,6 +4273,7 @@ convenience. Whenever rV changes, we recompute all these variables.
 int page_n; /* the 10-bit |n| field of rV, times 8 */
 int page_r; /* the 27-bit |r| field of rV */
 int page_s; /* the 8-bit |s| field of rV */
+int page_f; /* the 3-bit |f| field of rV */
 int page_b[5]; /* the 4-bit |b| fields of rV; |page_b[0]=0| */
 octa page_mask; /* the least significant |s| bits */
 bool page_bad=true; /* does rV violate the rules? */
@@ -4280,7 +4281,7 @@ bool page_bad=true; /* does rV violate the rules? */
 @ @<Update the \\{page} variables@>=
 {@+octa rv;
   rv=data->z.o;
-  page_bad=(rv.l&7? true: false);
+  page_f=rv.l&7, page_bad=(page_f>1);
   page_n=rv.l&0x1ff8;
   rv=shift_right(rv,13,1);
   page_r=rv.l&0x7ffffff;
@@ -4691,7 +4692,7 @@ case ld_st_launch:@+if ((self+1)->next)
   if (data->y.o.h&sign_bit)
     @<Do load/store stage~1 with known physical address@>;
   if (page_bad) {
-    if (data->i==st || (data->i<preld && data->i>syncid))
+    if (data->i<preld || data->i==st || data->i==pst)
        data->interrupt|=PRW_BITS;
     goto fin_ex;
   }
@@ -4862,7 +4863,7 @@ square_one: data->state=DT_retry;
    wait(DTcache->access_time);
  case DT_miss:@+if (DTcache->filler.next)
      if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;
-   if (no_hardware_PT)
+   if (no_hardware_PT || page_f)
      if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;
    p=alloc_slot(DTcache,trans_key(data->y.o));
    if (!p) goto square_one;
@@ -5259,7 +5260,8 @@ if (data->i!=prego) {
 @ @<Other cases for the fetch coroutine@>=
  case IT_miss:@+if (ITcache->filler.next)
      if (data->i==prego) goto fin_ex;@+else wait(1);
-   if (no_hardware_PT) @<Insert dummy instruction for page table emulation@>;
+   if (no_hardware_PT || page_f)
+     @<Insert dummy instruction for page table emulation@>;
    p=alloc_slot(ITcache,trans_key(data->y.o));
    if (!p) /* hey, it was present after all */
      if (data->i==prego) goto fin_ex;@+else goto new_fetch;
@@ -5773,8 +5775,10 @@ implicit outputs of many instructions.
 The same applies to rK, since it is changed by \.{TRAP} and
 by emulated instructions.
 
+Likewise, rQ must not be prematurely gotten.
+
 @<Cases for stage 1...@>=
-case get:@+ if (data->zz>=21 || data->zz==rK) {
+case get:@+ if (data->zz>=21 || data->zz==rK || data->zz==rQ) {
    if (data!=old_hot) wait(1);
    data->z.o=g[data->zz].o;
  }
@@ -5800,7 +5804,7 @@ case put:@+if (data->xx>=15 && data->xx<=20) {
   case rG: @<Update rG@>;@+break;
    }
  }@+else if (data->xx==rA && (data->z.o.h!=0 || data->z.o.l>=0x40000))
-   data->interrupt |= B_BIT;
+   data->interrupt |= B_BIT, data->z.o.h=0, data->z.o.l&=0x3ffff;
  data->x.o=data->z.o;@+goto fin_ex;
 
 @ When rG decreases, we assume that up to |commit_max| marginal registers can
@@ -5810,7 +5814,7 @@ seat, and holding |dispatch_lock|.)
 @<Update rG@>=
 if (data->z.o.h!=0 || data->z.o.l>=256 ||
       data->z.o.l<g[rL].o.l || data->z.o.l<32)
-  data->interrupt |= B_BIT;
+  data->interrupt |= B_BIT, data->z.o=g[rG].o;
 else if (data->z.o.l<g[rG].o.l) {
     data->interim=true; /* potentially interruptible */
     for (j=0;j<commit_max;j++) {
@@ -6123,7 +6127,8 @@ because it can be interrupted when it's in the hot seat.
 @<Cases to compute the results of reg...@>=
 case frem:@+if(is_trivial(data->y.o) || is_trivial(data->z.o))
     {
-      data->x.o=fremstep(data->y.o,data->z.o,2500);@+ goto fin_ex;
+      data->x.o=fremstep(data->y.o,data->z.o,2500);
+      data->interrupt |= exceptions;@+ goto fin_ex;
     }
   if ((self+1)->next) wait(1);
   data->interim=true;

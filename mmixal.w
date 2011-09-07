@@ -335,7 +335,7 @@ $$\vbox{\halign{$#$\hfil\cr
 \<expression list>\is\<expression>\mid\<expression list>\.,\<expression>\cr
 }}$$
 
-The opcode field either contains a symbolic \MMIX\ operation name (like
+The opcode field contains either a symbolic \MMIX\ operation name (like
 \.{ADD}), or an {\it alias operation}, or a {\it pseudo-operation}.
 Alias operations are alternate names for \MMIX\ operations whose standard
 names are inappropriate in certain contexts. 

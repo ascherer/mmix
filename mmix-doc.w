@@ -2092,8 +2092,8 @@ register\/}~rW\null.
 @^rX@>
 @^rY@>
 @^rZ@>
-The instruction in~rX may not be the same as the instruction in
-location $\rm rW-4$; for example, it may be an instruction that
+The instruction in~rX might not be the same as the instruction in
+location $\rm rW-4$; for example, it might be an instruction that
 branched or jumped to~rW\null. It might also be an instruction
 inserted internally by the \MMIX\ processor.
 (For example, the computer silently inserts an internal instruction
@@ -2971,7 +2971,9 @@ the TC. Register~X is set to 0 if the key was not present
 in any translation cache, or to 1 if the key was present in the TC
 for instructions, or to 2 if the key was present in the TC for data,
 or to~3 if the key was present in both. This instruction is for the
-operating system only.
+operating system only. (Changes to the TC are not immediate; so \.{SYNC}
+and/or \.{SYNCD} ought to be done when appropriate, as discussed in
+{\sc MMIX-PIPE}.)
 
 @ We mentioned earlier that
 cheap versions of\/ \MMIX\ might calculate the physical addresses with
