@@ -1405,8 +1405,8 @@ a speedy almost-correct one, so we implement the most general case.
   if (NaN) *q++='1';
   if (*p=='.') @<Scan a fraction part@>;
   next_char=p;
-  if (*p=='e' && !NaN) @<Scan an exponent@>@;
-  else exp=0;
+  exp=0;
+  if (*p=='e' && !NaN) @<Scan an exponent@>;
   if (dec_pt) @<Return a floating point constant@>;
   if (sign=='-') val=ominus(zero_octa,val);
   return 0;
@@ -1443,6 +1443,8 @@ know that a syntactically correct exponent exists.
 The code here will convert extra-large inputs like
 `\.{9e+9999999999999999}' into $\infty$ and extra-small inputs into zero.
 Strange inputs like `\.{-00.0e9999999}' must also be accommodated.
+(But we {\it don't\/} try to deliver precise answers when there are
+a billion or more leading zeros.)
 
 @<Scan an exponent@>=
 {@+register char exp_sign;
@@ -1450,7 +1452,7 @@ Strange inputs like `\.{-00.0e9999999}' must also be accommodated.
   if (*p=='+' || *p=='-') exp_sign=*p++;@+else exp_sign='+';
   if (isdigit(*p)) {
     for (exp=*p++ -'0';isdigit(*p);p++)
-      if (exp<1000) exp = 10*exp + *p - '0';
+      if (exp<100000000) exp = 10*exp + *p - '0';
     if (!dec_pt) dec_pt=q, zeros=0;
     if (exp_sign=='-') exp=-exp;
     next_char=p;

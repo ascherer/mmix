@@ -3178,7 +3178,7 @@ for (j=1;j<argc-1 && argv[j][0]=='-';j++) if (!argv[j][2]) {
   else if (argv[j][1]=='l') j++,strcpy(listing_name,argv[j]);
   else if (argv[j][1]=='b' && sscanf(argv[j+1],"%d",&buf_size)==1) j++;
   else break;
-}@+else if (argv[j][1]!='b' || sscanf(argv[j]+1,"%d",&buf_size)!=1) break;
+}@+else if (argv[j][1]!='b' || sscanf(argv[j]+2,"%d",&buf_size)!=1) break;
 if (j!=argc-1) {
   fprintf(stderr,"Usage: %s %s sourcefilename\n",
 @.Usage: ...@>

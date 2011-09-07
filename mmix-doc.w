@@ -2877,8 +2877,8 @@ $$\phi_i(A)=2^s\,a+(A\bmod2^s)$$
 if $a$ is the address in the PTE for page $\lfloor A/2^s\rfloor$ of
 segment~$i$.
 
-(6) Suppose $\lfloor A/2^s\rfloor=(a_4a_3a_2a_1a_0)_{1024}$ in the
-radix-1024 number system. In the common case $a_4=a_3=a_2=a_1=0$, the
+(6) Suppose $\lfloor A/2^s\rfloor$ is equal to $(a_4a_3a_2a_1a_0)_{1024}$
+in the radix-1024 number system. In the common case $a_4=a_3=a_2=a_1=0$, the
 PTE is simply the octabyte ${\rm m}_8[2^{13}(r+b_i)+8a_0]$; this rule
 defines the mapping for the first 1024 pages. The next million or~so pages are
 accessed through an auxiliary {\it page table pointer}
@@ -2909,6 +2909,14 @@ $2^{30}$ pages of 8192 bytes each, all belonging to segment~0. This is
 essentially the virtual memory setup in the Alpha~21064 computers with
 {\mc DIGITAL~UNIX}$^{\rm\,TM}$.
 @^Alpha computers@>
+
+Several special cases have weird behavior, which probably isn't going to
+be useful. But I might as well mention them so that the flexibility
+of this scheme is clarified: If, for example, $b_1=2$, $b_2=b_3=1$, and
+$b_4=5$, then $r+1$ is used both for PTPs of segment~0 and PTEs of
+segment~2. And if $b_2=b_3<b_4$, then $r+b_2$ is used for the PTE of
+page~0 segments 2 and~3; page~1 of segment~2 is not allowed, but there
+is a page~1 in segment~3.
 
 I know these rules look extremely complicated, and I sincerely wish I could
 have found an alternative that would be both simple and efficient in practice.
@@ -3019,62 +3027,60 @@ The next part of the routine finds the ``digits'' of
 the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
 $$
 \vcenter{\halign{&\tt#\hfil\ \cr
-&OR  &\$5,base,0\cr
+&CMP &\$5,base,limit\cr
 &SRU &\$1,\$0,10\cr
 &PBZ &\$1,1F\cr
 &AND &\$0,\$0,\$6\cr
-&INCL &base,\#2000\cr}}
-\qquad
+&INCL&base,\#2000\cr}}
 \vcenter{\halign{&\tt#\hfil\ \cr
-&OR  &\$5,base,0\cr
+&CMP &\$5,base,limit\cr
 &SRU &\$2,\$1,10\cr
 &PBZ &\$2,2F\cr
 &AND &\$1,\$1,\$6\cr
-&INCL &base,\#2000\cr}}
-\qquad
+&INCL&base,\#2000\cr}}
 \vcenter{\halign{&\tt#\hfil\ \cr
-&OR  &\$5,base,0\cr
+&CMP &\$5,base,limit\cr
 &SRU &\$3,\$2,10\cr
 &PBZ &\$3,3F\cr
 &AND &\$2,\$2,\$6\cr
-&INCL &base,\#2000\cr}}
-\qquad
+&INCL&base,\#2000\cr}}
 \vcenter{\halign{&\tt#\hfil\ \cr
-&OR  &\$5,base,0\cr
+&CMP &\$5,base,limit\cr
 &SRU &\$4,\$3,10\cr
 &PBZ &\$4,4F\cr
 &AND &\$3,\$3,\$6\cr
-&INCL &base,\#2000\cr}}
+&INCL&base,\#2000\cr}}
 $$
 Then the process cascades back through PTPs.
 $$
 \vcenter{\halign{&\tt#\hfil\ \cr
-&OR  &\$5,base,0\cr
+&CMP &\$5,base,limit\cr
+&BNN &\$5,Fail\cr
 &8ADDU&\$6,\$4,base\cr
 &LDO  &base,\$6,0\cr
 &XOR &\$6,base,\$7\cr
 &AND &\$6,\$6,mask\cr
 &BNZ &\$6,Fail\cr}}
-\quad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &ANDNL&base,\#1fff\cr
-4H&8ADDU &\$6,\$3,base\cr
+4H&BNN &\$5,Fail\cr
+&8ADDU &\$6,\$3,base\cr
 &LDO  &base,\$6,0\cr
 &XOR &\$6,base,\$7\cr
 &AND &\$6,\$6,mask\cr
 &BNZ &\$6,Fail\cr}}
-\quad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &ANDNL&base,\#1fff\cr
-3H&8ADDU &\$6,\$2,base\cr
+3H&BNN &\$5,Fail\cr
+&8ADDU &\$6,\$2,base\cr
 &LDO  &base,\$6,0\cr
 &XOR &\$6,base,\$7\cr
 &AND &\$6,\$6,mask\cr
 &BNZ &\$6,Fail\cr}}
-\quad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &ANDNL&base,\#1fff\cr
-2H&8ADDU &\$6,\$1,base\cr
+2H&BNN &\$5,Fail\cr
+&8ADDU &\$6,\$1,base\cr
 &LDO  &base,\$6,0\cr
 &XOR &\$6,base,\$7\cr
 &AND &\$6,\$6,mask\cr
@@ -3086,14 +3092,13 @@ any translation with permission bits zero would have the same effect.
 $$\chardef\_=`\_
 \vcenter{\halign{&\tt#\hfil\ \cr
 &ANDNL &base,\#1fff &\% remove low 13 bits of PTP\cr
-1H &8ADDU &\$6,\$0,base \cr
+1H &BNN &\$5,Fail\cr
+&8ADDU &\$6,\$0,base \cr
 &LDO  &base,\$6,0  &\% base=PTE\cr
 &XOR &\$6,base,\$7\cr
 &ANDN&\$6,\$6,\#7\cr
 &SLU &\$6,\$6,51\cr
-&BNZ &\$6,Fail &\% branch if n doesn't match\cr
-&CMP &\$6,\$5,limit \cr
-&BN  &\$6,Ready &\% did we run off the end of the page table?\cr
+&PBZ &\$6,Ready &\% branch if n matches\cr
 Fail&SETL &base,0 &\% errors lead to PTE of zero\cr
 Ready&PUT&rZZ,base\cr
 &LDO&\$255,IntMask &\% load the desired setting of rK\cr

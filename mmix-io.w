@@ -233,7 +233,7 @@ octa mmix_fgetws(handle,buffer,size)
   register int n,s;
   register char *p;
   octa o;
-  int eof;
+  int eof=0;
   if (!(sfile[handle].mode&0x1)) return neg_one;
   if (!size.l && !size.h) return neg_one;
   if (sfile[handle].mode&0x8) sfile[handle].mode &=~ 0x2;
