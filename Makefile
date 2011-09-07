@@ -49,10 +49,10 @@ PDFTEX = dvipdfm
 	 pdftex ) pdftex $* ;; \
 	esac
 
-.mmb.mmo:
+.mmo.mmb:
 	mmix -D$*.mmb $*.mmo
 
-.mmo.mms:
+.mms.mmo:
 	mmixal -x -b 250 -l $*.mml $*.mms
 
 WEBFILES = abstime.w boilerplate.w mmix-arith.w mmix-config.w mmix-doc.w \

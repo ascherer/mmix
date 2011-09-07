@@ -2266,7 +2266,7 @@ to implement |SAVE| and |UNSAVE|.
 
 @<Cases for ind...@>=
 case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
- l[(O+L)&lring_mask].l=L++;
+ l[(O+L)&lring_mask].l=L, L++;
  if (((S-O-L)&lring_mask)==0) stack_store();
  O+=L;@+ g[rO]=incr(g[rO],L<<3);
  L=g[rL].l=0;
@@ -2352,7 +2352,8 @@ case PRELD: case PRELDI: x=incr(w,xx);@+break;
 
 @<Cases for ind...@>=
 case GO: case GOI: x=inst_ptr;@+inst_ptr=w;@+goto store_x;
-case JMP: case JMPB: inst_ptr=z;@+break;
+case JMP: case JMPB: inst_ptr=z;
+case SWYM: break;
 case SYNC:@+if (xx!=0 || yy!=0 || zz>7) goto illegal_inst;
  if (zz<=3) break;
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");

@@ -779,7 +779,7 @@ static void print_control_block(c)
   if (c->ren_a) {@+printf(" a=");@+print_specnode(c->a);@+}
   if (c->set_l) {@+printf(" rL=");@+print_specnode(c->rl);@+}
   if (c->interrupt) {@+printf(" int=");@+print_bits(c->interrupt);@+}
-  if (c->arith_exc) printf(" exc=");@+print_bits(c->arith_exc<<8);
+  if (c->arith_exc) {@+printf(" exc=");@+print_bits(c->arith_exc<<8);@+}
   default_go=incr(c->loc,4);
   if (c->go.o.l!=default_go.l || c->go.o.h!=default_go.h) {
     printf(" ->");@+print_octa(c->go.o);
