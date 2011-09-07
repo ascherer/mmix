@@ -3066,7 +3066,8 @@ that has elapsed since their previous use.
 
 \smallskip\textindent{$\bullet$} ``Pseudo-LRU'' selection chooses the
 victim by a rough approximation to LRU that is simpler to implement
-in hardware. It requires a bit table $r_1\ldots r_a$. Whenever we use an item
+in hardware. It requires a bit table $r_1\ldots r_{2^a-1}$.
+Whenever we use an item
 with binary address $(i_1\ldots i_a)_2$ in the set, we adjust the
 bit table as follows:
 $$r_1\gets1-i_1,\quad r_{1i_1}\gets1-i_2,\quad\ldots,\quad
@@ -6530,7 +6531,7 @@ octa magic_read(addr)
   for (q=write_tail;;) {
     if (q==write_head) break;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
-    if (q->addr.l==addr.l && q->addr.h==addr.h) return q->o;
+    if ((q->addr.l&-8)==(addr.l&-8) && q->addr.h==addr.h) return q->o;
   }
   if (Dcache) {
     p=cache_search(Dcache,addr);
@@ -6563,7 +6564,7 @@ void magic_write(addr,val)
   for (q=write_tail;;) {
     if (q==write_head) break;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
-    if (q->addr.l==addr.l && q->addr.h==addr.h) q->o=val;
+    if ((q->addr.l&-8)==(addr.l&-8) && q->addr.h==addr.h) q->o=val;
   }
   if (Dcache) {
     p=cache_search(Dcache,addr);
