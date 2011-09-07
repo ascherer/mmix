@@ -5667,7 +5667,7 @@ case resume:@+ if (cool!=old_hot) goto stall;
 @ Here we set |cool->i=resum|, since we want to issue another instruction
 after the \.{RESUME} itself.
 
-The restrictions on inserted instructions are designed to insure that
+The restrictions on inserted instructions are designed to ensure that
 those instructions will be the very next ones issued. (If, for example,
 an |incgamma| instruction were necessary, it might cause a page fault
 and we'd lose the operand values for |RESUME_SET| or |RESUME_CONT|.)

@@ -2220,7 +2220,7 @@ Such instructions cause a \.{TRAP} even though their opcode is something
 else like \.{FREM} or \.{FADD} or \.{DIV}. The trap handler can tell
 what instruction to emulate by looking at the opcode, which appears
 in~rXX\null. 
-In such cases the lefthand half of~rXX is set to \Hex{02000000}; the handler
+In such cases the left-hand half of~rXX is set to \Hex{02000000}; the handler
 emulating \.{FADD}, say, should compute the floating point sum of rYY and~rZZ
 and place the result in~rZZ\null. A~subsequent
 \.{RESUME}~\.1 will then place the value of~rZZ in the proper register.
@@ -2376,7 +2376,7 @@ is, they set the `\.b' bit of~rQ) in the present version of\/ \MMIX.
 @^illegal instructions@>
 
 If the execution register rX is nonnegative, its leftmost byte controls
-the way its righthand half will be inserted into the program.
+the way its right-hand half will be inserted into the program.
 Let's call this byte the ``ropcode.'' A ropcode of~0 simply
 inserts the instruction into the execution stream; a ropcode of~1
 is similar, but it substitutes rY and rZ for the 

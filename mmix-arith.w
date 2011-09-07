@@ -373,13 +373,14 @@ octa oxor(y,z) /* compute $y\oplus z$ */
 for sideways addition'' in {\sl The Preparation of Programs
 for an Electronic Digital Computer\/} by Wilkes, Wheeler, and
 Gill, second edition (Reading, Mass.:\ Addison--Wesley, 1957),
-191--193. The efficient endgame used here was suggested by
-Peter Rossmanith and Stefan Schwoon.]
+191--193. Some of the tricks used here were suggested by
+Balbir Singh, Peter Rossmanith, and Stefan Schwoon.]
 @^Gillies, Donald Bruce@>
 @^Miller, Jeffrey Charles Percy@>
 @^Wilkes, Maurice Vincent@>
 @^Wheeler, David John@>
 @^Gill, Stanley@>
+@^Singh, Balbir@>
 @^Rossmanith, Peter@>
 @^Schwoon, Stefan@>
 
@@ -389,7 +390,7 @@ int count_bits(x)
   tetra x;
 {
   register int xx=x;
-  xx=(xx&0x55555555)+((xx>>1)&0x55555555);
+  xx=xx-((xx>>1)&0x55555555);
   xx=(xx&0x33333333)+((xx>>2)&0x33333333);
   xx=(xx+(xx>>4))&0x0f0f0f0f;
   xx=xx+(xx>>8);
@@ -922,7 +923,7 @@ if (ye<ze || (ye==ze && (yf.h<zf.h || (yf.h==zf.h && yf.l<zf.l))))
 if (ze==zero_exponent) ze=ye;
 d=ye-ze;
 if (!s) ee-=d;
-if (ee>=1023) return 1;
+if (ee>=1023) return 1; /* if $\epsilon\ge2$, $z\in N_\epsilon(y)$ */
 @<Compute the difference of fraction parts, |o|@>;
 if (!o.h && !o.l) return 1;
 if (ee<968) return 0; /* if $y\ne z$ and $\epsilon<2^{-54}$, $y\not\sim z$ */
@@ -934,9 +935,14 @@ return o.h<ef.h || (o.h==ef.h && o.l<=ef.l);
 if (ye<0) yf=shift_left(y,2), ye=0;
 if (ze<0) zf=shift_left(z,2), ze=0;
 
-@ When $d>2$, the difference of fraction parts might not fit exactly
+@ At this point $y\sim z$ if and only if
+$$|yf|+(-1)^{[ys=zs]}|zf|/2^d\le 2^{ee-1021}=2^{55}\epsilon.$$
+We need to evaluate this relation without overstepping the bounds of
+our simulated 64-bit registers.
+
+When $d>2$, the difference of fraction parts might not fit exactly
 in an octabyte;
-in that case the numbers are not similar unless $\epsilon\ge3/8$,
+in that case the numbers are not similar unless $\epsilon>3/8$,
 and we replace the difference by the ceiling of the
 true result. When $\epsilon<1/8$, our program essentially replaces
 $2^{55}\epsilon$ by $\lfloor2^{55}\epsilon\rfloor$. These
@@ -952,7 +958,7 @@ if (d>54) o=zero_octa,oo=zf;
 else o=shift_right(zf,d,1),oo=shift_left(o,d);
 if (oo.h!=zf.h || oo.l!=zf.l) { /* truncated result, hence $d>2$ */
   if (ee<1020) return 0; /* difference is too large for similarity */
-  o=incr(o,ys==zs? -1: 1); /* adjust for ceiling */
+  o=incr(o,ys==zs? 0: 1); /* adjust for ceiling */
 }
 o=(ys==zs? ominus(yf,o): oplus(yf,o));
 
