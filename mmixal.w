@@ -2994,6 +2994,7 @@ goto assemble_X;
 }
 
 @ @d SETH 0xe0
+@d SETL 0xe3
 @d ORH 0xe8
 @d ORL 0xeb
 
@@ -3006,7 +3007,7 @@ goto assemble_X;
      case 2: yz=o.l>>16;@+break; /* \.{SETML} or \.{ORML} */
      case 3: yz=o.l&0xffff;@+break; /* \.{SETL} or \.{ORL} */
      }
-    if (yz) {
+    if (yz || j==SETL) {
       assemble(4,(j<<24)+(255<<16)+yz,0);
       j |= ORH;
     }
