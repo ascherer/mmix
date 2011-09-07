@@ -1002,7 +1002,7 @@ else { /* a branch prediction table is desired */
 l=(specnode*)calloc(lring_size,sizeof(specnode));
 if (!l) panic(errprint0("Can't allocate local registers"));
 j=bus_words;
-if (Icache && Icache->bb>j) j=Icache->bb;
+if (Icache && (Icache->bb>>3)>j) j=Icache->bb>>3;
 fetched=(octa*)calloc(j,sizeof(octa));
 if (!fetched) panic(errprint0("Can't allocate prefetch buffer"));
 dispatch_stat=(int*)calloc(dispatch_max+1,sizeof(int));

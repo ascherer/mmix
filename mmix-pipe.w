@@ -5207,7 +5207,7 @@ if (!(p->data[0].l&(PX_BIT>>PROT_OFFSET))) goto bad_fetch;
 
 @<Copy the data from block~|q| to |fetched|@>=
 if (data->i!=prego) {
-  for (j=0;j<Icache->bb;j++) fetched[j]=q->data[j];
+  for (j=0;j<Icache->bb>>3;j++) fetched[j]=q->data[j];
   fetch_lo=(inst_ptr.o.l&(Icache->bb-1))>>3;
   fetch_hi=Icache->bb>>3;
 }
