@@ -125,6 +125,7 @@ required to treat them in greater generality.
 #include <stdlib.h>
 #include <math.h>
 #include "abstime.h"
+@h@#
 @<Header definitions@>@;
 @<Type definitions@>@;
 @<Global variables@>@;

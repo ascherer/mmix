@@ -2304,7 +2304,7 @@ in~\$2.)
 @^counting trailing zeros@>
 
 If the interrupted instruction contributed 1s to any of the \.{rwxnkbsp} bits
-of~rQ, the corresponding bits are set to~1 also in~rX\null. A~dynamic trap
+of~rQ, the corresponding bits are set to~1 also in~rXX\null. A~dynamic trap
 handler might be able to use this information (although it should
 service higher-priority interrupts first if the right half
 of $\rm rQ\land rK$ is nonzero).

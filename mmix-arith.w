@@ -932,11 +932,11 @@ else ef=shift_right(ef,1021-ee,1);
 return o.h<ef.h || (o.h==ef.h && o.l<=ef.l);
 
 @ @<Undenormalize |y| and |z|, if they are denormal@>=
-if (ye<0) yf=shift_left(y,2), ye=0;
-if (ze<0) zf=shift_left(z,2), ze=0;
+if (ye<0 && yt!=zro) yf=shift_left(y,2), ye=0;
+if (ze<0 && zt!=zro) zf=shift_left(z,2), ze=0;
 
 @ At this point $y\sim z$ if and only if
-$$|yf|+(-1)^{[ys=zs]}|zf|/2^d\le 2^{ee-1021}=2^{55}\epsilon.$$
+$$|yf|+(-1)^{[ys=zs]}|zf|/2^d\le 2^{ee-1021}|ef|=2^{55}\epsilon.$$
 We need to evaluate this relation without overstepping the bounds of
 our simulated 64-bit registers.
 
