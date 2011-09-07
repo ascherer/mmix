@@ -2228,6 +2228,12 @@ and place the result in~rZZ\null. A~subsequent
 @^emulation@>
 @^forced traps@>
 
+When a forced trap occurs on a store instruction because of memory protection
+failure, the settings of rYY and rZZ are undefined. They do not necessarily
+correspond to the virtual address rY and octabyte to be stored rZ
+that are supplied to a trip handler after a tripped store instruction,
+because a forced trap aborts its instruction as soon as possible.
+
 Implementations of\/ \MMIX\ might also emulate the process of
 virtual-address-to-physical-address translation described below,
 instead of providing for page table calculations in hardware.
@@ -2436,7 +2442,7 @@ internal code numbers:
 $$\vbox{\halign{\hfil#,\quad&#;\hfil\cr
 rA&arithmetic status register [21]\cr
 rB&bootstrap register (trip) [0]\cr
-rC&cycle counter [8]\cr
+rC&continuation register [8]\cr
 rD&dividend register [1]\cr
 rE&epsilon register [2]\cr
 rF&failure location register [22]\cr
@@ -2471,16 +2477,12 @@ rZZ&Z operand (trap) [31]\cr}}$$
 In this list rG and rL are what we have been calling simply $G$ and $L$; \
 rC, rF, rI, rN, rO, rS, rU, and~rV have not been mentioned before.
 
-@ The {\it cycle counter\/}~rC advances by~1 on every ``clock pulse'' of the
-@^rC@>
-\MMIX\ processor. Thus if \MMIX\ is running at 500 MHz, the cycle
-counter increases every 2 nanoseconds. There is no need to worry about
-rC overflowing; even if it were to increase once every nanosecond,
-it wouldn't reach $2^{64}$ until more than 584.55 years have gone by.
-
-The {\it interval counter\/}~rI is similar, but it {\it decreases\/}
+@ The {\it interval counter\/}~rI decreases by~1
+ on every ``clock pulse'' of the
 @^rI@>
-by~1 on each cycle, and causes an {\it interval interrupt\/}
+\MMIX\ processor. Thus if \MMIX\ is running at 500 MHz, the interval
+counter decreases every 2 nanoseconds.
+It causes an {\it interval interrupt\/}
 when it reaches zero. Such interrupts can be extremely useful for
 ``continuous profiling'' as a means of studying
 the empirical running time of programs;
@@ -2488,8 +2490,8 @@ see Jennifer~M. Anderson, Lance~M. Berc, Jeffrey Dean, Sanjay Ghemawat,
 Monika~R. Henzinger, Shun-Tak~A. Leung, Richard~L. Sites, Mark~T. Vandevoorde,
 Carl~A. Waldspurger, and William~E. Weihl, {\sl ACM Transactions on Computer
 Systems\/ \bf15} (1997), 357--390.
-The interval interrupt is achieved by setting the leftmost bit of the
-``machine'' byte of~rQ equal to~1; this is the eighth-least-significant bit.
+The interval interrupt is achieved by setting the next-to-leftmost bit of the
+``machine'' byte of~rQ equal to~1; this is the seventh-least-significant bit.
 @^rQ@>
 @^continuous profiling@>
 @^performance monitoring@>
@@ -2526,7 +2528,7 @@ are exceptional: They are included in the usage count only if the leading bit
 of $u_c$ is~1.
 @^negative locations@>
 
-Incidentally, the 64-bit counters rC and rI can be implemented rather cheaply with
+Incidentally, the 64-bit counter rI can be implemented rather cheaply with
 only two levels of logic, using an old trick called ``carry-save addition''
 [see, for example, G.~Metze and J.~E. Robertson, {\sl Proc.\ International
 Conf.\ Information Processing\/} (Paris:\ 1959), 389--396]. One nice
@@ -2674,8 +2676,8 @@ Every special register is readable; \MMIX\ does not keep secrets from
 an inquisitive user. But of course only the operating system is allowed
 @^operating system@>
 to change registers like rK and~rQ (the interrupt mask and request
-registers). And not even the operating system is allowed to change~rC
-(the cycle counter) or rN~(the serial number) or the stack pointers
+registers). And not even the operating system is allowed to change
+rN~(the serial number) or the stack pointers
 rO~and~rS.
 
 \bull\<PUT X,\0 `put into special register';
@@ -2686,8 +2688,8 @@ the contents of register Z or to the unsigned byte~Z itself,
 if permissible. Some changes are, however, impermissible:
 Bits of rA that are always zero must remain zero; the leading seven bytes
 of rG and rL must remain zero, and rL must not exceed~rG;
-special registers 8--11 (namely rC, rN, rO, and~rS) must not change;
-special registers 12--18 (namely
+special registers 9--11 (namely rN, rO, and~rS) must not change;
+special registers 8 and 12--18 (namely rC,
 rI, rK, rQ, rT, rU, rV, and~rTT) can be changed only if the privilege
 bit of rK is zero;
 and certain bits of~rQ (depending on available hardware) might not
@@ -2919,13 +2921,6 @@ segment~2. And if $b_2=b_3<b_4$, then $r+b_2$ is used for the PTE of
 page~0 segments 2 and~3; page~1 of segment~2 is not allowed, but there
 is a page~1 in segment~3.
 
-A {\it default page\/} of $2^{13}$ bytes is permanently allocated
-at the top end of physical memory, in order to give the operating system
-some ``breathing room'' as it is processing interrupts. When a write-protection
-fault occurs, on an instruction with \.w interrupts disabled, \MMIX\ completes
-the instruction that triggered it by writing into the default page.
-@^default page@>
-
 I know these rules look extremely complicated, and I sincerely wish I could
 have found an alternative that would be both simple and efficient in practice.
 I tried various schemes based on hashing, but came to the conclusion that
@@ -2936,6 +2931,20 @@ the shortcut for small page numbers. I tried also to find formats for rV
 and the page tables that would match byte boundaries in a more friendly way,
 but the corresponding page sizes did not work well. Fortunately these grungy
 details are almost always completely hidden from ordinary users.
+
+Stack overflow presents a potential problem:
+@^Stack overflow@>
+If $\gamma$ increases to a virtual address on a new page for which there
+is no permission to write, the protection interrupt handler would have no stack
+space in which to work! Therefore \MMIX\ has a
+{\it continuation register\/}~rC,
+@^rC@>
+which contains the physical address of a ``continuation page.'' Pushed-down
+information is written to the continuation page until \MMIX\ comes to
+an instruction that is safely interruptible. Then a stack overflow
+interrupt occurs, and the operating system can restore order.
+The format of~rC is just like an ordinary PTE entry, except that
+the $n$ field is ignored.
 
 @ Of course \MMIX\ can't afford to perform a lengthy calculation of physical
 addresses every time it accesses memory. The machine therefore maintains a

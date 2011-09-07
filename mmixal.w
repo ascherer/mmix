@@ -987,7 +987,7 @@ if (acc.h!=0xffffffff) panic("Type tetra is not implemented correctly");
 characters, but the present code limits itself to an 8-bit subset.
 @^Unicode@>
 The type \&{Char} is defined here in order to ease the later transition:
-At present, \&{Char} is the same as \&{unsigned} \&{char}, but
+At present, \&{Char} is the same as \&{char}, but
 \&{Char} can be changed to a 16-bit type in the Unicode version.
 
 Other changes will also be necessary when the transition to Unicode is made;
@@ -997,7 +997,7 @@ The switchable type name \&{Char} provides at least a first step
 towards a brighter future with Unicode.
 
 @<Type...@>=
-typedef unsigned char Char; /* bytes that will become wydes some day */
+typedef char Char; /* bytes that will become wydes some day */
 
 @ While we're talking about classic systems versus future systems, we
 might as well define the |ARGS| macro, which makes function prototypes
@@ -1460,7 +1460,7 @@ a given string in its middle subtrie, inserting new nodes if necessary.
 The string ends with the first nonletter or nondigit; the location
 of the terminating character is stored in global variable~|terminator|. 
 
-@d isletter(c) (isalpha(c)||c=='_'||c==':'||c>126)
+@d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
 
 @<Sub...@>=
 trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];

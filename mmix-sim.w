@@ -46,13 +46,12 @@ that provide rudimentary input-output.
 All instructions take a fixed amount of time, given by the rough estimates
 stated in the \MMIX\ documentation. For example, \.{MUL} takes $10\upsilon$,
 \.{LDB} takes $\mu+\upsilon\mkern1mu$; all times are expressed in terms of
-$\mu$ and~$\upsilon$, ``mems'' and ``oops.'' The clock register~rC increases by
+$\mu$ and~$\upsilon$, ``mems'' and ``oops.'' The simulated clock increases by
 @^mems@>
 @^oops@>
 $2^{32}$ for each~$\mu$ and 1~for each~$\upsilon$. But the interval
 counter~rI decreases by~1 for each instruction, and the usage
 counter~rU increases by~1 for each instruction.
-@^rC@>
 @^rI@>
 @^rU@>
 
@@ -450,12 +449,12 @@ Registers rA, rB, rD, rE, rF, rH, rI, rJ, rM, rP, rQ, and rR
 are initially zero, and $\rm rL=2$.
 
 A subroutine library loaded with the user program might need to initialize
-itself. If an instruction has been loaded into tetrabyte M$[\Hex{90}]_4$,
-the simulator actually begins execution at \Hex{90} instead of at~\.{Main};
+itself. If an instruction has been loaded into tetrabyte M$[\Hex{f0}]_4$,
+the simulator actually begins execution at \Hex{f0} instead of at~\.{Main};
 in this case \$255 holds the location of~\.{Main}.
 @^subroutine library initialization@>
 @^initialization of a user program@>
-(The routine at \Hex{90} can pass control to \.{Main} without increasing~rL,
+(The routine at \Hex{f0} can pass control to \.{Main} without increasing~rL,
 if it starts with the slightly tricky sequence
 $$\.{PUT rW, \$255;{ } PUT rB, \$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
       PUT rX,\$255}$$
@@ -765,6 +764,7 @@ last_mem=mem_root;
 tetra priority=314159265; /* pseudorandom time stamp counter */
 mem_node *mem_root; /* root of the treap */
 mem_node *last_mem; /* the memory node most recently read or written */
+octa sclock; /* simulated clock */
 
 @ The |mem_find| routine finds a given tetrabyte in the simulated
 memory, inserting a new node into the treap if necessary.
@@ -2111,7 +2111,7 @@ case PBNP: case PBNPB: case PBEV: case PBEVB:@/
    good=(op>=PBN);
  }@+else good=(op<PBN);
  if (good) good_guesses++;
- else bad_guesses++, g[rC].l+=2; /* penalty is $2\upsilon$ for bad guess */
+ else bad_guesses++, sclock.l+=2; /* penalty is $2\upsilon$ for bad guess */
  break;
 
 @ Memory operations are next on our agenda. The memory address,
@@ -2645,8 +2645,8 @@ if (rop==RESUME_SET) {
 
 @<Update the clocks@>=
 if (g[rU].l || g[rU].h || !resuming) {
-  g[rC].h+=info[op].mems; /* clock goes up by $2^{32}$ for each $\mu$ */
-  g[rC]=incr(g[rC],info[op].oops); /* clock goes up by 1 for each $\upsilon$ */
+  sclock.h+=info[op].mems; /* clock goes up by $2^{32}$ for each $\mu$ */
+  sclock=incr(sclock,info[op].oops); /* clock goes up by 1 for each $\upsilon$ */
   g[rU]=incr(g[rU],1); /* usage counter counts total instructions simulated */
   g[rI]=incr(g[rI],-1); /* interval timer counts down by 1 only */
   if (g[rI].l==0 && g[rI].h==0) tracing=breakpoint=true;
@@ -2855,8 +2855,8 @@ void show_stats(verbose)
   octa o;
   printf("  %d instruction%s, %d mem%s, %d oop%s; %d good guess%s, %d bad\n",
   g[rU].l,g[rU].l==1? "": "s",@|
-  g[rC].h,g[rC].h==1? "": "s",@|
-  g[rC].l,g[rC].l==1? "": "s",@|
+  sclock.h,sclock.h==1? "": "s",@|
+  sclock.l,sclock.l==1? "": "s",@|
   good_guesses,good_guesses==1? "": "es",bad_guesses);
   if (!verbose) return;
   o = halted? incr(inst_ptr,-4): inst_ptr;
@@ -3366,7 +3366,7 @@ for (k=0; k<argc; k++,cur_arg++) {
 x.l=0;@+ll=mem_find(x);@+ll->tet=loc.h, (ll+1)->tet=loc.l;
 
 @ @<Get ready to \.{UNSAVE} the initial context@>=
-x.h=0, x.l=0x90;
+x.h=0, x.l=0xf0;
 ll=mem_find(x);
 if (ll->tet) inst_ptr=x;
 @^subroutine library initialization@>

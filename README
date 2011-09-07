@@ -135,8 +135,8 @@ after 405 cycles, having printed out its famous message to the world.]
   Simulation ended at time 4425.
   Predictions: 183 in agreement, 15 in opposition; 176 good, 22 bad
   Instructions issued per cycle:
-    0   2665
-    1   1760
+    0   2655
+    1   1770
 [Explanation: This time we try mmmix on the torture-test program "silly".
 That program is completely weird, but it does exercise all 256 instructions
 and comes up with lots of different cases. The "silly" program is so weird,

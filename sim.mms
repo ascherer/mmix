@@ -71,7 +71,7 @@ gg       GREG  % 8*rG
 aa       GREG  % rA
 ii       GREG  % rI
 uu       GREG  % rU
-cc       GREG  % rC
+cc       GREG  % clock
 
 lring_mask GREG 8*lring_size-1
 :GetReg    CMPU   t,$0,gg
@@ -426,7 +426,6 @@ Unsave     BNZ    xx,Error    \S104
 Get        CMPU   t,yz,32
            BNN    t,Error
            STOU   ii,g,8*rI
-           STOU   cc,g,8*rC
            STOU   oo,g,8*rO
            STOU   ss,g,8*rS
            STOU   uu,g,8*rU
@@ -1116,11 +1115,11 @@ Main       LDA    Mem:head,Chunk0
            SUBU   arg,loc,8*13
            PUSHJ  res,MemFind
            LDOU   inst_ptr,res,0   Main
-           SET    arg,#90          Get ready to UNSAVE, \S162
+           SET    arg,#f0          Get ready to UNSAVE, \S162
            PUSHJ  res,MemFind
            LDTU   x,res,0
            SET    resuming,1       RESUME_AGAIN
-           CSNZ   inst_ptr,x,#90
+           CSNZ   inst_ptr,x,#f0
 0H    GREG   #FB<<24+255      UNSAVE $255
            STOU   0B,g,8*rX
            SET    gg,c255

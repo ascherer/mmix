@@ -186,7 +186,7 @@ octa mmix_fgets(handle,buffer,size)
   o=zero_octa;
   while (1) {
     @<Read |n<256| characters into |buf|@>;
-    mmputchars(buf,n+1,buffer);
+    mmputchars((unsigned char*)buf,n+1,buffer);
     o=incr(o,n);
     size=incr(size,-n);
     if ((n&&buf[n-1]=='\n') || (!size.l&&!size.h) || eof) return o;
@@ -242,7 +242,7 @@ octa mmix_fgetws(handle,buffer,size)
   o=zero_octa;
   while (1) {
     @<Read |n<128| wyde characters into |buf|@>;
-    mmputchars(buf,2*n+2,buffer);
+    mmputchars((unsigned char*)buf,2*n+2,buffer);
     o=incr(o,n);
     size=incr(size,-n);
     if ((n&&buf[2*n-1]=='\n'&&buf[2*n-2]==0) || (!size.l&&!size.h) || eof)

@@ -743,6 +743,7 @@ typedef struct control_struct {
  bool ren_a; /* does |a| correspond to a rename register? */
  bool set_l; /* does |rl| correspond to a new value of rL? */
  bool interim; /* does this instruction need to be reissued on interrupt? */
+ bool stack_alert; /* is there potential for stack overflow? */
  unsigned int arith_exc; /* arithmetic exceptions for event bits of rA */
  unsigned int hist; /* history bits for use in branch prediction */
  int denin,denout; /* execution time penalties for subnormal handling */
@@ -1105,16 +1106,16 @@ internal_opcode internal_op[256]={@/
 @ While we're into boring lists, we might as well define all the
 special register numbers, together with an inverse table for
 use in diagnostic outputs. These codes have been designed so that
-special registers 0--7 are unencumbered, 8--11 can't be \.{PUT} by anybody,
-12--18 can't be \.{PUT} by the user. Pipeline delays might occur
+special registers 0--7 are unencumbered, 9--11 can't be \.{PUT} by anybody,
+8 and 12--18 can't be \.{PUT} by the user. Pipeline delays might occur
 when \.{GET} is applied to special registers 21--31 or when
-\.{PUT} is applied to special registers 15--20. The \.{SAVE} and
+\.{PUT} is applied to special registers 8 or 15--20. The \.{SAVE} and
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27.
 
 @<Header def...@>=
 #define rA 21 /* arithmetic status register */
 #define rB 0  /* bootstrap register (trip) */
-#define rC 8  /* cycle counter */
+#define rC 8  /* continuation register */
 #define rD 1  /* dividend register */
 #define rE 2  /* epsilon register */
 #define rF 22 /* failure location register */
@@ -1197,7 +1198,8 @@ Most of them are implementation-dependent, but a few are defined in general.
 #define PARITY_ERROR (1<<1) /* try to save the file systems */
 #define NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
 #define REBOOT_SIGNAL (1<<4) /* it's time to start over */
-#define INTERVAL_TIMEOUT (1<<7) /* the timer register, rI, has reached zero */
+#define INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
+#define STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
 
 @* Dynamic speculation.
 Now that we understand some basic low-level structures,
@@ -1828,8 +1830,11 @@ Extern int lring_size; /* the number of on-chip local registers
 Extern int max_rename_regs, max_mem_slots; /* capacity of reorder buffer */
 Extern int rename_regs, mem_slots; /* currently unused capacity */
 
-@ @<Header def...@>=
-#define ticks @[g[rC].o@] /* the internal clock */
+@ Special register rC was the clock in the original definition of \MMIX.
+But now the clock is just an external variable, called |ticks|.
+
+@<External v...@>=
+Extern octa ticks; /* the internal clock */
 
 @ @<Glob...@>=
 int lring_mask; /* for calculations modulo |lring_size| */
@@ -1975,7 +1980,7 @@ cool->interrupt=head->interrupt;
 cool->hist=peek_hist;
 cool->go.o=incr(cool->loc,4);
 cool->go.known=false, cool->go.addr.h=-1,cool->go.up=(specnode*)cool;
-cool->interim=false;
+cool->interim=cool->stack_alert=false;
 
 @ @<Dispatch an inst...@>=
 if (new_cool==hot) goto stall; /* reorder buffer is full */
@@ -2097,12 +2102,12 @@ case 3: cool->z.o.l=yz;@+break;
 @ @<Install register X...@>=
 {
   if (cool->xx>=cool_G) {
-    if (i!=pushgo && i!=pushj)
+    if (i!=pushgo && i!=pushj && i!=cswap)
       cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
-  }@+else if (cool->xx<cool_L)
-    cool->ren_x=true,
+  }@+else if (cool->xx<cool_L) {
+    if (i!=cswap) cool->ren_x=true,
       spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
-  else { /* we need to increase L before issuing |head->inst| */
+  }@+else { /* we need to increase L before issuing |head->inst| */
  increase_L:@+ if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
     else @<Insert an instruction to advance beta and L@>;
@@ -2147,23 +2152,40 @@ from the local register ring to virtual memory location |cool_S<<3|.
   cool->z=zero_spec;
   cool->mem_x=true, spec_install(&mem,&cool->x);
   op=STOU; /* this instruction needs to be handled by load/store unit */
-  cool->interim=true;
+  cool->interim=cool->stack_alert=true;
   goto dispatch_done;
 }
 
 @ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 from virtual memory location |(cool_S-1)<<3| into the local register ring.
+The value of $\beta$ may need to be decreased too (by decreasing~rL).
 
 @<Insert an instruction to decrease gamma@>=
 {
-  cool->i=decgamma;
-  new_S=incr(cool_S,-1);
+  if (cool_O.l+cool_L==cool_S.l+lring_size) {
+      /* don't let $\gamma$ pass $\beta$ */
+    if (cool->i==pop && cool->xx==cool_L && cool_L>1) {
+      cool->i=or; /* we'll preserve the main result by moving it down */
+      head->inst-=0x10000; /* decrease X field of \.{POP} in fetch buffer */
+      op=OR;
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+      spec_install(&l[(cool_O.l+cool->xx-2)&lring_mask],&cool->x);
+    }@+else { /* decrease rL by 1 */
+      spec_install(&g[rL],&cool->rl);
+      cool->rl.o.l=cool_L-1;
+      cool->set_l=true;
+    }
+  }
+  if (cool->i!=or) {
+    cool->i=decgamma;
+    new_S=incr(cool_S,-1);
+    cool->y.p=NULL, cool->y.o=shift_left(new_S,3);
+    spec_install(&l[new_S.l&lring_mask],&cool->x);
+    op=LDOU; /* this instruction needs to be handled by load/store unit */
+    cool->ptr_a=(void*)mem.up;
+  }
   cool->z=cool->b=zero_spec; cool->need_b=false;
-  cool->y.p=NULL, cool->y.o=shift_left(new_S,3);
-  cool->ren_x=true, spec_install(&l[new_S.l&lring_mask],&cool->x);
-  op=LDOU; /* this instruction needs to be handled by load/store unit */
-  cool->interim=true;
-  cool->ptr_a=(void*)mem.up;
+  cool->ren_x=cool->interim=true;
   goto dispatch_done;
 }
 
@@ -2196,7 +2218,7 @@ case pst:
  cool->mem_x=true, spec_install(&mem,&cool->x);@+ break;
 case ld: case ldunc: cool->ptr_a=(void *)mem.up;@+ break;
 
-@ When new data is \.{PUT} into special registers 15--20 (namely rK,
+@ When new data is \.{PUT} into special registers 8 or 15--20 (namely rC, rK,
 rQ, rU, rV, rG, or~rL) it can affect many things. Therefore we stop
 issuing further instructions until such \.{PUT}s are committed.
 Moreover, we will see later that such drastic \.{PUT}s defer execution until
@@ -2205,10 +2227,10 @@ they reach the hot seat.
 @<Special cases of instruction dispatch@>=
 case put:@+ if (cool->yy!=0 || cool->xx>=32) goto illegal_inst;
  if (cool->xx>=8) {
-   if (cool->xx<=11) goto illegal_inst;
+   if (cool->xx<=11 && cool->xx!=8) goto illegal_inst;
    if (cool->xx<=18 && !(cool->loc.h&sign_bit)) goto privileged_inst;
  }
- if (cool->xx>=15 && cool->xx<=20) freeze_dispatch=true;
+ if (cool->xx==8 || (cool->xx>=15 && cool->xx<=20)) freeze_dispatch=true;
  cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
 @#
 case get:@+ if (cool->yy || cool->zz>=32) goto illegal_inst;
@@ -2702,6 +2724,13 @@ each clock cycle.
     else if (hot->i==put && hot->xx==rQ)
       hot->x.o.h |= new_Q.h, hot->x.o.l |= new_Q.l;
     if (hot->mem_x) @<Commit to memory if possible, otherwise |break|@>;
+    if (hot->stack_alert) stack_overflow=true;
+    else if (stack_overflow && !hot->interim) {
+      g[rQ].o.l|=STACK_OVERFLOW, new_Q.l|=STACK_OVERFLOW,stack_overflow=false;
+      if (verbose&issue_bit) {
+        printf(" setting rQ=");@+print_octa(g[rQ].o);@+printf("\n");
+      }
+    }
     if (verbose&issue_bit) {
       printf("Committing ");@+print_control_block(hot);@+printf("\n");
     }
@@ -2745,6 +2774,7 @@ have become~1 since the most recently committed \.{GET}.
 
 @<Glob...@>=
 octa new_Q; /* when rQ increases in any bit position, so should this */
+bool stack_overflow; /* stack overflow not yet reported */
 
 @ An instruction will not be committed immediately if it violates the basic
 security rule of \MMIX: An instruction in a nonnegative location
@@ -4309,7 +4339,7 @@ static octa phys_addr @,@,@[ARGS((octa,octa))@];
 static octa phys_addr(virt,trans)
   octa virt,trans;
 {@+octa t;
-  t=trans;@+ t.l &= -8; /* zero out the protection bits */
+  t=oandn(trans,page_mask); /* zero out the |ynp| fields of a PTE */
   return oplus(t,oand(virt,page_mask));
 }
 
@@ -4367,6 +4397,8 @@ the octabyte |data->b.o|. Its least significant three bits are the
 protection code~$p=p_rp_wp_x$; its page address field is scaled by~$2^s$. It
 is entirely zero, including the protection bits, if there was a
 page table failure.
+
+The |z| field of the caller receives this translation.
 
 @<Compute the new entry for |c->inbuf| and give the caller a sneak preview@>=
 c->inbuf.tag=trans_key(data->y.o);
@@ -4507,15 +4539,14 @@ it will also increase the number of buffered items when writes are to
 different locations.
 
 A store instruction that sets any of the eight interrupt bits
-\.{rwxnkbsp} except~\.w
-will not affect memory, even if it doesn't cause an interrupt.
+\.{rwxnkbsp} will not affect memory, even if it doesn't cause an interrupt.
 
 When ``store'' is followed by ``store uncached'' at the same address,
 or vice versa, we believe the most recent hint.
 
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
-  if (hot->interrupt&(F_BIT+0xbf)) goto done_with_write;
+  if (hot->interrupt&(F_BIT+0xff)) goto done_with_write;
   if (hot->i!=sync) for (;;) {
     if (q==write_head) break;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
@@ -4749,8 +4780,8 @@ experience a spurious miss.
 
 @<Do a simultaneous lookup in the D-cache@>=
 {@+octa *m;
-  @<Update DT-cache usage and check the protection bits@>;
-  data->z.o=phys_addr(data->y.o,p->data[0]);
+  p=use_and_fix(DTcache,p), data->z.o=p->data[0];
+  @<Check the protection bits and get the physical address@>;
   m=write_search(data,data->z.o);
   if (m==DUNNO) data->state=DT_hit;
   else if (m) data->x.o=*m, data->state=ld_ready;
@@ -4775,21 +4806,26 @@ four positions right from the interrupt codes |PR_BIT|, |PW_BIT|, |PX_BIT|.
 If the data is protected, we abort the load/store operation immediately;
 this protects the privacy of other users.
 
-@<Update DT-cache usage and check the protection bits@>=
-p=use_and_fix(DTcache,p);
+@<Check the protection bits and get the physical address@>=
+if (data->stack_alert) {
+  if (data->z.o.l&(PW_BIT>>PROT_OFFSET)) data->stack_alert=false;
+  else data->z.o=g[rC].o; /* use the continuation page for stack overflow */
+}
 j=PRW_BITS;
-if (((p->data[0].l<<PROT_OFFSET)&j)!=j) {
+if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
   if (data->i==syncd || data->i==syncid) goto sync_check;
   if (data->i!=preld && data->i!=prest)
-    data->interrupt|=j&~(p->data[0].l<<PROT_OFFSET);
+    data->interrupt|=j&~(data->z.o.l<<PROT_OFFSET);
+  data->stack_alert=false;
   goto fin_ex;
 }
+data->z.o=phys_addr(data->y.o,data->z.o);
 
 @ @<Do load/store stage 1 without D-cache lookup@>=
 {@+octa *m;
   if (p) {
-    @<Update DT-cache usage and check the protection bits@>;
-    data->z.o=phys_addr(data->y.o,p->data[0]);
+    p=use_and_fix(DTcache,p), data->z.o=p->data[0];
+    @<Check the protection bits and get the physical address@>;
     if (data->i>=st && data->i<=syncid) data->state=st_ready;
     else {
       m=write_search(data,data->z.o);
@@ -4856,8 +4892,8 @@ square_one: data->state=DT_retry;
    startup(&DTcache->reader[j],DTcache->access_time);
    p=cache_search(DTcache,trans_key(data->y.o));
    if (p) {
-     @<Update DT-cache usage and check the protection bits@>;
-     data->z.o=phys_addr(data->y.o,p->data[0]);
+     p=use_and_fix(DTcache,p), data->z.o=p->data[0];
+     @<Check the protection bits and get the physical address@>;
      if (data->i>=st && data->i<=syncid) data->state=st_ready;
      else data->state=DT_hit;
    }@+ else data->state=DT_miss;
@@ -4875,18 +4911,7 @@ square_one: data->state=DT_retry;
    data->state=got_DT;
    if (data->i==preld || data->i==prest) goto fin_ex;@+else sleep;
  case got_DT: release_lock(self,DTcache->fill_lock);
-   j=PRW_BITS;
-   if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
-     if (data->i==syncd || data->i==syncid) goto sync_check;
-     data->interrupt |= j&~(data->z.o.l<<PROT_OFFSET);
-     if ((j&PW_BIT)&&(data->i==st || data->i==pst)) {
-       data->z.o.l=data->y.o.l | 0xffffe000, data->z.o.h=0xffff;
-       goto finish_store; /* write on the default page */
-@^default page@>
-     }
-     goto fin_ex;
-   }
-   data->z.o=phys_addr(data->y.o,data->z.o);
+   @<Check the protection bits and get the physical address@>;
    if (data->i>=st && data->i<=syncid) goto finish_store;
     /* otherwise we fall through to |ld_retry| below */
 
@@ -5635,7 +5660,7 @@ if (hot->interrupt&H_BIT) { /* trip */
 j=hot->interrupt&H_BIT;
 if ((hot->interrupt&F_BIT) && hot->op==SWYM) g[rYY].o=hot->go.o;
 else g[j?rY:rYY].o=hot->y.o;
-if (hot->i==st || hot->i==pst) g[j?rZ:rZZ].o=hot->b.o;
+if (hot->i==st || hot->i==pst) g[j?rZ:rZZ].o=hot->x.o;
 else g[j?rZ:rZZ].o=hot->z.o;
 if (verbose&issue_bit) {
   if (j) {
@@ -5798,7 +5823,7 @@ This program does not restrict the 1~bits that might be
 drastic implications.
 
 @<Cases for stage 1...@>=
-case put:@+if (data->xx>=15 && data->xx<=20) {
+case put:@+if (data->xx==8 || (data->xx>=15 && data->xx<=20)) {
    if (data!=old_hot) wait(1);
    switch (data->xx) {
   case rV: @<Update the \\{page} variables@>;@+break;
