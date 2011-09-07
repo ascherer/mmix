@@ -745,7 +745,7 @@ typedef struct control_struct {
  bool interim; /* does this instruction need to be reissued on interrupt? */
  unsigned int arith_exc; /* arithmetic exceptions for event bits of rA */
  unsigned int hist; /* history bits for use in branch prediction */
- int denin,denout; /* execution time penalties for denormal handling */
+ int denin,denout; /* execution time penalties for subnormal handling */
  octa cur_O,cur_S; /* speculative rO and rS before this instruction */
  unsigned int interrupt; /* does this instruction generate an interrupt? */
  void *ptr_a, *ptr_b, *ptr_c; /* generic pointers for miscellaneous use */
@@ -6051,21 +6051,21 @@ case cset:@+if (register_truth(data->y.o,data->op))
 {\mc MMIX-ARITH}, which record anomalous events in the global
 variable |exceptions|. But we consider the operation trivial if an
 input is infinite or NaN; and we may need to increase the execution
-time when denormals are present.
+time when subnormals are present.
 
 @d ROUND_OFF 1
 @d ROUND_UP 2
 @d ROUND_DOWN 3
 @d ROUND_NEAR 4
-@d is_denormal(x) ((x.h&0x7ff00000)==0 && ((x.h&0xfffff) || x.l))
+@d is_subnormal(x) ((x.h&0x7ff00000)==0 && ((x.h&0xfffff) || x.l))
 @d is_trivial(x) ((x.h&0x7ff00000)==0x7ff00000)
 @d set_round cur_round=(data->ra.o.l<0x10000? ROUND_NEAR: data->ra.o.l>>16)
 
 @<Cases to compute the results of reg...@>=
 case fadd: set_round;@+data->x.o=fplus(data->y.o,data->z.o);
- fin_bflot:@+ if (is_denormal(data->y.o)) data->denin=denin_penalty;
- fin_uflot:@+ if (is_denormal(data->x.o)) data->denout=denout_penalty;
- fin_flot:@+ if (is_denormal(data->z.o)) data->denin=denin_penalty;
+ fin_bflot:@+ if (is_subnormal(data->y.o)) data->denin=denin_penalty;
+ fin_uflot:@+ if (is_subnormal(data->x.o)) data->denout=denout_penalty;
+ fin_flot:@+ if (is_subnormal(data->z.o)) data->denin=denin_penalty;
    data->interrupt|=exceptions;
    if (is_trivial(data->y.o) || is_trivial(data->z.o)) goto fin_ex;
    if (data->i==fsqrt && (data->z.o.h&sign_bit)) goto fin_ex;
@@ -6097,7 +6097,7 @@ case fsqrt: case fint: case fix: case flot:@+ if (cool->y.o.l>4)
 @ @<Cases to compute the results of reg...@>=
 case feps: j=fepscomp(data->y.o,data->z.o,data->b.o,data->op!=FEQLE);
   if (j==2) data->i=fcmp;
-  else if (is_denormal(data->y.o) || is_denormal(data->z.o))
+  else if (is_subnormal(data->y.o) || is_subnormal(data->z.o))
     data->denin=denin_penalty;
   switch (data->op) {
  case FUNE:@+ if (j==2) goto cmp_pos;@+ else goto cmp_zero;
@@ -6128,7 +6128,7 @@ case frem:@+if(is_trivial(data->y.o) || is_trivial(data->z.o))
   if ((self+1)->next) wait(1);
   data->interim=true;
   j=1;
-  if (is_denormal(data->y.o)||is_denormal(data->z.o)) j+=denin_penalty;
+  if (is_subnormal(data->y.o)||is_subnormal(data->z.o)) j+=denin_penalty;
   pass_after(j);
   goto passit;
 
@@ -6144,7 +6144,7 @@ if (data->i==frem) {
     data->state=3;
     data->interim=false;
     data->interrupt |= exceptions;
-    if (is_denormal(data->x.o)) j+=denout_penalty;
+    if (is_subnormal(data->x.o)) j+=denout_penalty;
   }
   wait(j);
 }

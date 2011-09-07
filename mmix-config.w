@@ -107,10 +107,10 @@ must be $\ge1$.
 cycle; must be $\ge1$.
 
 \bull denin (default 1), extra cycles taken if a floating point input
-is denormal.
+is subnormal.
 
 \bull denout (default 1), extra cycles taken if a floating point result
-is denormal.
+is subnormal.
 
 \bull writeholdingtime (default 0), minimum number of cycles for data to
 remain in the write buffer.
@@ -286,8 +286,8 @@ number of cycles to be spent in each stage. For example, a specification like
 in two stages; it can start working on a second product after three cycles
 have gone by.
 
-If a floating point operation has a denormal input, \.{denin} is added to
-the time for the first stage. If a floating point operation has a denormal
+If a floating point operation has a subnormal input, \.{denin} is added to
+the time for the first stage. If a floating point operation has a subnormal
 result, \.{denout} is added to the time for the last stage.
 
 @ The fourth and final kind of specification defines a functional unit:

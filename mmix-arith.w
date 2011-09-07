@@ -474,7 +474,7 @@ Thus, for example, the floating binary number $+1.0=\Hex{3ff0000000000000}$
 is obtained when $f=2^{54}$, $e=\Hex{3fe}$, and |s='+'|.
 The raw exponent~$e$ is usually one less than
 the final exponent value; the leading bit of~$f$ is essentially added
-to the exponent. (This trick works nicely for denormal numbers, when
+to the exponent. (This trick works nicely for subnormal numbers, when
 $e<0$, or in cases where the value of $f$ is rounded upwards to $2^{55}$.)
 
 Exceptional events are noted by oring appropriate bits into
@@ -917,7 +917,7 @@ $y\sim z\ (\epsilon/2^d)$, if $d$~is the difference between the
 larger and smaller exponents of $y$ and~$z$.
 
 @<Compare two numbers with respect to epsilon and |return|@>=
-@<Undenormalize |y| and |z|, if they are denormal@>;
+@<Unsubnormalize |y| and |z|, if they are subnormal@>;
 if (ye<ze || (ye==ze && (yf.h<zf.h || (yf.h==zf.h && yf.l<zf.l))))
   @<Exchange |y| with |z|@>;
 if (ze==zero_exponent) ze=ye;
@@ -931,7 +931,7 @@ if (ee>=1021) ef=shift_left(ef,ee-1021);
 else ef=shift_right(ef,1021-ee,1);
 return o.h<ef.h || (o.h==ef.h && o.l<=ef.l);
 
-@ @<Undenormalize |y| and |z|, if they are denormal@>=
+@ @<Unsubnormalize |y| and |z|, if they are subnormal@>=
 if (ye<0 && yt!=zro) yf=shift_left(y,2), ye=0;
 if (ze<0 && zt!=zro) zf=shift_left(z,2), ze=0;
 
@@ -1024,7 +1024,7 @@ if (!f.h && !f.l) @<Handle the special case when the fraction part is zero@>@;
 else {
   g=incr(f,1);
   f=incr(f,-1);
-  if (!e) e=1; /* denormal */
+  if (!e) e=1; /* subnormal */
   else if (e==0x7ff) {
     printf("NaN");
     if (g.h==0x100000 && g.l==1) return; /* the ``standard'' NaN */

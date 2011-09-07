@@ -1119,7 +1119,7 @@ calls them simply floating point numbers because 64-bit quantities are
 the~norm.
 @^floating point arithmetic@>
 @^IEEE/ANSI Standard 754@>
-@^denormal numbers@>
+@^subnormal numbers@>
 @^normal numbers@>
 @^NaN@>
 @^overflow@>
@@ -1132,7 +1132,7 @@ the~norm.
 @^rounding modes@>
 
 A positive floating point number has 53 bits of precision and can range
-from approximately $10^{-308}$ to $10^{308}$. ``Denormal numbers''
+from approximately $10^{-308}$ to $10^{308}$. ``Subnormal numbers''
 between $10^{-324}$ and $10^{-308}$ can also be represented, but with fewer
 bits of precision.
 Floating point numbers can be
@@ -1191,7 +1191,7 @@ Each octabyte has the following
 significance:
 $$\vbox{\halign{\hfil$\pm#$,\quad if &#\hfil\cr
 0.0&$e=f=0$ (zero);\cr
-2^{-1022}f&$e=0$ and $f>0$ (denormal);\cr
+2^{-1022}f&$e=0$ and $f>0$ (subnormal);\cr
 2^{\mkern1mu e-1023}(1+f)&$0<e<2047$ (normal);\cr
 \infty&$e=2047$ and $f=0$ (infinite);\cr
 \NaN(f)&$e=2047$ and $0<f<1/2$ (signaling NaN);\cr
@@ -1225,7 +1225,7 @@ result is finite but needs an exponent greater than 2046.
 A floating underflow exception occurs if the rounded result needs an exponent
 less than~1 and either (i)~the unrounded result cannot be represented exactly
 @^rA@>
-as a denormal number or (ii)~the ``floating underflow trip'' is enabled in~rA\null.
+as a subnormal number or (ii)~the ``floating underflow trip'' is enabled in~rA\null.
 (Trips are discussed below.)
 NaNs are treated specially as follows: If either \$Y or~\$Z is a signaling NaN,
 an invalid exception occurs and the NaN is quieted by adding 1/2 to its
@@ -1252,7 +1252,7 @@ numbers in the interval have a known sign.
 
 Floating point underflow cannot occur unless the U-trip has been enabled,
 because any underflowing result of floating point
-addition can be represented exactly as a denormal number.
+addition can be represented exactly as a subnormal number.
 
 Silly but instructive exercise: Find all pairs of numbers $(\rY,\rZ)$ such
 that the commands \<FADD \$X,\$Y,\$Z and \<ADDU \$X,\$Y,\$Z both produce
@@ -1291,7 +1291,7 @@ The floating point quotient $\rY\?/\rZ$ is computed by
 the standard floating point conventions, and placed in \$X\null.
 @^standard floating point conventions@>
 A floating divide by zero exception occurs if the
-quotient is $(\hbox{normal or denormal})/(\pm0.0)$. An invalid exception occurs if
+quotient is $(\hbox{normal or subnormal})/(\pm0.0)$. An invalid exception occurs if
 the quotient is $(\pm0.0)/(\pm0.0)$ or $(\pm\infty)/(\pm\infty)$; in that case the
 result is $\pm\NaN(1/2)$. No exception occurs for the
 quotient $(\pm\infty)/(\pm0.0)$. If neither \$Y nor~\$Z is a NaN,
@@ -1317,7 +1317,7 @@ that case the result is $\NaN(1/2)$ with the sign of~\$Y\null.
 The floating point square root $\sqrt\rZ$ is computed by the
 standard floating point conventions, and placed in register~X\null.  An
 invalid exception occurs if \$Z is a negative number (either infinite, normal,
-or denormal); in that case the result is $-\NaN(1/2)$. No exception occurs
+or subnormal); in that case the result is $-\NaN(1/2)$. No exception occurs
 when taking the square root of $-0.0$ or $+\infty$. In all cases the sign of
 the result is the sign of~\$Z\null.
 
@@ -1436,7 +1436,7 @@ a {\it neighborhood\/}
 $$N_\epsilon(u)=\{x\,\mid\,\vert x-u\vert\le 2^{e-1022}\epsilon\};$$
 we also define $N_\epsilon(0)=\{0\}$,
 $N_\epsilon(u)=\{x\mid\vert x-u\vert\le2^{-1021}\epsilon\}$ if $u$ is
-denormal; $N_\epsilon(\pm\infty)=\{\pm\infty\}$ if $\epsilon<1$,
+subnormal; $N_\epsilon(\pm\infty)=\{\pm\infty\}$ if $\epsilon<1$,
 $N_\epsilon(\pm\infty)=\{$everything except $\mp\infty\}$ if $1\le\epsilon<2$,
 $N_\epsilon(\pm\infty)=\{$everything$\}$ if $\epsilon\ge2$. Then we write
 $$\vbox{\halign{$u#v\ (\epsilon)$, &#\hfil\cr
@@ -1480,10 +1480,10 @@ a signaling NaN.
 \smallskip\noindent
 Exercise: What floating point numbers does \.{FCMPE} regard
 as $\sim0.0$ with respect to
-$\epsilon=1/2$, when no exceptions arise? \ Answer: Zero, denormal
+$\epsilon=1/2$, when no exceptions arise? \ Answer: Zero, subnormal
 numbers, and normal numbers with $f=0$.
 (The numbers similar to zero with respect to~$\epsilon$ are zero,
-denormal numbers with $f\le2\epsilon$, normal numbers with $f\le2\epsilon-1$,
+subnormal numbers with $f\le2\epsilon$, normal numbers with $f\le2\epsilon-1$,
 and $\pm\infty$ if $\epsilon>=1$.)
 
 @ The IEEE standard also defines 32-bit floating point quantities, which
@@ -1495,7 +1495,7 @@ bit followed by an 8-bit exponent and a 23-bit fraction. After it has
 been loaded into one of\/ \MMIX's registers, its 52-bit fraction part
 will have 29 trailing zero bits, and its exponent~$e$ will be one of the
 256 values 0, $(01110000001)_2=897$, $(01110000010)_2=898$, \dots,
-$(10001111110)_2=1150$, or~2047, unless it was denormal; a denormal
+$(10001111110)_2=1150$, or~2047, unless it was subnormal; a subnormal
 short float loads into a normal number with $874\le e\le896$.
 
 \bull\<LDSF \$X,\$Y,\0 `load short float'.\>
@@ -3218,7 +3218,7 @@ need only $1\upsilon$.
 @.FREM@>
 The actual running time of floating point computations
 will vary depending on the operands; for example,
-the machine might need one extra $\upsilon$ for each denormal input
+the machine might need one extra $\upsilon$ for each subnormal input
 or output, and it might slow down greatly when trips are enabled.
 The \.{FREM} instruction might typically cost
 $(3+\delta)\upsilon$, where $\delta$ is the amount

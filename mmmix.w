@@ -34,6 +34,8 @@ its name ends with the extension `\.{.mmb}'.
 
 @c
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "mmix-pipe.h"
 @#
 char *config_file_name, *prog_file_name;
