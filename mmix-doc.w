@@ -2986,8 +2986,6 @@ compute the relevant base addresses for PTEs and PTPs:
 $$\vbox{\halign{&\tt#\hfil\ \cr
 &GET &virt,rYY\cr
 &GET &\$7,rV         &\% \$7=(virtual translation register)\cr
-&AND    &\$1,\$7,\#7     &\% \$1=rightmost three bits\cr
-&BNZ    &\$1,Fail       &\% those bits should be zero\cr
 &SRU    &\$1,virt,61    &\% \$1=i (segment number of virtual address)\cr
 &SLU    &\$1,\$1,2       \cr
 &NEG    &\$1,52,\$1      &\% \$1=52-4i\cr
@@ -3014,6 +3012,7 @@ $$\vbox{\halign{&\tt#\hfil\ \cr
 &SRU    &\$0,virt,s     &\% \$0=a4a3a2a1a0 (page number of virt)\cr
 &ZSZ   &\$1,\$0,1       &\% \$1=[page number is zero]\cr
 &ADD    &limit,limit,\$1&\% increase limit if page number is zero\cr
+&SETL&\$6,\#3ff\cr
 }}$$
 The next part of the routine finds the ``digits'' of
 the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
@@ -3022,28 +3021,28 @@ $$
 &OR  &\$5,base,0\cr
 &SRU &\$1,\$0,10\cr
 &PBZ &\$1,1F\cr
-&AND &\$0,\#3ff\cr
+&AND &\$0,\$0,\$6\cr
 &INCL &base,\#2000\cr}}
 \qquad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &OR  &\$5,base,0\cr
 &SRU &\$2,\$1,10\cr
 &PBZ &\$2,2F\cr
-&AND &\$1,\#3ff\cr
+&AND &\$1,\$1,\$6\cr
 &INCL &base,\#2000\cr}}
 \qquad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &OR  &\$5,base,0\cr
 &SRU &\$3,\$2,10\cr
 &PBZ &\$3,3F\cr
-&AND &\$2,\#3ff\cr
+&AND &\$2,\$2,\$6\cr
 &INCL &base,\#2000\cr}}
 \qquad
 \vcenter{\halign{&\tt#\hfil\ \cr
 &OR  &\$5,base,0\cr
 &SRU &\$4,\$3,10\cr
 &PBZ &\$4,4F\cr
-&AND &\$3,\#3ff\cr
+&AND &\$3,\$3,\$6\cr
 &INCL &base,\#2000\cr}}
 $$
 Then the process cascades back through PTPs.

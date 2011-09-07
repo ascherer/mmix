@@ -1329,6 +1329,8 @@ was found, $-1$ if nothing was found. A decimal constant that doesn't
 fit in an octabyte is computed modulo~$2^{64}$.
 @^syntax of floating point constants@>
 
+The value of |exceptions| set by |scan_const| is not necessarily correct.
+
 @<Subr...@>=
 static void bignum_double @,@,@[ARGS((bignum*))@];
 int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
