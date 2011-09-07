@@ -12,4 +12,4 @@ Main LDA  $255,ArgR
      LDA  $255,ArgW
      TRAP 0,Fwrite,StdOut
      JMP  Main
-Done TRAP 0,0,Halt
+Done TRAP 0,Halt,0

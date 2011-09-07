@@ -276,15 +276,15 @@ stand respectively for
 $(x\times y)\bmod2^{64}$ (multiplication), $\lfloor x/y\rfloor$ (division),
 $\lfloor2^{64}x/y\rfloor$ (fractional division), $x\bmod y$ (remainder),
 $(x\times2^y)\bmod2^{64}$ (left~shift), $\lfloor x/2^y\rfloor$
-(right shift), and $x\land y$ (bitwise and) on unsigned octabytes.
+(right shift), and $x\mathbin{\char`\&}y$ (bitwise and) on unsigned octabytes.
 Division is legal only if $y>0$; fractional division is
 legal only if $x<y$. None of the strong binary operations can be
 applied to register numbers.
 
 The weak binary operations \.{x+y}, \.{x-y}, \.{x\char'174 y}, and
 \.{x\^y} stand respectively for $(x+y)\bmod2^{64}$ (addition),
-$(x-y)\bmod2^{64}$ (subtraction),
-$x\lor y$ (bitwise or), and $x\oplus y$ (bitwise exclusive-or) on
+$(x-y)\bmod2^{64}$ (subtraction), $x\mathbin{\mkern1mu\vert\mkern1mu}y$
+(bitwise or), and $x\oplus y$ (bitwise exclusive-or) on
 unsigned octabytes. These operations can be applied to register
 numbers only in four contexts: $\<register>+\<pure>$, $\<pure>+\<register>$,
 $\<register>-\<pure>$
@@ -969,8 +969,8 @@ extern octa oand @,@,@[ARGS((octa y,octa z))@];
   /* $y\land z$ */
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];
   /* $y\LL s$, $0\le s\le64$ */
-extern octa shift_right @,@,@[ARGS((octa y,int s,int uns))@];
-  /* $y\GG s$, signed if |!uns| */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 extern octa omult @,@,@[ARGS((octa y,octa z))@];
   /* unsigned $(|aux|,x)=y\times z$ */
 extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
@@ -1080,7 +1080,7 @@ as a comment by the assembler.
 @<Check for a line directive@>=
 {
   for (p=buffer+1;isspace(*p);p++);
-  for (j=*p++-'0';isdigit(*p);p++) j=10*j+*p-'0';
+  for (j=0;isdigit(*p);p++) j=10*j+*p-'0';
   for (;isspace(*p);p++);
   if (*p=='\"') {
     if (!filename[filename_count]) {
@@ -1089,11 +1089,17 @@ as a comment by the assembler.
         panic("Capacity exceeded: Out of filename memory");
 @.Capacity exceeded...@>
     }
-    for (p++,q=filename[filename_count];*p && *p!='\"';p++,q++) *q=*p;
+    for (p++,k=0;*p && *p!='\"' && k<FILENAME_MAX; p++,k++)
+      filename[filename_count][k]=*p;
+    if (k==FILENAME_MAX) panic("Capacity exceeded: File name too long");
     if (*p=='\"' && *(p-1)!='\"') { /* yes, it's a line directive */
-      *q='\0';
+      filename[filename_count][k]='\0';
       for (k=0;strcmp(filename[k],filename[filename_count])!=0;k++);
-      if (k==filename_count) filename_count++;
+      if (k==filename_count) {
+        if (filename_count==256)
+          panic("Capacity exceeded: More than 256 file names");
+        filename_count++;
+      }
       cur_file=k;
       line_no=j-1;
     }
@@ -2448,7 +2454,7 @@ switch(*p++) {
  case '%': rt_op=mod;@+break;
  case '<': rt_op=shl;@+goto sh_check;
  case '>': rt_op=shr;
-  sh_check:@+if (*p++==*(p-1)) break;
+  sh_check: p++;@+if (*(p-1)==*(p-2)) break;
   derr("syntax error at `%c'",*(p-2));
 @.syntax error...@>
  case '&': rt_op=and;@+break;
@@ -2557,7 +2563,7 @@ case shl: case shr: binary_check("compute a bitwise shift of");
  if (top_val.equiv.h || top_val.equiv.l>63) next_val.equiv=zero_octa;
  else if (op_stack[op_ptr]==shl)
    next_val.equiv=shift_left(next_val.equiv,top_val.equiv.l);
- else next_val.equiv=shift_right(next_val.equiv,top_val.equiv.l,true);
+ else next_val.equiv=shift_right(next_val.equiv,top_val.equiv.l,1);
  goto fin_bin;
 case and: binary_check("compute bitwise and of");
  next_val.equiv.h&=top_val.equiv.h, next_val.equiv.l&=top_val.equiv.l;
@@ -2813,7 +2819,11 @@ case 2:@+if (!(op_bits&two_arg_bit))
     if (op_bits&one_arg_bit)
       derr("opcode `%s' must not have two operands",op_field)@;
     else derr("opcode `%s' must have more than two operands",op_field);
+  if ((op_bits&(three_arg_bit+mem_bit))==three_arg_bit) goto make_two_three;
   @<Do a two-operand operation@>;
+make_two_three: val_stack[2]=val_stack[1], val_ptr=3;
+  val_stack[1].equiv=zero_octa, val_stack[1].link=NULL,
+    val_stack[1].status=pure; /* insert \.0 as the second operand */
 case 3:@+if (!(op_bits&three_arg_bit))
     derr("opcode `%s' must not have three operands",op_field);
   @<Do a three-operand operation@>;

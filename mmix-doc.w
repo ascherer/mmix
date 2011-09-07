@@ -2990,7 +2990,7 @@ for instructions, or to 2 if the key was present in the TC for data,
 or to~3 if the key was present in both. This instruction is for the
 operating system only. (Changes to the TC are not immediate; so \.{SYNC}
 and/or \.{SYNCD} ought to be done when appropriate, as discussed in
-{\sc MMIX-PIPE}.)
+{\mc MMIX-PIPE}.)
 
 @ We mentioned earlier that
 cheap versions of\/ \MMIX\ might calculate the physical addresses with

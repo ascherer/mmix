@@ -606,8 +606,8 @@ extern octa oand @,@,@[ARGS((octa y,octa z))@];
   /* $y\land z$ */
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];
   /* $y\LL s$, $0\le s\le64$ */
-extern octa shift_right @,@,@[ARGS((octa y,int s,int uns))@];
-  /* $y\GG s$, signed if |!uns| */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 extern octa omult @,@,@[ARGS((octa y,octa z))@];
   /* unsigned $(|aux|,x)=y\times z$ */
 extern octa signed_omult @,@,@[ARGS((octa y,octa z))@];
@@ -2197,7 +2197,7 @@ case GET:@+if (yy!=0 || zz>=32) goto illegal_inst;
 case PUT: case PUTI:@+ if (yy!=0 || xx>=32) goto illegal_inst;
   strcpy(rhs,"%z = %#z");
   if (xx>=8) {
-    if (xx<=11) goto illegal_inst; /* can't change rC, rN, rO, rS */
+    if (xx<=11 && xx!=8) goto illegal_inst; /* can't change rN, rO, rS */
     if (xx<=18) goto privileged_inst;
     if (xx==rA) @<Get ready to update rA@>@;
     else if (xx==rL) @<Set $L=z=\min(z,L)$@>@;

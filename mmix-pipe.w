@@ -355,8 +355,8 @@ extern octa oandn @,@,@[ARGS((octa y,octa z))@];
   /* $y\land \bar z$ */
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];
   /* $y\LL s$, $0\le s\le64$ */
-extern octa shift_right @,@,@[ARGS((octa y,int s,int uns))@];
-  /* $y\GG s$, signed if |!uns| */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 extern octa omult @,@,@[ARGS((octa y,octa z))@];
   /* unsigned $(|aux|,x)=y\times z$ */
 extern octa signed_omult @,@,@[ARGS((octa y,octa z))@];
@@ -5827,7 +5827,8 @@ already present.)
 
 @<Cases for stage 1 execution@>=
 case noop:@+if (data->interrupt&F_BIT) goto emulate_virt;
-case jmp: case pushj: case incrl: case unsave: goto fin_ex;
+case incrl: case unsave: goto fin_ex;
+case jmp: case pushj: data->go.o=data->z.o; goto fin_ex;
 case sav:@+if (!(data->mem_x)) goto fin_ex;
 case incgamma: case save: data->i=st; goto switch1;
 case decgamma: case unsav: data->i=ld; goto switch1;

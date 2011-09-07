@@ -29,8 +29,8 @@ static char buf[20];
 static char *kind[]={"byte","wyde","tetra","octa"};
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];
   /* $y\LL s$, $0\le s\le64$ */
-extern octa shift_right @,@,@[ARGS((octa y,int s,int uns))@];
-  /* $y\GG s$, signed if |!uns| */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 
 @ If the |interactive_read_bit| of the |verbose| control is set,
 the user is supposed to supply values dynamically. Otherwise

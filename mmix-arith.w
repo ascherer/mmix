@@ -69,8 +69,6 @@ octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
-octa aux; /* auxiliary output of a subroutine */
-bool overflow; /* set by certain subroutines for signed arithmetic */
 
 @ It's easy to add and subtract octabytes, if we aren't terribly
 worried about speed.
@@ -172,8 +170,8 @@ octa omult(y,z)
 }
 
 @ @<Glob...@>=
-extern octa aux; /* secondary output of subroutines with multiple outputs */
-extern bool overflow;
+octa aux; /* secondary output of subroutines with multiple outputs */
+bool overflow; /* set by certain subroutines for signed arithmetic */
 
 @ @<Unpack the mult...@>=
 u[3]=y.h>>16, u[2]=y.h&0xffff, u[1]= y.l>>16, u[0]=y.l&0xffff;

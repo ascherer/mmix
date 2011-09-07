@@ -73,7 +73,7 @@ pages to the front (those pages appear at the end). Read the introductory
 parts of those documents, and please report any errors you find to
 knuth-bug@cs.stanford.edu. If your system is unable to create those documents
 for some reason, go to
-   http://www-cs-faculty.stanford.edu/~knuth/mmix.html
+   http://www-cs-faculty.stanford.edu/~knuth/mmix-news.html
 and download the compressed PostScript files from there.
 Say "make clean" when you've got hardcopy.
 
