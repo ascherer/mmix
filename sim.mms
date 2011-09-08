@@ -104,15 +104,15 @@ lring_mask GREG 8*lring_size-1
            PUT   rJ,$0
            POP
 :StackRoom SUBU  t,ss,oo   idiom in \S81,\S101,\S102
+           SUBU  t,t,ll
            AND   t,t,lring_mask
-           CMPU  t,t,ll
            PBNZ  t,1F
-           PBZ   ll,1F
            GET   $0,rJ
            PUSHJ res,StackStore
            PUT   rJ,$0
 1H         POP
 
+* The main loop
 loc        GREG      % where the simulator is at
 inst_ptr   GREG      % where the simulator will be next
 inst       GREG      % the current instruction being simulated
@@ -231,11 +231,11 @@ XDest      CMPU   t,xxx,gg      Install X as dest, \S80
            BN     t,3F
            LDA    xptr,g,xxx
            JMP    1F
-2H         PUSHJ  res,StackRoom
-           ADDU   t,oo,ll
+2H         ADDU   t,oo,ll
            AND    t,t,lring_mask
            STCO   0,l,t
            INCL   ll,8
+           PUSHJ  res,StackRoom
 3H         CMPU   t,xxx,ll
            BNN    t,2B
            ADD    t,xxx,oo
@@ -295,12 +295,12 @@ Go         SET    x,inst_ptr
 
 PushGo     ADDU   yz,y,z
 PushJ      SET    inst_ptr,yz
-           CMPU   t,xxx,ll
+           CMPU   t,xxx,gg
            PBN    t,1F
-           PUSHJ  0,StackRoom
            SET    xxx,ll
            SRU    xx,xxx,3
            INCL   ll,8
+           PUSHJ  0,StackRoom
 1H         ADDU   t,xxx,oo
            AND    t,t,lring_mask
            STOU   xx,l,t
@@ -348,13 +348,13 @@ Pop        SUBU   oo,oo,8
 Save       BNZ    yz,Error     \S102
            CMPU   t,xxx,gg
            BN     t,Error
-           PUSHJ  0,StackRoom
            ADDU   t,oo,ll
            AND    t,t,lring_mask
            SRU    y,ll,3
            STOU   y,l,t
+           INCL   ll,8
+           PUSHJ  0,StackRoom
            ADDU   oo,oo,ll
-           ADDU   oo,oo,8
            SET    ll,0
 1H         PUSHJ  0,StackStore
            CMPU   t,ss,oo
@@ -967,8 +967,8 @@ O   IS  Done-4
  SWYM 0; BYTE 0,1,0,#09  PRESTI
  SWYM 0; BYTE 0,1,0,#0a  SYNCID
  SWYM 0; BYTE 0,1,0,#09  SYNCIDI
- JMP PushGo+@-O; BYTE 0,3,0,#0a  PUSHGO
- JMP PushGo+@-O; BYTE 0,3,0,#09  PUSHGOI
+ JMP PushGo+@-O; BYTE 0,3,0,#2a  PUSHGO
+ JMP PushGo+@-O; BYTE 0,3,0,#29  PUSHGOI
  OR x,y,z; BYTE 0,1,0,#2a  OR
  OR x,y,z; BYTE 0,1,0,#29  ORI
  ORN x,y,z; BYTE 0,1,0,#2a  ORN
@@ -1019,8 +1019,8 @@ O   IS  Done-4
  ANDN x,x,z; BYTE 0,1,0,#30  ANDNL
  SET inst_ptr,yz; BYTE 0,1,0,#41  JMP
  SET inst_ptr,yz; BYTE 0,1,0,#41  JMPB
- JMP PushJ+@-O; BYTE 0,1,0,#40  PUSHJ
- JMP PushJ+@-O; BYTE 0,1,0,#40  PUSHJB
+ JMP PushJ+@-O; BYTE 0,1,0,#60  PUSHJ
+ JMP PushJ+@-O; BYTE 0,1,0,#60  PUSHJB
  SET x,yz; BYTE 0,1,0,#60  GETA
  SET x,yz; BYTE 0,1,0,#60  GETAB
  JMP Put+@-O; BYTE 0,1,0,#02  PUT
@@ -1071,7 +1071,8 @@ TakeTrip   STOU   inst_ptr,g,8*rW
            STOU   z,g,8*rZ
            LDOU   t,g,c255
            STOU   t,g,8*rB
-           STCO   0,g,c255
+           LDOU   t,g,8*rJ
+           STOU   t,g,c255
 4H         OR     aa,aa,exc
 0H    GREG   #0000000800000004  Update the clocks, \S128
 Update     MOR    t,f,0B      $2^{32}$mems + oops
@@ -1133,6 +1134,3 @@ Main       LDA    Mem:head,Chunk0
            LOC    U_Handler
            ORL    exc,U_BIT
            JMP    Done
-
-
-

@@ -195,6 +195,7 @@ Main        FCMP   $0,neg_zero,$5
             FSUB   $100,small,$200   % cause underflow trip
             PUT    rL,10
             PUT    rL,small
+            PUSHJ  11,@+4
             UNSAVE $255
             TRAP   0,Halt,0          % normal exit
 

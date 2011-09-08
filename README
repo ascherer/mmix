@@ -131,13 +131,13 @@ after 405 cycles, having printed out its famous message to the world.]
   Running 10000 at time 0
   Warning: TRIP at location 000000000000039c
   Warning: floating point underflow at location 00000000000003a0
-  Halted at time 4377
+  Halted at time 4424
   mmmix> q
-  Simulation ended at time 4378.
+  Simulation ended at time 4425.
   Predictions: 183 in agreement, 15 in opposition; 176 good, 22 bad
   Instructions issued per cycle:
-    0   2624
-    1   1754
+    0   2665
+    1   1760
 [Explanation: This time we try mmmix on the torture-test program "silly".
 That program is completely weird, but it does exercise all 256 instructions
 and comes up with lots of different cases. The "silly" program is so weird,
@@ -152,7 +152,7 @@ by asking for "verbose" output, saying
   mmmix> 10000
 although the output file will then be huge. Indeed, it took me a couple days
 to verify that everything was indeed working as I thought it should.]
-  my_machine> mmmix test1.mmconfig test1.mmix
+  home_machine> mmmix test1.mmconfig test1.mmix
   mmmix> @8000000000010000
   mmmix> b0
   mmmix> vff
@@ -175,7 +175,7 @@ to verify that everything was indeed working as I thought it should.]
   Write buffer (empty)
   Reorder buffer:
   0: fd000000(noop)* int=x hist=1 state=0 UNI1:1
-   5 available rename registers, 1 memory slot
+   5 available rename registers, 2 memory slots
   Fetch buffer:
   4: fd000000(SWYM)x
   8: fd000000(SWYM)x

@@ -46,7 +46,7 @@ in the simulators.
 
 @<Type...@>=
 typedef unsigned int tetra;
-typedef struct {tetra h,l;} octa; /* two tetrabytes makes one octabyte */
+typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
 @ Three basic subroutines are used to get strings from the simulated
 memory and to put strings into that memory. These subroutines are
@@ -96,7 +96,6 @@ octa mmix_fopen(handle,name,mode)
   octa name,mode;
 {
   char name_buf[FILENAME_MAX];
-  FILE* tmp;
   if (mode.h || mode.l>4) goto abort;
   if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto abort;
   if (sfile[handle].mode!=0 && handle>2) fclose(sfile[handle].fp);
@@ -163,7 +162,10 @@ if (sfile[handle].fp==stdin) {
 } else {
   clearerr(sfile[handle].fp);
   n=fread(buf,1,size.l,sfile[handle].fp);
-  if (ferror(sfile[handle].fp)) goto done;
+  if (ferror(sfile[handle].fp)) {
+    free(buf);
+    goto done;
+  }
 }
 
 @ @<Sub...@>=
@@ -325,6 +327,7 @@ octa mmix_fputws(handle,string)
   octa o;
   o=zero_octa;
   if (!(sfile[handle].mode&0x2)) return neg_one;
+  if (sfile[handle].mode&0x8) sfile[handle].mode &=~ 0x1;
   while (1) {
     n=mmgetchars(buf,256,string,1);
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;

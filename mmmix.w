@@ -52,6 +52,7 @@ int main(argc,argv)
   @<Run the simulation interactively@>;
   printf("Simulation ended at time %d.\n",ticks.l);
   print_stats();
+  return 0;
 }
 
 @ The command line might also contain options, some day.
@@ -68,7 +69,8 @@ config_file_name=argv[1];
 prog_file_name=argv[2];
 
 @ @<Input the program@>=
-if (strcmp(prog_file_name+strlen(prog_file_name)-4,".mmb")==0)
+if (strlen(prog_file_name)>4 &&
+     strcmp(prog_file_name+strlen(prog_file_name)-4,".mmb")==0)
   @<Input an \MMIX\ binary file@>@;
 else @<Input a rudimentary hexadecimal file@>;
 fclose(prog_file);
@@ -197,7 +199,9 @@ assumed by the stripped-down simulator.)
 
 @ The |undump_octa| routine reads eight bytes from the binary file
 |prog_file| into the global octabyte |cur_dat|,
-taking care as usual to be big-Endian regardless of the host computer's bias.
+taking care as usual to be big-endian regardless of the host computer's bias.
+@^big-endian versus little-endian@>
+@^little-endian versus big-endian@>
 
 @<Sub...@>=
 static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
@@ -289,7 +293,7 @@ mem_write(cur_loc,cur_dat); /* PTE for the pool segment */
 cur_dat.h=3, cur_loc.l=9<<13;
 mem_write(cur_loc,cur_dat); /* PTE for the stack segment */
 g[rK].o=neg_one; /* enable all interrupts */
-g[rV].o.h=0x3692004;
+g[rV].o.h=0x369c2004;
 page_bad=false, page_r=4<<(32-13), page_s=32, page_mask.l=0xffffffff;
 page_b[1]=3, page_b[2]=6, page_b[3]=9, page_b[4]=12;
 
@@ -315,7 +319,9 @@ deissued, or committed; \Hex2 shows the pipeline and locks after each cycle;
 \Hex4 shows each coroutine activation; \Hex8 each coroutine scheduling;
 \Hex{10} reports when reading from an uninitialized chunk of memory;
 \Hex{20} asks for online input when reading from addresses $\ge2^{48}$;
-\Hex{40} reports all I/O to memory address $\ge2^{48}$.
+\Hex{40} reports all I/O to memory address $\ge2^{48}$;
+\Hex{80} shows details of branch prediction;
+\Hex{100} displays full cache contents including blocks with invalid tags.
 
 \bull\.-\<integer>: Deissue this many instructions.
 
@@ -358,7 +364,7 @@ case 'q': case 'x': goto done;
   @<Cases for interaction@>@;
   }
 }
-done:
+done:@;
 
 @ @<Cases...@>=
 case 'h': case '?': printf("The interactive commands are as follows:\n");
@@ -391,7 +397,7 @@ case '0': case '1': case '2': case '3': case '4':
 case '5': case '6': case '7': case '8': case '9':
   if (sscanf(buffer,"%d",&n)!=1) goto what_say;
   printf("Running %d at time %d",n,ticks.l);
-  if (bp.h==-1 && bp.l==-1) printf("\n");
+  if (bp.h==(tetra)-1 && bp.l==(tetra)-1) printf("\n");
   else printf(" with breakpoint %08x%08x\n",bp.h,bp.l);
   MMIX_run(n,bp);@+continue;
 case '@@': inst_ptr.o=read_hex(buffer+1);@+inst_ptr.p=NULL;@+continue;
@@ -535,5 +541,6 @@ octa seven_octa={0,7};
 extern octa incr @,@,@[ARGS((octa y,int delta))@];
   /* unsigned $y+\delta$ ($\delta$ is signed) */
 extern void mmix_io_init @,@,@[ARGS((void))@];
+extern void MMIX_config @,@,@[ARGS((char*))@];
 
 @* Index.

@@ -30,6 +30,9 @@ This program module has a simple structure, intended to make it
 suitable for loading with \MMIX\ simulators and assemblers.
 
 @c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 @<Stuff for \CEE/ preprocessor@>@;
 typedef enum{@+false,true@+} bool;
 @<Tetrabyte and octabyte type definitions@>@;
@@ -57,7 +60,7 @@ it represents an unsigned 32-bit integer.
 @<Tetra...@>=
 typedef unsigned int tetra;
  /* for systems conforming to the LP-64 data model */
-typedef struct { tetra h,l;} octa; /* two tetrabytes makes one octabyte */
+typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
 @ @d sign_bit ((unsigned)0x80000000)
 
@@ -194,7 +197,7 @@ octa signed_omult(y,z)
   acc=omult(y,z);
   if (y.h&sign_bit) aux=ominus(aux,z);
   if (z.h&sign_bit) aux=ominus(aux,y);
-  overflow=(aux.h!=aux.l || ((aux.h^acc.h)&sign_bit));
+  overflow=(aux.h!=aux.l || (aux.h^(aux.h>>1)^(acc.h&sign_bit)));
   return acc;
 }  
 
@@ -206,7 +209,7 @@ octabytes $q$ and $r$ such that $(2^{64}x+y)=qz+r$ and $0\le r<z$,
 given octabytes $x$, $y$, and~$z$, assuming that $x<z$.
 (If $x\ge z$, it simply sets $q=x$ and $r=y$.)
 The quotient~$q$ is returned by the subroutine;
-the remainder~$r$ is stored in |aux|
+the remainder~$r$ is stored in |aux|.
 @^multiprecision division@>
 
 @<Subr...@>=
@@ -281,7 +284,7 @@ aux.h=(u[3]<<16)+u[2], aux.l=(u[1]<<16)+u[0];
 @ @<Find the trial quotient, $\hat q$@>=
 t=(u[j+n]<<16)+u[j+n-1];
 qhat=t/vh, rhat=t-vh*qhat;
-while (qhat==0x10000 || qhat*vmh>(rhat<<16)+u[j+n-2]) {
+if (n>1) while (qhat==0x10000 || qhat*vmh>(rhat<<16)+u[j+n-2]) {
   qhat--, rhat+=vh;
   if (rhat>=0x10000) break;
 }
@@ -370,12 +373,15 @@ octa oxor(y,z) /* compute $y\oplus z$ */
 for sideways addition'' in {\sl The Preparation of Programs
 for an Electronic Digital Computer\/} by Wilkes, Wheeler, and
 Gill, second edition (Reading, Mass.:\ Addison--Wesley, 1957),
-191--193.]
+191--193. The efficient endgame used here was suggested by
+Peter Rossmanith and Stefan Schwoon.]
 @^Gillies, Donald Bruce@>
 @^Miller, Jeffrey Charles Percy@>
 @^Wilkes, Maurice Vincent@>
 @^Wheeler, David John@>
 @^Gill, Stanley@>
+@^Rossmanith, Peter@>
+@^Schwoon, Stefan@>
 
 @<Subr...@>=
 int count_bits @,@,@[ARGS((tetra))@];@+@t}\6{@>
@@ -385,9 +391,9 @@ int count_bits(x)
   register int xx=x;
   xx=(xx&0x55555555)+((xx>>1)&0x55555555);
   xx=(xx&0x33333333)+((xx>>2)&0x33333333);
-  xx=(xx&0x0f0f0f0f)+((xx>>4)&0x0f0f0f0f);
-  xx=(xx&0x00ff00ff)+((xx>>8)&0x00ff00ff);
-  return (xx&0x0000ffff)+(xx>>16);
+  xx=(xx+(xx>>4))&0x0f0f0f0f;
+  xx=xx+(xx>>8);
+  return (xx+(xx>>16)) & 0xff;
 }
 
 @ To compute the nonnegative byte differences of two given tetrabytes,
@@ -820,7 +826,7 @@ octa fplus(y,z)
   if (d) @<Adjust for difference in exponents@>;
   if (ys==zs) {
     xf=oplus(yf,zf);
-    if (xf.h>=0x800000) xe++, xf=shift_right(xf,1,1);
+    if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,1), xf.l|=d;
   }@+else {
     xf=ominus(yf,zf);
     if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,1), xf.l|=d;
@@ -858,11 +864,11 @@ $|yf|=2^{54}$, $|zf|=2^{54}+2^{53}-1$, $d=52$.
     o=zf;
     zf=shift_right(o,d,1);
     oo=shift_left(zf,d);
-    if (oo.l!=o.l || oo.h||o.h) zf.l|=1;
+    if (oo.l!=o.l || oo.h!=o.h) zf.l|=1;
   }
 }
 
-@ The comparison of floating point number with respect to $\epsilon$
+@ The comparison of floating point numbers with respect to $\epsilon$
 shares some of the characteristics of floating point addition/subtraction.
 In some ways it is simpler, and in other ways it is more difficult;
 we might as well deal with it now. % anyways
@@ -1156,7 +1162,7 @@ static void bignum_dec(f,g,r)
   }
   for (;borrow;p--)
     if (*p) borrow=0, *p=*p-1;
-    else *p=r;
+    else *p=r-1;
   while (f->dat[f->a]==0) {
     if (f->a==f->b) { /* the result is zero */
       f->a=f->b=bignum_prec-1, f->dat[bignum_prec-1]=0;

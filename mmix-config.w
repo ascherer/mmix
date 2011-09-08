@@ -151,7 +151,7 @@ be signaled only when going from a nonnegative location to a negative one.
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
 simulated memory; must be $\ge1$.
 
-\bull hashprime (default 2009), prime number used to address simulated memory;
+\bull hashprime (default 2003), prime number used to address simulated memory;
 must exceed \.{memchunksmax}, preferably by a factor of about~2.
 
 \smallskip\noindent
@@ -233,7 +233,7 @@ Only the translation caches (the IT-cache and DT-cache) are present by
 default. But if any specifications are given for, say, an I-cache,
 all of the unspecified I-cache parameters take their default values.
 
-The existence of a S-cache (secondary cache) implies the existence of both
+The existence of an S-cache (secondary cache) implies the existence of both
 I-cache and D-cache (primary caches for instructions and data).
 The block size of the secondary cache must not be less than the block
 size of the primary caches. The secondary cache must have the
@@ -259,7 +259,7 @@ unsigned.
 
 \bull sadd (default 1); the sideways addition operator.
 
-\bull mor (default 1); the boolean matrix ultiplication operators \.{MOR} and
+\bull mor (default 1); the boolean matrix multiplication operators \.{MOR} and
 \.{MXOR}.
 
 \bull fadd (default 4); floating point addition and subtraction.
@@ -449,7 +449,7 @@ pv_spec PV[]={@/
 {"writebuffer", &write_buf_size, 2, 1, INT_MAX, false},@/
 {"reorderbuffer", &reorder_buf_size, 5, 1, INT_MAX, false},@/
 {"renameregs", &max_rename_regs, 5, 1, INT_MAX, false},@/
-{"memslots", &max_mem_slots, 1, 1, INT_MAX, false},@/
+{"memslots", &max_mem_slots, 2, 1, INT_MAX, false},@/
 {"localregs", &lring_size, 256, 256, 1024, true},@/
 {"fetchmax", &fetch_max, 2, 1, INT_MAX, false},@/
 {"dispatchmax", &dispatch_max, 1, 1, INT_MAX, false},@/
@@ -470,7 +470,7 @@ pv_spec PV[]={@/
 {"hardwarepagetable", &hardware_PT, 1, 0, 1, false},@/
 {"disablesecurity", (int*)&security_disabled, 0, 0, 1, false},@/
 {"memchunksmax", &mem_chunks_max, 1000, 1, INT_MAX, false},@/
-{"hashprime", &hash_prime, 2009, 2, INT_MAX, false}};
+{"hashprime", &hash_prime, 2003, 2, INT_MAX, false}};
 @#
 cpv_spec CPV[]={
 {"associativity", assoc, 1, 1, INT_MAX, true},@/

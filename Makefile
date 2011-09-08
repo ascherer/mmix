@@ -3,11 +3,16 @@
 #
 
 #   Be sure that CWEB version 3.0 or greater is installed before proceeding!
+#   In fact, CWEB 3.61 is recommended for making hardcopy or PDF documentation.
 
 #   If you prefer optimization to debugging, change -g to something like -O:
 CFLAGS = -g
 
-.SUFFIXES: .dvi .tex .w .ps
+#   Uncomment the second line if you use pdftex to bypass .dvi files:
+PDFTEX = dvipdfm
+#PDFTEX = pdftex
+
+.SUFFIXES: .dvi .tex .w .ps .pdf
 
 .tex.dvi:
 	tex $*.tex
@@ -37,6 +42,13 @@ CFLAGS = -g
 	make $*.dvi
 	make $*.ps
 
+.w.pdf:
+	make $*.tex
+	case "$(PDFTEX)" in \
+	 dvipdfm ) tex "\let\pdf+ \input $*"; dvipdfm $* ;; \
+	 pdftex ) pdftex $* ;; \
+	esac
+
 WEBFILES = abstime.w boilerplate.w mmix-arith.w mmix-config.w mmix-doc.w \
 	mmix-io.w mmix-mem.w mmix-pipe.w mmix-sim.w mmixal.w mmmix.w mmotype.w
 CHANGEFILES =
@@ -46,7 +58,9 @@ ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
 
 basic:  mmixal mmix
 
-doc:    mmix-doc.ps mmixal.ps mmix-sim.ps
+doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
+	dvips -n13 mmixal.dvi -o mmixal-intro.ps
+	dvips -n8 mmix-sim.dvi -o mmix-sim-intro.ps
 
 all:    mmixal mmix mmotype mmmix
 
@@ -75,5 +89,3 @@ mmix:   mmix-arith.o mmix-io.o mmix-sim.c abstime
 tarfile: $(ALL)
 	tar cvf /tmp/mmix.tar $(ALL)
 	gzip -9 /tmp/mmix.tar
-
-

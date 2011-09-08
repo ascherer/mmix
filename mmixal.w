@@ -105,7 +105,7 @@ corresponding to that character. For example, \.{'a'}
 represents the constant \.{\#61}, also known as~\.{97}. The quoted character
 can be 
 anything except the character that the \CEE/ library calls \.{\\n} or {\it
-newline}; that character should be represented as \.{\#12}.
+newline}; that character should be represented as \.{\#a}.
 $$\vbox{\halign{$#$\hfil\cr
 \<character constant>\is\.'\<single byte character except newline>\.'\cr
 \<constant>\is\<decimal constant>\mid\<hex constant>\mid\<character constant>
@@ -205,13 +205,13 @@ $$\vbox{\halign{$#$\hfill\cr
 \<local label>\is\<digit>\,\.H\cr
 }}$$
 The \.B and \.F forms are permitted only in the operand field of \MMIXAL\
-instructions; the \.H form is permitted only in the location field. A local
+instructions; the \.H form is permitted only in the label field. A local
 operand such as~\.{2B} stands for the last local label~\.{2H}
 in instructions before the current one, or 0 if \.{2H} has not yet appeared
 as a label. A~local operand such as~\.{2F} stands
 for the first \.{2H} in instructions after the current one. Thus, in a
 sequence such as
-$$\.{2H JMP 2F; 2H JMP 2B}$$
+$$\vbox{\halign{\tt#\cr 2H JMP 2F\cr 2H JMP 2B\cr}}$$
 the first instruction jumps to the second and the second jumps to the first.
 
 Local symbols are useful for references to nearby points of a program, in
@@ -262,7 +262,7 @@ The character \.{@@} stands for the current location, which is always pure.
 The unary operators
 \.+, \.-, \.\~, \.\$, and \.\& mean, respectively, ``do nothing,''
 ``subtract from zero,'' ``complement the bits,'' ``change from pure value
-to register number,'' and ``take the serial number''. Only the first of these,
+to register number,'' and ``take the serial number.'' Only the first of these,
 \.+, can be applied to a register number. The last unary operator, \.\&,
 applies only to symbols, and it is of interest primarily to system programmers;
 it converts a symbol to the unique positive integer that is used to identify
@@ -363,11 +363,13 @@ Thus, one never writes \.{ADDI} or \.{JMPB} in the source input to
 \MMIXAL, although such opcodes might appear when a simulator or
 debugger or disassembler is presenting a numeric instruction in symbolic form.
 $$\vbox{\halign{$#$\hfil\cr
-\<opcode>\is\<symbolic \MMIX\ operation>\mid\<pseudo-operation>\cr
+\<opcode>\is\<symbolic \MMIX\ operation>\mid\<alias operation>\cr
+\hskip12pc\mid\<pseudo-operation>\cr
 \<symbolic \MMIX\ operation>\is\.{TRAP}\mid\.{FCMP}\mid\cdots\mid\.{TRIP}\cr
+\<alias operation>\is\.{SET}\mid\.{LDA}\cr
 \<pseudo-operation>\is\.{IS}\mid\.{LOC}\mid\.{PREFIX}\mid
-   \.{GREG}\mid\.{LOCAL}\mid\.{BSPEC}\mid\.{ESPEC}\mid\cr
-\hskip12pc\.{BYTE}\mid\.{WYDE}\mid\.{TETRA}\mid\.{OCTA}\cr
+   \.{GREG}\mid\.{LOCAL}\mid\.{BSPEC}\mid\.{ESPEC}\cr
+\hskip12pc\mid\.{BYTE}\mid\.{WYDE}\mid\.{TETRA}\mid\.{OCTA}\cr
 }}$$
 
 @ \MMIX\ operations like \.{ADD} require exactly three expressions as
@@ -380,7 +382,7 @@ $$\.{ADD \$1,\$2,\$3}$$
 or as, say,
 $$\.{ADD x,y,y+1}$$
 if the equivalent of \.x is \.{\$1} and the equivalent of \.y is \.{\$2}.
-The command ``subtract 5 from register~1' could be expressed as
+The command ``subtract 5 from register~1'' could be expressed as
 $$\.{SUB \$1,\$1,5}$$
 or as
 $$\.{SUB x,x,5}$$
@@ -394,11 +396,11 @@ best expressed in terms of the predefined symbolic values
 \.{ROUND\_NEAR}, for $(0,1,2,3,4)$ respectively. In the second case
 the middle operand is understood to be zero (namely,
 \.{ROUND\_CURRENT}).
-@.ROUND_OFF@>
-@.ROUND_UP@>
-@.ROUND_DOWN@>
-@.ROUND_NEAR@>
-@.ROUND_CURRENT@>
+@:ROUND_OFF}\.{ROUND\_OFF@>
+@:ROUND_UP}\.{ROUND\_UP@>
+@:ROUND_DOWN}\.{ROUND\_DOWN@>
+@:ROUND_NEAR}\.{ROUND\_NEAR@>
+@:ROUND_CURRENT}\.{ROUND\_CURRENT@>
 
 \MMIX\ operations like \.{SETL} or \.{INCH}, which involve a wyde
 intermediate constant, require exactly two operands, (register, pure).
@@ -406,9 +408,9 @@ The value of the second operand should fit in two bytes.
 
 \MMIX\ operations like \.{BNZ}, which mention a register and a
 relative address, also require two operands. The first operand
-should be a register number. The second operand, when subtracted from
-the current location and divided by four, should yield a result~$r$
-in the range $-2^{16}\le r<2^{16}$. The second operand might also
+should be a register number. The second operand should yield a result~$r$
+in the range $-2^{16}\le r<2^{16}$ when the current location is subtracted
+from it and the result is divided by~4. The second operand might also
 be undefined; in that case, the eventual value must satisfy the
 restriction stated for defined values. The opcodes \.{GETA} and
 \.{PUSHJ} are similar, except that the first operand to \.{PUSHJ}
@@ -764,12 +766,12 @@ f0000000&(\.{JMP} \.{1F}, will be fixed up later)\cr
 98032001&|lop_fixo| $\Hex{20},1$ (data segment, 1 tetra)\cr
 00000000&(low tetrabyte of data segment address to fix)\cr
 98060102&|lop_file| $1,2$ (file name 1, 2 tetras)\cr
-666f6f2e&(\.{"foo."}\cr
-6d6d7300&(\.{"mms"},\thinspace0\cr
+666f6f2e&(\.{"foo."})\cr
+6d6d7300&(\.{"mms",0})\cr
 98070004&|lop_line| 4 (line 4 of the current file)\cr
 f000000a&(\.{JMP} \.{2B})\cr
 98080005&|lop_spec| 5 (begin special data of type 5)\cr
-00000200&(\.{TETRA} \.{\&b<<8})\cr
+00000200&(\.{TETRA} \.{\&a<<8})\cr
 00fe0000&(\.{WYDE} \.{a-\$0})\cr
 98012001&|lop_loc| $\Hex{20},1$ (data segment, 1 tetra)\cr
 0000000a&(low tetrabyte of address in data segment)\cr
@@ -832,7 +834,7 @@ instruction that takes a relative address: a branch, probable branch,
 \.{JMP}, \.{PUSHJ}, or~\.{GETA}. Its YZ~field was previously
 assembled as zero because of a future reference.)
 
-\bull |lop_fixrx|: $\rm X=\Hex{05}$, $\rm Y=0$, $Z=16$ or 24.
+\bull |lop_fixrx|: $\rm X=\Hex{05}$, $\rm Y=0$, $\rm Z=16$ or 24.
 Proceed as in |lop_fixr|,
 but load $\delta$ into tetrabyte $\rm P=\lambda-4\delta$ instead of loading
 YZ into $\rm P=\lambda-4YZ$. Here $\delta$ is the value of the tetrabyte
@@ -941,7 +943,7 @@ necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
 @<Type...@>=
 typedef unsigned int tetra;
   /* assumes that an int is exactly 32 bits wide */
-typedef struct { tetra h,l;} octa; /* two tetrabytes makes one octabyte */
+typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 typedef enum {@!false,@!true}@+@!bool;
 
 @ @<Glob...@>=
@@ -985,8 +987,8 @@ if (acc.h!=0xffffffff) panic("Type tetra is not implemented correctly");
 characters, but the present code limits itself to an 8-bit subset.
 @^Unicode@>
 The type \&{Char} is defined here in order to ease the later transition:
-At present, \&{Char} is the same as \&{char}, but \&{Char} can be changed to
-a 16-bit type in the Unicode version.
+At present, \&{Char} is the same as \&{unsigned} \&{char}, but
+\&{Char} can be changed to a 16-bit type in the Unicode version.
 
 Other changes will also be necessary when the transition to Unicode is made;
 for example, some calls of |fprintf| will become calls of |fwprintf|,
@@ -995,7 +997,7 @@ The switchable type name \&{Char} provides at least a first step
 towards a brighter future with Unicode.
 
 @<Type...@>=
-typedef char Char; /* bytes that will become wydes some day */
+typedef unsigned char Char; /* bytes that will become wydes some day */
 
 @ While we're talking about classic systems versus future systems, we
 might as well define the |ARGS| macro, which makes function prototypes
@@ -1040,13 +1042,14 @@ line_no++;
 line_listed=false;
 j=strlen(buffer);
 if (buffer[j-1]=='\n') buffer[j-1]='\0'; /* remove the newline */
-else if (fgetc(src_file)!=EOF) @<Flush the excess part of an overlong line@>;
+else if ((j=fgetc(src_file))!=EOF)
+  @<Flush the excess part of an overlong line@>;
 if (buffer[0]=='#') @<Check for a line directive@>;
 buf_ptr=buffer;
 
 @ @<Flush the excess...@>=
 {
-  do j=fgetc(src_file);@+while(j!='\n' && j!= EOF);
+  while(j!='\n' && j!= EOF) j=fgetc(src_file);
   if (!long_warning_given) {
     long_warning_given=true;
     err("*trailing characters of long input line have been dropped");
@@ -1067,7 +1070,7 @@ error reporting and for synchronization data in the object file.
 Up to 256 different source file names can be remembered.
 
 @<Glob...@>=
-char *filename[257];
+Char *filename[257];
   /* source file names, including those in line directives */
 int filename_count; /* how many |filename| entries have we filled? */
 
@@ -1142,7 +1145,6 @@ void update_listing_loc @,@,@[ARGS((int))@];@+@t}\6{@>
 void update_listing_loc(k)
   int k; /* the location to display, mod 4 */
 {
-  octa o;
   if (cur_loc.h!=listing_loc.h || ((cur_loc.l^listing_loc.l)&0xfffff000)) {
     fprintf(listing_file,"%08x%08x:",cur_loc.h,(cur_loc.l&-4)|k);
     flush_listing_line("  ");
@@ -1275,7 +1277,7 @@ void mmo_out() /* output the contents of |mmo_buf| */
 @ @<Sub...@>=
 void mmo_tetra @,@,@[ARGS((tetra))@];
 void mmo_byte @,@,@[ARGS((unsigned char))@];
-void mmo_lop @,@,@[ARGS((char,char,char))@];
+void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
 void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
 void mmo_tetra(t) /* output a tetrabyte */
   tetra t;
@@ -1293,7 +1295,8 @@ void mmo_byte(b)
 }
 @#
 void mmo_lop(x,y,z) /* output a loader operation */
-  char x,y,z;
+  char x;
+  unsigned char y,z;
 {
   mmo_buf[0]=mm;@+ mmo_buf[1]=x;@+ mmo_buf[2]=y;@+ mmo_buf[3]=z;
   mmo_out();
@@ -1337,7 +1340,7 @@ line number in the output file agree with |cur_file| and |line_no|.
 void mmo_sync @,@,@[ARGS((void))@];@+@t}\6{@>
 void mmo_sync()
 {
-  register int j,k; register char *p;
+  register int j; register unsigned char *p;
   if (cur_file!=mmo_cur_file) {
     if (filename_passed[cur_file]) mmo_lop(lop_file,cur_file,0);
     else {
@@ -1376,6 +1379,7 @@ of~|k|. The |x_bits| parameter tells which bytes, if any, are part of
 a future reference.
 
 @<Sub...@>=
+void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
 void assemble(k,dat,x_bits)
   char k;
   tetra dat;
@@ -1498,7 +1502,7 @@ trie_node *trie_search(t,s)
 equivalents of defined symbols. They also
 hold ``fixup information'' for undefined symbols; this will allow the
 loader to correct any previously assembled instructions that refer to such
-symbols when are they are eventually defined.
+symbols when they are eventually defined.
 
 In the symbol table node for a defined symbol, the |link| field
 has one of the special codes |DEFINED| or |REGISTER| or |PREDEFINED|, and the
@@ -1607,7 +1611,7 @@ are stored as the ``equivalents'' of opcode symbols like \.{\^ADD}.
 
 @<Type...@>=
 typedef struct {
- char *name; /* symbolic opcode */
+ Char *name; /* symbolic opcode */
  short code; /* numeric opcode */
  int bits; /* treatment of operands */
 } op_spec;
@@ -1964,69 +1968,69 @@ for (j=0;j<32;j++) {
 }
 
 @ @<Glob...@>=
-char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
+Char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
  "rC","rN","rO","rS","rI","rT","rTT","rK","rQ","rU","rV","rG","rL",
  "rA","rF","rP","rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
 @^predefined symbols@>
 
 @ @<Type...@>=
 typedef struct {
-  char* name;
+  Char* name;
   tetra h,l;
 }@+predef_spec;
 
 @ @<Glob...@>=
 predef_spec predefs[]={
 {"ROUND_CURRENT",0,0},
-@.ROUND_CURRENT@>
+@:ROUND_CURRENT}\.{ROUND\_CURRENT@>
 {"ROUND_OFF",0,1},
-@.ROUND_OFF@>
+@:ROUND_OFF}\.{ROUND\_OFF@>
 {"ROUND_UP",0,2},
-@.ROUND_UP@>
+@:ROUND_UP}\.{ROUND\_UP@>
 {"ROUND_DOWN",0,3},
-@.ROUND_DOWN@>
+@:ROUND_DOWN}\.{ROUND\_DOWN@>
 {"ROUND_NEAR",0,4},@/
-@.ROUND_NEAR@>
+@:ROUND_NEAR}\.{ROUND\_NEAR@>
 {"Inf",0x7ff00000,0},@/
 @.Inf@>
 {"Data_Segment",0x20000000,0},
-@.Data_Segment@>
+@:Data_Segment}\.{Data\_Segment@>
 {"Pool_Segment",0x40000000,0},
-@.Pool_Segment@>
+@:Pool_Segment}\.{Pool\_Segment@>
 {"Stack_Segment",0x60000000,0},@/
-@.Stack_Segment@>
+@:Stack_Segment}\.{Stack\_Segment@>
 {"D_BIT",0,0x80},
-@.D_BIT@>
+@:D_BIT}\.{D\_BIT@>
 {"V_BIT",0,0x40},
-@.V_BIT@>
+@:V_BIT}\.{V\_BIT@>
 {"W_BIT",0,0x20},
-@.W_BIT@>
+@:W_BIT}\.{W\_BIT@>
 {"I_BIT",0,0x10},
-@.I_BIT@>
+@:I_BIT}\.{I\_BIT@>
 {"O_BIT",0,0x08},
-@.O_BIT@>
+@:O_BIT}\.{O\_BIT@>
 {"U_BIT",0,0x04},
-@.U_BIT@>
+@:U_BIT}\.{U\_BIT@>
 {"Z_BIT",0,0x02},
-@.Z_BIT@>
+@:Z_BIT}\.{Z\_BIT@>
 {"X_BIT",0,0x01},@/
-@.X_BIT@>
+@:X_BIT}\.{X\_BIT@>
 {"D_Handler",0,0x10},
-@.D_Handler@>
+@:D_Handler}\.{D\_Handler@>
 {"V_Handler",0,0x20},
-@.V_Handler@>
+@:V_Handler}\.{V\_Handler@>
 {"W_Handler",0,0x30},
-@.W_Handler@>
+@:W_Handler}\.{W\_Handler@>
 {"I_Handler",0,0x40},
-@.I_Handler@>
+@:I_Handler}\.{I\_Handler@>
 {"O_Handler",0,0x50},
-@.O_Handler@>
+@:O_Handler}\.{O\_Handler@>
 {"U_Handler",0,0x60},
-@.U_Handler@>
+@:U_Handler}\.{U\_Handler@>
 {"Z_Handler",0,0x70},
-@.Z_Handler@>
+@:Z_Handler}\.{Z\_Handler@>
 {"X_Handler",0,0x80},@/
-@.X_Handler@>
+@:X_Handler}\.{X\_Handler@>
 {"StdIn",0,0},
 @.StdIn@>
 {"StdOut",0,1},
@@ -2152,8 +2156,8 @@ trie_node* prune(t)
 @ Then we output the trie by following the recursive traversal pattern.
 
 @<Sub...@>=
-trie_node* out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
-trie_node* out_stab(t)
+void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
+void out_stab(t)
   trie_node* t;
 {
   register int m=0,j;
@@ -2322,7 +2326,7 @@ while (1) {
     @<Perform the top operation on |op_stack|@>;
  hold_op: op_stack[op_ptr++]=rt_op;
 }
-operands_done:
+operands_done:@;
 
 @ A comment that follows an empty operand list needs to be detected here.
 
@@ -2590,7 +2594,7 @@ if (op_bits&align_bits) @<Align the location pointer@>;
 if (opcode==GREG) @<Allocate a global register@>;
 if (lab_field[0]) @<Define the label@>;
 @<Do the operation@>;
-bypass:
+bypass:@;
 
 @ @<Scan the label field; |goto bypass| if there is none@>=
 if (!*p) goto bypass;
@@ -3003,7 +3007,7 @@ goto assemble_X;
      case 3: yz=o.l&0xffff;@+break; /* \.{SETL} or \.{ORL} */
      }
     if (yz) {
-      assemble(4,(j<<24)+(255<<16)+yz);
+      assemble(4,(j<<24)+(255<<16)+yz,0);
       j |= ORH;
     }
   }

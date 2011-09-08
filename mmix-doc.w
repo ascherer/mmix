@@ -56,7 +56,7 @@ I~must confess that
 I~can hardly wait to own a computer like this.
 
 How do you pronounce \MMIX? I've been saying ``em-mix'' to myself,
-because the first `\.M' represents a new millenium. Therefore I~use
+because the first `\.M' represents a new millennium. Therefore I~use
 the article ``an'' instead of~``a'' before the name \MMIX\
 in English phrases like ``an \MMIX\ simulator.''
 
@@ -667,7 +667,7 @@ Let the bits of the other operand, \$Z or~Z, be indexed similarly:
 $$z_{00}z_{01}\ldots z_{07}z_{10}z_{11}\ldots z_{17}\ldots
   z_{70}z_{71}\ldots z_{77}.$$
 The \.{MOR} operation replaces each bit $x_{ij}$ of register~X by the bit
-$$ y_{0j}z_{i0}\lor y_{1j}z_{i1}\lor \cdots y_{7j}z_{i7}.$$
+$$ y_{0j}z_{i0}\lor y_{1j}z_{i1}\lor \cdots \lor y_{7j}z_{i7}.$$
 Thus, for example, if register Z contains the constant
 \Hex{0102040810204080},
 \.{MOR} reverses the order of the bytes in register~Y, converting between
@@ -768,7 +768,7 @@ any of these \.{INC} instructions could also be replaced by \.{OR}.
      \<ANDNL \$X,YZ `bitwise and-not low wyde'.\>
 @.ANDNL@>
 The 16-bit unsigned number YZ is shifted left
-by either 0 or 16 or 32 or 48 bits, respectively, then
+by either 48 or 32 or 16 or 0 bits, respectively, then
 complemented and anded with register~X;
 the result is placed back into register~X\null.
 
@@ -1009,7 +1009,7 @@ apply; for example, we can write `\.{GETA} \.{\$X,Addr}'.)
 @ \MMIX\ also has unconditional jump instructions, which change the
 location of the next instruction no matter what.
 
-\bull\<JMP @@+XYZ[-67108864] `jump'.\>
+\bull\<JMP @@+4*XYZ[-67108864] `jump'.\>
 @.JMP@>
 A \.{JMP} command treats bytes X, Y, and Z as an unsigned 24-bit
 integer XYZ. It allows a program to transfer control from location $\lambda$ to any
@@ -1034,7 +1034,7 @@ But subroutines are normally entered with the instructions
 \.{PUSHJ} or \.{PUSHGO}, described below.
 
 The two least significant bits of the address
-in a \.{GO} command are essentially ignored. They will, however, appear in the
+in a \.{GO} command are essentially ignored. They will, however, appear in
 the value of~$\lambda$ returned by \.{GETA} instructions, and in the
 return-jump register~rJ after \.{PUSHJ} or \.{PUSHGO} instructions are
 performed, and in
@@ -1179,7 +1179,8 @@ edition of {\sl Seminumerical Algorithms}, Section 4.2.
 For our present purposes, we need not study all the details; but
 we do need to specify \MMIX's behavior with respect to several
 things that are not completely defined by the standard.
-For example, the IEEE standard does not define the representations of NaNs.
+For example, the IEEE standard does not fully define the
+result of operations with NaNs.
 
 When an octabyte represents a floating point number
 in \MMIX's registers, the leftmost bit is the sign; then come 11 bits for an
@@ -1214,7 +1215,7 @@ conventions\/} in the discussion below:
 @^overflow@>
 @^underflow@>
 The operation is performed on floating point numbers found in two registers,
-\$Y and~\$Z, except that square root and integerization ignore~\$Y since they
+\$Y and~\$Z, except that square root and integerization
 involve only one operand.
 If neither input operand is a NaN, we first determine the exact result,
 then round it using the current rounding mode
@@ -1230,7 +1231,7 @@ NaNs are treated specially as follows: If either \$Y or~\$Z is a signaling NaN,
 an invalid exception occurs and the NaN is quieted by adding 1/2 to its
 fraction part. Then if \$Z is a quiet NaN, the result is set
 to \$Z; otherwise if \$Y is a quiet NaN, the result is set to \$Y\null.
-\looseness=-1
+(Registers \$Y and \$Z do not actually change.)
 
 \bull\<FADD \$X,\$Y,\$Z `floating add'.@>\>
 @.FADD@>
@@ -1272,7 +1273,7 @@ of {\sl Seminumerical Algorithms}.
 \bull\<FSUB \$X,\$Y,\$Z `floating subtract'.\>
 @.FSUB@>
 This instruction is equivalent to \.{FADD}, but with the sign of~\$Z negated
-unless rZ is a~NaN.
+unless \$Z is a~NaN.
 
 \bull\<FMUL \$X,\$Y,\$Z `floating multiply'.\>
 @.FMUL@>
@@ -1307,7 +1308,7 @@ the standard floating point conventions, and placed in register~X\null.
 where $n$ is the nearest integer to $\rY/\rZ$, and $n$ is an even
 integer in case of ties. This is not the same as the remainder
 $\rY\bmod\rZ$ computed by \.{DIV} or \.{DIVU}.)
-A zero remainder has the sign of~rY\null.
+A zero remainder has the sign of~\$Y\null.
 An invalid exception occurs if \$Y is infinite and/or \$Z is zero; in
 that case the result is $\NaN(1/2)$ with the sign of~\$Y\null.
 
@@ -1324,7 +1325,7 @@ the result is the sign of~\$Z\null.
 @.FINT@>
 The floating point number in register~Z is rounded (if
 necessary) to a floating point integer, using the current
-rounding mode, and placed in register~\$X\null. Infinite values and quiet NaNs
+rounding mode, and placed in register~X\null. Infinite values and quiet NaNs
 are not changed; signaling NaNs are treated as in the standard conventions.
 Floating point overflow and underflow exceptions cannot occur. 
 
@@ -1408,24 +1409,24 @@ to be rounded to another value.)
 
 Answer: (The assembler prefixes hexadecimal constants by \.\#.)
 $$\vbox{\halign{&\tt#\hfil\ \cr
-  &SETH &\$0,\char`\#4330&\% \$0=2\char`\^53\cr
+  &SETH &\$0,\char`\#4330&\% \$0=2\char`\^52\cr
   &SET &\$1,\$Z&\% \$1=\$Z\cr
   &ANDNH &\$1,\char`\#8000&\% \$1=abs(\$Z)\cr
   &ANDN &\$2,\$Z,\$1&\% \$2=signbit(\$Z)\cr
   &FUN &\$3,\$Z,\$Z&\% \$3=[\$Z is a NaN]\cr
   &BNZ &\$3,1F&\% skip ahead if \$Z is a NaN\cr
-  &FCMP &\$3,\$1,\$0&\% \$3=[abs(\$Z)>2\char`\^53]-[abs(\$Z)<2\char`\^53]\cr
+  &FCMP &\$3,\$1,\$0&\% \$3=[abs(\$Z)>2\char`\^52]-[abs(\$Z)<2\char`\^52]\cr
   &CSNN &\$0,\$3,0&\% set \$0=0 if \$3>=0\cr
   &OR  &\$0,\$2,\$0&\% attach sign of \$Z to \$0\cr
 1H\ &FADD &\$1,\$Z,\$0&\% \$1=\$Z+\$0\cr
   &FSUB &\$X,\$1,\$0&\% \$X=\$1-\$0\cr}}$$
 This program handles most cases of interest by adding and subtracting
-$2^{53}$ using floating point arithmetic.
+$\pm2^{52}$ using floating point arithmetic.
 It would be incorrect to do this in all cases;
 for example, such addition/subtraction might fail to give the correct
 answer when \$Z is a small negative
 quantity (if rounding toward zero), or when \$Z is a number like
-$2^{106}+2^{54}$ (if rounding to nearest).
+$2^{105}+2^{53}$ (if rounding to nearest).
 
 @ \MMIX\ goes beyond the IEEE standard to define additional relations
 between floating point numbers, as suggested by the theory in
@@ -1489,7 +1490,7 @@ and $\pm\infty$ if $\epsilon>=1$.)
 it calls ``single format'' numbers. \MMIX\ calls them {\it short floats},
 @^short float@>
 and converts between 32-bit and 64-bit forms when such numbers are
-loaded from memory or stored from memory. A short float consists of a sign
+loaded from memory or stored into memory. A short float consists of a sign
 bit followed by an 8-bit exponent and a 23-bit fraction. After it has
 been loaded into one of\/ \MMIX's registers, its 52-bit fraction part
 will have 29 trailing zero bits, and its exponent~$e$ will be one of the
@@ -1532,7 +1533,7 @@ floating point values.
 
 \bull\<FIX \$X,\$Z `convert floating to fixed'.\>
 @.FIX@>
-The floating point number in register~\$Z is converted to an integer
+The floating point number in register~Z is converted to an integer
 as with the \.{FINT} instruction, and the resulting integer (mod~$2^{64}$)
 is placed in register~X\null.
 An invalid exception occurs if \$Z is infinite
@@ -1551,7 +1552,7 @@ exception occurs.
 @.FLOT@>
 The integer in \$Z or the immediate constant~Z is
 converted to the nearest floating point value (using the current rounding
-mode) and placed in register~\$X\null. A floating inexact exception
+mode) and placed in register~X\null. A floating inexact exception
 occurs if rounding is necessary.
 
 \bull\<FLOTU \$X,\0 `convert fixed to floating unsigned'.\>
@@ -1590,10 +1591,10 @@ with \.{SETL}~\.{\$0,1086}; \.{SR}~\.{\$X,\$X,52}; \.{SUB}~\.{\$X,\$0,\$X};
 @.SFLOTU@>
 @.FIX@>
 @.FIXU@>
-@.ROUND_OFF@>
-@.ROUND_UP@>
-@.ROUND_DOWN@>
-@.ROUND_NEAR@>
+@:ROUND_OFF}\.{ROUND\_OFF@>
+@:ROUND_UP}\.{ROUND\_UP@>
+@:ROUND_DOWN}\.{ROUND\_DOWN@>
+@:ROUND_NEAR}\.{ROUND\_NEAR@>
 
 The Y field can also be used in the same way
 to specify any desired rounding mode in the other
@@ -1675,7 +1676,10 @@ placed on the register stack, where they will be temporarily inaccessible.
 Then control jumps to a subroutine with $L$ reduced to~3; the registers that we
 had been calling \$2, \$3, and \$4 appear as \$0, \$1, and \$2 to the subroutine.
 
-If $\xx\ge\ll$ the actions are similar, except that {\it all\/} of the local
+If $\ll\le\xx<\gg$, the value of $\ll$ increases to $\xx+1$ as described
+above; then the rules for $\xx<\ll$ apply.
+
+If $\xx\ge\gg$ the actions are similar, except that {\it all\/} of the local
 registers \$0, \dots,~$\$(\ll-1)$ are placed on the register stack
 followed by the number~$L$, and $L$~is reset to zero. In particular, the
 instruction \<PUSHGO \$255,\$Y,\$Z pushes all the local registers
@@ -1694,12 +1698,13 @@ $\$(\xx-1)$ goes into the ``hole'' position where \.{PUSHJ} or
 
 The formal details of \.{POP} are slightly complicated, but we will see that
 they make sense: If $\xx>\ll$, we first replace X by $\ll+1$. Then we
-essentially set
-$x\gets S[\tau-1]\bmod 256$, $S[\tau-1]\gets\$(\xx-1)$,
+set $x\gets S[\tau-1]\bmod 256$; this is the effective value of the X~field
+in the push instruction that is being undone. Stack position $S[\tau-1]$ is
+now set to $\$(\xx-1)$ if $0<\xx\le L$, otherwise it is set to zero.
+Then we essentially set
 $\ll\gets\min(x+\xx,\gg)$, $\$(\ll-1)\gets\$(\ll-x-2)$, \dots,
 $\$(x+1)\gets\$0$, $\$x\gets S[\tau-1]$, \dots,
-$\$0\gets S[\tau-x-1]$, $\tau\gets\tau-x-1$; here $x$~is the effective
-value of the X~field on the previous \.{PUSHGO}. The operating system should
+$\$0\gets S[\tau-x-1]$, $\tau\gets\tau-x-1$. The operating system should
 @^operating system@>
 arrange things so that a memory-protection
 interrupt will occur if a program does more pops than pushes.
@@ -1762,12 +1767,12 @@ local registers onto the stack and sets $L$ to~zero.
 This makes $G$ local registers available for use by the subroutine
 jumped~to. If that subroutine later returns with \.{POP} \.{0,0}, the former
 value of~$L$ and the former contents of \$0, \dots,~$\$(\ll-1)$ will be
-restored.
+restored (assuming that $G$ doesn't decrease).
 
 A \.{POP} instruction with $\xx=255$
 preserves all the local registers as outputs of
 the subroutine (provided that the total doesn't exceed~$G$ after popping),
-and puts zero into the hole. The best policy, however, is
+and puts zero into the hole (unless $L=G=255$). The best policy, however, is
 almost always to use \.{POP} with a small value of~X, and in general to keep
 the value of~$L$ as small as
 possible by decreasing it when registers are no longer active.
@@ -1863,7 +1868,7 @@ Therefore \MMIX's instruction cache is allowed to become inconsistent with
 respect to its data cache. Programmers who insist on executing instructions
 that have been fabricated dynamically, for example when setting a breakpoint
 for debugging, must first \.{SYNCID} those instructions
-in order to guarantee that the intended results will be obtained. A \.{SYNCID}
+in order to guarantee that the intended results will be obtained.) A \.{SYNCID}
 command might be implemented in several ways; for example, the machine
 might update its instruction cache to agree with its data cache. A simpler
 solution, which is good enough because the need for \.{SYNCID} ought to
@@ -1971,7 +1976,7 @@ I~for invalid operation, O~for floating overflow, U~for
 floating underflow, Z~for floating division by zero, and X~for floating
 inexact. % The low order five bits agree with SPARC I conventions
 % but Alpha, for example, uses the order VXUOZI
-The next least significant byte of E contains eight
+The next least significant byte of rA contains eight
 ``enable'' bits with the same names DVWIOUZX and the same meanings.
 When an exceptional condition occurs, there are two cases: If the
 corresponding enable bit is~0, the corresponding event bit is set
@@ -2159,7 +2164,7 @@ tell the \.{RESUME} command not to \.{TRIP} again.) The special registers
 rY and rZ are set to the contents of the registers specified by the
 Y and Z fields of the \.{TRIP} command, namely \$Y and~\$Z.
 Then \$255 is placed into the special {\it bootstrap
-register\/}~rB, and \$255 is set to zero. \MMIX\ now takes its next instruction
+register\/}~rB, and \$255 is set to~rJ. \MMIX\ now takes its next instruction
 @^rB@>
 from virtual memory address~0.
 
@@ -2170,8 +2175,8 @@ their handlers begin at the respective addresses
 Z, and~X of~rA; registers rY and~rZ are set to the operands of the
 interrupted instruction as explained earlier.
 
-A 16-byte block of memory is more than enough for a sequence of commands like
-$$\hbox{\tt PUSHJ 255,Handler; GET \$255,rB; RESUME}$$
+A 16-byte block of memory is just enough for a sequence of commands like
+$$\hbox{\tt PUSHJ 255,Handler; PUT rJ,\$255; GET \$255,rB; RESUME}$$
 which will invoke a user's handler. And if the user does not choose to
 provide a custom-designed handler, the operating system provides a
 default handler via the instructions
@@ -2193,14 +2198,13 @@ are reserved for the operating system, as we will see.
 
 @ A \.{TRAP} instruction interrupts the computation essentially
 @^interrupts@>
-like \.{TRIP}, but with the following modifications: (i)~\$255 is set to
-the contents of the special ``trap address register''~rT, not zero;
+like \.{TRIP}, but with the following modifications:
 @^rT@>
 @.TRAP@>
 @^rK@>
-(ii)~the interrupt mask register~rK is cleared
-to zero, thereby inhibiting interrupts; (iii)~control jumps to virtual memory
-address~rT, not zero; (iv)~information is placed
+(i)~the interrupt mask register~rK is cleared
+to zero, thereby inhibiting interrupts; (ii)~control jumps to virtual memory
+address~rT, not zero; (iii)~information is placed
 @^rBB@>
 @^rWW@>
 @^rXX@>
@@ -2237,7 +2241,7 @@ complete~the~\.{LDB}.
 @^interrupts@>
 @^dynamic traps@>
 Such interruptions occur when one or more of the 64 bits in the
-the special {\it interrupt request register\/}~rQ have been set to~1,
+special {\it interrupt request register\/}~rQ have been set to~1,
 @^rQ@>
 @^rK@>
 and when at least one corresponding bit of the special
@@ -2293,8 +2297,8 @@ trap address register''~rTT instead of~rT. The trap handler that
 begins at location~rTT can figure out the reason for interrupt by
 examining $\rm rQ\land rK$. (For example, after the instructions
 $$\hbox spread-10pt{\tt\spaceskip .5em minus .1em
- GET \$0,rQ; GET \$1,rK; AND \$0,\$0,\$1; SUBU \$1,\$0,1;
-   XOR \$2,\$0,\$1; ANDN \$1,\$0,\$1; SADD \$2,\$2,0}$$
+ GET \$0,rQ; LDOU \$1,savedK; AND \$0,\$0,\$1; SUBU \$1,\$0,1;
+   SADD \$2,\$1,\$0; ANDN \$1,\$0,\$1}$$
 the highest-priority offending bit will be in \$1 and its position will be
 in~\$2.)
 @^counting trailing zeros@>
@@ -2418,7 +2422,7 @@ not be marginal. All of these restrictions hold automatically in normal
 use; they are relevant only if the programmer tries to do something tricky.
 
 Notice that the slightly tricky sequence
-$$\hbox{\tt LDA \$0,Loc; PUT rW,\$0; LDT \$1,Inst; PUT rX,\$1; RESUME}$$
+$$\hbox{\tt LDA \$0,Loc; PUT rW,\$0; LDTU \$1,Inst; PUT rX,\$1; RESUME}$$
 will execute an almost arbitrary instruction \.{Inst} as if it had been in
 location \.{Loc-4}, and then will jump to location \.{Loc} (assuming
 that \.{Inst} doesn't branch elsewhere).
@@ -2555,7 +2559,7 @@ because several instructions might finish at the same time.
 @ The special {\it serial number register\/}~rN is permanently set to
 @^rN@>
 the time this particular instance of\/ \MMIX\ was created (measured as the
-number of seconds since 00:00:00 Greenwich mean time on 1~January 1970),
+number of seconds since 00:00:00 Greenwich Mean Time on 1~January 1970),
 in its five least significant bytes. The three most significant bytes
 are permanently set to the {\it version number\/} of the \MMIX\ architecture
 that is being implemented together with
@@ -2630,7 +2634,9 @@ one or more times if necessary, to keep $\alpha$ from decreasing
 past~$\gamma$. Similarly, the operation of increasing~$L$ may cause \MMIX\ to
 set $\mm_8[{\rm rS}]\gets\l[\gamma]$ and increase rS by~8 (thereby increasing
 $\gamma$ by~1) one or more times, to keep $\beta$ from increasing
-past~$\gamma$. If many registers need to be loaded or stored at once,
+past~$\gamma$. (Actually $\beta$ is never allowed to increase to the point
+where it becomes {\it equal\/} to $\gamma$.)
+If many registers need to be loaded or stored at once,
 these operations are interruptible.
 
 [A somewhat similar scheme was introduced by David R. Ditzel and H.~R.
@@ -2772,7 +2778,7 @@ system, but two simple rules are important to ordinary users:
 \bull Negative addresses are mapped directly to physical addresses, by simply
 @^negative locations@>
 suppressing the sign bit:
-$$\phi(A)=A+2^{63}=A\land\Hex{7fffffffffff},\qquad
+$$\phi(A)=A+2^{63}=A\land\Hex{7fffffffffffffff},\qquad
 \hbox{if $A<0$.}$$
 {\it All accesses to negative addresses are privileged}, for use by the
 operating system only.
@@ -2815,7 +2821,7 @@ pages. In particular, segment~$i$ must have at most one page when
 $b_i=b_{i+1}$, and it must be entirely empty if $b_i>b_{i+1}$.
 
 (2) The next byte of rV, $s$, specifies the current {\it page size},
-which is $2^s$ bytes. We must have $s\ge13$ (hence at least 8K~bytes
+which is $2^s$ bytes. We must have $s\ge13$ (hence at least 8192~bytes
 per page). Values of~$s$ larger than, say, 20 or~so are of use only in rather
 large programs that will reside in main memory for long periods of time,
 because memory protection and swapping are applied to entire pages.
@@ -2850,7 +2856,7 @@ $$\centerline{$\hbox{PTE}=\beginword
 \noalign{\hrule}\endword$}$$
 Here $x$ and $y$ are ignored (thus they are usable for any purpose by the
 operating
-system); $a$~is the physical address of byte~0 on the page; and $n$~is
+system); $2^s a$~is the physical address of byte~0 on the page; and $n$~is
 the address space number (which must match the number in~rV). The final three
 bits are the {\it protection bits\/} $p_r\,p_w\,p_x$; the user needs
 $p_r=1$ to load from this page, $p_w=1$ to store on this page, and
@@ -2899,7 +2905,7 @@ segment bits of a virtual address are ignored; the other $61-s$ bits of each
 virtual address must be zero.
 
 If $s=13$, $b_1=3$, $b_2=2$, $b_3=1$, and $b_4=0$, there are at most
-$2^{30}$ pages of 8K bytes each, all belonging to segment~0. This is
+$2^{30}$ pages of 8192 bytes each, all belonging to segment~0. This is
 essentially the virtual memory setup in the Alpha~21064 computers with
 {\mc DIGITAL~UNIX}$^{\rm\,TM}$.
 @^Alpha computers@>

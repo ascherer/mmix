@@ -1116,61 +1116,63 @@ line 192:               FADD   $100,small,$200
 line 193:               PUT    rA,small-1        % enable underflow trip
          1. 0000000000000398: f61500fd (PUT) rA = 1024 = #400
 line 194:               TRIP   1,$100,small
-         1. 000000000000039c: ff0164fe (TRIP) rY=#abc, rZ=#abc, rB=#6000000000000228, g[255]=0, -> #00
+         1. 000000000000039c: ff0164fe (TRIP) rW=#3a0, rX=#80000000ff0164fe, rY=#abc, rZ=#abc, rB=#6000000000000228, g[255]=#368, -> #00
      ...
-line 213:               GET    $50,rX
+line 214:               GET    $50,rX
          1. 0000000000000000: fe320019 (GET) $50=l[120] = rX = #80000000ff0164fe
-line 214:               INCH   $50,#8200         % ropcode 2
+line 215:               INCH   $50,#8200         % ropcode 2
          1. 0000000000000004: e4328200 (INCH) $50=l[120] = #80000000ff0164fe + #8200000000000000 = #2000000ff0164fe
-line 215:               INCMH  $50,#ff00-(U_BIT<<8)
+line 216:               INCMH  $50,#ff00-(U_BIT<<8)
          1. 0000000000000008: e532fb00 (INCMH) $50=l[120] = #2000000ff0164fe + #fb0000000000 = #200fb00ff0164fe
 Warning: TRIP at location 000000000000039c
-line 216:               TRAP   1
+line 217:               TRAP   1
          1. 000000000000000c: 00000001 (TRAP) Halt(1)
-line 217:   2H          PUT    rX,$50
+line 218:   2H          PUT    rX,$50
          1. 0000000000000010: f6190032 (PUT) rX = 144391169772709118 = #200fb00ff0164fe
-line 218:               GET    $255,rB
+line 219:               GET    $255,rB
          1. 0000000000000014: feff0000 (GET) $255=g[255] = rB = #6000000000000228
-line 219:               RESUME
+line 220:               RESUME
          1. 0000000000000018: f9000000 (RESUME) {#200fb00ff0164fe} -> #3a0
            (000000000000039c: ..01..rZ (SET)) $1=l[71] = 2748 = #abc, rA=#004fb
 --------
 line 195:               FSUB   $100,small,$200   % cause underflow trip
          1. 00000000000003a0: 0664fec8 (FSUB) $100=l[170] = 1.3577e-320 (-) 0. = 1.3577e-320, -> #60
      ...
-line 202:               PUSHJ  $255,Handler
+line 203:               PUSHJ  $255,Handler
          1. 0000000000000060: f3ffffef (PUSHJB) l[68]=254, rO=#6000000000000a28, rL=0, rJ=#64, -> #1c
      ...
-line 220:   Handler     SETL   $5,#abcd
+line 221:   Handler     SETL   $5,#abcd
              M8[#6000000000000230]=l[70]=#0000000000000000, rS+=8
              M8[#6000000000000238]=l[71]=#0000000000000abc, rS+=8
              M8[#6000000000000240]=l[72]=#0000000000000000, rS+=8
              M8[#6000000000000248]=l[73]=#0000000000000000, rS+=8
              M8[#6000000000000250]=l[74]=#0000000000000000, rS+=8
+             M8[#6000000000000258]=l[75]=#0000000000000000, rS+=8
          1. 000000000000001c: e305abcd (SETL) rL=6, $5=l[74] = #abcd
-line 221:               GET    $1,rJ
+line 222:               GET    $1,rJ
          1. 0000000000000020: fe010004 (GET) $1=l[70] = rJ = #64
-line 222:               PUSHJ  3,3B
+line 223:               PUSHJ  3,3B
          1. 0000000000000024: f2030010 (PUSHJ) l[72]=3, rO=#6000000000000a48, rL=2, rJ=#28, -> #64
 Warning: floating point underflow at location 00000000000003a0
 --------
-line 203:   3H          TRAP   0,$1
+line 204:   3H          TRAP   0,$1
          1. 0000000000000064: 00000001 (TRAP) Halt(1)
-line 204:               SUB    $0,$1,1
+line 205:               SUB    $0,$1,1
          1. 0000000000000068: 25000101 (SUBI) $0=l[73] = 43981 - 1 = 43980
-line 205:               POP    2,0
+line 206:               POP    2,0
          1. 000000000000006c: f8020000 (POP) l[72]=#abcd, rL=5, rO=#6000000000000a28, -> #28
      ...
-line 223:               SUB    $10,$3,$4
-             M8[#6000000000000258]=l[75]=#0000000000000000, rS+=8
+line 224:               SUB    $10,$3,$4
              M8[#6000000000000260]=l[76]=#0000000000000000, rS+=8
              M8[#6000000000000268]=l[77]=#0000000000000000, rS+=8
              M8[#6000000000000270]=l[78]=#0000000000000000, rS+=8
              M8[#6000000000000278]=l[79]=#0000000000000000, rS+=8
+             M8[#6000000000000280]=l[80]=#0000000000000000, rS+=8
          1. 0000000000000028: 240a0304 (SUB) rL=11, $10=l[79] = 43981 - 43980 = 1
-line 224:               PUT    rJ,$1
+line 225:               PUT    rJ,$1
          1. 000000000000002c: f6040001 (PUT) rJ = 100 = #64
-line 225:               POP    11,(4B-3B)>>2
+line 226:               POP    11,(4B-3B)>>2
+             rS-=8, l[80]=M8[#6000000000000280]=#0000000000000000
              rS-=8, l[79]=M8[#6000000000000278]=#0000000000000000
              rS-=8, l[78]=M8[#6000000000000270]=#0000000000000000
              rS-=8, l[77]=M8[#6000000000000268]=#0000000000000000
@@ -1183,22 +1185,22 @@ line 225:               POP    11,(4B-3B)>>2
              rS-=8, l[70]=M8[#6000000000000230]=#0000000000000000
          1. 0000000000000030: f80b0003 (POP) rL=254, rO=#6000000000000230, -> #64+12
 --------
-line 206:   4H          GET    $50,rX
+line 207:   4H          GET    $50,rX
          1. 0000000000000070: fe320019 (GET) $50=l[120] = rX = #800000000664fec8
-line 207:               INCH   $50,#8100         % ropcode 1
+line 208:               INCH   $50,#8100         % ropcode 1
          1. 0000000000000074: e4328100 (INCH) $50=l[120] = #800000000664fec8 + #8100000000000000 = #10000000664fec8
-line 208:               FLOT   $60,1
+line 209:               FLOT   $60,1
          1. 0000000000000078: 093c0001 (FLOTI) $60=l[130] = (flot) 1 = 1.
-line 209:               PUT    rZ,$60
+line 210:               PUT    rZ,$60
          1. 000000000000007c: f61b003c (PUT) rZ = 4607182418800017408 = #3ff0000000000000
-line 210:               JMP    2F
+line 211:               JMP    2F
          1. 0000000000000080: f1ffffe4 (JMPB) -> #10
      ...
-line 217:   2H          PUT    rX,$50
+line 218:   2H          PUT    rX,$50
          2. 0000000000000010: f6190032 (PUT) rX = 72057594145210056 = #10000000664fec8
-line 218:               GET    $255,rB
+line 219:               GET    $255,rB
          2. 0000000000000014: feff0000 (GET) $255=g[255] = rB = #6000000000000228
-line 219:               RESUME
+line 220:               RESUME
          2. 0000000000000018: f9000000 (RESUME) {#10000000664fec8} -> #3a4
            (00000000000003a0: 0664rYrZ (FSUB)) $100=l[170] = 1.3577e-320 (-) 1. = -1., rA=#004fb
 --------
@@ -1206,7 +1208,9 @@ line 196:               PUT    rL,10
          1. 00000000000003a4: f714000a (PUTI) rL = min(rL,10) = 10
 line 197:               PUT    rL,small
          1. 00000000000003a8: f61400fe (PUT) rL = min(rL,2748) = 10
-line 198:               UNSAVE $255
+line 198:               PUSHJ  11,@+4
+         1. 00000000000003ac: f20b0001 (PUSHJ) l[81]=11, rO=#6000000000000290, rL=0, rJ=#3b0, -> #3b0
+line 199:               UNSAVE $255
              (rG,rA)=M8[#6000000000000228]=#f100000000000049
              rS-=8, rZ=M8[#6000000000000220]=#0000000000000000
              rS-=8, rY=M8[#6000000000000218]=#0000000000000000
@@ -1277,58 +1281,58 @@ line 198:               UNSAVE $255
              rS-=8, l[2]=M8[#6000000000000010]=#0000000000000000
              rS-=8, l[1]=M8[#6000000000000008]=#ffffffffffffffff
              rS-=8, l[0]=M8[#6000000000000000]=#7fefffffffffffff
-         1. 00000000000003ac: fb0000ff (UNSAVE) #6000000000000228: rG=241, ..., rL=41
-line 199:               TRAP   0,Halt,0          % normal exit
-         1. 00000000000003b0: 00000000 (TRAP) Halt(0)
-  1242 instructions, 99 mems, 2556 oops; 179 good guesses, 19 bad
-  (halted at location #00000000000003b0)
+         1. 00000000000003b0: fb0000ff (UNSAVE) #6000000000000228: rG=241, ..., rL=41
+line 200:               TRAP   0,Halt,0          % normal exit
+         1. 00000000000003b4: 00000000 (TRAP) Halt(0)
+  1243 instructions, 99 mems, 2557 oops; 179 good guesses, 19 bad
+  (halted at location #00000000000003b4)
 
 Program profile:
 "silly.mms"
-line 213:               GET    $50,rX
+line 214:               GET    $50,rX
          1. 0000000000000000: fe320019 (GET)
-line 214:               INCH   $50,#8200         % ropcode 2
+line 215:               INCH   $50,#8200         % ropcode 2
          1. 0000000000000004: e4328200 (INCH)
-line 215:               INCMH  $50,#ff00-(U_BIT<<8)
+line 216:               INCMH  $50,#ff00-(U_BIT<<8)
          1. 0000000000000008: e532fb00 (INCMH)
-line 216:               TRAP   1
+line 217:               TRAP   1
          1. 000000000000000c: 00000001 (TRAP)
-line 217:   2H          PUT    rX,$50
+line 218:   2H          PUT    rX,$50
          2. 0000000000000010: f6190032 (PUT)
-line 218:               GET    $255,rB
+line 219:               GET    $255,rB
          2. 0000000000000014: feff0000 (GET)
-line 219:               RESUME
+line 220:               RESUME
          2. 0000000000000018: f9000000 (RESUME)
-line 220:   Handler     SETL   $5,#abcd
+line 221:   Handler     SETL   $5,#abcd
          1. 000000000000001c: e305abcd (SETL)
-line 221:               GET    $1,rJ
+line 222:               GET    $1,rJ
          1. 0000000000000020: fe010004 (GET)
-line 222:               PUSHJ  3,3B
+line 223:               PUSHJ  3,3B
          1. 0000000000000024: f2030010 (PUSHJ)
-line 223:               SUB    $10,$3,$4
+line 224:               SUB    $10,$3,$4
          1. 0000000000000028: 240a0304 (SUB)
-line 224:               PUT    rJ,$1
+line 225:               PUT    rJ,$1
          1. 000000000000002c: f6040001 (PUT)
-line 225:               POP    11,(4B-3B)>>2
+line 226:               POP    11,(4B-3B)>>2
          1. 0000000000000030: f80b0003 (POP)
 --------
-line 202:               PUSHJ  $255,Handler
+line 203:               PUSHJ  $255,Handler
          1. 0000000000000060: f3ffffef (PUSHJB)
-line 203:   3H          TRAP   0,$1
+line 204:   3H          TRAP   0,$1
          1. 0000000000000064: 00000001 (TRAP)
-line 204:               SUB    $0,$1,1
+line 205:               SUB    $0,$1,1
          1. 0000000000000068: 25000101 (SUBI)
-line 205:               POP    2,0
+line 206:               POP    2,0
          1. 000000000000006c: f8020000 (POP)
-line 206:   4H          GET    $50,rX
+line 207:   4H          GET    $50,rX
          1. 0000000000000070: fe320019 (GET)
-line 207:               INCH   $50,#8100         % ropcode 1
+line 208:               INCH   $50,#8100         % ropcode 1
          1. 0000000000000074: e4328100 (INCH)
-line 208:               FLOT   $60,1
+line 209:               FLOT   $60,1
          1. 0000000000000078: 093c0001 (FLOTI)
-line 209:               PUT    rZ,$60
+line 210:               PUT    rZ,$60
          1. 000000000000007c: f61b003c (PUT)
-line 210:               JMP    2F
+line 211:               JMP    2F
          1. 0000000000000080: f1ffffe4 (JMPB)
 --------
 line 29:    Main        FCMP   $0,neg_zero,$5
@@ -1665,9 +1669,11 @@ line 196:               PUT    rL,10
          1. 00000000000003a4: f714000a (PUTI)
 line 197:               PUT    rL,small
          1. 00000000000003a8: f61400fe (PUT)
-line 198:               UNSAVE $255
-         1. 00000000000003ac: fb0000ff (UNSAVE)
-line 199:               TRAP   0,Halt,0          % normal exit
-         1. 00000000000003b0: 00000000 (TRAP)
-  1242 instructions, 99 mems, 2556 oops; 179 good guesses, 19 bad
-  (halted at location #00000000000003b0)
+line 198:               PUSHJ  11,@+4
+         1. 00000000000003ac: f20b0001 (PUSHJ)
+line 199:               UNSAVE $255
+         1. 00000000000003b0: fb0000ff (UNSAVE)
+line 200:               TRAP   0,Halt,0          % normal exit
+         1. 00000000000003b4: 00000000 (TRAP)
+  1243 instructions, 99 mems, 2557 oops; 179 good guesses, 19 bad
+  (halted at location #00000000000003b4)

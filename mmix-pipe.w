@@ -314,7 +314,7 @@ the definitions found there.
 @<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
-typedef struct { tetra h,l;} octa; /* two tetrabytes makes one octabyte */
+typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
 @ @<Internal proto...@>=
 static void print_octa @,@,@[ARGS((octa))@];
@@ -558,7 +558,7 @@ static void unschedule(c)
 
 @ When it is time to process all coroutines that have queued up for a
 particular time~|t|, we empty the queue called |ring[t]| and link its items in
-the opposite order (from to back). The following subroutine uses the
+the opposite order (from front to back). The following subroutine uses the
 well known algorithm discussed in exercise 2.2.3--7 of {\sl The Art
 of Computer Programming}.
 
@@ -785,6 +785,10 @@ static void print_control_block(c)
     printf(" ->");@+print_octa(c->go.o);
   }
   if (verbose&show_pred_bit) printf(" hist=%x",c->hist);
+  if (c->i==pop) {
+     printf(" rS="); print_octa(c->cur_S);
+     printf(" rO="); print_octa(c->cur_O);
+  }
   printf(" state=%d",c->state);
 }
 
@@ -1544,7 +1548,7 @@ static void print_fetch_buffer()
   else {
     printf("waiting for ");
     if (inst_ptr.p==UNKNOWN_SPEC) printf("dispatch");
-    else if (inst_ptr.p->addr.h==-1)
+    else if (inst_ptr.p->addr.h==(tetra)-1)
       print_coroutine_id(((control*)inst_ptr.p->up)->owner);
     else print_specnode_id(inst_ptr.p->addr);
   }
@@ -1742,14 +1746,14 @@ unsigned char flags[256]={
 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, /* \.{STB}, \dots\ */
 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, 0x1a, 0x19, /* \.{STT}, \dots\ */
 0x1a, 0x19, 0x1a, 0x19, 0x0a, 0x09, 0x1a, 0x19, /* \.{STSF}, \dots\ */
-0x0a, 0x09, 0x0a, 0x09, 0x0a, 0x09, 0x8a, 0x89, /* \.{SYNCD}, \dots\ */
+0x0a, 0x09, 0x0a, 0x09, 0x0a, 0x09, 0xaa, 0xa9, /* \.{SYNCD}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{OR}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{AND}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{BDIF}, \dots\ */
 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, 0x2a, 0x29, /* \.{MUX}, \dots\ */
 0x20, 0x20, 0x20, 0x20, 0x30, 0x30, 0x30, 0x30, /* \.{SETH}, \dots\ */
 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, /* \.{ORH}, \dots\ */
-0xc0, 0xc0, 0xc0, 0xc0, 0x60, 0x60, 0x02, 0x01, /* \.{JMP}, \dots\ */
+0xc0, 0xc0, 0xe0, 0xe0, 0x60, 0x60, 0x02, 0x01, /* \.{JMP}, \dots\ */
 0x80, 0x80, 0x00, 0x02, 0x01, 0x00, 0x20, 0x8a}; /* \.{POP}, \dots\ */
 
 @ @<Convert relative...@>=
@@ -1875,7 +1879,7 @@ static void print_specnode_id(a)
     if (a.l<32) printf(special_name[a.l]);
     else if (a.l<256) printf("g[%d]",a.l);
     else printf("l[%d]",a.l-256);
-  }@+else if (a.h!=-1) {
+  }@+else if (a.h!=(tetra)-1) {
     printf("m[");@+print_octa(a);@+printf("]");
   }
 }
@@ -1982,7 +1986,7 @@ switch (i) {
 @<Special cases of instruction dispatch@>@;
 default: break;
 }
-dispatch_done:
+dispatch_done:@;
 
 @ The \.{UNSAVE} operation begins by loading register~rG from memory.
 We don't really need to know the value of~rG until twelve other registers
@@ -2091,12 +2095,14 @@ case 3: cool->z.o.l=yz;@+break;
 
 @ @<Install register X...@>=
 {
-  if (cool->xx>=cool_G) cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
-  else if (cool->xx<cool_L)
+  if (cool->xx>=cool_G) {
+    if (i!=pushgo && i!=pushj)
+      cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
+  }@+else if (cool->xx<cool_L)
     cool->ren_x=true,
       spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
   else { /* we need to increase L before issuing |head->inst| */
- increase_L:@+ if (((cool_S.l-cool_O.l)&lring_mask)==cool_L && cool_L!=0)
+ increase_L:@+ if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
     else @<Insert an instruction to advance beta and L@>;
   }
@@ -2189,7 +2195,7 @@ case pst:
  cool->mem_x=true, spec_install(&mem,&cool->x);@+ break;
 case ld: case ldunc: cool->ptr_a=(void *)mem.up;@+ break;
 
-@ When new data is \.{PUT} into special registers 16--21 (namely rK,
+@ When new data is \.{PUT} into special registers 15--20 (namely rK,
 rQ, rU, rV, rG, or~rL) it can affect many things. Therefore we stop
 issuing further instructions until such \.{PUT}s are committed.
 Moreover, we will see later that such drastic \.{PUT}s defer execution until
@@ -2213,7 +2219,7 @@ case ldvts:@+ if (cool->loc.h&sign_bit) break;
 privileged_inst:  cool->interrupt |= K_BIT;
 noop_inst: cool->i=noop;@+break;
 
-@ A \.{PUSHGO} instruction with $\rm X\ge L$ causes L to increase
+@ A \.{PUSHGO} instruction with $\rm X\ge G$ causes L to increase
 momentarily by~1, even if $\rm L=G$.
 But the value of~L will be decreased before the \.{PUSHGO}
 is complete, so it will never actually exceed~G. Moreover, we needn't
@@ -2222,12 +2228,12 @@ insert an~|incrl| command.
 @<Special cases of instruction dispatch@>=
 case pushgo: inst_ptr.p=&cool->go;
 case pushj: {@+register int x=cool->xx;
-  if (x>=cool_L) {
-    if (((cool_S.l-cool_O.l)&lring_mask)==cool_L && cool_L!=0)
+  if (x>=cool_G) {
+    if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
     x=cool_L;@+ cool_L++;
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
   }
-  cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
   cool->ren_a=true, spec_install(&g[rJ],&cool->a);
   cool->a.known=true, cool->a.o=incr(cool->loc,4);
@@ -2315,7 +2321,7 @@ Each coroutine scheduled for action at the current tick of the clock has a
 For example, the coroutines with |stage=2| are the second stages in the
 pipelines of the functional units. A coroutine with |stage=0| works
 in the fetch unit. Several artificially large stage numbers
-are used to control special coroutines that that do things like write data
+are used to control special coroutines that do things like write data
 from buffers into memory.
 
 In this program the current coroutine of interest is called |self|; hence
@@ -2634,9 +2640,9 @@ case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
  cmp_neg: data->x.o=neg_one;@+ break;
 
 @ The other operations will be deferred until later, now that we understand
-the basic ideas. But one more piece of code ought to written before we move on,
-because it completes the execution stage for the simple cases already
-considered.
+the basic ideas. But one more piece of code ought to be
+written before we move on, because
+it completes the execution stage for the simple cases already considered.
 
 The |ren_x| and |ren_a| fields tell us whether the |x| and/or |a|
 fields contain valid information that should become officially known.
@@ -2827,7 +2833,7 @@ don't want to update it yet.
   predicted=op&0x10; /* start with the instruction's recommendation */
   if (bp_table) {@+register int h;
     m=((head->loc.l&bp_cmask)<<bp_b)+(head->loc.l&bp_amask);
-    m=((cool_hist&bp_bcmask)<<bp_b)^(m>>2);
+    m=((cool_hist&bp_bcmask)<<bp_a)^(m>>2);
     h=bp_table[m];
     if (h&bp_npower) predicted^=0x10;
   }
@@ -2844,7 +2850,7 @@ if (bp_table) {@+register int reversed,h,h_up,h_down;
   reversed=op&0x10;
   if (peek_hist&1) reversed^=0x10;
   m=((head->loc.l&bp_cmask)<<bp_b)+(head->loc.l&bp_amask);
-  m=((cool_hist&bp_bcmask)<<bp_b)^(m>>2);
+  m=((cool_hist&bp_bcmask)<<bp_a)^(m>>2);
   h=bp_table[m];
   h_up=(h+1)&bp_nmask;@+ if (h_up==bp_npower) h_up=h;
   if (h==bp_npower) h_down=h;@+ else h_down=(h-1)&bp_nmask;
@@ -2872,7 +2878,7 @@ bp_amask=((1<<bp_a)-1)<<2; /* least $a$ bits of instruction address */
 bp_cmask=((1<<bp_c)-1)<<(bp_a+2); /* the next $c$ address bits */
 bp_bcmask=(1<<(bp_b+bp_c))-1; /* least $b+c$ bits of history info */
 bp_nmask=(1<<bp_n)-1; /* least significant $n$ bits */
-bp_npower=1<<(bp_n-1); /* $2^{n-1}$, the $n$-bit code for $-1$ */
+bp_npower=1<<(bp_n-1); /* $2^{n-1}$, the sign bit of an $n$-bit number */
 
 @ @<Glob...@>=
 int bp_amask,bp_cmask,bp_bcmask,bp_nmask,bp_npower;
@@ -3015,12 +3021,11 @@ between the reorder buffer and the D-cache.)
 
 Besides the optional I-cache, D-cache, and S-cache, there are required caches
 called the IT-cache and DT-cache, for translation of virtual addresses to
-physical addresses. A translation cache is often called a ``table lookaside
+physical addresses. A translation cache is often called a ``translation
 @^TLB@>
-@^table lookaside buffer@>
 @^translation caches@>
-buffer'' or TLB; but we call it a cache since it is implemented in nearly the
-same way as an I-cache.
+lookaside buffer'' or TLB; but we call it a cache since it is implemented in
+nearly the same way as an I-cache.
 
 @ Consider a cache that has blocks of $2^b$~bytes each and
 associativity~$2^a$; here $b\ge3$ and $a\ge0$. The I-cache, D-cache, and
@@ -3493,7 +3498,7 @@ pointers escape into other data structures.
 }
 
 @ The |demote_and_fix| routine is analogous to |use_and_fix|,
-except that we want don't want to promote the data we found.
+except that we don't want to promote the data we found.
 
 @<Internal proto...@>=
 static cacheblock* demote_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
@@ -3591,7 +3596,6 @@ static cacheblock* alloc_slot(c,alf)
 {
   register cacheset s;
   register cacheblock *p,*q;
-  register int j;
   if (cache_search(c,alf)) return NULL;
   s=cache_addr(c,alf); /* the set corresponding to |alf| */
   if (c->victim) p=choose_victim(c->victim,c->vv,c->vrepl);
@@ -3647,7 +3651,7 @@ typedef struct {
 @ The parameter |hash_prime| should be a prime number larger than the
 parameter
 |mem_chunks_max|, preferably more than twice as large but not much bigger
-than~that. The default values |mem_chunks_max=1000| and |hash_prime=2009| are
+than~that. The default values |mem_chunks_max=1000| and |hash_prime=2003| are
 set by |MMIX_config| unless the user specifies otherwise.
 
 @<External v...@>=
@@ -3850,12 +3854,14 @@ p->tag=c->outbuf.tag;@+ p->tag.l=c->outbuf.tag.l&(-Scache->bb);
 read them all and to charge only for reading the ones we needed.
 
 @<Fill |Scache->inbuf| with clean memory data@>=
-{@+register int off=(c->outbuf.tag.l&0xffff)>>3;
-  register int count=block_diff>>3;
-  register int delay;
+{@+register int count=block_diff>>3;
+  register int off,delay;
+  octa addr;
   if (mem_lock) wait(1);
+  addr.h=c->outbuf.tag.h;@+ addr.l=c->outbuf.tag.l&-Scache->bb;
+  off=(addr.l&0xffff)>>3;
   for (j=0;j<Scache->bb>>3;j++)
-    if (j==0) Scache->inbuf.data[j]=mem_read(c->outbuf.tag);
+    if (j==0) Scache->inbuf.data[j]=mem_read(addr);
     else Scache->inbuf.data[j]=mem_hash[last_h].chunk[j+off];
   set_lock(&mem_locker,mem_lock);
   delay=mem_addr_time+(int)((count+bus_words-1)/(bus_words))*mem_read_time;
@@ -3894,7 +3900,7 @@ and wakes up the caller. It proceeds to fill the cache's |inbuf| and,
 ultimately, the specified cache block, before waking the caller again.
 
 Let |c=data->ptr_b|. The caller is then |c->fill_lock|, if this variable is
-nonnull. However, the caller might not wish to be awoken or the receive
+nonnull. However, the caller might not wish to be awoken or to receive
 the data (for example, if it has been aborted). In such cases |c->fill_lock|
 will be~|NULL|; the filling action continues without the wakeup calls.
 If |c=Scache|, the S-cache will be locked and the caller will not
@@ -4080,7 +4086,7 @@ case 0:@+ if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1);
 Dclean_loop: p=(i<Dcache->cc? &(Dcache->set[i][j]): &(Dcache->victim[j]));
   if (p->tag.h&sign_bit) goto Dclean_inc;
   if (!is_dirty(Dcache,p)) {
-    p->tag.h!=data->x.o.h;@+goto Dclean_inc;
+    p->tag.h|=data->x.o.h;@+goto Dclean_inc;
   }
   data->y.o.h=i, data->y.o.l=j;
 Dclean: data->state=1;@+
@@ -4127,7 +4133,7 @@ case 5:@+ if (self->lockloc) *(self->lockloc)=NULL, self->lockloc=NULL;
 Sclean_loop: p=(i<Scache->cc? &(Scache->set[i][j]): &(Scache->victim[j]));
   if (p->tag.h&sign_bit) goto Sclean_inc;
   if (!is_dirty(Scache,p)) {
-    p->tag.h!=data->x.o.h;@+goto Sclean_inc;
+    p->tag.h|=data->x.o.h;@+goto Sclean_inc;
   }
   data->y.o.h=i, data->y.o.l=j;
 Sclean: data->state=6;@+
@@ -4187,7 +4193,7 @@ $$\vbox{\halign{\tt#\hfil\cr
 LDPTP $x$,[$2^{63}+2^{13}(r+b_i+2)$],$8a_2$\cr
 LDPTP $x$,$x$,$8a_1$\cr
 LDPTE $x$,$x$,$8a_0$\cr}}$$
-where $x$ is a hidden internal register and the other quantites are immediate
+where $x$ is a hidden internal register and the other quantities are immediate
 values. Slight changes to the normal functionality of \.{LDO} give us the
 actions needed to implement \.{LDPTP} and \.{LDPTE}. Coroutine~$c_j$
 corresponds to the instruction that involves $a_j$ and computes~$p_j$; when
@@ -4456,7 +4462,8 @@ possibly relevant physical address has not yet been computed, the subroutine
 returns the special code value~|DUNNO|.
 
 The search starts at the |x.up| field of a control block for a store
-instruction, otherwise at the |ptr_a| field of the control block.
+instruction, otherwise at the |ptr_a| field of the control block,
+unless |ptr_a| points to a committed instruction.
 
 The |i| field in the write buffer is usually |st| or |pst|, inherited from
 a store or partial store command. It may also be |sync| (from \.{SYNC}~\.1
@@ -4474,12 +4481,15 @@ static octa *write_search(ctl,addr)
 {@+register specnode *p=(ctl->mem_x? ctl->x.up: (specnode*)ctl->ptr_a);
   register write_node *q=write_tail;
   addr.l &=-8;
+  if (p==&mem) goto qloop;
+  if (p > &hot->x && ctl <= hot) goto qloop; /* already committed */
+  if (p < &ctl->x && (ctl <= hot || p > &hot->x)) goto qloop;
   for (; p!=&mem; p=p->up) {
-    if (p->addr.h==-1) return DUNNO;
+    if (p->addr.h==(tetra)-1) return DUNNO;
     if ((p->addr.l&-8)==addr.l && p->addr.h==addr.h)
       return (p->known? &(p->o): DUNNO);
   }
-  for (;;) {
+qloop:@+ for (;;) {
     if (q==write_head) return NULL;
     if (q==wbuf_top) q=wbuf_bot;@+ else q++;
     if (q->addr.l==addr.l && q->addr.h==addr.h) return &(q->o);
@@ -5014,7 +5024,7 @@ if (data->b.p) wait(1);
 switch(data->op>>1) {
  case STUNC>>1: data->i=stunc;
  default: data->x.o=data->b.o;@+goto fin_ex;
- case STSF>>1: data->b.o.h=store_sf(data->b.o);
+ case STSF>>1: set_round;@+ data->b.o.h=store_sf(data->b.o);
     data->interrupt |= exceptions;
     if ((data->b.o.h&0x7f800000)==0 && (data->b.o.h&0x7fffff)) {
       if (data->z.o.l&4) data->x.o.l=data->b.o.h;
@@ -5086,7 +5096,7 @@ pointer), and transfers up to |fetch_max| instructions from that block to the
 fetch buffer. Complications arise if the instruction isn't in the cache, or if
 we can't translate the virtual address because of a miss in the IT-cache.
 Moreover, |inst_ptr| is a \&{spec} variable whose value might not even be
-known; it |inst_ptr.p| is nonnull, we don't know what to fetch.
+known; if |inst_ptr.p| is nonnull, we don't know what to fetch.
 @^program counter@>
 
 @<External v...@>=
@@ -5461,13 +5471,13 @@ case 5: goto state_5;
 case trap:@+ if ((flags[op]&X_is_dest_bit) &&
                 cool->xx<cool_G && cool->xx>=cool_L)
     goto increase_L;
-  if (!g[rT].up->known) goto stall;
+  if (!g[rT].up->known || !g[rJ].up->known) goto stall;
   inst_ptr=specval(&g[rT]); /* traps and emulated ops */
-  cool->x.o=inst_ptr.o; 
   cool->need_b=true, cool->b=specval(&g[255]);
-case trip: cool->ren_x=true, spec_install(&g[255],&cool->x);
-  cool->x.known=true;
-  if (i==trip) cool->x.o=cool->go.o=zero_octa;
+case trip: if (!g[rJ].up->known) goto stall;
+  cool->ren_x=true, spec_install(&g[255],&cool->x);
+  cool->x.known=true, cool->x.o=g[rJ].up->o;
+  if (i==trip) cool->go.o=zero_octa;
   cool->ren_a=true, spec_install(&g[i==trap? rBB: rB],&cool->a);@+break;
 
 @ @<Cases for stage 1 execution@>=
@@ -5558,16 +5568,14 @@ switch (doing_interrupt--) {
 @ @<Set resumption registers $\rm(rB,\$255)$ or $\rm(rBB,\$255)$@>=
 j=hot->interrupt&H_BIT;
 g[j?rB:rBB].o=g[255].o;
-if (j) g[255].o=zero_octa;
-else g[255].o=g[hot->interrupt&F_BIT? rT:rTT].o;
+g[255].o=g[rJ].o;
 if (verbose&issue_bit) {
   if (j) {
     printf(" setting rB=");@+print_octa(g[rB].o);
-    printf(", $255=0\n");
   }@+else {
     printf(" setting rBB=");@+print_octa(g[rBB].o);
-    printf(", $255=");@+print_octa(g[255].o);@+printf("\n");
   }
+  printf(", $255=");@+print_octa(g[255].o);@+printf("\n");
 }
 
 @ Here's where we manufacture the ``ropcodes'' for resumption.
@@ -5743,7 +5751,6 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 
 
 @* Administrative operations.
-
 The internal instructions that handle the register stack simply reduce
 to things we already know how to do. (Well, the internal instructions
 for saving and unsaving do sometimes lead to special cases, based on
@@ -5899,7 +5906,7 @@ goto fin_ex;
 @<Special cases of instruction dispatch@>=
 case save:@+if (cool->xx<cool_G) cool->interrupt|=B_BIT;
  if (cool->interrupt&B_BIT) cool->i=noop;
- else if (((cool_S.l-cool_O.l)&lring_mask)==cool_L && cool_L!=0)
+ else if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
  else {
    cool->interim=true;
@@ -6066,14 +6073,18 @@ case fsub: data->a.o=data->z.o;
   set_round;@+data->x.o=fplus(data->y.o,data->a.o);
   data->i=fadd; /* use pipeline times for addition */
   goto fin_bflot;
-case fmul: set_round; data->x.o=fmult(data->y.o,data->z.o);@+ goto fin_bflot;
-case fdiv: set_round; data->x.o=fdivide(data->y.o,data->z.o);@+ goto fin_bflot;
-case fsqrt: data->x.o=froot(data->z.o,data->y.o.l);@+ goto fin_uflot;
-case fint: data->x.o=fintegerize(data->z.o,data->y.o.l);@+ goto fin_uflot;
-case fix: data->x.o=fixit(data->z.o,data->y.o.l);
+case fmul: set_round;@+ data->x.o=fmult(data->y.o,data->z.o);@+ goto fin_bflot;
+case fdiv: set_round;@+ data->x.o=fdivide(data->y.o,data->z.o);@+
+  goto fin_bflot;
+case fsqrt: set_round;@+ data->x.o=froot(data->z.o,data->y.o.l);@+
+  goto fin_uflot;
+case fint: set_round;@+ data->x.o=fintegerize(data->z.o,data->y.o.l);@+
+  goto fin_uflot;
+case fix: set_round;@+ data->x.o=fixit(data->z.o,data->y.o.l);
   if (data->op&0x2) exceptions&=~W_BIT; /* unsigned case doesn't overflow */
   goto fin_flot;
-case flot: data->x.o=floatit(data->z.o,data->y.o.l,data->op&0x2, data->op&0x4);
+case flot: set_round;@+
+  data->x.o=floatit(data->z.o,data->y.o.l,data->op&0x2, data->op&0x4);
   data->interrupt|=exceptions;@+break;
 
 @ @<Special cases of instruction dispatch@>=
@@ -6500,7 +6511,7 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 
 @ @<Internal proto...@>=
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
-int mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
 char stdin_chr @,@,@[ARGS((void))@];
 octa magic_read @,@,@[ARGS((octa))@];
 void magic_write @,@,@[ARGS((octa,octa))@];
@@ -6654,7 +6665,7 @@ int mmgetchars(buf,size,addr,stop)
 into the simulated memory starting at address |addr|.
 
 @<Sub...@>=
-int mmputchars(buf,size,addr)
+void mmputchars(buf,size,addr)
   unsigned char *buf;
   int size;
   octa addr;
@@ -6665,7 +6676,7 @@ int mmputchars(buf,size,addr)
   if (((addr.h&0x9fffffff)||(incr(addr,size-1).h&0x9fffffff))&&size) {
     fprintf(stderr,"Attempt to put characters off the page!\n");
 @.Attempt to put characters...@>
-    return 0;    
+    return;    
   }
   for (p=buf,m=0,a=addr,a.h>>=29; m<size;) {
     if ((a.l&0x7) || m>size-8) @<Load and write one byte@>@;

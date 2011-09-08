@@ -17,6 +17,7 @@ also the tetrabytes of input, if invoked with the \.{-v} option.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 @<Prototype preparations@>@;
 @<Type definitions@>@;
 @<Global variables@>@;
@@ -25,15 +26,15 @@ also the tetrabytes of input, if invoked with the \.{-v} option.
 int main(argc,argv)
   int argc;@+char*argv[];
 {
-  register int j,k,delta,postamble=0;
+  register int j,delta,postamble=0;
   register char *p;
-  register tetra t;
   @<Process the command line@>;
   @<Initialize everything@>;
   @<List the preamble@>;
   do @<List the next item@>@;@+while (!postamble);
   @<List the postamble@>;
   @<List the symbol table@>;
+  return 0;
 }
 
 @ @<Process the command line@>=
@@ -176,7 +177,7 @@ count=byte_count=0;
 }
 
 @ We want to catch all cases where the rules of \.{mmo} format are
-not obeyed. The |error| macro ameliorates this somewhat tedious chore.
+not obeyed. The |err| macro ameliorates this somewhat tedious chore.
 
 @d err(m) {@+fprintf(stderr,"Error in tetra %d: %s!\n",count,m);@+ continue;@+}
 @.Error in tetra...@>
@@ -226,10 +227,10 @@ Now let's consider the other lopcodes in turn.
 
 @<Cases...@>=
 case lop_loc:@+if (z==2) {
-   read_tet();@+ cur_loc.h=(y<<24)+tet;
+   j=y;@+ read_tet();@+ cur_loc.h=(j<<24)+tet;
  }@+else if (z==1) cur_loc.h=y<<24;
  else err("Z field of lop_loc should be 1 or 2");
-@.Z field of lop_loc...@>
+@:Z field of lop_loc...}\.{Z field of lop\_loc...@>
  read_tet();@+ cur_loc.l=tet;
  continue;
 case lop_skip: cur_loc=incr(cur_loc,yz);@+continue;
@@ -240,17 +241,17 @@ relevant.
 
 @<Cases...@>=
 case lop_fixo:@+if (z==2) {
-   read_tet();@+ tmp.h=(y<<24)+tet;
+   j=y;@+ read_tet();@+ tmp.h=(j<<24)+tet;
  }@+else if (z==1) tmp.h=y<<24;
  else err("Z field of lop_fixo should be 1 or 2");
-@.Z field of lop_fixo...@>
+@:Z field of lop_fixo...}\.{Z field of lop\_fixo...@>
  read_tet();@+ tmp.l=tet;
  if (listing) printf("%08x%08x: %08x%08x\n",tmp.h,tmp.l,cur_loc.h,cur_loc.l);
  continue;
 case lop_fixr: delta=yz; goto fixr;
 case lop_fixrx:j=yz;@+if (j!=16 && j!=24)
     err("YZ field of lop_fixrx should be 16 or 24");
-@.YZ field of lop_fixrx...@>
+@:YZ field of lop_fixrx...}\.{YZ field of lop\_fixrx...@>
  read_tet(); delta=tet;
  if (delta&0xfe000000) err("increment of lop_fixrx is too large");
 @.increment...too large@>
@@ -314,9 +315,9 @@ case lop_pre: err("Can't have another preamble");
 @.Can't have another...@>
 case lop_post: postamble=1;
  if (y) err("Y field of lop_post should be zero");
-@.Y field of lop_post...@>
+@:Y field of lop_post...}\.{Y field of lop\_post...@>
  if (z<32) err("Z field of lop_post must be 32 or more");
-@.Z field of lop_post...@>
+@:Z field of lop_post...}\.{Z field of lop\_post...@>
  continue;
 case lop_stab: err("Symbol table must follow postamble");
 @.Symbol table...@>
@@ -338,7 +339,8 @@ if (y!=1) fprintf(stderr,
 if (z>0) {
   j=z;
   read_tet();
-  if (listing) printf("File was created %s",asctime(localtime(&tet)));
+  if (listing)
+    printf("File was created %s",asctime(localtime((time_t*)&tet)));
   for (j--;j>0;j--) {
     read_tet();
     if (listing) printf("Preamble data %08x\n",tet);
@@ -425,6 +427,7 @@ if (j) c='?'; /* oops, we can't print |(j<<8)+c| easily at this time */
     if (strcmp(equiv_buf,"#0000")==0) strcpy(equiv_buf,"?"); /* undefined */
   }@+else {
     strncpy(equiv_buf,"#20000000000000",33-2*j);
+    equiv_buf[33-2*j]='\0';
     for (;j>8;j--) sprintf(equiv_buf+strlen(equiv_buf),"%02x",read_byte());
   }
   for (j=k=read_byte();; k=read_byte(),j=(j<<7)+k) if (k>=128) break;
@@ -451,7 +454,7 @@ if (buf[0]!=mm || buf[1]!=lop_end)
 @.The symbol table isn't...@>
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
-@.YZ field at lop_end...@>
+@:YZ field at lop_end...}\.{YZ field at lop\_end...@>
 else {
   if (verbose) printf("Symbol table ends at tetra %d.\n",count);
   if (fread(buf,1,1,mmo_file))

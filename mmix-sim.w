@@ -67,13 +67,13 @@ to the simulated program, and \<options> is any subset of the following:
 is executed. (The notation \.{<n>} in this option, and in several
 other options and interactive commands below, stands for a decimal integer.)
 
-\bull \.{-x<x>}\quad Trace each instruction that raises an arithmetic
+\bull \.{-e<x>}\quad Trace each instruction that raises an arithmetic
 exception belonging to the given bit pattern. (The notation \.{<x>} in this
 option, and in several other commands below, stands for a hexadecimal integer.)
 The exception bits are DVWIOUZX as they appear in rA, namely
 \Hex{80} for~D (integer divide check), \Hex{40} for~V (integer overflow),
-\dots, \Hex{01} for~X (floating inexact). The option \.{-x} by itself
-is equivalent to \.{-xff}, tracing all eight exceptions.
+\dots, \Hex{01} for~X (floating inexact). The option \.{-e} by itself
+is equivalent to \.{-eff}, tracing all eight exceptions.
 
 \bull \.{-r}\quad Trace details of the register stack. This option
 shows all the ``hidden'' loads and stores that occur when octabytes are
@@ -95,11 +95,11 @@ of each instruction that was executed) when the simulation ends.
 
 \bull \.{-L<n>}\quad List the source lines corresponding to each instruction
 that appears in the program profile, filling gaps of length $n$ or less.
-This option implies \.{-P}.
+This option implies \.{-P}.  If \.{<n>} is omitted it is assumed to be~3.
 
 \bull \.{-v}\quad Be verbose: \kern-2.5ptTurn on all options.
-\kern-2.5pt(More precisely,
-this is shorthand for \.{-t9999999999}~\.{-r}~\.{-s}~\.{-l10}~\.{-L10}.)
+(More precisely, the \.{-v} option is
+shorthand for \.{-t9999999999}~\.{-e} \.{-r} \.{-s} \.{-l10}~\.{-L10}.)
 
 \bull \.{-q}\quad Be quiet: Cancel all previously specified options.
 
@@ -114,7 +114,9 @@ halts or pauses for a breakpoint.
 to $\max(256,n)$; this number must be a power of~2.
 
 \bull \.{-f<filename>}\quad Use the named file for standard input to the
-simulated program.
+simulated program. This option should be used whenever the simulator
+is not being used interactively, because the simulator will not recognize
+end of file when standard input has been defined in any other way.
 
 \bull \.{-D<filename>}\quad Prepare the named file for use by other
 simulators, instead of actually doing a simulation.
@@ -218,10 +220,10 @@ stores, or appears in tetrabyte number \Hex{1000}.
 \Hex{4000000000000000}, or \Hex{6000000000000000}. The current segment,
 initially \Hex{0}, is added to all
 memory addresses in \.{M}, \.{@@}, \.{t}, \.{u}, and \.{b} commands.
-@.Text_Segment@>
-@.Data_Segment@>
-@.Pool_Segment@>
-@.Stack_Segment@>
+@:Text_Segment}\.{Text\_Segment@>
+@:Data_Segment}\.{Data\_Segment@>
+@:Pool_Segment}\.{Pool\_Segment@>
+@:Stack_Segment}\.{Stack\_Segment@>
 
 \bull \.{B} lists all current breakpoints and tracepoints.
 
@@ -246,7 +248,8 @@ values \.{TextRead}, \.{TextWrite}, \.{BinaryRead}, \.{BinaryWrite},
 \.{BinaryReadWrite}. An \.{Fopen} call associates |handle| with the
 external file called |name| and prepares to do input and/or output
 on that file. It returns 0 if the file was opened successfully; otherwise
-returns the value~$-1$. If |mode| is \.{TextWrite} or \.{BinaryWrite},
+returns the value~$-1$. If |mode| is \.{TextWrite}, \.{BinaryWrite}, or
+\.{BinaryReadWrite},
 any previous contents of the named file are discarded. If |mode| is
 \.{TextRead} or \.{TextWrite}, the file consists of ``lines'' terminated
 by ``newline'' characters, and it is said to be a text file; otherwise
@@ -274,12 +277,13 @@ At the beginning of a program three handles have already been opened: The
 @.StdOut@>
 @.StdErr@>
 When this simulator is being run interactively, lines of standard input
-should be typed following a prompt that says `\.{StdIn>\ }'; the
-standard output and standard error files of the simulated program
+should be typed following a prompt that says `\.{StdIn>\ }', unless the \.{-f}
+option has been used.
+The standard output and standard error files of the simulated program
 are intermixed with the output of the simulator~itself.
 
 The input/output operations supported by this simulator can perhaps be
-understood most easily with reference to the standard library \.{<stdio>}
+understood most easily with reference to the standard library \.{stdio}
 that comes with the \CEE/ language, because the conventions of~\CEE/
 have been explained in hundreds of books. If we declare an array
 |FILE *file[256]| and set |file[0]=stdin|, |file[1]=stdout|, and
@@ -428,7 +432,7 @@ example below.)
 
 @ The user program starts at symbolic location \.{Main}. At this time
 @.Main@>
-@.Pool_Segment@>
+@:Pool_Segment}\.{Pool\_Segment@>
 the global registers are initialized according to the \.{GREG}
 statements in the \.{MMIXAL} program, and \$255 is set to the
 numeric equivalent of~\.{Main}. Local register~\$0 is
@@ -556,7 +560,7 @@ definition in that module.
 @<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
-typedef struct {tetra h,l;} octa; /* two tetrabytes makes one octabyte */
+typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 typedef unsigned char byte; /* a monobyte */
 
 @ We declare subroutines twice, once with a prototype and once
@@ -694,7 +698,7 @@ void print_int(o)
   }
 }
     
-@* Simulated memory. Chunks of simulated memory, 2K bytes each,
+@* Simulated memory. Chunks of simulated memory, 2048 bytes each,
 are kept in a tree structure organized as a {\it treap},
 following ideas of Vuillemin, Aragon, and Seidel
 @^Vuillemin, Jean Etienne@>
@@ -847,6 +851,8 @@ but such enhancements are left to the interested reader.)
 mmo_file=fopen(mmo_file_name,"rb");
 if (!mmo_file) {
   register char *alt_name=(char*)calloc(strlen(mmo_file_name)+5,sizeof(char));
+  if (!alt_name) panic("Can't allocate file name buffer");
+@.Can't allocate...@>
   sprintf(alt_name,"%s.mmo",mmo_file_name);
   mmo_file=fopen(alt_name,"rb");
   if (!mmo_file) {
@@ -969,7 +975,7 @@ Now let's consider the other lopcodes in turn.
 
 @<Cases for lopcodes...@>=
 case lop_loc:@+if (zbyte==2) {
-   read_tet();@+ cur_loc.h=(ybyte<<24)+tet;
+   j=ybyte;@+ read_tet();@+ cur_loc.h=(j<<24)+tet;
  }@+else if (zbyte==1) cur_loc.h=ybyte<<24;
  else mmo_err;
  read_tet();@+ cur_loc.l=tet;
@@ -982,7 +988,7 @@ relevant.
 
 @<Cases for lopcodes...@>=
 case lop_fixo:@+if (zbyte==2) {
-   read_tet();@+ tmp.h=(ybyte<<24)+tet;
+   j=ybyte;@+ read_tet();@+ tmp.h=(j<<24)+tet;
  }@+else if (zbyte==1) tmp.h=ybyte<<24;
  else mmo_err;
  read_tet();@+ tmp.l=tet;
@@ -1034,14 +1040,14 @@ case lop_spec:@+ while(1) {
 @ Since a chunk of memory holds 512 tetrabytes, the |ll| pointer in the
 following loop stays in the same chunk (namely, the first chunk
 of segment~3, also known as \.{Stack\_Segment}).
-@.Stack_Segment@>
-@.Pool_Segment@>
+@:Stack_Segment}\.{Stack\_Segment@>
+@:Pool_Segment}\.{Pool\_Segment@>
 
 @<Load the postamble@>=
 aux.h=0x60000000;@+ aux.l=0x18;
 ll=mem_find(aux);
 (ll-1)->tet=2; /* this will ultimately set |rL=2| */
-(ll-5)->tet=argc; /* and $\$=|argc|$ */
+(ll-5)->tet=argc; /* and $\$0=|argc|$ */
 (ll-4)->tet=0x40000000;
 (ll-3)->tet=0x8; /* and $\$1=\.{Pool\_Segment}+8$ */
 G=zbyte;@+ L=0;
@@ -1083,6 +1089,8 @@ be truncated to the buffer size when the simulator lists them.)
 @<Initialize...@>=
 if (buf_size<72) buf_size=72;
 buffer=(Char*)calloc(buf_size+1,sizeof(Char));
+if (!buffer) panic("Can't allocate source line buffer");
+@.Can't allocate...@>
 
 @ The first time we are called upon to list a line from a given source
 file, we make a map of starting locations for each line. Source files
@@ -1153,7 +1161,7 @@ void print_line(k)
 
 @ @<Preprocessor macros@>=
 #ifndef SEEK_SET
-#define	SEEK_SET	0	/* Set file pointer to "offset" */
+#define SEEK_SET 0 /* code for setting the file pointer to a given offset */
 #endif
 
 @ The |show_line| routine is called when we want to output line |cur_line|
@@ -1424,7 +1432,7 @@ typedef struct {
   unsigned char third_operand; /* its special register input */
   unsigned char mems; /* how many $\mu$ it costs */
   unsigned char oops; /* how many $\upsilon$ it costs */
-  char *trace_format; /* how it is appears when traced */
+  char *trace_format; /* how it appears when traced */
 } op_info;
 
 @ For example, the |flags| field of |info[op]|
@@ -1650,8 +1658,8 @@ op_info info[256]={
 {"PRESTI",0x09,0,0,1,"[%#y%?+ .. %#x]"},@|
 {"SYNCID",0x0a,0,0,1,"[%#y+%#z .. %#x]"},@|
 {"SYNCIDI",0x09,0,0,1,"[%#y%?+ .. %#x]"},@|
-{"PUSHGO",0x8a,0,0,3,"%lrO=%#b, rL=%a, rJ=%#x, -> %#y+%#z"},@|
-{"PUSHGOI",0x89,0,0,3,"%lrO=%#b, rL=%a, rJ=%#x, -> %#y%?+"}
+{"PUSHGO",0xaa,0,0,3,"%lrO=%#b, rL=%a, rJ=%#x, -> %#y+%#z"},@|
+{"PUSHGOI",0xa9,0,0,3,"%lrO=%#b, rL=%a, rJ=%#x, -> %#y%?+"}
 
 @ @<Info for logical and control commands@>=
 {"OR",0x2a,0,0,1,"%l = %#y | %#z = %#x"},@|
@@ -1704,8 +1712,8 @@ op_info info[256]={
 {"ANDNL",0x30,0,0,1,"%l = %#y \\ %#z = %#x"},@|
 {"JMP",0x40,0,0,1,"-> %#z"},@|
 {"JMPB",0x40,0,0,1,"-> %#z"},@|
-{"PUSHJ",0xc0,0,0,1,"%lrO=%#b, rL=%a, rJ=%#x, -> %#z"},@|
-{"PUSHJB",0xc0,0,0,1,"%lrO=%#b, rL=%a, rJ=%#x, -> %#z"},@|
+{"PUSHJ",0xe0,0,0,1,"%lrO=%#b, rL=%a, rJ=%#x, -> %#z"},@|
+{"PUSHJB",0xe0,0,0,1,"%lrO=%#b, rL=%a, rJ=%#x, -> %#z"},@|
 {"GETA",0x60,0,0,1,"%l = %#z"},@|
 {"GETAB",0x60,0,0,1,"%l = %#z"},@|
 {"PUT",0x02,0,0,1,"%s = %r"},@|
@@ -1717,7 +1725,7 @@ op_info info[256]={
 {"SYNC",0x01,0,0,1,""},@|
 {"SWYM",0x00,0,0,1,""},@|
 {"GET",0x20,0,0,1,"%l = %s = %#x"},@|
-{"TRIP",0x0a,255,0,5,"rY=%#y, rZ=%#z, rB=%#b, g[255]=0"}
+{"TRIP",0x0a,255,0,5,"rW=%#w, rX=%#x, rY=%#y, rZ=%#z, rB=%#b, g[255]=%#a"}
 
 @ @<Convert relative address to absolute address@>=
 {
@@ -1841,9 +1849,9 @@ if (xx>=G) {
 
 @ @<Increase rL@>=
 {
-  if (((S-O)&lring_mask)==L && L!=0) stack_store();
   l[(O+L)&lring_mask]=zero_octa;
   L=g[rL].l=L+1;
+  if (((S-O-L)&lring_mask)==0) stack_store();
 }
 
 @ The |stack_store| routine advances the ``gamma'' pointer in the
@@ -1993,7 +2001,9 @@ case MUL: case MULI: x=signed_omult(y,z);
 test_overflow:@+if (overflow) exc|=V_BIT;
  goto store_x;
 case MULU: case MULUI: x=omult(y,z);@+a=g[rH]=aux;@+goto store_x;
-case DIV: case DIVI: x=signed_odiv(y,z);@+a=g[rR]=aux;@+goto test_overflow;
+case DIV: case DIVI:@+if (!z.l && !z.h) aux=y, exc|=D_BIT;
+ else x=signed_odiv(y,z);
+ a=g[rR]=aux;@+goto test_overflow;
 case DIVU: case DIVUI: x=odiv(b,y,z);@+a=g[rR]=aux;@+goto store_x;
 
 @ The floating point routines of {\mc MMIX-ARITH} record exceptional
@@ -2226,9 +2236,9 @@ them coherently.
 @<Cases for ind...@>=
 case PUSHGO: case PUSHGOI: inst_ptr=w;@+goto push;
 case PUSHJ: case PUSHJB: inst_ptr=z;
-push:@+if (xx>=L) {
-   if (((S-O)&lring_mask)==L && L!=0) stack_store();
+push:@+if (xx>=G) {
    xx=L++;
+   if (((S-O-L)&lring_mask)==0) stack_store();
  }
  x.l=xx;@+l[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
  sprintf(lhs,"l[%d]=%d, ",(O+xx)&lring_mask,xx);
@@ -2256,9 +2266,9 @@ to implement |SAVE| and |UNSAVE|.
 
 @<Cases for ind...@>=
 case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
- if (((S-O)&lring_mask)==L && L!=0) stack_store();
- l[(O+L)&lring_mask].l=L;
- O+=L+1;@+ g[rO]=incr(g[rO],(L+1)<<3);
+ l[(O+L)&lring_mask].l=L++;
+ if (((S-O-L)&lring_mask)==0) stack_store();
+ O+=L;@+ g[rO]=incr(g[rO],L<<3);
  L=g[rL].l=0;
  while (g[rO].l!=g[rS].l) stack_store();
  for (k=G;;) {
@@ -2343,7 +2353,7 @@ case PRELD: case PRELDI: x=incr(w,xx);@+break;
 @<Cases for ind...@>=
 case GO: case GOI: x=inst_ptr;@+inst_ptr=w;@+goto store_x;
 case JMP: case JMPB: inst_ptr=z;@+break;
-case SYNC:@+if (xx!=0 || yy!=0 || zz>6) goto illegal_inst;
+case SYNC:@+if (xx!=0 || yy!=0 || zz>7) goto illegal_inst;
  if (zz<=3) break;
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
  goto break_inst;
@@ -2495,8 +2505,8 @@ int mmgetchars(buf,size,addr,stop)
 into the simulated memory starting at address |addr|.
 
 @<Sub...@>=
-int mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
-int mmputchars(buf,size,addr)
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
+void mmputchars(buf,size,addr)
   unsigned char *buf;
   int size;
   octa addr;
@@ -2504,7 +2514,6 @@ int mmputchars(buf,size,addr)
   register unsigned char *p;
   register int m;
   register mem_tetra *ll;
-  register tetra x;
   octa a;
   for (p=buf,m=0,a=addr; m<size;) {
     ll=mem_find(a);@+test_store_bkpt(ll);
@@ -2547,7 +2556,8 @@ char stdin_chr()
       printf("StdIn> ");@+fflush(stdout);
 @.StdIn>@>
     }
-    fgets(stdin_buf,256,stdin);
+    if (!fgets(stdin_buf,256,stdin))
+      panic("End of file on standard input; use the -f option, not <");
     stdin_buf_start=stdin_buf;
     for (p=stdin_buf;p<stdin_buf+254;p++) if(*p=='\n') break;
     stdin_buf_end=p+1;
@@ -2584,7 +2594,8 @@ if (exc) {
   if ((op&0xe0)==STB) g[rY]=w, g[rZ]=b;
   else g[rY]=y, g[rZ]=z;
   g[rB]=g[255];
-  g[255]=zero_octa;
+  g[255]=g[rJ];
+  if (op==TRIP) w=g[rW], x=g[rX], a=g[255];
 }
 
 @ We are finally ready for the last case.
@@ -2707,7 +2718,7 @@ if (L!=old_L && !(f&push_pop_bit)) printf("rL=%d, ",L);
 its symbolic representation. For example, the string for \.{ADD} is
 |"%l = %y + %z = %x"|; if the instruction is, say, \.{ADD}~\.{\$1,\$2,\$3}
 with $\$2=5$ and $\$3=8$, and if the stack offset is 100, the trace output
-will be |"\$1=l[101] = 5 + 8 = 13"|.
+will be |"$1=l[101] = 5 + 8 = 13"|.
 
 Percent signs (\.\%) induce special format conventions, as follows:
 
@@ -2719,7 +2730,7 @@ percent sign in this case, as explained below.
 \bull \.{\%(} and \.{\%)} are brackets that indicate the mode of
 floating point rounding. If |round_mode=ROUND_NEAR|, |ROUND_OFF|,
 |ROUND_UP|, |ROUND_DOWN|, the corresponding brackets are
-\.(~and~\.), \.[~and~\.], \.\^~and\.\^, \.\_~and~\.\_.
+\.(~and~\.), \.[~and~\.], \.\^~and~\.\^, \.\_~and~\.\_.
 Such brackets are placed around a floating point operator;
 for example, floating point addition is denoted
 by `\.{[+]}' when the current rounding mode is rounding-off.
@@ -2867,7 +2878,7 @@ working simulator.
 @<Global variables@>@;
 @<Subroutines@>@;
 @#
-main(argc,argv)
+int main(argc,argv)
   int argc;
   char *argv[];
 {
@@ -2890,6 +2901,7 @@ main(argc,argv)
   }
  end_simulation:@+if (profiling) @<Print all the frequency counts@>;
   if (interacting || profiling || showing_stats) show_stats(true);
+  return g[255].l; /* provide rudimentary feedback for non-interactive runs */
 }
 
 @ Here we process the command-line options; when we finish, |*cur_arg|
@@ -2923,7 +2935,7 @@ void scan_option(arg,usage)
  case 't':@+if (strlen(arg)>10) trace_threshold=0xffffffff;
   else if (sscanf(arg+1,"%d",&trace_threshold)!=1) trace_threshold=0;
   return;
- case 'x':@+if (!*(arg+1)) tracing_exceptions=0xff;
+ case 'e':@+if (!*(arg+1)) tracing_exceptions=0xff;
   else if (sscanf(arg+1,"%x",&tracing_exceptions)!=1) tracing_exceptions=0;
   return;
  case 'r': stack_tracing=true;@+return;
@@ -2995,6 +3007,7 @@ char *interactive_help[]={@/
 "s         show current statistics\n",@|
 "l<n><t>   set and/or show local register in format t\n",@|
 "g<n><t>   set and/or show global register in format t\n",@|
+"rA<t>     set and/or show register rA in format t\n",@|
 "$<n><t>   set and/or show dynamic register in format t\n",@|
 "M<x><t>   set and/or show memory octabyte in format t\n",@|
 "+<n><t>   set and/or show n additional octabytes in format t\n",@|
@@ -3015,7 +3028,7 @@ char *interactive_help[]={@/
 ""};
 
 @ @<Open a file for simulated standard input@>=
-fclose(fake_stdin);
+if (fake_stdin) fclose(fake_stdin);
 fake_stdin=fopen(arg+1,"r");
 if (!fake_stdin) fprintf(stderr,"Sorry, I can't open file %s!\n",arg+1);
 @.Sorry, I can't open...@>
@@ -3336,7 +3349,7 @@ M$[\.{Pool\_Segment}+8*(k+1)]_8$ for $0\le k<|argc|$;
 the strings themselves are octabyte-aligned, starting at
 M$[\.{Pool\_Segment}+8*(|argc|+2)]_8$. The location of the first free
 octabyte in the pool segment is placed in M$[\.{Pool\_Segment}]_8$.
-@.Pool_Segment@>
+@:Pool_Segment}\.{Pool\_Segment@>
 @^command line arguments@>
 
 @<Load the command line arguments@>=
@@ -3346,7 +3359,7 @@ for (k=0; k<argc; k++,cur_arg++) {
   ll=mem_find(x);
   ll->tet=loc.h, (ll+1)->tet=loc.l;
   ll=mem_find(loc);
-  mmputchars(*cur_arg,strlen(*cur_arg),loc);
+  mmputchars((unsigned char *)*cur_arg,strlen(*cur_arg),loc);
   x.l+=8, loc.l+=8+(strlen(*cur_arg)&-8);
 }
 x.l=0;@+ll=mem_find(x);@+ll->tet=loc.h, (ll+1)->tet=loc.l;
