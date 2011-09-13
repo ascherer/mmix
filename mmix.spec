@@ -3,7 +3,7 @@ Summary: The MMIX system
 Version: 20110831
 Release: 1
 Packager: Andreas Scherer <andreas@komputer.de>
-License: Copyright 1993 Stanford University
+License: Copyright 1999 Donald E. Knuth
 Group: Productivity/Development
 URL: http://www-cs-faculty.stanford.edu/~knuth/programs
 BuildRequires:
@@ -58,6 +58,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Tue Sep 13 2011 Andreas Scherer <andreas_tex@freenet.de>
+- Correct Copyright line (1993 was CWEB, not MMIX)
 * Mon Sep 05 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Correct URL for source package
 * Thu Sep 01 2011 Andreas Scherer <andreas_tex@freenet.de>
