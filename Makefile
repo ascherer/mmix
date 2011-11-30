@@ -6,7 +6,7 @@
 #   In fact, CWEB 3.61 is recommended for making hardcopy or PDF documentation.
 
 #   If you prefer optimization to debugging, change -g to something like -O:
-CFLAGS = -g
+CFLAGS = -g -Wall
 
 #   Uncomment the second line if you use pdftex to bypass .dvi files:
 PDFTEX = dvipdfm
