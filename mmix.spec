@@ -1,7 +1,7 @@
 Name: mmix
 Summary: The MMIX system
 Version: 20110831
-Release: 1
+Release: 2
 Packager: Andreas Scherer <andreas@komputer.de>
 License: Copyright 1999 Donald E. Knuth
 Group: Productivity/Development
@@ -11,6 +11,10 @@ Distribution: Kubuntu 10.04 (i386)
 Source0: %{name}-%{version}.tar.gz
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
+Source3: mmixal.ch
+Source4: mmix-arith.ch
+Source5: mmix-config.ch
+Source6: mmix-io.ch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: i386
 
@@ -22,8 +26,13 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 mkdir -p %{name}-%{version}
 cd %{name}-%{version}
 tar xzvf %{SOURCE0}
+sed "s/CFLAGS = -g/CFLAGS = -g -Wall/" -i Makefile
 cp -a %{SOURCE1} .
 cp -a %{SOURCE2} .
+cp -a %{SOURCE3} .
+cp -a %{SOURCE4} .
+cp -a %{SOURCE5} .
+cp -a %{SOURCE6} .
 
 %build
 make doc all mmotype mmmix
@@ -58,6 +67,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Wed Nov 30 2011 Andreas Scherer <andreas_tex@freenet.de>
+- Eliminate all GCC warnings
 * Tue Sep 13 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Correct Copyright line (1993 was CWEB, not MMIX)
 * Mon Sep 05 2011 Andreas Scherer <andreas_tex@freenet.de>
