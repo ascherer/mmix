@@ -41,7 +41,7 @@ Phase2 SET  ii,9*8-8 At this point $\.z=\min_jC(j)$
        LDA  ans,a10,ans  A saddle point was found here.
        POP  1,0
 No     SUB  ii,ii,8
-       PBP  ii,3B     Try another row.
+       PBNN ii,3B     Try another row.
        SET  ans,0
        POP  1,0     $\.{ans} = 0$; no saddle.\quad\slug
 

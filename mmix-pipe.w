@@ -2152,7 +2152,8 @@ from the local register ring to virtual memory location |cool_S<<3|.
   cool->z=zero_spec;
   cool->mem_x=true, spec_install(&mem,&cool->x);
   op=STOU; /* this instruction needs to be handled by load/store unit */
-  cool->interim=cool->stack_alert=true;
+  cool->interim=true;
+  cool->stack_alert=!(cool->y.o.h&sign_bit);
   goto dispatch_done;
 }
 
@@ -2264,7 +2265,7 @@ case pushj: {@+register int x=cool->xx;
   cool->rl.o.l=cool_L-x-1;
   new_O=incr(cool_O,x+1);
 }@+break;
-case syncid: if (cool->loc.h&sign_bit) break;
+case syncid:@+if (cool->loc.h&sign_bit) break;
 case go: inst_ptr.p=&cool->go;@+break;
   
 @ We need to know the topmost ``hidden'' element of the register stack
@@ -3929,7 +3930,7 @@ coroutine; the I-cache or D-cache may also invoke a |fill_from_mem| coroutine,
 if there is no S-cache. When such a coroutine is invoked, it holds
 |mem_lock|, and its caller has gone to sleep.
 A physical memory address is given in |data->z.o|,
-and |data->ptr_a| specifies either |Icache| or |Dcache|.
+and |data->ptr_a| specifies either |Icache|, |Dcache|, or |Scache|.
 Furthermore, |data->ptr_b| specifies a block within that
 cache, determined by the |alloc_slot| routine. The coroutine
 simulates reading the contents of the specified memory location,
@@ -3937,7 +3938,7 @@ places the result in the |x.o| field of its caller's control block,
 and wakes up the caller. It proceeds to fill the cache's |inbuf| and,
 ultimately, the specified cache block, before waking the caller again.
 
-Let |c=data->ptr_b|. The caller is then |c->fill_lock|, if this variable is
+Let |c=data->ptr_a|. The caller is then |c->fill_lock|, if this variable is
 nonnull. However, the caller might not wish to be awoken or to receive
 the data (for example, if it has been aborted). In such cases |c->fill_lock|
 will be~|NULL|; the filling action continues without the wakeup calls.
@@ -4008,12 +4009,13 @@ case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
     }
   case 3: @<Copy data from |p| into |c->inbuf|@>;
     data->state=4;@+wait(Scache->access_time);
-  case 4:@+ if (c->lock) wait(1);
+  case 4: Scache->lock=NULL; /* we had been holding that lock */
+    data->state=5;
+  case 5:@+ if (c->lock) wait(1);
     set_lock(self,c->lock);
-    Scache->lock=NULL; /* we had been holding that lock */
     load_cache(c,(cacheblock*)data->ptr_b);
-    data->state=5;@+ wait(c->copy_in_time);
-  case 5:@+if (cc) awaken(cc,1); /* second wakeup call */
+    data->state=6;@+ wait(c->copy_in_time);
+  case 6:@+if (cc) awaken(cc,1); /* second wakeup call */
     goto terminate;
   }
 }

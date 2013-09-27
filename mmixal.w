@@ -477,11 +477,13 @@ the current location;
 defines the value of the label to be the value of the expression,
 which must not be a future reference. The expression may be
 either pure or a register number.
+@.IS@>
 
 \bull\<label> \.{LOC} \<expression>
 first defines the label to be the value of the current location, if the label
 is nonempty. Then the current location is changed to the value of the
 expression, which must be pure.
+@.LOC@>
 
 \smallskip For example, `\.{LOC} \.{\#1000}' will start assembling subsequent
 instructions or data in location whose hexa\-decimal value is \Hex{1000}.
@@ -506,6 +508,7 @@ switching from instructions to data.
 \bull \.{PREFIX} \<symbol>
 redefines the current prefix to be the given symbol (fully qualified).
 The label field should be blank.
+@.PREFIX@>
 
 @ The next pseudo-operations assemble bytes, wydes, tetrabytes, or
 octabytes of data.
@@ -522,6 +525,7 @@ For example, if the current location is \Hex{1000}, the instruction
 \.{'H'}, \.{'e'}, \.{'l'}, \.{'l'}, \.{'o'}, and~\.0 into locations
 \Hex{1000}, \dots,~\Hex{1005}, and advances the current location
 to \Hex{1006}.
+@.BYTE@>
 
 \bull \<label> \.{WYDE} \<expression list>
 is similar, but it first makes the current location even, by adding~1 to it
@@ -529,6 +533,7 @@ if necessary. Then it defines the label (if a nonempty label is present),
 and assembles each expression as a two-byte value. The current location
 is advanced by twice the number of expressions in the list. The
 expressions should all be pure numbers that fit in two bytes.
+@.WYDE@>
 
 \bull \<label> \.{TETRA} \<expression list>
 is similar, but it aligns the current location to a multiple of~4
@@ -536,6 +541,7 @@ before defining the label; then it
 assembles each expression as a four-byte value. The current location
 is advanced by $4n$ if there are $n$~expressions in the list. Each
 expression should be a pure number that fits in four bytes.
+@.TETRA@>
 
 \bull \<label> \.{OCTA} \<expression list>
 is similar, but it first aligns the current location to a multiple of~8;
@@ -543,6 +549,7 @@ it assembles each expression as an eight-byte value. The current location
 is advanced by $8n$ if there are $n$~expressions in the list. Any or all
 of the expressions may be future references, but they should all
 be defined as pure numbers eventually.
+@.OCTA@>
 
 @ Global registers are important for accessing memory in \MMIX\ programs.
 They could be allocated by hand, and defined with \.{IS} instructions,
@@ -554,6 +561,7 @@ equivalent of the label.
 At the beginning of assembly, the current global threshold~G is~\$255.
 Each distinct \.{GREG} instruction decreases~G by~1; the final value of~G will
 be the initial value of~rG when the assembled program is loaded.
+@.GREG@>
 
 The value of the expression will be loaded into the global register
 at the beginning of the program. {\it If this value is nonzero, it
@@ -624,6 +632,7 @@ being assembled. The expression should be a register number, and
 the label field should be blank. At the close of
 assembly, \MMIXAL\ will report an error if the final value of~G does
 not exceed all register numbers that are declared local in this way.
+@.LOCAL@>
 
 A \.{LOCAL} instruction need not be given unless the register number
 is 32 or~more. (\MMIX\ always considers \.{\$0} through \.{\$31} to be
@@ -637,10 +646,12 @@ using the assembled program.
 \bull \.{BSPEC} \<expression>
 begins ``special mode''; the \<expression> should have a value that
 fits in two bytes, and the label field should be blank.
+@.BSPEC@>
 
 \bull \.{ESPEC}
 ends ``special mode''; the operand field is ignored, and the label
 field should be blank.
+@.ESPEC@>
 
 \smallskip\noindent
 All material assembled between \.{BSPEC} and \.{ESPEC} is passed
@@ -753,7 +764,7 @@ $$
 f0000000&(\.{JMP} \.{1F}, will be fixed up later)\cr
 98024000&|lop_skip| \Hex{4000} (advance 16384 bytes)\cr
 98070009&|lop_line| 9 (line 9 of the current file)\cr
-8103fe01&(\.{LDB} \.{\$3,b,1}, uses base address \.b)\cr
+8103fe01&(\.{LDB} \.{\$3,a,1}, uses base address \.a)\cr
 42030000&(\.{BZ} \.{\$3,1F}, will be fixed later)\cr
 9807000a&|lop_line| 10 (stay on line 10)\cr
 00000000&(\.{TRAP})\cr
@@ -838,7 +849,7 @@ assembled as zero because of a future reference.)
 Proceed as in |lop_fixr|,
 but load $\delta$ into tetrabyte $\rm P=\lambda-4\delta$ instead of loading
 YZ into $\rm P=\lambda-4YZ$. Here $\delta$ is the value of the tetrabyte
-following the |lop_fixrx| instruction; its leading byte will either
+following the |lop_fixrx| instruction; its leading byte will be either
 0 or~1. If the leading byte is~1, $\delta$ should be treated as the
 {\it negative\/} number $(\delta\land\Hex{ffffff})-2^{\rm Z}$ when
 calculating the address~P. (The latter case arises only rarely,
@@ -1476,10 +1487,10 @@ trie_node *trie_search(t,s)
   Char *s;
 {
   register trie_node *tt=t;
-  register Char *p=s;
+  register unsigned char *p=(unsigned char*)s;
   while (1) {
     if (!isletter(*p) && !isdigit(*p)) {
-      terminator=p;@+return tt;
+      terminator=(Char*)p;@+return tt;
     }
     if (tt->mid) {
       tt=tt->mid;
@@ -2405,12 +2416,12 @@ for (j=0;j<10;j++) {
 @ We have already checked to make sure that the character constant is legal.
 
 @<Scan a character constant@>=
-acc.h=0, acc.l=*p;
+acc.h=0, acc.l=(unsigned char)*p;
 p+=2;
 goto constant_found;
 
 @ @<Scan a string constant@>=
-acc.h=0, acc.l=*p;
+acc.h=0, acc.l=(unsigned char)*p;
 if (*p=='\"') {
   p++; acc.l=0; err("*null string is treated as zero");
 @.null string...@>
@@ -2710,6 +2721,8 @@ if its predefined value has already been used.
   sym_node *new_link=DEFINED;
   acc=cur_loc;
   if (opcode==IS) {
+    if (val_stack[0].status==undefined) err("the operand is undefined");
+@.the operand is undefined@>
     cur_loc=val_stack[0].equiv;
     if (val_stack[0].status==reg_val) new_link=REGISTER;
   }@+else if (opcode==GREG) cur_loc.h=0, cur_loc.l=cur_greg, new_link=REGISTER;

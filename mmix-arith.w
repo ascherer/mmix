@@ -207,7 +207,7 @@ octabytes $q$ and $r$ such that $(2^{64}x+y)=qz+r$ and $0\le r<z$,
 given octabytes $x$, $y$, and~$z$, assuming that $x<z$.
 (If $x\ge z$, it simply sets $q=x$ and $r=y$.)
 The quotient~$q$ is returned by the subroutine;
-the remainder~$r$ is stored in |aux|.
+the remainder~$r$ is stored in~|aux|.
 @^multiprecision division@>
 
 @<Subr...@>=
