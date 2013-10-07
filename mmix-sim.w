@@ -58,7 +58,7 @@ count field of~rU may increase by~1 (modulo~$2^{47}$) for each instruction.
 @ To run this simulator, assuming \UNIX/ conventions, you say
 `\.{mmix} \<options> \.{progfile} \.{args...}',
 where \.{progfile} is an output of the \.{MMIXAL} assembler,
-\.{args...} is a sequence of optional command-line arguments passed
+\.{args...} is a sequence of optional command line arguments passed
 to the simulated program, and \<options> is any subset of the following:
 @^command line arguments@>
 
@@ -121,7 +121,7 @@ end of file when standard input has been defined in any other way.
 simulators, instead of actually doing a simulation.
 
 \bull \.{-?}\quad Print the ``\.{Usage}'' message, which summarizes
-the command-line options.
+the command line options.
 
 \smallskip\noindent
 The author recommends \.{-t2} \.{-l} \.{-L} for initial offline debugging.
@@ -134,7 +134,7 @@ even if \.{-i} and \.{-I} were not specified on the command line.
 
 @ In interactive mode, the user is prompted `\.{mmix>}' and a variety of
 @.mmix>@>
-commands can be typed online. Any command-line option can be given
+commands can be typed online. Any command line option can be given
 in response to such a prompt (including the `\.-' that begins the option),
 and the following operations are also available:
 
@@ -436,13 +436,13 @@ example below.)
 the global registers are initialized according to the \.{GREG}
 statements in the \.{MMIXAL} program, and \$255 is set to the
 numeric equivalent of~\.{Main}. Local register~\$0 is
-initially set to the number of {\it command-line arguments\/}; and
+initially set to the number of {\it command line arguments\/}; and
 @^command line arguments@>
 local register~\$1 points to the first such argument, which
-is always a pointer to the program name. Each command-line argument is a
+is always a pointer to the program name. Each command line argument is a
 pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1]$, and
 M$_8[\$0\ll3+\$1+8]$ is zero. (Register~\$1 will point to an octabyte in
-\.{Pool\_Segment}, and the command-line strings will be in that segment
+\.{Pool\_Segment}, and the command line strings will be in that segment
 too.) Location M[\.{Pool\_Segment}] will be the address of the first
 unused octabyte of the pool segment.
 
@@ -753,7 +753,7 @@ mem_node* new_mem()
 }
 
 @ Initially we start with a chunk for the pool segment, since
-the simulator will be putting command-line information there before
+the simulator will be putting command line information there before
 it runs the program.
 
 @<Initialize...@>=
@@ -1055,7 +1055,7 @@ G=zbyte;@+ L=0;
 for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
 inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 (ll+2*12)->tet=G<<24;
-g[255]=incr(aux,12*8); /* we will |UNSAVE| from here, to get going */
+g[255]=incr(aux,12*8); /* we will \.{UNSAVE} from here, to get going */
 
 @* Loading and printing source lines.
 The loaded program generally contains cross references to the lines
@@ -1819,10 +1819,10 @@ if (!l) panic("No room for the local registers");
 @.No room...@>
 cur_round=ROUND_NEAR;
 
-@ In operations like |INCH|, we want |z| to be the |yz| field,
+@ In operations like \.{INCH}, we want |z| to be the |yz| field,
 shifted left 48 bits. We also want |y| to be register~X, which has
-previously been placed in |b|; then |INCH| can be simulated as if
-it were |ADDU|.
+previously been placed in |b|; then \.{INCH} can be simulated as if
+it were \.{ADDU}.
 
 @<Set |z| as an immediate wyde@>=
 {
@@ -2193,7 +2193,7 @@ case CSWAP: case CSWAPI: w.l&=-8;@+ll=mem_find(w);
  }
  goto check_ld;
 
-@ The |GET| command is permissive, but |PUT| is restrictive.
+@ The \.{GET} command is permissive, but \.{PUT} is restrictive.
 
 @<Cases for ind...@>=
 case GET:@+if (yy!=0 || zz>=32) goto illegal_inst;
@@ -2267,7 +2267,7 @@ case POP:@+if (xx!=0 && xx<=L) y=l[(O+xx-1)&lring_mask];
  goto sync_L;
 
 @ To complete our simulation of \MMIX's register stack, we need
-to implement |SAVE| and |UNSAVE|.
+to implement \.{SAVE} and \.{UNSAVE}.
 
 @<Cases for ind...@>=
 case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
@@ -2620,7 +2620,7 @@ If so, the ropcode will actually be obeyed on the next fetch phase.
 
 @d RESUME_AGAIN 0 /* repeat the command in rX as if in location $\rm rW-4$ */
 @d RESUME_CONT 1 /* same, but substitute rY and rZ for operands */
-@d RESUME_SET 2 /* set r[X] to rZ */
+@d RESUME_SET 2 /* set register \$X to rZ */
 
 @<Prepare to perform a ropcode@>=
 {
@@ -2648,7 +2648,7 @@ if (rop==RESUME_SET) {
   z=g[rZ];
 }
 
-@ We don't want to count the |UNSAVE| that bootstraps the whole process.
+@ We don't want to count the \.{UNSAVE} that bootstraps the whole process.
 
 @<Update the clocks@>=
 if (sclock.l || sclock.h || !resuming) {
@@ -2916,7 +2916,7 @@ int main(argc,argv)
   return g[255].l; /* provide rudimentary feedback for non-interactive runs */
 }
 
-@ Here we process the command-line options; when we finish, |*cur_arg|
+@ Here we process the command line options; when we finish, |*cur_arg|
 should be the name of the object file to be loaded and simulated.
 
 We assume that |argv[0]| is never null. (The author believes strongly that
@@ -2945,7 +2945,7 @@ are harmless while interacting.
 @<Subr...@>=
 void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
 void scan_option(arg,usage)
-  char *arg; /* command-line argument (without the `\.-') */
+  char *arg; /* command line argument (without the `\.-') */
   bool usage; /* should we exit with usage note if unrecognized? */
 {
   register int k;
@@ -2982,7 +2982,7 @@ void scan_option(arg,usage)
  case 'D': @<Open a file for dumping binary output@>;@+return;
  default:@+if (usage) {
     fprintf(stderr,
-        "Usage: %s <options> progfile command-line-args...\n",myself);
+        "Usage: %s <options> progfile command line-args...\n",myself);
 @.Usage: ...@>
     for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
     exit(-1);
@@ -3253,8 +3253,8 @@ switch (cur_disp_mode) {
   }@+break;
 }
 
-@ Here we essentially simulate a |PUT| command, but we simply |break|
-if the |PUT| is illegal or privileged.
+@ Here we essentially simulate a \.{PUT} command, but we simply |break|
+if the \.{PUT} is illegal or privileged.
 
 @<Set |g[k]=val| only if permissible@>=
 if (k>=9 && k!=rI) {
@@ -3362,7 +3362,7 @@ void show_breaks(p)
   if (p->right) show_breaks(p->right);
 }
 
-@ We put pointers to the command-line strings in
+@ We put pointers to the command line strings in
 M$_8[\.{Pool\_Segment}+8*(k+1)]$ for $0\le k<|argc|$;
 the strings themselves are octabyte-aligned, starting at
 M$_8[\.{Pool\_Segment}+8*(|argc|+2)]$. The location of the first free
@@ -3399,7 +3399,9 @@ if (dump_file) {
 }
 
 @ The special option `\.{-D<filename>}' can be used to prepare binary files
-needed by the \MMIX-in-\MMIX\ simulator of Section 1.4.3\'{}. This option
+needed by the \MMIX-in-\MMIX\ simulator of Section 1.4.3\'{}. (See
+{\sl The Art of Computer Programming}, Volume~1, Fascicle~1.) This option
+@^Fascicle 1@>
 puts big-endian octa\-bytes into a given file; a location~$l$ is followed
 by one or more nonzero octabytes M$_8[l]$, M$_8[l+8]$, M$_8[l+16]$, \dots,
 followed by zero. The simulated simulator knows how to load programs

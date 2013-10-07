@@ -681,10 +681,10 @@ data assembled for each byte position; but the general rule ``do not load
 two things into the same byte'' is safest.)
 All locations that do not receive assembled data are initially zero,
 except that the loading routine will put register stack data into
-segment~3, and the operating system may put command-line data and
+segment~3, and the operating system may put command line data and
 debugger data into segment~2.
 (The rudimentary \MMIX\ operating system starts a program
-with the number of command-line arguments in~\$0, and a pointer to
+with the number of command line arguments in~\$0, and a pointer to
 the beginning of an array of argument pointers in~\$1.)
 Segments 2 and 3 should not get assembled data, unless the
 user is a true hacker who is willing to take the risk that such data
@@ -1129,7 +1129,7 @@ register Char *p,*q; /* the place where we're currently scanning */
 
 @ The next several subroutines are useful for preparing a listing of
 the assembled results. In such a listing, which the user can request
-with a command-line option, we fill the leftmost 19 columns with
+with a command line option, we fill the leftmost 19 columns with
 a representation of the output that has been assembled from the
 input in the buffer. Sometimes the assembled output requires
 more than one line, because we have room to output only a tetrabyte per line.

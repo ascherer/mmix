@@ -758,7 +758,7 @@ int_stages[ld]=int_stages[st]=int_stages[frem]=2;
 for (j=0;j<256;j++) stages[j]=int_stages[int_op[j]];
 
 @ The |int_op| conversion table is similar to the |internal_op| array of
-the \\{MMIX\_pipe} routine, but it replaces |divu| by |div|,
+the \\{MMIX\_run} routine, but it replaces |divu| by |div|,
 |fsub| by |fadd|, etc.
 
 @<Glob...@>=

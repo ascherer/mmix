@@ -24,9 +24,8 @@ A lot of subtle things can happen when instructions are executed in parallel.
 Therefore this simulator ranks among the most interesting and instructive
 programs in the author's experience. The author has tried his best to make
 everything correct \dots\ but the chances for error are great. Anyone who
-discovers a bug is therefore urged to report it as soon as possible to
-\.{knuth-bug@@cs.stanford.edu}; then the program will be as useful as
-possible. Rewards will be paid to bug-finders! (Except for bugs in version~0.)
+discovers a bug is therefore urged to report it as soon as possible;
+please see \.{http:/\kern-.1em/mmix.cs.hm.edu/bugs/} for instructions.
 
 It sort of boggles the mind when one realizes that the present program might
 someday be translated by a \CEE/~compiler for \MMIX\ and used to simulate
@@ -35,6 +34,8 @@ someday be translated by a \CEE/~compiler for \MMIX\ and used to simulate
 @ This high-performance prototype of \MMIX\ achieves its efficiency by
 means of ``pipelining,'' a technique of overlapping that is explained
 for the related \.{DLX} computer in Chapter~3 of Hennessy \char`\&\ Patterson's
+@^Hennessy, John LeRoy@>
+@^Patterson, David Andrew@>
 book {\sl Computer Architecture\/} (second edition). Other techniques
 such as ``dynamic scheduling'' and ``multiple issue,'' explained in
 Chapter~4 of that book, are used too.
@@ -202,7 +203,7 @@ bypass the library names here.
 
 @ The |MMIX_init()| routine should be called exactly once, after
 |MMIX_config()| has done its work but before the simulator starts to execute
-any programs. Then |MMIX_run| can be called as often as the user likes.
+any programs. Then |MMIX_run()| can be called as often as the user likes.
 
 @s octa int
 
@@ -3849,6 +3850,7 @@ fact does help us: We know that the flusher coroutine will not be
 aborted until it has run to completion.
 
 Some machines, such as the Alpha 21164, have an additional cache between
+@^Alpha computers@>
 the S-cache and memory, called the B-cache (the ``backup cache''). A B-cache
 could be simulated by extending the logic used here; but such extensions
 of the present program are left to the interested reader.
@@ -4347,7 +4349,7 @@ static octa phys_addr @,@,@[ARGS((octa,octa))@];
 static octa phys_addr(virt,trans)
   octa virt,trans;
 {@+octa t;
-  t=oandn(trans,page_mask); /* zero out the |ynp| fields of a PTE */
+  t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
   return oplus(t,oand(virt,page_mask));
 }
 
@@ -4993,7 +4995,7 @@ data->state=ld_ready;
 if (data->i==preld || data->i==prest) goto fin_ex;@+else sleep;
 
 @ If a |prest| instruction makes it to the hot seat,
-we have been assured by the user of |PREST| that the current
+we have been assured by the user of \.{PREST} that the current
 values of bytes in virtual addresses |data->y.o-(data->xx&-Dcache->bb)| through
 |data->y.o+(data->xx&(Dcache->bb-1))|
 are irrelevant. Hence we can pretend that we know they are zero. This
@@ -5419,7 +5421,7 @@ tail->noted=false;
 if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h)
   breakpoint_hit=true;
 
-@ The commands |RESUME|, |SAVE|, |UNSAVE|, and |SYNC| should not have
+@ The commands \.{RESUME}, \.{SAVE}, \.{UNSAVE}, and \.{SYNC} should not have
 nonzero bits in the positions defined here.
 
 @<Global...@>=
@@ -5652,7 +5654,7 @@ if (verbose&issue_bit) {
 
 @d RESUME_AGAIN 0 /* repeat the command in rX as if in location $\rm rW-4$ */
 @d RESUME_CONT 1 /* same, but substitute rY and rZ for operands */
-@d RESUME_SET 2 /* set r[X] to rZ */
+@d RESUME_SET 2 /* set register \$X to rZ */
 @d RESUME_TRANS 3 /* install $\rm(rY,rZ)$ into IT-cache or DT-cache,
         then |RESUME_AGAIN| */
 @d pack_bytes(a,b,c,d) ((((((unsigned)(a)<<8)+(b))<<8)+(c))<<8)+(d)

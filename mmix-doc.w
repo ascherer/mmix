@@ -89,7 +89,7 @@ have made significant contributions.
 @^Hennessy, John LeRoy@>
 @^Sites, Richard Lee@>
 
-@ A programmer's introduction to \MMIX\ appears in ``Volume~1 Fascicle~1,''
+@ A programmer's introduction to \MMIX\ appears in ``Volume~1, Fascicle~1,''
 @^Fascicle 1@>
 a booklet containing tutorial material that will ultimately appear in the
 fourth edition of {\sl The Art of Computer Programming}.
@@ -344,7 +344,7 @@ into $\mm_8[\$2+17]$.
 @.STB@>
 The least significant byte of register~X is stored into
 byte $\mm[\rY+\rZ]$ or $\mm[\rY+\zz]$. An integer overflow exception occurs if
-@.overflow@>
+@^overflow@>
 \$X is not between $-128$ and $+127$. (We will discuss overflow and other
 kinds of exceptions later.)
 
@@ -411,7 +411,7 @@ The sum $\rY+\rZ$ or $\rY+\zz$ is placed into register~X using signed,
 two's complement arithmetic.
 An integer overflow exception occurs if the sum is $\ge2^{63}$ or $<-2^{63}$.
 (We will discuss overflow and other kinds of exceptions later.)
-@.overflow@>
+@^overflow@>
 
 \bull\<ADDU \$X,\$Y,\0 `add unsigned'.\>
 @.ADDU@>
@@ -705,7 +705,7 @@ exclusive-or is used to combine the bits. Thus we obtain a matrix
 product over the field of two elements instead of a Boolean matrix product.
 This operation can be used to construct hash functions, among many other things.
 (The hash functions aren't bad, but they are not ``universal'' in the
-sense of exercise 6.4--72.)
+sense of {\sl Sorting and Searching}, exercise 6.4--72.)
 @^matrices of bits@>
 @^Boolean multiplication@>
 
@@ -2239,7 +2239,7 @@ and place the result in~rZZ\null. A~subsequent
 
 When a forced trap occurs on a store instruction because of memory protection
 failure, the settings of rYY and rZZ are undefined. They do not necessarily
-correspond to the virtual address rY and octabyte to be stored rZ
+correspond to the virtual address rY and the octabyte to be stored rZ
 that are supplied to a trip handler after a tripped store instruction,
 because a forced trap aborts its instruction as soon as possible.
 
@@ -2661,7 +2661,7 @@ by Advanced Micro Devices, in the processors of their Am29000 series---a
 family of computers whose instructions have essentially the
 format `OP~X~Y~Z' used by~\MMIX.]
 @^Ditzel, David Roger@>
-@^McClellan, Hubert Rae, Jr.@>
+@^McLellan, Hubert Rae, Jr.@>
 
 Limited versions of\/ \MMIX, having fewer registers, can also be envisioned. For
 example, we might have only 32 local registers $\l[0]$, $\l[1]$,
@@ -2710,7 +2710,7 @@ of the current value and the new value. (A~program should say
 \<SETL \$99,0 instead of \<PUT rL,100 when rL is known to be less than~100.)
 
 Impermissible \.{PUT} commands cause an illegal instruction interrupt,
-or (in the case of rI, rK, rQ, rT, rU, rV, and~rTT) a privileged
+or (in the case of rC, rI, rK, rQ, rT, rU, rV, and~rTT) a privileged
 operation interrupt.
 @^illegal instructions@>
 @^privileged operations@>

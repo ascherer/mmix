@@ -163,10 +163,12 @@ FILE *prog_file;
 
 @* Binary input to memory.
 When the program file was dumped by {\mc MMIX-SIM}, it
-has the simple format discussed in exercise 1.4.3$'$--20 of the \MMIX\ fascicle.
+has the simple format discussed in exercise 1.4.3$'$--20 of the \MMIX\ fascicle
+[{\sl The Art of Computer Programming}, Volume~1, Fascicle~1].
+@^Fascicle 1@>
 @^binary files@>
 @^segments@>
-In this case we assume that the user's program has text, data, pool, and stack
+We assume that such a program has text, data, pool, and stack
 segments, as in the conventions of that book.
 We load it into four
 $2^{32}$-byte pages of physical memory, one for each segment; page zero of

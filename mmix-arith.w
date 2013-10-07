@@ -12,6 +12,7 @@
 @s ff TeX
 @s bool normal @q unreserve a C++ keyword @>
 @s xor normal @q unreserve a C++ keyword @>
+@s bignum int
 
 @* Introduction. The subroutines below are used to simulate 64-bit \MMIX\
 arithmetic on an old-fashioned 32-bit computer---like the one the author
@@ -487,6 +488,8 @@ it is tiny and either (i)~it is inexact or (ii)~the underflow trap is enabled.
 The |fpack| routine sets |U_BIT| in |exceptions| if and only if the result is
 tiny, |X_BIT| if and only if the result is inexact.
 @^underflow@>
+@^tininess@>
+@^accuracy loss@>
 
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
