@@ -3595,6 +3595,7 @@ static void flush_cache(c,p,keep)
     else d=c->outbuf.data, c->outbuf.data=p->data, p->data=d;
     dd=c->outbuf.dirty, c->outbuf.dirty=p->dirty, p->dirty=dd;
     for (j=0;j<c->bb>>c->g;j++) p->dirty[j]=false;
+    c->outbuf.rank=c->bb; /* this many valid bytes */
     startup(&c->flusher,c->copy_out_time); /* will not be aborted */
 }
 
@@ -3857,7 +3858,7 @@ of the present program are left to the interested reader.
 
 @<Cases for control of special coroutines@>=
 case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
-  register int block_diff=Scache->bb-c->bb;
+  register int block_diff=Scache->bb-c->outbuf.rank;
   p=(cacheblock*)data->ptr_b;
  switch (data->state) {
   case 0:@+ if (Scache->lock) wait(1);
@@ -3870,7 +3871,9 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
     wait(Scache->access_time);
   case 2: @<Fill |Scache->inbuf| with clean memory data@>;
   case 3: @<Allocate a slot |p| in the S-cache@>;
-    if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>;         
+    if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
+    else@+for (j=0;j<Scache->bb>>3;j++) p->data[j]=c->outbuf.data[j];
+    for (j=0;j<Scache->bb>>Scache->g;j++) p->dirty[j]=false;
   case 4: copy_block(c,&(c->outbuf),Scache,p);
     hit_set=cache_addr(Scache,c->outbuf.tag);@+ use_and_fix(Scache,p);
                    /* |p| not moved */
@@ -4121,7 +4124,7 @@ case 10: goto terminate;
 }
 
 @ @<Cases 0 through 4, for the D-cache@>=
-case 0:@+ if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1);
+case 0:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
   startup(&Dcache->reader[j],Dcache->access_time);
   set_lock(self,Dcache->lock);
   i=j=0;
@@ -4144,7 +4147,7 @@ case 2:@+ if (!clean_lock) goto done; /* premature termination */
   if (Dcache->flusher.next) wait(1);
   if (data->i!=sync) goto Sprep;
   data->state=3;
-case 3:@+ if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1);
+case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
   startup(&Dcache->reader[j],Dcache->access_time);
   set_lock(self,Dcache->lock);
   i=data->y.o.h, j=data->y.o.l;
@@ -4155,7 +4158,7 @@ Dclean_inc: j++;
     wait(Dcache->access_time);
   }
   goto Dclean_loop;
-case 4:@+ if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1);
+case 4:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
   startup(&Dcache->reader[j],Dcache->access_time);
   set_lock(self,Dcache->lock);
   p=cache_search(Dcache,data->z.o);
@@ -4602,7 +4605,7 @@ case write_from_wbuf:
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
       wait(1); /* data too raw */
     if (!Dcache) goto mem_direct; /* not cached */
-    if (Dcache->lock || (j=get_reader(Dcache)<0)) wait(1); /* D-cache busy */
+    if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1); /* D-cache busy */
     startup(&Dcache->reader[j],Dcache->access_time);
     @<Write the data into the D-cache and set |state=4|,
                 if there's a cache hit@>;
@@ -4624,12 +4627,15 @@ register cacheblock *p,*q;
 D-cache (unless it hits in the D-cache), it will go into a secondary cache.
 
 @<Handle write-around when writing to the D-cache@>=
+if (Dcache->filler.next) goto write_restart;
+if ((Scache&&Scache->lock) || (!Scache&&mem_lock)) goto write_restart;
 if (Dcache->flusher.next) wait(1);
 Dcache->outbuf.tag.h=write_head->addr.h;
 Dcache->outbuf.tag.l=write_head->addr.l&(-Dcache->bb);
 for (j=0;j<Dcache->bb>>Dcache->g;j++) Dcache->outbuf.dirty[j]=false;
 Dcache->outbuf.data[(write_head->addr.l&(Dcache->bb-1))>>3]=write_head->o;
 Dcache->outbuf.dirty[(write_head->addr.l&(Dcache->bb-1))>>Dcache->g]=true;
+Dcache->outbuf.rank=Dcache->gg; /* this many valid bytes */
 set_lock(self,wbuf_lock);
 startup(&Dcache->flusher,Dcache->copy_out_time);
 data->state=5;@+ wait(Dcache->copy_out_time);

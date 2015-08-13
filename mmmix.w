@@ -272,8 +272,8 @@ inst_ptr.o=mem_read(incr(cur_loc,-8*14)); /* \.{Main} */
 inst_ptr.p=NULL;
 cur_loc.h=0x60000000;
 g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
-cur_dat.l=0x90;
-if (mem_read(cur_dat).h) inst_ptr.o=cur_dat; /* start at |0x90| if nonzero */
+cur_dat.l=0xf0;
+if (mem_read(cur_dat).h) inst_ptr.o=cur_dat; /* start at |0xf0| if nonzero */
 head->inst=(UNSAVE<<24)+255, tail--; /* prefetch a fabricated command */
 head->loc=incr(inst_ptr.o,-4); /* in case the \.{UNSAVE} is interrupted */
 g[rT].o.h=0x80000005, g[rTT].o.h=0x80000006;

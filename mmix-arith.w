@@ -855,12 +855,12 @@ Some subtleties need to be observed here, in order to
 prevent the sticky bit from being shifted left. If we did not
 shift |yf| left~1 before shifting |zf| to the right, an incorrect
 answer would be obtained in certain cases---for example, if
-$|yf|=2^{54}$, $|zf|=2^{54}+2^{53}-1$, $d=52$.
+$|yf|=2^{54}$, $|zf|=2^{54}+2^{53}-4$, $d=52$.
 
 @<Adjust for difference in exponents@>=
 {
   if (d<=2) zf=shift_right(zf,d,1); /* exact result */
-  else if (d>53) zf.h=0, zf.l=1; /* tricky but OK */
+  else if (d>54) zf.h=0, zf.l=1; /* tricky but OK */
   else {
     if (ys!=zs) d--,xe--,yf=shift_left(yf,1);
     o=zf;
