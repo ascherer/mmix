@@ -23,9 +23,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 'ultimate' editions of 'The Art of Computer Programming' by Don Knuth.
 
 %prep
-mkdir -p %{name}-%{version}
-cd %{name}-%{version}
-tar xzvf %{SOURCE0}
+%setup -c -q
 sed "s/CFLAGS = -g/CFLAGS = -g -Wall/" -i Makefile
 cp -a %{SOURCE1} .
 cp -a %{SOURCE2} .
@@ -67,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Wed Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Update mmix.spec by using %setup more properly
 * Thu Oct 07 2013 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 10/2013 source drop
 * Thu Sep 26 2013 Andreas Scherer <andreas_tex@freenet.de>
