@@ -1,22 +1,22 @@
 Name: mmix
-Summary: The MMIX system
-Version: 20131007
+Version: 20131017
 Release: 1
 Packager: Andreas Scherer <andreas@komputer.de>
+Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
+URL: http://mmix.cs.hm.edu/
 Group: Productivity/Development
-URL: http://www-cs-faculty.stanford.edu/~knuth/programs
-BuildRequires:
 Distribution: Kubuntu 12.04 (i386)
-Source0: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildArch: i386
+BuildRequires:
+Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
 Source3: mmixal.ch
 Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildArch: i386
 
 %description
 Here is MMIX, a 64-bit computer that will totally replace MIX in the
@@ -65,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Sat Aug 15 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Provide consistent information in URL and Source0
 * Wed Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Update mmix.spec by using %setup more properly
 * Thu Oct 07 2013 Andreas Scherer <andreas_tex@freenet.de>
