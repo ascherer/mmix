@@ -94,7 +94,7 @@ case 'l': printf("%s",lhs);@+break;
 @x
     }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
               command_buf[0]!='%')
-      if (command_buf[0]==' ') printf(command_buf);
+      if (command_buf[0]==' ') printf("%s",command_buf);
       else ready=true;
 @y
     }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
