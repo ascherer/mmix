@@ -2657,7 +2657,7 @@ if (sclock.l || sclock.h || !resuming) {
   if ((!(loc.h&sign_bit)||(g[rU].h&0x8000)) &&@|
     ((op&(g[rU].h>>16))==(g[rU].h>>24))) {
       g[rU].l++;
-      if (g[rU].l==0)@+{@+g[rU].h++;@+if (g[rU].h&0x7fff==0) g[rU].h-=0x8000;@+}
+      if (g[rU].l==0)@+{@+g[rU].h++;@+if ((g[rU].h&0x7fff)==0) g[rU].h-=0x8000;@+}
   } /* usage counter counts matched instructions simulated */
   if (g[rI].l<=info[op].oops && g[rI].l && g[rI].h==0) tracing=breakpoint=true;
   g[rI]=incr(g[rI],-info[op].oops); /* interval $\upsilon$ timer counts down */
