@@ -1,13 +1,13 @@
 Name: mmix
 Summary: The MMIX system
-Version: 20110831
-Release: 2
+Version: 20131007
+Release: 1
 Packager: Andreas Scherer <andreas@komputer.de>
 License: Copyright 1999 Donald E. Knuth
 Group: Productivity/Development
 URL: http://www-cs-faculty.stanford.edu/~knuth/programs
 BuildRequires:
-Distribution: Kubuntu 10.04 (i386)
+Distribution: Kubuntu 12.04 (i386)
 Source0: %{name}-%{version}.tar.gz
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
@@ -67,6 +67,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Thu Oct 07 2013 Andreas Scherer <andreas_tex@freenet.de>
+- Update for 10/2013 source drop
+* Thu Sep 26 2013 Andreas Scherer <andreas_tex@freenet.de>
+- Update for 09/2013 source drop
 * Wed Nov 30 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Eliminate all GCC warnings
 * Tue Sep 13 2011 Andreas Scherer <andreas_tex@freenet.de>
