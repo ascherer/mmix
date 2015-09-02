@@ -1,6 +1,6 @@
 Name: mmix
 Version: 20131017
-Release: 1
+Release: 2
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
@@ -17,6 +17,10 @@ Source3: mmixal.ch
 Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
+Patch0: 0001-Fix-intermediate-bugs.patch
+Patch1: 0004-Fix-intermediate-bugs.patch
+Patch2: 0005-Fix-another-bug.patch
+Patch3: 0006-Update-information-about-documentation.patch
 
 %description
 Here is MMIX, a 64-bit computer that will totally replace MIX in the
@@ -31,6 +35,10 @@ cp -a %{SOURCE3} .
 cp -a %{SOURCE4} .
 cp -a %{SOURCE5} .
 cp -a %{SOURCE6} .
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 make doc all mmotype mmmix
@@ -65,6 +73,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Wed Sep 02 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Build from latest release plus intermediate fixes
 * Sat Aug 15 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Provide consistent information in URL and Source0
 * Wed Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de>
