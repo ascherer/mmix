@@ -30,6 +30,24 @@ unsigned int trace_threshold; /* each instruction should be traced this many tim
 @z
 
 @x
+(The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
+which should have just been created by {\mc ABSTIME}\kern.05em;
+{\mc ABSTIME} is
+a trivial program that computes the value of the standard library function
+|time(NULL)|. We assume that this number, which is the number of seconds in
+@y
+(The macro \.{ABSTIME} will be set to a numeric value at compilation-time in
+\.{Makefile}. We assume that this number, which is the number of seconds in
+@z
+
+@x
+@d VERSION 1 /* version of the \MMIX\ architecture that we support */
+@y
+@d ABSTIME /* number of seconds in “the epoch” */
+@d VERSION 1 /* version of the \MMIX\ architecture that we support */
+@z
+
+@x
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
  round_mode=(y.l? (int)y.l: cur_round);@+goto store_fx;
@@ -61,6 +79,11 @@ case 'l': printf(lhs);@+break;
 case 's': printf("%s",special_name[zz]);@+break;
 case '?': p++;@+if (z.l) printf("%c%d",*p,z.l);@+break;
 case 'l': printf("%s",lhs);@+break;
+@z
+
+@x
+#include "abstime.h"
+@y
 @z
 
 @x
@@ -103,6 +126,7 @@ case 'l': printf("%s",lhs);@+break;
       else ready=true;
     }
 @z
+
 @x
     if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
     for (j=val.l; j<G; j++) g[j]=zero_octa;
