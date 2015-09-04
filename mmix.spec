@@ -21,6 +21,7 @@ Patch0: 0001-Fix-intermediate-bugs.patch
 Patch1: 0004-Fix-intermediate-bugs.patch
 Patch2: 0005-Fix-another-bug.patch
 Patch3: 0006-Update-information-about-documentation.patch
+Patch4: 0010-Fix-another-compiler-warning.patch
 
 %description
 Here is MMIX, a 64-bit computer that will totally replace MIX in the
@@ -28,7 +29,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %setup -c -q
-sed "s/CFLAGS = -g/CFLAGS = -g -Wall/" -i Makefile
+sed "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
 cp -a %{SOURCE1} .
 cp -a %{SOURCE2} .
 cp -a %{SOURCE3} .
@@ -39,6 +40,7 @@ cp -a %{SOURCE6} .
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 make doc all mmotype mmmix
