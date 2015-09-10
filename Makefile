@@ -74,10 +74,9 @@ clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
 
 .SECONDEXPANSION:
-mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) abstime
-	./abstime > abstime.h
+mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
+	sed "s/#define ABSTIME/& `date +%s`/" -i $<
 	$(CC) $(CFLAGS) -c $<
-	rm abstime.h
 
 mmix-config.o: mmix-pipe.o
 
