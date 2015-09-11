@@ -1,6 +1,6 @@
 Name: mmix
 Version: 20131017
-Release: 2
+Release: 3
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
@@ -51,7 +51,7 @@ ps2pdf mmix-sim-intro.ps mmix-sim-intro.pdf
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr/bin
-cp mmix mmixal abstime mmotype mmmix $RPM_BUILD_ROOT/usr/bin
+cp mmix mmixal mmotype mmmix $RPM_BUILD_ROOT/usr/bin
 mkdir -p $RPM_BUILD_ROOT/usr/share/mmix
 cp *.mms *.mmconfig *.mmix $RPM_BUILD_ROOT/usr/share/mmix
 mkdir -p $RPM_BUILD_ROOT/usr/share/doc/mmix
@@ -64,7 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755, root, root) /usr/bin/mmix
 %attr(755, root, root) /usr/bin/mmixal
-%attr(755, root, root) /usr/bin/abstime
 %attr(755, root, root) /usr/bin/mmotype
 %attr(755, root, root) /usr/bin/mmmix
 /usr/share/mmix
@@ -75,6 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 
 %changelog
+* Fri Sep 11 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Do not install the utility program 'abstime'
 * Wed Sep 02 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Build from latest release plus intermediate fixes
 * Sat Aug 15 2015 Andreas Scherer <andreas_tex@freenet.de>
