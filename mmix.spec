@@ -9,7 +9,7 @@ Group: Productivity/Development
 Distribution: Kubuntu 12.04 (i386)
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: i386
-BuildRequires:
+#BuildRequires:
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
@@ -29,51 +29,49 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %setup -c -q
-sed "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
-cp -a %{SOURCE1} .
-cp -a %{SOURCE2} .
-cp -a %{SOURCE3} .
-cp -a %{SOURCE4} .
-cp -a %{SOURCE5} .
-cp -a %{SOURCE6} .
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
+%{__cp} -a %{SOURCE1} .
+%{__cp} -a %{SOURCE2} .
+%{__cp} -a %{SOURCE3} .
+%{__cp} -a %{SOURCE4} .
+%{__cp} -a %{SOURCE5} .
+%{__cp} -a %{SOURCE6} .
+%patch -P 0 1 2 3 4 -p1
 
 %build
-make doc all mmotype mmmix
-ps2pdf mmixal-intro.ps mmixal-intro.pdf
-ps2pdf mmix-doc.ps mmix-doc.pdf
-ps2pdf mmix-sim-intro.ps mmix-sim-intro.pdf
+%{__make} doc all mmotype mmmix
+%{__ps2pdf} mmixal-intro.ps mmixal-intro.pdf
+%{__ps2pdf} mmix-doc.ps mmix-doc.pdf
+%{__ps2pdf} mmix-sim-intro.ps mmix-sim-intro.pdf
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-cp mmix mmixal mmotype mmmix $RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/share/mmix
-cp *.mms *.mmconfig *.mmix $RPM_BUILD_ROOT/usr/share/mmix
-mkdir -p $RPM_BUILD_ROOT/usr/share/doc/mmix
-cp *.pdf $RPM_BUILD_ROOT/usr/share/doc/mmix
+%{__rm} -rf $RPM_BUILD_ROOT
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/bin
+%{__cp} mmix mmixal mmotype mmmix $RPM_BUILD_ROOT/usr/bin
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/mmix
+%{__cp} *.mms *.mmconfig *.mmix $RPM_BUILD_ROOT/usr/share/mmix
+%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/doc/mmix
+%{__cp} *.pdf $RPM_BUILD_ROOT/usr/share/doc/mmix
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755, root, root) /usr/bin/mmix
-%attr(755, root, root) /usr/bin/mmixal
-%attr(755, root, root) /usr/bin/mmotype
-%attr(755, root, root) /usr/bin/mmmix
-/usr/share/mmix
-%doc /usr/share/doc/mmix
+%attr(755, root, root) %{_usr}/bin/mmix
+%attr(755, root, root) %{_usr}/bin/mmixal
+%attr(755, root, root) %{_usr}/bin/mmotype
+%attr(755, root, root) %{_usr}/bin/mmmix
+%{_usr}/share/mmix
+%doc %{_usr}/share/doc/mmix
 
 %post
 
 %postun
 
 %changelog
+* Thu Oct 29 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Fully parametrized specfile
 * Fri Sep 11 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Do not install the utility program 'abstime'
 * Wed Sep 02 2015 Andreas Scherer <andreas_tex@freenet.de>
