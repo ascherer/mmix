@@ -1,6 +1,8 @@
+%bcond_without tex
+
 Name: mmix
 Version: 20131017
-Release: 3
+Release: 4
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
@@ -39,37 +41,46 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %patch -P 0 1 2 3 4 -p1
 
 %build
-%{__make} doc all mmotype mmmix
+%{__make} all mmotype mmmix
+%if %{with tex}
+%{__make} doc
 %{__ps2pdf} mmixal-intro.ps mmixal-intro.pdf
 %{__ps2pdf} mmix-doc.ps mmix-doc.pdf
 %{__ps2pdf} mmix-sim-intro.ps mmix-sim-intro.pdf
+%endif
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/bin
-%{__cp} mmix mmixal mmotype mmmix $RPM_BUILD_ROOT/usr/bin
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/mmix
-%{__cp} *.mms *.mmconfig *.mmix $RPM_BUILD_ROOT/usr/share/mmix
-%{__mkdir_p} $RPM_BUILD_ROOT/usr/share/doc/mmix
-%{__cp} *.pdf $RPM_BUILD_ROOT/usr/share/doc/mmix
+%{__mkdir_p} $RPM_BUILD_ROOT%{_bindir}
+%{__cp} mmix mmixal mmotype mmmix $RPM_BUILD_ROOT%{_bindir}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/%{name}
+%{__cp} *.mms *.mmconfig *.mmix $RPM_BUILD_ROOT%{_datadir}/%{name}
+%if %{with tex}
+%{__mkdir_p} $RPM_BUILD_ROOT%{_docdir}/%{name}
+%{__cp} *.pdf $RPM_BUILD_ROOT%{_docdir}/%{name}
+%endif
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755, root, root) %{_usr}/bin/mmix
-%attr(755, root, root) %{_usr}/bin/mmixal
-%attr(755, root, root) %{_usr}/bin/mmotype
-%attr(755, root, root) %{_usr}/bin/mmmix
-%{_usr}/share/mmix
-%doc %{_usr}/share/doc/mmix
+%attr(755,root,root) %{_bindir}/mmix
+%attr(755,root,root) %{_bindir}/mmixal
+%attr(755,root,root) %{_bindir}/mmotype
+%attr(755,root,root) %{_bindir}/mmmix
+%{_datadir}/%{name}
+%if %{with tex}
+%doc %{_docdir}/%{name}
+%endif
 
 %post
 
 %postun
 
 %changelog
+* Thu Nov 26 2015 Andreas Scherer <andreas_tex@freenet.de>
+- Conditional Build Stuff
 * Thu Oct 29 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Fully parametrized specfile
 * Fri Sep 11 2015 Andreas Scherer <andreas_tex@freenet.de>
@@ -78,9 +89,9 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 - Build from latest release plus intermediate fixes
 * Sat Aug 15 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Provide consistent information in URL and Source0
-* Wed Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de>
+* Mon Jul 06 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Update mmix.spec by using %setup more properly
-* Thu Oct 07 2013 Andreas Scherer <andreas_tex@freenet.de>
+* Mon Oct 07 2013 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 10/2013 source drop
 * Thu Sep 26 2013 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 09/2013 source drop
@@ -100,7 +111,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 - Update for 07/2011 source drop
 * Wed Jun 08 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 06/2011 source drop
-* Wed May 28 2011 Andreas Scherer <andreas_tex@freenet.de>
+* Sat May 28 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 04/2011 source drop
 * Wed Jan 19 2011 Andreas Scherer <andreas_tex@freenet.de>
 - Update for 03/2010 source drop
