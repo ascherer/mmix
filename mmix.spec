@@ -1,4 +1,5 @@
 %bcond_without tex
+%bcond_without patches
 
 Name: mmix
 Version: 20131017
@@ -21,11 +22,13 @@ Source3: mmixal.ch
 Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
+%if %{with patches}
 Patch0: 0001-Fix-intermediate-bugs.patch
 Patch1: 0004-Fix-intermediate-bugs.patch
 Patch2: 0005-Fix-another-bug.patch
 Patch3: 0006-Update-information-about-documentation.patch
 Patch4: 0010-Fix-another-compiler-warning.patch
+%endif
 
 %description
 Here is MMIX, a 64-bit computer that will totally replace MIX in the
@@ -33,14 +36,16 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %setup -c -q
-%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
 %{__cp} -a %{SOURCE1} .
 %{__cp} -a %{SOURCE2} .
 %{__cp} -a %{SOURCE3} .
 %{__cp} -a %{SOURCE4} .
 %{__cp} -a %{SOURCE5} .
 %{__cp} -a %{SOURCE6} .
+%if %{with patches}
+%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
 %patch -P 0 1 2 3 4 -p1
+%endif
 
 %build
 %{__make} all mmotype mmmix
