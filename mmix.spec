@@ -76,9 +76,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %attr(755,root,root) %{_bindir}/mmotype
 %attr(755,root,root) %{_bindir}/mmmix
 %{_datadir}/%{name}
-%if %{with tex}
-%doc %{_docdir}/%{name}
-%endif
+%{?with_tex:%doc %{_docdir}/%{name}}
 
 %post
 
