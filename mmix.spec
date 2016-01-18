@@ -23,11 +23,11 @@ Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
 %if %{with patches}
-Patch0: 0001-Fix-intermediate-bugs.patch
-Patch1: 0004-Fix-intermediate-bugs.patch
-Patch2: 0005-Fix-another-bug.patch
-Patch3: 0006-Update-information-about-documentation.patch
-Patch4: 0010-Fix-another-compiler-warning.patch
+Patch1: 0001-Fix-intermediate-bugs.patch
+Patch4: 0004-Fix-intermediate-bugs.patch
+Patch5: 0005-Fix-another-bug.patch
+Patch6: 0006-Update-information-about-documentation.patch
+Patch10: 0010-Fix-another-compiler-warning.patch
 %endif
 
 %description
@@ -44,7 +44,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{__cp} -a %{SOURCE6} .
 %if %{with patches}
 %{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
-%patch -P 0 1 2 3 4 -p1
+%autopatch -p1 -v
 %endif
 
 %build
