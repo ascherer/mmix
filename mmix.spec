@@ -42,9 +42,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{__cp} -a %{SOURCE4} .
 %{__cp} -a %{SOURCE5} .
 %{__cp} -a %{SOURCE6} .
-%if %{with patches}
-%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
-%endif
+%{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
 %build
 %{__make} all mmotype mmmix
