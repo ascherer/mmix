@@ -35,7 +35,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 'ultimate' editions of 'The Art of Computer Programming' by Don Knuth.
 
 %prep
-%setup -c -q
+%autosetup -c %{!?with_patches:-N}
 %{__cp} -a %{SOURCE1} .
 %{__cp} -a %{SOURCE2} .
 %{__cp} -a %{SOURCE3} .
@@ -44,7 +44,6 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{__cp} -a %{SOURCE6} .
 %if %{with patches}
 %{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
-%autopatch -p1 -v
 %endif
 
 %build
