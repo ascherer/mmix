@@ -43,9 +43,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{__make} all mmotype mmmix
 %if %{with tex}
 %{__make} doc
-%{__ps2pdf} mmixal-intro.ps mmixal-intro.pdf
-%{__ps2pdf} mmix-doc.ps mmix-doc.pdf
-%{__ps2pdf} mmix-sim-intro.ps mmix-sim-intro.pdf
+%{perl:for (qw(al-intro -doc -sim-intro)) { print "%{__ps2pdf} mmix$_.ps\n" }}
 %endif
 
 %install
@@ -63,10 +61,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/mmix
-%attr(755,root,root) %{_bindir}/mmixal
-%attr(755,root,root) %{_bindir}/mmotype
-%attr(755,root,root) %{_bindir}/mmmix
+%{perl:for (qw(mmix mmixal mmotype mmmix)) { print "%attr(755,root,root) %{_bindir}/$_\n" }}
 %{_datadir}/%{name}
 %{?with_tex:%doc %{_docdir}/%{name}}
 
