@@ -36,12 +36,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %autosetup -c %{!?with_patches:-N}
-%{__cp} -a %{SOURCE1} .
-%{__cp} -a %{SOURCE2} .
-%{__cp} -a %{SOURCE3} .
-%{__cp} -a %{SOURCE4} .
-%{__cp} -a %{SOURCE5} .
-%{__cp} -a %{SOURCE6} .
+%{perl:for (1..6) { print "%{__cp} -a %{SOURCE$_} .\n" }}
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
 %build
