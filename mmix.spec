@@ -35,7 +35,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 'ultimate' editions of 'The Art of Computer Programming' by Don Knuth.
 
 %prep
-%autosetup -c %{!?with_patches:-N}
+%autosetup -c %{!?with_patches:-N} -S git_am
 %{perl:for (1..6) { print "%{__cp} -a %{SOURCE$_} .\n" }}
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
