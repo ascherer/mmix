@@ -36,7 +36,11 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %autosetup -c %{!?with_patches:-N} -S git
-%{perl:for (1..6) { print "%{__cp} -a %{SOURCE$_} .\n" }}
+%if %{_vendor} == "debbuild"
+%{perl:for (1..6) { print "%{__cp} %{S:$_} .\n" }}
+%else
+%{lua:for i=1,6 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
+%endif
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
 %build
@@ -61,7 +65,10 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %files
 %defattr(644,root,root,755)
-%{perl:for (qw(mmix mmixal mmotype mmmix)) { print "%attr(755,root,root) %{_bindir}/$_\n" }}
+%attr(755,root,root) %{_bindir}/mmix
+%attr(755,root,root) %{_bindir}/mmixal
+%attr(755,root,root) %{_bindir}/mmotype
+%attr(755,root,root) %{_bindir}/mmmix
 %{_datadir}/%{name}
 %{?with_tex:%doc %{_docdir}/%{name}}
 
