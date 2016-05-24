@@ -10,9 +10,9 @@ License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
 Group: Productivity/Development
-Distribution: Kubuntu 12.04 (i386)
+Distribution: Kubuntu 16.04 (x86_64)
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildArch: i386
+BuildArch: amd64
 #BuildRequires:
 
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
