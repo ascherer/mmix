@@ -13,7 +13,9 @@ Group: Productivity/Development
 Distribution: Kubuntu 16.04 (x86_64)
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: amd64
-#BuildRequires:
+%if %{with tex}
+BuildRequires: texlive
+%endif
 
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
 Source1: mmix-sim.ch
