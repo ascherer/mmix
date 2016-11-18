@@ -2084,13 +2084,13 @@ int register_truth(o,op)
 the contents of register~X on the \.{CS} operations.
 
 @<Cases for ind...@>=
-case CSN: case CSNI: case CSZ: case CSZI:@/
-case CSP: case CSPI: case CSOD: case CSODI:@/
-case CSNN: case CSNNI: case CSNZ: case CSNZI:@/
-case CSNP: case CSNPI: case CSEV: case CSEVI:@/
-case ZSN: case ZSNI: case ZSZ: case ZSZI:@/
-case ZSP: case ZSPI: case ZSOD: case ZSODI:@/
-case ZSNN: case ZSNNI: case ZSNZ: case ZSNZI:@/
+case CSN: case CSNI: case CSZ: case CSZI:@/@t\4@>
+case CSP: case CSPI: case CSOD: case CSODI:@/@t\4@>
+case CSNN: case CSNNI: case CSNZ: case CSNZI:@/@t\4@>
+case CSNP: case CSNPI: case CSEV: case CSEVI:@/@t\4@>
+case ZSN: case ZSNI: case ZSZ: case ZSZI:@/@t\4@>
+case ZSP: case ZSPI: case ZSOD: case ZSODI:@/@t\4@>
+case ZSNN: case ZSNNI: case ZSNZ: case ZSNZI:@/@t\4@>
 case ZSNP: case ZSNPI: case ZSEV: case ZSEVI:@/
  x=register_truth(y,op)? z: b;@+goto store_x;
 
@@ -2098,13 +2098,13 @@ case ZSNP: case ZSNPI: case ZSEV: case ZSEVI:@/
 We get to do it one more time. Happiness!
 
 @<Cases for ind...@>=
-case BN: case BNB: case BZ: case BZB:@/
-case BP: case BPB: case BOD: case BODB:@/
-case BNN: case BNNB: case BNZ: case BNZB:@/
-case BNP: case BNPB: case BEV: case BEVB:@/
-case PBN: case PBNB: case PBZ: case PBZB:@/
-case PBP: case PBPB: case PBOD: case PBODB:@/
-case PBNN: case PBNNB: case PBNZ: case PBNZB:@/
+case BN: case BNB: case BZ: case BZB:@/@t\4@>
+case BP: case BPB: case BOD: case BODB:@/@t\4@>
+case BNN: case BNNB: case BNZ: case BNZB:@/@t\4@>
+case BNP: case BNPB: case BEV: case BEVB:@/@t\4@>
+case PBN: case PBNB: case PBZ: case PBZB:@/@t\4@>
+case PBP: case PBPB: case PBOD: case PBODB:@/@t\4@>
+case PBNN: case PBNNB: case PBNZ: case PBNZB:@/@t\4@>
 case PBNP: case PBNPB: case PBEV: case PBEVB:@/
  x.l=register_truth(b,op);
  if (x.l) {
@@ -2998,7 +2998,7 @@ bool interrupt; /* has the user interrupted the simulation recently? */
 bool profiling; /* should we print the profile at the end? */
 FILE *fake_stdin; /* file substituted for the simulated \.{StdIn} */
 FILE *dump_file; /* file used for binary dumps */
-char *usage_help[]={@/
+char *usage_help[]={@|
 " with these options: (<n>=decimal number, <x>=hex number)\n",@|
 "-t<n> trace each instruction the first n times\n",@|
 "-e<x> trace each instruction with an exception matching x\n",@|
@@ -3014,9 +3014,9 @@ char *usage_help[]={@/
 "-b<n> change the buffer size for source lines\n",@|
 "-c<n> change the cyclic local register ring size\n",@|
 "-f<filename> use given file to simulate standard input\n",@|
-"-D<filename> dump a file for use by other simulators\n",@|
+"-D<filename> dump a file for use by other simulators\n",@+
 ""};
-char *interactive_help[]={@/
+char *interactive_help[]={@|
 "The interactive commands are:\n",@|
 "<return>  trace one instruction\n",@|
 "n         trace one instruction\n",@|
@@ -3042,7 +3042,7 @@ char *interactive_help[]={@/
 "B         show all current breakpoints and tracepoints\n",@|
 "i<file>   insert commands from file\n",@|
 "-<option> change a tracing/listing/profile option\n",@|
-"-?        show the tracing/listing/profile options  \n",@|
+"-?        show the tracing/listing/profile options  \n",@+
 ""};
 
 @ @<Open a file for simulated standard input@>=
