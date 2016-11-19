@@ -103,6 +103,12 @@ case 'l': printf("%s",lhs);@+break;
 @z
 
 @x
+  interrupt=true;
+@y
+  interrupt=true; (void) n;
+@z
+
+@x
   case 'h':@+ for (k=0;interactive_help[k][0];k++) printf(interactive_help[k]);
 @y
   case 'h':@+ for (k=0;interactive_help[k][0];k++) printf("%s",interactive_help[k]);
