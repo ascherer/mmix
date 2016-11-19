@@ -2,8 +2,8 @@
 %bcond_without patches
 
 Name: mmix
-Version: 20131017
-Release: 4
+Version: 20160804
+Release: 1
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
@@ -25,11 +25,7 @@ Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
 %if %{with patches}
-Patch1: 0001-Fix-intermediate-bugs.patch
-Patch4: 0004-Fix-intermediate-bugs.patch
-Patch5: 0005-Fix-another-bug.patch
-Patch6: 0006-Update-information-about-documentation.patch
-Patch10: 0010-Fix-another-compiler-warning.patch
+Patch1: 0001-Update-initial-documentation.patch
 Patch29: 0029-DRY-up-the-Makefile.patch
 %endif
 
