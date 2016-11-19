@@ -4,6 +4,12 @@
 @z
 
 @x
+  @<Local variables@>;
+@y
+  @<Local variables@>; (void)breakpoint_hit;
+@z
+
+@x
  cease:;
 @y
 @z
