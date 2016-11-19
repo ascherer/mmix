@@ -205,17 +205,32 @@ bypass the library names here.
 |MMIX_config()| has done its work but before the simulator starts to execute
 any programs. Then |MMIX_run()| can be called as often as the user likes.
 
+The |MMIX_silent()| routine is a noninteractive variant of |MMIX_run()|:
+It will return the value of register |g[255].l| when executing a
+\.{TRAP} \.{0,Halt,0} instruction.
+
 @s octa int
 
 @<External proto...@>=
 Extern void MMIX_init @,@,@[ARGS((void))@];
 Extern void MMIX_run @,@,@[ARGS((int cycs, octa breakpoint))@];
+Extern int MMIX_silent @,@,@[ARGS((void))@];
 
 @ @<External routines@>=
 void MMIX_init()
 {
   register int i,j;
   @<Initialize everything@>;
+}
+@#
+int MMIX_silent()
+{
+  octa breakpoint;
+  @<Local variables@>;
+  while (true) {
+    @<Perform one machine cycle@>;
+    if (halted) return specval(&g[255]).o.l;
+  }
 }
 @#
 void MMIX_run(cycs,breakpoint)
@@ -3595,7 +3610,7 @@ static void flush_cache(c,p,keep)
     else d=c->outbuf.data, c->outbuf.data=p->data, p->data=d;
     dd=c->outbuf.dirty, c->outbuf.dirty=p->dirty, p->dirty=dd;
     for (j=0;j<c->bb>>c->g;j++) p->dirty[j]=false;
-    c->outbuf.rank=c->bb; /* this many valid bytes */
+    p->rank=c->bb; /* this many valid bytes */
     startup(&c->flusher,c->copy_out_time); /* will not be aborted */
 }
 
@@ -3636,7 +3651,7 @@ static cacheblock* alloc_slot(c,alf)
   register cacheblock *p,*q;
   if (cache_search(c,alf)) return NULL;
   if (c->flusher.next && c->outbuf.tag.h==alf.h &&
-        !((c->outbuf.tag.l^alf.l)&c->tagmask)) return NULL;
+        !((c->outbuf.tag.l^alf.l)&-c->bb)) return NULL;
   s=cache_addr(c,alf); /* the set corresponding to |alf| */
   if (c->victim) p=choose_victim(c->victim,c->vv,c->vrepl);
   else p=choose_victim(s,c->aa,c->repl);

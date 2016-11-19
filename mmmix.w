@@ -22,7 +22,7 @@ do the actual work after this module has told them what to do.
 
 @ A user typically invokes the meta-simulator with a \UNIX/-like command line
 of the general form
-`\.{mmmix}~\.{configfile}~\.{progfile}',
+`\.{mmmix} \.{options}~\.{configfile}~\.{progfile}',
 where the \.{configfile} describes the characteristics
 of an \MMIX\ implementation and the \.{progfile} contains a program to
 be downloaded and run. Rules for configuration files appear in
@@ -31,6 +31,9 @@ an ``\MMIX\ binary file'' dumped by {\mc MMIX-SIM}, or an
 ASCII text file that describes hexadecimal data
 in a rudimentary format. It is assumed to be binary if
 its name ends with the extension `\.{.mmb}'.
+
+The only command-line option currently supported is \.{-s}, which will run the
+simulator silently until a \.{TRAP} \.{0,Halt,0} instruction is executed.
 
 @c
 #include <stdio.h>
@@ -51,24 +54,31 @@ int main(argc,argv)
   MMIX_init();
   mmix_io_init();
   @<Input the program@>;
-  @<Run the simulation interactively@>;
-  printf("Simulation ended at time %d.\n",ticks.l);
-  print_stats();
-  return 0;
+  if (silent) return MMIX_silent();
+  else {
+    @<Run the simulation interactively@>;
+    printf("Simulation ended at time %d.\n",ticks.l);
+    print_stats();
+    return 0;
+  }
 }
 
-@ The command line might also contain options, some day.
+@ The command line might also contain additional options, some day.
 For now I'm forgetting them and simplifying everything until I gain
 further experience.
 
 @<Parse...@>=
-if (argc!=3) {
-  fprintf(stderr,"Usage: %s configfile progfile\n",argv[0]);
+for (n=1;argv[n]!=NULL && argv[n][0]=='-';n++) {
+  if (argv[n][1]=='s') silent=true;
+  else argc=0; /* unknown option */
+}
+if (argc!=n+2) {
+  fprintf(stderr,"Usage: %s [-s] configfile progfile\n",argv[0]);
 @.Usage: ...@>
   exit(-3);
 }
-config_file_name=argv[1];
-prog_file_name=argv[2];
+config_file_name=argv[argc-2];
+prog_file_name=argv[argc-1];
 
 @ @<Input the program@>=
 if (strlen(prog_file_name)>4 &&
@@ -543,6 +553,7 @@ case '!':@+ { register int j;
  continue;
 
 @ @<Glob...@>=
+bool silent=false;
 bool bad_address;
 extern bool page_bad;
 extern octa page_mask;
