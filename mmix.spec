@@ -43,7 +43,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
 %build
-%{__make} all mmotype mmmix
+%{__make} basic mmotype mmmix
 %if %{with tex}
 %{__make} doc
 %{perl:for (qw(al-intro -doc -sim-intro)) { print "%{__ps2pdf} mmix$_.ps\n" }}
