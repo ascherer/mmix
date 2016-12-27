@@ -13,7 +13,7 @@
   if (f&X_is_dest_bit) @<Install register~X as the destination,
           adjusting the register stack if necessary@>;
 @y
-  if (f&X_is_dest_bit){ @<Install register~X as the destination,
+  if (f&X_is_dest_bit) { @<Install register~X as the destination,
           adjusting the register stack if necessary@>; }
 @z
 
@@ -21,12 +21,6 @@
 int tracing_exceptions; /* exception bits that cause tracing */
 @y
 unsigned int tracing_exceptions; /* exception bits that cause tracing */
-@z
-
-@x
-tetra trace_threshold; /* each instruction should be traced this many times */
-@y
-unsigned int trace_threshold; /* each instruction should be traced this many times */
 @z
 
 @x
@@ -98,7 +92,7 @@ case PBNN: case PBNNB: case PBNZ: case PBNZB:@/@t\4@>
 @x
   if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
 @y
-  if (z.h!=0 || z.l>255 || z.l<(unsigned int)L || z.l<32) goto illegal_inst;
+  if (z.h!=0 || z.l>255 || (int)z.l<L || z.l<32) goto illegal_inst;
 @z
 
 @x
