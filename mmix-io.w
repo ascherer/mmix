@@ -23,9 +23,12 @@ simple simulator.
 @ Of course we include standard \CEE/ library routines, and we set things
 up to accommodate older versions of \CEE/.
 
+@s uint32_t int
+
 @<Preproc...@>=
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #ifdef __STDC__
 #define ARGS(list) list
 #else
@@ -45,7 +48,7 @@ up to accommodate older versions of \CEE/.
 in the simulators.
 
 @<Type...@>=
-typedef unsigned int tetra;
+typedef uint32_t tetra;
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
 @ Three basic subroutines are used to get strings from the simulated
