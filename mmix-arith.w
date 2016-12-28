@@ -30,12 +30,14 @@ however, we can simulate the future and hope for continued progress.
 This program module has a simple structure, intended to make it
 suitable for loading with \MMIX\ simulators and assemblers.
 
+@s bool int
+
 @c
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
 @<Stuff for \CEE/ preprocessor@>@;
-typedef enum{@+false,true@+} bool;
 @<Tetrabyte and octabyte type definitions@>@;
 @<Other type definitions@>@;
 @<Global variables@>@;
