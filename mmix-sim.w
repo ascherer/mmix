@@ -543,10 +543,14 @@ ReadErr  GETA t,1F              readerr: fputs("Trouble r...!",stderr)\cr
 1H       BYTE "Trouble reading!",\#a,0\cr
 }$$
 
-@* Basics. To get started, we define a type that provides semantic sugar.
+@* Basics. Standard types for syntactic sugar.
+
+@s uint8_t int
+@s uint32_t int
 
 @<Type...@>=
-typedef enum {@!false,@!true}@+@!bool;
+#include <stdbool.h>
+#include <stdint.h>
 
 @ This program for the 64-bit \MMIX\ architecture is based on 32-bit integer
 arithmetic, because nearly every computer available to the author at the time
@@ -558,10 +562,10 @@ definition in that module.
 @^system dependencies@>
 
 @<Type...@>=
-typedef unsigned int tetra;
+typedef uint32_t tetra;
   /* for systems conforming to the LP-64 data model */
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
-typedef unsigned char byte; /* a monobyte */
+typedef uint8_t byte; /* a monobyte */
 
 @ We declare subroutines twice, once with a prototype and once
 with the old-style~\CEE/ conventions. The following hack makes
