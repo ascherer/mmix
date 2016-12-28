@@ -121,10 +121,13 @@ required to treat them in greater generality.
 
 @ Here's the overall structure of the present program module.
 
+@s uint32_t int
+
 @c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdint.h>
 #include "abstime.h"
 @h@#
 @<Header definitions@>@;
@@ -329,7 +332,7 @@ the definitions found there.
 @^system dependencies@>
 
 @<Type...@>=
-typedef unsigned int tetra;
+typedef uint32_t tetra;
   /* for systems conforming to the LP-64 data model */
 typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
