@@ -31,11 +31,13 @@ This program module has a simple structure, intended to make it
 suitable for loading with \MMIX\ simulators and assemblers.
 
 @s bool int
+@s uint32_t int
 
 @c
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <ctype.h>
 @<Stuff for \CEE/ preprocessor@>@;
 @<Tetrabyte and octabyte type definitions@>@;
@@ -61,7 +63,7 @@ it represents an unsigned 32-bit integer.
 @^system dependencies@>
 
 @<Tetra...@>=
-typedef unsigned int tetra;
+typedef uint32_t tetra;
  /* for systems conforming to the LP-64 data model */
 typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 
