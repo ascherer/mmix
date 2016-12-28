@@ -952,10 +952,9 @@ necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
 @^system dependencies@>
 
 @<Type...@>=
-typedef unsigned int tetra;
+typedef uint32_t tetra;
   /* assumes that an int is exactly 32 bits wide */
 typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
-typedef enum {@!false,@!true}@+@!bool;
 
 @ @<Glob...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
@@ -1537,6 +1536,7 @@ address in the XYZ field of the instruction pointed to by |equiv|.''
 
 @s sym_node int
 @s bool int
+@s uint32_t int
 
 @d DEFINED (sym_node*)1 /* code value for octabyte equivalents */
 @d REGISTER (sym_node*)2 /* code value for register-number equivalents */
@@ -3164,6 +3164,8 @@ temporary use of global register~\$255.
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
+#include <stdint.h>
 @#
 @<Preprocessor definitions@>@;
 @<Type definitions@>@;
