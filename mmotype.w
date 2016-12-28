@@ -11,13 +11,15 @@ the \MMIXAL\ processor and lists it in human-readable form. It lists
 only the symbol table, if invoked with the \.{-s} option. It lists
 also the tetrabytes of input, if invoked with the \.{-v} option.
 
-@s tetra int
+@s uint8_t int
+@s uint32_t int
 
 @c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stdint.h>
 @<Prototype preparations@>@;
 @<Type definitions@>@;
 @<Global variables@>@;
@@ -92,8 +94,8 @@ Here we need to define only the basic constants used for interpretation.
 whenever an |int| has at least 32 bits.
 
 @<Type...@>=
-typedef unsigned char byte; /* a monobyte */
-typedef unsigned int tetra; /* a tetrabyte */
+typedef uint8_t byte; /* a monobyte */
+typedef uint32_t tetra; /* a tetrabyte */
 typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 
 @ The |incr| subroutine adds a signed integer to an (unsigned) octabyte.
