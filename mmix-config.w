@@ -4,7 +4,6 @@
 \def\title{MMIX-CONFIG}
 \def\MMIX{\.{MMIX}}
 \def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
-@s bool int
 @s cache int
 @s func int
 @s coroutine int

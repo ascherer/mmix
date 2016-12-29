@@ -9,7 +9,6 @@
 \def\dts{\mathinner{\ldotp\ldotp}}
 \def\bull{\smallskip\textindent{$\bullet$}}
 @s xor normal @q unreserve a C++ keyword @>
-@s bool normal @q unreserve a C++ keyword @>
 
 @*Introduction. This program simulates a simplified version of the \MMIX\
 computer. Its main goal is to help people create and test \MMIX\ programs for
@@ -544,9 +543,6 @@ ReadErr  GETA t,1F              readerr: fputs("Trouble r...!",stderr)\cr
 }$$
 
 @* Basics. Standard types for syntactic sugar.
-
-@s uint8_t int
-@s uint32_t int
 
 @<Type...@>=
 #include <stdbool.h>

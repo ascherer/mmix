@@ -10,7 +10,6 @@
 \def\<#1>{\hbox{$\langle\,$#1$\,\rangle$}}\let\is=\longrightarrow
 \def\ff{\\{ff\kern-.05em}}
 @s ff TeX
-@s bool normal @q unreserve a C++ keyword @>
 @s xor normal @q unreserve a C++ keyword @>
 @s bignum int
 
@@ -29,9 +28,6 @@ however, we can simulate the future and hope for continued progress.
 
 This program module has a simple structure, intended to make it
 suitable for loading with \MMIX\ simulators and assemblers.
-
-@s bool int
-@s uint32_t int
 
 @c
 #include <stdio.h>

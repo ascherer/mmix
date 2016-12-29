@@ -7,7 +7,6 @@
 \def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
 @s and normal @q unreserve a C++ keyword @>
 @s or normal @q unreserve a C++ keyword @>
-@s bool normal @q unreserve a C++ keyword @>
 @s xor normal @q unreserve a C++ keyword @>
 
 @* Introduction. This program is the heart of the meta-simulator for the
@@ -120,8 +119,6 @@ can get a better understanding of the issues involved if we are
 required to treat them in greater generality.
 
 @ Here's the overall structure of the present program module.
-
-@s uint32_t int
 
 @c
 #include <stdio.h>

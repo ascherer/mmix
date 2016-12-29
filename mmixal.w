@@ -1535,8 +1535,6 @@ field of the instruction pointed to by |equiv|'' or ``fixup the relative
 address in the XYZ field of the instruction pointed to by |equiv|.''
 
 @s sym_node int
-@s bool int
-@s uint32_t int
 
 @d DEFINED (sym_node*)1 /* code value for octabyte equivalents */
 @d REGISTER (sym_node*)2 /* code value for register-number equivalents */

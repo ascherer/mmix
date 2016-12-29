@@ -11,9 +11,6 @@ the \MMIXAL\ processor and lists it in human-readable form. It lists
 only the symbol table, if invoked with the \.{-s} option. It lists
 also the tetrabytes of input, if invoked with the \.{-v} option.
 
-@s uint8_t int
-@s uint32_t int
-
 @c
 #include <stdio.h>
 #include <stdlib.h>

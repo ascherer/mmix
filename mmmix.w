@@ -6,7 +6,6 @@
 \def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
 @s octa int
 @s tetra int
-@s bool int
 @s fetch int
 @s specnode int
 

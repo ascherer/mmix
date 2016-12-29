@@ -23,8 +23,6 @@ simple simulator.
 @ Of course we include standard \CEE/ library routines, and we set things
 up to accommodate older versions of \CEE/.
 
-@s uint32_t int
-
 @<Preproc...@>=
 #include <stdio.h>
 #include <stdlib.h>
