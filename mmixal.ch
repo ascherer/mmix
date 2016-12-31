@@ -1,4 +1,19 @@
 @x
+@<Type...@>=
+typedef unsigned int tetra;
+  /* assumes that an int is exactly 32 bits wide */
+@y
+@s uint32_t int
+@<Type...@>=
+typedef uint32_t tetra;
+@z
+
+@x
+typedef enum {@!false,@!true}@+@!bool;
+@y
+@z
+
+@x
 void mmo_byte @,@,@[ARGS((unsigned char))@];
 void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
 void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
@@ -45,7 +60,7 @@ void mmo_sync()
 {
   register int j; register Char *p;
 @z
-  
+
 @x
 @<Sub...@>=
 void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
@@ -53,13 +68,18 @@ void assemble(k,dat,x_bits)
   char k;
   tetra dat;
   unsigned char x_bits;
-@y  
+@y
 @<Sub...@>=
 void assemble @,@,@[ARGS((int,tetra,unsigned int))@];@+@t}\6{@>
 void assemble(k,dat,x_bits)
   int k;
   tetra dat;
   unsigned int x_bits;
+@z
+
+@x
+@s bool int
+@y
 @z
 
 @x
@@ -126,3 +146,12 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
    goto bypass;
  case LOCAL:@+if (val_stack[0].equiv.l>(unsigned int)lreg) lreg=val_stack[0].equiv.l;
 @z
+
+@x
+#include <time.h>
+@y
+#include <time.h>
+#include <stdbool.h>
+#include <stdint.h>
+@z
+
