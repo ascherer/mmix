@@ -124,7 +124,6 @@ required to treat them in greater generality.
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <stdint.h>
 #include "abstime.h"
 @h@#
 @<Header definitions@>@;
@@ -256,8 +255,9 @@ void MMIX_run(cycs,breakpoint)
  cease:;
 }
 
-@ @<Type...@>=
-typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
+@ @<Type def...@>=
+#include <stdbool.h> /* |bool| */
+#include <stdint.h> /* |uint8_t| and |uint32_t| */
 
 @ @<Local var...@>=
 register int i,j,m;
