@@ -24,6 +24,8 @@ Source3: mmixal.ch
 Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
+Source7: mmmix.ch
+Source8: mmotype.ch
 %if %{with patches}
 Patch1: 0001-Update-initial-documentation.patch
 Patch29: 0029-DRY-up-the-Makefile.patch
@@ -36,9 +38,9 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %prep
 %autosetup -c %{!?with_patches:-N}
 %if %{_vendor} == "debbuild"
-%{perl:for (1..6) { print "%{__cp} %{S:$_} .\n" }}
+%{perl:for (1..8) { print "%{__cp} %{S:$_} .\n" }}
 %else
-%{lua:for i=1,6 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
+%{lua:for i=1,8 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
 %endif
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
@@ -76,6 +78,9 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %postun
 
 %changelog
+* Sat Dec 31 2016 Andreas Scherer <andreas_tex@freenet.de>
+- Use C99 standard types
+
 * Thu Nov 26 2015 Andreas Scherer <andreas_tex@freenet.de>
 - Conditional Build Stuff
 
