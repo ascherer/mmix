@@ -1,4 +1,9 @@
 @x
+@s bool normal @q unreserve a C++ keyword @>
+@y
+@z
+
+@x
 #include "abstime.h"
 @y
 @z
@@ -12,6 +17,23 @@
 @x
  cease:;
 @y
+@z
+
+@x
+typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
+@y
+#include <stdbool.h> /* |bool| */
+#include <stdint.h> /* |uint32_t| */
+@z
+
+@x
+@<Type...@>=
+typedef unsigned int tetra;
+  /* for systems conforming to the LP-64 data model */
+@y
+@s uint32_t int
+@<Type...@>=
+typedef uint32_t tetra;
 @z
 
 @x
