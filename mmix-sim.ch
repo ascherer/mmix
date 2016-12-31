@@ -1,4 +1,39 @@
 @x
+@s bool normal @q unreserve a C++ keyword @>
+@y
+@z
+
+@x
+@* Basics. To get started, we define a type that provides semantic sugar.
+@y
+@* Basics. Standard types for syntactic sugar.
+@z
+
+@x
+typedef enum {@!false,@!true}@+@!bool;
+@y
+#include <stdbool.h>
+#include <stdint.h>
+@z
+
+@x
+@<Type...@>=
+typedef unsigned int tetra;
+  /* for systems conforming to the LP-64 data model */
+@y
+@s uint32_t int
+@s uint8_t int
+@<Type...@>=
+typedef uint32_t tetra;
+@z
+
+@x
+typedef unsigned char byte; /* a monobyte */
+@y
+typedef uint8_t byte; /* a monobyte */
+@z
+
+@x
     if (shown_line>0)
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
       else printf("     ...\n"); /* indicate the gap */

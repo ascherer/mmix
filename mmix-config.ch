@@ -1,4 +1,9 @@
 @x
+@s bool int
+@y
+@z
+
+@x
 pv_spec PV[]={@/
 {"fetchbuffer", &fetch_buf_size, 4, 1, INT_MAX, false},@/
 {"writebuffer", &write_buf_size, 2, 1, INT_MAX, false},@/
