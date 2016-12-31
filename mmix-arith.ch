@@ -1,4 +1,34 @@
-k ist an int, where u is an array of tetras (unsigned int)
+Use C99 standard types instead of homebrewn typedefs.
+
+@x
+@s bool normal @q unreserve a C++ keyword @>
+@y
+@z
+
+@x
+#include <string.h>
+@y
+#include <string.h>
+#include <stdbool.h>
+#include <stdint.h>
+@z
+
+@x
+typedef enum{@+false,true@+} bool;
+@y
+@z
+
+@x
+@<Tetra...@>=
+typedef unsigned int tetra;
+ /* for systems conforming to the LP-64 data model */
+@y
+@s uint32_t int
+@<Tetra...@>=
+typedef uint32_t tetra;
+@z
+
+k is an int, where u is an array of tetras (unsigned int)
 
 @x
 if (u[j+n]!=k) {
