@@ -1,3 +1,18 @@
+@x
+#include <stdlib.h>
+@y
+#include <stdlib.h>
+#include <stdint.h>
+@z
+
+@x
+@<Type...@>=
+typedef unsigned int tetra;
+@y
+@s uint32_t int
+@<Type...@>=
+typedef uint32_t tetra;
+@z
 
 @x
 octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
@@ -56,6 +71,7 @@ octa mmix_fread(handle,buffer,size)
 @y
   n=(int)fread(buf,1,size.l,sfile[handle].fp);
 @z
+
 @x
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fgets(handle,buffer,size)
@@ -119,6 +135,7 @@ octa mmix_fputs(handle,string)
 @y
     if ((int)fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;
 @z
+
 @x
 octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 octa mmix_fputws(handle,string)
@@ -154,3 +171,4 @@ octa mmix_ftell @,@,@[ARGS((unsigned int))@];@+@t}\6{@>
 octa mmix_ftell(handle)
   unsigned int handle;
 @z
+
