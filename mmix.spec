@@ -51,6 +51,19 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{perl:for (qw(al-intro -doc -sim-intro)) { print "%{__ps2pdf} mmix$_.ps\n" }}
 %endif
 
+%check
+./mmixal -x -b 250 -l copy.mml copy.mms
+./mmix copy copy.mms > copy.out
+diff -u copy.mms copy.out
+
+./mmixal -x -b 250 -l hello.mml hello.mms
+./mmix -Dhello.mmb hello.mmo
+printf "10000\nq" | ./mmmix plain.mmconfig hello.mmb
+
+./mmixal -x -b 250 -l silly.mml silly.mms
+./mmix -Dsilly.mmb silly.mmo
+printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
+
 %install
 %{__rm} -rf %{buildroot}
 %{__mkdir_p} %{buildroot}%{_bindir}
