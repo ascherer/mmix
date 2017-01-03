@@ -48,7 +48,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{__make} basic mmotype mmmix
 %if %{with tex}
 %{__make} doc
-%{perl:for (qw(al-intro -doc -sim-intro)) { print "%{__ps2pdf} mmix$_.ps\n" }}
+for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
 %endif
 
 %check
