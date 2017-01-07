@@ -6,7 +6,7 @@
 #   In fact, CWEB 3.61 is recommended for making hardcopy or PDF documentation.
 
 #   If you prefer optimization to debugging, change -g to something like -O:
-CFLAGS = -g -Wall
+CFLAGS = -g -fpic -Wall
 
 #   Uncomment the second line if you use pdftex to bypass .dvi files:
 PDFTEX = dvipdfm
@@ -72,6 +72,11 @@ all:    mmixal mmix mmotype mmmix
 
 clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
+
+lib: libmmix.so
+
+libmmix.so: mmix-arith.o mmix-config.o mmix-io.o mmix-mem.o mmix-pipe.o
+	$(CC) -shared -o libmmix.so $^
 
 .SECONDEXPANSION:
 mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
