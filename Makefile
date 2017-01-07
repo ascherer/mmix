@@ -7,6 +7,8 @@
 
 #   If you prefer optimization to debugging, change -g to something like -O:
 CFLAGS = -g -fpic -Wall
+LDFLAGS = -L.
+LDLIBS = -lmmix
 
 #   Uncomment the second line if you use pdftex to bypass .dvi files:
 PDFTEX = dvipdfm
@@ -62,13 +64,13 @@ TESTFILES = *.mms silly.run silly.out *.mmconfig *.mmix
 MISCFILES = Makefile makefile.dos README mmix.mp mmix.1
 ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
 
-basic:  mmixal mmix
+basic:  lib mmixal mmix
 
 doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
 	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
 	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
 
-all:    mmixal mmix mmotype mmmix
+all:    basic mmotype mmmix
 
 clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
@@ -84,12 +86,6 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
 	$(CC) $(CFLAGS) -c $<
 
 mmix-config.o: mmix-pipe.o
-
-mmmix:  mmix-arith.o mmix-pipe.o mmix-config.o mmix-mem.o mmix-io.o mmmix.c
-	$(CC) $(CFLAGS) $^ -o $@
-
-mmixal: mmix-arith.o mmixal.c
-	$(CC) $(CFLAGS) $^ -o $@
 
 mmix:   mmix-arith.o mmix-io.o mmix-sim.o
 	$(CC) $(CFLAGS) $^ -o $@
