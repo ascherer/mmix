@@ -18,12 +18,12 @@ BuildRequires: texlive
 %endif
 
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
-Source1: mmix-sim.ch
-Source2: mmix-pipe.ch
-Source3: mmixal.ch
-Source4: mmix-arith.ch
-Source5: mmix-config.ch
-Source6: mmix-io.ch
+Source1: mmix-arith.ch
+Source2: mmix-config.ch
+Source3: mmix-io.ch
+Source4: mmix-pipe.ch
+Source5: mmix-sim.ch
+Source6: mmixal.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
 %if %{with patches}
@@ -36,7 +36,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 'ultimate' editions of 'The Art of Computer Programming' by Don Knuth.
 
 %prep
-%autosetup -c %{!?with_patches:-N}
+%autosetup -c %{?with_patches:-p1}%{!?with_patches:-N}
 %if %{_vendor} == "debbuild"
 %{perl:for (1..8) { print "%{__cp} %{S:$_} .\n" }}
 %else
@@ -45,7 +45,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 
 %build
-%{__make} basic mmotype mmmix
+%{__make} basic mmmix mmotype
 %if %{with tex}
 %{__make} doc
 for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
@@ -67,7 +67,7 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %install
 %{__rm} -rf %{buildroot}
 %{__mkdir_p} %{buildroot}%{_bindir}
-%{__cp} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
+%{__cp} mmix mmixal mmmix mmotype %{buildroot}%{_bindir}
 %{__mkdir_p} %{buildroot}%{_datadir}/%{name}
 %{__cp} *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
 %if %{with tex}
@@ -81,8 +81,8 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/mmix
 %attr(755,root,root) %{_bindir}/mmixal
-%attr(755,root,root) %{_bindir}/mmotype
 %attr(755,root,root) %{_bindir}/mmmix
+%attr(755,root,root) %{_bindir}/mmotype
 %{_datadir}/%{name}
 %{?with_tex:%doc %{_docdir}/%{name}}
 
