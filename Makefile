@@ -70,7 +70,7 @@ doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
 	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
 	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
 
-all:    basic mmotype mmmix
+all:    basic mmmix mmotype
 
 clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
@@ -87,8 +87,8 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
 
 mmix-config.o: mmix-pipe.o
 
-mmix:   mmix-arith.o mmix-io.o mmix-sim.o
-	$(CC) $(CFLAGS) $^ -o $@
+mmix: mmix-sim.o lib
+	$(CC) $< -o $@ $(LOADLIBES)
 
 mmotype: mmotype.c
 	$(CC) $(CFLAGS) $^ -o $@
