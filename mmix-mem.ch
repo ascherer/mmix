@@ -1,21 +1,28 @@
 @x
-@s bool int
+extern octa read_hex(); /* found in the main program module */
 @y
 @z
 
 @x
-static unsigned char d[BUF_SIZE];
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
+@y
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 
 @ Here's a simple program to read an octabyte in hexadecimal notation
 from a buffer. It changes the buffer by storing a null character
 after the input.
 @^radix conversion@>
 
-@<Sub...@>=
+@d BUF_SIZE 100
+
+@c
 octa read_hex @,@,@[ARGS((char *))@];@+@t}\6{@>
 octa read_hex(p)
   char *p;
 {
+  unsigned char d[BUF_SIZE];
   register int j,k;
   octa val;
   val.h=val.l=0;
@@ -32,12 +39,4 @@ octa read_hex(p)
   }
   return val;
 }
-@y
-@z
-
-@x
-octa seven_octa={0,7};
-@y
-octa seven_octa={0,7};
-extern octa read_hex @,@,@[ARGS((char *))@];
 @z
