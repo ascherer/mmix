@@ -27,6 +27,7 @@ Source5: mmix-config.ch
 Source6: mmix-io.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
+Source9: mmix-mem.ch
 %if %{with patches}
 Patch1: 0001-Update-initial-documentation.patch
 Patch29: 0029-DRY-up-the-Makefile.patch
@@ -39,9 +40,9 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %prep
 %autosetup -c %{!?with_patches:-N}
 %if %{_vendor} == "debbuild"
-%{perl:for (1..8) { print "%{__cp} %{S:$_} .\n" }}
+%{perl:for (1..9) { print "%{__cp} %{S:$_} .\n" }}
 %else
-%{lua:for i=1,8 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
+%{lua:for i=1,9 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
 %endif
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
 %{!?with_debuginfo:%{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile}
