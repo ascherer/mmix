@@ -73,27 +73,24 @@ all:    mmixal mmix mmotype mmmix
 clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
 
-mmix-pipe.o: mmix-pipe.c abstime
-	./abstime > abstime.h
-	$(CC) $(CFLAGS) -c mmix-pipe.c
-	rm abstime.h
+.SECONDEXPANSION:
+mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
+	perl -pe "s/(#define ABSTIME)/\1 `date +%s`/" -i $<
+	$(CC) $(CFLAGS) -c $<
 
 mmix-config.o: mmix-pipe.o
 
 mmmix:  mmix-arith.o mmix-pipe.o mmix-config.o mmix-mem.o mmix-io.o mmmix.c
-	$(CC) $(CFLAGS) mmmix.c \
-	  mmix-arith.o mmix-pipe.o mmix-config.o mmix-mem.o mmix-io.o -o mmmix
+	$(CC) $(CFLAGS) $^ -o $@
 
 mmixal: mmix-arith.o mmixal.c
-	$(CC) $(CFLAGS) mmixal.c mmix-arith.o -o mmixal
+	$(CC) $(CFLAGS) $^ -o $@
 
-mmix:   mmix-arith.o mmix-io.o mmix-sim.c abstime
-	./abstime > abstime.h
-	$(CC) $(CFLAGS) mmix-sim.c mmix-arith.o mmix-io.o -o mmix
-	rm abstime.h
+mmix:   mmix-arith.o mmix-io.o mmix-sim.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 mmotype: mmotype.c
-	$(CC) $(CFLAGS) mmotype.c -o mmotype
+	$(CC) $(CFLAGS) $^ -o $@
 
 tarfile: $(ALL)
 	tar cvf /tmp/mmix.tar $(ALL)
