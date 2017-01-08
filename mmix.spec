@@ -1,5 +1,6 @@
 %bcond_without tex
 %bcond_without patches
+%bcond_with debuginfo
 
 Name: mmix
 Version: 20160804
@@ -43,6 +44,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{lua:for i=1,8 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
 %endif
 %{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
+%{!?with_debuginfo:%{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile}
 
 %build
 %{__make} basic mmotype mmmix
