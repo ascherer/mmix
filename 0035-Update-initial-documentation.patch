@@ -1,0 +1,34 @@
+From 0ff9c299a65f9015496151f0985a7b8b9085eaf4 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Mon, 8 Aug 2016 19:16:19 +0200
+Subject: [PATCH 35/35] Update initial documentation.
+
+The toc pages were missing.
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index f53674f..a47830d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -65,13 +65,13 @@ ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
+ basic:  mmixal mmix
+ 
+ doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
+-	dvips -n13 mmixal.dvi -o mmixal-intro.ps
+-	dvips -n8 mmix-sim.dvi -o mmix-sim-intro.ps
++	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
++	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
+ 
+ all:    mmixal mmix mmotype mmmix
+ 
+ clean:
+-	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
++	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
+ 
+ .SECONDEXPANSION:
+ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
+-- 
+2.11.0
+

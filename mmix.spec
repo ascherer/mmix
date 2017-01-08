@@ -25,8 +25,8 @@ Source4: mmix-arith.ch
 Source5: mmix-config.ch
 Source6: mmix-io.ch
 %if %{with patches}
-Patch1: 0001-Update-initial-documentation.patch
 Patch29: 0029-DRY-up-the-Makefile.patch
+Patch35: 0035-Update-initial-documentation.patch
 %endif
 
 %description
