@@ -3,15 +3,22 @@
 %bcond_with debuginfo
 
 Name: mmix
-Version: 20160804
-Release: 2
-Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
-Group: Productivity/Development
+Version: 20160804
+Release: 2
+Packager: Andreas Scherer <andreas@komputer.de>
+
+%if %{_vendor} == "debbuild"
+Group: science
 Distribution: Kubuntu 16.04 (x86_64)
+%else
+Group: Productivity/Scientific/Electronics
+Distribution: openSUSE 42 (x86_64)
+%endif
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: amd64
 %if %{with tex}
