@@ -46,14 +46,14 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %{lua:for i=1,9 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
 %endif
 %if %{with patches}
-%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
+%{__sed} "s/CFLAGS = -g/& -W -Wall/" -i Makefile
 %else
 %{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-pipe.ch
 %{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-sim.ch
 %endif
 %if ! %{with debuginfo}
 %{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
-%{?with_patches:%{__sed} "s/LDFLAGS =/LDFLAGS = -s/" -i Makefile}
+%{?with_patches:%{__sed} "s/LDFLAGS =/& -s/" -i Makefile}
 %endif
 
 %build
