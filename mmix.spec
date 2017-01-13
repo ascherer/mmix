@@ -9,21 +9,21 @@ URL: http://mmix.cs.hm.edu/
 
 Version: 20160804
 Release: 2
-Packager: Andreas Scherer <andreas@komputer.de>
+Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if %{_vendor} == "debbuild"
 Group: science
 Distribution: Kubuntu 16.04 (x86_64)
-%else
-Group: Productivity/Scientific/Electronics
-Distribution: openSUSE 42 (x86_64)
-%endif
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildArch: amd64
 %if %{with tex}
 BuildRequires: texlive
 %endif
+%else
+Group: Productivity/Scientific/Electronics
+Distribution: openSUSE 42 (x86_64)
+%global __ps2pdf `which ps2pdf`
+%endif
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
 Source1: mmix-sim.ch
