@@ -46,7 +46,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 'ultimate' editions of 'The Art of Computer Programming' by Don Knuth.
 
 %prep
-%autosetup -c %{!?with_patches:-N}
+%autosetup -c
 %if %{_vendor} == "debbuild"
 %{perl:for (1..9) { print "%{__cp} %{S:$_} .\n" }}
 %else
