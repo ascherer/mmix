@@ -91,6 +91,9 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %if %{with patches}
 %{__mkdir_p} %{buildroot}%{_libdir}/%{name}
 %{__cp} libmmix.so %{buildroot}%{_libdir}/%{name}
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
+%{__echo} "%{_libdir}/%{name}" > \
+	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %endif
 %{__mkdir_p} %{buildroot}%{_datadir}/%{name}
 %{__cp} *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
@@ -107,8 +110,11 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %attr(755,root,root) %{_bindir}/mmixal
 %attr(755,root,root) %{_bindir}/mmotype
 %attr(755,root,root) %{_bindir}/mmmix
-%{?with_patches:%{_libdir}/%{name}/libmmix.so}
 %{_datadir}/%{name}
+%if %{with patches}
+%{_libdir}/%{name}
+%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%endif
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %post
