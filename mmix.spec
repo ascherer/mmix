@@ -21,6 +21,7 @@ BuildRequires: texlive
 Group: Productivity/Scientific/Electronics
 Distribution: openSUSE 42 (x86_64)
 %global __ps2pdf `which ps2pdf`
+%global __echo `which echo`
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
