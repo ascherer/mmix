@@ -103,8 +103,6 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %{__cp} *.pdf %{buildroot}%{_docdir}/%{name}
 %endif
 
-%clean
-
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/mmix
