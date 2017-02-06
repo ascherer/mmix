@@ -1,6 +1,10 @@
 %bcond_without tex
 %bcond_without patches
+%bcond_without changes
 %bcond_with debuginfo
+
+# Plain vanilla MMIX
+%{!?with_changes:%global with_patches 0}
 
 Name: mmix
 Summary: The MMIX system
@@ -26,6 +30,7 @@ Distribution: openSUSE 42 (x86_64)
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
+%if %{with changes}
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
 Source3: mmixal.ch
@@ -35,6 +40,7 @@ Source6: mmix-io.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
 Source9: mmix-mem.ch
+%endif
 
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
@@ -47,10 +53,12 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 
 %prep
 %autosetup -c
+%if %{with changes}
 %if %{_vendor} == "debbuild"
 %{perl:for (1..9) { print "%{__cp} %{S:$_} .\n" }}
 %else
 %{lua:for i=1,9 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
+%endif
 %endif
 %if %{with patches}
 %{__sed} "s/CFLAGS = -g/& -W -Wall/" -i Makefile
