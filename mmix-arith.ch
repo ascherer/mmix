@@ -88,6 +88,18 @@ same as above
   int s; /* the sign */
 @z
 
+@x
+ case zro: z=0;@+break;
+@y
+ default: case zro: z=0;@+break;
+@z
+
+@x
+ case 4*zro+zro: x=zero_octa;
+@y
+ default: case 4*zro+zro: x=zero_octa;
+@z
+
 strlen returns size_t which is unsigned. comparing it
 to s signed value e, might give unexpected results.
 So it is casted to an int, which causes no problems because
@@ -128,6 +140,12 @@ the label make_it_zero is not referenced.
  make_it_zero: exp=-99999;@+ goto packit;
 @y
  exp=-99999;@+ goto packit;
+@z
+
+@x
+ case 4*zro+zro: return 0;
+@y
+ default: case 4*zro+zro: return 0;
 @z
 
 adding a default case tells the compiler
