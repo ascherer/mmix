@@ -1,5 +1,6 @@
 [Git-archive]
 .gitattributes export-ignore
+README.md export-ignore
 
 [Github]
 *.mms linguist-language=Assembly
