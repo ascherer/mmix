@@ -40,3 +40,9 @@ octa read_hex(p)
   return val;
 }
 @z
+
+@x
+    fgets(buf,20,stdin);
+@y
+    if (fgets(buf,20,stdin)) {}
+@z
