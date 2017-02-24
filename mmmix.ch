@@ -4,6 +4,12 @@
 @z
 
 @x
+  fgets(buffer,BUF_SIZE,stdin);
+@y
+  if (fgets(buffer,BUF_SIZE,stdin)) {}
+@z
+
+@x
 static unsigned char d[BUF_SIZE];
 
 @ Here's a simple program to read an octabyte in hexadecimal notation
