@@ -34,6 +34,12 @@ typedef uint8_t byte; /* a monobyte */
 @z
 
 @x
+case lop_fixr: delta=yzbytes; goto fixr;
+@y
+case lop_fixr: j=delta=yzbytes; goto fixr;
+@z
+
+@x
     if (shown_line>0)
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
       else printf("     ...\n"); /* indicate the gap */
@@ -42,6 +48,12 @@ typedef uint8_t byte; /* a monobyte */
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
       else printf("     ...\n"); /* indicate the gap */
     }
+@z
+
+@x
+  else freopen(file_info[cur_file].name,"r",src_file);
+@y
+  else if (freopen(file_info[cur_file].name,"r",src_file)) {}
 @z
 
 @x
@@ -56,6 +68,12 @@ typedef uint8_t byte; /* a monobyte */
 int tracing_exceptions; /* exception bits that cause tracing */
 @y
 unsigned int tracing_exceptions; /* exception bits that cause tracing */
+@z
+
+@x
+register int G,L,O; /* accessible copies of key registers */
+@y
+register int G,L,O=0; /* accessible copies of key registers */
 @z
 
 @x
@@ -80,6 +98,12 @@ a trivial program that computes the value of the standard library function
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
  round_mode=(y.l? (int)y.l: cur_round);@+goto store_fx;
+@z
+
+@x
+ case 0: b=o.h>>31;@+break; /* negative? */
+@y
+ default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
 @x
