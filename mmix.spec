@@ -28,6 +28,7 @@ Patch4: 0004-Fix-intermediate-bugs.patch
 Patch5: 0005-Fix-another-bug.patch
 Patch6: 0006-Update-information-about-documentation.patch
 Patch10: 0010-Fix-another-compiler-warning.patch
+Patch29: 0029-DRY-up-the-Makefile.patch
 %endif
 
 %description
