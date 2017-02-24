@@ -4,7 +4,7 @@
 
 Name: mmix
 Version: 20160804
-Release: 1
+Release: 2
 Packager: Andreas Scherer <andreas@komputer.de>
 Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
@@ -28,9 +28,10 @@ Source6: mmix-io.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
 Source9: mmix-mem.ch
+
 %if %{with patches}
-Patch1: 0001-Update-initial-documentation.patch
 Patch29: 0029-DRY-up-the-Makefile.patch
+Patch43: 0043-Build-and-apply-shared-library.patch
 %endif
 
 %description
@@ -44,8 +45,16 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %else
 %{lua:for i=1,9 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
 %endif
-%{?with_patches:%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile}
-%{!?with_debuginfo:%{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile}
+%if %{with patches}
+%{__sed} "s/CFLAGS = -g/CFLAGS = -g -W -Wall/" -i Makefile
+%else
+%{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-pipe.ch
+%{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-sim.ch
+%endif
+%if ! %{with debuginfo}
+%{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
+%{?with_patches:%{__sed} "s/LDFLAGS =/LDFLAGS = -s/" -i Makefile}
+%endif
 
 %build
 %{__make} basic mmotype mmmix
@@ -55,6 +64,8 @@ for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
 %endif
 
 %check
+%{?with_patches:export LD_LIBRARY_PATH=.}
+
 ./mmixal -x -b 250 -l copy.mml copy.mms
 ./mmix copy copy.mms > copy.out
 diff -u copy.mms copy.out
@@ -71,6 +82,10 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %{__rm} -rf %{buildroot}
 %{__mkdir_p} %{buildroot}%{_bindir}
 %{__cp} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
+%if %{with patches}
+%{__mkdir_p} %{buildroot}%{_libdir}/%{name}
+%{__cp} libmmix.so %{buildroot}%{_libdir}/%{name}
+%endif
 %{__mkdir_p} %{buildroot}%{_datadir}/%{name}
 %{__cp} *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
 %if %{with tex}
@@ -86,14 +101,20 @@ printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 %attr(755,root,root) %{_bindir}/mmixal
 %attr(755,root,root) %{_bindir}/mmotype
 %attr(755,root,root) %{_bindir}/mmmix
+%{?with_patches:%{_libdir}/%{name}/libmmix.so}
 %{_datadir}/%{name}
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %post
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
 
 %postun
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
 
 %changelog
+* Sat Jan 07 2017 Andreas Scherer <andreas_tex@freenet.de>
+- Build shared library from common modules
+
 * Sat Dec 31 2016 Andreas Scherer <andreas_tex@freenet.de>
 - Use C99 standard types
 
