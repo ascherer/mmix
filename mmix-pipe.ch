@@ -90,6 +90,12 @@ if (cool->mem_x)
 @z
 
 @x
+ case 0: b=o.h>>31;@+break; /* negative? */
+@y
+ default: case 0: b=o.h>>31;@+break; /* negative? */
+@z
+
+@x
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
  default: panic(confusion("lru victim")); /* what happened? nobody has rank zero */
@@ -174,4 +180,10 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(unsigned int)j) {
   data->y.o.l &= -data->b.o.l;
 @y
   data->y.o.l &= -(int)data->b.o.l;
+@z
+
+@x
+    fgets(stdin_buf,256,stdin);
+@y
+    if (fgets(stdin_buf,256,stdin)) {}
 @z
