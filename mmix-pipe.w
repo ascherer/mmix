@@ -848,38 +848,38 @@ typedef enum{@/
 @!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
 
 @ @<Glob...@>=
-char *opcode_name[]={
-"TRAP","FCMP","FUN","FEQL","FADD","FIX","FSUB","FIXU",@/
-"FLOT","FLOTI","FLOTU","FLOTUI","SFLOT","SFLOTI","SFLOTU","SFLOTUI",@/
-"FMUL","FCMPE","FUNE","FEQLE","FDIV","FSQRT","FREM","FINT",@/
-"MUL","MULI","MULU","MULUI","DIV","DIVI","DIVU","DIVUI",@/
-"ADD","ADDI","ADDU","ADDUI","SUB","SUBI","SUBU","SUBUI",@/
-"2ADDU","2ADDUI","4ADDU","4ADDUI","8ADDU","8ADDUI","16ADDU","16ADDUI",@/
-"CMP","CMPI","CMPU","CMPUI","NEG","NEGI","NEGU","NEGUI",@/
-"SL","SLI","SLU","SLUI","SR","SRI","SRU","SRUI",@/
-"BN","BNB","BZ","BZB","BP","BPB","BOD","BODB",@/
-"BNN","BNNB","BNZ","BNZB","BNP","BNPB","BEV","BEVB",@/
-"PBN","PBNB","PBZ","PBZB","PBP","PBPB","PBOD","PBODB",@/
-"PBNN","PBNNB","PBNZ","PBNZB","PBNP","PBNPB","PBEV","PBEVB",@/
-"CSN","CSNI","CSZ","CSZI","CSP","CSPI","CSOD","CSODI",@/
-"CSNN","CSNNI","CSNZ","CSNZI","CSNP","CSNPI","CSEV","CSEVI",@/
-"ZSN","ZSNI","ZSZ","ZSZI","ZSP","ZSPI","ZSOD","ZSODI",@/
-"ZSNN","ZSNNI","ZSNZ","ZSNZI","ZSNP","ZSNPI","ZSEV","ZSEVI",@/
-"LDB","LDBI","LDBU","LDBUI","LDW","LDWI","LDWU","LDWUI",@/
-"LDT","LDTI","LDTU","LDTUI","LDO","LDOI","LDOU","LDOUI",@/
-"LDSF","LDSFI","LDHT","LDHTI","CSWAP","CSWAPI","LDUNC","LDUNCI",@/
-"LDVTS","LDVTSI","PRELD","PRELDI","PREGO","PREGOI","GO","GOI",@/
-"STB","STBI","STBU","STBUI","STW","STWI","STWU","STWUI",@/
-"STT","STTI","STTU","STTUI","STO","STOI","STOU","STOUI",@/
-"STSF","STSFI","STHT","STHTI","STCO","STCOI","STUNC","STUNCI",@/
-"SYNCD","SYNCDI","PREST","PRESTI","SYNCID","SYNCIDI","PUSHGO","PUSHGOI",@/
-"OR","ORI","ORN","ORNI","NOR","NORI","XOR","XORI",@/
-"AND","ANDI","ANDN","ANDNI","NAND","NANDI","NXOR","NXORI",@/
-"BDIF","BDIFI","WDIF","WDIFI","TDIF","TDIFI","ODIF","ODIFI",@/
-"MUX","MUXI","SADD","SADDI","MOR","MORI","MXOR","MXORI",@/
-"SETH","SETMH","SETML","SETL","INCH","INCMH","INCML","INCL",@/
-"ORH","ORMH","ORML","ORL","ANDNH","ANDNMH","ANDNML","ANDNL",@/
-"JMP","JMPB","PUSHJ","PUSHJB","GETA","GETAB","PUT","PUTI",@/
+char *opcode_name[]={@|
+"TRAP","FCMP","FUN","FEQL","FADD","FIX","FSUB","FIXU",@|
+"FLOT","FLOTI","FLOTU","FLOTUI","SFLOT","SFLOTI","SFLOTU","SFLOTUI",@|
+"FMUL","FCMPE","FUNE","FEQLE","FDIV","FSQRT","FREM","FINT",@|
+"MUL","MULI","MULU","MULUI","DIV","DIVI","DIVU","DIVUI",@|
+"ADD","ADDI","ADDU","ADDUI","SUB","SUBI","SUBU","SUBUI",@|
+"2ADDU","2ADDUI","4ADDU","4ADDUI","8ADDU","8ADDUI","16ADDU","16ADDUI",@|
+"CMP","CMPI","CMPU","CMPUI","NEG","NEGI","NEGU","NEGUI",@|
+"SL","SLI","SLU","SLUI","SR","SRI","SRU","SRUI",@|
+"BN","BNB","BZ","BZB","BP","BPB","BOD","BODB",@|
+"BNN","BNNB","BNZ","BNZB","BNP","BNPB","BEV","BEVB",@|
+"PBN","PBNB","PBZ","PBZB","PBP","PBPB","PBOD","PBODB",@|
+"PBNN","PBNNB","PBNZ","PBNZB","PBNP","PBNPB","PBEV","PBEVB",@|
+"CSN","CSNI","CSZ","CSZI","CSP","CSPI","CSOD","CSODI",@|
+"CSNN","CSNNI","CSNZ","CSNZI","CSNP","CSNPI","CSEV","CSEVI",@|
+"ZSN","ZSNI","ZSZ","ZSZI","ZSP","ZSPI","ZSOD","ZSODI",@|
+"ZSNN","ZSNNI","ZSNZ","ZSNZI","ZSNP","ZSNPI","ZSEV","ZSEVI",@|
+"LDB","LDBI","LDBU","LDBUI","LDW","LDWI","LDWU","LDWUI",@|
+"LDT","LDTI","LDTU","LDTUI","LDO","LDOI","LDOU","LDOUI",@|
+"LDSF","LDSFI","LDHT","LDHTI","CSWAP","CSWAPI","LDUNC","LDUNCI",@|
+"LDVTS","LDVTSI","PRELD","PRELDI","PREGO","PREGOI","GO","GOI",@|
+"STB","STBI","STBU","STBUI","STW","STWI","STWU","STWUI",@|
+"STT","STTI","STTU","STTUI","STO","STOI","STOU","STOUI",@|
+"STSF","STSFI","STHT","STHTI","STCO","STCOI","STUNC","STUNCI",@|
+"SYNCD","SYNCDI","PREST","PRESTI","SYNCID","SYNCIDI","PUSHGO","PUSHGOI",@|
+"OR","ORI","ORN","ORNI","NOR","NORI","XOR","XORI",@|
+"AND","ANDI","ANDN","ANDNI","NAND","NANDI","NXOR","NXORI",@|
+"BDIF","BDIFI","WDIF","WDIFI","TDIF","TDIFI","ODIF","ODIFI",@|
+"MUX","MUXI","SADD","SADDI","MOR","MORI","MXOR","MXORI",@|
+"SETH","SETMH","SETML","SETL","INCH","INCMH","INCML","INCL",@|
+"ORH","ORMH","ORML","ORL","ANDNH","ANDNMH","ANDNML","ANDNL",@|
+"JMP","JMPB","PUSHJ","PUSHJB","GETA","GETAB","PUT","PUTI",@|
 "POP","RESUME","SAVE","UNSAVE","SYNC","SWYM","GET","TRIP"};
 
 @ And here is a (likewise boring) list of all the internal opcodes.
@@ -1085,38 +1085,38 @@ char *internal_op_name[]={
 internal ones.
 
 @<Glob...@>=
-internal_opcode internal_op[256]={@/
-  trap,fcmp,funeq,funeq,fadd,fix,fsub,fix,@/
-  flot,flot,flot,flot,flot,flot,flot,flot,@/
-  fmul,feps,feps,feps,fdiv,fsqrt,frem,fint,@/
-  mul,mul,mulu,mulu,div,div,divu,divu,@/
-  add,add,addu,addu,sub,sub,subu,subu,@/
-  addu,addu,addu,addu,addu,addu,addu,addu,@/
-  cmp,cmp,cmpu,cmpu,sub,sub,subu,subu,@/
-  shl,shl,shlu,shlu,shr,shr,shru,shru,@/
-  br,br,br,br,br,br,br,br,@/
-  br,br,br,br,br,br,br,br,@/
-  pbr,pbr,pbr,pbr,pbr,pbr,pbr,pbr,@/
-  pbr,pbr,pbr,pbr,pbr,pbr,pbr,pbr,@/
-  cset,cset,cset,cset,cset,cset,cset,cset,@/
-  cset,cset,cset,cset,cset,cset,cset,cset,@/
-  zset,zset,zset,zset,zset,zset,zset,zset,@/
-  zset,zset,zset,zset,zset,zset,zset,zset,@/
-  ld,ld,ld,ld,ld,ld,ld,ld,@/
-  ld,ld,ld,ld,ld,ld,ld,ld,@/
-  ld,ld,ld,ld,cswap,cswap,ldunc,ldunc,@/
-  ldvts,ldvts,preld,preld,prego,prego,go,go,@/
-  pst,pst,pst,pst,pst,pst,pst,pst,@/
-  pst,pst,pst,pst,st,st,st,st,@/
-  pst,pst,pst,pst,st,st,st,st,@/
-  syncd,syncd,prest,prest,syncid,syncid,pushgo,pushgo,@/
-  or,or,orn,orn,nor,nor,xor,xor,@/
-  and,and,andn,andn,nand,nand,nxor,nxor,@/
-  bdif,bdif,wdif,wdif,tdif,tdif,odif,odif,@/
-  mux,mux,sadd,sadd,mor,mor,mor,mor,@/
-  set,set,set,set,addu,addu,addu,addu,@/
-  or,or,or,or,andn,andn,andn,andn,@/
-  jmp,jmp,pushj,pushj,set,set,put,put,@/
+internal_opcode internal_op[256]={@|
+  trap,fcmp,funeq,funeq,fadd,fix,fsub,fix,@|
+  flot,flot,flot,flot,flot,flot,flot,flot,@|
+  fmul,feps,feps,feps,fdiv,fsqrt,frem,fint,@|
+  mul,mul,mulu,mulu,div,div,divu,divu,@|
+  add,add,addu,addu,sub,sub,subu,subu,@|
+  addu,addu,addu,addu,addu,addu,addu,addu,@|
+  cmp,cmp,cmpu,cmpu,sub,sub,subu,subu,@|
+  shl,shl,shlu,shlu,shr,shr,shru,shru,@|
+  br,br,br,br,br,br,br,br,@|
+  br,br,br,br,br,br,br,br,@|
+  pbr,pbr,pbr,pbr,pbr,pbr,pbr,pbr,@|
+  pbr,pbr,pbr,pbr,pbr,pbr,pbr,pbr,@|
+  cset,cset,cset,cset,cset,cset,cset,cset,@|
+  cset,cset,cset,cset,cset,cset,cset,cset,@|
+  zset,zset,zset,zset,zset,zset,zset,zset,@|
+  zset,zset,zset,zset,zset,zset,zset,zset,@|
+  ld,ld,ld,ld,ld,ld,ld,ld,@|
+  ld,ld,ld,ld,ld,ld,ld,ld,@|
+  ld,ld,ld,ld,cswap,cswap,ldunc,ldunc,@|
+  ldvts,ldvts,preld,preld,prego,prego,go,go,@|
+  pst,pst,pst,pst,pst,pst,pst,pst,@|
+  pst,pst,pst,pst,st,st,st,st,@|
+  pst,pst,pst,pst,st,st,st,st,@|
+  syncd,syncd,prest,prest,syncid,syncid,pushgo,pushgo,@|
+  or,or,orn,orn,nor,nor,xor,xor,@|
+  and,and,andn,andn,nand,nand,nxor,nxor,@|
+  bdif,bdif,wdif,wdif,tdif,tdif,odif,odif,@|
+  mux,mux,sadd,sadd,mor,mor,mor,mor,@|
+  set,set,set,set,addu,addu,addu,addu,@|
+  or,or,or,or,andn,andn,andn,andn,@|
+  jmp,jmp,pushj,pushj,set,set,put,put,@|
   pop,resume,save,unsave,sync,noop,get,trip};
 
 @ While we're into boring lists, we might as well define all the
@@ -1741,7 +1741,7 @@ rX is a destination, \Hex{40}~means YZ is part of a relative address,
 @d ctl_change_bit 0x80
 
 @<Glob...@>=
-unsigned char flags[256]={
+unsigned char flags[256]={@|@t\1\1@>
 0x8a, 0x2a, 0x2a, 0x2a, 0x2a, 0x26, 0x2a, 0x26, /* \.{TRAP}, \dots\ */
 0x26, 0x25, 0x26, 0x25, 0x26, 0x25, 0x26, 0x25, /* \.{FLOT}, \dots\ */
 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x26, 0x2a, 0x26, /* \.{FMUL}, \dots\ */
@@ -2058,7 +2058,7 @@ else{
 that register is listed in the |third_operand| table.
 
 @<Glob...@>=
-unsigned char third_operand[256]={@/
+unsigned char third_operand[256]={@|@t\1\1@>
   0,rA,0,0,rA,rA,rA,rA, /* \.{TRAP}, \dots\ */
   rA,rA,rA,rA,rA,rA,rA,rA, /* \.{FLOT}, \dots\ */
   rA,rE,rE,rE,rA,rA,rA,rA, /* \.{FMUL}, \dots\ */
@@ -3610,7 +3610,7 @@ static void flush_cache(c,p,keep)
     else d=c->outbuf.data, c->outbuf.data=p->data, p->data=d;
     dd=c->outbuf.dirty, c->outbuf.dirty=p->dirty, p->dirty=dd;
     for (j=0;j<c->bb>>c->g;j++) p->dirty[j]=false;
-    p->rank=c->bb; /* this many valid bytes */
+    c->outbuf.rank=c->bb; /* this many valid bytes */
     startup(&c->flusher,c->copy_out_time); /* will not be aborted */
 }
 
