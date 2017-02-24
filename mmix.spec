@@ -11,8 +11,8 @@ Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
-Version: 20160804
-Release: 2
+Version: 20170221
+Release: 1
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if %{_vendor} == "debbuild"
