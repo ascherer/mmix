@@ -94,22 +94,15 @@ printf "10000\nq" | ./mmmix plain.mmconfig hello.mmb
 printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir_p} %{buildroot}%{_bindir}
-%{__cp} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
+%{__install} mmix mmixal mmotype mmmix -D -t %{buildroot}%{_bindir}
 %if %{with patches}
-%{__mkdir_p} %{buildroot}%{_libdir}/%{name}
-%{__cp} libmmix.so %{buildroot}%{_libdir}/%{name}
+%{__install} libmmix.so -D -t %{buildroot}%{_libdir}/%{name}
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
 %{__echo} "%{_libdir}/%{name}" > \
 	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %endif
-%{__mkdir_p} %{buildroot}%{_datadir}/%{name}
-%{__cp} *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
-%if %{with tex}
-%{__mkdir_p} %{buildroot}%{_docdir}/%{name}
-%{__cp} *.pdf %{buildroot}%{_docdir}/%{name}
-%endif
+%{__install} *.mms *.mmconfig *.mmix -D -t %{buildroot}%{_datadir}/%{name}
+%{?with_tex:%{__install} *.pdf -D -t %{buildroot}%{_docdir}/%{name}}
 
 %files
 %defattr(644,root,root,755)
