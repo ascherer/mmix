@@ -93,6 +93,10 @@ printf "10000\nq" | ./mmmix plain.mmconfig hello.mmb
 ./mmix -Dsilly.mmb silly.mmo
 printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 
+echo "i silly.run" | ./mmix -i silly > silly.out.new 2>silly.err.new
+diff -u silly.out silly.out.new ||:
+diff -u silly.err silly.err.new ||:
+
 %install
 %{__install} mmix mmixal mmotype mmmix -D -t %{buildroot}%{_bindir}
 %if %{with patches}
