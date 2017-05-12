@@ -98,6 +98,7 @@ diff -u silly.out silly.out.new ||:
 diff -u silly.err silly.err.new ||:
 
 %install
+%{__rm} -rf %{buildroot}
 %{__install} mmix mmixal mmotype mmmix -D -t %{buildroot}%{_bindir}
 %if %{with patches}
 %{__install} libmmix.so -D -t %{buildroot}%{_libdir}/%{name}
