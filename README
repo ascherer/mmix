@@ -27,7 +27,7 @@ mmixal.w          Assembly program; includes detailed description of the
 
 mmix-arith.w      Subroutines to implement 64-bit arithmetic on a
                    32-bit computer; includes complete implementation
-                   of standard IEEE floating binary arithemtic
+                   of standard IEEE floating binary arithmetic
 
 mmix-sim.w        Program for the simple (non-pipelined) simulator;
                    includes detailed description of the runtime
