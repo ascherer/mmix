@@ -82,7 +82,7 @@ libmmix.so: mmix-arith.o mmix-config.o mmix-io.o mmix-mem.o mmix-pipe.o
 
 .SECONDEXPANSION:
 mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
-	sed "s/#define ABSTIME/& `date +%s`/" -i $<
+	sed -e "s/#define ABSTIME/& `date +%s`/" -i $<
 	$(CC) $(CFLAGS) -c $<
 
 mmix-config.o: mmix-pipe.o
