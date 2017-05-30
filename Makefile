@@ -75,7 +75,7 @@ clean:
 
 .SECONDEXPANSION:
 mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
-	sed -e "s/#define ABSTIME/& `date +%s`/" -i $<
+	sed -e "s/#define ABSTIME/& `date +%s`/" -i "" $<
 	$(CC) $(CFLAGS) -c $<
 
 mmix-config.o: mmix-pipe.o
