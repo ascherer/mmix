@@ -1,4 +1,4 @@
-@x 
+@x
 @s tetra int
 
 @y
@@ -22,3 +22,12 @@ typedef unsigned int tetra; /* a tetrabyte */
 typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra; /* a tetrabyte */
 @z
+
+@x
+    printf("File was created %s",asctime(localtime((time_t*)&tet)));
+@y
+  { time_t t = tet;
+    printf("File was created %s",asctime(localtime(&t)));
+  }
+@z
+
