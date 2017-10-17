@@ -72,7 +72,7 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %endif
 
 %build
-%{__make} all mmotype mmmix
+%{__make} all
 %if %{with tex}
 %{__make} doc
 for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
