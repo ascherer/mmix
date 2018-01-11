@@ -12,7 +12,7 @@ License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
 Version: 20170917
-Release: 1
+Release: 2
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if %{_vendor} == "debbuild"
@@ -45,6 +45,7 @@ Source9: mmix-mem.ch
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
 Patch43: 0043-Build-and-apply-shared-library.patch
+Patch66: 0066-Address-issue-9-detected-on-MacOS.patch
 %endif
 
 %description
@@ -79,8 +80,6 @@ for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
 %endif
 
 %check
-%{?with_patches:export LD_LIBRARY_PATH=.}
-
 ./mmixal -x -b 250 -l copy.mml copy.mms
 ./mmix copy copy.mms > copy.out
 diff -u copy.mms copy.out
@@ -100,12 +99,6 @@ diff -u silly.err silly.err.new ||:
 %install
 %{__rm} -rf %{buildroot}
 %{__install} mmix mmixal mmotype mmmix -D -t %{buildroot}%{_bindir}
-%if %{with patches}
-%{__install} libmmix.so -D -t %{buildroot}%{_libdir}/%{name}
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/ld.so.conf.d
-%{__echo} "%{_libdir}/%{name}" > \
-	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
-%endif
 %{__install} *.mms *.mmconfig *.mmix -D -t %{buildroot}%{_datadir}/%{name}
 %{?with_tex:%{__install} *.pdf -D -t %{buildroot}%{_docdir}/%{name}}
 
@@ -116,19 +109,12 @@ diff -u silly.err silly.err.new ||:
 %attr(755,root,root) %{_bindir}/mmotype
 %attr(755,root,root) %{_bindir}/mmmix
 %{_datadir}/%{name}
-%if %{with patches}
-%{_libdir}/%{name}
-%{_sysconfdir}/ld.so.conf.d/%{name}.conf
-%endif
 %{?with_tex:%doc %{_docdir}/%{name}}
 
-%post
-%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
-
-%postun
-%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
-
 %changelog
+* Thu Jan 11 2018 Andreas Scherer <andreas_tex@freenet.de>
+- Un-build shared library
+
 * Sat Jan 07 2017 Andreas Scherer <andreas_tex@freenet.de>
 - Build shared library from common modules
 
