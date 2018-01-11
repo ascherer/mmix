@@ -1,7 +1,7 @@
-From c6fdf5b41f0e3eb0f70309fe7e086346e832139b Mon Sep 17 00:00:00 2001
+From 91a396dab0da97ee861cc061b84c6ab862a1916b Mon Sep 17 00:00:00 2001
 From: debbuild <debbuild>
 Date: Sat, 7 Jan 2017 16:49:29 +0100
-Subject: [PATCH 43/43] Build and apply shared library.
+Subject: [PATCH 43/66] Build and apply shared library.
 
 Collect generic modules in a shared library and link programs.
 ---
@@ -69,5 +69,5 @@ index 42c3327..c0f5d6e 100644
  tarfile: $(ALL)
  	tar cvf /tmp/mmix.tar $(ALL)
 -- 
-2.13.0
+2.15.1
 
