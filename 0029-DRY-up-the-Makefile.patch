@@ -1,7 +1,7 @@
-From e98f79a58970acb83bba6dd99e417be103f82997 Mon Sep 17 00:00:00 2001
+From 19a4a74466b9e7e3b19ce56d06194802dcfe7b5a Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 8 Jan 2017 15:13:01 +0100
-Subject: [PATCH 29/43] DRY up the Makefile.
+Subject: [PATCH 29/66] DRY up the Makefile.
 
 The rules for mmix-pipe and mmix-sim are similar. With the
 .SECONDEXPANSION feature of GNU make, this can be made clear.
@@ -57,5 +57,5 @@ index b46d129..dcd4dad 100644
  tarfile: $(ALL)
  	tar cvf /tmp/mmix.tar $(ALL)
 -- 
-2.13.0
+2.15.1
 
