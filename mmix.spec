@@ -44,8 +44,6 @@ Source9: mmix-mem.ch
 
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
-Patch43: 0043-Build-and-apply-shared-library.patch
-Patch66: 0066-Address-issue-9-detected-on-MacOS.patch
 %endif
 
 %description
