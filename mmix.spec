@@ -53,11 +53,9 @@ Here is MMIX, a 64-bit computer that will totally replace MIX in the
 %prep
 %autosetup -c
 %if %{with changes}
-%if %{_vendor} == "debbuild"
-%{perl:for (1..9) { print "%{__cp} %{S:$_} .\n" }}
-%else
-%{lua:for i=1,9 do print(rpm.expand("%{__cp} %{S:"..i.."} .").."\n") end}
-%endif
+for f in %sources; do
+  case $f in *.ch) %{__cp} $f . ;; esac
+done
 %if %{with patches}
 %{__sed} "s/CFLAGS = -g/& -W -Wall/" -i Makefile
 %else
