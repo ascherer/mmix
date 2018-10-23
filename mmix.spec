@@ -94,9 +94,12 @@ diff -u silly.err silly.err.new ||:
 
 %install
 %{__rm} -rf %{buildroot}
-%{__install} mmix mmixal mmotype mmmix -D -t %{buildroot}%{_bindir}
-%{__install} *.mms *.mmconfig *.mmix -m 644 -D -t %{buildroot}%{_datadir}/%{name}
-%{?with_tex:%{__install} *.pdf -m 644 -D -t %{buildroot}%{_docdir}/%{name}}
+%{__install} -d %{buildroot}%{_bindir} \
+	%{buildroot}%{_datadir}/%{name}
+%{?with_tex:%{__install} -d %{buildroot}%{_docdir}/%{name}}
+%{__install} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
+%{__install} -m 644 *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
+%{?with_tex:%{__install} -m 644 *.pdf %{buildroot}%{_docdir}/%{name}}
 
 %files
 %defattr(-,root,root,-)
