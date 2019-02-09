@@ -17,7 +17,7 @@ Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if %{_vendor} == "debbuild"
 Group: science
-Distribution: Kubuntu 16.04 (x86_64)
+Distribution: Kubuntu 18.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
