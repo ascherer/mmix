@@ -57,7 +57,7 @@ for f in %sources; do
   case $f in *.ch) %{__cp} $f . ;; esac
 done
 %if %{with patches}
-%{__sed} "s/CFLAGS = -g/& -W -Wall/" -i Makefile
+%{__sed} "s/CFLAGS = -g/& -Wall -Wextra -Wno-implicit-fallthrough/" -i Makefile
 %else
 %{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-pipe.ch
 %{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-sim.ch
