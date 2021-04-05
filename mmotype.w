@@ -339,9 +339,9 @@ if (y!=1) fprintf(stderr,
 if (z>0) {
   j=z;
   read_tet();
-  if (listing) {
-    time_t t=tet;
-    printf("File was created %s",asctime(localtime((time_t*)&t)));
+  if (listing)
+  { time_t t = tet;
+    printf("File was created %s",asctime(localtime(&t)));
   }
   for (j--;j>0;j--) {
     read_tet();

@@ -90,20 +90,20 @@ protect the standard input, output, and error streams from being
 preempted.
 
 @<Sub...@>=
-octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fopen @,@,@[ARGS((unsigned int,octa,octa))@];@+@t}\6{@>
 octa mmix_fopen(handle,name,mode)
-  unsigned char handle;
+  unsigned int handle;
   octa name,mode;
 {
   char name_buf[FILENAME_MAX];
-  if (mode.h || mode.l>4) goto abort;
-  if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto abort;
+  if (mode.h || mode.l>4) goto failure;
+  if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto failure;
   if (sfile[handle].mode!=0 && handle>2) fclose(sfile[handle].fp);
   sfile[handle].fp=fopen(name_buf,mode_string[mode.l]);
-  if (!sfile[handle].fp) goto abort;
+  if (!sfile[handle].fp) goto failure;
   sfile[handle].mode=mode_code[mode.l];
   return zero_octa; /* success */
- abort: sfile[handle].mode=0;
+ failure: sfile[handle].mode=0;
   return neg_one; /* failure */
 }
 
@@ -123,9 +123,9 @@ void mmix_fake_stdin(f)
 }
 
 @ @<Sub...@>=
-octa mmix_fclose @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
+octa mmix_fclose @,@,@[ARGS((unsigned int))@];@+@t}\6{@>
 octa mmix_fclose(handle)
-  unsigned char handle;
+  unsigned int handle;
 {
   if (sfile[handle].mode==0) return neg_one;
   if (handle>2 && fclose(sfile[handle].fp)!=0) return neg_one;
@@ -134,13 +134,13 @@ octa mmix_fclose(handle)
 }
 
 @ @<Sub...@>=
-octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fread @,@,@[ARGS((unsigned int,octa,octa))@];@+@t}\6{@>
 octa mmix_fread(handle,buffer,size)
-  unsigned char handle;
+  unsigned int handle;
   octa buffer,size;
 {
   register unsigned char *buf;
-  register int n;
+  register unsigned int n;
   octa o;
   o=neg_one;
   if (!(sfile[handle].mode&0x1)) goto done;
@@ -169,9 +169,9 @@ if (sfile[handle].fp==stdin) {
 }
 
 @ @<Sub...@>=
-octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fgets @,@,@[ARGS((unsigned int,octa,octa))@];@+@t}\6{@>
 octa mmix_fgets(handle,buffer,size)
-  unsigned char handle;
+  unsigned int handle;
   octa buffer,size;
 {
   char buf[256];
@@ -196,7 +196,7 @@ octa mmix_fgets(handle,buffer,size)
 
 @ @<Read |n<256| characters into |buf|@>=
 s=255;
-if (size.l<s && !size.h) s=size.l;
+if (size.l<(unsigned int)s && !size.h) s=(int)size.l;
 if (sfile[handle].fp==stdin)
   for (p=buf,n=0;n<s;) {
     *p=stdin_chr();
@@ -224,13 +224,13 @@ prepared on random operating systems might be backwards.
 @^system dependencies@>
 
 @<Sub...@>=
-octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fgetws @,@,@[ARGS((unsigned int,octa,octa))@];@+@t}\6{@>
 octa mmix_fgetws(handle,buffer,size)
-  unsigned char handle;
+  unsigned int handle;
   octa buffer,size;
 {
   char buf[256];
-  register int n,s;
+  register tetra n,s;
   register char *p;
   octa o;
   int eof=0;
@@ -244,7 +244,7 @@ octa mmix_fgetws(handle,buffer,size)
     @<Read |n<128| wyde characters into |buf|@>;
     mmputchars((unsigned char*)buf,2*n+2,buffer);
     o=incr(o,n);
-    size=incr(size,-n);
+    size=incr(size,-(int)n);
     if ((n&&buf[2*n-1]=='\n'&&buf[2*n-2]==0) || (!size.l&&!size.h) || eof)
       return o;
     buffer=incr(buffer,2*n);
@@ -272,19 +272,19 @@ else for (p=buf,n=0;n<s;) {
 *p=*(p+1)='\0';
 
 @ @<Sub...@>=
-octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fwrite @,@,@[ARGS((unsigned int,octa,octa))@];@+@t}\6{@>
 octa mmix_fwrite(handle,buffer,size)
-  unsigned char handle;
+  unsigned int handle;
   octa buffer,size;
 {
   char buf[256];
-  register int n;
+  register unsigned int n;
   if (!(sfile[handle].mode&0x2)) return ominus(zero_octa,size);
   if (sfile[handle].mode&0x8) sfile[handle].mode &=~ 0x1;
   while (1) {
     if (size.h || size.l>=256) n=mmgetchars(buf,256,buffer,-1);
     else n=mmgetchars(buf,size.l,buffer,-1);
-    size=incr(size,-n);
+    size=incr(size,-(int)n);
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return ominus(zero_octa,size);
     fflush(sfile[handle].fp);
     if (!size.l && !size.h) return zero_octa;
@@ -293,13 +293,13 @@ octa mmix_fwrite(handle,buffer,size)
 }
 
 @ @<Sub...@>=
-octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
+octa mmix_fputs @,@,@[ARGS((unsigned int,octa))@];@+@t}\6{@>
 octa mmix_fputs(handle,string)
-  unsigned char handle;
+  unsigned int handle;
   octa string;
 {
   char buf[256];
-  register int n;
+  register unsigned int n;
   octa o;
   o=zero_octa;
   if (!(sfile[handle].mode&0x2)) return neg_one;
@@ -317,13 +317,13 @@ octa mmix_fputs(handle,string)
 }
 
 @ @<Sub...@>=
-octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
+octa mmix_fputws @,@,@[ARGS((unsigned int,octa))@];@+@t}\6{@>
 octa mmix_fputws(handle,string)
-  unsigned char handle;
+  unsigned int handle;
   octa string;
 {
   char buf[256];
-  register int n;
+  register unsigned int n;
   octa o;
   o=zero_octa;
   if (!(sfile[handle].mode&0x2)) return neg_one;
@@ -343,9 +343,9 @@ octa mmix_fputws(handle,string)
 @ @d sign_bit ((unsigned)0x80000000)
 
 @<Sub...@>=
-octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
+octa mmix_fseek @,@,@[ARGS((unsigned int,octa))@];@+@t}\6{@>
 octa mmix_fseek(handle,offset)
-  unsigned char handle;
+  unsigned int handle;
   octa offset;
 {
   if (!(sfile[handle].mode&0x4)) return neg_one;
@@ -361,9 +361,9 @@ octa mmix_fseek(handle,offset)
 }
 
 @ @<Sub...@>=
-octa mmix_ftell @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
+octa mmix_ftell @,@,@[ARGS((unsigned int))@];@+@t}\6{@>
 octa mmix_ftell(handle)
-  unsigned char handle;
+  unsigned int handle;
 {
   register long x;
   octa o;

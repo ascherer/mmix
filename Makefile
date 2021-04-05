@@ -65,13 +65,13 @@ ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
 basic:  mmixal mmix
 
 doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
-	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
-	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
+	dvips -pp 0-13 -o mmixal-intro.ps mmixal.dvi
+	dvips -pp 0-8 -o mmix-sim-intro.ps mmix-sim.dvi
 
 all:    mmixal mmix mmotype mmmix
 
 clean:
-	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
+	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
 
 mmix-pipe.o: mmix-pipe.c abstime
 	./abstime > abstime.h

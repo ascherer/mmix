@@ -749,10 +749,10 @@ for (j=0;j<=funit_count;j++) {
 }
 
 @ @<Build table of pipeline stages needed for each opcode@>=
-for (j=div;j<=max_pipe_op;j++) int_stages[j]=strlen(pipe_seq[j]);
+for (j=div;j<=max_pipe_op;j++) int_stages[j]=(int)strlen((char*)pipe_seq[j]);
 for (;j<=max_real_command;j++) int_stages[j]=1;
 for (j=mul0,n=0;j<=mul8;j++)
-  if (strlen(pipe_seq[j])>n) n=strlen(pipe_seq[j]);
+  if (strlen((char*)pipe_seq[j])>(unsigned int)n) n=(int)strlen((char*)pipe_seq[j]);
 int_stages[mul]=n;
 int_stages[ld]=int_stages[st]=int_stages[frem]=2;
 for (j=0;j<256;j++) stages[j]=int_stages[int_op[j]];

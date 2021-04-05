@@ -253,7 +253,6 @@ void MMIX_run(cycs,breakpoint)
     }
     cycs--;
   }
- cease:;
 }
 
 @ @<Type...@>=
@@ -1126,7 +1125,7 @@ special registers 0--7 are unencumbered, 9--11 can't be \.{PUT} by anybody,
 8 and 12--18 can't be \.{PUT} by the user. Pipeline delays might occur
 when \.{GET} is applied to special registers 21--31 or when
 \.{PUT} is applied to special registers 8 or 15--20. The \.{SAVE} and
-\.{UNSAVE} commands store and restore special registers 0--6 and 23--27.
+\.{UNSAVE} commands store and restore special registers 0--6 and 23--27 followed by 19 and 21.
 
 @<Header def...@>=
 #define rA 21 /* arithmetic status register */
@@ -1872,7 +1871,7 @@ fail in February of 2106.)
 
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @d SUBVERSION 0 /* secondary byte of version number */
-@d SUBSUBVERSION 0 /* further qualification to version number */
+@d SUBSUBVERSION 2 /* further qualification to version number */
 
 @<Initialize everything@>=
 rename_regs=max_rename_regs;
@@ -1898,7 +1897,7 @@ static void print_specnode_id(a)
   octa a;
 {
   if (a.h==sign_bit) {
-    if (a.l<32) printf(special_name[a.l]);
+    if (a.l<32) printf("%s",special_name[a.l]);
     else if (a.l<256) printf("g[%d]",a.l);
     else printf("l[%d]",a.l-256);
   }@+else if (a.h!=(tetra)-1) {
@@ -1971,7 +1970,7 @@ floating point rounding, are treated in the normal way.
 Extern octa cool_O,cool_S; /* values of rO, rS before the |cool| instruction */
 
 @ @<Glob...@>=
-int cool_L,cool_G; /* values of rL and rG before the |cool| instruction */
+unsigned int cool_L,cool_G; /* values of rL and rG before the |cool| instruction */
 unsigned int cool_hist,peek_hist; /* history bits for branch prediction */
 octa new_O,new_S; /* values of rO, rS after |cool| */
 
@@ -2131,10 +2130,10 @@ case 3: cool->z.o.l=yz;@+break;
 }
 
 @ @<Check for sufficient rename registers...@>=
-if (rename_regs<cool->ren_x+cool->ren_a) goto stall;
+if (rename_regs<(cool->ren_x?1:0)+(cool->ren_a?1:0)) goto stall;
 if (cool->mem_x)
-  if (mem_slots) mem_slots--;@+else goto stall;
-rename_regs-=cool->ren_x+cool->ren_a;
+{ if (mem_slots) mem_slots--;@+else goto stall; }
+rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 
 @ The |incrl| instruction
 advances $\beta$ and~rL by~1 at a time when we know that $\beta\ne\gamma$,
@@ -2267,7 +2266,7 @@ insert an~|incrl| command.
 
 @<Special cases of instruction dispatch@>=
 case pushgo: inst_ptr.p=&cool->go;
-case pushj: {@+register int x=cool->xx;
+case pushj: {@+register unsigned int x=cool->xx;
   if (x>=cool_G) {
     if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
@@ -2297,7 +2296,7 @@ case pop:@+if (cool->xx && cool_L>=cool->xx)
       cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
 pop_unsave:@+if (cool_S.l==cool_O.l)
     @<Insert an instruction to decrease gamma@>;
-  {@+register tetra x; register int new_L;
+  {@+register tetra x; register unsigned int new_L;
     register specnode *p=l[(cool_O.l-1)&lring_mask].up;
     if (p->known) x=(p->o.l)&0xff;@+ else goto stall;
     if ((tetra)(cool_O.l-cool_S.l)<=x)
@@ -2516,6 +2515,7 @@ switch (data->i) {
   @<Cases to compute the results of register-to-register operation@>;
   @<Cases to compute the virtual address of a memory operation@>;
   @<Cases for stage 1 execution@>;
+  default: ;
 }
 @<Set things up so that the results become |known| when they should@>;
 
@@ -3412,7 +3412,7 @@ static cacheblock* choose_victim(s,aa,policy)
  case serial: l=s[0].rank;@+ s[0].rank=(l+1)&(aa-1);@+ return &s[l];
  case lru: for (p=s;p<s+aa;p++)
     if (p->rank==0) return p;
-  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
+ default: panic(confusion("lru victim")); /* what happened? nobody has rank zero */
  case pseudo_lru: for (l=1,m=aa>>1; m; m>>=1) l=l+l+s[l].rank;
    return &s[l-aa];
   }
@@ -4328,7 +4328,7 @@ kept unpacked in several global variables |page_r|, |page_s|, etc., for
 convenience. Whenever rV changes, we recompute all these variables.
 
 @<Glob...@>=
-int page_n; /* the 10-bit |n| field of rV, times 8 */
+unsigned int page_n; /* the 10-bit |n| field of rV, times 8 */
 int page_r; /* the 27-bit |r| field of rV */
 int page_s; /* the 8-bit |s| field of rV */
 int page_f; /* the 3-bit |f| field of rV */
@@ -4617,7 +4617,7 @@ case write_from_wbuf:
     if (write_head==write_tail) wait(1); /* write buffer is empty */
     if (write_head->i==sync) @<Ignore the item in |write_head|@>;
     if (write_head->addr.h&0xffff0000) goto mem_direct;
-    if (ticks.l-write_head->stamp<holding_time && !speed_lock)
+    if ((int)(ticks.l-write_head->stamp)<holding_time && !speed_lock)
       wait(1); /* data too raw */
     if (!Dcache) goto mem_direct; /* not cached */
     if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1); /* D-cache busy */
@@ -4851,7 +4851,7 @@ if (data->stack_alert) {
   else data->z.o=g[rC].o; /* use the continuation page for stack overflow */
 }
 j=PRW_BITS;
-if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
+if (((data->z.o.l<<PROT_OFFSET)&j)!=(unsigned int)j) {
   if (data->i==syncd || data->i==syncid) goto sync_check;
   if (data->i!=preld && data->i!=prest)
     data->interrupt|=j&~(data->z.o.l<<PROT_OFFSET);
@@ -4898,6 +4898,7 @@ data->z.o=phys_addr(data->y.o,data->z.o);
     }
     data->x.o=zero_octa;
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
+  default: ;
     }
   }@+else if (data->i>=st && data->i<=syncid) {
     data->state=st_ready;@+pass_after(1);@+goto passit;
@@ -4955,9 +4956,9 @@ square_one: data->state=DT_retry;
    }@+ else data->state=DT_miss;
    wait(DTcache->access_time);
  case DT_miss:@+if (DTcache->filler.next)
-     if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;
+   { if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;@+}
    if (no_hardware_PT || page_f)
-     if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;
+   { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;@+}
    p=alloc_slot(DTcache,trans_key(data->y.o));
    if (!p) goto square_one;
    data->ptr_b=DTcache->filler_ctl.ptr_b=(void *)p;
@@ -5026,7 +5027,7 @@ the S-cache or from memory.
 @<Check for |prest| with a fully spanned cache block@>=
 if (data->i==prest &&@|
    (data->xx>=Dcache->bb || ((data->y.o.l&(Dcache->bb-1))==0)) &&@|
-   ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=Dcache->bb)
+   ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(unsigned int)Dcache->bb)
   goto prest_span;
 
 @ @<Special cases for states in later stages@>=
@@ -5101,8 +5102,9 @@ case st_ready:@+ switch (data->i) {
  case st: case pst: @<Finish a store command@>;
  case syncd: data->b.o.l=(Dcache? Dcache->bb: 8192);@+goto do_syncd;
  case syncid: data->b.o.l=(Icache? Icache->bb: 8192);
-   if (Dcache && Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
+   if (Dcache && (unsigned int)Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
+ default: ;
 }
 
 @ Store instructions have an extra complication, because some of them need
@@ -5346,12 +5348,12 @@ if (data->i!=prego) {
 
 @ @<Other cases for the fetch coroutine@>=
  case IT_miss:@+if (ITcache->filler.next)
-     if (data->i==prego) goto fin_ex;@+else wait(1);
+   { if (data->i==prego) goto fin_ex;@+else wait(1);@+}
    if (no_hardware_PT || page_f)
      @<Insert dummy instruction for page table emulation@>;
    p=alloc_slot(ITcache,trans_key(data->y.o));
    if (!p) /* hey, it was present after all */
-     if (data->i==prego) goto fin_ex;@+else goto new_fetch;
+   { if (data->i==prego) goto fin_ex;@+else goto new_fetch;@+}
    data->ptr_b=ITcache->filler_ctl.ptr_b=(void *)p;
    ITcache->filler_ctl.y.o=data->y.o;
    set_lock(self,ITcache->fill_lock);
@@ -6197,6 +6199,7 @@ case feps: j=fepscomp(data->y.o,data->z.o,data->b.o,data->op!=FEQLE);
  case FUNE:@+ if (j==2) goto cmp_pos;@+ else goto cmp_zero;
  case FEQLE: goto cmp_fin;
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
+ default: ;
   }
 case fcmp: j=fcomp(data->y.o,data->z.o);
   if (j<0) goto cmp_neg;
@@ -6455,7 +6458,7 @@ case 33:@+ if (data!=old_hot) wait(1);
  @<Wait till write buffer is empty@>;
  if (((data->b.o.l-1)&~data->y.o.l)<data->xx) data->interim=true;
  if (!Dcache)
-   if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
+ { if (data->i==syncd) goto fin_ex;@+ else goto next_sync;@+}
  @<Use |cleanup| on the cache blocks for |data->z.o|, if any@>;
  data->state=34;
 case 34:@+if (!clean_co.next) goto next_sync;
