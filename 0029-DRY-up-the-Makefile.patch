@@ -22,7 +22,7 @@ index 798d9d7..2f5f5ce 100644
 +++ b/Makefile
 @@ -73,27 +73,24 @@ all:    mmixal mmix mmotype mmmix
  clean:
- 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps *.pdf core
+ 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
  
 -mmix-pipe.o: mmix-pipe.c abstime
 -	./abstime > abstime.h
