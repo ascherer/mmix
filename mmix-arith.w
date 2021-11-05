@@ -302,7 +302,7 @@ for (i=k=0; i<n; i++) {
 example, when dividing the number \Hex{7fff800100000000} by \Hex{800080020005}.
 
 @<If the result was negative, decrease $\hat q$ by 1@>=
-if (u[j+n]!=(tetra)k) {
+if (u[j+n]!=k) {
   qhat--;
   for (i=k=0; i<n; i++) {
     t=u[i+j]+v[i]+k;
@@ -329,7 +329,7 @@ octa signed_odiv(y,z)
   switch (sy+sz) {
  case 2+1: aux=ominus(zero_octa,aux);
   if (q.h==sign_bit) overflow=true;
- case 0+0: default: return q;
+ case 0+0: return q;
  case 2+0:@+ if (aux.h || aux.l) aux=ominus(zz,aux);
   goto negate_q;
  case 0+1:@+ if (aux.h || aux.l) aux=ominus(aux,zz);
@@ -502,11 +502,11 @@ tiny, |X_BIT| if and only if the result is inexact.
 @d E_BIT (1<<18) /* external (dynamic) trap bit */
 
 @<Subr...@>=
-octa fpack @,@,@[ARGS((octa,int,int,int))@];@+@t}\6{@>
+octa fpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 octa fpack(f,e,s,r)
   octa f; /* the normalized fraction part */
   int e; /* the raw exponent */
-  int s; /* the sign */
+  char s; /* the sign */
   int r; /* the rounding mode */
 {
   octa o;
@@ -550,11 +550,11 @@ return o;
 having the same conventions as |fpack|.
 
 @<Subr...@>=
-tetra sfpack @,@,@[ARGS((octa,int,int,int))@];@+@t}\6{@>
+tetra sfpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 tetra sfpack(f,e,s,r)
   octa f; /* the fraction part */
   int e; /* the raw exponent */
-  int s; /* the sign */
+  char s; /* the sign */
   int r; /* the rounding mode */
 {
   register tetra o;
@@ -719,7 +719,7 @@ octa fmult(y,z)
   xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
   switch (4*yt+zt) {
  @t\4@>@<The usual NaN cases@>;
- default: case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
+ case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
  case 4*num+inf: case 4*inf+num: case 4*inf+inf: x=inf_octa;@+break;
  case 4*zro+inf: case 4*inf+zro: x=standard_NaN;
   exceptions|=I_BIT;@+break;
@@ -765,7 +765,7 @@ octa fdivide(y,z)
  case 4*zro+inf: case 4*zro+num: case 4*num+inf: x=zero_octa;@+break;
  case 4*num+zro: exceptions|=Z_BIT;
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
- default: case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
+ case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
   exceptions|=I_BIT;@+break;
  case 4*num+num: @<Divide nonzero numbers and |return|@>;
   }
@@ -812,7 +812,7 @@ octa fplus(y,z)
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+xs=ys;@+break;
  case 4*num+num:@+ if (y.h!=(z.h^0x80000000) || y.l!=z.l) 
    @<Add nonzero numbers and |return|@>;
- default: case 4*zro+zro: x=zero_octa;
+ case 4*zro+zro: x=zero_octa;
   xs=(ys==zs? ys: cur_round==ROUND_DOWN? '-': '+');@+break;
   }
   if (xs=='-') x.h|=sign_bit;
@@ -1298,7 +1298,7 @@ explicit exponent only if the alternative would take more than
 if (e>17 || e<(int)strlen(s)-17)
   printf("%c%s%se%d",s[0],(s[1]? ".": ""),s+1,e-1);
 else if (e<0) printf(".%0*d%s",-e,0,s);
-else if ((int)strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
+else if (strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
 else printf("%s%0*d.",s,e-(int)strlen(s),0);
 
 @*Floating point input conversion. Going the other way, we want to
@@ -1354,7 +1354,7 @@ int scan_const(s)
     @<Scan a number and |return|@>;
   if (NaN) @<Return the standard NaN@>;
   if (strncmp(p,"Inf",3)==0) @<Return infinity@>;
-  next_char=s;@+return -1;
+ no_const_found: next_char=s;@+return -1;
 }
 
 @ @<Glob...@>=
@@ -1399,10 +1399,9 @@ a speedy almost-correct one, so we implement the most general case.
   for (q=buf0,dec_pt=(char*)0;isdigit(*p);p++) {
     val=oplus(val,shift_left(val,2)); /* multiply by 5 */
     val=incr(shift_left(val,1),*p-'0');
-    if (q>buf0 || *p!='0') {
+    if (q>buf0 || *p!='0')
        if (q<buf_max) *q++=*p;
-       else if (*(q-1)=='0') *(q-1)=*p;@+
-    }
+       else if (*(q-1)=='0') *(q-1)=*p;
   }
   if (NaN) *q++='1';
   if (*p=='.') @<Scan a fraction part@>;
@@ -1437,7 +1436,7 @@ static char buf[785]="00000000"; /* where we put significant input digits */
 @ @<Local variables for |scan_const|@>=
 register char* dec_pt; /* position of decimal point in |buf| */
 register int exp; /* scanned exponent; later used for raw binary exponent */
-register int zeros=0; /* leading zeros removed after decimal point */
+register int zeros; /* leading zeros removed after decimal point */
 
 @ Here we don't advance |next_char| and force a decimal point until we
 know that a syntactically correct exponent exists.
@@ -1481,7 +1480,7 @@ by $10^{9k}$, for $36\ge k\ge-120$.
 @<Move the digits from |buf| to |ff|@>=
 x=buf+341+zeros-dec_pt-exp;
 if (q==buf0 || x>=1413) {
-  exp=-99999;@+ goto packit;
+ make_it_zero: exp=-99999;@+ goto packit;
 }
 if (x<0) {
  make_it_infinite: exp=99999;@+ goto packit;
@@ -1591,7 +1590,7 @@ int fcomp(y,z)
   switch (4*yt+zt) {
  case 4*nan+nan: case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
  case 4*nan+zro: case 4*nan+num: case 4*nan+inf: return 2;
- default: case 4*zro+zro: return 0;
+ case 4*zro+zro: return 0;
  case 4*zro+num: case 4*num+zro: case 4*zro+inf: case 4*inf+zro:
  case 4*num+num: case 4*num+inf: case 4*inf+num: case 4*inf+inf:
   if (ys!=zs) x=1;
@@ -1623,7 +1622,7 @@ octa fintegerize(z,r)
   if (!r) r=cur_round;
   switch (zt) {
  case nan:@+if (!(z.h&0x80000)) {@+exceptions|=I_BIT;@+z.h|=0x80000;@+}
- case inf: case zro: default: return z;
+ case inf: case zro: return z;
  case num: @<Integerize and |return|@>;
   }
 }
@@ -1665,7 +1664,7 @@ octa fixit(z,r)
   if (!r) r=cur_round;
   switch (zt) {
  case nan: case inf: exceptions|=I_BIT;@+return z;
- case zro: default: return zero_octa;
+ case zro: return zero_octa;
  case num:@+if (funpack(fintegerize(z,r),&zf,&ze,&zs)==zro) return zero_octa;
    if (ze<=1076) o=shift_right(zf,1076-ze,1);
    else {
@@ -1736,7 +1735,7 @@ octa froot(z,r)
   else@+switch (zt) {
  case nan:@+ if (!(z.h&0x80000)) exceptions|=I_BIT, z.h|=0x80000;
   return z;
- default: case inf: case zro: x=z;@+break;
+ case inf: case zro: x=z;@+break;
  case num: @<Take the square root and |return|@>;
   }
   if (zs=='-') x.h|=sign_bit;
@@ -1795,7 +1794,7 @@ octa fremstep(y,z,delta)
   exceptions|=I_BIT;@+break;
  case 4*zro+num: case 4*zro+inf: case 4*num+inf: return y;
  case 4*num+num: @<Remainderize nonzero numbers and |return|@>;
- default: zero_out: x=zero_octa;
+ zero_out: x=zero_octa;
   }
   if (ys=='-') x.h|=sign_bit;
   return x;

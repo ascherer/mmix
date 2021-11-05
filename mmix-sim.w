@@ -996,11 +996,12 @@ case lop_fixo:@+if (zbyte==2) {
  mmo_load(tmp,cur_loc.h);
  mmo_load(incr(tmp,4),cur_loc.l);
  continue;
-case lop_fixr: mmo_load(incr(cur_loc,-yzbytes<<2),yzbytes); continue;
+case lop_fixr: delta=yzbytes; goto fixr;
 case lop_fixrx:j=yzbytes;@+if (j!=16 && j!=24) mmo_err;
- read_tet();@+if (tet&0xfe000000) mmo_err;
- delta=(tet>=0x1000000? (tet&0xffffff)-(1<<j): tet);
- mmo_load(incr(cur_loc,-delta<<2),tet);
+ read_tet(); delta=tet;
+ if (delta&0xfe000000) mmo_err;
+fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
+ mmo_load(tmp,delta);
  continue;
 
 @ The space for file names isn't allocated until we are sure we need it.
@@ -1050,7 +1051,7 @@ ll=mem_find(aux);
 (ll-5)->tet=argc; /* and $\$0=|argc|$ */
 (ll-4)->tet=0x40000000;
 (ll-3)->tet=0x8; /* and $\$1=\.{Pool\_Segment}+8$ */
-G=zbyte;@+ L=0;@+ O=0;
+G=zbyte;@+ L=0;
 for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
 inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 (ll+2*12)->tet=G<<24;
@@ -1180,8 +1181,8 @@ void show_line()
   else if (shown_line==cur_line) return; /* already shown */
   if (cur_line>shown_line+gap+1 || cur_line<shown_line) {
     if (shown_line>0)
-    { if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
-      else printf("     ...\n"); @+}/* indicate the gap */
+      if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
+      else printf("     ...\n"); /* indicate the gap */
     print_line(cur_line);
   }@+else@+ for (k=shown_line+1;k<=cur_line;k++) print_line(k);
   shown_line=cur_line;
@@ -1387,7 +1388,7 @@ octa inst_ptr; /* location of the next instruction */
 tetra inst; /* the current instruction */
 int old_L; /* value of |L| before the current instruction */
 int exc; /* exceptions raised by the current instruction */
-unsigned int tracing_exceptions; /* exception bits that cause tracing */
+int tracing_exceptions; /* exception bits that cause tracing */
 int rop; /* ropcode of a resumed instruction */
 int round_mode; /* the style of floating point rounding just used */
 bool resuming; /* are we resuming an interrupted instruction? */
@@ -1799,7 +1800,7 @@ fail in February of 2106.)
 
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @d SUBVERSION 0 /* secondary byte of version number */
-@d SUBSUBVERSION 3 /* further qualification to version number */
+@d SUBSUBVERSION 1 /* further qualification to version number */
 
 @<Initialize...@>=
 g[rK]=neg_one;
@@ -1838,14 +1839,13 @@ it were \.{ADDU}.
 b=g[info[op].third_operand];
 
 @ @<Install register~X as the destination...@>=
-{if (xx>=G) {
+if (xx>=G) {
   sprintf(lhs,"$%d=g[%d]",xx,xx);
   x_ptr=&g[xx];
 }@+else {
   while (xx>=L) @<Increase rL@>;
   sprintf(lhs,"$%d=l[%d]",xx,(O+xx)&lring_mask);
   x_ptr=&l[(O+xx)&lring_mask];
-}
 }
 
 @ @<Increase rL@>=
@@ -2024,7 +2024,7 @@ case FDIV: x=fdivide(y,z);@+goto fin_float;
 case FREM: x=fremstep(y,z,2500);@+goto fin_float;
 case FSQRT: x=froot(z,y.l);
  fin_unifloat:@+if (y.h || y.l>4) goto illegal_inst;
- round_mode=(y.l? (int)y.l: cur_round);@+goto store_fx;
+ round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 case FINT: x=fintegerize(z,y.l);@+goto fin_unifloat;
 case FIX: x=fixit(z,y.l);@+goto fin_unifloat;
 case FIXU: x=fixit(z,y.l);@+exceptions&=~W_BIT;@+goto fin_unifloat;
@@ -2072,7 +2072,7 @@ int register_truth(o,op)
 {@+register int b;
   switch ((op>>1) & 0x3) {
  case 0: b=o.h>>31;@+break; /* negative? */
- default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
+ case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
  case 2: b=(o.h<sign_bit && (o.h||o.l));@+break; /* positive? */
  case 3: b=o.l&0x1;@+break; /* odd? */
 }
@@ -2213,13 +2213,13 @@ case PUT: case PUTI:@+ if (yy!=0 || xx>=32) goto illegal_inst;
 @ @<Set $L=z=\min(z,L)$@>=
 {
   x=z;@+ strcpy(rhs,z.h? "min(rL,%#x) = %z": "min(rL,%x) = %z");
-  if (z.l>(unsigned int)L || z.h) z.h=0, z.l=L;
+  if (z.l>L || z.h) z.h=0, z.l=L;
   else old_L=L=z.l;
 }
 
 @ @<Get ready to update rG@>=
 {
-  if (z.h!=0 || z.l>255 || z.l<(unsigned int)L || z.l<32) goto illegal_inst;
+  if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
   for (j=z.l; j<G; j++) g[j]=zero_octa;
   G=z.l;
 }
@@ -2832,7 +2832,7 @@ void trace_print(o)
  case hex: fputc('#',stdout);@+print_hex(o);@+return;
  case zhex: printf("%08x%08x",o.h,o.l);@+return;
  case floating: print_float(o);@+return;
- case handle:@+if (o.h==0 && o.l<3) printf("%s",stream_name[o.l]);
+ case handle:@+if (o.h==0 && o.l<3) printf(stream_name[o.l]);
     else print_int(o);@+return;
   }
 }
@@ -2843,9 +2843,9 @@ case ')': fputc(right_paren[round_mode],stdout);@+break;
 case 't':@+if (x.l) printf(" Yes, -> #"),print_hex(inst_ptr);
    else printf(" No");@+break;
 case 'g':@+if (!good) printf(" (bad guess)");@+break;
-case 's': printf("%s",special_name[zz]);@+break;
+case 's': printf(special_name[zz]);@+break;
 case '?': p++;@+if (z.l) printf("%c%d",*p,z.l);@+break;
-case 'l': printf("%s",lhs);@+break;
+case 'l': printf(lhs);@+break;
 case 'r': p=switchable_string;@+break;
 
 @ @d rhs &switchable_string[1]
@@ -2951,7 +2951,7 @@ void scan_option(arg,usage)
   register int k;
   switch (*arg) {
  case 't':@+if (strlen(arg)>10) trace_threshold=0xffffffff;
-  else if (sscanf(arg+1,"%d",(int *)&trace_threshold)!=1) trace_threshold=0;
+  else if (sscanf(arg+1,"%d",&trace_threshold)!=1) trace_threshold=0;
   return;
  case 'e':@+if (!*(arg+1)) tracing_exceptions=0xff;
   else if (sscanf(arg+1,"%x",&tracing_exceptions)!=1) tracing_exceptions=0;
@@ -2984,9 +2984,9 @@ void scan_option(arg,usage)
     fprintf(stderr,
         "Usage: %s <options> progfile command line-args...\n",myself);
 @.Usage: ...@>
-    for (k=0;usage_help[k][0];k++) fprintf(stderr,"%s",usage_help[k]);
+    for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
     exit(-1);
-  }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
+  }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf(usage_help[k]);
   return;
   }
 }
@@ -3064,7 +3064,7 @@ signal(SIGINT,catchint); /* now |catchint| will catch the first interrupt */
 void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
 void catchint(n)
   int n;
-{ if (n!=SIGINT) return;
+{
   interrupt=true;
   signal(SIGINT,catchint); /* now |catchint| will catch the next interrupt */
 }
@@ -3090,10 +3090,10 @@ void catchint(n)
     printf("Eh? Sorry, I don't understand `%s'. (Type h for help)\n",
          command_buf);
     goto interact;
-  case 'h':@+ for (k=0;interactive_help[k][0];k++) printf("%s",interactive_help[k]);
+  case 'h':@+ for (k=0;interactive_help[k][0];k++) printf(interactive_help[k]);
     goto interact;
   }
-  if (*p!='\n') {
+ check_syntax:@+ if (*p!='\n') {
    if (!*p) incomplete_str: printf("Syntax error: Incomplete command!\n");
    else {
      p[strlen(p)-1]='\0';
@@ -3112,10 +3112,9 @@ resume_simulation:;
       fclose(incl_file);
       incl_file=NULL;
     }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
-              command_buf[0]!='%') {
-      if (command_buf[0]==' ') printf("%s",command_buf);@+
-      else ready=true;@+
-    }
+              command_buf[0]!='%')
+      if (command_buf[0]==' ') printf("%s",command_buf);
+      else ready=true;
   while (!ready) {
     printf("mmix> ");@+fflush(stdout);
 @.mmix>@>
@@ -3264,11 +3263,11 @@ if (k>=9 && k!=rI) {
     if (val.h!=0 || val.l>=0x40000) break;
     cur_round=(val.l>=0x10000? val.l>>16: ROUND_NEAR);
   }@+else if (k==rG) {
-    if (val.h!=0 || val.l>(unsigned int)255 || val.l<(unsigned int)L || val.l<32) break;
+    if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
     for (j=val.l; j<G; j++) g[j]=zero_octa;
     G=val.l;
   }@+else if (k==rL) {
-    if (val.h==0 && val.l<(unsigned int)L) L=val.l;
+    if (val.h==0 && val.l<L) L=val.l;
     else break;
   }
 }

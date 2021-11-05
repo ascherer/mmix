@@ -22,7 +22,7 @@ do the actual work after this module has told them what to do.
 
 @ A user typically invokes the meta-simulator with a \UNIX/-like command line
 of the general form
-`\.{mmmix}~\.{options}~\.{configfile}~\.{progfile}',
+`\.{mmmix} \.{options}~\.{configfile}~\.{progfile}',
 where the \.{configfile} describes the characteristics
 of an \MMIX\ implementation and the \.{progfile} contains a program to
 be downloaded and run. Rules for configuration files appear in
