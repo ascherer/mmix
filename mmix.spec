@@ -11,7 +11,7 @@ Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
-Version: 20190219
+Version: 20210823
 Release: 1
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
@@ -29,7 +29,7 @@ Distribution: openSUSE 42 (x86_64)
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
-Source0: http://mmix.cs.hm.edu/src/%{name}-%{version}.tgz
+Source0: https://www-cs-faculty.stanford.edu/~knuth/programs/%{name}-%{version}.tar.gz
 %if %{with changes}
 Source1: mmix-sim.ch
 Source2: mmix-pipe.ch
