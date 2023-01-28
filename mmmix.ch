@@ -4,6 +4,12 @@
 @z
 
 @x
+char buffer[BUF_SIZE];
+@y
+static char buffer[BUF_SIZE];
+@z
+
+@x
   fgets(buffer,BUF_SIZE,stdin);
 @y
   if (fgets(buffer,BUF_SIZE,stdin)) {}
