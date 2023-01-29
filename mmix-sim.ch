@@ -87,10 +87,28 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
+@x l.2027
+ round_mode=(y.l? y.l: cur_round);@+goto store_fx;
+@y
+ round_mode=(y.l? y.l: (tetra)cur_round);@+goto store_fx;
+@z
+
 @x l.2079
 {@+register int b;
 @y
 {@+register int b=0;
+@z
+
+@x l.2216
+  if (z.l>L || z.h) z.h=0, z.l=L;
+@y
+  if (z.l>(tetra)L || z.h) z.h=0, z.l=L;
+@z
+
+@x l.2222
+  if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
+@y
+  if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
 @x l.2835
@@ -156,4 +174,16 @@ case 'l': printf("%s",lhs);@+break;
               command_buf[0]!='%') {
       if (command_buf[0]==' ') printf("%s",command_buf);
       else ready=true; }
+@z
+
+@x l.3266
+    if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
+@y
+    if (val.h!=0 || val.l>255 || val.l<(tetra)L || val.l<32) break;
+@z
+
+@x l.3270
+    if (val.h==0 && val.l<L) L=val.l;
+@y
+    if (val.h==0 && val.l<(tetra)L) L=val.l;
 @z
