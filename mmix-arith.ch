@@ -28,6 +28,12 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
+@x l.305
+if (u[j+n]!=k) {
+@y
+if (u[j+n]!=(tetra)k) {
+@z
+
 @x l.337
   else return ominus(zero_octa,q);
   }
@@ -67,6 +73,12 @@ again the default case helps the compiler see that no cases are missing.
   register char xs;
 @y
   register char xs='+';
+@z
+
+@x l.1301
+else if (strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
+@y
+else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
 @z
 
 @x l.1357
