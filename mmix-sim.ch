@@ -33,6 +33,16 @@ typedef unsigned char byte; /* a monobyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
+@x l.1183
+    if (shown_line>0)
+      if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
+      else printf("     ...\n"); /* indicate the gap */
+@y
+    if (shown_line>0) {
+      if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
+      else printf("     ...\n"); /* indicate the gap */ }
+@z
+
 @x l.1204
   else freopen(file_info[cur_file].name,"r",src_file);
 @y
@@ -134,4 +144,16 @@ case 'l': printf("%s",lhs);@+break;
  check_syntax:@+ if (*p!='\n') {
 @y
   if (*p!='\n') {
+@z
+
+@x l.3114
+    }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
+              command_buf[0]!='%')
+      if (command_buf[0]==' ') printf("%s",command_buf);
+      else ready=true;
+@y
+    }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
+              command_buf[0]!='%') {
+      if (command_buf[0]==' ') printf("%s",command_buf);
+      else ready=true; }
 @z

@@ -33,6 +33,34 @@ typedef enum {@!false,@!true}@+@!bool;
   { @<Make special listing to show the label equivalent@>; }
 @z
 
+@x l.2831
+case 2:@+if (!(op_bits&two_arg_bit))
+    if (op_bits&one_arg_bit)
+      derr("opcode `%s' must not have two operands",op_field)@;
+    else derr("opcode `%s' must have more than two operands",op_field);
+@y
+case 2:@+if (!(op_bits&two_arg_bit)) {
+    if (op_bits&one_arg_bit)
+      derr("opcode `%s' must not have two operands",op_field)@;
+    else derr("opcode `%s' must have more than two operands",op_field); }
+@z
+
+@x l.2853
+    if (k==1) err("*constant doesn't fit in one byte")@;
+@.constant doesn't fit...@>
+    else derr("*constant doesn't fit in %d bytes",k);
+@y
+  { if (k==1) err("*constant doesn't fit in one byte")@;
+@.constant doesn't fit...@>
+    else derr("*constant doesn't fit in %d bytes",k); }
+@z
+
+@x l.3107
+ case GREG:@+if (listing_file) @<Make listing for |GREG|@>;
+@y
+ case GREG:@+if (listing_file) { @<Make listing for |GREG|@>; }
+@z
+
 @x l.3166
 #include <time.h>
 @y
