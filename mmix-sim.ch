@@ -1,22 +1,22 @@
-@x
+@x l.12
 @s bool normal @q unreserve a C++ keyword @>
 @y
 @z
 
-@x
+@x l.546
 @* Basics. To get started, we define a type that provides semantic sugar.
 @y
 @* Basics. Standard types for syntactic sugar.
 @z
 
-@x
+@x l.549
 typedef enum {@!false,@!true}@+@!bool;
 @y
 #include <stdbool.h>
 #include <stdint.h>
 @z
 
-@x
+@x l.560
 @<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
@@ -27,19 +27,19 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
-@x
+@x l.564
 typedef unsigned char byte; /* a monobyte */
 @y
 typedef uint8_t byte; /* a monobyte */
 @z
 
-@x
+@x l.1204
   else freopen(file_info[cur_file].name,"r",src_file);
 @y
   else if (freopen(file_info[cur_file].name,"r",src_file)) {}
 @z
 
-@x
+@x l.1367
   if (f&X_is_dest_bit) @<Install register~X as the destination,
           adjusting the register stack if necessary@>;
 @y
@@ -47,13 +47,13 @@ typedef uint8_t byte; /* a monobyte */
           adjusting the register stack if necessary@>; }
 @z
 
-@x
+@x l.1779
 register int G,L,O; /* accessible copies of key registers */
 @y
 register int G,L,O=0; /* accessible copies of key registers */
 @z
 
-@x
+@x l.1792
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
 {\mc ABSTIME} is
@@ -64,20 +64,26 @@ a trivial program that computes the value of the standard library function
 \.{Makefile}. We assume that this number, which is the number of seconds in
 @z
 
-@x
+@x l.1801
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
-@x
+@x l.2887
 #include "abstime.h"
 @y
 @z
 
-@x
+@x l.3068
   interrupt=true;
 @y
   interrupt=true; (void) n;
+@z
+
+@x l.3096
+ check_syntax:@+ if (*p!='\n') {
+@y
+  if (*p!='\n') {
 @z
