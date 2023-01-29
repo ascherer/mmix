@@ -47,6 +47,12 @@ typedef uint8_t byte; /* a monobyte */
           adjusting the register stack if necessary@>; }
 @z
 
+@x l.1409
+register int i,j,k; /* miscellaneous indices */
+@y
+register int i,j=0,k; /* miscellaneous indices */
+@z
+
 @x l.1779
 register int G,L,O; /* accessible copies of key registers */
 @y
@@ -69,6 +75,12 @@ a trivial program that computes the value of the standard library function
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
+@z
+
+@x l.2079
+{@+register int b;
+@y
+{@+register int b=0;
 @z
 
 @x l.2835
