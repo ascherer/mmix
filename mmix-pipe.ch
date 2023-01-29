@@ -100,6 +100,18 @@ a trivial program that computes the value of the standard library function
   return NULL;
 @z
 
+@x l.4621
+    if (ticks.l-write_head->stamp<holding_time && !speed_lock)
+@y
+    if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
+@z
+
+@x l.4855
+if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
+@y
+if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
+@z
+
 @x l.4901
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
@@ -119,9 +131,29 @@ a trivial program that computes the value of the standard library function
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
 @z
 
-@x l.5106
+@x l.5030
+   ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=Dcache->bb)
+@y
+   ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
+@z
+
+@x l.5089
+      if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=page_n)
+@y
+      if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=(tetra)page_n)
+@z
+
+@x l.5093
+    case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=page_n) data->x.o=zero_octa;
+@y
+    case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
+@z
+
+@x l.5105
+   if (Dcache && Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
 @y
+   if (Dcache && (tetra)(Dcache->bb)<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
  default:@+; /* fall through */
 @z
@@ -140,12 +172,6 @@ a trivial program that computes the value of the standard library function
 @y
    if (!p) /* hey, it was present after all */
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
-@z
-
-@x l.5787
-    if (m>=cool_L && m<cool_G) goto bad_resume;
-@y
-    if ((unsigned int)m>=cool_L && (unsigned int)m<cool_G) goto bad_resume;
 @z
 
 @x l.6200
