@@ -1,4 +1,4 @@
-@x
+@x l.954
 @<Type...@>=
 typedef unsigned int tetra;
   /* assumes that an int is exactly 32 bits wide */
@@ -8,17 +8,24 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
-@x
+@x l. 958
 typedef enum {@!false,@!true}@+@!bool;
 @y
 @z
 
-@x
+@x l.1539
 @s bool int
 @y
 @z
 
-@x
+@x l.2499
+ @t\4@>@<Cases for binary operators@>@;
+@y
+ @t\4@>@<Cases for binary operators@>@;
+ case inner_rp: case outer_rp:@+; /* fall through */
+@z
+
+@x l.2747
   if (listing_file && (opcode==IS || opcode==LOC))
     @<Make special listing to show the label equivalent@>;
 @y
@@ -26,7 +33,7 @@ typedef enum {@!false,@!true}@+@!bool;
   { @<Make special listing to show the label equivalent@>; }
 @z
 
-@x
+@x l.3166
 #include <time.h>
 @y
 #include <time.h>
