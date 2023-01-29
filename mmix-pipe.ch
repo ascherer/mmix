@@ -54,6 +54,12 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
+@x l.1902
+    if (a.l<32) printf(special_name[a.l]);
+@y
+    if (a.l<32) printf("%s",special_name[a.l]);
+@z
+
 @x l.2306
     new_O=incr(cool_O,-x-1);
 @y
