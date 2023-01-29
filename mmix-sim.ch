@@ -71,15 +71,51 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
+@x l.2835
+ case handle:@+if (o.h==0 && o.l<3) printf(stream_name[o.l]);
+@y
+ case handle:@+if (o.h==0 && o.l<3) printf("%s",stream_name[o.l]);
+@z
+
+@x l.2846
+case 's': printf(special_name[zz]);@+break;
+@y
+case 's': printf("%s",special_name[zz]);@+break;
+@z
+
+@x l.2848
+case 'l': printf(lhs);@+break;
+@y
+case 'l': printf("%s",lhs);@+break;
+@z
+
 @x l.2887
 #include "abstime.h"
 @y
+@z
+
+@x l.2987
+    for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
+@y
+    for (k=0;usage_help[k][0];k++) fprintf(stderr,"%s",usage_help[k]);
+@z
+
+@x l.2989
+  }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf(usage_help[k]);
+@y
+  }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
 @z
 
 @x l.3068
   interrupt=true;
 @y
   interrupt=true; (void) n;
+@z
+
+@x l.3093
+  case 'h':@+ for (k=0;interactive_help[k][0];k++) printf(interactive_help[k]);
+@y
+  case 'h':@+ for (k=0;interactive_help[k][0];k++) printf("%s",interactive_help[k]);
 @z
 
 @x l.3096
