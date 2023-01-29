@@ -28,6 +28,15 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
+@x l.337
+  else return ominus(zero_octa,q);
+  }
+@y
+  else return ominus(zero_octa,q);
+  }
+  return q;
+@z
+
 again the default case helps the compiler see that no cases are missing.
 
 @x l.540
@@ -86,4 +95,22 @@ again the default case helps the compiler see that no cases are missing.
   register int x;
 @y
   register int x=0;
+@z
+
+@x l.1626
+ case num: @<Integerize and |return|@>;
+  }
+@y
+ case num: @<Integerize and |return|@>;
+  }
+  return z;
+@z
+
+@x l.1676
+  return (zs=='-'? ominus(zero_octa,o): o);
+  }
+@y
+  return (zs=='-'? ominus(zero_octa,o): o);
+  }
+  return z;
 @z
