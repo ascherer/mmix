@@ -13,9 +13,21 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 @z
 
+@x l.1350
+  register int j; register unsigned char *p;
+@y
+  register int j; register Char *p;
+@z
+
 @x l.1539
 @s bool int
 @y
+@z
+
+@x l.2229
+  for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
+@y
+  for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
 @x l.2499
@@ -59,6 +71,12 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
  case GREG:@+if (listing_file) @<Make listing for |GREG|@>;
 @y
  case GREG:@+if (listing_file) { @<Make listing for |GREG|@>; }
+@z
+
+@x l.3109
+ case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
+@y
+ case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
 @z
 
 @x l.3166
