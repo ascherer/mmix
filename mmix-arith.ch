@@ -66,6 +66,16 @@ again the default case helps the compiler see that no cases are missing.
   next_char=s;@+return -1;
 @z
 
+@x l.1402
+    if (q>buf0 || *p!='0')
+       if (q<buf_max) *q++=*p;
+       else if (*(q-1)=='0') *(q-1)=*p;
+@y
+    if (q>buf0 || *p!='0') {
+       if (q<buf_max) *q++=*p;
+       else if (*(q-1)=='0') *(q-1)=*p; }
+@z
+
 @x l.1483
  make_it_zero: exp=-99999;@+ goto packit;
 @y
