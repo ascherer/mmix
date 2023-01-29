@@ -42,6 +42,24 @@ again the default case helps the compiler see that no cases are missing.
  default: case zro: z=0;@+break;
 @z
 
+@x l.716
+  register char xs;
+@y
+  register char xs='+';
+@z
+
+@x l.759
+  register char xs;
+@y
+  register char xs='+';
+@z
+
+@x l.801
+  register char xs;
+@y
+  register char xs='+';
+@z
+
 @x l.1357
  no_const_found: next_char=s;@+return -1;
 @y
@@ -52,4 +70,10 @@ again the default case helps the compiler see that no cases are missing.
  make_it_zero: exp=-99999;@+ goto packit;
 @y
   exp=-99999;@+ goto packit;
+@z
+
+@x l.1587
+  register int x;
+@y
+  register int x=0;
 @z
