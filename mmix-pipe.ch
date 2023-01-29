@@ -91,6 +91,15 @@ a trivial program that computes the value of the standard library function
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
+@x l.3418
+   return &s[l-aa];
+  }
+@y
+   return &s[l-aa];
+  }
+  return NULL;
+@z
+
 @x l.4901
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
