@@ -66,16 +66,44 @@ a trivial program that computes the value of the standard library function
     if (x<(unsigned int)new_L)
 @z
 
+@x l.2519
+  @<Cases for stage 1 execution@>;
+@y
+  @<Cases for stage 1 execution@>;
+  default:@+; /* fall through */
+@z
+
 @x l.2968
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
+@x l.4901
+  case st: data->state=st_ready;@+pass_after(1);@+goto passit;
+@y
+  case st: data->state=st_ready;@+pass_after(1);@+goto passit;
+  default:@+; /* fall through */
+@z
+
+@x l.5106
+   goto do_syncid;
+@y
+   goto do_syncid;
+ default:@+; /* fall through */
+@z
+
 @x l.5787
     if (m>=cool_L && m<cool_G) goto bad_resume;
 @y
     if ((unsigned int)m>=cool_L && (unsigned int)m<cool_G) goto bad_resume;
+@z
+
+@x l.6200
+ case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
+@y
+ case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
+ default:@+; /* fall through */
 @z
 
 @x l.6519
