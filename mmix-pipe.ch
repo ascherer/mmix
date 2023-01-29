@@ -60,6 +60,12 @@ a trivial program that computes the value of the standard library function
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
+@x l.2136
+  if (mem_slots) mem_slots--;@+else goto stall;
+@y
+  { if (mem_slots) mem_slots--;@+else goto stall; }
+@z
+
 @x l.2306
     new_O=incr(cool_O,-x-1);
 @y
@@ -92,11 +98,39 @@ a trivial program that computes the value of the standard library function
   default:@+; /* fall through */
 @z
 
+@x l.4958
+ case DT_miss:@+if (DTcache->filler.next)
+     if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;
+   if (no_hardware_PT || page_f)
+     if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;
+@y
+ case DT_miss:@+if (DTcache->filler.next)
+   { if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one; }
+   if (no_hardware_PT || page_f)
+   { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
+@z
+
 @x l.5106
    goto do_syncid;
 @y
    goto do_syncid;
  default:@+; /* fall through */
+@z
+
+@x l.5349
+ case IT_miss:@+if (ITcache->filler.next)
+     if (data->i==prego) goto fin_ex;@+else wait(1);
+@y
+ case IT_miss:@+if (ITcache->filler.next) {
+     if (data->i==prego) goto fin_ex;@+else wait(1); }
+@z
+
+@x l.5354
+   if (!p) /* hey, it was present after all */
+     if (data->i==prego) goto fin_ex;@+else goto new_fetch;
+@y
+   if (!p) /* hey, it was present after all */
+     { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
 @z
 
 @x l.5787
@@ -110,6 +144,12 @@ a trivial program that computes the value of the standard library function
 @y
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
  default:@+; /* fall through */
+@z
+
+@x l.6458
+   if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
+@y
+   { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
 @z
 
 @x l.6519
