@@ -1,17 +1,17 @@
-@x
+@x [1] l.14
 @s tetra int
 
 @y
 @z
 
-@x
+@x l.20
 #include <string.h>
 @y
 #include <string.h>
 #include <stdint.h>
 @z
 
-@x
+@x [7] l.94
 @<Type...@>=
 typedef unsigned char byte; /* a monobyte */
 typedef unsigned int tetra; /* a tetrabyte */
