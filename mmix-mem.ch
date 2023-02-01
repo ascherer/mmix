@@ -1,7 +1,7 @@
 @x [1] l.27
 extern octa read_hex(); /* found in the main program module */
 @y
-octa read_hex @,@,@[ARGS((char *))@];@+@t}\6{@>
+octa read_hex @,@,@[ARGS((char *))@];
 @z
 
 @x [2] l.49
@@ -23,7 +23,6 @@ after the input.
 @d BUF_SIZE 100
 
 @c
-octa read_hex @,@,@[ARGS((char *))@];@+@t}\6{@>
 octa read_hex(p)
   char *p;
 {
