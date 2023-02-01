@@ -1,6 +1,7 @@
 @x [1] l.27
 extern octa read_hex(); /* found in the main program module */
 @y
+octa read_hex @,@,@[ARGS((char *))@];@+@t}\6{@>
 @z
 
 @x [2] l.49
