@@ -1,15 +1,19 @@
-@x
+@x [1] l.27
 extern octa read_hex(); /* found in the main program module */
 @y
 @z
 
-@x
-extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
-  /* $y\GG s$, signed if |!u| */
+@x [2] l.49
+    fgets(buf,20,stdin);
 @y
-extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
-  /* $y\GG s$, signed if |!u| */
+    if (fgets(buf,20,stdin)) {}
+@z
 
+Resolve cyclic dependency. Move function from mmmix.w here.
+
+@x [5/6] l.99
+@* Index.
+@y
 @ Here's a simple program to read an octabyte in hexadecimal notation
 from a buffer. It changes the buffer by storing a null character
 after the input.
@@ -39,10 +43,6 @@ octa read_hex(p)
   }
   return val;
 }
-@z
 
-@x
-    fgets(buf,20,stdin);
-@y
-    if (fgets(buf,20,stdin)) {}
+@* Index.
 @z
