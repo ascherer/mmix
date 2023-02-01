@@ -3,12 +3,12 @@
 @y
 @z
 
-@x l.128
+@x [3] l.128
 #include "abstime.h"
 @y
 @z
 
-@x l.229
+@x [10] l.229
   @<Local variables@>;
 @y
   @<Local variables@>; (void)breakpoint_hit;
@@ -19,14 +19,14 @@
 @y
 @z
 
-@x l.260
+@x [11] l.260
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
 #include <stdbool.h> /* |bool| */
 #include <stdint.h> /* |uint32_t| */
 @z
 
-@x l.331
+@x [17] l.331
 @<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
@@ -36,7 +36,7 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
-@x l.1865
+@x [89] l.1865
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
 {\mc ABSTIME} is
@@ -54,19 +54,19 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
-@x l.1902
+@x [91] l.1902
     if (a.l<32) printf(special_name[a.l]);
 @y
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
-@x l.2136
+@x [111] l.2136
   if (mem_slots) mem_slots--;@+else goto stall;
 @y
   { if (mem_slots) mem_slots--;@+else goto stall; }
 @z
 
-@x l.2306
+@x [120] l.2306
     new_O=incr(cool_O,-x-1);
 @y
     new_O=incr(cool_O,-(int)x-1);
@@ -78,20 +78,20 @@ a trivial program that computes the value of the standard library function
     if (x<(unsigned int)new_L)
 @z
 
-@x l.2519
+@x [132] l.2519
   @<Cases for stage 1 execution@>;
 @y
   @<Cases for stage 1 execution@>;
   default:@+; /* fall through */
 @z
 
-@x l.2968
+@x [157] l.2968
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
-@x l.3418
+@x [187] l.3418
    return &s[l-aa];
   }
 @y
@@ -100,26 +100,26 @@ a trivial program that computes the value of the standard library function
   return NULL;
 @z
 
-@x l.4621
+@x [257] l.4621
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
-@x l.4855
+@x [269] l.4855
 if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
 @y
 if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @z
 
-@x l.4901
+@x [271] l.4901
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
   default:@+; /* fall through */
 @z
 
-@x l.4958
+@x [272] l.4958
  case DT_miss:@+if (DTcache->filler.next)
      if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;
    if (no_hardware_PT || page_f)
@@ -131,13 +131,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
 @z
 
-@x l.5030
+@x [275] l.5030
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=Dcache->bb)
 @y
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
 @z
 
-@x l.5089
+@x [279] l.5089
       if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=page_n)
 @y
       if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=(tetra)page_n)
@@ -149,7 +149,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
 @z
 
-@x l.5105
+@x [280] l.5105
    if (Dcache && Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
 @y
@@ -158,7 +158,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  default:@+; /* fall through */
 @z
 
-@x l.5349
+@x [298] l.5349
  case IT_miss:@+if (ITcache->filler.next)
      if (data->i==prego) goto fin_ex;@+else wait(1);
 @y
@@ -174,26 +174,26 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
 @z
 
-@x l.6200
+@x [348] l.6200
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @y
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
  default:@+; /* fall through */
 @z
 
-@x l.6458
+@x [364] l.6458
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
 @z
 
-@x l.6519
+@x [369] l.6519
   data->y.o.l &= -data->b.o.l;
 @y
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
-@x l.6827
+@x [387] l.6827
     fgets(stdin_buf,256,stdin);
 @y
     if (fgets(stdin_buf,256,stdin)) {}
