@@ -24,6 +24,54 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 @z
 
+@x l.2009
+{"ROUND_NEAR",0,4},@/
+@y
+{"ROUND_NEAR",0,4},@|
+@z
+
+@x l.2011
+{"Inf",0x7ff00000,0},@/
+@y
+{"Inf",0x7ff00000,0},@|
+@z
+
+@x l.2015
+{"Pool_Segment",0x40000000,0},
+@y
+{"Pool_Segment",0x40000000,0},@|
+@z
+
+@x l.2017
+{"Stack_Segment",0x60000000,0},@/
+@y
+{"Stack_Segment",0x60000000,0},@|
+@z
+
+@x l.2033
+{"X_BIT",0,0x01},@/
+@y
+{"X_BIT",0,0x01},@|
+@z
+
+@x l.2049
+{"X_Handler",0,0x80},@/
+@y
+{"X_Handler",0,0x80},@|
+@z
+
+@x l.2055
+{"StdErr",0,2},@/
+@y
+{"StdErr",0,2},@|
+@z
+
+@x l.2065
+{"BinaryReadWrite",0,4},@/
+@y
+{"BinaryReadWrite",0,4},@|
+@z
+
 @x l.2229
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
