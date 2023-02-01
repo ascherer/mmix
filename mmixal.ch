@@ -1,4 +1,4 @@
-@x l.954
+@x [26] l.954
 @<Type...@>=
 typedef unsigned int tetra;
   /* assumes that an int is exactly 32 bits wide */
@@ -13,18 +13,18 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 @z
 
-@x l.1350
+@x [50] l.1360
   register int j; register unsigned char *p;
 @y
   register int j; register Char *p;
 @z
 
-@x l.1539
+@x [58] l.1539
 @s bool int
 @y
 @z
 
-@x l.2009
+@x [69] l.2009
 {"ROUND_NEAR",0,4},@/
 @y
 {"ROUND_NEAR",0,4},@|
@@ -72,20 +72,20 @@ typedef enum {@!false,@!true}@+@!bool;
 {"BinaryReadWrite",0,4},@|
 @z
 
-@x l.2229
+@x [76] l.2229
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
-@x l.2499
- @t\4@>@<Cases for binary operators@>@;
+@x [98] l.2499
+ @t\4@>@<Cases for unary operators@>@;
 @y
- @t\4@>@<Cases for binary operators@>@;
- case inner_rp: case outer_rp:@+; /* fall through */
+ case inner_rp: case outer_rp:@+goto scan_close;
+ @t\4@>@<Cases for unary operators@>@;
 @z
 
-@x l.2747
+@x [109] l.2747
   if (listing_file && (opcode==IS || opcode==LOC))
     @<Make special listing to show the label equivalent@>;
 @y
@@ -93,7 +93,7 @@ typedef enum {@!false,@!true}@+@!bool;
   { @<Make special listing to show the label equivalent@>; }
 @z
 
-@x l.2831
+@x [116] l.2831
 case 2:@+if (!(op_bits&two_arg_bit))
     if (op_bits&one_arg_bit)
       derr("opcode `%s' must not have two operands",op_field)@;
@@ -105,7 +105,7 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else derr("opcode `%s' must have more than two operands",op_field); }
 @z
 
-@x l.2853
+@x [116] l.2853
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
@@ -115,7 +115,7 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else derr("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x l.3107
+@x [132] l.3107
  case GREG:@+if (listing_file) @<Make listing for |GREG|@>;
 @y
  case GREG:@+if (listing_file) { @<Make listing for |GREG|@>; }
@@ -127,7 +127,7 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
 @z
 
-@x l.3166
+@x [136] l.3166
 #include <time.h>
 @y
 #include <time.h>
