@@ -100,6 +100,38 @@ a trivial program that computes the value of the standard library function
   return NULL;
 @z
 
+@x [236] l.4292
+DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
+@y
+DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
+@#
+page_bad=true; /* variable delared below */
+@z
+
+@x [238] l.4329
+convenience. Whenever rV changes, we recompute all these variables.
+
+@<Glob...@>=
+int page_n; /* the 10-bit |n| field of rV, times 8 */
+int page_r; /* the 27-bit |r| field of rV */
+int page_s; /* the 8-bit |s| field of rV */
+int page_f; /* the 3-bit |f| field of rV */
+int page_b[5]; /* the 4-bit |b| fields of rV; |page_b[0]=0| */
+octa page_mask; /* the least significant |s| bits */
+bool page_bad=true; /* does rV violate the rules? */
+@y
+convenience. Whenever rV changes, we recompute all these variables.
+
+@<External var...@>=
+Extern int page_n; /* the 10-bit |n| field of rV, times 8 */
+Extern int page_r; /* the 27-bit |r| field of rV */
+Extern int page_s; /* the 8-bit |s| field of rV */
+Extern int page_f; /* the 3-bit |f| field of rV */
+Extern int page_b[5]; /* the 4-bit |b| fields of rV; |page_b[0]=0| */
+Extern octa page_mask; /* the least significant |s| bits */
+Extern bool page_bad; /* does rV violate the rules? */
+@z
+
 @x [257] l.4621
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
