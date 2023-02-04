@@ -52,7 +52,14 @@ so we had better move it ``up'' (together with the |static| variable in
 the previous section).
 @z
 
-@x [25] l.563
+@x [25] l.558
+extern bool page_bad;
+extern octa page_mask;
+extern int page_r,page_s,page_b[5];
+@y
+@z
+
+@x l.563
 octa seven_octa={0,7};
 @y
 octa seven_octa={0,7};
