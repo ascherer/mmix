@@ -1,6 +1,7 @@
 @x [0] l.9
 @s bool int
 @y
+\def\9#1#2{\|#1 (#2)}
 @z
 
 @x [5] l.118
@@ -9,10 +10,24 @@ char buffer[BUF_SIZE];
 static char buffer[BUF_SIZE];
 @z
 
+@x [12] l.284
+g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
+@y
+g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
+@:g}{global registers@>
+@z
+
 @x [13] l.374
   fgets(buffer,BUF_SIZE,stdin);
 @y
   if (fgets(buffer,BUF_SIZE,stdin)) {}
+@z
+
+@x [15] l.424
+    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+@y
+    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+@:g}{global registers@>
 @z
 
 Avoid cyclic dependeny. Move this part to mmix-mem.ch.
@@ -50,6 +65,34 @@ octa read_hex(p)
 @ Function |read_hex| is used in \.{mmix-mem} (referenced as |extern|),
 so we had better move it ``up'' (together with the |static| variable in
 the previous section).
+@z
+
+@x [18] l.469
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+@y
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+@:l}{ring of local registers@>
+@z
+
+@x [19] l.475
+examining the pipeline.
+@y
+examining the pipeline.
+@:g}{global registers@>
+@z
+
+@x [21] l.505
+case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
+@y
+case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
+@:g}{global registers@>
+@z
+
+@x [23] l.537
+   g[rK].o=neg_one;
+@y
+   g[rK].o=neg_one;
+@:g}{global registers@>
 @z
 
 @x [25] l.558
