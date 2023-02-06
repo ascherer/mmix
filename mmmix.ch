@@ -4,10 +4,18 @@
 \def\9#1#2{\|#1 (#2)}
 @z
 
-@x [5] l.118
+@x [5] l.115
+octa cur_loc;
+octa cur_dat;
+bool new_chunk;
 char buffer[BUF_SIZE];
+FILE *prog_file;
 @y
+static octa cur_loc;
+static octa cur_dat;
+static bool new_chunk;
 static char buffer[BUF_SIZE];
+static FILE *prog_file;
 @z
 
 @x [12] l.284
@@ -32,7 +40,10 @@ g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 
 Avoid cyclic dependeny. Move this part to mmix-mem.ch.
 
-@x [16,17] l.433
+@x [16,17] l.430
+int n,m; /* temporary integer */
+octa bp={-1,-1}; /* breakpoint */
+octa tmp; /* an octabyte of temporary interest */
 static unsigned char d[BUF_SIZE];
 
 @ Here's a simple program to read an octabyte in hexadecimal notation
@@ -62,6 +73,10 @@ octa read_hex(p)
   return val;
 }
 @y
+static int n,m; /* temporary integer */
+static octa bp={-1,-1}; /* breakpoint */
+static octa tmp; /* an octabyte of temporary interest */
+
 @ Function |read_hex| is used in \.{mmix-mem} (referenced as |extern|),
 so we had better move it ``up'' (together with the |static| variable in
 the previous section).
@@ -95,16 +110,20 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @:g}{global registers@>
 @z
 
-@x [25] l.558
+@x [25] l.556
+bool silent=false;
+bool bad_address;
 extern bool page_bad;
 extern octa page_mask;
 extern int page_r,page_s,page_b[5];
 @y
+static bool silent=false;
+static bool bad_address;
 @z
 
 @x l.563
 octa seven_octa={0,7};
 @y
-octa seven_octa={0,7};
+static octa seven_octa={0,7};
 extern octa read_hex @,@,@[ARGS((char *))@];
 @z
