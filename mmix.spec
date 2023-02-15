@@ -15,7 +15,7 @@ Version: 20230213
 Release: 1
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
-%if %{_vendor} == "debbuild"
+%if "%{_vendor}" == "debbuild"
 Group: science
 Distribution: Kubuntu 22.04 (x86_64)
 %if %{with tex}
