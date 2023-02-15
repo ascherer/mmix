@@ -357,9 +357,7 @@ print error messages.
 
 @<Global variables@>=
 FILE *config_file; /* input comes from here */
-char buffer[BUF_SIZE]; /* input lines go here */
 char token[BUF_SIZE]; /* and tokens are copied to here */
-char *buf_pointer=buffer; /* this is our current position */
 bool token_prescanned; /* does |token| contain the next token already? */
 
 @ The |get_token| routine copies the next token of input into the |token|
@@ -369,6 +367,8 @@ buffer. After the input has ended, a final `\.{end}' is appended.
 static void get_token @,@,@[ARGS((void))@];@+@t}\6{@>
 static void get_token() /* set |token| to the next token of the configuration file */
 {
+  static char buffer[BUF_SIZE]; /* input lines go here */
+  static char *buf_pointer=buffer; /* this is our current position */
   register char *p,*q;
   if (token_prescanned) {
     token_prescanned=false;@+ return;
