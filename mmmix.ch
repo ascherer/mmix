@@ -4,6 +4,15 @@
 \def\9#1#2{\|#1 (#2)}
 @z
 
+@x [2] l.44
+char *config_file_name, *prog_file_name;
+@<Global variables@>@;
+@y
+static char *config_file_name, *prog_file_name;
+@<Global variables@>@;
+@<External stuff@>@;
+@z
+
 @x [5] l.115
 octa cur_loc;
 octa cur_dat;
@@ -78,8 +87,8 @@ static octa bp={-1,-1}; /* breakpoint */
 static octa tmp; /* an octabyte of temporary interest */
 
 @ Function |read_hex| is used in \.{mmix-mem} (referenced as |extern|),
-so we had better move it ``up'' (together with the |static| variable in
-the previous section).
+so we had better move it ``up'' (together with the |static| variable~|d|
+in the previous section).
 @z
 
 @x [18] l.469
@@ -122,8 +131,23 @@ static bool bad_address;
 @z
 
 @x l.563
+extern octa zero_octa;
+extern octa neg_one;
 octa seven_octa={0,7};
+extern octa incr @,@,@[ARGS((octa y,int delta))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
+extern void mmix_io_init @,@,@[ARGS((void))@];
+extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
+
+@ @<External stuff@>=
+extern octa zero_octa;
+extern octa neg_one;
+@#
 extern octa read_hex @,@,@[ARGS((char *))@];
+extern octa incr @,@,@[ARGS((octa y,int delta))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
+extern void mmix_io_init @,@,@[ARGS((void))@];
+extern void MMIX_config @,@,@[ARGS((char*))@];
 @z
