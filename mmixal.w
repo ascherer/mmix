@@ -2468,6 +2468,7 @@ switch(*p++) {
   sh_check: p++;@+if (*(p-1)==*(p-2)) break;
   derr("syntax error at `%c'",*(p-2));
 @.syntax error...@>
+  @=/* fall through */@>
  case '&': rt_op=and;@+break;
  case '|': rt_op=or;@+break;
  case '^': rt_op=xor;@+break;
@@ -2837,6 +2838,7 @@ case 2:@+if (!(op_bits&two_arg_bit))
 make_two_three: val_stack[2]=val_stack[1], val_ptr=3;
   val_stack[1].equiv=zero_octa, val_stack[1].link=NULL,
     val_stack[1].status=pure; /* insert \.0 as the second operand */
+  @=/* fall through */@>
 case 3:@+if (!(op_bits&three_arg_bit))
     derr("opcode `%s' must not have three operands",op_field);
   @<Do a three-operand operation@>;

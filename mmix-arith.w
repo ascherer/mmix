@@ -328,7 +328,7 @@ octa signed_odiv(y,z)
   overflow=false;
   switch (sy+sz) {
  case 2+1: aux=ominus(zero_octa,aux);
-  if (q.h==sign_bit) overflow=true;
+  if (q.h==sign_bit) overflow=true; @=/* else fall through */@>@;
  case 0+0: return q;
  case 2+0:@+ if (aux.h || aux.l) aux=ominus(zz,aux);
   goto negate_q;
@@ -731,6 +731,7 @@ octa fmult(y,z)
 
 @ @<The usual NaN cases@>=
 case 4*nan+nan:@+if (!(y.h&0x80000)) exceptions|=I_BIT; /* |y| is signaling */
+@=/* else fall through */@>@;
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
   if (!(z.h&0x80000)) exceptions|=I_BIT, z.h|=0x80000;
   return z;
@@ -763,7 +764,7 @@ octa fdivide(y,z)
   switch (4*yt+zt) {
  @t\4@>@<The usual NaN cases@>;
  case 4*zro+inf: case 4*zro+num: case 4*num+inf: x=zero_octa;@+break;
- case 4*num+zro: exceptions|=Z_BIT;
+ case 4*num+zro: exceptions|=Z_BIT; @=/* fall through */@>@;
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
  case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
   exceptions|=I_BIT;@+break;
@@ -807,11 +808,12 @@ octa fplus(y,z)
  case 4*num+zro: return fpack(yf,ye,ys,ROUND_OFF);@+break; /* may underflow */
  case 4*inf+inf:@+if (ys!=zs) {
     exceptions|=I_BIT;@+x=standard_NaN;@+xs=zs;@+break;
-  }
+  } @=/* else fall through */@>@;
  case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+xs=ys;@+break;
  case 4*num+num:@+ if (y.h!=(z.h^0x80000000) || y.l!=z.l) 
    @<Add nonzero numbers and |return|@>;
+   @=/* else fall through */@>@;
  case 4*zro+zro: x=zero_octa;
   xs=(ys==zs? ys: cur_round==ROUND_DOWN? '-': '+');@+break;
   }
@@ -1622,6 +1624,7 @@ octa fintegerize(z,r)
   if (!r) r=cur_round;
   switch (zt) {
  case nan:@+if (!(z.h&0x80000)) {@+exceptions|=I_BIT;@+z.h|=0x80000;@+}
+  @=/* else fall through */@>@;
  case inf: case zro: return z;
  case num: @<Integerize and |return|@>;
   }

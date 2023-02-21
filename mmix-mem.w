@@ -50,9 +50,9 @@ octa spec_read(addr,size)
     val=read_hex(buf);
   } else val.l=val.h=0;
   switch (size) {
-case 0: val.l&=0xff;
-case 1: val.l&=0xffff;
-case 2: val.h=0;
+case 0: val.l&=0xff; @=/* fall through */@>@;
+case 1: val.l&=0xffff; @=/* fall through */@>@;
+case 2: val.h=0; @=/* fall through */@>@;
 case 3: break;
 }
   if (verbose&show_spec_bit) {
