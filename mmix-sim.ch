@@ -93,10 +93,31 @@ a trivial program that computes the value of the standard library function
  round_mode=(y.l? y.l: (tetra)cur_round);@+goto store_fx;
 @z
 
+@x [90] l.2043
+case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
+@y
+  @=/* else fall through */@>
+case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
+@z
+
+@x l.2051
+case FCMP: k=fcomp(y,z);
+@y
+  @=/* else fall through */@>
+case FCMP: k=fcomp(y,z);
+@z
+
 @x [91] l.2079
 {@+register int b;
 @y
 {@+register int b=0;
+@z
+
+@x [95] l.2159
+case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
+@y
+  @=/* fall through */@>
+case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
 @x [98] l.2216
@@ -109,6 +130,27 @@ a trivial program that computes the value of the standard library function
   if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
 @y
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
+@z
+
+@x [107] l.2366
+case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
+@y
+  @=/* else fall through */@>
+case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
+@z
+
+@x [125] l.2630
+ case RESUME_SET: k=(b.l>>16)&0xff;
+@y
+  @=/* else fall through */@>
+ case RESUME_SET: k=(b.l>>16)&0xff;
+@z
+
+@x l.2632
+ case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
+@y
+  @=/* else fall through */@>
+ case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @z
 
 @x [137] l.2835
@@ -134,7 +176,14 @@ case 'l': printf("%s",lhs);@+break;
 @y
 @z
 
-@x [143] l.2987
+@x [143] l.2967
+ case 'P': profiling=true;@+return;
+@y
+  @=/* else fall through */@>
+ case 'P': profiling=true;@+return;
+@z
+
+@x l.2987
     for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
 @y
     for (k=0;usage_help[k][0];k++) fprintf(stderr,"%s",usage_help[k]);
