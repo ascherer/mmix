@@ -10,6 +10,16 @@ octa read_hex @,@,@[ARGS((char *))@];
     if (fgets(buf,20,stdin)) {}
 @z
 
+@x l.53
+case 0: val.l&=0xff;
+case 1: val.l&=0xffff;
+case 2: val.h=0;
+@y
+case 0: val.l&=0xff; @=/* fall through */@>
+case 1: val.l&=0xffff; @=/* fall through */@>
+case 2: val.h=0; @=/* fall through */@>
+@z
+
 Resolve cyclic dependency. Move function from mmmix.w here.
 
 @x [5/6] l.99
