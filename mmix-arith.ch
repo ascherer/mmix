@@ -34,7 +34,14 @@ if (u[j+n]!=k) {
 if (u[j+n]!=(tetra)k) {
 @z
 
-@x [24] l.337
+@x [24] l.332
+ case 0+0: return q;
+@y
+  @=/* else fall through */@>
+ case 0+0: return q;
+@z
+
+@x l.337
   else return ominus(zero_octa,q);
   }
 @y
@@ -63,16 +70,44 @@ again the default case helps the compiler see that no cases are missing.
   register char xs='+';
 @z
 
+@x [42] l.734
+case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
+@y
+  @=/* else fall through */@>
+case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
+@z
+
 @x [44] l.759
   register char xs;
 @y
   register char xs='+';
 @z
 
+@x l.767
+ case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
+@y
+  @=/* fall through */@>
+ case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
+@z
+
 @x [46] l.801
   register char xs;
 @y
   register char xs='+';
+@z
+
+@x l.811
+ case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
+@y
+  @=/* else fall through */@>
+ case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
+@z
+
+@x l.815
+ case 4*zro+zro: x=zero_octa;
+@y
+  @=/* else fall through */@>
+ case 4*zro+zro: x=zero_octa;
 @z
 
 @x [67] l.1301
@@ -109,10 +144,13 @@ else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
   register int x=0;
 @z
 
-@x [86] l.1626
+@x [86] l.1625
+ case inf: case zro: return z;
  case num: @<Integerize and |return|@>;
   }
 @y
+  @=/* else fall through */@>
+ case inf: case zro: return z;
  case num: @<Integerize and |return|@>;
   }
   return z;
