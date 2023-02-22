@@ -726,6 +726,13 @@ op_spec op_init_table[]={@|
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
+@x [97] l.2471
+ case '&': rt_op=and;@+break;
+@y
+  @=/* fall through */@>
+ case '&': rt_op=and;@+break;
+@z
+
 @x [98] l.2499
  @t\4@>@<Cases for unary operators@>@;
 @y
@@ -753,7 +760,14 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else derr("opcode `%s' must have more than two operands",op_field); }
 @z
 
-@x [116] l.2853
+@x l.2840
+case 3:@+if (!(op_bits&three_arg_bit))
+@y
+  @=/* fall through */@>
+case 3:@+if (!(op_bits&three_arg_bit))
+@z
+
+@x l.2853
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
