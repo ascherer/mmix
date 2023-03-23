@@ -1,7 +1,6 @@
 @x [0] l.9
 @s bool int
 @y
-\def\9#1#2{\|#1 (#2)}
 @z
 
 @x [2] l.44
@@ -31,7 +30,7 @@ static FILE *prog_file;
 g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @y
 g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
-@:g}{global registers@>
+@:g}{\|g (global registers)@>
 @z
 
 @x [13] l.374
@@ -44,7 +43,7 @@ g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
     g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
 @y
     g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
-@:g}{global registers@>
+@:g}{\|g (global registers)@>
 @z
 
 Avoid cyclic dependeny. Move this part to mmix-mem.ch.
@@ -95,28 +94,28 @@ in the previous section).
   printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @y
   printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
-@:l}{ring of local registers@>
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [19] l.475
 examining the pipeline.
 @y
 examining the pipeline.
-@:g}{global registers@>
+@:g}{\|g (global registers)@>
 @z
 
 @x [21] l.505
 case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @y
 case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
-@:g}{global registers@>
+@:g}{\|g (global registers)@>
 @z
 
 @x [23] l.537
    g[rK].o=neg_one;
 @y
    g[rK].o=neg_one;
-@:g}{global registers@>
+@:g}{\|g (global registers)@>
 @z
 
 @x [25] l.556
