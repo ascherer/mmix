@@ -1,3 +1,8 @@
+@x [0] l.9
+@s bool int
+@y
+@z
+
 @x [2] l.44
 char *config_file_name, *prog_file_name;
 @<Global variables@>@;
