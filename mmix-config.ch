@@ -1,3 +1,8 @@
+@x [0] l.7
+@s bool int
+@y
+@z
+
 @x [27] l.752
 for (j=div;j<=max_pipe_op;j++) int_stages[j]=strlen(pipe_seq[j]);
 @y
