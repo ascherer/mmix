@@ -5,17 +5,27 @@ Use C99 standard types instead of homebrewn typedefs.
 @y
 @z
 
-@x [1] l.35
+@x [1] l.34
+#include <stdio.h>
 #include <string.h>
 @y
+#include "mmix-arith.h" /* we use our own interface first */
+@#
+#include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
-#include <stdint.h>
 @z
 
-@x l.38
+@x [1] l.37
+@<Stuff for \CEE/ preprocessor@>@;
 typedef enum{@+false,true@+} bool;
+@<Tetrabyte and octabyte type definitions@>@;
 @y
+@z
+
+@x [1] l.41
+@<Global variables@>@;
+@y
+@<Private variable@>@;
 @z
 
 @x [3] l.51
@@ -132,6 +142,18 @@ else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
        else if (*(q-1)=='0') *(q-1)=*p; }
 @z
 
+@x [75] l.1431
+@d buf_max (buf+777)
+
+@<Glob...@>=
+static char buf[785]="00000000"; /* where we put significant input digits */
+@y
+@d buf_max (buf+777)
+
+@<Priv...@>=
+static char buf[785]="00000000"; /* where we put significant input digits */
+@z
+
 @x [79] l.1483
  make_it_zero: exp=-99999;@+ goto packit;
 @y
@@ -163,4 +185,24 @@ else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
   return (zs=='-'? ominus(zero_octa,o): o);
   }
   return z;
+@z
+
+@x [96] l.1845
+@* Index.  
+@y
+@* Public interface.
+
+@(mmix-arith.h@>=
+#ifndef MMIX_ARITH_H
+#define MMIX_ARITH_H
+#include <stdbool.h> /* |@!bool| */
+#include <stdint.h>  /* |@!uint32_t| */
+@#
+@<Stuff for \CEE/ preprocessor@>@;
+@<Tetrabyte and octabyte type definitions@>@;
+@<Global variables@>@;
+@#
+#endif /* |MMIX_ARITH_H| */
+
+@* Index.
 @z
