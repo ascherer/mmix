@@ -141,10 +141,11 @@ extern void MMIX_config @,@,@[ARGS((char*))@];
 static octa seven_octa={0,7};
 
 @ @<External stuff@>=
+#include "mmix-mem.h" /* |@!read_hex| */
+@#
 extern octa zero_octa;
 extern octa neg_one;
 @#
-extern octa read_hex @,@,@[ARGS((char *))@];
 extern octa incr @,@,@[ARGS((octa y,int delta))@];
   /* unsigned $y+\delta$ ($\delta$ is signed) */
 extern void mmix_io_init @,@,@[ARGS((void))@];

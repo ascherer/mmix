@@ -8,6 +8,22 @@
 @y
 @z
 
+@x [5] l.152
+@(mmix-pipe.h@>=
+@y
+@(mmix-pipe.h@>=
+#ifndef MMIX_PIPE_H
+#define MMIX_PIPE_H
+@z
+
+@x [5] l.157
+@<External prototypes@>@;
+@y
+@<External prototypes@>@;
+#undef Extern
+#endif /* |MMIX_PIPE_H| */
+@z
+
 @x [10] l.229
   @<Local variables@>;
 @y
@@ -98,6 +114,18 @@ a trivial program that computes the value of the standard library function
    return &s[l-aa];
   }
   return NULL;
+@z
+
+@x [208] l.3724
+@<Sub...@>=
+extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
+ /* for memory mapped I/O */
+extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
+ /* likewise */
+@y
+@<External proto...@>=
+#define MMIX_PIPE_H /* TODO: will be set earlier (later) */
+#include "mmix-mem.h"
 @z
 
 @x [236] l.4292
