@@ -13,6 +13,16 @@ static char token[BUF_SIZE]; /* and tokens are copied to here */
 static bool token_prescanned; /* does |token| contain the next token already? */
 @z
 
+@x [10] l.367
+static void get_token @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [11] l.397
+static int get_int @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
 @x [15] l.447
 int fetch_buf_size,write_buf_size,reorder_buf_size,mem_bus_bytes,hardware_PT;
 int max_cycs=60;
@@ -39,6 +49,21 @@ static op_spec OP[]={@|
 int PV_size,CPV_size,OP_size; /* the number of entries in |PV|, |CPV|, |OP| */
 @y
 static int PV_size,CPV_size,OP_size; /* the number of entries in |PV|, |CPV|, |OP| */
+@z
+
+@x [16] l.520
+static cache* new_cache @,@,@[ARGS((char*))@];@+@t}\6{@>
+@y
+@z
+
+@x [22] l.639
+static void ppol @,@,@[ARGS((replace_policy*))@];@+@t}\6{@>
+@y
+@z
+
+@x [23] l.652
+static void pcs @,@,@[ARGS((cache*))@];@+@t}\6{@>
+@y
 @z
 
 @x [27] l.752
@@ -70,6 +95,16 @@ static int int_stages[max_real_command+1];
 static int stages[256]; /* stages as function of |mmix_opcode| */
 @z
 
+@x [30] l.817
+static int lg @,@,@[ARGS((int))@];@+@t}\6{@>
+@y
+@z
+
+@x [31] l.826
+static void alloc_cache @,@,@[ARGS((cache*,char*))@];@+@t}\6{@>
+@y
+@z
+
 @x [37] l.1002
 l=(specnode*)calloc(lring_size,sizeof(specnode));
 @y
@@ -79,15 +114,21 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 
 @x [38] l.1016
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
+#include <stdlib.h> /* |calloc|, |exit| */
+#include <ctype.h> /* |isspace| */
+#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
+#include <limits.h> /* |INT_MAX| */
+#include "mmix-pipe.h"
 @y
 #include "mmix-config.h" /* we use our own interface first */
-#include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
 @z
 
-x [38] l.1021
-#include "mmix-pipe.h"
-y
-z
+@x [38] l.1024
+@<Subroutines@>@;
+@y
+@<Private...@>@;
+@<Subroutines@>@;
+@z
 
 @x [39] l.1041
 @*Index.
@@ -97,19 +138,26 @@ z
 @(mmix-config.h@>=
 #ifndef MMIX_CONFIG_H
 #define MMIX_CONFIG_H
+#include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
+#include <stdlib.h> /* |calloc|, |exit| */
+#include <ctype.h> /* |isspace| */
+#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
+#include <limits.h> /* |INT_MAX| */
 @#
-#define MMIX_PIPE_H
-#include "mmix-pipe.h" /* TODO: clean up MMIX-PIPE interface */
-#undef MMIX_PIPE_H
-#ifdef __STDC__
-#define ARGS(list) list
-#else
-#define ARGS(list) ()
-#endif
+#include "mmix-pipe.h"
 @#
 extern void MMIX_config @,@,@[ARGS((char *))@];
 @#
 #endif /* |MMIX_CONFIG_H| */
+
+@ @<Private prototypes@>=
+static void get_token @,@,@[ARGS((void))@];
+static int get_int @,@,@[ARGS((void))@];
+static cache* new_cache @,@,@[ARGS((char*))@];
+static void ppol @,@,@[ARGS((replace_policy*))@];
+static void pcs @,@,@[ARGS((cache*))@];
+static int lg @,@,@[ARGS((int))@];
+static void alloc_cache @,@,@[ARGS((cache*,char*))@];
 
 @*Index.
 @z

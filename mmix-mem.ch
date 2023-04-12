@@ -10,7 +10,6 @@
 #include "mmix-pipe.h" /* header file for all modules */
 @y
 #include "mmix-mem.h" /* we use our own interface first */
-#include <stdio.h>
 @z
 
 @x [1] l.27
@@ -83,6 +82,7 @@ octa read_hex(p)
 @(mmix-mem.h@>=
 #ifndef MMIX_MEM_H
 #define MMIX_MEM_H
+#include <stdio.h>
 @#
 #include "mmix-pipe.h" /* header file for all modules */
 @#

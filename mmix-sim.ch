@@ -139,6 +139,31 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
+@x [113] l.2443
+interfaces on which they depend.
+
+@ @<Glob...@>=
+extern void mmix_io_init @,@,@[ARGS((void))@];
+extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
+extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
+extern void print_trip_warning @,@,@[ARGS((int,octa))@];
+extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
+@y
+interfaces on which they depend.
+
+@ @<Glob...@>=
+#define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
+#include "mmix-io.h"
+@z
+
 @x [125] l.2630
  case RESUME_SET: k=(b.l>>16)&0xff;
 @y

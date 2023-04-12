@@ -253,6 +253,29 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
+@x [376] l.6595
+interfaces on which they depend.
+
+@ @<Glob...@>=
+extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
+extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
+extern void print_trip_warning @,@,@[ARGS((int,octa))@];
+@y
+interfaces on which they depend.
+
+@ @<Glob...@>=
+#define MMIX_PIPE_H
+#include "mmix-io.h"
+@z
+
 @x [387] l.6827
     fgets(stdin_buf,256,stdin);
 @y
