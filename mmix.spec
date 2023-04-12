@@ -44,6 +44,7 @@ Source9: mmix-mem.ch
 
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
+Patch103: 0103-Adjust-Makefile-to-new-header-files.patch
 %endif
 
 %description
