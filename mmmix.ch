@@ -3,13 +3,23 @@
 @y
 @z
 
+@x [2] l.39
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "mmix-pipe.h"
+@y
+@#
+#include "mmix-arith.h" /* |@!zero_octa|, |@!neg_one|, |@!incr| */
+#include "mmix-config.h" /* |@!MMIX_config| */
+#include "mmix-io.h" /* |@!mmix_io_init| */
+#include "mmix-mem.h" /* |@!read_hex| */
+@z
+
 @x [2] l.44
 char *config_file_name, *prog_file_name;
-@<Global variables@>@;
 @y
 static char *config_file_name, *prog_file_name;
-@<Global variables@>@;
-@<External stuff@>@;
 @z
 
 @x [5] l.115
@@ -140,14 +150,5 @@ extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
 
-@ @<External stuff@>=
-#include "mmix-config.h" /* |@!MMIX_config| */
-#include "mmix-io.h" /* |@!mmix_io_init| */
-#include "mmix-mem.h" /* |@!read_hex| */
-@#
-extern octa zero_octa;
-extern octa neg_one;
-@#
-extern octa incr @,@,@[ARGS((octa y,int delta))@];
-  /* unsigned $y+\delta$ ($\delta$ is signed) */
+@ (This section remains empty for historic reasons.)
 @z
