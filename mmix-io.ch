@@ -10,6 +10,7 @@
 @<Preprocessor macros@>@;
 @y
 #include "mmix-io.h" /* we use our own interface first */
+#include <stdlib.h> /* |@!calloc|, |@!free| */
 @<Preprocessor macros@>@;
 @z
 
@@ -58,6 +59,23 @@ typedef unsigned int tetra;
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @y
 @ (This section remains empty for historic reasons.)
+@z
+
+@x [4] l.53
+defined appropriately in each simulator. We also use a few subroutines
+and constants defined in {\mc MMIX-ARITH}.
+@y
+defined appropriately in each simulator.
+@z
+
+@x [4] l.60
+extern octa oplus @,@,@[ARGS((octa,octa))@];
+extern octa ominus @,@,@[ARGS((octa,octa))@];
+extern octa incr @,@,@[ARGS((octa,int))@];
+extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+
+@y
 @z
 
 @x [6] l.75
@@ -183,12 +201,9 @@ static char *trip_warning[]={
 @(mmix-io.h@>=
 #ifndef MMIX_IO_H
 #define MMIX_IO_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
+#include <stdio.h> /* |@!FILE| */
 @#
-#include "mmix-pipe.h"
+#include "mmix-arith.h" /* |@!octa| */
 @#
 extern void mmix_io_init @,@,@[ARGS((void))@];
 extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
