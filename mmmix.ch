@@ -149,6 +149,4 @@ extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
-
-@ (This section remains empty for historic reasons.)
 @z
