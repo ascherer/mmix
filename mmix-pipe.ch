@@ -4,7 +4,22 @@
 @z
 
 @x [3] l.128
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include "abstime.h"
+@y
+@#
+@#
+#include "mmix-pipe.h" /* we use our own interface first */
+#include "mmix-mem.h" /* |@!spec_read|, |@!spec_write| */
+#include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, etc. */
+@#
+@z
+
+@x [3] l.130
+@<Header definitions@>@;
+@<Type definitions@>@;
 @y
 @z
 
@@ -14,6 +29,9 @@
 @(mmix-pipe.h@>=
 #ifndef MMIX_PIPE_H
 #define MMIX_PIPE_H
+#include <math.h> /* we'll override |fsqrt| below */
+#include <stdlib.h> /* we'll override |div| and |random| below */
+#include "mmix-arith.h" /* |@!tetra|, |@!octa|, etc. */
 @z
 
 @x [5] l.157
@@ -22,6 +40,20 @@
 @<External prototypes@>@;
 #undef Extern
 #endif /* |MMIX_PIPE_H| */
+@z
+
+@x [6] l.161
+The following preprocessor commands make this work correctly with both
+new-style and old-style compilers.
+@^prototypes for functions@>
+
+@<Header def...@>=
+#ifdef __STDC__
+#define ARGS(list) list
+#else
+#define ARGS(list) ()
+#endif
+@y
 @z
 
 @x [10] l.229
@@ -35,21 +67,99 @@
 @y
 @z
 
-@x [11] l.260
+@x [11] l.259
+@ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
-#include <stdbool.h> /* |bool| */
-#include <stdint.h> /* |uint32_t| */
+@ (This section remains empty for historic reasons.)
 @z
 
-@x [17] l.331
+@x [17] l.326
+for the assembler and for the non-pipelined simulator. The
+definition of type \&{tetra} should be changed, if necessary, to conform with
+the definitions found there.
+@^system dependencies@>
+
 @<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
+typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @y
+for the assembler and for the non-pipelined simulator.
 @s uint32_t int
-@<Type...@>=
-typedef uint32_t tetra;
+@s tetra int
+@s octa int
+@z
+
+@x [20] l.347
+@ @<Glob...@>=
+extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+extern octa aux; /* auxiliary output of a subroutine */
+extern bool overflow; /* set by certain subroutines for signed arithmetic */
+extern int exceptions; /* bits set by floating point operations */
+extern int cur_round; /* the current rounding mode */
+@y
+@ (This section remains empty for historic reasons.)
+@z
+
+@x [21] l.361
+@<Sub...@>=
+extern octa oplus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y+z$ */
+extern octa ominus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y-z$ */
+extern octa incr @,@,@[ARGS((octa y,int delta))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
+extern octa oand @,@,@[ARGS((octa y,octa z))@];
+  /* $y\land z$ */
+extern octa oandn @,@,@[ARGS((octa y,octa z))@];
+  /* $y\land \bar z$ */
+extern octa shift_left @,@,@[ARGS((octa y,int s))@];
+  /* $y\LL s$, $0\le s\le64$ */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
+extern octa omult @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $(|aux|,x)=y\times z$ */
+extern octa signed_omult @,@,@[ARGS((octa y,octa z))@];
+  /* signed $x=y\times z$, setting |overflow| */
+extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
+  /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
+extern octa signed_odiv @,@,@[ARGS((octa y,octa z))@];
+  /* signed $y/z$, when $z\ne0$; $|aux|=y\bmod z$ */
+extern int count_bits @,@,@[ARGS((tetra z))@];
+  /* $x=\nu(z)$ */
+extern tetra byte_diff @,@,@[ARGS((tetra y,tetra z))@];
+  /* half of \.{BDIF} */
+extern tetra wyde_diff @,@,@[ARGS((tetra y,tetra z))@];
+  /* half of \.{WDIF} */
+extern octa bool_mult @,@,@[ARGS((octa y,octa z,bool xor))@];
+  /* \.{MOR} or \.{MXOR} */
+extern octa load_sf @,@,@[ARGS((tetra z))@];
+  /* load short float */
+extern tetra store_sf @,@,@[ARGS((octa x))@];
+  /* store short float */
+extern octa fplus @,@,@[ARGS((octa y,octa z))@];
+  /* floating point $x=y\oplus z$ */
+extern octa fmult @,@,@[ARGS((octa y ,octa z))@];
+  /* floating point $x=y\otimes z$ */
+extern octa fdivide @,@,@[ARGS((octa y,octa z))@];
+  /* floating point $x=y\oslash z$ */
+extern octa froot @,@,@[ARGS((octa,int))@];
+  /* floating point $x=\sqrt z$ */
+extern octa fremstep @,@,@[ARGS((octa y,octa z,int delta))@];
+  /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
+extern octa fintegerize @,@,@[ARGS((octa z,int mode))@];
+  /* floating point $x={\rm round}(z)$ */
+extern int fcomp @,@,@[ARGS((octa y,octa z))@];
+  /* $-1$, 0, 1, or 2 if $y<z$, $y=z$, $y>z$, $y\parallel z$ */
+extern int fepscomp @,@,@[ARGS((octa y,octa z,octa eps,int sim))@];
+  /* $x=|sim|?\ [y\sim z\ (\epsilon)]:\ [y\approx z\ (\epsilon)]$ */
+extern octa floatit @,@,@[ARGS((octa z,int mode,int unsgnd,int shrt))@];
+  /* fix to float */
+extern octa fixit @,@,@[ARGS((octa z,int mode))@];
+  /* float to fix */
+@y
 @z
 
 @x [89] l.1865
@@ -123,9 +233,6 @@ extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
 extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
  /* likewise */
 @y
-@<External proto...@>=
-#define MMIX_PIPE_H /* TODO: will be set earlier (later) */
-#include "mmix-mem.h"
 @z
 
 @x [236] l.4292
@@ -271,9 +378,7 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
 interfaces on which they depend.
 
-@ @<Glob...@>=
-#define MMIX_PIPE_H
-#include "mmix-io.h"
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [387] l.6827
