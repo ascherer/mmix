@@ -23,6 +23,11 @@
 @y
 @z
 
+@x [3] l.335
+@<External prototypes@>@;
+@y
+@z
+
 @x [5] l.152
 @(mmix-pipe.h@>=
 @y
