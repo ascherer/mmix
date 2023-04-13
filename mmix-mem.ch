@@ -10,10 +10,21 @@
 #include "mmix-pipe.h" /* header file for all modules */
 @y
 #include "mmix-mem.h" /* we use our own interface first */
+@#
+#include <stdio.h>
+@#
 @z
 
 @x [1] l.27
 extern octa read_hex(); /* found in the main program module */
+@y
+@z
+
+@x [1] l.30
+extern octa shift_left @,@,@[ARGS((octa y,int s))@];
+  /* $y\LL s$, $0\le s\le64$ */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
 @y
 @z
 
@@ -82,7 +93,6 @@ octa read_hex(p)
 @(mmix-mem.h@>=
 #ifndef MMIX_MEM_H
 #define MMIX_MEM_H
-#include <stdio.h>
 @#
 #include "mmix-pipe.h" /* header file for all modules */
 @#
