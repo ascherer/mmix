@@ -40,6 +40,12 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
+@x [4] l.69
+octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+@y
+octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
+@z
+
 @x [5] l.78
 octa oplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
