@@ -245,9 +245,7 @@ extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 @y
 interfaces on which they depend.
 
-@ @<Glob...@>=
-#define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
-#include "mmix-io.h"
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [125] l.2630
@@ -286,7 +284,9 @@ case 'l': printf("%s",lhs);@+break;
 #include "abstime.h"
 @y
 @#
-#include "mmix-arith.h"
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
+#define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
+#include "mmix-io.h" /* |@!mmix_io_init| */
 @#
 @z
 
