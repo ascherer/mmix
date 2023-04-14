@@ -3,13 +3,26 @@
 @y
 @z
 
+@x [2] l.39
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "mmix-pipe.h"
+@y
+@#
+#include "mmix-arith.h" /* |@!zero_octa|, |@!neg_one|, |@!incr| */
+#include "mmix-config.h" /* |@!MMIX_config| */
+#include "mmix-io.h" /* |@!mmix_io_init| */
+#include "mmix-mem.h" /* |@!read_hex| */
+#include "mmix-pipe.h" /* |@!MMIX_init| et al. */
+@#
+#include <string.h> /* |@!strlen| */
+@z
+
 @x [2] l.44
 char *config_file_name, *prog_file_name;
-@<Global variables@>@;
 @y
 static char *config_file_name, *prog_file_name;
-@<Global variables@>@;
-@<External stuff@>@;
 @z
 
 @x [5] l.115
@@ -85,7 +98,7 @@ static int n,m; /* temporary integer */
 static octa bp={-1,-1}; /* breakpoint */
 static octa tmp; /* an octabyte of temporary interest */
 
-@ Function |read_hex| is used in \.{mmix-mem} (referenced as |extern|),
+@ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
 so we had better move it ``up'' (together with the |static| variable~|d|
 in the previous section).
 @z
@@ -139,14 +152,4 @@ extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
-
-@ @<External stuff@>=
-extern octa zero_octa;
-extern octa neg_one;
-@#
-extern octa read_hex @,@,@[ARGS((char *))@];
-extern octa incr @,@,@[ARGS((octa y,int delta))@];
-  /* unsigned $y+\delta$ ($\delta$ is signed) */
-extern void mmix_io_init @,@,@[ARGS((void))@];
-extern void MMIX_config @,@,@[ARGS((char*))@];
 @z
