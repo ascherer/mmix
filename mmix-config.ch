@@ -3,6 +3,12 @@
 @y
 @z
 
+@x [7] l.328
+in the \.{mmix-pipe} module, which defines and discusses the data structures
+@y
+in the {\mc MMIX-PIPE} module, which defines and discusses the data structures
+@z
+
 @x [9] l.359
 FILE *config_file; /* input comes from here */
 char token[BUF_SIZE]; /* and tokens are copied to here */
