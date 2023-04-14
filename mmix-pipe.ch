@@ -213,7 +213,7 @@ a trivial program that computes the value of the standard library function
   @<Cases for stage 1 execution@>;
 @y
   @<Cases for stage 1 execution@>;
-  default:@+; /* fall through */@;
+  default:@+; @=/* fall through */@>@;
 @z
 
 @x [157] l.2968
@@ -288,7 +288,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
-  default:@+; /* fall through */@;
+  default:@+; @=/* fall through */@>@;
 @z
 
 @x [272] l.4958
@@ -327,7 +327,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @y
    if (Dcache && (tetra)(Dcache->bb)<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
- default:@+; /* fall through */@;
+ default:@+; @=/* fall through */@>@;
 @z
 
 @x [298] l.5349
@@ -350,7 +350,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @y
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
- default:@+; /* fall through */@;
+ default:@+; @=/* fall through */@>@;
 @z
 
 @x [364] l.6458
