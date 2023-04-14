@@ -9,7 +9,7 @@
 @<Type...@>=
 typedef enum {@!false,@!true}@+@!bool;
 @y
-@* Basics. Most of the stuff in the follwing sections comes from the {\mc
+@* Basics. Most of the stuff in the following sections comes from the {\mc
 MMIX-ARITH} module.
 @z
 

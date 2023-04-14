@@ -196,7 +196,7 @@ static char *trip_warning[]={
 @x [25] l.403
 @* Index.
 @y
-@ Here comes the exported interface of this MMIX-IO program module.
+@ Here comes the exported interface of this {\mc MMIX-IO} program module.
 
 @(mmix-io.h@>=
 #ifndef MMIX_IO_H
