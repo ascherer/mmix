@@ -121,6 +121,13 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 #include "mmix-pipe.h"
 @y
 #include "mmix-config.h" /* we use our own interface first */
+#include "mmix-pipe.h" /* |@!internal_op_code| and much more */
+@#
+#include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
+#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
+#include <ctype.h> /* |isspace| */
+#include <limits.h> /* |INT_MAX| */
+@#
 @z
 
 @x [38] l.1024
@@ -133,18 +140,13 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 @x [39] l.1041
 @*Index.
 @y
-@ Here comes the exported interface of this MMIX-CONFIG program module.
+@ Here comes the exported interface of this {\mc MMIX-CONFIG} program module.
 
 @(mmix-config.h@>=
 #ifndef MMIX_CONFIG_H
 #define MMIX_CONFIG_H
-#include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
-#include <stdlib.h> /* |calloc|, |exit| */
-#include <ctype.h> /* |isspace| */
-#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
-#include <limits.h> /* |INT_MAX| */
 @#
-#include "mmix-pipe.h"
+#include "mmix-arith.h" /* |@!ARGS| */
 @#
 extern void MMIX_config @,@,@[ARGS((char *))@];
 @#

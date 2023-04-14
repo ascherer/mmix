@@ -59,7 +59,8 @@ with a prototype, then with an old-style definition.
 #define ARGS(list) ()
 #endif
 @y
-@ (This section remains empty for historic reasons.)
+@ Each subroutine below is declared first with a prototype, then with an
+old-style definition.
 @z
 
 @x [50] l.1360

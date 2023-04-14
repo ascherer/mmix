@@ -383,7 +383,37 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
 interfaces on which they depend.
 
-@ (This section remains empty for historic reasons.)
+@ The following three functions are not declared in \.{mmix-pipe.h}, although
+they are used in {\mc MMIX-IO}. Similar functions are defined in the simplified
+\MMIX\ computer {\mc MMIX-SIM}.
+
+@<Internal proto...@>=
+int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+char stdin_chr @,@,@[ARGS((void))@];
+@z
+
+@x [377] l.6611
+int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+char stdin_chr @,@,@[ARGS((void))@];
+octa magic_read @,@,@[ARGS((octa))@];
+void magic_write @,@,@[ARGS((octa,octa))@];
+@y
+static octa magic_read @,@,@[ARGS((octa))@];
+static void magic_write @,@,@[ARGS((octa,octa))@];
+@z
+
+@x [378] l.6623
+octa magic_read(addr)
+@y
+static octa magic_read(addr)
+@z
+
+@x [379] l.6656
+void magic_write(addr,val)
+@y
+static void magic_write(addr,val)
 @z
 
 @x [387] l.6827

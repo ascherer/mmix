@@ -11,8 +11,8 @@ Use C99 standard types instead of homebrewn typedefs.
 @y
 #include "mmix-arith.h" /* we use our own interface first */
 @#
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h> /* |@!printf| */
+#include <string.h> /* |@!strncmp| */
 @z
 
 @x [1] l.37
@@ -376,7 +376,9 @@ octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @x [96] l.1845
 @* Index.  
 @y
-@* Public interface.
+@* Public interface. This program module, {\mc MMIX-ARITH}, is central to the
+whole {\mc MMIX} system. Each user of its functionality should include the
+following header file.
 
 @(mmix-arith.h@>=
 #ifndef MMIX_ARITH_H
@@ -417,9 +419,11 @@ extern octa oand @,@,@[ARGS((octa,octa))@];
 extern octa oandn @,@,@[ARGS((octa,octa))@];
 extern octa oxor @,@,@[ARGS((octa,octa))@];
 extern int count_bits @,@,@[ARGS((tetra))@];
+@#
 extern tetra byte_diff @,@,@[ARGS((tetra,tetra))@];
 extern tetra wyde_diff @,@,@[ARGS((tetra,tetra))@];
 extern octa bool_mult @,@,@[ARGS((octa,octa,bool))@];
+@#
 extern octa fpack @,@,@[ARGS((octa,int,char,int))@];
 extern tetra sfpack @,@,@[ARGS((octa,int,char,int))@];
 extern octa load_sf @,@,@[ARGS((tetra))@];
@@ -440,6 +444,7 @@ extern octa fremstep @,@,@[ARGS((octa,octa,int))@];
 @ @<Internal...@>=
 static ftype funpack @,@,@[ARGS((octa,octa*,int*,char*))@];
 static ftype sfunpack @,@,@[ARGS((tetra,octa*,int*,char*))@];
+@#
 static void bignum_times_ten @,@,@[ARGS((bignum*))@];
 static void bignum_dec @,@,@[ARGS((bignum*,bignum*,tetra))@];
 static int bignum_compare @,@,@[ARGS((bignum*,bignum*))@];

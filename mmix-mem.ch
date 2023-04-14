@@ -10,8 +10,9 @@
 #include "mmix-pipe.h" /* header file for all modules */
 @y
 #include "mmix-mem.h" /* we use our own interface first */
+#include "mmix-pipe.h" /* |@!verbose| and much more */
 @#
-#include <stdio.h>
+#include <stdio.h> /* |@!printf| */
 @#
 @z
 
@@ -88,13 +89,13 @@ octa read_hex(p)
   return val;
 }
 
-@ Here comes the exported interface of this MMIX-MEM program module.
+@ Here comes the exported interface of this {\mc MMIX-MEM} program module.
 
 @(mmix-mem.h@>=
 #ifndef MMIX_MEM_H
 #define MMIX_MEM_H
 @#
-#include "mmix-pipe.h" /* header file for all modules */
+#include "mmix-arith.h" /* |@!ARGS|, |@!octa| */
 @#
 extern octa spec_read @,@,@[ARGS((octa,int))@];
 extern void spec_write @,@,@[ARGS((octa,octa,int))@];

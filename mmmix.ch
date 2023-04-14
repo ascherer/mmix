@@ -14,6 +14,9 @@
 #include "mmix-config.h" /* |@!MMIX_config| */
 #include "mmix-io.h" /* |@!mmix_io_init| */
 #include "mmix-mem.h" /* |@!read_hex| */
+#include "mmix-pipe.h" /* |@!MMIX_init| et al. */
+@#
+#include <string.h> /* |@!strlen| */
 @z
 
 @x [2] l.44
@@ -95,7 +98,7 @@ static int n,m; /* temporary integer */
 static octa bp={-1,-1}; /* breakpoint */
 static octa tmp; /* an octabyte of temporary interest */
 
-@ Function |read_hex| is used in \.{mmix-mem} (referenced as |extern|),
+@ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
 so we had better move it ``up'' (together with the |static| variable~|d|
 in the previous section).
 @z
