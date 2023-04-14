@@ -3,6 +3,12 @@
 @y
 @z
 
+@x [2] l.29
+the module called \.{mmix-config}. The program file is either
+@y
+the module called {\mc MMIX-CONFIG}. The program file is either
+@z
+
 @x [2] l.39
 #include <stdio.h>
 #include <stdlib.h>
