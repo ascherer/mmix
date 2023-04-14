@@ -377,7 +377,7 @@ octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @* Index.  
 @y
 @* Public interface. This program module, {\mc MMIX-ARITH}, is central to the
-whole {\mc MMIX} system. Each user of its functionality should include the
+whole \MMIX\ system. Each user of its functionality should include the
 following header file.
 
 @(mmix-arith.h@>=
