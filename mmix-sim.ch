@@ -5,32 +5,118 @@
 
 @x [9] l.546
 @* Basics. To get started, we define a type that provides semantic sugar.
-@y
-@* Basics. Standard types for syntactic sugar.
-@z
 
-@x l.549
+@<Type...@>=
 typedef enum {@!false,@!true}@+@!bool;
 @y
-#include <stdbool.h>
-#include <stdint.h>
+@* Basics. Most of the stuff in the follwing sections comes from the {\mc
+MMIX-ARITH} module.
 @z
 
-@x [10] l.560
-@<Type...@>=
-typedef unsigned int tetra;
-  /* for systems conforming to the LP-64 data model */
+@x [10] l.555
+represents unsigned 32-bit integers. The definition of \&{tetra}
+given here should be changed, if necessary, to agree with the
+definition in that module.
 @y
+represents unsigned 32-bit integers.
 @s uint32_t int
 @s uint8_t int
-@<Type...@>=
-typedef uint32_t tetra;
+@s tetra int
+@s octa int
 @z
 
-@x l.564
+@x [10] l.561
+typedef unsigned int tetra;
+  /* for systems conforming to the LP-64 data model */
+typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 typedef unsigned char byte; /* a monobyte */
 @y
 typedef uint8_t byte; /* a monobyte */
+@z
+
+@x [11] l.566
+@ We declare subroutines twice, once with a prototype and once
+with the old-style~\CEE/ conventions. The following hack makes
+this work with new compilers as well as the old standbys.
+
+@<Preprocessor macros@>=
+#ifdef __STDC__
+#define ARGS(list) list
+#else
+#define ARGS(list) ()
+#endif
+@y
+@ We declare subroutines twice, once with a prototype and once
+with the old-style~\CEE/ conventions.
+@z
+
+@x [13] l.592
+@<Sub...@>=
+extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+extern octa aux,val; /* auxiliary data */
+extern bool overflow; /* flag set by signed multiplication and division */
+extern int exceptions; /* bits set by floating point operations */
+extern int cur_round; /* the current rounding mode */
+extern char *next_char; /* where a scanned constant ended */
+extern octa oplus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y+z$ */
+extern octa ominus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y-z$ */
+extern octa incr @,@,@[ARGS((octa y,int delta))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
+extern octa oand @,@,@[ARGS((octa y,octa z))@];
+  /* $y\land z$ */
+extern octa shift_left @,@,@[ARGS((octa y,int s))@];
+  /* $y\LL s$, $0\le s\le64$ */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
+extern octa omult @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $(|aux|,x)=y\times z$ */
+extern octa signed_omult @,@,@[ARGS((octa y,octa z))@];
+  /* signed $x=y\times z$ */
+extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
+  /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
+extern octa signed_odiv @,@,@[ARGS((octa y,octa z))@];
+  /* signed $x=y/z$ */
+extern int count_bits @,@,@[ARGS((tetra z))@];
+  /* $x=\nu(z)$ */
+extern tetra byte_diff @,@,@[ARGS((tetra y,tetra z))@];
+  /* half of \.{BDIF} */
+extern tetra wyde_diff @,@,@[ARGS((tetra y,tetra z))@];
+  /* half of \.{WDIF} */
+extern octa bool_mult @,@,@[ARGS((octa y,octa z,bool xor))@];
+  /* \.{MOR} or \.{MXOR} */
+extern octa load_sf @,@,@[ARGS((tetra z))@];
+  /* load short float */
+extern tetra store_sf @,@,@[ARGS((octa x))@];
+  /* store short float */
+extern octa fplus @,@,@[ARGS((octa y,octa z))@];
+  /* floating point $x=y\oplus z$ */
+extern octa fmult @,@,@[ARGS((octa y ,octa z))@];
+  /* floating point $x=y\otimes z$ */
+extern octa fdivide @,@,@[ARGS((octa y,octa z))@];
+  /* floating point $x=y\oslash z$ */
+extern octa froot @,@,@[ARGS((octa,int))@];
+  /* floating point $x=\sqrt z$ */
+extern octa fremstep @,@,@[ARGS((octa y,octa z,int delta))@];
+  /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
+extern octa fintegerize @,@,@[ARGS((octa z,int mode))@];
+  /* floating point $x={\rm round}(z)$ */
+extern int fcomp @,@,@[ARGS((octa y,octa z))@];
+  /* $-1$, 0, 1, or 2 if $y<z$, $y=z$, $y>z$, $y\parallel z$ */
+extern int fepscomp @,@,@[ARGS((octa y,octa z,octa eps,int sim))@];
+  /* $x=|sim|?\ [y\sim z\ (\epsilon)]:\ [y\approx z\ (\epsilon)]$ */
+extern octa floatit @,@,@[ARGS((octa z,int mode,int unsgnd,int shrt))@];
+  /* fix to float */
+extern octa fixit @,@,@[ARGS((octa z,int mode))@];
+  /* float to fix */
+extern void print_float @,@,@[ARGS((octa z))@];
+  /* print octabyte as floating decimal */
+extern int scan_const @,@,@[ARGS((char* buf))@];
+  /* |val| = floating or integer constant; returns the type */
+
+@y
 @z
 
 @x [47] l.1183
@@ -96,14 +182,14 @@ a trivial program that computes the value of the standard library function
 @x [90] l.2043
 case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
 case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 @z
 
 @x l.2051
 case FCMP: k=fcomp(y,z);
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
 case FCMP: k=fcomp(y,z);
 @z
 
@@ -116,7 +202,7 @@ case FCMP: k=fcomp(y,z);
 @x [95] l.2159
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @y
-  @=/* fall through */@>
+  @=/* fall through */@>@;
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
@@ -135,21 +221,44 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @x [107] l.2366
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
+@z
+
+@x [113] l.2443
+interfaces on which they depend.
+
+@ @<Glob...@>=
+extern void mmix_io_init @,@,@[ARGS((void))@];
+extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
+extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
+extern void print_trip_warning @,@,@[ARGS((int,octa))@];
+extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
+@y
+interfaces on which they depend.
+
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [125] l.2630
  case RESUME_SET: k=(b.l>>16)&0xff;
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
  case RESUME_SET: k=(b.l>>16)&0xff;
 @z
 
 @x l.2632
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @z
 
@@ -174,12 +283,17 @@ case 'l': printf("%s",lhs);@+break;
 @x [141] l.2887
 #include "abstime.h"
 @y
+@#
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
+#define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
+#include "mmix-io.h" /* |@!mmix_io_init| */
+@#
 @z
 
 @x [143] l.2967
  case 'P': profiling=true;@+return;
 @y
-  @=/* else fall through */@>
+  @=/* else fall through */@>@;
  case 'P': profiling=true;@+return;
 @z
 
