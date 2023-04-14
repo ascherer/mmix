@@ -1,16 +1,66 @@
-@x [26] l.954
+@x [26] l.950
+for the simulators. The definition of type \&{tetra} should be changed, if
+necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
+@^system dependencies@>
+
 @<Type...@>=
 typedef unsigned int tetra;
   /* assumes that an int is exactly 32 bits wide */
-@y
-@s uint32_t int
-@<Type...@>=
-typedef uint32_t tetra;
-@z
-
-@x l. 958
+typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 typedef enum {@!false,@!true}@+@!bool;
 @y
+for the simulators.
+@s uint32_t int
+@z
+
+@x [27] l.960
+@ @<Glob...@>=
+extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+extern octa aux; /* auxiliary output of a subroutine */
+extern bool overflow; /* set by certain subroutines for signed arithmetic */
+@y
+@ (This section remains empty for historic reasons.)
+@z
+
+@x [28] l.972
+@<Sub...@>=
+extern octa oplus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y+z$ */
+extern octa ominus @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $y-z$ */
+extern octa incr @,@,@[ARGS((octa y,int delta))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
+extern octa oand @,@,@[ARGS((octa y,octa z))@];
+  /* $y\land z$ */
+extern octa shift_left @,@,@[ARGS((octa y,int s))@];
+  /* $y\LL s$, $0\le s\le64$ */
+extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
+  /* $y\GG s$, signed if |!u| */
+extern octa omult @,@,@[ARGS((octa y,octa z))@];
+  /* unsigned $(|aux|,x)=y\times z$ */
+extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
+  /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
+
+@y
+@z
+
+@x [31] l.1013
+@ While we're talking about classic systems versus future systems, we
+might as well define the |ARGS| macro, which makes function prototypes
+available on {\mc ANSI \CEE/} systems without making them
+uncompilable on older systems. Each subroutine below is declared first
+with a prototype, then with an old-style definition.
+
+@<Preprocessor definitions@>=
+#ifdef __STDC__
+#define ARGS(list) list
+#else
+#define ARGS(list) ()
+#endif
+@y
+@ Each subroutine below is declared first with a prototype, then with an
+old-style definition.
 @z
 
 @x [50] l.1360
@@ -729,7 +779,7 @@ op_spec op_init_table[]={@|
 @x [97] l.2471
  case '&': rt_op=and;@+break;
 @y
-  @=/* fall through */@>
+  @=/* fall through */@>@;
  case '&': rt_op=and;@+break;
 @z
 
@@ -763,7 +813,7 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
 @x l.2840
 case 3:@+if (!(op_bits&three_arg_bit))
 @y
-  @=/* fall through */@>
+  @=/* fall through */@>@;
 case 3:@+if (!(op_bits&three_arg_bit))
 @z
 
@@ -793,6 +843,6 @@ case 3:@+if (!(op_bits&three_arg_bit))
 #include <time.h>
 @y
 #include <time.h>
-#include <stdbool.h>
-#include <stdint.h>
+@#
+#include "mmix-arith.h"
 @z
