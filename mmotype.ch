@@ -15,10 +15,12 @@
 @<Type...@>=
 typedef unsigned char byte; /* a monobyte */
 typedef unsigned int tetra; /* a tetrabyte */
+typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 @y
 @s uint8_t int
 @s uint32_t int
 @<Type...@>=
 typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra; /* a tetrabyte */
+typedef struct {@+tetra h,l;@+} octa; /* an octabyte */
 @z
