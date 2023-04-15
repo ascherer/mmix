@@ -51,6 +51,7 @@ utilities respectively.
 * Advanced build script `mmix.spec` for rpm and deb packaging
 * Modified `Makefile` for target optimization
 * Use C99/C++ types `bool`, `uint8_t` and `uint32_t`
+* **New in 2023: Completely updated module structure with new header files**
 
 ## Postscript
 
