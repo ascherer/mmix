@@ -74,13 +74,13 @@ clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
 
 .SECONDEXPANSION:
-mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@)
+mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
 	perl -pe "s/(#define ABSTIME)/\1 `date +%s`/" -i $<
 	$(CC) $(CFLAGS) -c $<
 
-mmix-config.o: mmix-pipe.o
+mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
 
-mmmix:  mmix-arith.o mmix-pipe.o mmix-config.o mmix-mem.o mmix-io.o mmmix.c
+mmmix:  mmix-arith.o mmix-config.o mmix-mem.o mmix-io.o mmix-pipe.o mmmix.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 mmixal: mmix-arith.o mmixal.c
