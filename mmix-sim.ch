@@ -50,6 +50,11 @@ this work with new compilers as well as the old standbys.
 with the old-style~\CEE/ conventions.
 @z
 
+@x [12] l.578
+void print_hex @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
+@z
+
 @x [13] l.592
 @<Sub...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
@@ -119,6 +124,46 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
+@x [15] l.672
+void print_int @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [17] l.743
+mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [20] l.774
+mem_tetra* mem_find @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [26] l.890
+void read_tet @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [27] l.899
+byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [42] l.1102
+void make_map @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [45] l.1149
+void print_line @,@,@[ARGS((int))@];@+@t}\6{@>
+@y
+@z
+
+@x [47] l.1176
+void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
 @x [47] l.1183
     if (shown_line>0)
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
@@ -133,6 +178,11 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
   else freopen(file_info[cur_file].name,"r",src_file);
 @y
   else if (freopen(file_info[cur_file].name,"r",src_file)) {}
+@z
+
+@x [50] l.1225
+void print_freqs @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
+@y
 @z
 
 @x [60] l.1367
@@ -173,6 +223,16 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
+@x [82] l.1865
+void stack_store @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [83] l.1886
+void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
 @x [89] l.2027
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
@@ -191,6 +251,11 @@ case FCMP: k=fcomp(y,z);
 @y
   @=/* else fall through */@>@;
 case FCMP: k=fcomp(y,z);
+@z
+
+@x [91] l.2068
+int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
+@y
 @z
 
 @x [91] l.2079
@@ -225,7 +290,8 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
-@x [113] l.2443
+@x [112,113] l.2443
+Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 
 @ @<Glob...@>=
@@ -243,9 +309,32 @@ extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
 extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 @y
+Here we need only write three primitive
 interfaces on which they depend.
 
-@ (This section remains empty for historic reasons.)
+@ The following three functions are not declared in any header file, although
+they are used in {\mc MMIX-IO}. Similar functions are defined in the
+meta-simulator {\mc MMIX-PIPE}.
+
+@<Proto...@>=
+int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+char stdin_chr @,@,@[ARGS((void))@];
+@z
+
+@x [114] l.2468
+int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];@+@t}\6{@>
+@y
+@z
+
+@x [117] l.2516
+void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [120] l.2558
+char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
 @z
 
 @x [125] l.2630
@@ -260,6 +349,17 @@ interfaces on which they depend.
 @y
   @=/* else fall through */@>@;
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
+@z
+
+@x [137] l.2820
+fmt_style style;
+char *stream_name[]={"StdIn","StdOut","StdErr"};
+@.StdIn@>
+@.StdOut@>
+@.StdErr@>
+@#
+void trace_print @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
 @z
 
 @x [137] l.2835
@@ -280,6 +380,23 @@ case 'l': printf(lhs);@+break;
 case 'l': printf("%s",lhs);@+break;
 @z
 
+@x [139] l.
+char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
+@y
+fmt_style style;
+char *stream_name[]={"StdIn","StdOut","StdErr"};
+@.StdIn@>
+@.StdOut@>
+@.StdErr@>
+@#
+char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
+@z
+
+@x [140] l.2862
+void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
+@y
+@z
+
 @x [141] l.2887
 #include "abstime.h"
 @y
@@ -288,6 +405,18 @@ case 'l': printf("%s",lhs);@+break;
 #define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
 #include "mmix-io.h" /* |@!mmix_io_init| */
 @#
+@z
+
+@x [141] l.2891
+@<Subroutines@>@;
+@y
+@<Prototypes@>@;
+@<Subroutines@>@;
+@z
+
+@x [143] l.2946
+void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
+@y
 @z
 
 @x [143] l.2967
@@ -307,6 +436,11 @@ case 'l': printf("%s",lhs);@+break;
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf(usage_help[k]);
 @y
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
+@z
+
+@x [148] l.3064
+void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
+@y
 @z
 
 @x [148] l.3068
@@ -339,6 +473,11 @@ case 'l': printf("%s",lhs);@+break;
       else ready=true; }
 @z
 
+@x [154] l.3194
+octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
+@y
+@z
+
 @x [158] l.3266
     if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
 @y
@@ -349,4 +488,50 @@ case 'l': printf("%s",lhs);@+break;
     if (val.h==0 && val.l<L) L=val.l;
 @y
     if (val.h==0 && val.l<(tetra)L) L=val.l;
+@z
+
+@x [160] l.3301
+void print_string @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [162] l.3347
+void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
+@y
+@z
+
+@x [165] l.3412
+void dump @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
+void dump_tet @,@,@[ARGS((tetra))@];@+@t}\6{@>
+@y
+@z
+
+@x [167] l.3443
+@* Index.
+@y
+@ @<Proto...@>=
+void print_hex @,@,@[ARGS((octa))@];
+void print_int @,@,@[ARGS((octa))@];
+mem_node* new_mem @,@,@[ARGS((void))@];
+mem_tetra* mem_find @,@,@[ARGS((octa))@];
+void read_tet @,@,@[ARGS((void))@];
+byte read_byte @,@,@[ARGS((void))@];
+void make_map @,@,@[ARGS((void))@];
+void print_line @,@,@[ARGS((int))@];
+void show_line @,@,@[ARGS((void))@];
+void print_freqs @,@,@[ARGS((mem_node*))@];
+void stack_store @,@,@[ARGS((void))@];
+void stack_load @,@,@[ARGS((void))@];
+int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
+void trace_print @,@,@[ARGS((octa))@];
+void show_stats @,@,@[ARGS((bool))@];
+void scan_option @,@,@[ARGS((char*,bool))@];
+void catchint @,@,@[ARGS((int))@];
+octa scan_hex @,@,@[ARGS((char*,octa))@];
+void print_string @,@,@[ARGS((octa))@];
+void show_breaks @,@,@[ARGS((mem_node*))@];
+void dump @,@,@[ARGS((mem_node*))@];
+void dump_tet @,@,@[ARGS((tetra))@];
+
+@* Index.
 @z
