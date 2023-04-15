@@ -12,7 +12,7 @@ License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
 Version: 20230213
-Release: 1
+Release: 2
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if "%{_vendor}" == "debbuild"
@@ -44,6 +44,7 @@ Source9: mmix-mem.ch
 
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
+Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
 %endif
 
 %description
@@ -111,6 +112,9 @@ diff -u silly.err silly.err.new ||:
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %changelog
+* Sat Apr 15 2023 Andreas Scherer <andreas_tex@freenet.de>
+- Second patch for Makefile
+
 * Wed Feb 14 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Update from DEK
 
