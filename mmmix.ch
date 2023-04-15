@@ -31,6 +31,13 @@ char *config_file_name, *prog_file_name;
 static char *config_file_name, *prog_file_name;
 @z
 
+@x [2] l.46
+@<Subroutines@>@;
+@y
+@<Prototypes@>@;
+@<Subroutines@>@;
+@z
+
 @x [5] l.115
 octa cur_loc;
 octa cur_dat;
@@ -43,6 +50,11 @@ static octa cur_dat;
 static bool new_chunk;
 static char buffer[BUF_SIZE];
 static FILE *prog_file;
+@z
+
+@x [10] l.221
+static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
 @z
 
 @x [12] l.284
@@ -123,6 +135,11 @@ examining the pipeline.
 @:g}{\|g (global registers)@>
 @z
 
+@x [20] l.489
+static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
+@y
+@z
+
 @x [21] l.505
 case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @y
@@ -158,4 +175,14 @@ extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
+@z
+
+@x [26] l.569
+@* Index.
+@y
+@ @<Proto...@>=
+static bool undump_octa @,@,@[ARGS((void))@];
+static octa sl3 @,@,@[ARGS((octa))@];
+
+@* Index.
 @z
