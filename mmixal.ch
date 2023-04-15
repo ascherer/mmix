@@ -11,6 +11,8 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 for the simulators.
 @s uint32_t int
+@s tetra int
+@s octa int
 @z
 
 @x [27] l.960
@@ -63,14 +65,102 @@ with a prototype, then with an old-style definition.
 old-style definition.
 @z
 
+@x [41] l.1145
+void flush_listing_line @,@,@[ARGS((char*))@];@+@t}\6{@>
+@y
+@z
+
+@x [42] l.1161
+void update_listing_loc @,@,@[ARGS((int))@];@+@t}\6{@>
+@y
+@z
+
+@x [44] l.1195
+void listing_clear @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [45] l.1229
+void report_error @,@,@[ARGS((char*))@];@+@t}\6{@>
+@y
+@z
+
+@x [46] l.1258
+int err_count; /* this many errors were found */
+@y
+int err_count; /* this many errors were found */
+unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
+unsigned char mmo_buf[4];
+int mmo_ptr;
+@z
+
+@x [47] l.1272
+void mmo_clear @,@,@[ARGS((void))@];
+void mmo_out @,@,@[ARGS((void))@];
+unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
+@y
+@z
+
+@x [47] l.1286
+unsigned char mmo_buf[4];
+int mmo_ptr;
+@y
+@z
+
+@x [48] l.1295
+void mmo_tetra @,@,@[ARGS((tetra))@];
+void mmo_byte @,@,@[ARGS((unsigned char))@];
+void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
+void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
+@y
+@z
+
+@x [49] l.1335
+void mmo_loc @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [50] l.1357
+void mmo_sync @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
 @x [50] l.1360
   register int j; register unsigned char *p;
 @y
   register int j; register Char *p;
 @z
 
+@x [52] l.1399
+void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
+@y
+@z
+
+@x [54] l.1455
+trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
+@y
+@z
+
+@x [56] l.1473
+trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
+@y
+trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
+Char *terminator; /* where the search ended */
+@z
+
+@x [57] l.1483
+trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
+Char *terminator; /* where the search ended */
+@y
+@z
+
 @x [58] l.1539
 @s bool int
+@y
+@z
+
+@x [59] l.1562
+sym_node* new_sym_node @,@,@[ARGS((bool))@];@+@t}\6{@>
 @y
 @z
 
@@ -770,6 +860,16 @@ op_spec op_init_table[]={@|
 {"BinaryReadWrite",0,4},@|
 @z
 
+@x [73] l.2148
+trie_node* prune @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
+@y
+@z
+
+@x [74] l.2176
+void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
+@y
+@z
+
 @x [76] l.2229
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
@@ -845,4 +945,40 @@ case 3:@+if (!(op_bits&three_arg_bit))
 #include <time.h>
 @#
 #include "mmix-arith.h"
+@z
+
+@x [136] l.3171
+@<Subroutines@>@;
+@y
+@<Prototypes@>@;
+@<Subroutines@>@;
+@z
+
+@x [146] l.3281
+@* Index.
+@y
+@ @<Prototypes@>=
+void flush_listing_line @,@,@[ARGS((char*))@];
+void update_listing_loc @,@,@[ARGS((int))@];
+void listing_clear @,@,@[ARGS((void))@];
+void report_error @,@,@[ARGS((char*))@];
+@#
+void mmo_clear @,@,@[ARGS((void))@];
+void mmo_out @,@,@[ARGS((void))@];
+void mmo_tetra @,@,@[ARGS((tetra))@];
+void mmo_byte @,@,@[ARGS((unsigned char))@];
+void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
+void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
+void mmo_loc @,@,@[ARGS((void))@];
+void mmo_sync @,@,@[ARGS((void))@];
+@#
+void assemble @,@,@[ARGS((char,tetra,unsigned char))@];
+@#
+trie_node* new_trie_node @,@,@[ARGS((void))@];
+trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
+sym_node* new_sym_node @,@,@[ARGS((bool))@];
+trie_node* prune @,@,@[ARGS((trie_node*))@];
+void out_stab @,@,@[ARGS((trie_node*))@];
+
+@* Index.
 @z
