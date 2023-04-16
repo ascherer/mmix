@@ -12,7 +12,7 @@ License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
 Version: 20230213
-Release: 2
+Release: 3
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if "%{_vendor}" == "debbuild"
@@ -45,6 +45,7 @@ Source9: mmix-mem.ch
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
 Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
+Patch110: 0110-Avoid-redundant-date-values.patch
 %endif
 
 %description
