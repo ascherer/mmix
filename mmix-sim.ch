@@ -402,7 +402,6 @@ void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
 @y
 @#
 #include "mmix-arith.h" /* |@!tetra|, |@!octa| */
-#define MMIX_PIPE_H /* do not include \.{mmix-pipe.h} */
 #include "mmix-io.h" /* |@!mmix_io_init| */
 @#
 @z
