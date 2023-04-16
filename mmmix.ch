@@ -118,7 +118,11 @@ static octa tmp; /* an octabyte of temporary interest */
 
 @ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
 so we had better move it ``up'' (together with the |static| variable~|d|
-in the previous section).
+in the previous section). Instead, we place some internal prototypes here.
+
+@<Proto...@>=
+static bool undump_octa @,@,@[ARGS((void))@];
+static octa sl3 @,@,@[ARGS((octa))@];
 @z
 
 @x [18] l.469
@@ -175,14 +179,4 @@ extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
 static octa seven_octa={0,7};
-@z
-
-@x [26] l.569
-@* Index.
-@y
-@ @<Proto...@>=
-static bool undump_octa @,@,@[ARGS((void))@];
-static octa sl3 @,@,@[ARGS((octa))@];
-
-@* Index.
 @z
