@@ -75,7 +75,7 @@ clean:
 
 .SECONDEXPANSION:
 mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
-	perl -pe "s/(#define ABSTIME)/\1 `date +%s`/" -i $<
+	perl -pe "s/(#define ABSTIME) \d*/\1 `date +%s`/" -i $<
 	$(CC) $(CFLAGS) -c $<
 
 mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
