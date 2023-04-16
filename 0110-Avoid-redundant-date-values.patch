@@ -1,0 +1,30 @@
+From f27352e6d6bde0c6236cd28de177eb336cda6dbd Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Sun, 16 Apr 2023 12:06:50 +0200
+Subject: [PATCH 110/110] Avoid redundant 'date' values.
+
+Due to the mutual dependencies between MMIX-IO and the MMIX simulators
+MMIX-PIPE and MMIX-SIM respectively, each invocation of 'make (all)'
+re-applies the Perl substitution of ABSTIME. In order to avoid syntax
+errors in the resulting C code, we replace the numeric value (if
+present) instead of appending the new value.
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 2df3698..9f669e6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -75,7 +75,7 @@ clean:
+ 
+ .SECONDEXPANSION:
+ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
+-	perl -pe "s/(#define ABSTIME)/\1 `date +%s`/" -i $<
++	perl -pe "s/(#define ABSTIME) \d*/\1 `date +%s`/" -i $<
+ 	$(CC) $(CFLAGS) -c $<
+ 
+ mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
+-- 
+2.40.0
+
