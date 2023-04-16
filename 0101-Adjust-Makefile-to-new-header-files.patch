@@ -1,7 +1,7 @@
-From 746a677125d8908d3d252030940bce1cf5479e73 Mon Sep 17 00:00:00 2001
+From 0a84b23171c8ebe1029787c7608d701934f569af Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sat, 15 Apr 2023 18:40:32 +0200
-Subject: [PATCH 101/101] Adjust Makefile to new header files.
+Subject: [PATCH 101/110] Adjust Makefile to new header files.
 
 ---
  Makefile | 6 +++---
