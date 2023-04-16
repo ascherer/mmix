@@ -58,7 +58,30 @@ in the simulators.
 typedef unsigned int tetra;
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @y
-@ (This section remains empty for historic reasons.)
+@ Here comes the exported interface of this {\mc MMIX-IO} program module.
+
+@(mmix-io.h@>=
+#ifndef MMIX_IO_H
+#define MMIX_IO_H
+#include <stdio.h> /* |@!FILE| */
+@#
+#include "mmix-arith.h" /* |@!octa| */
+@#
+extern void mmix_io_init @,@,@[ARGS((void))@];
+extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
+extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
+extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
+extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
+extern void print_trip_warning @,@,@[ARGS((int,octa))@];
+@#
+#endif /* |MMIX_IO_H| */
 @z
 
 @x [4] l.53
@@ -68,14 +91,19 @@ and constants defined in {\mc MMIX-ARITH}.
 defined appropriately in each simulator.
 @z
 
-@x [4] l.60
+@x [4] l.57
+extern char stdin_chr @,@,@[ARGS((void))@];
+extern int mmgetchars @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
+extern void mmputchars @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
 extern octa oplus @,@,@[ARGS((octa,octa))@];
 extern octa ominus @,@,@[ARGS((octa,octa))@];
 extern octa incr @,@,@[ARGS((octa,int))@];
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
-
 @y
+extern int mmgetchars @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
+extern void mmputchars @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
+extern char stdin_chr @,@,@[ARGS((void))@];
 @z
 
 @x [6] l.75
@@ -191,35 +219,4 @@ void print_trip_warning @,@,@[ARGS((int,octa))@];@+@t}\6{@>
 char *trip_warning[]={
 @y
 static char *trip_warning[]={
-@z
-
-@x [25] l.403
-@* Index.
-@y
-@ Here comes the exported interface of this {\mc MMIX-IO} program module.
-
-@(mmix-io.h@>=
-#ifndef MMIX_IO_H
-#define MMIX_IO_H
-#include <stdio.h> /* |@!FILE| */
-@#
-#include "mmix-arith.h" /* |@!octa| */
-@#
-extern void mmix_io_init @,@,@[ARGS((void))@];
-extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
-extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
-extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
-extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
-extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
-extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
-extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
-extern void print_trip_warning @,@,@[ARGS((int,octa))@];
-@#
-#endif /* |MMIX_IO_H| */
-
-@* Index.
 @z
