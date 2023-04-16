@@ -63,6 +63,30 @@ with a prototype, then with an old-style definition.
 @y
 @ Each subroutine below is declared first with a prototype, then with an
 old-style definition.
+@s trie_node int
+
+@<Prototypes@>=
+void flush_listing_line @,@,@[ARGS((char*))@];
+void update_listing_loc @,@,@[ARGS((int))@];
+void listing_clear @,@,@[ARGS((void))@];
+void report_error @,@,@[ARGS((char*))@];
+@#
+void mmo_clear @,@,@[ARGS((void))@];
+void mmo_out @,@,@[ARGS((void))@];
+void mmo_tetra @,@,@[ARGS((tetra))@];
+void mmo_byte @,@,@[ARGS((unsigned char))@];
+void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
+void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
+void mmo_loc @,@,@[ARGS((void))@];
+void mmo_sync @,@,@[ARGS((void))@];
+@#
+void assemble @,@,@[ARGS((char,tetra,unsigned char))@];
+@#
+trie_node* new_trie_node @,@,@[ARGS((void))@];
+trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
+sym_node* new_sym_node @,@,@[ARGS((bool))@];
+trie_node* prune @,@,@[ARGS((trie_node*))@];
+void out_stab @,@,@[ARGS((trie_node*))@];
 @z
 
 @x [41] l.1145
@@ -952,33 +976,4 @@ case 3:@+if (!(op_bits&three_arg_bit))
 @y
 @<Prototypes@>@;
 @<Subroutines@>@;
-@z
-
-@x [146] l.3281
-@* Index.
-@y
-@ @<Prototypes@>=
-void flush_listing_line @,@,@[ARGS((char*))@];
-void update_listing_loc @,@,@[ARGS((int))@];
-void listing_clear @,@,@[ARGS((void))@];
-void report_error @,@,@[ARGS((char*))@];
-@#
-void mmo_clear @,@,@[ARGS((void))@];
-void mmo_out @,@,@[ARGS((void))@];
-void mmo_tetra @,@,@[ARGS((tetra))@];
-void mmo_byte @,@,@[ARGS((unsigned char))@];
-void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
-void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
-void mmo_loc @,@,@[ARGS((void))@];
-void mmo_sync @,@,@[ARGS((void))@];
-@#
-void assemble @,@,@[ARGS((char,tetra,unsigned char))@];
-@#
-trie_node* new_trie_node @,@,@[ARGS((void))@];
-trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
-sym_node* new_sym_node @,@,@[ARGS((bool))@];
-trie_node* prune @,@,@[ARGS((trie_node*))@];
-void out_stab @,@,@[ARGS((trie_node*))@];
-
-@* Index.
 @z
