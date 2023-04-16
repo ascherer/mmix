@@ -1,7 +1,7 @@
-From f91bbc7f04e46cc97359356f960160b4d4dc292d Mon Sep 17 00:00:00 2001
+From a81adc0d627a9a31081130587ea7c7a0b04add9b Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 8 Jan 2017 15:13:01 +0100
-Subject: [PATCH 29/73] DRY up the Makefile.
+Subject: [PATCH 029/110] DRY up the Makefile.
 
 The rules for mmix-pipe and mmix-sim are similar. With the
 .SECONDEXPANSION feature of GNU make, this can be made clear.
@@ -17,7 +17,7 @@ into production.
  1 file changed, 9 insertions(+), 12 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 798d9d7..2f5f5ce 100644
+index b46d129..f6afd12 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -73,27 +73,24 @@ all:    mmixal mmix mmotype mmmix
@@ -58,5 +58,5 @@ index 798d9d7..2f5f5ce 100644
  tarfile: $(ALL)
  	tar cvf /tmp/mmix.tar $(ALL)
 -- 
-2.31.1
+2.40.0
 
