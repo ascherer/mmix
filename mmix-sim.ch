@@ -48,6 +48,32 @@ this work with new compilers as well as the old standbys.
 @y
 @ We declare subroutines twice, once with a prototype and once
 with the old-style~\CEE/ conventions.
+@s mem_node int
+@s mem_tetra int
+
+@<Proto...@>=
+void print_hex @,@,@[ARGS((octa))@];
+void print_int @,@,@[ARGS((octa))@];
+mem_node* new_mem @,@,@[ARGS((void))@];
+mem_tetra* mem_find @,@,@[ARGS((octa))@];
+void read_tet @,@,@[ARGS((void))@];
+byte read_byte @,@,@[ARGS((void))@];
+void make_map @,@,@[ARGS((void))@];
+void print_line @,@,@[ARGS((int))@];
+void show_line @,@,@[ARGS((void))@];
+void print_freqs @,@,@[ARGS((mem_node*))@];
+void stack_store @,@,@[ARGS((void))@];
+void stack_load @,@,@[ARGS((void))@];
+int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
+void trace_print @,@,@[ARGS((octa))@];
+void show_stats @,@,@[ARGS((bool))@];
+void scan_option @,@,@[ARGS((char*,bool))@];
+void catchint @,@,@[ARGS((int))@];
+octa scan_hex @,@,@[ARGS((char*,octa))@];
+void print_string @,@,@[ARGS((octa))@];
+void show_breaks @,@,@[ARGS((mem_node*))@];
+void dump @,@,@[ARGS((mem_node*))@];
+void dump_tet @,@,@[ARGS((tetra))@];
 @z
 
 @x [12] l.578
@@ -503,34 +529,4 @@ void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 void dump @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 void dump_tet @,@,@[ARGS((tetra))@];@+@t}\6{@>
 @y
-@z
-
-@x [167] l.3443
-@* Index.
-@y
-@ @<Proto...@>=
-void print_hex @,@,@[ARGS((octa))@];
-void print_int @,@,@[ARGS((octa))@];
-mem_node* new_mem @,@,@[ARGS((void))@];
-mem_tetra* mem_find @,@,@[ARGS((octa))@];
-void read_tet @,@,@[ARGS((void))@];
-byte read_byte @,@,@[ARGS((void))@];
-void make_map @,@,@[ARGS((void))@];
-void print_line @,@,@[ARGS((int))@];
-void show_line @,@,@[ARGS((void))@];
-void print_freqs @,@,@[ARGS((mem_node*))@];
-void stack_store @,@,@[ARGS((void))@];
-void stack_load @,@,@[ARGS((void))@];
-int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
-void trace_print @,@,@[ARGS((octa))@];
-void show_stats @,@,@[ARGS((bool))@];
-void scan_option @,@,@[ARGS((char*,bool))@];
-void catchint @,@,@[ARGS((int))@];
-octa scan_hex @,@,@[ARGS((char*,octa))@];
-void print_string @,@,@[ARGS((octa))@];
-void show_breaks @,@,@[ARGS((mem_node*))@];
-void dump @,@,@[ARGS((mem_node*))@];
-void dump_tet @,@,@[ARGS((tetra))@];
-
-@* Index.
 @z
