@@ -394,16 +394,16 @@ following header file.
 #endif /* |MMIX_ARITH_H| */
 
 @ @<Exported...@>=
-extern octa zero_octa;
-extern octa neg_one;
-extern octa inf_octa;
-extern octa standard_NaN;
-extern octa aux;
-extern bool overflow;
-extern int cur_round;
-extern int exceptions;
-extern octa val;
-extern char *next_char;
+extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+extern octa inf_octa; /* floating point $+\infty$ */
+extern octa standard_NaN; /* floating point NaN(.5) */
+extern octa aux; /* auxiliary output of a subroutine */
+extern bool overflow; /* set by certain subroutines for signed arithmetic */
+extern int cur_round; /* the current rounding mode */
+extern int exceptions; /* bits set by floating point operations */
+extern octa val; /* value returned by |scan_const| */
+extern char *next_char; /* where a scanned constant ended */
 
 @ @<External proto...@>=
 extern octa oplus @,@,@[ARGS((octa,octa))@];
