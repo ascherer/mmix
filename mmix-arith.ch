@@ -153,7 +153,9 @@ octa bool_mult @,@,@[ARGS((octa,octa,bool))@];@+@t}\6{@>
 
 @x [31] l.505
 octa fpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
+octa fpack(f,e,s,r)
 @y
+static octa fpack(f,e,s,r)
 @z
 
 again the default case helps the compiler see that no cases are missing.
@@ -166,7 +168,9 @@ again the default case helps the compiler see that no cases are missing.
 
 @x [34] l.553
 tetra sfpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
+tetra sfpack(f,e,s,r)
 @y
+static tetra sfpack(f,e,s,r)
 @z
 
 @x [37] l.610
@@ -443,9 +447,6 @@ extern tetra wyde_diff @,@,@[ARGS((tetra,tetra))@];
 extern octa bool_mult @,@,@[ARGS((octa,octa,bool))@];
   /* \.{MOR} or \.{MXOR} */
 @#
-extern octa fpack @,@,@[ARGS((octa,int,char,int))@];
-extern tetra sfpack @,@,@[ARGS((octa,int,char,int))@];
-@#
 extern octa load_sf @,@,@[ARGS((tetra))@];
   /* load short float */
 extern tetra store_sf @,@,@[ARGS((octa))@];
@@ -476,6 +477,8 @@ extern octa fremstep @,@,@[ARGS((octa,octa,int))@];
   /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
 
 @ @<Internal...@>=
+static octa fpack @,@,@[ARGS((octa,int,char,int))@];
+static tetra sfpack @,@,@[ARGS((octa,int,char,int))@];
 static ftype funpack @,@,@[ARGS((octa,octa*,int*,char*))@];
 static ftype sfunpack @,@,@[ARGS((tetra,octa*,int*,char*))@];
 @#
