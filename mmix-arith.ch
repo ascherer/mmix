@@ -407,39 +407,70 @@ extern char *next_char; /* where a scanned constant ended */
 
 @ @<External proto...@>=
 extern octa oplus @,@,@[ARGS((octa,octa))@];
+  /* unsigned $y+z$ */
 extern octa ominus @,@,@[ARGS((octa,octa))@];
+  /* unsigned $y-z$ */
 extern octa incr @,@,@[ARGS((octa,int))@];
+  /* unsigned $y+\delta$ ($\delta$ is signed) */
 extern octa shift_left @,@,@[ARGS((octa,int))@];
+  /* $y\LL s$, $0\le s\le64$ */
 extern octa shift_right @,@,@[ARGS((octa,int,int))@];
+  /* $y\GG s$, signed if |!u| */
 extern octa omult @,@,@[ARGS((octa,octa))@];
+  /* unsigned $(|aux|,x)=y\times z$ */
 extern octa signed_omult @,@,@[ARGS((octa,octa))@];
+  /* signed $x=y\times z$, setting |overflow| */
 extern octa odiv @,@,@[ARGS((octa,octa,octa))@];
+  /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
 extern octa signed_odiv @,@,@[ARGS((octa,octa))@];
+  /* signed $y/z$, when $z\ne0$; $|aux|=y\bmod z$ */
 extern octa oand @,@,@[ARGS((octa,octa))@];
+  /* $y\land z$ */
 extern octa oandn @,@,@[ARGS((octa,octa))@];
+  /* $y\land \bar z$ */
 extern octa oxor @,@,@[ARGS((octa,octa))@];
+  /* $y\oplus z$ */
 extern int count_bits @,@,@[ARGS((tetra))@];
+  /* $x=\nu(z)$ */
 @#
 extern tetra byte_diff @,@,@[ARGS((tetra,tetra))@];
+  /* half of \.{BDIF} */
 extern tetra wyde_diff @,@,@[ARGS((tetra,tetra))@];
+  /* half of \.{WDIF} */
 extern octa bool_mult @,@,@[ARGS((octa,octa,bool))@];
+  /* \.{MOR} or \.{MXOR} */
 @#
 extern octa fpack @,@,@[ARGS((octa,int,char,int))@];
 extern tetra sfpack @,@,@[ARGS((octa,int,char,int))@];
+@#
 extern octa load_sf @,@,@[ARGS((tetra))@];
+  /* load short float */
 extern tetra store_sf @,@,@[ARGS((octa))@];
+  /* store short float */
 extern octa fmult @,@,@[ARGS((octa,octa))@];
+  /* floating point $x=y\otimes z$ */
 extern octa fdivide @,@,@[ARGS((octa,octa))@];
+  /* floating point $x=y\oslash z$ */
 extern octa fplus @,@,@[ARGS((octa,octa))@];
+  /* floating point $x=y\oplus z$ */
 extern int fepscomp @,@,@[ARGS((octa,octa,octa,int))@];
+  /* $x=|sim|?\ [y\sim z\ (\epsilon)]:\ [y\approx z\ (\epsilon)]$ */
 extern void print_float @,@,@[ARGS((octa))@];
+  /* print octabyte as floating decimal */
 extern int scan_const @,@,@[ARGS((char*))@];
+  /* |val| = floating or integer constant; returns the type */
 extern int fcomp @,@,@[ARGS((octa,octa))@];
+  /* $-1$, 0, 1, or 2 if $y<z$, $y=z$, $y>z$, $y\parallel z$ */
 extern octa fintegerize @,@,@[ARGS((octa,int))@];
+  /* floating point $x={\rm round}(z)$ */
 extern octa fixit @,@,@[ARGS((octa,int))@];
+  /* float to fix */
 extern octa floatit @,@,@[ARGS((octa,int,int,int))@];
+  /* fix to float */
 extern octa froot @,@,@[ARGS((octa,int))@];
+  /* floating point $x=\sqrt z$ */
 extern octa fremstep @,@,@[ARGS((octa,octa,int))@];
+  /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
 
 @ @<Internal...@>=
 static ftype funpack @,@,@[ARGS((octa,octa*,int*,char*))@];
