@@ -98,8 +98,12 @@ octa read_hex(p)
 #include "mmix-arith.h" /* |@!ARGS|, |@!octa| */
 @#
 extern octa spec_read @,@,@[ARGS((octa,int))@];
+  /* for memory mapped I/O */
 extern void spec_write @,@,@[ARGS((octa,octa,int))@];
+  /* likewise */
+@#
 extern octa read_hex @,@,@[ARGS((char *))@];
+  /* see {\mc MMMIX} */
 @#
 #endif /* |MMIX_MEM_H| */
 
