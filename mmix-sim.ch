@@ -175,6 +175,12 @@ byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
+@x [32] l.965
+do @<Load the next item@>@;@+while (!postamble);
+@y
+do @<Load the next item@>@; while (!postamble);
+@z
+
 @x [42] l.1102
 void make_map @,@,@[ARGS((void))@];@+@t}\6{@>
 @y

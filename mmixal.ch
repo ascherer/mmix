@@ -914,6 +914,12 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
  @t\4@>@<Cases for unary operators@>@;
 @z
 
+@x [109] l.2742
+    do @<Fix prior references to this label@>@;@+while (pp->link);
+@y
+    do @<Fix prior references to this label@>@; while (pp->link);
+@z
+
 @x [109] l.2747
   if (listing_file && (opcode==IS || opcode==LOC))
     @<Make special listing to show the label equivalent@>;
