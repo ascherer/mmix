@@ -8,11 +8,14 @@ Use C99 standard types instead of homebrewn typedefs.
 @x [1] l.34
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 @y
 #include "mmix-arith.h" /* we use our own interface first */
 @#
 #include <stdio.h> /* |@!printf| */
 #include <string.h> /* |@!strncmp| */
+#include <ctype.h> /* |@!isdigit| */
+@#
 @z
 
 @x [1] l.37
