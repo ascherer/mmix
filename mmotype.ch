@@ -11,6 +11,12 @@
 #include <stdint.h>
 @z
 
+@x [1] l.34
+  do @<List the next item@>@;@+while (!postamble);
+@y
+  do @<List the next item@>@; while (!postamble);
+@z
+
 @x [7] l.94
 @<Type...@>=
 typedef unsigned char byte; /* a monobyte */
