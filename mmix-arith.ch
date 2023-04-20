@@ -10,7 +10,8 @@ Use C99 standard types instead of homebrewn typedefs.
 #include <string.h>
 #include <ctype.h>
 @y
-#include "mmix-arith.h" /* we use our own interface first */
+#include "mmix-arith.h" /* we use our own interface first;
+  see |@(mmix-arith.h@>| */
 @#
 #include <stdio.h> /* |@!printf| */
 #include <string.h> /* |@!strncmp| */

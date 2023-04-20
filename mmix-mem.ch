@@ -9,7 +9,8 @@
 #include <stdio.h>
 #include "mmix-pipe.h" /* header file for all modules */
 @y
-#include "mmix-mem.h" /* we use our own interface first */
+#include "mmix-mem.h" /* we use our own interface first;
+  see |@(mmix-mem.h@>| */
 #include "mmix-pipe.h" /* |@!verbose| and much more */
 @#
 #include <stdio.h> /* |@!printf| */
