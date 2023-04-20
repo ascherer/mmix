@@ -126,7 +126,8 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 #include <limits.h> /* |INT_MAX| */
 #include "mmix-pipe.h"
 @y
-#include "mmix-config.h" /* we use our own interface first */
+#include "mmix-config.h" /* we use our own interface first;
+  see |@(mmix-config.h@>| */
 #include "mmix-pipe.h" /* |@!internal_op_code| and much more */
 @#
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
