@@ -9,7 +9,8 @@
 @x [1] l.17
 @<Preprocessor macros@>@;
 @y
-#include "mmix-io.h" /* we use our own interface first */
+#include "mmix-io.h" /* we use our own interface first;
+  see |@(mmix-io.h@>| */
 #include <stdlib.h> /* |@!calloc|, |@!free| */
 @<Preprocessor macros@>@;
 @z
