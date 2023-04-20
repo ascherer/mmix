@@ -11,7 +11,8 @@
 @y
 @#
 @#
-#include "mmix-pipe.h" /* we use our own interface first */
+#include "mmix-pipe.h" /* we use our own interface first;
+  see |@(mmix-pipe.h@>| */
 #include "mmix-mem.h" /* |@!spec_read|, |@!spec_write| */
 #include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, etc. */
 @#
@@ -383,7 +384,7 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
 interfaces on which they depend.
 
-@ The following three functions are not declared in \.{mmix-pipe.h}, although
+@ The following three functions are not declared in |@(mmix-pipe.h@>|, although
 they are used in {\mc MMIX-IO}. Similar functions are defined in the simplified
 \MMIX\ computer {\mc MMIX-SIM}.
 
