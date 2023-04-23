@@ -30,3 +30,11 @@ typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra; /* a tetrabyte */
 typedef struct {@+tetra h,l;@+} octa; /* an octabyte */
 @z
+
+@x [39 l.457
+else if (count!=stab_start+yz+1)
+  fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
+@y
+else if (count-stab_start-1!=yz)
+  fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-stab_start-1);
+@z
