@@ -105,7 +105,7 @@ octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
  case 0+0: return q;
 @y
   @=/* else fall through */@>@;
- case 0+0: return q;
+ case 0+0: default: return q;
 @z
 
 @x l.337
@@ -157,6 +157,14 @@ octa fpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 octa fpack(f,e,s,r)
 @y
 static octa fpack(f,e,s,r)
+@z
+
+@x [33[ l.532
+@ Everything falls together so nicely here, it's almost too good to be true!
+@y
+@ Everything falls together so nicely here, it's almost too good to be true!
+The conditional expression in the case for |ROUND_NEAR|
+rounds towards an even number in case of a tie.
 @z
 
 again the default case helps the compiler see that no cases are missing.
@@ -215,6 +223,12 @@ octa fmult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register char xs='+';
 @z
 
+@x [41] l.722
+ case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
+@y
+ default: case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
+@z
+
 @x [42] l.734
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 @y
@@ -235,9 +249,11 @@ octa fdivide @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 
 @x l.767
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
+ case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @y
   @=/* fall through */@>@;
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
+ default: case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @z
 
 @x [46] l.792
@@ -262,7 +278,7 @@ octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
  case 4*zro+zro: x=zero_octa;
 @y
   @=/* else fall through */@>@;
- case 4*zro+zro: x=zero_octa;
+ default: case 4*zro+zro: x=zero_octa;
 @z
 
 @x [50] l.885
@@ -318,6 +334,12 @@ static char buf[785]="00000000"; /* where we put significant input digits */
 static char buf[785]="00000000"; /* where we put significant input digits */
 @z
 
+@x [76] l.1439
+register int zeros; /* leading zeros removed after decimal point */
+@y
+register int zeros=0; /* leading zeros removed after decimal point */
+@z
+
 @x [79] l.1483
  make_it_zero: exp=-99999;@+ goto packit;
 @y
@@ -335,6 +357,12 @@ int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register int x=0;
 @z
 
+@x [85] l.1593
+ case 4*zro+zro: return 0;
+@y
+ default: case 4*zro+zro: return 0;
+@z
+
 @x [86] l.1612
 octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
@@ -346,7 +374,7 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
   }
 @y
   @=/* else fall through */@>@;
- case inf: case zro: return z;
+ case inf: case zro: default: return z;
  case num: @<Integerize and |return|@>;
   }
   return z;
@@ -355,6 +383,12 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @x [88] l.1654
 octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [88] l.1667
+ case zro: return zero_octa;
+@y
+ case zro: default: return zero_octa;
 @z
 
 @x [88] l.1676
@@ -376,9 +410,21 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
+@x [91] l.1738
+ case inf: case zro: x=z;@+break;
+@y
+ default: case inf: case zro: x=z;@+break;
+@z
+
 @x [93] l.1778
 octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [93] l.1797
+ zero_out: x=zero_octa;
+@y
+ default: zero_out: x=zero_octa;
 @z
 
 @x [96] l.1845
