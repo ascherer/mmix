@@ -168,6 +168,14 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
 @y
 @z
 
+@x [52] l.1129
+\.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
+followed by rG~(19) and rA~(21) packed into eight bytes.
+@y
+\.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
+followed by~19 and~21.
+@z
+
 @x [89] l.1865
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
@@ -186,16 +194,28 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
+@x [91] l.1876
+@d SUBSUBVERSION 0 /* further qualification to version number */
+@y
+@d SUBSUBVERSION 2 /* further qualification to version number */
+@z
+
 @x [91] l.1902
     if (a.l<32) printf(special_name[a.l]);
 @y
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
-@x [111] l.2136
+@x [111] l.2135
+if (rename_regs<cool->ren_x+cool->ren_a) goto stall;
+if (cool->mem_x)
   if (mem_slots) mem_slots--;@+else goto stall;
+rename_regs-=cool->ren_x+cool->ren_a;
 @y
+if (rename_regs<(cool->ren_x?1:0)+(cool->ren_a?1:0)) goto stall;
+if (cool->mem_x)
   { if (mem_slots) mem_slots--;@+else goto stall; }
+rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @z
 
 @x [120] l.2306
@@ -224,12 +244,9 @@ a trivial program that computes the value of the standard library function
 @z
 
 @x [187] l.3418
-   return &s[l-aa];
-  }
+  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
-   return &s[l-aa];
-  }
-  return NULL;
+ default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @z
 
 @x [208] l.3724
