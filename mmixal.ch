@@ -160,6 +160,21 @@ void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
 @y
 @z
 
+@x [52] l.1416
+    listing_bits|=1<<jj;
+  }
+  listing_bits|=x_bits;
+  if (((l+k)&3)==0) {
+    if (listing_file) listing_clear();
+    mmo_clear();
+@y
+    listing_bits|=x_bits;
+    if (((l+j+1)&3)==0) {
+      if (listing_file) listing_clear();
+      mmo_clear();
+    }
+@z
+
 @x [54] l.1455
 trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
@@ -910,7 +925,7 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 @x [98] l.2499
  @t\4@>@<Cases for unary operators@>@;
 @y
- case inner_rp: case outer_rp:@+goto scan_close;
+ case outer_rp: case inner_rp:@+goto scan_close; /* should not happen */
  @t\4@>@<Cases for unary operators@>@;
 @z
 
@@ -920,12 +935,16 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
     do @<Fix prior references to this label@>@; while (pp->link);
 @z
 
-@x [109] l.2747
-  if (listing_file && (opcode==IS || opcode==LOC))
-    @<Make special listing to show the label equivalent@>;
+@x [115] l.2815
+if (new_link==DEFINED) {
 @y
-  if (listing_file && (opcode==IS || opcode==LOC))
-  { @<Make special listing to show the label equivalent@>; }
+{ if (new_link==DEFINED) {
+@z
+
+@x [115] l.2821
+}
+@y
+} }
 @z
 
 @x [116] l.2831
@@ -957,16 +976,28 @@ case 3:@+if (!(op_bits&three_arg_bit))
     else derr("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x [132] l.3107
- case GREG:@+if (listing_file) @<Make listing for |GREG|@>;
-@y
- case GREG:@+if (listing_file) { @<Make listing for |GREG|@>; }
-@z
-
 @x l.3109
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
+@z
+
+@x [132] l.3121
+ case ESPEC: spec_mode=false;@+goto bypass;
+@y
+ case ESPEC: spec_mode=false;@+if (held_bits) mmo_clear();@+goto bypass;
+@z
+
+@x [134] l.3128
+if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
+@y
+{ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
+@z
+
+@x [134] l.3136
+}
+@y
+} }
 @z
 
 @x [136] l.3166
