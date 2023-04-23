@@ -123,6 +123,28 @@ octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x {8] l.99
+  if (mode.h || mode.l>4) goto abort;
+  if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto abort;
+  if (sfile[handle].mode!=0 && handle>2) fclose(sfile[handle].fp);
+@y
+  if (mode.h || mode.l>4) return neg_one;
+  if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) return neg_one;
+  mmix_fclose(handle);
+@z
+
+@x [8] l.103
+  if (!sfile[handle].fp) goto abort;
+@y
+  if (!sfile[handle].fp) return neg_one;
+@z
+
+@x [8] l.106
+ abort: sfile[handle].mode=0;
+  return neg_one; /* failure */
+@y
+@z
+
 @x [9] l.111
 char *mode_string[]={"r","w","rb","wb","w+b"};
 int mode_code[]={0x1,0x2,0x5,0x6,0xf};
@@ -141,6 +163,17 @@ octa mmix_fclose @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
 @y
 @z
 
+@x [11] l.131
+  if (handle>2 && fclose(sfile[handle].fp)!=0) return neg_one;
+  sfile[handle].mode=0;
+@y
+  sfile[handle].mode=0;
+  if (((handle==0 && sfile[handle].fp!=stdin) ||
+      (handle==1 && sfile[handle].fp!=stdout) ||
+      (handle==2 && sfile[handle].fp!=stderr) ||
+      handle>2) && fclose(sfile[handle].fp)!=0) return neg_one;
+@z
+
 @x [12] l.137
 octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 @y
@@ -154,7 +187,7 @@ octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 @x [15] l.199
 if (size.l<s && !size.h) s=size.l;
 @y
-if (size.l<(tetra)s && !size.h) s=size.l;
+if (size.l<(tetra)s && !size.h) s=(int)size.l;
 @z
 
 @x [16] l.227
