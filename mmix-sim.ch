@@ -3,6 +3,14 @@
 @y
 @z
 
+@x [6] l.443
+pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1]$, and
+M$_8[\$0\ll3+\$1+8]$ is zero. (Register~\$1 will point to an octabyte in
+@y
+pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1-8]$, and
+M$_8[\$0\ll3+\$1]$ is zero. (Register~\$1 will point to an octabyte in
+@z
+
 @x [9] l.546
 @* Basics. To get started, we define a type that provides semantic sugar.
 
@@ -181,6 +189,29 @@ do @<Load the next item@>@;@+while (!postamble);
 do @<Load the next item@>@; while (!postamble);
 @z
 
+@x [34] l.999
+case lop_fixr: delta=yzbytes; goto fixr;
+@y
+case lop_fixr: mmo_load(incr(cur_loc,-yzbytes<<2),yzbytes); continue;
+@z
+
+@x [34] l.1001
+ read_tet(); delta=tet;
+ if (delta&0xfe000000) mmo_err;
+fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
+ mmo_load(tmp,delta);
+@y
+ read_tet();@+if (tet&0xfe000000) mmo_err;
+ delta=(tet>=0x1000000? (tet&0xffffff)-(1<<j): tet);
+ mmo_load(incr(cur_loc,-delta<<2),tet);
+@z
+
+@x [37] l.1054
+G=zbyte;@+ L=0;
+@y
+G=zbyte;@+ L=0;@+ O=0;
+@z
+
 @x [42] l.1102
 void make_map @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
@@ -217,14 +248,6 @@ void print_freqs @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 @y
 @z
 
-@x [60] l.1367
-  if (f&X_is_dest_bit) @<Install register~X as the destination,
-          adjusting the register stack if necessary@>;
-@y
-  if (f&X_is_dest_bit) { @<Install register~X as the destination,
-          adjusting the register stack if necessary@>; }
-@z
-
 @x [62] l.1409
 register int i,j,k; /* miscellaneous indices */
 @y
@@ -253,6 +276,24 @@ a trivial program that computes the value of the standard library function
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
+@z
+
+@x [77] l.1803
+@d SUBSUBVERSION 1 /* further qualification to version number */
+@y
+@d SUBSUBVERSION 3 /* further qualification to version number */
+@z
+
+@x [80] l.1842
+if (xx>=G) {
+@y
+{ if (xx>=G) {
+@z
+
+@x [80] l.1849
+}
+@y
+} }
 @z
 
 @x [82] l.1865
@@ -294,6 +335,12 @@ int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
 {@+register int b;
 @y
 {@+register int b=0;
+@z
+
+@x [91] l.2075
+ case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
+@y
+ default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @z
 
 @x [95] l.2159
@@ -477,7 +524,8 @@ void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
 @x [148] l.3068
   interrupt=true;
 @y
-  interrupt=true; (void) n;
+  if (n!=SIGINT) return;
+  interrupt=true;
 @z
 
 @x [149] l.3093
