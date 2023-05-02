@@ -3,6 +3,12 @@
 @y
 @z
 
+@x [1] l.17
+file called \.{mmix\_pipe.h}. The header file is used by the main routine and
+@y
+file called |@(mmix-pipe.h@>|. The header file is used by the main routine and
+@z
+
 @x [3] l.128
 #include <stdio.h>
 #include <stdlib.h>
