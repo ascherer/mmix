@@ -168,9 +168,29 @@ mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
+@x [17] l.746
+  register mem_node *p;
+  p=(mem_node*)calloc(1,sizeof(mem_node));
+@y
+  register mem_node *p=(mem_node*)calloc(1,sizeof(mem_node));
+@z
+
 @x [20] l.774
 mem_tetra* mem_find @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [20] l.778
+  octa key;
+  register int offset;
+  register mem_node *p=last_mem;
+  key.h=addr.h;
+  key.l=addr.l&0xfffff800;
+  offset=addr.l&0x7fc;
+@y
+  octa key={addr.h, addr.l&0xfffff800};
+  register int offset=addr.l&0x7fc;
+  register mem_node *p=last_mem;
 @z
 
 @x [26] l.890
@@ -181,6 +201,12 @@ void read_tet @,@,@[ARGS((void))@];@+@t}\6{@>
 @x [27] l.899
 byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
+@z
+
+@x [32] l.961
+cur_loc.h=cur_loc.l=0;
+@y
+cur_loc=zero_octa;
 @z
 
 @x [32] l.965
@@ -248,6 +274,17 @@ void print_freqs @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 @y
 @z
 
+@x [50] l.1230
+  octa cur_loc;
+@y
+@z
+
+@x [51] l.1242
+  cur_loc=incr(p->loc,4*j);
+@y
+  octa cur_loc=incr(p->loc,4*j);
+@z
+
 @x [62] l.1409
 register int i,j,k; /* miscellaneous indices */
 @y
@@ -271,7 +308,7 @@ a trivial program that computes the value of the standard library function
 \.{Makefile}. We assume that this number, which is the number of seconds in
 @z
 
-@x l.1801
+@x [77] l.1801
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
@@ -319,7 +356,7 @@ case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 @z
 
-@x l.2051
+@x [90] l.2051
 case FCMP: k=fcomp(y,z);
 @y
   @=/* else fall through */@>@;
@@ -423,7 +460,7 @@ char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
  case RESUME_SET: k=(b.l>>16)&0xff;
 @z
 
-@x l.2632
+@x [125] l.2632
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @y
   @=/* else fall through */@>@;
@@ -453,13 +490,13 @@ case 's': printf(special_name[zz]);@+break;
 case 's': printf("%s",special_name[zz]);@+break;
 @z
 
-@x l.2848
+@x [138] l.2848
 case 'l': printf(lhs);@+break;
 @y
 case 'l': printf("%s",lhs);@+break;
 @z
 
-@x [139] l.
+@x [139] l.2854
 char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
 @y
 fmt_style style;
@@ -504,13 +541,13 @@ void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
  case 'P': profiling=true;@+return;
 @z
 
-@x l.2987
+@x [143] l.2987
     for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
 @y
     for (k=0;usage_help[k][0];k++) fprintf(stderr,"%s",usage_help[k]);
 @z
 
-@x l.2989
+@x [143] l.2989
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf(usage_help[k]);
 @y
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
@@ -534,7 +571,7 @@ void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
   case 'h':@+ for (k=0;interactive_help[k][0];k++) printf("%s",interactive_help[k]);
 @z
 
-@x l.3096
+@x [149] l.3096
  check_syntax:@+ if (*p!='\n') {
 @y
   if (*p!='\n') {
@@ -557,13 +594,22 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [154] l.3199
+  register char *p;
+  octa o;
+  o=zero_octa;
+@y
+  register char *p;
+  octa o=zero_octa;
+@z
+
 @x [158] l.3266
     if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
 @y
     if (val.h!=0 || val.l>255 || val.l<(tetra)L || val.l<32) break;
 @z
 
-@x l.3270
+@x [158] l.3270
     if (val.h==0 && val.l<L) L=val.l;
 @y
     if (val.h==0 && val.l<(tetra)L) L=val.l;
