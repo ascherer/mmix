@@ -1,4 +1,4 @@
-@x l.10
+@x [0] l.10
 @s bool normal @q unreserve a C++ keyword @>
 @y
 @z
@@ -74,7 +74,7 @@ new-style and old-style compilers.
   @<Local variables@>; (void)breakpoint_hit;
 @z
 
-@x l.256
+@x [10] l.256
  cease:;
 @y
 @z
@@ -193,7 +193,7 @@ a trivial program that computes the value of the standard library function
 \.{Makefile}. We assume that this number, which is the number of seconds in
 @z
 
-@x l.1874
+@x [89] l.1874
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
@@ -230,7 +230,7 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
     new_O=incr(cool_O,-(int)x-1);
 @z
 
-@x l.2310
+@x [120] l.2310
     if (x<new_L)
 @y
     if (x<(unsigned int)new_L)
@@ -253,6 +253,15 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
  default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
+@z
+
+@x [193] l.3496
+  register cacheset s;
+  register cacheblock* p;
+  s=cache_addr(c,alf); /* the set corresponding to |alf| */
+@y
+  register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
+  register cacheblock* p;
 @z
 
 @x [208] l.3724
@@ -294,6 +303,20 @@ Extern int page_f; /* the 3-bit |f| field of rV */
 Extern int page_b[5]; /* the 4-bit |b| fields of rV; |page_b[0]=0| */
 Extern octa page_mask; /* the least significant |s| bits */
 Extern bool page_bad; /* does rV violate the rules? */
+@z
+
+@x [239] l.4341
+{@+octa rv;
+  rv=data->z.o;
+@y
+{@+octa rv=data->z.o;
+@z
+
+@x [241] l.4370
+{@+octa t;
+  t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
+@y
+{@+octa t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
 @z
 
 @x [257] l.4621
@@ -339,7 +362,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
       if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=(tetra)page_n)
 @z
 
-@x l.5093
+@x [279] l.5093
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=page_n) data->x.o=zero_octa;
 @y
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
@@ -354,6 +377,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  default:@+; @=/* fall through */@>@;
 @z
 
+@x [297] l.5334
+{@+octa addr;
+  addr=data->z.o;
+@y
+{@+octa addr=data->z.o;
+@z
+
 @x [298] l.5349
  case IT_miss:@+if (ITcache->filler.next)
      if (data->i==prego) goto fin_ex;@+else wait(1);
@@ -362,7 +392,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
      if (data->i==prego) goto fin_ex;@+else wait(1); }
 @z
 
-@x l.5354
+@x [290] l.5354
    if (!p) /* hey, it was present after all */
      if (data->i==prego) goto fin_ex;@+else goto new_fetch;
 @y
@@ -438,6 +468,13 @@ static octa magic_read(addr)
 void magic_write(addr,val)
 @y
 static void magic_write(addr,val)
+@z
+
+@x [380] l.6695
+  octa arg_loc;
+  arg_loc=g[rBB].o;
+@y
+  octa arg_loc=g[rBB].o;
 @z
 
 @x [387] l.6827
