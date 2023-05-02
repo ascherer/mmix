@@ -169,7 +169,7 @@ static bool silent=false;
 static bool bad_address;
 @z
 
-@x l.563
+@x [25] l.563
 extern octa zero_octa;
 extern octa neg_one;
 octa seven_octa={0,7};
