@@ -4,7 +4,7 @@
 @y
 @z
 
-@x l.20
+@x [1] l.20
 #include <string.h>
 @y
 #include <string.h>
@@ -31,7 +31,7 @@ typedef uint32_t tetra; /* a tetrabyte */
 typedef struct {@+tetra h,l;@+} octa; /* an octabyte */
 @z
 
-@x [39 l.457
+@x [39] l.457
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
 @y

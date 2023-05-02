@@ -41,7 +41,13 @@ octa spec_read @,@,@[ARGS((octa,int))@];@+@t}\6{@>
     if (fgets(buf,20,stdin)) {}
 @z
 
-@x l.53
+@x [2] l.51
+  } else val.l=val.h=0;
+@y
+  } else val=zero_octa;
+@z
+
+@x [2] l.53
 case 0: val.l&=0xff;
 case 1: val.l&=0xffff;
 case 2: val.h=0;
@@ -74,8 +80,7 @@ octa read_hex(p)
 {
   unsigned char d[BUF_SIZE];
   register int j,k;
-  octa val;
-  val.h=val.l=0;
+  octa val=zero_octa;
   for (j=0;;j++) {
     if (p[j]>='0' && p[j]<='9') d[j]=p[j]-'0';
     else if (p[j]>='a' && p[j]<='f') d[j]=p[j]-'a'+10;

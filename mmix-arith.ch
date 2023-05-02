@@ -55,14 +55,43 @@ octa oplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [5] l.83
+{@+ octa x;
+  x.h=y.h+z.h;@+
+  x.l=y.l+z.l;
+@y
+{@+ octa x = {y.h+z.h, y.l+z.l};
+@z
+
 @x [5] l.88
 octa ominus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [5] l.91
+{@+ octa x;
+  x.h=y.h-z.h;@+
+  x.l=y.l-z.l;
+@y
+{@+ octa x={y.h-z.h, y.l-z.l};
+@z
+
 @x [6] l.102
 octa incr @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [6] l.106
+{@+ octa x;
+  x.h=y.h;@+ x.l=y.l+delta;
+@y
+{@+ octa x={y.h, y.l+delta};
+@z
+
+@x [6] l.110
+  }@+else if (x.l>y.l) x.h--;
+@y
+  }@+else {if (x.l>y.l) x.h--;}
 @z
 
 @x [7] l.117
@@ -82,7 +111,16 @@ octa omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 
 @x [12] l.191
 octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
+octa signed_omult(y,z)
+  octa y,z;
+{
+  octa acc;
+  acc=omult(y,z);
 @y
+octa signed_omult(y,z)
+  octa y,z;
+{
+  octa acc=omult(y,z);
 @z
 
 @x [13] l.215
@@ -108,7 +146,7 @@ octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
  case 0+0: default: return q;
 @z
 
-@x l.337
+@x [24] l.337
   else return ominus(zero_octa,q);
   }
 @y
@@ -122,14 +160,35 @@ octa oand @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [25] l.349
+{@+ octa x;
+  x.h=y.h&z.h;@+ x.l=y.l&z.l;
+@y
+{@+ octa x={y.h&z.h, y.l&z.l};
+@z
+
 @x [25] l.354
 octa oandn @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [25] l.357
+{@+ octa x;
+  x.h=y.h&~z.h;@+ x.l=y.l&~z.l;
+@y
+{@+ octa x={y.h&~z.h, y.l&~z.l};
+@z
+
 @x [25] l.362
 octa oxor @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [25] l.365
+{@+ octa x;
+  x.h=y.h^z.h;@+ x.l=y.l^z.l;
+@y
+{@+ octa x={y.h^z.h, y.l^z.l};
 @z
 
 @x [26] l.387
@@ -159,7 +218,7 @@ octa fpack(f,e,s,r)
 static octa fpack(f,e,s,r)
 @z
 
-@x [33[ l.532
+@x [33] l.532
 @ Everything falls together so nicely here, it's almost too good to be true!
 @y
 @ Everything falls together so nicely here, it's almost too good to be true!
@@ -201,9 +260,23 @@ octa load_sf @,@,@[ARGS((tetra))@];@+@t}\6{@>
 @y
 @z
 
+@x [39] l.669
+  octa f,x;@+int e;@+char s;@+ftype t;
+  t=sfunpack(z,&f,&e,&s);
+@y
+  octa f,x;@+int e;@+char s;@+ftype t=sfunpack(z,&f,&e,&s);
+@z
+
 @x [40] l.682
 tetra store_sf @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [40] l.686
+  octa f;@+tetra z;@+int e;@+char s;@+ftype t;
+  t=funpack(x,&f,&e,&s);
+@y
+  octa f;@+tetra z;@+int e;@+char s;@+ftype t=funpack(x,&f,&e,&s);
 @z
 
 @x [40] l.689
@@ -217,10 +290,23 @@ octa fmult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [41] l.716
+@x [41] l.711
+  ftype yt,zt;
+  int ye,ze;
+  char ys,zs;
+  octa x,xf,yf,zf;
+  register int xe;
   register char xs;
+  yt=funpack(y,&yf,&ye,&ys);
+  zt=funpack(z,&zf,&ze,&zs);
+  xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @y
-  register char xs='+';
+  octa x,xf,yf,zf;
+  int ye,ze;
+  char ys,zs;
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
+  register int xe;
+  register char xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @z
 
 @x [41] l.722
@@ -241,13 +327,26 @@ octa fdivide @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [44] l.759
+@x [44] l.754
+  ftype yt,zt;
+  int ye,ze;
+  char ys,zs;
+  octa x,xf,yf,zf;
+  register int xe;
   register char xs;
+  yt=funpack(y,&yf,&ye,&ys);
+  zt=funpack(z,&zf,&ze,&zs);
+  xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @y
-  register char xs='+';
+  octa x,xf,yf,zf;
+  int ye,ze;
+  char ys,zs;
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
+  register int xe;
+  register char xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @z
 
-@x l.767
+@x [44] l.767
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
  case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @y
@@ -261,20 +360,32 @@ octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [46] l.801
+@x [46] l.796
+  ftype yt,zt;
+  int ye,ze;
+  char ys,zs;
+  octa x,xf,yf,zf;
+  register int xe,d;
   register char xs;
+  yt=funpack(y,&yf,&ye,&ys);
+  zt=funpack(z,&zf,&ze,&zs);
 @y
-  register char xs='+';
+  octa x,xf,yf,zf;
+  int ye,ze;
+  char ys,zs;
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
+  register int xe,d;
+  register char xs;
 @z
 
-@x l.811
+@x [46] l.811
  case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
 @y
   @=/* else fall through */@>@;
  case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
 @z
 
-@x l.815
+@x [46] l.815
  case 4*zro+zro: x=zero_octa;
 @y
   @=/* else fall through */@>@;
@@ -304,6 +415,12 @@ else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
 static void bignum_double @,@,@[ARGS((bignum*))@];
 int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
 @y
+@z
+
+@x [68] l.1348
+  val.h=val.l=0;
+@y
+  val=zero_octa;
 @z
 
 @x [68] l.1357
@@ -351,9 +468,19 @@ int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [85] l.1587
+@x [85] l.1583
+  ftype yt,zt;
+  int ye,ze;
+  char ys,zs;
+  octa yf,zf;
   register int x;
+  yt=funpack(y,&yf,&ye,&ys);
+  zt=funpack(z,&zf,&ze,&zs);
 @y
+  octa yf,zf;
+  int ye,ze;
+  char ys,zs;
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
   register int x=0;
 @z
 
@@ -366,6 +493,19 @@ int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @x [86] l.1612
 octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [86] l.1617
+  ftype zt;
+  int ze;
+  char zs;
+  octa xf,zf;
+  zt=funpack(z,&zf,&ze,&zs);
+@y
+  octa xf,zf;
+  int ze;
+  char zs;
+  ftype zt=funpack(z,&zf,&ze,&zs);
 @z
 
 @x [86] l.1625
@@ -383,6 +523,19 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @x [88] l.1654
 octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [88] l.1659
+  ftype zt;
+  int ze;
+  char zs;
+  octa zf,o;
+  zt=funpack(z,&zf,&ze,&zs);
+@y
+  octa zf,o;
+  int ze;
+  char zs;
+  ftype zt=funpack(z,&zf,&ze,&zs);
 @z
 
 @x [88] l.1667
@@ -410,6 +563,23 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
+@x [91] l.1727
+  ftype zt;
+  int ze;
+  char zs;
+  octa x,xf,rf,zf;
+  register int xe,k;
+  if (!r) r=cur_round;
+  zt=funpack(z,&zf,&ze,&zs);
+@y
+  octa x,xf,rf,zf;
+  int ze;
+  char zs;
+  ftype zt=funpack(z,&zf,&ze,&zs);
+  register int xe,k;
+  if (!r) r=cur_round;
+@z
+
 @x [91] l.1738
  case inf: case zro: x=z;@+break;
 @y
@@ -419,6 +589,22 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @x [93] l.1778
 octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @y
+@z
+
+@x [93] l.1789
+  ftype yt,zt;
+  int ye,ze;
+  char xs,ys,zs;
+  octa x,xf,yf,zf;
+  register int xe,thresh,odd;
+  yt=funpack(y,&yf,&ye,&ys);
+  zt=funpack(z,&zf,&ze,&zs);
+@y
+  octa x,xf,yf,zf;
+  int ye,ze;
+  char xs,ys,zs;
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
+  register int xe,thresh,odd;
 @z
 
 @x [93] l.1797

@@ -179,8 +179,26 @@ octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [12] l.144
+  octa o;
+  o=neg_one;
+@y
+  octa o=neg_one;
+@z
+
 @x [14] l.172
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [14] l.180
+  octa o;
+@y
+  octa o=zero_octa;
+@z
+
+@x [14] l.186
+  o=zero_octa;
 @y
 @z
 
@@ -192,6 +210,17 @@ if (size.l<(tetra)s && !size.h) s=(int)size.l;
 
 @x [16] l.227
 octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+@y
+@z
+
+@x [16] l.235
+  octa o;
+@y
+  octa o=zero_octa;
+@z
+
+@x [16] l.242
+  o=zero_octa;
 @y
 @z
 
@@ -217,6 +246,13 @@ octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [19] l.304
+  octa o;
+  o=zero_octa;
+@y
+  octa o=zero_octa;
+@z
+
 @x [19] l.309
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;
 @y
@@ -226,6 +262,13 @@ octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 @x [20] l.320
 octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [20] l.327
+  octa o;
+  o=zero_octa;
+@y
+  octa o=zero_octa;
 @z
 
 @x [20] l.333

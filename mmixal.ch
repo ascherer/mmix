@@ -857,43 +857,43 @@ op_spec op_init_table[]={@|
 {"ROUND_NEAR",0,4},@|
 @z
 
-@x l.2011
+@x [69] l.2011
 {"Inf",0x7ff00000,0},@/
 @y
 {"Inf",0x7ff00000,0},@|
 @z
 
-@x l.2015
+@x [69] l.2015
 {"Pool_Segment",0x40000000,0},
 @y
 {"Pool_Segment",0x40000000,0},@|
 @z
 
-@x l.2017
+@x [69] l.2017
 {"Stack_Segment",0x60000000,0},@/
 @y
 {"Stack_Segment",0x60000000,0},@|
 @z
 
-@x l.2033
+@x [69] l.2033
 {"X_BIT",0,0x01},@/
 @y
 {"X_BIT",0,0x01},@|
 @z
 
-@x l.2049
+@x [69] l.2049
 {"X_Handler",0,0x80},@/
 @y
 {"X_Handler",0,0x80},@|
 @z
 
-@x l.2055
+@x [69] l.2055
 {"StdErr",0,2},@/
 @y
 {"StdErr",0,2},@|
 @z
 
-@x l.2065
+@x [69] l.2065
 {"BinaryReadWrite",0,4},@/
 @y
 {"BinaryReadWrite",0,4},@|
@@ -915,6 +915,12 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
+@x [95] l.2446
+acc.h=acc.l=0;
+@y
+acc=zero_octa;
+@z
+
 @x [97] l.2471
  case '&': rt_op=and;@+break;
 @y
@@ -933,6 +939,13 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
     do @<Fix prior references to this label@>@;@+while (pp->link);
 @y
     do @<Fix prior references to this label@>@; while (pp->link);
+@z
+
+@x [114] l.279ß
+  octa o;
+  o=ominus(cur_loc,qq->equiv);
+@y
+  octa o=ominus(cur_loc,qq->equiv);
 @z
 
 @x [115] l.2815
@@ -959,14 +972,14 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else derr("opcode `%s' must have more than two operands",op_field); }
 @z
 
-@x l.2840
+@x [116] l.2840
 case 3:@+if (!(op_bits&three_arg_bit))
 @y
   @=/* fall through */@>@;
 case 3:@+if (!(op_bits&three_arg_bit))
 @z
 
-@x l.2853
+@x [116] l.2853
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
@@ -976,7 +989,15 @@ case 3:@+if (!(op_bits&three_arg_bit))
     else derr("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x l.3109
+@x [127] l.3004
+  octa o;
+  o=val_stack[1].equiv, k=0;
+@y
+  octa o=val_stack[1].equiv;
+  k=0;
+@z
+
+@x [127] l.3109
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
