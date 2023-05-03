@@ -291,6 +291,20 @@ register int i,j,k; /* miscellaneous indices */
 register int i,j=0,k; /* miscellaneous indices */
 @z
 
+@x [65] l.1461
+op_info info[256]={
+@<Info for arithmetic commands@>,
+@<Info for branch commands@>,
+@<Info for load/store commands@>,
+@<Info for logical and control commands@>};
+@y
+op_info info[256]={@t}\1{@>@/
+@<Info for arithmetic commands@>,@/
+@<Info for branch commands@>,@/
+@<Info for load/store commands@>,@/
+@<Info for logical and control commands@>@t}\2{@>@/};
+@z
+
 @x [75] l.1779
 register int G,L,O; /* accessible copies of key registers */
 @y
@@ -504,7 +518,6 @@ char *stream_name[]={"StdIn","StdOut","StdErr"};
 @.StdIn@>
 @.StdOut@>
 @.StdErr@>
-@#
 char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
 @z
 
