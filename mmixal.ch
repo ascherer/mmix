@@ -205,650 +205,260 @@ sym_node* new_sym_node @,@,@[ARGS((bool))@];@+@t}\6{@>
 
 @x [63] l.1641
 op_spec op_init_table[]={@/
-{"TRAP", 0x00, 0x27554},
-@.TRAP@>
-{"FCMP", 0x01, 0x240a8},
-@.FCMP@>
-{"FUN", 0x02, 0x240a8},
-@.FUN@>
-{"FEQL", 0x03, 0x240a8},@/
-@.FEQL@>
-{"FADD", 0x04, 0x240a8},
-@.FADD@>
-{"FIX", 0x05, 0x26288},
-@.FIX@>
-{"FSUB", 0x06, 0x240a8},
-@.FSUB@>
-{"FIXU", 0x07, 0x26288},@/
-@.FIXU@>
-{"FLOT", 0x08, 0x26282},
-@.FLOT@>
-{"FLOTU", 0x0a, 0x26282},
-@.FLOTU@>
-{"SFLOT", 0x0c, 0x26282},
-@.SFLOT@>
-{"SFLOTU", 0x0e, 0x26282},@/
-@.SFLOTU@>
-{"FMUL", 0x10, 0x240a8},
-@.FMUL@>
-{"FCMPE", 0x11, 0x240a8},
-@.FCMPE@>
-{"FUNE", 0x12, 0x240a8},
-@.FUNE@>
-{"FEQLE", 0x13, 0x240a8},@/
-@.FEQLE@>
-{"FDIV", 0x14, 0x240a8},
-@.FDIV@>
-{"FSQRT", 0x15, 0x26288},
-@.FSQRT@>
-{"FREM", 0x16, 0x240a8},
-@.FREM@>
-{"FINT", 0x17, 0x26288},@/
-@.FINT@>
-{"MUL", 0x18, 0x240a2},
-@.MUL@>
-{"MULU", 0x1a, 0x240a2},
-@.MULU@>
-{"DIV", 0x1c, 0x240a2},
-@.DIV@>
-{"DIVU", 0x1e, 0x240a2},@/
-@.DIVU@>
-{"ADD", 0x20, 0x240a2},
-@.ADD@>
-{"ADDU", 0x22, 0x240a2},
-@.ADDU@>
-{"SUB", 0x24, 0x240a2},
-@.SUB@>
-{"SUBU", 0x26, 0x240a2},@/
-@.SUBU@>
-{"2ADDU", 0x28, 0x240a2},
-@.2ADDU@>
-{"4ADDU", 0x2a, 0x240a2},
-@.4ADDU@>
-{"8ADDU", 0x2c, 0x240a2},
-@.8ADDU@>
-{"16ADDU", 0x2e, 0x240a2},@/
-@.16ADDU@>
-{"CMP", 0x30, 0x240a2},
-@.CMP@>
-{"CMPU", 0x32, 0x240a2},
-@.CMPU@>
-{"NEG", 0x34, 0x26082},
-@.NEG@>
-{"NEGU", 0x36, 0x26082},@/
-@.NEGU@>
-{"SL", 0x38, 0x240a2},
-@.SL@>
-{"SLU", 0x3a, 0x240a2},
-@.SLU@>
-{"SR", 0x3c, 0x240a2},
-@.SR@>
-{"SRU", 0x3e, 0x240a2},@/
-@.SRU@>
-{"BN", 0x40, 0x22081},
-@.BN@>
-{"BZ", 0x42, 0x22081},
-@.BZ@>
-{"BP", 0x44, 0x22081},
-@.BP@>
-{"BOD", 0x46, 0x22081},@/
-@.BOD@>
-{"BNN", 0x48, 0x22081},
-@.BNN@>
-{"BNZ", 0x4a, 0x22081},
-@.BNZ@>
-{"BNP", 0x4c, 0x22081},
-@.BNP@>
-{"BEV", 0x4e, 0x22081},@/
-@.BEV@>
-{"PBN", 0x50, 0x22081},
-@.PBN@>
-{"PBZ", 0x52, 0x22081},
-@.PBZ@>
-{"PBP", 0x54, 0x22081},
-@.PBP@>
-{"PBOD", 0x56, 0x22081},@/
-@.PBOD@>
-{"PBNN", 0x58, 0x22081},
-@.PBNN@>
-{"PBNZ", 0x5a, 0x22081},
-@.PBNZ@>
-{"PBNP", 0x5c, 0x22081},
-@.PBNP@>
-{"PBEV", 0x5e, 0x22081},@/
-@.PBEV@>
-{"CSN", 0x60, 0x240a2},
-@.CSN@>
-{"CSZ", 0x62, 0x240a2},
-@.CSZ@>
-{"CSP", 0x64, 0x240a2},
-@.CSP@>
-{"CSOD", 0x66, 0x240a2},@/
-@.CSOD@>
-{"CSNN", 0x68, 0x240a2},
-@.CSNN@>
-{"CSNZ", 0x6a, 0x240a2},
-@.CSNZ@>
-{"CSNP", 0x6c, 0x240a2},
-@.CSNP@>
-{"CSEV", 0x6e, 0x240a2},@/
-@.CSEV@>
-{"ZSN", 0x70, 0x240a2},
-@.ZSN@>
-{"ZSZ", 0x72, 0x240a2},
-@.ZSZ@>
-{"ZSP", 0x74, 0x240a2},
-@.ZSP@>
-{"ZSOD", 0x76, 0x240a2},@/
-@.ZSOD@>
-{"ZSNN", 0x78, 0x240a2},
-@.ZSNN@>
-{"ZSNZ", 0x7a, 0x240a2},
-@.ZSNZ@>
-{"ZSNP", 0x7c, 0x240a2},
-@.ZSNP@>
-{"ZSEV", 0x7e, 0x240a2},@/
-@.ZSEV@>
-{"LDB", 0x80, 0xa60a2},
-@.LDB@>
-{"LDBU", 0x82, 0xa60a2},
-@.LDBU@>
-{"LDW", 0x84, 0xa60a2},
-@.LDW@>
-{"LDWU", 0x86, 0xa60a2},@/
-@.LDWU@>
-{"LDT", 0x88, 0xa60a2},
-@.LDT@>
-{"LDTU", 0x8a, 0xa60a2},
-@.LDTU@>
-{"LDO", 0x8c, 0xa60a2},
-@.LDO@>
-{"LDOU", 0x8e, 0xa60a2},@/
-@.LDOU@>
-{"LDSF", 0x90, 0xa60a2},
-@.LDSF@>
-{"LDHT", 0x92, 0xa60a2},
-@.LDHT@>
-{"CSWAP", 0x94, 0xa60a2},
-@.CSWAP@>
-{"LDUNC", 0x96, 0xa60a2},@/
-@.LDUNC@>
-{"LDVTS", 0x98, 0xa60a2},
-@.LDVTS@>
-{"PRELD", 0x9a, 0xa6022},
-@.PRELD@>
-{"PREGO", 0x9c, 0xa6022},
-@.PREGO@>
-{"GO", 0x9e, 0xa60a2},@/
-@.GO@>
-{"STB", 0xa0, 0xa60a2},
-@.STB@>
-{"STBU", 0xa2, 0xa60a2},
-@.STBU@>
-{"STW", 0xa4, 0xa60a2},
-@.STW@>
-{"STWU", 0xa6, 0xa60a2},@/
-@.STWU@>
-{"STT", 0xa8, 0xa60a2},
-@.STT@>
-{"STTU", 0xaa, 0xa60a2},
-@.STTU@>
-{"STO", 0xac, 0xa60a2},
-@.STO@>
-{"STOU", 0xae, 0xa60a2},@/
-@.STOU@>
-{"STSF", 0xb0, 0xa60a2},
-@.STSF@>
-{"STHT", 0xb2, 0xa60a2},
-@.STHT@>
-{"STCO", 0xb4, 0xa6022},
-@.STCO@>
-{"STUNC", 0xb6, 0xa60a2},@/
-@.STUNC@>
-{"SYNCD", 0xb8, 0xa6022},
-@.SYNCD@>
-{"PREST", 0xba, 0xa6022},
-@.PREST@>
-{"SYNCID", 0xbc, 0xa6022},
-@.SYNCID@>
-{"PUSHGO", 0xbe, 0xa6062},@/
-@.PUSHGO@>
-{"OR", 0xc0, 0x240a2},
-@.OR@>
-{"ORN", 0xc2, 0x240a2},
-@.ORN@>
-{"NOR", 0xc4, 0x240a2},
-@.NOR@>
-{"XOR", 0xc6, 0x240a2},@/
-@.XOR@>
-{"AND", 0xc8, 0x240a2},
-@.AND@>
-{"ANDN", 0xca, 0x240a2},
-@.ANDN@>
-{"NAND", 0xcc, 0x240a2},
-@.NAND@>
-{"NXOR", 0xce, 0x240a2},@/
-@.NXOR@>
-{"BDIF", 0xd0, 0x240a2},
-@.BDIF@>
-{"WDIF", 0xd2, 0x240a2},
-@.WDIF@>
-{"TDIF", 0xd4, 0x240a2},
-@.TDIF@>
-{"ODIF", 0xd6, 0x240a2},@/
-@.ODIF@>
-{"MUX", 0xd8, 0x240a2},
-@.MUX@>
-{"SADD", 0xda, 0x240a2},
-@.SADD@>
-{"MOR", 0xdc, 0x240a2},
-@.MOR@>
-{"MXOR", 0xde, 0x240a2},@/
-@.MXOR@>
-{"SETH", 0xe0, 0x22080},
-@.SETH@>
-{"SETMH", 0xe1, 0x22080},
-@.SETMH@>
-{"SETML", 0xe2, 0x22080},
-@.SETML@>
-{"SETL", 0xe3, 0x22080},@/
-@.SETL@>
-{"INCH", 0xe4, 0x22080},
-@.INCH@>
-{"INCMH", 0xe5, 0x22080},
-@.INCMH@>
-{"INCML", 0xe6, 0x22080},
-@.INCML@>
-{"INCL", 0xe7, 0x22080},@/
-@.INCL@>
-{"ORH", 0xe8, 0x22080},
-@.ORH@>
-{"ORMH", 0xe9, 0x22080},
-@.ORMH@>
-{"ORML", 0xea, 0x22080},
-@.ORML@>
-{"ORL", 0xeb, 0x22080},@/
-@.ORL@>
-{"ANDNH", 0xec, 0x22080},
-@.ANDNH@>
-{"ANDNMH", 0xed, 0x22080},
-@.ANDNMH@>
-{"ANDNML", 0xee, 0x22080},
-@.ANDNML@>
-{"ANDNL", 0xef, 0x22080},@/
-@.ANDNL@>
-{"JMP", 0xf0, 0x21001},
-@.JMP@>
-{"PUSHJ", 0xf2, 0x22041},
-@.PUSHJ@>
-{"GETA", 0xf4, 0x22081},
-@.GETA@>
-{"PUT", 0xf6, 0x22002},@/
-@.PUT@>
-{"POP", 0xf8, 0x23000},
-@.POP@>
-{"RESUME", 0xf9, 0x21000},
-@.RESUME@>
-{"SAVE", 0xfa, 0x22080},
-@.SAVE@>
-{"UNSAVE", 0xfb, 0x23a00},@/
-@.UNSAVE@>
-{"SYNC", 0xfc, 0x21000},
-@.SYNC@>
-{"SWYM", 0xfd, 0x27554},
-@.SWYM@>
-{"GET", 0xfe, 0x22080},
-@.GET@>
-{"TRIP", 0xff, 0x27554},@/
-@.TRIP@>
-{"SET",SET, 0x22180},
-@.SET@>
-{"LDA", 0x22, 0xa60a2},@/
-@.LDA@>
-{"IS", IS, 0x101400},
-@.IS@>
-{"LOC", LOC, 0x1400},
-@.LOC@>
-{"PREFIX", PREFIX, 0x141000},@/
-@.PREFIX@>
-{"BYTE", BYTE, 0x10f000},
-@.BYTE@>
-{"WYDE", WYDE, 0x11f000},
-@.WYDE@>
-{"TETRA", TETRA, 0x12f000},
-@.TETRA@>
-{"OCTA", OCTA, 0x13f000},@/
-@.OCTA@>
-{"BSPEC", BSPEC, 0x41400},
-@.BSPEC@>
-{"ESPEC", ESPEC, 0x141000},@/
-@.ESPEC@>
-{"GREG", GREG, 0x101000},
-@.GREG@>
-{"LOCAL", LOCAL, 0x141800}};
 @y
 op_spec op_init_table[]={@|
-{"TRAP", 0x00, 0x27554},
-@.TRAP@>
-{"FCMP", 0x01, 0x240a8},
-@.FCMP@>
-{"FUN", 0x02, 0x240a8},
-@.FUN@>
+@z
+
+@x [63] l.1648
+{"FEQL", 0x03, 0x240a8},@/
+@y
 {"FEQL", 0x03, 0x240a8},@|
-@.FEQL@>
-{"FADD", 0x04, 0x240a8},
-@.FADD@>
-{"FIX", 0x05, 0x26288},
-@.FIX@>
-{"FSUB", 0x06, 0x240a8},
-@.FSUB@>
+@z
+
+@x [63] l.1656
+{"FIXU", 0x07, 0x26288},@/
+@y
 {"FIXU", 0x07, 0x26288},@|
-@.FIXU@>
-{"FLOT", 0x08, 0x26282},
-@.FLOT@>
-{"FLOTU", 0x0a, 0x26282},
-@.FLOTU@>
-{"SFLOT", 0x0c, 0x26282},
-@.SFLOT@>
+@z
+
+@x [63] l.1664
+{"SFLOTU", 0x0e, 0x26282},@/
+@y
 {"SFLOTU", 0x0e, 0x26282},@|
-@.SFLOTU@>
-{"FMUL", 0x10, 0x240a8},
-@.FMUL@>
-{"FCMPE", 0x11, 0x240a8},
-@.FCMPE@>
-{"FUNE", 0x12, 0x240a8},
-@.FUNE@>
+@z
+
+@x [63] l.1672
+{"FEQLE", 0x13, 0x240a8},@/
+@y
 {"FEQLE", 0x13, 0x240a8},@|
-@.FEQLE@>
-{"FDIV", 0x14, 0x240a8},
-@.FDIV@>
-{"FSQRT", 0x15, 0x26288},
-@.FSQRT@>
-{"FREM", 0x16, 0x240a8},
-@.FREM@>
+@z
+
+@x [63] l.1680
+{"FINT", 0x17, 0x26288},@/
+@y
 {"FINT", 0x17, 0x26288},@|
-@.FINT@>
-{"MUL", 0x18, 0x240a2},
-@.MUL@>
-{"MULU", 0x1a, 0x240a2},
-@.MULU@>
-{"DIV", 0x1c, 0x240a2},
-@.DIV@>
+@z
+
+@x [63] l.1688
+{"DIVU", 0x1e, 0x240a2},@/
+@y
 {"DIVU", 0x1e, 0x240a2},@|
-@.DIVU@>
-{"ADD", 0x20, 0x240a2},
-@.ADD@>
-{"ADDU", 0x22, 0x240a2},
-@.ADDU@>
-{"SUB", 0x24, 0x240a2},
-@.SUB@>
+@z
+
+@x [63] l.1696
+{"SUBU", 0x26, 0x240a2},@/
+@y
 {"SUBU", 0x26, 0x240a2},@|
-@.SUBU@>
-{"2ADDU", 0x28, 0x240a2},
-@.2ADDU@>
-{"4ADDU", 0x2a, 0x240a2},
-@.4ADDU@>
-{"8ADDU", 0x2c, 0x240a2},
-@.8ADDU@>
+@z
+
+@x [63] l.1704
+{"16ADDU", 0x2e, 0x240a2},@/
+@y
 {"16ADDU", 0x2e, 0x240a2},@|
-@.16ADDU@>
-{"CMP", 0x30, 0x240a2},
-@.CMP@>
-{"CMPU", 0x32, 0x240a2},
-@.CMPU@>
-{"NEG", 0x34, 0x26082},
-@.NEG@>
+@z
+
+@x [63] l.1712
+{"NEGU", 0x36, 0x26082},@/
+@y
 {"NEGU", 0x36, 0x26082},@|
-@.NEGU@>
-{"SL", 0x38, 0x240a2},
-@.SL@>
-{"SLU", 0x3a, 0x240a2},
-@.SLU@>
-{"SR", 0x3c, 0x240a2},
-@.SR@>
+@z
+
+@x [63] l.1720
+{"SRU", 0x3e, 0x240a2},@/
+@y
 {"SRU", 0x3e, 0x240a2},@|
-@.SRU@>
-{"BN", 0x40, 0x22081},
-@.BN@>
-{"BZ", 0x42, 0x22081},
-@.BZ@>
-{"BP", 0x44, 0x22081},
-@.BP@>
+@z
+
+@x [63] l.1728
+{"BOD", 0x46, 0x22081},@/
+@y
 {"BOD", 0x46, 0x22081},@|
-@.BOD@>
-{"BNN", 0x48, 0x22081},
-@.BNN@>
-{"BNZ", 0x4a, 0x22081},
-@.BNZ@>
-{"BNP", 0x4c, 0x22081},
-@.BNP@>
+@z
+
+@x [63] l.1736
+{"BEV", 0x4e, 0x22081},@/
+@y
 {"BEV", 0x4e, 0x22081},@|
-@.BEV@>
-{"PBN", 0x50, 0x22081},
-@.PBN@>
-{"PBZ", 0x52, 0x22081},
-@.PBZ@>
-{"PBP", 0x54, 0x22081},
-@.PBP@>
+@z
+
+@x [63] l.1744
+{"PBOD", 0x56, 0x22081},@/
+@y
 {"PBOD", 0x56, 0x22081},@|
-@.PBOD@>
-{"PBNN", 0x58, 0x22081},
-@.PBNN@>
-{"PBNZ", 0x5a, 0x22081},
-@.PBNZ@>
-{"PBNP", 0x5c, 0x22081},
-@.PBNP@>
+@z
+
+@x [63] l.1752
+{"PBEV", 0x5e, 0x22081},@/
+@y
 {"PBEV", 0x5e, 0x22081},@|
-@.PBEV@>
-{"CSN", 0x60, 0x240a2},
-@.CSN@>
-{"CSZ", 0x62, 0x240a2},
-@.CSZ@>
-{"CSP", 0x64, 0x240a2},
-@.CSP@>
+@z
+
+@x [63] l.1760
+{"CSOD", 0x66, 0x240a2},@/
+@y
 {"CSOD", 0x66, 0x240a2},@|
-@.CSOD@>
-{"CSNN", 0x68, 0x240a2},
-@.CSNN@>
-{"CSNZ", 0x6a, 0x240a2},
-@.CSNZ@>
-{"CSNP", 0x6c, 0x240a2},
-@.CSNP@>
+@z
+
+@x [63] l.1768
+{"CSEV", 0x6e, 0x240a2},@/
+@y
 {"CSEV", 0x6e, 0x240a2},@|
-@.CSEV@>
-{"ZSN", 0x70, 0x240a2},
-@.ZSN@>
-{"ZSZ", 0x72, 0x240a2},
-@.ZSZ@>
-{"ZSP", 0x74, 0x240a2},
-@.ZSP@>
+@z
+
+@x [63] l.1776
+{"ZSOD", 0x76, 0x240a2},@/
+@y
 {"ZSOD", 0x76, 0x240a2},@|
-@.ZSOD@>
-{"ZSNN", 0x78, 0x240a2},
-@.ZSNN@>
-{"ZSNZ", 0x7a, 0x240a2},
-@.ZSNZ@>
-{"ZSNP", 0x7c, 0x240a2},
-@.ZSNP@>
+@z
+
+@x [63] l.1784
+{"ZSEV", 0x7e, 0x240a2},@/
+@y
 {"ZSEV", 0x7e, 0x240a2},@|
-@.ZSEV@>
-{"LDB", 0x80, 0xa60a2},
-@.LDB@>
-{"LDBU", 0x82, 0xa60a2},
-@.LDBU@>
-{"LDW", 0x84, 0xa60a2},
-@.LDW@>
+@z
+
+@x [63] l.1792
+{"LDWU", 0x86, 0xa60a2},@/
+@y
 {"LDWU", 0x86, 0xa60a2},@|
-@.LDWU@>
-{"LDT", 0x88, 0xa60a2},
-@.LDT@>
-{"LDTU", 0x8a, 0xa60a2},
-@.LDTU@>
-{"LDO", 0x8c, 0xa60a2},
-@.LDO@>
+@z
+
+@x [63] l.1800
+{"LDOU", 0x8e, 0xa60a2},@/
+@y
 {"LDOU", 0x8e, 0xa60a2},@|
-@.LDOU@>
-{"LDSF", 0x90, 0xa60a2},
-@.LDSF@>
-{"LDHT", 0x92, 0xa60a2},
-@.LDHT@>
-{"CSWAP", 0x94, 0xa60a2},
-@.CSWAP@>
+@z
+
+@x [63] l.1808
+{"LDUNC", 0x96, 0xa60a2},@/
+@y
 {"LDUNC", 0x96, 0xa60a2},@|
-@.LDUNC@>
-{"LDVTS", 0x98, 0xa60a2},
-@.LDVTS@>
-{"PRELD", 0x9a, 0xa6022},
-@.PRELD@>
-{"PREGO", 0x9c, 0xa6022},
-@.PREGO@>
+@z
+
+@x [63] l.1816
+{"GO", 0x9e, 0xa60a2},@/
+@y
 {"GO", 0x9e, 0xa60a2},@|
-@.GO@>
-{"STB", 0xa0, 0xa60a2},
-@.STB@>
-{"STBU", 0xa2, 0xa60a2},
-@.STBU@>
-{"STW", 0xa4, 0xa60a2},
-@.STW@>
+@z
+
+@x [63] l.1824
+{"STWU", 0xa6, 0xa60a2},@/
+@y
 {"STWU", 0xa6, 0xa60a2},@|
-@.STWU@>
-{"STT", 0xa8, 0xa60a2},
-@.STT@>
-{"STTU", 0xaa, 0xa60a2},
-@.STTU@>
-{"STO", 0xac, 0xa60a2},
-@.STO@>
+@z
+
+@x [63] l.1832
+{"STOU", 0xae, 0xa60a2},@/
+@y
 {"STOU", 0xae, 0xa60a2},@|
-@.STOU@>
-{"STSF", 0xb0, 0xa60a2},
-@.STSF@>
-{"STHT", 0xb2, 0xa60a2},
-@.STHT@>
-{"STCO", 0xb4, 0xa6022},
-@.STCO@>
+@z
+
+@x [63] l.1840
+{"STUNC", 0xb6, 0xa60a2},@/
+@y
 {"STUNC", 0xb6, 0xa60a2},@|
-@.STUNC@>
-{"SYNCD", 0xb8, 0xa6022},
-@.SYNCD@>
-{"PREST", 0xba, 0xa6022},
-@.PREST@>
-{"SYNCID", 0xbc, 0xa6022},
-@.SYNCID@>
+@z
+
+@x [63] l.1848
+{"PUSHGO", 0xbe, 0xa6062},@/
+@y
 {"PUSHGO", 0xbe, 0xa6062},@|
-@.PUSHGO@>
-{"OR", 0xc0, 0x240a2},
-@.OR@>
-{"ORN", 0xc2, 0x240a2},
-@.ORN@>
-{"NOR", 0xc4, 0x240a2},
-@.NOR@>
+@z
+
+@x [63] l.1856
+{"XOR", 0xc6, 0x240a2},@/
+@y
 {"XOR", 0xc6, 0x240a2},@|
-@.XOR@>
-{"AND", 0xc8, 0x240a2},
-@.AND@>
-{"ANDN", 0xca, 0x240a2},
-@.ANDN@>
-{"NAND", 0xcc, 0x240a2},
-@.NAND@>
+@z
+
+@x [63] l.1864
+{"NXOR", 0xce, 0x240a2},@/
+@y
 {"NXOR", 0xce, 0x240a2},@|
-@.NXOR@>
-{"BDIF", 0xd0, 0x240a2},
-@.BDIF@>
-{"WDIF", 0xd2, 0x240a2},
-@.WDIF@>
-{"TDIF", 0xd4, 0x240a2},
-@.TDIF@>
+@z
+
+@x [63] l.1872
+{"ODIF", 0xd6, 0x240a2},@/
+@y
 {"ODIF", 0xd6, 0x240a2},@|
-@.ODIF@>
-{"MUX", 0xd8, 0x240a2},
-@.MUX@>
-{"SADD", 0xda, 0x240a2},
-@.SADD@>
-{"MOR", 0xdc, 0x240a2},
-@.MOR@>
+@z
+
+@x [63] l.1880
+{"MXOR", 0xde, 0x240a2},@/
+@y
 {"MXOR", 0xde, 0x240a2},@|
-@.MXOR@>
-{"SETH", 0xe0, 0x22080},
-@.SETH@>
-{"SETMH", 0xe1, 0x22080},
-@.SETMH@>
-{"SETML", 0xe2, 0x22080},
-@.SETML@>
+@z
+
+@x [63] l.1888
+{"SETL", 0xe3, 0x22080},@/
+@y
 {"SETL", 0xe3, 0x22080},@|
-@.SETL@>
-{"INCH", 0xe4, 0x22080},
-@.INCH@>
-{"INCMH", 0xe5, 0x22080},
-@.INCMH@>
-{"INCML", 0xe6, 0x22080},
-@.INCML@>
+@z
+
+@x [63] l.1896
+{"INCL", 0xe7, 0x22080},@/
+@y
 {"INCL", 0xe7, 0x22080},@|
-@.INCL@>
-{"ORH", 0xe8, 0x22080},
-@.ORH@>
-{"ORMH", 0xe9, 0x22080},
-@.ORMH@>
-{"ORML", 0xea, 0x22080},
-@.ORML@>
+@z
+
+@x [63] l.1904
+{"ORL", 0xeb, 0x22080},@/
+@y
 {"ORL", 0xeb, 0x22080},@|
-@.ORL@>
-{"ANDNH", 0xec, 0x22080},
-@.ANDNH@>
-{"ANDNMH", 0xed, 0x22080},
-@.ANDNMH@>
-{"ANDNML", 0xee, 0x22080},
-@.ANDNML@>
+@z
+
+@x [63] l.1912
+{"ANDNL", 0xef, 0x22080},@/
+@y
 {"ANDNL", 0xef, 0x22080},@|
-@.ANDNL@>
-{"JMP", 0xf0, 0x21001},
-@.JMP@>
-{"PUSHJ", 0xf2, 0x22041},
-@.PUSHJ@>
-{"GETA", 0xf4, 0x22081},
-@.GETA@>
+@z
+
+@x [63] l.1920
+{"PUT", 0xf6, 0x22002},@/
+@y
 {"PUT", 0xf6, 0x22002},@|
-@.PUT@>
-{"POP", 0xf8, 0x23000},
-@.POP@>
-{"RESUME", 0xf9, 0x21000},
-@.RESUME@>
-{"SAVE", 0xfa, 0x22080},
-@.SAVE@>
+@z
+
+@x [63] l.1928
+{"UNSAVE", 0xfb, 0x23a00},@/
+@y
 {"UNSAVE", 0xfb, 0x23a00},@|
-@.UNSAVE@>
-{"SYNC", 0xfc, 0x21000},
-@.SYNC@>
-{"SWYM", 0xfd, 0x27554},
-@.SWYM@>
-{"GET", 0xfe, 0x22080},
-@.GET@>
+@z
+
+@x [63] l.1936
+{"TRIP", 0xff, 0x27554},@/
+@y
 {"TRIP", 0xff, 0x27554},@|
-@.TRIP@>
-{"SET",SET, 0x22180},
-@.SET@>
+@z
+
+@x [63] l.1940
+{"LDA", 0x22, 0xa60a2},@/
+@y
 {"LDA", 0x22, 0xa60a2},@|
-@.LDA@>
-{"IS", IS, 0x101400},
-@.IS@>
-{"LOC", LOC, 0x1400},
-@.LOC@>
+@z
+
+@x [63] l.1946
+{"PREFIX", PREFIX, 0x141000},@/
+@y
 {"PREFIX", PREFIX, 0x141000},@|
-@.PREFIX@>
-{"BYTE", BYTE, 0x10f000},
-@.BYTE@>
+@z
+
+@x [63] l.1950
+{"WYDE", WYDE, 0x11f000},
+@y
 {"WYDE", WYDE, 0x11f000},@|
-@.WYDE@>
-{"TETRA", TETRA, 0x12f000},
-@.TETRA@>
+@z
+
+@x [63] l.1954
+{"OCTA", OCTA, 0x13f000},@/
+@y
 {"OCTA", OCTA, 0x13f000},@|
-@.OCTA@>
-{"BSPEC", BSPEC, 0x41400},
-@.BSPEC@>
+@z
+
+@x [63] l.1958
+{"ESPEC", ESPEC, 0x141000},@/
+@y
 {"ESPEC", ESPEC, 0x141000},@|
-@.ESPEC@>
-{"GREG", GREG, 0x101000},
-@.GREG@>
-{"LOCAL", LOCAL, 0x141800}};
 @z
 
 @x [69] l.2009
