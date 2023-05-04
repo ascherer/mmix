@@ -15,7 +15,6 @@ the module called {\mc MMIX-CONFIG}. The program file is either
 #include <string.h>
 #include "mmix-pipe.h"
 @y
-@#
 #include "mmix-arith.h" /* |@!zero_octa|, |@!neg_one|, |@!incr| */
 #include "mmix-config.h" /* |@!MMIX_config| */
 #include "mmix-io.h" /* |@!mmix_io_init| */
@@ -164,12 +163,6 @@ bool bad_address;
 extern bool page_bad;
 extern octa page_mask;
 extern int page_r,page_s,page_b[5];
-@y
-static bool silent=false;
-static bool bad_address;
-@z
-
-@x [25] l.563
 extern octa zero_octa;
 extern octa neg_one;
 octa seven_octa={0,7};
@@ -178,5 +171,7 @@ extern octa incr @,@,@[ARGS((octa y,int delta))@];
 extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
+static bool silent=false;
+static bool bad_address;
 static octa seven_octa={0,7};
 @z
