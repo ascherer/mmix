@@ -15,8 +15,6 @@ file called |@(mmix-pipe.h@>|. The header file is used by the main routine and
 #include <math.h>
 #include "abstime.h"
 @y
-@#
-@#
 #include "mmix-pipe.h" /* we use our own interface first;
   see |@(mmix-pipe.h@>| */
 #include "mmix-mem.h" /* |@!spec_read|, |@!spec_write| */
@@ -419,7 +417,8 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
-@x [376] l.6595
+@x [376] l.6594
+Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 
 @ @<Glob...@>=
@@ -435,7 +434,7 @@ extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
 extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
 extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
-interfaces on which they depend.
+Here we need only write three primitive interfaces on which they depend.
 
 @ The following three functions are not declared in |@(mmix-pipe.h@>|, although
 they are used in {\mc MMIX-IO}. Similar functions are defined in the simplified

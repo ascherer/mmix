@@ -298,11 +298,11 @@ op_info info[256]={
 @<Info for load/store commands@>,
 @<Info for logical and control commands@>};
 @y
-op_info info[256]={@t}\1{@>@/
+op_info info[256]={@t\1@>@/
 @<Info for arithmetic commands@>,@/
 @<Info for branch commands@>,@/
 @<Info for load/store commands@>,@/
-@<Info for logical and control commands@>@t}\2{@>@/};
+@<Info for logical and control commands@>@t\2@>@/};
 @z
 
 @x [75] l.1779
