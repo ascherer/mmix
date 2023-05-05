@@ -59,7 +59,7 @@ in the simulators.
 typedef unsigned int tetra;
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @y
-@ Here comes the exported interface of this {\mc MMIX-IO} program module.
+@* Interface.  Here comes the exported interface of this program module.
 
 @(mmix-io.h@>=
 #ifndef MMIX_IO_H
@@ -105,6 +105,12 @@ extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
 extern int mmgetchars @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 extern void mmputchars @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
 extern char stdin_chr @,@,@[ARGS((void))@];
+@z
+
+@x [5] l.66
+@ Each possible handle has a file pointer and a current mode.
+@y
+@* Implementation.  Each possible handle has a file pointer and a current mode.
 @z
 
 @x [6] l.75
