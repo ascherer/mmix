@@ -95,7 +95,7 @@ octa read_hex(p)
   return val;
 }
 
-@ Here comes the exported interface of this {\mc MMIX-MEM} program module.
+@* Interface. Here comes the exported interface of this program module.
 
 @(mmix-mem.h@>=
 #ifndef MMIX_MEM_H
