@@ -271,6 +271,23 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
 @y
 @z
 
+@x [216] l.3838
+  register int del=c->gg>>3; /* octabytes per granule */
+  octa addr;
+  addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
+@y
+  register int del=c->gg>>3; /* octabytes per granule */
+  octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
+@z
+
+@x [232] l.4137
+@<Cases 0 through 4, for the D-cache@>;
+@<Cases 5 through 9, for the S-cache@>;
+@y
+@t\4@>@<Cases 0 through 4, for the D-cache@>;
+@t\4@>@<Cases 5 through 9, for the S-cache@>;
+@z
+
 @x [236] l.4292
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @y
@@ -375,6 +392,15 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  default:@+; @=/* fall through */@>@;
 @z
 
+@x [282] l.5141
+  if (!(data->op&2)) {@+octa before,after;
+    before=data->b.o;@+after=shift_right(shift_left(data->b.o,i),i,0);
+@y
+  if (!(data->op&2)) {
+    octa before=data->b.o;
+    octa after=shift_right(shift_left(data->b.o,i),i,0);
+@z
+
 @x [297] l.5334
 {@+octa addr;
   addr=data->z.o;
@@ -398,6 +424,14 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
 @z
 
+@x [301] l.5403
+    register fetch *new_tail;
+    if (tail==fetch_bot) new_tail=fetch_top;
+    else new_tail=tail-1;
+@y
+    register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
+@z
+
 @x [348] l.6200
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @y
@@ -415,6 +449,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   data->y.o.l &= -data->b.o.l;
 @y
   data->y.o.l &= -(int)data->b.o.l;
+@z
+
+@x [373] l.6583
+  octa trap_loc;
+  trap_loc=incr(g[rWW].o,-4);
+@y
+  octa trap_loc=incr(g[rWW].o,-4);
 @z
 
 @x [376] l.6594
