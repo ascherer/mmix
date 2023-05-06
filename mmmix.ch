@@ -150,6 +150,14 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @:g}{\|g (global registers)@>
 @z
 
+@x [22] l.511
+   register fetch* new_tail;
+   if (tail==fetch_bot) new_tail=fetch_top;
+   else new_tail=tail-1;
+@y
+   register fetch* new_tail=tail==fetch_bot?fetch_top:tail-1;
+@z
+
 @x [23] l.537
    g[rK].o=neg_one;
 @y
