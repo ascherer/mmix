@@ -520,5 +520,11 @@ static void magic_write(addr,val)
 @x [387] l.6827
     fgets(stdin_buf,256,stdin);
 @y
-    if (fgets(stdin_buf,256,stdin)) {}
+    if (!fgets(stdin_buf,sizeof(stdin_buf),stdin)) break;
+@z
+
+@x [387] l.6829
+    for (p=stdin_buf;p<stdin_buf+254;p++) if(*p=='\n') break;
+@y
+    for (p=stdin_buf;p<stdin_buf+sizeof(stdin_buf)-2;p++) if(*p=='\n') break;
 @z
