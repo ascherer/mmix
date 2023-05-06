@@ -519,10 +519,25 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 @y
 @z
 
+@x [74] l.2181
+  register sym_node *pp;
+@y
+@z
+
 @x [76] l.2229
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
+@z
+
+@x [78] l.2248
+  *sym_ptr='\0';
+  fprintf(listing_file," %s = ",sym_buf+1);
+  pp=t->sym;
+@y
+  register sym_node *pp=t->sym;
+  *sym_ptr='\0';
+  fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
 @x [95] l.2446
