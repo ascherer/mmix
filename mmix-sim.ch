@@ -467,6 +467,12 @@ char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
+@x [120] l.2567
+    if (!fgets(stdin_buf,256,stdin))
+@y
+    if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
+@z
+
 @x [125] l.2630
  case RESUME_SET: k=(b.l>>16)&0xff;
 @y
