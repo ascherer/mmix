@@ -66,7 +66,13 @@ g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @x [13] l.374
   fgets(buffer,BUF_SIZE,stdin);
 @y
-  if (fgets(buffer,BUF_SIZE,stdin)) {}
+  if (!fgets(buffer,BUF_SIZE,stdin)) break;
+@z
+
+@x [13} l.380
+  @<Cases for interaction@>@;
+@y
+  @t\4@>@<Cases for interaction@>@;
 @z
 
 @x [15] l.424
