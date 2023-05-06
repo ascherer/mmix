@@ -35,16 +35,21 @@ octa spec_read @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [2] l.49
+@x [2] l.45
+  octa val;
+  size&=0x3, addr.l&=-(1<<size);
+  if (verbose&interactive_read_bit) {
+    printf("** Read %s from loc %08x%08x: ",kind[size],addr.h,addr.l);
     fgets(buf,20,stdin);
-@y
-    if (fgets(buf,20,stdin)) {}
-@z
-
-@x [2] l.51
+    val=read_hex(buf);
   } else val.l=val.h=0;
 @y
-  } else val=zero_octa;
+  octa val=zero_octa;
+  size&=0x3, addr.l&=-(1<<size);
+  if (verbose&interactive_read_bit) {
+    printf("** Read %s from loc %08x%08x: ",kind[size],addr.h,addr.l);
+    if (fgets(buf,sizeof(buf),stdin)) val=read_hex(buf);
+  }
 @z
 
 @x [2] l.53
