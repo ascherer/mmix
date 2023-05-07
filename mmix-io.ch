@@ -12,6 +12,8 @@
 #include "mmix-io.h" /* we use our own interface first;
   see |@(mmix-io.h@>| */
 #include <stdlib.h> /* |@!calloc|, |@!free| */
+@#
+@h
 @<Preprocessor macros@>@;
 @z
 

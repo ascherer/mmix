@@ -89,6 +89,12 @@ trie_node* prune @,@,@[ARGS((trie_node*))@];
 void out_stab @,@,@[ARGS((trie_node*))@];
 @z
 
+@x [39] l.1122
+@<Preprocessor definitions@>=
+@y
+@<Preprocessor macros@>=
+@z
+
 @x [41] l.1145
 void flush_listing_line @,@,@[ARGS((char*))@];@+@t}\6{@>
 @y
@@ -648,10 +654,15 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 
 @x [136] l.3166
 #include <time.h>
+@#
+@<Preprocessor definitions@>@;
 @y
 #include <time.h>
 @#
 #include "mmix-arith.h"
+@#
+@h
+@<Preprocessor macros@>@;
 @z
 
 @x [136] l.3171

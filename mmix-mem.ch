@@ -15,6 +15,8 @@
 @#
 #include <stdio.h> /* |@!printf| */
 @#
+@h
+@#
 @z
 
 @x [1] l.27
