@@ -136,6 +136,8 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 #include <ctype.h> /* |isspace| */
 #include <limits.h> /* |INT_MAX| */
 @#
+@h
+@#
 @z
 
 @x [38] l.1024
