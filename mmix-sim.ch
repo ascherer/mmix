@@ -539,6 +539,7 @@ void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
 #include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 #include "mmix-io.h" /* |@!mmix_io_init| */
 @#
+@h
 @z
 
 @x [141] l.2891
