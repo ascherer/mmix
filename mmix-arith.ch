@@ -17,6 +17,8 @@ Use C99 standard types instead of homebrewn typedefs.
 #include <string.h> /* |@!strncmp| */
 #include <ctype.h> /* |@!isdigit| */
 @#
+@h
+@#
 @z
 
 @x [1] l.37

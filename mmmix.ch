@@ -22,6 +22,9 @@ the module called {\mc MMIX-CONFIG}. The program file is either
 #include "mmix-pipe.h" /* |@!MMIX_init| et al. */
 @#
 #include <string.h> /* |@!strlen| */
+@#
+@h
+@#
 @z
 
 @x [2] l.44
