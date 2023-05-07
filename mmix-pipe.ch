@@ -210,6 +210,12 @@ a trivial program that computes the value of the standard library function
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
+@x [101] l.2009
+@<Special cases of instruction dispatch@>@;
+@y
+@t\4@>@<Special cases of instruction dispatch@>@;
+@z
+
 @x [111] l.2135
 if (rename_regs<cool->ren_x+cool->ren_a) goto stall;
 if (cool->mem_x)
@@ -234,11 +240,27 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
     if (x<(unsigned int)new_L)
 @z
 
-@x [132] l.2519
+@x [130] l.2473
+  @<Special cases for states in the first stage@>;
+@y
+  @t\4@>@<Special cases for states in the first stage@>;
+@z
+
+@x [132] l.2517
+  @<Cases to compute the results of register-to-register operation@>;
+  @<Cases to compute the virtual address of a memory operation@>;
   @<Cases for stage 1 execution@>;
 @y
-  @<Cases for stage 1 execution@>;
+  @t\4@>@<Cases to compute the results of register-to-register operation@>;
+  @t\4@>@<Cases to compute the virtual address of a memory operation@>;
+  @t\4@>@<Cases for stage 1 execution@>;
   default:@+; @=/* fall through */@>@;
+@z
+
+@x [135] l.2572
+  @<Special cases for states in later stages@>;
+@y
+  @t\4@>@<Special cases for states in later stages@>;
 @z
 
 @x [157] l.2968
@@ -399,6 +421,12 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   if (!(data->op&2)) {
     octa before=data->b.o;
     octa after=shift_right(shift_left(data->b.o,i),i,0);
+@z
+
+@x [288] l.5238
+  @<Other cases for the fetch coroutine@>@;
+@y
+  @t\4@>@<Other cases for the fetch coroutine@>@;
 @z
 
 @x [297] l.5334
