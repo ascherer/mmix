@@ -254,7 +254,7 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   @t\4@>@<Cases to compute the results of register-to-register operation@>;
   @t\4@>@<Cases to compute the virtual address of a memory operation@>;
   @t\4@>@<Cases for stage 1 execution@>;
-  default:@+; @=/* fall through */@>@;
+  default:@+;
 @z
 
 @x [135] l.2572
@@ -371,8 +371,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @x [271] l.4901
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
-  case st: data->state=st_ready;@+pass_after(1);@+goto passit;
-  default:@+; @=/* fall through */@>@;
+  case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
 
 @x [272] l.4958
@@ -410,8 +409,8 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    goto do_syncid;
 @y
    if (Dcache && (tetra)(Dcache->bb)<data->b.o.l) data->b.o.l=Dcache->bb;
-   goto do_syncid;
- default:@+; @=/* fall through */@>@;
+   @=/* fall through */@>@;
+ default: goto do_syncid;
 @z
 
 @x [282] l.5141
@@ -460,11 +459,12 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [348] l.6200
+@x [348] l.6199
+ case FEQLE: goto cmp_fin;
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @y
+ case FEQLE: default: goto cmp_fin;
  case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
- default:@+; @=/* fall through */@>@;
 @z
 
 @x [364] l.6458
