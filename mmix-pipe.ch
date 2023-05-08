@@ -180,6 +180,18 @@ followed by rG~(19) and rA~(21) packed into eight bytes.
 followed by~19 and~21.
 @z
 
+@x [75] l.1620
+  if (head==fetch_bot) new_head=fetch_top;@+else new_head=head-1;
+@y
+  new_head=head==fetch_bot?fetch_top:head-1;
+@z
+
+@x [75] l.1630
+  if (cool==reorder_bot) new_cool=reorder_top;@+else new_cool=cool-1;
+@y
+  new_cool=cool==reorder_bot?reorder_top:cool-1;
+@z
+
 @x [89] l.1865
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
