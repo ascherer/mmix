@@ -659,7 +659,7 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @y
 #include <time.h>
 @#
-#include "mmix-arith.h"
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 @#
 @h
 @<Preprocessor macros@>@;
