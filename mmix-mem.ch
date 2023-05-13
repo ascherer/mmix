@@ -59,9 +59,9 @@ case 0: val.l&=0xff;
 case 1: val.l&=0xffff;
 case 2: val.h=0;
 @y
-case 0: val.l&=0xff; @=/* fall through */@>@;
-case 1: val.l&=0xffff; @=/* fall through */@>@;
-case 2: val.h=0; @=/* fall through */@>@;
+case 0: val.l&=0xff;@+@=/* fall through */@>@;
+case 1: val.l&=0xffff;@+@=/* fall through */@>@;
+case 2: val.h=0;@+@=/* fall through */@>@;
 @z
 
 @x [3] l.75
