@@ -113,15 +113,13 @@ octa omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 
 @x [12] l.191
 octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
-octa signed_omult(y,z)
-  octa y,z;
-{
+@y
+@z
+
+@x [12] l.195
   octa acc;
   acc=omult(y,z);
 @y
-octa signed_omult(y,z)
-  octa y,z;
-{
   octa acc=omult(y,z);
 @z
 
@@ -146,15 +144,6 @@ octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
   @=/* else fall through */@>@;
  case 0+0: default: return q;
-@z
-
-@x [24] l.337
-  else return ominus(zero_octa,q);
-  }
-@y
-  else return ominus(zero_octa,q);
-  }
-  return q;
 @z
 
 @x [25] l.346
@@ -445,12 +434,10 @@ int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
 @d buf_max (buf+777)
 
 @<Glob...@>=
-static char buf[785]="00000000"; /* where we put significant input digits */
 @y
 @d buf_max (buf+777)
 
 @<Priv...@>=
-static char buf[785]="00000000"; /* where we put significant input digits */
 @z
 
 @x [76] l.1439
@@ -512,14 +499,9 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 
 @x [86] l.1625
  case inf: case zro: return z;
- case num: @<Integerize and |return|@>;
-  }
 @y
   @=/* else fall through */@>@;
  case inf: case zro: default: return z;
- case num: @<Integerize and |return|@>;
-  }
-  return z;
 @z
 
 @x [88] l.1654
@@ -544,15 +526,6 @@ octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
  case zro: return zero_octa;
 @y
  case zro: default: return zero_octa;
-@z
-
-@x [88] l.1676
-  return (zs=='-'? ominus(zero_octa,o): o);
-  }
-@y
-  return (zs=='-'? ominus(zero_octa,o): o);
-  }
-  return z;
 @z
 
 @x [89] l.1695
