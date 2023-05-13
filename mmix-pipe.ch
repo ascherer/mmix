@@ -69,7 +69,7 @@ new-style and old-style compilers.
 @x [10] l.229
   @<Local variables@>;
 @y
-  @<Local variables@>; (void)breakpoint_hit;
+  @<Local variables@>;@+(void)breakpoint_hit;
 @z
 
 @x [10] l.256
@@ -292,8 +292,8 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   register cacheblock* p;
   s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @y
-  register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
   register cacheblock* p;
+  register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @z
 
 @x [208] l.3724
