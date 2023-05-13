@@ -266,7 +266,7 @@ void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
 @x [49] l.1204
   else freopen(file_info[cur_file].name,"r",src_file);
 @y
-  else if (freopen(file_info[cur_file].name,"r",src_file)) {}
+  else src_file=freopen(file_info[cur_file].name,"r",src_file);
 @z
 
 @x [50] l.1225
