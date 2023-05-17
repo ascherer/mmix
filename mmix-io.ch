@@ -132,7 +132,7 @@ extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
 @y
 @ The ``mixins'' in the interface above are defined similarly, but slightly
 differently, as \&{static} functions in the simulators {\mc MMIX-PIPE} and
-{\mc MMIX-SIM}. Only these two program modules of the {\mc MMIX} system
+{\mc MMIX-SIM}. Only these two program modules of the \MMIX\ system
 call any of the extended functions from this module.
 @z
 
