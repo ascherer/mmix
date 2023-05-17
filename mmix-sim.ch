@@ -420,6 +420,28 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
+@x [108] l.2395
+case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
+@y
+case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
+@z
+
+@x [108] l.2397
+case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
+case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
+case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
+case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
+case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
+@y
+case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
+case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
+case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
+@z
+
 @x [112,113] l.2443
 Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
@@ -442,29 +464,34 @@ extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 Here we need only write three primitive
 interfaces on which they depend.
 
-@ The following three functions are not declared in any header file, although
-they are used in {\mc MMIX-IO}. Similar functions are defined in the
-meta-simulator {\mc MMIX-PIPE}.
+@ The following three functions are used in {\mc MMIX-IO} as ``mixins''.
+Similar functions are defined in the meta-simulator {\mc MMIX-PIPE}.
 
 @<Proto...@>=
-int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
-void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
-char stdin_chr @,@,@[ARGS((void))@];
+static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
+static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+static char stdin_chr @,@,@[ARGS((void))@];
 @z
 
 @x [114] l.2468
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];@+@t}\6{@>
+int mmgetchars(buf,size,addr,stop)
 @y
+static int mmgetchars(buf,size,addr,stop)
 @z
 
 @x [117] l.2516
 void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
+void mmputchars(buf,size,addr)
 @y
+static void mmputchars(buf,size,addr)
 @z
 
 @x [120] l.2558
 char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
+char stdin_chr()
 @y
+static char stdin_chr()
 @z
 
 @x [120] l.2567
