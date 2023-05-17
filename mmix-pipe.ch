@@ -491,6 +491,28 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
+@x [372] l.6566
+case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma);@+break;
+@y
+case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma,mmgetchars);@+break;
+@z
+
+@x [372] l.6568
+case Fread: g[rBB].o=mmix_fread(zz,mb,ma);@+break;
+case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma);@+break;
+case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
+case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
+case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o);@+break;
+case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o);@+break;
+@y
+case Fread: g[rBB].o=mmix_fread(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma,mmgetchars);@+break;
+case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o,mmgetchars);@+break;
+case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
+@z
+
 @x [373] l.6583
   octa trap_loc;
   trap_loc=incr(g[rWW].o,-4);
@@ -517,14 +539,13 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
 Here we need only write three primitive interfaces on which they depend.
 
-@ The following three functions are not declared in |@(mmix-pipe.h@>|, although
-they are used in {\mc MMIX-IO}. Similar functions are defined in the simplified
-\MMIX\ computer {\mc MMIX-SIM}.
+@ The following three functions are used in {\mc MMIX-IO} as ``mixins''.
+Similar functions are defined in the simplified \MMIX\ computer {\mc MMIX-SIM}.
 
 @<Internal proto...@>=
-int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
-void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
-char stdin_chr @,@,@[ARGS((void))@];
+static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
+static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
+static char stdin_chr @,@,@[ARGS((void))@];
 @z
 
 @x [377] l.6611
@@ -555,6 +576,24 @@ static void magic_write(addr,val)
   arg_loc=g[rBB].o;
 @y
   octa arg_loc=g[rBB].o;
+@z
+
+@x [381] l.6714
+int mmgetchars(buf,size,addr,stop)
+@y
+static int mmgetchars(buf,size,addr,stop)
+@z
+
+@x [384] l.6772
+void mmputchars(buf,size,addr)
+@y
+static void mmputchars(buf,size,addr)
+@z
+
+@x [387] l.6821
+char stdin_chr()
+@y
+static char stdin_chr()
 @z
 
 @x [387] l.6827
