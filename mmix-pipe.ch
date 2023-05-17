@@ -539,8 +539,9 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 @y
 Here we need only write three primitive interfaces on which they depend.
 
-@ The following three functions are used in {\mc MMIX-IO} as ``mixins''.
-Similar functions are defined in the simplified \MMIX\ computer {\mc MMIX-SIM}.
+@ The following three functions are used in {\mc MMIX-IO} as ``mixins'' in
+section |@<Magic...@>|.  Similar functions are defined in the simplified \MMIX\
+computer {\mc MMIX-SIM}.
 
 @<Internal proto...@>=
 static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
