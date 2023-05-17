@@ -464,8 +464,9 @@ extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 Here we need only write three primitive
 interfaces on which they depend.
 
-@ The following three functions are used in {\mc MMIX-IO} as ``mixins''.
-Similar functions are defined in the meta-simulator {\mc MMIX-PIPE}.
+@ The following three functions are used in {\mc MMIX-IO} as ``mixins'' in
+section \X108:Trips and traps\X.  Similar functions are defined in the
+meta-simulator {\mc MMIX-PIPE}.
 
 @<Proto...@>=
 static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
