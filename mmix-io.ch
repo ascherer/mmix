@@ -8,6 +8,8 @@
 
 @x [1] l.17
 @<Preprocessor macros@>@;
+@<Type definitions@>@;
+@<External subroutines@>@;
 @y
 #include "mmix-io.h" /* we use our own interface first;
   see |@(mmix-io.h@>| */
@@ -15,6 +17,7 @@
 @#
 @h
 @<Preprocessor macros@>@;
+@<Type definitions@>@;
 @z
 
 @x [2] l.23
@@ -71,15 +74,39 @@ typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 #include "mmix-arith.h" /* |@!ARGS|, |@!octa| */
 @#
 extern void mmix_io_init @,@,@[ARGS((void))@];
-extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];
+extern octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa, /* mixin */
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@]
+@,))@];
 extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 extern octa mmix_fclose @,@,@[ARGS((unsigned char))@];
-extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];
-extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];
-extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];
+extern octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa, /* mixins */
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@],@|
+  char @,(*stdin_chr) @,@,@[ARGS((void))@]
+@,))@];
+extern octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa, /* mixins */
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@],@|
+  char @,(*stdin_chr) @,@,@[ARGS((void))@]
+@,))@];
+extern octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa, /* mixins */
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@],@|
+  char @,(*stdin_chr) @,@,@[ARGS((void))@]
+@,))@];
+extern octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa, /* mixin */
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@]
+@,))@];
+extern octa mmix_fputs @,@,@[ARGS((unsigned char,octa, /* mixin */
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@]
+@,))@];
+extern octa mmix_fputws @,@,@[ARGS((unsigned char,octa, /* mixin */
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@]
+@,))@];
 extern octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];
 extern octa mmix_ftell @,@,@[ARGS((unsigned char))@];
 extern void print_trip_warning @,@,@[ARGS((int,octa))@];
@@ -87,14 +114,13 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 #endif /* |MMIX_IO_H| */
 @z
 
-@x [4] l.53
+@x [4] l.51
+@ Three basic subroutines are used to get strings from the simulated
+memory and to put strings into that memory. These subroutines are
 defined appropriately in each simulator. We also use a few subroutines
 and constants defined in {\mc MMIX-ARITH}.
-@y
-defined appropriately in each simulator.
-@z
 
-@x [4] l.57
+@<External...@>=
 extern char stdin_chr @,@,@[ARGS((void))@];
 extern int mmgetchars @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 extern void mmputchars @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
@@ -104,9 +130,10 @@ extern octa incr @,@,@[ARGS((octa,int))@];
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
 @y
-extern int mmgetchars @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
-extern void mmputchars @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
-extern char stdin_chr @,@,@[ARGS((void))@];
+@ The ``mixins'' in the interface above are defined similarly, but slightly
+differently, as \&{static} functions in the simulators {\mc MMIX-PIPE} and
+{\mc MMIX-SIM}. Only these two program modules of the {\mc MMIX} system
+call any of the extended functions from this module.
 @z
 
 @x [5] l.66
@@ -128,7 +155,15 @@ void mmix_io_init @,@,@[ARGS((void))@];@+@t}\6{@>
 
 @x [8] l.93
 octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fopen(handle,name,mode)
+  unsigned char handle;
+  octa name,mode;
 @y
+octa mmix_fopen(handle,name,mode,mmgetchars)
+  unsigned char handle;
+  octa name,mode;
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
 @x {8] l.99
@@ -184,7 +219,17 @@ octa mmix_fclose @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
 
 @x [12] l.137
 octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fread(handle,buffer,size)
+  unsigned char handle;
+  octa buffer,size;
 @y
+octa mmix_fread(handle,buffer,size,mmputchars,stdin_chr)
+  unsigned char handle;
+  octa buffer,size;
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
+@+@t}\6{\qquad@>
+  char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
 @x [12] l.144
@@ -196,7 +241,17 @@ octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 
 @x [14] l.172
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fgets(handle,buffer,size)
+  unsigned char handle;
+  octa buffer,size;
 @y
+octa mmix_fgets(handle,buffer,size,mmputchars,stdin_chr)
+  unsigned char handle;
+  octa buffer,size;
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
+@+@t}\6{\qquad@>
+  char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
 @x [14] l.180
@@ -218,7 +273,17 @@ if (size.l<(tetra)s && !size.h) s=(int)size.l;
 
 @x [16] l.227
 octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fgetws(handle,buffer,size)
+  unsigned char handle;
+  octa buffer,size;
 @y
+octa mmix_fgetws(handle,buffer,size,mmputchars,stdin_chr)
+  unsigned char handle;
+  octa buffer,size;
+@t\qquad@>
+  void @,(*mmputchars) @,@,@[ARGS((unsigned char* buf,int size,octa addr))@];
+@+@t}\6{\qquad@>
+  char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
 @x [16] l.235
@@ -240,7 +305,15 @@ if (size.l<(tetra)s && !size.h) s=size.l;
 
 @x [18] l.275
 octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
+octa mmix_fwrite(handle,buffer,size)
+  unsigned char handle;
+  octa buffer,size;
 @y
+octa mmix_fwrite(handle,buffer,size,mmgetchars)
+  unsigned char handle;
+  octa buffer,size;
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
 @x [18] l.288
@@ -251,7 +324,15 @@ octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 
 @x [19] l.296
 octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
+octa mmix_fputs(handle,string)
+  unsigned char handle;
+  octa string;
 @y
+octa mmix_fputs(handle,string,mmgetchars)
+  unsigned char handle;
+  octa string;
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
 @x [19] l.304
@@ -269,7 +350,15 @@ octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 
 @x [20] l.320
 octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
+octa mmix_fputws(handle,string)
+  unsigned char handle;
+  octa string;
 @y
+octa mmix_fputws(handle,string,mmgetchars)
+  unsigned char handle;
+  octa string;
+@t\qquad@>
+  int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
 @x [20] l.327
