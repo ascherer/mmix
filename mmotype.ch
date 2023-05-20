@@ -4,20 +4,20 @@
 @y
 @z
 
-@x [1] l.20
+@x [1] l.20 Use standard C99 types.
 #include <string.h>
 @y
 #include <string.h>
 #include <stdint.h>
 @z
 
-@x [1] l.34
+@x [1] l.34 CWEB 3.0 does this.
   do @<List the next item@>@;@+while (!postamble);
 @y
   do @<List the next item@>@; while (!postamble);
 @z
 
-@x [7] l.94
+@x [7] l.94 Use standard C99 types.
 @<Type...@>=
 typedef unsigned char byte; /* a monobyte */
 typedef unsigned int tetra; /* a tetrabyte */
@@ -31,7 +31,7 @@ typedef uint32_t tetra; /* a tetrabyte */
 typedef struct {@+tetra h,l;@+} octa; /* an octabyte */
 @z
 
-@x [39] l.457
+@x [39] l.457 Change from MMIX home.
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
 @y
