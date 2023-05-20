@@ -5,7 +5,7 @@
 @s octa int
 @z
 
-@x [1] l.25
+@x [1] l.25 Improved module structure with interface.
 #include <stdio.h>
 #include "mmix-pipe.h" /* header file for all modules */
 @y
@@ -19,12 +19,12 @@
 @#
 @z
 
-@x [1] l.27
+@x [1] l.27 Stuff from MMMIX.
 extern octa read_hex(); /* found in the main program module */
 @y
 @z
 
-@x [1] l.30
+@x [1] l.30 Stuff from MMIX-ARITH.
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];
   /* $y\LL s$, $0\le s\le64$ */
 extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
@@ -37,7 +37,7 @@ octa spec_read @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [2] l.45
+@x [2] l.45 RAII. Don't ignore return code from fgets().
   octa val;
   size&=0x3, addr.l&=-(1<<size);
   if (verbose&interactive_read_bit) {
@@ -54,7 +54,7 @@ octa spec_read @,@,@[ARGS((octa,int))@];@+@t}\6{@>
   }
 @z
 
-@x [2] l.53
+@x [2] l.53 GCC warning.
 case 0: val.l&=0xff;
 case 1: val.l&=0xffff;
 case 2: val.h=0;
@@ -69,9 +69,7 @@ void spec_write @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @y
 @z
 
-Resolve cyclic dependency. Move function from mmmix.w here.
-
-@x [5/6] l.99
+@x [5/6] l.99 Stuff from MMMIX. Improved module structure.
 @* Index.
 @y
 @ Here's a simple program to read an octabyte in hexadecimal notation
