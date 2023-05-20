@@ -1,15 +1,15 @@
-@x [0] l.9
+@x [0] l.9 CWEB 3.5 learned this.
 @s bool int
 @y
 @z
 
-@x [2] l.29
+@x [2] l.29 Improved typography.
 the module called \.{mmix-config}. The program file is either
 @y
 the module called {\mc MMIX-CONFIG}. The program file is either
 @z
 
-@x [2] l.39
+@x [2] l.39 Improved module structure with intefaces.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,20 +27,20 @@ the module called {\mc MMIX-CONFIG}. The program file is either
 @#
 @z
 
-@x [2] l.44
+@x [2] l.44 Untangle private stuff.
 char *config_file_name, *prog_file_name;
 @y
 static char *config_file_name, *prog_file_name;
 @z
 
-@x [2] l.46
+@x [2] l.46 Prototypes.
 @<Subroutines@>@;
 @y
 @<Prototypes@>@;
 @<Subroutines@>@;
 @z
 
-@x [5] l.115
+@x [5] l.115 Untangle private stuff.
 octa cur_loc;
 octa cur_dat;
 bool new_chunk;
@@ -59,35 +59,33 @@ static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [12] l.284
+@x [12] l.284 Change from MMIX home.
 g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @y
 g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @:g}{\|g (global registers)@>
 @z
 
-@x [13] l.374
+@x [13] l.374 Don't ignore return code from fgets().
   fgets(buffer,BUF_SIZE,stdin);
 @y
   if (!fgets(buffer,BUF_SIZE,stdin)) break;
 @z
 
-@x [13} l.380
+@x [13} l.380 Improved typography.
   @<Cases for interaction@>@;
 @y
   @t\4@>@<Cases for interaction@>@;
 @z
 
-@x [15] l.424
+@x [15] l.424 Change from MMIX home.
     g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
 @y
     g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
 @:g}{\|g (global registers)@>
 @z
 
-Avoid cyclic dependeny. Move this part to mmix-mem.ch.
-
-@x [16,17] l.430
+@x [16,17] l.430 Avoid cyclic dependeny. Move this part to MMIX-MEM.
 int n,m; /* temporary integer */
 octa bp={-1,-1}; /* breakpoint */
 octa tmp; /* an octabyte of temporary interest */
@@ -133,14 +131,14 @@ static bool undump_octa @,@,@[ARGS((void))@];
 static octa sl3 @,@,@[ARGS((octa))@];
 @z
 
-@x [18] l.469
+@x [18] l.469 Change from MMIX home.
   printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @y
   printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @:l}{\|l (ring of local registers)@>
 @z
 
-@x [19] l.475
+@x [19] l.475 Change from MMIX home.
 examining the pipeline.
 @y
 examining the pipeline.
@@ -152,14 +150,14 @@ static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [21] l.505
+@x [21] l.505 Change from MMIX home.
 case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @y
 case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @:g}{\|g (global registers)@>
 @z
 
-@x [22] l.511
+@x [22] l.511 RAII.
    register fetch* new_tail;
    if (tail==fetch_bot) new_tail=fetch_top;
    else new_tail=tail-1;
@@ -167,14 +165,14 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
    register fetch* new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [23] l.537
+@x [23] l.537 Change from MMIX home.
    g[rK].o=neg_one;
 @y
    g[rK].o=neg_one;
 @:g}{\|g (global registers)@>
 @z
 
-@x [25] l.556
+@x [25] l.556 Untangle private stuff from MMIX-ARITH.
 bool silent=false;
 bool bad_address;
 extern bool page_bad;
