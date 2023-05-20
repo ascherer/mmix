@@ -1,21 +1,21 @@
-@x [0] l.10
+@x [0] l.10 Use standard C99 type.
 @s bool normal @q unreserve a C++ keyword @>
 @y
 @z
 
-@x [1] l.17
+@x [1] l.17 Improved typography.
 file called \.{mmix\_pipe.h}. The header file is used by the main routine and
 @y
 file called |@(mmix-pipe.h@>|. The header file is used by the main routine and
 @z
 
-@x [1] l.20
+@x [1] l.20 Fix typo.
 Readers of this program should be familiar with the explanation of \MMIX\
 @y
 Readers of this program should be familiar with the explanation of \MMIX's
 @z
 
-@x [3] l.128
+@x [3] l.128 Improved module structure with interfaces.
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -28,18 +28,18 @@ Readers of this program should be familiar with the explanation of \MMIX's
 @#
 @z
 
-@x [3] l.130
+@x [3] l.130 Improved module structure with interfaces.
 @<Header definitions@>@;
 @<Type definitions@>@;
 @y
 @z
 
-@x [3] l.335
+@x [3] l.335 Improved module structure with interfaces.
 @<External prototypes@>@;
 @y
 @z
 
-@x [5] l.152
+@x [5] l.152 Improved module structure with interfaces.
 @(mmix-pipe.h@>=
 @y
 @(mmix-pipe.h@>=
@@ -50,7 +50,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #include "mmix-arith.h" /* |@!tetra|, |@!octa|, etc. */
 @z
 
-@x [5] l.157
+@x [5] l.157 Improved module structure with interfaces.
 @<External prototypes@>@;
 @y
 @<External prototypes@>@;
@@ -58,7 +58,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #endif /* |MMIX_PIPE_H| */
 @z
 
-@x [6] l.161
+@x [6] l.161 Stuff from MMIX-ARITH.
 The following preprocessor commands make this work correctly with both
 new-style and old-style compilers.
 @^prototypes for functions@>
@@ -72,25 +72,25 @@ new-style and old-style compilers.
 @y
 @z
 
-@x [10] l.229
+@x [10] l.229 GCC warning.
   @<Local variables@>;
 @y
   @<Local variables@>;@+(void)breakpoint_hit;
 @z
 
-@x [10] l.256
+@x [10] l.256 Change from MMIX home.
  cease:;
 @y
 @z
 
-@x [11] l.259
+@x [11] l.259 Use standard C99 type. ('wow' was never used anywhere.)
 @ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
 @ (This section remains empty for historic reasons.)
 @z
 
-@x [17] l.326
+@x [17] l.326 Stuff from MMIX-ARITH.
 for the assembler and for the non-pipelined simulator. The
 definition of type \&{tetra} should be changed, if necessary, to conform with
 the definitions found there.
@@ -107,7 +107,7 @@ for the assembler and for the non-pipelined simulator.
 @s octa int
 @z
 
-@x [20] l.347
+@x [20] l.347 Stuff from MMIX-ARITH.
 @ @<Glob...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
@@ -119,7 +119,7 @@ extern int cur_round; /* the current rounding mode */
 @ (This section remains empty for historic reasons.)
 @z
 
-@x [21] l.361
+@x [21] l.361 Stuff from MMIX-ARITH.
 @<Sub...@>=
 extern octa oplus @,@,@[ARGS((octa y,octa z))@];
   /* unsigned $y+z$ */
@@ -178,7 +178,7 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
 @y
 @z
 
-@x [52] l.1129
+@x [52] l.1129 Change from MMIX home.
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
 followed by rG~(19) and rA~(21) packed into eight bytes.
 @y
@@ -186,19 +186,19 @@ followed by rG~(19) and rA~(21) packed into eight bytes.
 followed by~19 and~21.
 @z
 
-@x [75] l.1620
+@x [75] l.1620 Improved typography.
   if (head==fetch_bot) new_head=fetch_top;@+else new_head=head-1;
 @y
   new_head=head==fetch_bot?fetch_top:head-1;
 @z
 
-@x [75] l.1630
+@x [75] l.1630 Improved typography.
   if (cool==reorder_bot) new_cool=reorder_top;@+else new_cool=cool-1;
 @y
   new_cool=cool==reorder_bot?reorder_top:cool-1;
 @z
 
-@x [89] l.1865
+@x [89] l.1865 Different approach for ABSTIME.
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
 {\mc ABSTIME} is
@@ -209,32 +209,32 @@ a trivial program that computes the value of the standard library function
 \.{Makefile}. We assume that this number, which is the number of seconds in
 @z
 
-@x [89] l.1874
+@x [89] l.1874 Different approach for ABSTIME.
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
-@x [91] l.1876
+@x [91] l.1876 Change from MMIX home.
 @d SUBSUBVERSION 0 /* further qualification to version number */
 @y
 @d SUBSUBVERSION 2 /* further qualification to version number */
 @z
 
-@x [91] l.1902
+@x [91] l.1902 Change from MMIX home.
     if (a.l<32) printf(special_name[a.l]);
 @y
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
-@x [101] l.2009
+@x [101] l.2009 Improved typography.
 @<Special cases of instruction dispatch@>@;
 @y
 @t\4@>@<Special cases of instruction dispatch@>@;
 @z
 
-@x [111] l.2135
+@x [111] l.2135 Change from MMIX home.
 if (rename_regs<cool->ren_x+cool->ren_a) goto stall;
 if (cool->mem_x)
   if (mem_slots) mem_slots--;@+else goto stall;
@@ -246,25 +246,25 @@ if (cool->mem_x)
 rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @z
 
-@x [120] l.2306
+@x [120] l.2306 Change from MMIX home.
     new_O=incr(cool_O,-x-1);
 @y
     new_O=incr(cool_O,-(int)x-1);
 @z
 
-@x [120] l.2310
+@x [120] l.2310 Change from MMIX home.
     if (x<new_L)
 @y
     if (x<(unsigned int)new_L)
 @z
 
-@x [130] l.2473
+@x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
   @t\4@>@<Special cases for states in the first stage@>;
 @z
 
-@x [132] l.2517
+@x [132] l.2517 Improved typography.
   @<Cases to compute the results of register-to-register operation@>;
   @<Cases to compute the virtual address of a memory operation@>;
   @<Cases for stage 1 execution@>;
@@ -275,25 +275,25 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   default:@+;
 @z
 
-@x [135] l.2572
+@x [135] l.2572 Improved typography.
   @<Special cases for states in later stages@>;
 @y
   @t\4@>@<Special cases for states in later stages@>;
 @z
 
-@x [157] l.2968
+@x [157] l.2968 Change from MMIX home.
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
-@x [187] l.3418
+@x [187] l.3418 Change from MMIX home.
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
  default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @z
 
-@x [193] l.3496
+@x [193] l.3496 RAII.
   register cacheset s;
   register cacheblock* p;
   s=cache_addr(c,alf); /* the set corresponding to |alf| */
@@ -302,7 +302,7 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @z
 
-@x [208] l.3724
+@x [208] l.3724 Stuff from MMIX-MEM.
 @<Sub...@>=
 extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
  /* for memory mapped I/O */
@@ -311,7 +311,7 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
 @y
 @z
 
-@x [216] l.3838
+@x [216] l.3838 RAII.
   register int del=c->gg>>3; /* octabytes per granule */
   octa addr;
   addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
@@ -320,7 +320,7 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
-@x [232] l.4137
+@x [232] l.4137 Improved typography.
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
 @y
@@ -336,7 +336,7 @@ DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 page_bad=true; /* variable delared below */
 @z
 
-@x [238] l.4329
+@x [238] l.4329 Exported variables.
 convenience. Whenever rV changes, we recompute all these variables.
 
 @<Glob...@>=
@@ -360,39 +360,39 @@ Extern octa page_mask; /* the least significant |s| bits */
 Extern bool page_bad; /* does rV violate the rules? */
 @z
 
-@x [239] l.4341
+@x [239] l.4341 RAII.
 {@+octa rv;
   rv=data->z.o;
 @y
 {@+octa rv=data->z.o;
 @z
 
-@x [241] l.4370
+@x [241] l.4370 RAII.
 {@+octa t;
   t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
 @y
 {@+octa t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
 @z
 
-@x [257] l.4621
+@x [257] l.4621 Change from MMIX home.
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
-@x [269] l.4855
+@x [269] l.4855 Change from MMIX home.
 if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
 @y
 if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @z
 
-@x [271] l.4901
+@x [271] l.4901 Change from MMIX home.
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
 
-@x [272] l.4958
+@x [272] l.4958 Change from MMIX home.
  case DT_miss:@+if (DTcache->filler.next)
      if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one;
    if (no_hardware_PT || page_f)
@@ -404,25 +404,25 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
 @z
 
-@x [275] l.5030
+@x [275] l.5030 Change from MMIX home.
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=Dcache->bb)
 @y
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
 @z
 
-@x [279] l.5089
+@x [279] l.5089 Change from MMIX home.
       if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=page_n)
 @y
       if ((data->x.o.h&sign_bit)==0 || (data->x.o.l&0x1ff8)!=(tetra)page_n)
 @z
 
-@x [279] l.5093
+@x [279] l.5093 Change from MMIX home.
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=page_n) data->x.o=zero_octa;
 @y
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
 @z
 
-@x [280] l.5105
+@x [280] l.5105 GCC warning. Change from MMIX home.
    if (Dcache && Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
 @y
@@ -431,7 +431,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  default: goto do_syncid;
 @z
 
-@x [282] l.5141
+@x [282] l.5141 Change from MMIX home.
   if (!(data->op&2)) {@+octa before,after;
     before=data->b.o;@+after=shift_right(shift_left(data->b.o,i),i,0);
 @y
@@ -440,20 +440,20 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     octa after=shift_right(shift_left(data->b.o,i),i,0);
 @z
 
-@x [288] l.5238
+@x [288] l.5238 Improved typography.
   @<Other cases for the fetch coroutine@>@;
 @y
   @t\4@>@<Other cases for the fetch coroutine@>@;
 @z
 
-@x [297] l.5334
+@x [297] l.5334 RAII.
 {@+octa addr;
   addr=data->z.o;
 @y
 {@+octa addr=data->z.o;
 @z
 
-@x [298] l.5349
+@x [298] l.5349 Change from MMIX home.
  case IT_miss:@+if (ITcache->filler.next)
      if (data->i==prego) goto fin_ex;@+else wait(1);
 @y
@@ -461,7 +461,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
      if (data->i==prego) goto fin_ex;@+else wait(1); }
 @z
 
-@x [290] l.5354
+@x [290] l.5354 Change from MMIX home.
    if (!p) /* hey, it was present after all */
      if (data->i==prego) goto fin_ex;@+else goto new_fetch;
 @y
@@ -469,7 +469,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
 @z
 
-@x [301] l.5403
+@x [301] l.5403 RAII.
     register fetch *new_tail;
     if (tail==fetch_bot) new_tail=fetch_top;
     else new_tail=tail-1;
@@ -477,33 +477,31 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [348] l.6199
+@x [348] l.6199 Change from MMIX home.
  case FEQLE: goto cmp_fin;
- case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @y
  case FEQLE: default: goto cmp_fin;
- case FCMPE:@+ if (j) goto cmp_zero_or_invalid;
 @z
 
-@x [364] l.6458
+@x [364] l.6458 Change from MMIX home.
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
 @z
 
-@x [369] l.6519
+@x [369] l.6519 Change from MMIX home.
   data->y.o.l &= -data->b.o.l;
 @y
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
-@x [372] l.6566
+@x [372] l.6566 Change from MMIX home.
 case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma);@+break;
 @y
 case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma,mmgetchars);@+break;
 @z
 
-@x [372] l.6568
+@x [372] l.6568 Decouple 'mixins'.
 case Fread: g[rBB].o=mmix_fread(zz,mb,ma);@+break;
 case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma);@+break;
 case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
@@ -519,14 +517,14 @@ case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o,mmgetchars);@+break;
 case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
 @z
 
-@x [373] l.6583
+@x [373] l.6583 RAII.
   octa trap_loc;
   trap_loc=incr(g[rWW].o,-4);
 @y
   octa trap_loc=incr(g[rWW].o,-4);
 @z
 
-@x [376] l.6594
+@x [376] l.6594 Decouple 'mixins'.
 Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 
@@ -555,7 +553,7 @@ static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
 static char stdin_chr @,@,@[ARGS((void))@];
 @z
 
-@x [377] l.6611
+@x [377] l.6611 Decouple 'mixins' from other private stuff..
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
 void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
 char stdin_chr @,@,@[ARGS((void))@];
@@ -566,50 +564,50 @@ static octa magic_read @,@,@[ARGS((octa))@];
 static void magic_write @,@,@[ARGS((octa,octa))@];
 @z
 
-@x [378] l.6623
+@x [378] l.6623 Factor out private stuff.
 octa magic_read(addr)
 @y
 static octa magic_read(addr)
 @z
 
-@x [379] l.6656
+@x [379] l.6656 Factor out private stuff.
 void magic_write(addr,val)
 @y
 static void magic_write(addr,val)
 @z
 
-@x [380] l.6695
+@x [380] l.6695 RAII.
   octa arg_loc;
   arg_loc=g[rBB].o;
 @y
   octa arg_loc=g[rBB].o;
 @z
 
-@x [381] l.6714
+@x [381] l.6714 Factor out private stuff (mixins).
 int mmgetchars(buf,size,addr,stop)
 @y
 static int mmgetchars(buf,size,addr,stop)
 @z
 
-@x [384] l.6772
+@x [384] l.6772 Factor out private stuff (mixins).
 void mmputchars(buf,size,addr)
 @y
 static void mmputchars(buf,size,addr)
 @z
 
-@x [387] l.6821
+@x [387] l.6821 Factor out private stuff (mixins).
 char stdin_chr()
 @y
 static char stdin_chr()
 @z
 
-@x [387] l.6827
+@x [387] l.6827 Don't ignore return code from fgets().
     fgets(stdin_buf,256,stdin);
 @y
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin)) break;
 @z
 
-@x [387] l.6829
+@x [387] l.6829 Replace magic number.
     for (p=stdin_buf;p<stdin_buf+254;p++) if(*p=='\n') break;
 @y
     for (p=stdin_buf;p<stdin_buf+sizeof(stdin_buf)-2;p++) if(*p=='\n') break;
