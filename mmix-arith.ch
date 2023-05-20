@@ -1,11 +1,9 @@
-Use C99 standard types instead of homebrewn typedefs.
-
-@x [0] l.13
+@x [0] l.13 Use C99 standard types instead of homebrewn typedefs.
 @s bool normal @q unreserve a C++ keyword @>
 @y
 @z
 
-@x [1] l.34
+@x [1] l.34 Improved module structure with interfaces.
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -21,14 +19,14 @@ Use C99 standard types instead of homebrewn typedefs.
 @#
 @z
 
-@x [1] l.37
+@x [1] l.37 Move to interface.
 @<Stuff for \CEE/ preprocessor@>@;
 typedef enum{@+false,true@+} bool;
 @<Tetrabyte and octabyte type definitions@>@;
 @y
 @z
 
-@x [1] l.41
+@x [1] l.41 Factor out private stuff.
 @<Global variables@>@;
 @y
 @<Global variables@>@;
@@ -36,7 +34,7 @@ typedef enum{@+false,true@+} bool;
 @<Internal prototypes@>@;
 @z
 
-@x [3] l.51
+@x [3] l.51 Use standard C99 types.
 @<Tetra...@>=
 typedef unsigned int tetra;
  /* for systems conforming to the LP-64 data model */
@@ -46,7 +44,7 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
-@x [4] l.69
+@x [4] l.69 RAII.
 octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 @y
 octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
@@ -57,7 +55,7 @@ octa oplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [5] l.83
+@x [5] l.83 RAII.
 {@+ octa x;
   x.h=y.h+z.h;@+
   x.l=y.l+z.l;
@@ -70,7 +68,7 @@ octa ominus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [5] l.91
+@x [5] l.91 RAII.
 {@+ octa x;
   x.h=y.h-z.h;@+
   x.l=y.l-z.l;
@@ -83,14 +81,14 @@ octa incr @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [6] l.106
+@x [6] l.106 RAII.
 {@+ octa x;
   x.h=y.h;@+ x.l=y.l+delta;
 @y
 {@+ octa x={y.h, y.l+delta};
 @z
 
-@x [6] l.110
+@x [6] l.110 Format improvement. (if-block requires braces.)
   }@+else if (x.l>y.l) x.h--;
 @y
   }@+else {if (x.l>y.l) x.h--;}
@@ -116,7 +114,7 @@ octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [12] l.195
+@x [12] l.195 RAII.
   octa acc;
   acc=omult(y,z);
 @y
@@ -128,7 +126,7 @@ octa odiv @,@,@[ARGS((octa,octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [23] l.305
+@x [23] l.305 Change from MMIX home.
 if (u[j+n]!=k) {
 @y
 if (u[j+n]!=(tetra)k) {
@@ -139,7 +137,7 @@ octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [24] l.332
+@x [24] l.332 GCC warning. Change from MMIX home.
  case 0+0: return q;
 @y
   @=/* else fall through */@>@;
@@ -151,7 +149,7 @@ octa oand @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [25] l.349
+@x [25] l.349 RAII.
 {@+ octa x;
   x.h=y.h&z.h;@+ x.l=y.l&z.l;
 @y
@@ -163,7 +161,7 @@ octa oandn @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [25] l.357
+@x [25] l.357 RAII.
 {@+ octa x;
   x.h=y.h&~z.h;@+ x.l=y.l&~z.l;
 @y
@@ -175,7 +173,7 @@ octa oxor @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [25] l.365
+@x [25] l.365 RAII.
 {@+ octa x;
   x.h=y.h^z.h;@+ x.l=y.l^z.l;
 @y
@@ -202,14 +200,14 @@ octa bool_mult @,@,@[ARGS((octa,octa,bool))@];@+@t}\6{@>
 @y
 @z
 
-@x [31] l.505
+@x [31] l.505 Factor out private stuff.
 octa fpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 octa fpack(f,e,s,r)
 @y
 static octa fpack(f,e,s,r)
 @z
 
-@x [33] l.532
+@x [33] l.532 Change from MMIX home.
 @ Everything falls together so nicely here, it's almost too good to be true!
 @y
 @ Everything falls together so nicely here, it's almost too good to be true!
@@ -217,29 +215,27 @@ The conditional expression in the case for |ROUND_NEAR|
 rounds towards an even number in case of a tie.
 @z
 
-again the default case helps the compiler see that no cases are missing.
-
-@x [33] l.540
+@x [33] l.540 Change from MMIX home.
  case ROUND_NEAR: o=incr(o, o.l&4? 2: 1);@+break;
 @y
  case ROUND_NEAR: default: o=incr(o, o.l&4? 2: 1);@+break;
 @z
 
-@x [34] l.553
+@x [34] l.553 Factor out private stuff.
 tetra sfpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 tetra sfpack(f,e,s,r)
 @y
 static tetra sfpack(f,e,s,r)
 @z
 
-@x [37] l.610
+@x [37] l.610 Factor out private stuff.
 ftype funpack @,@,@[ARGS((octa,octa*,int*,char*))@];@+@t}\6{@>
 ftype funpack(x,f,e,s)
 @y
 static ftype funpack(x,f,e,s)
 @z
 
-@x [38] l.636
+@x [38] l.636 Factor out private stuff.
 ftype sfunpack @,@,@[ARGS((tetra,octa*,int*,char*))@];@+@t}\6{@>
 ftype sfunpack(x,f,e,s)
 @y
@@ -251,7 +247,7 @@ octa load_sf @,@,@[ARGS((tetra))@];@+@t}\6{@>
 @y
 @z
 
-@x [39] l.669
+@x [39] l.669 RAII.
   octa f,x;@+int e;@+char s;@+ftype t;
   t=sfunpack(z,&f,&e,&s);
 @y
@@ -263,14 +259,14 @@ tetra store_sf @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [40] l.686
+@x [40] l.686 RAII.
   octa f;@+tetra z;@+int e;@+char s;@+ftype t;
   t=funpack(x,&f,&e,&s);
 @y
   octa f;@+tetra z;@+int e;@+char s;@+ftype t=funpack(x,&f,&e,&s);
 @z
 
-@x [40] l.689
+@x [40] l.689 Change from MMIX home.
  case zro: z=0;@+break;
 @y
  default: case zro: z=0;@+break;
@@ -281,7 +277,7 @@ octa fmult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [41] l.711
+@x [41] l.711 RAII.
   ftype yt,zt;
   int ye,ze;
   char ys,zs;
@@ -300,13 +296,13 @@ octa fmult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register char xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @z
 
-@x [41] l.722
+@x [41] l.722 Change from MMIX home.
  case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
 @y
  default: case 4*zro+zro: case 4*zro+num: case 4*num+zro: x=zero_octa;@+break;
 @z
 
-@x [42] l.734
+@x [42] l.734 GCC warning.
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 @y
   @=/* else fall through */@>@;
@@ -318,7 +314,7 @@ octa fdivide @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [44] l.754
+@x [44] l.754 RAII.
   ftype yt,zt;
   int ye,ze;
   char ys,zs;
@@ -337,7 +333,7 @@ octa fdivide @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register char xs=ys+zs-'+'; /* will be |'-'| when the result is negative */
 @z
 
-@x [44] l.767
+@x [44] l.767 GCC warning. Change from MMIX home.
  case 4*inf+num: case 4*inf+zro: x=inf_octa;@+break;
  case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @y
@@ -351,7 +347,7 @@ octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [46] l.796
+@x [46] l.796 RAII.
   ftype yt,zt;
   int ye,ze;
   char ys,zs;
@@ -369,14 +365,14 @@ octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register char xs;
 @z
 
-@x [46] l.811
+@x [46] l.811 GCC warning.
  case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
 @y
   @=/* else fall through */@>@;
  case 4*num+inf: case 4*zro+inf: x=inf_octa;@+xs=zs;@+break;
 @z
 
-@x [46] l.815
+@x [46] l.815 GCC warning. Change from MMIX home.
  case 4*zro+zro: x=zero_octa;
 @y
   @=/* else fall through */@>@;
@@ -396,7 +392,7 @@ void print_float @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [67] l.1301
+@x [67] l.1301 Change from MMIX home.
 else if (strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
 @y
 else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
@@ -408,19 +404,19 @@ int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
 @y
 @z
 
-@x [68] l.1348
+@x [68] l.1348 RAII.
   val.h=val.l=0;
 @y
   val=zero_octa;
 @z
 
-@x [68] l.1357
+@x [68] l.1357 Change from MMIX home.
  no_const_found: next_char=s;@+return -1;
 @y
   next_char=s;@+return -1;
 @z
 
-@x [73] l.1402
+@x [73] l.1402 GCC warning.
     if (q>buf0 || *p!='0')
        if (q<buf_max) *q++=*p;
        else if (*(q-1)=='0') *(q-1)=*p;
@@ -430,7 +426,7 @@ int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
        else if (*(q-1)=='0') *(q-1)=*p; }
 @z
 
-@x [75] l.1431
+@x [75] l.1431 Factor out private stuff.
 @d buf_max (buf+777)
 
 @<Glob...@>=
@@ -440,13 +436,13 @@ int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
 @<Priv...@>=
 @z
 
-@x [76] l.1439
+@x [76] l.1439 GCC warning.
 register int zeros; /* leading zeros removed after decimal point */
 @y
 register int zeros=0; /* leading zeros removed after decimal point */
 @z
 
-@x [79] l.1483
+@x [79] l.1483 Change from MMIX home.
  make_it_zero: exp=-99999;@+ goto packit;
 @y
   exp=-99999;@+ goto packit;
@@ -457,7 +453,7 @@ int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [85] l.1583
+@x [85] l.1583 RAII.
   ftype yt,zt;
   int ye,ze;
   char ys,zs;
@@ -473,7 +469,7 @@ int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
   register int x=0;
 @z
 
-@x [85] l.1593
+@x [85] l.1593 Change from MMIX home.
  case 4*zro+zro: return 0;
 @y
  default: case 4*zro+zro: return 0;
@@ -484,7 +480,7 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [86] l.1617
+@x [86] l.1617 RAII.
   ftype zt;
   int ze;
   char zs;
@@ -497,7 +493,7 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
   ftype zt=funpack(z,&zf,&ze,&zs);
 @z
 
-@x [86] l.1625
+@x [86] l.1625 GCC warning. Change from MMIX home.
  case inf: case zro: return z;
 @y
   @=/* else fall through */@>@;
@@ -509,7 +505,7 @@ octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [88] l.1659
+@x [88] l.1659 RAII.
   ftype zt;
   int ze;
   char zs;
@@ -522,7 +518,7 @@ octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
   ftype zt=funpack(z,&zf,&ze,&zs);
 @z
 
-@x [88] l.1667
+@x [88] l.1667 Change from MMIX home.
  case zro: return zero_octa;
 @y
  case zro: default: return zero_octa;
@@ -538,7 +534,7 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [91] l.1727
+@x [91] l.1727 RAII.
   ftype zt;
   int ze;
   char zs;
@@ -555,7 +551,7 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
   if (!r) r=cur_round;
 @z
 
-@x [91] l.1738
+@x [91] l.1738 Change from MMIX home.
  case inf: case zro: x=z;@+break;
 @y
  default: case inf: case zro: x=z;@+break;
@@ -566,7 +562,7 @@ octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 @y
 @z
 
-@x [93] l.1789
+@x [93] l.1789 RAII.
   ftype yt,zt;
   int ye,ze;
   char xs,ys,zs;
@@ -582,13 +578,13 @@ octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
   register int xe,thresh,odd;
 @z
 
-@x [93] l.1797
+@x [93] l.1797 Change from MMIX home.
  zero_out: x=zero_octa;
 @y
  default: zero_out: x=zero_octa;
 @z
 
-@x [96] l.1845
+@x [96] l.1845 Improved module structure with interface.
 @* Index.  
 @y
 @* Public interface. This program module, {\mc MMIX-ARITH}, is central to the

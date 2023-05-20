@@ -6,7 +6,7 @@
 @s octa int
 @z
 
-@x [1] l.17
+@x [1] l.17 Improved module structure with interface.
 @<Preprocessor macros@>@;
 @<Type definitions@>@;
 @<External subroutines@>@;
@@ -20,7 +20,7 @@
 @<Type definitions@>@;
 @z
 
-@x [2] l.23
+@x [2] l.23 Stuff from MMIX-ARITH.
 @ Of course we include standard \CEE/ library routines, and we set things
 up to accommodate older versions of \CEE/.
 
@@ -56,7 +56,7 @@ up to accommodate older versions of \CEE/.
 #endif
 @z
 
-@x [3] l.48
+@x [3] l.48 Improved module structure with interface.
 @ The unsigned 32-bit type \&{tetra} must agree with its definition
 in the simulators.
 
@@ -114,7 +114,7 @@ extern void print_trip_warning @,@,@[ARGS((int,octa))@];
 #endif /* |MMIX_IO_H| */
 @z
 
-@x [4] l.51
+@x [4] l.51 Decouple 'mixins' from other functions and variables.
 @ Three basic subroutines are used to get strings from the simulated
 memory and to put strings into that memory. These subroutines are
 defined appropriately in each simulator. We also use a few subroutines
@@ -136,13 +136,13 @@ differently, as \&{static} functions in the simulators {\mc MMIX-PIPE} and
 call any of the extended functions from this module.
 @z
 
-@x [5] l.66
+@x [5] l.66 Improved typography.
 @ Each possible handle has a file pointer and a current mode.
 @y
 @* Implementation.  Each possible handle has a file pointer and a current mode.
 @z
 
-@x [6] l.75
+@x [6] l.75 Factor out private stuff.
 sim_file_info sfile[256];
 @y
 static sim_file_info sfile[256];
@@ -153,7 +153,7 @@ void mmix_io_init @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [8] l.93
+@x [8] l.93 Decouple 'mixins'.
 octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fopen(handle,name,mode)
   unsigned char handle;
@@ -166,7 +166,7 @@ octa mmix_fopen(handle,name,mode,mmgetchars)
   int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
-@x {8] l.99
+@x {8] l.99 Change from MMIX home.
   if (mode.h || mode.l>4) goto abort;
   if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto abort;
   if (sfile[handle].mode!=0 && handle>2) fclose(sfile[handle].fp);
@@ -176,19 +176,19 @@ octa mmix_fopen(handle,name,mode,mmgetchars)
   mmix_fclose(handle);
 @z
 
-@x [8] l.103
+@x [8] l.103 Change from MMIX home.
   if (!sfile[handle].fp) goto abort;
 @y
   if (!sfile[handle].fp) return neg_one;
 @z
 
-@x [8] l.106
+@x [8] l.106 Change from MMIX home.
  abort: sfile[handle].mode=0;
   return neg_one; /* failure */
 @y
 @z
 
-@x [9] l.111
+@x [9] l.111 Factor out private stuff.
 char *mode_string[]={"r","w","rb","wb","w+b"};
 int mode_code[]={0x1,0x2,0x5,0x6,0xf};
 @y
@@ -206,7 +206,7 @@ octa mmix_fclose @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
 @y
 @z
 
-@x [11] l.131
+@x [11] l.131 Change from MMIX home.
   if (handle>2 && fclose(sfile[handle].fp)!=0) return neg_one;
   sfile[handle].mode=0;
 @y
@@ -217,7 +217,7 @@ octa mmix_fclose @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
       handle>2) && fclose(sfile[handle].fp)!=0) return neg_one;
 @z
 
-@x [12] l.137
+@x [12] l.137 Decouple 'mixins'.
 octa mmix_fread @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fread(handle,buffer,size)
   unsigned char handle;
@@ -232,14 +232,14 @@ octa mmix_fread(handle,buffer,size,mmputchars,stdin_chr)
   char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
-@x [12] l.144
+@x [12] l.144 RAII.
   octa o;
   o=neg_one;
 @y
   octa o=neg_one;
 @z
 
-@x [14] l.172
+@x [14] l.172 Decouple 'mixins'.
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fgets(handle,buffer,size)
   unsigned char handle;
@@ -254,24 +254,24 @@ octa mmix_fgets(handle,buffer,size,mmputchars,stdin_chr)
   char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
-@x [14] l.180
+@x [14] l.180 RAII.
   octa o;
 @y
   octa o=zero_octa;
 @z
 
-@x [14] l.186
+@x [14] l.186 RAII.
   o=zero_octa;
 @y
 @z
 
-@x [15] l.199
+@x [15] l.199 Change from MMIX home.
 if (size.l<s && !size.h) s=size.l;
 @y
 if (size.l<(tetra)s && !size.h) s=(int)size.l;
 @z
 
-@x [16] l.227
+@x [16] l.227 Decouple 'mixins'.
 octa mmix_fgetws @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fgetws(handle,buffer,size)
   unsigned char handle;
@@ -286,24 +286,24 @@ octa mmix_fgetws(handle,buffer,size,mmputchars,stdin_chr)
   char @,(*stdin_chr) @,@,@[ARGS((void))@];
 @z
 
-@x [16] l.235
+@x [16] l.235 RAII.
   octa o;
 @y
   octa o=zero_octa;
 @z
 
-@x [16] l.242
+@x [16] l.242 RAII.
   o=zero_octa;
 @y
 @z
 
-@x [17] l.256
+@x [17] l.256 Change from MMIX home.
 if (size.l<s && !size.h) s=size.l;
 @y
 if (size.l<(tetra)s && !size.h) s=size.l;
 @z
 
-@x [18] l.275
+@x [18] l.275 Decouple 'mixins'.
 octa mmix_fwrite @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fwrite(handle,buffer,size)
   unsigned char handle;
@@ -316,13 +316,13 @@ octa mmix_fwrite(handle,buffer,size,mmgetchars)
   int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
-@x [18] l.288
+@x [18] l.288 Change from MMIX home.
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return ominus(zero_octa,size);
 @y
     if (fwrite(buf,1,n,sfile[handle].fp)!=(size_t)n) return ominus(zero_octa,size);
 @z
 
-@x [19] l.296
+@x [19] l.296 Decouple 'mixins'.
 octa mmix_fputs @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 octa mmix_fputs(handle,string)
   unsigned char handle;
@@ -335,20 +335,20 @@ octa mmix_fputs(handle,string,mmgetchars)
   int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
-@x [19] l.304
+@x [19] l.304 RAII.
   octa o;
   o=zero_octa;
 @y
   octa o=zero_octa;
 @z
 
-@x [19] l.309
+@x [19] l.309 Change from MMIX home.
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;
 @y
     if (fwrite(buf,1,n,sfile[handle].fp)!=(size_t)n) return neg_one;
 @z
 
-@x [20] l.320
+@x [20] l.320 Decouple 'mixins'.
 octa mmix_fputws @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 octa mmix_fputws(handle,string)
   unsigned char handle;
@@ -361,14 +361,14 @@ octa mmix_fputws(handle,string,mmgetchars)
   int @,(*mmgetchars) @,@,@[ARGS((char* buf,int size,octa addr,int stop))@];
 @z
 
-@x [20] l.327
+@x [20] l.327 RAII.
   octa o;
   o=zero_octa;
 @y
   octa o=zero_octa;
 @z
 
-@x [20] l.333
+@x [20] l.333 Change from MMIX home.
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;
 @y
     if (fwrite(buf,1,n,sfile[handle].fp)!=(size_t)n) return neg_one;
@@ -389,7 +389,7 @@ void print_trip_warning @,@,@[ARGS((int,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [24] l.392
+@x [24] l.392 Factor out private stuff.
 char *trip_warning[]={
 @y
 static char *trip_warning[]={

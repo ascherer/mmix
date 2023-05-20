@@ -1,9 +1,9 @@
-@x [0] l.12
+@x [0] l.12 Use standard C99 type.
 @s bool normal @q unreserve a C++ keyword @>
 @y
 @z
 
-@x [6] l.443
+@x [6] l.443 Change from MMIX home.
 pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1]$, and
 M$_8[\$0\ll3+\$1+8]$ is zero. (Register~\$1 will point to an octabyte in
 @y
@@ -11,7 +11,7 @@ pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1-8]$, and
 M$_8[\$0\ll3+\$1]$ is zero. (Register~\$1 will point to an octabyte in
 @z
 
-@x [9] l.546
+@x [9] l.546 Use standard C99 type.
 @* Basics. To get started, we define a type that provides semantic sugar.
 
 @<Type...@>=
@@ -21,7 +21,7 @@ typedef enum {@!false,@!true}@+@!bool;
 MMIX-ARITH} module.
 @z
 
-@x [10] l.555
+@x [10] l.555 Use standard C99 type.
 represents unsigned 32-bit integers. The definition of \&{tetra}
 given here should be changed, if necessary, to agree with the
 definition in that module.
@@ -33,7 +33,7 @@ represents unsigned 32-bit integers.
 @s octa int
 @z
 
-@x [10] l.561
+@x [10] l.561 Stuff from MMIX-ARITH.
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
@@ -42,7 +42,7 @@ typedef unsigned char byte; /* a monobyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
-@x [11] l.566
+@x [11] l.566 Improved module structure with interface.
 @ We declare subroutines twice, once with a prototype and once
 with the old-style~\CEE/ conventions. The following hack makes
 this work with new compilers as well as the old standbys.
@@ -89,7 +89,7 @@ void print_hex @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [13] l.592
+@x [13] l.592 Stuff from MMIX-ARITH.
 @<Sub...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
@@ -168,7 +168,7 @@ mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [17] l.746
+@x [17] l.746 RAII.
   register mem_node *p;
   p=(mem_node*)calloc(1,sizeof(mem_node));
 @y
@@ -180,7 +180,7 @@ mem_tetra* mem_find @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [20] l.778
+@x [20] l.778 RAII.
   octa key;
   register int offset;
   register mem_node *p=last_mem;
@@ -203,25 +203,25 @@ byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [32] l.961
+@x [32] l.961 RAII.
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=zero_octa;
 @z
 
-@x [32] l.965
+@x [32] l.965 CWEB 3.0 learned this.
 do @<Load the next item@>@;@+while (!postamble);
 @y
 do @<Load the next item@>@; while (!postamble);
 @z
 
-@x [34] l.999
+@x [34] l.999 Change from MMIX home.
 case lop_fixr: delta=yzbytes; goto fixr;
 @y
 case lop_fixr: mmo_load(incr(cur_loc,-yzbytes<<2),yzbytes); continue;
 @z
 
-@x [34] l.1001
+@x [34] l.1001 RAII.
  read_tet(); delta=tet;
  if (delta&0xfe000000) mmo_err;
 fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
@@ -232,7 +232,7 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  mmo_load(incr(cur_loc,-delta<<2),tet);
 @z
 
-@x [37] l.1054
+@x [37] l.1054 RAII.
 G=zbyte;@+ L=0;
 @y
 G=zbyte;@+ L=0;@+ O=0;
@@ -253,7 +253,7 @@ void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [47] l.1183
+@x [47] l.1183 Change from MMIX home.
     if (shown_line>0)
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
       else printf("     ...\n"); /* indicate the gap */
@@ -263,7 +263,7 @@ void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
       else printf("     ...\n"); /* indicate the gap */ }
 @z
 
-@x [49] l.1204
+@x [49] l.1204 Don't ignore return code from freopen().
   else freopen(file_info[cur_file].name,"r",src_file);
 @y
   else src_file=freopen(file_info[cur_file].name,"r",src_file);
@@ -274,24 +274,24 @@ void print_freqs @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 @y
 @z
 
-@x [50] l.1230
+@x [50] l.1230 Block-local variable.
   octa cur_loc;
 @y
 @z
 
-@x [51] l.1242
+@x [51] l.1242 RAII. Block-local variable.
   cur_loc=incr(p->loc,4*j);
 @y
   octa cur_loc=incr(p->loc,4*j);
 @z
 
-@x [62] l.1409
+@x [62] l.1409 RAII.
 register int i,j,k; /* miscellaneous indices */
 @y
 register int i,j=0,k; /* miscellaneous indices */
 @z
 
-@x [65] l.1461
+@x [65] l.1461 Improved typography.
 op_info info[256]={
 @<Info for arithmetic commands@>,
 @<Info for branch commands@>,
@@ -305,13 +305,13 @@ op_info info[256]={@t\1@>@/
 @<Info for logical and control commands@>@t\2@>@/};
 @z
 
-@x [75] l.1779
+@x [75] l.1779 RAII.
 register int G,L,O; /* accessible copies of key registers */
 @y
 register int G,L,O=0; /* accessible copies of key registers */
 @z
 
-@x [77] l.1792
+@x [77] l.1792 Different approach for ABSTIME.
 (The macro \.{ABSTIME} is defined externally in the file \.{abstime.h},
 which should have just been created by {\mc ABSTIME}\kern.05em;
 {\mc ABSTIME} is
@@ -322,26 +322,26 @@ a trivial program that computes the value of the standard library function
 \.{Makefile}. We assume that this number, which is the number of seconds in
 @z
 
-@x [77] l.1801
+@x [77] l.1801 Different approach for ABSTIME.
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
 @d ABSTIME /* number of seconds in “the epoch” */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
-@x [77] l.1803
+@x [77] l.1803 Change from MMIX home.
 @d SUBSUBVERSION 1 /* further qualification to version number */
 @y
 @d SUBSUBVERSION 3 /* further qualification to version number */
 @z
 
-@x [80] l.1842
+@x [80] l.1842 Change from MMIX home.
 if (xx>=G) {
 @y
 { if (xx>=G) {
 @z
 
-@x [80] l.1849
+@x [80] l.1849 Change from MMIX home.
 }
 @y
 } }
@@ -357,20 +357,20 @@ void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [89] l.2027
+@x [89] l.2027 Change from MMIX home.
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
  round_mode=(y.l? y.l: (tetra)cur_round);@+goto store_fx;
 @z
 
-@x [90] l.2043
+@x [90] l.2043 GCC warning.
 case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 @y
   @=/* else fall through */@>@;
 case CMPU: case CMPUI:@+if (y.h<z.h) goto cmp_neg;
 @z
 
-@x [90] l.2051
+@x [90] l.2051 GCC warning.
 case FCMP: k=fcomp(y,z);
 @y
   @=/* else fall through */@>@;
@@ -382,51 +382,51 @@ int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
 @y
 @z
 
-@x [91] l.2079
+@x [91] l.2079 RAII.
 {@+register int b;
 @y
 {@+register int b=0;
 @z
 
-@x [91] l.2075
+@x [91] l.2075 Change from MMIX home.
  case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @y
  default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @z
 
-@x [95] l.2159
+@x [95] l.2159 GCC warning.
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @y
   @=/* fall through */@>@;
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
-@x [98] l.2216
+@x [98] l.2216 Change from MMIX home.
   if (z.l>L || z.h) z.h=0, z.l=L;
 @y
   if (z.l>(tetra)L || z.h) z.h=0, z.l=L;
 @z
 
-@x [99] l.2222
+@x [99] l.2222 Change from MMIX home.
   if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
 @y
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
-@x [107] l.2366
+@x [107] l.2366 GCC warning.
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @y
   @=/* else fall through */@>@;
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
-@x [108] l.2395
+@x [108] l.2395 Decouple 'mixins'.
 case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
 @y
 case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
 @z
 
-@x [108] l.2397
+@x [108] l.2397 Decouple 'mixins'.
 case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
 case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
 case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
@@ -442,7 +442,7 @@ case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
 case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
 @z
 
-@x [112,113] l.2443
+@x [112,113] l.2443 Decouple 'mixins'.
 Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 
@@ -474,48 +474,48 @@ static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
 static char stdin_chr @,@,@[ARGS((void))@];
 @z
 
-@x [114] l.2468
+@x [114] l.2468 Decouple 'mixins'.
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];@+@t}\6{@>
 int mmgetchars(buf,size,addr,stop)
 @y
 static int mmgetchars(buf,size,addr,stop)
 @z
 
-@x [117] l.2516
+@x [117] l.2516 Decouple 'mixins'.
 void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
 void mmputchars(buf,size,addr)
 @y
 static void mmputchars(buf,size,addr)
 @z
 
-@x [120] l.2558
+@x [120] l.2558 Decouple 'mixins'.
 char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
 char stdin_chr()
 @y
 static char stdin_chr()
 @z
 
-@x [120] l.2567
+@x [120] l.2567 Replace magic number.
     if (!fgets(stdin_buf,256,stdin))
 @y
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
 @z
 
-@x [125] l.2630
+@x [125] l.2630 GCC warning.
  case RESUME_SET: k=(b.l>>16)&0xff;
 @y
   @=/* else fall through */@>@;
  case RESUME_SET: k=(b.l>>16)&0xff;
 @z
 
-@x [125] l.2632
+@x [125] l.2632 GCC warning.
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @y
   @=/* else fall through */@>@;
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
 @z
 
-@x [137] l.2820
+@x [137] l.2820 Untangle variables from functions.
 fmt_style style;
 char *stream_name[]={"StdIn","StdOut","StdErr"};
 @.StdIn@>
@@ -526,25 +526,25 @@ void trace_print @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [137] l.2835
+@x [137] l.2835 Change from MMIX home.
  case handle:@+if (o.h==0 && o.l<3) printf(stream_name[o.l]);
 @y
  case handle:@+if (o.h==0 && o.l<3) printf("%s",stream_name[o.l]);
 @z
 
-@x [138] l.2846
+@x [138] l.2846 Change from MMIX home.
 case 's': printf(special_name[zz]);@+break;
 @y
 case 's': printf("%s",special_name[zz]);@+break;
 @z
 
-@x [138] l.2848
+@x [138] l.2848 Change from MMIX home.
 case 'l': printf(lhs);@+break;
 @y
 case 'l': printf("%s",lhs);@+break;
 @z
 
-@x [139] l.2854
+@x [139] l.2854 Untangle variables from functions.
 char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
 @y
 fmt_style style;
@@ -560,7 +560,7 @@ void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
 @y
 @z
 
-@x [141] l.2887
+@x [141] l.2887 Improved module structure with interfaces.
 #include "abstime.h"
 @y
 @#
@@ -570,7 +570,7 @@ void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
 @h
 @z
 
-@x [141] l.2891
+@x [141] l.2891 Prototypes.
 @<Subroutines@>@;
 @y
 @<Prototypes@>@;
@@ -582,20 +582,20 @@ void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
 @y
 @z
 
-@x [143] l.2967
+@x [143] l.2967 GCC warning
  case 'P': profiling=true;@+return;
 @y
   @=/* else fall through */@>@;
  case 'P': profiling=true;@+return;
 @z
 
-@x [143] l.2987
+@x [143] l.2987 Change from MMIX home.
     for (k=0;usage_help[k][0];k++) fprintf(stderr,usage_help[k]);
 @y
     for (k=0;usage_help[k][0];k++) fprintf(stderr,"%s",usage_help[k]);
 @z
 
-@x [143] l.2989
+@x [143] l.2989 Change from MMIX home.
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf(usage_help[k]);
 @y
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
@@ -606,26 +606,26 @@ void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
 @y
 @z
 
-@x [148] l.3068
+@x [148] l.3068 Change from MMIX home.
   interrupt=true;
 @y
   if (n!=SIGINT) return;
   interrupt=true;
 @z
 
-@x [149] l.3093
+@x [149] l.3093 Change from MMIX home.
   case 'h':@+ for (k=0;interactive_help[k][0];k++) printf(interactive_help[k]);
 @y
   case 'h':@+ for (k=0;interactive_help[k][0];k++) printf("%s",interactive_help[k]);
 @z
 
-@x [149] l.3096
+@x [149] l.3096 Change from MMIX home.
  check_syntax:@+ if (*p!='\n') {
 @y
   if (*p!='\n') {
 @z
 
-@x [150] l.3114
+@x [150] l.3114 Change from MMIX home.
     }@+else if (command_buf[0]!='\n' && command_buf[0]!='i' &&
               command_buf[0]!='%')
       if (command_buf[0]==' ') printf("%s",command_buf);
@@ -642,7 +642,7 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [154] l.3199
+@x [154] l.3199 RAII.
   register char *p;
   octa o;
   o=zero_octa;
@@ -651,13 +651,13 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
   octa o=zero_octa;
 @z
 
-@x [158] l.3266
+@x [158] l.3266 Change from MMIX home.
     if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
 @y
     if (val.h!=0 || val.l>255 || val.l<(tetra)L || val.l<32) break;
 @z
 
-@x [158] l.3270
+@x [158] l.3270 Change from MMIX home.
     if (val.h==0 && val.l<L) L=val.l;
 @y
     if (val.h==0 && val.l<(tetra)L) L=val.l;
