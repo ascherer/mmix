@@ -1,15 +1,15 @@
-@x [0] l.7
+@x [0] l.7 CWEB 3.5 learned this in 1999.
 @s bool int
 @y
 @z
 
-@x [7] l.328
+@x [7] l.328 Improve typography.
 in the \.{mmix-pipe} module, which defines and discusses the data structures
 @y
 in the {\mc MMIX-PIPE} module, which defines and discusses the data structures
 @z
 
-@x [9] l.359
+@x [9] l.359 Factor out private stuff.
 FILE *config_file; /* input comes from here */
 char token[BUF_SIZE]; /* and tokens are copied to here */
 bool token_prescanned; /* does |token| contain the next token already? */
@@ -29,7 +29,7 @@ static int get_int @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [15] l.447
+@x [15] l.447 Factor out private stuff.
 int fetch_buf_size,write_buf_size,reorder_buf_size,mem_bus_bytes,hardware_PT;
 int max_cycs=60;
 pv_spec PV[]={@|
@@ -39,19 +39,19 @@ static int max_cycs=60;
 static pv_spec PV[]={@|
 @z
 
-@x [15] l.477
+@x [15] l.477 Factor out private stuff.
 cpv_spec CPV[]={@|
 @y
 static cpv_spec CPV[]={@|
 @z
 
-@x [15] l.490
+@x [15] l.490 Factor out private stuff.
 op_spec OP[]={@|
 @y
 static op_spec OP[]={@|
 @z
 
-@x [15] l.513
+@x [15] l.513 Factor out private stuff.
 int PV_size,CPV_size,OP_size; /* the number of entries in |PV|, |CPV|, |OP| */
 @y
 static int PV_size,CPV_size,OP_size; /* the number of entries in |PV|, |CPV|, |OP| */
@@ -72,27 +72,27 @@ static void pcs @,@,@[ARGS((cache*))@];@+@t}\6{@>
 @y
 @z
 
-@x [27] l.752
+@x [27] l.752 Change from MMIX home.
 for (j=div;j<=max_pipe_op;j++) int_stages[j]=strlen(pipe_seq[j]);
 @y
 for (j=div;j<=max_pipe_op;j++)
   int_stages[j]=(int)strlen((const char*)pipe_seq[j]);
 @z
 
-@x [27] l.755
+@x [27] l.755 Change from MMIX home.
   if (strlen(pipe_seq[j])>n) n=strlen(pipe_seq[j]);
 @y
   if (strlen((const char*)pipe_seq[j])>(size_t)n)
     n=(int)strlen((const char*)pipe_seq[j]);
 @z
 
-@x [28] l.765
+@x [28] l.765 Factor out private stuff.
 internal_opcode int_op[256]={@|
 @y
 static internal_opcode int_op[256]={@|
 @z
 
-@x [28] l.798
+@x [28] l.798 Factor out private stuff.
 int int_stages[max_real_command+1];
        /* stages as function of |internal_opcode| */
 int stages[256]; /* stages as function of |mmix_opcode| */
@@ -112,14 +112,14 @@ static void alloc_cache @,@,@[ARGS((cache*,char*))@];@+@t}\6{@>
 @y
 @z
 
-@x [37] l.1002
+@x [37] l.1002 Change from MMIX home.
 l=(specnode*)calloc(lring_size,sizeof(specnode));
 @y
 l=(specnode*)calloc(lring_size,sizeof(specnode));
 @:l}{\|l (ring of local registers)@>
 @z
 
-@x [38] l.1016
+@x [38] l.1016 Improved module structure with interfaces.
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
 #include <stdlib.h> /* |calloc|, |exit| */
 #include <ctype.h> /* |isspace| */
@@ -140,14 +140,14 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 @#
 @z
 
-@x [38] l.1024
+@x [38] l.1024 Factor out private stuff.
 @<Subroutines@>@;
 @y
 @<Private...@>@;
 @<Subroutines@>@;
 @z
 
-@x [39] l.1041
+@x [39] l.1041 Improved module structure with interface.
 @*Index.
 @y
 @ Here comes the exported interface of this {\mc MMIX-CONFIG} program module.

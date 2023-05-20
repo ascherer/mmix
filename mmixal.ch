@@ -1,4 +1,4 @@
-@x [26] l.950
+@x [26] l.950 Use C99 standard types. 'tetra' comes from MMIX-ARITH.
 for the simulators. The definition of type \&{tetra} should be changed, if
 necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
 @^system dependencies@>
@@ -15,7 +15,7 @@ for the simulators.
 @s octa int
 @z
 
-@x [27] l.960
+@x [27] l.960 Variables from MMIX-ARITH.
 @ @<Glob...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
@@ -25,7 +25,7 @@ extern bool overflow; /* set by certain subroutines for signed arithmetic */
 @ (This section remains empty for historic reasons.)
 @z
 
-@x [28] l.972
+@x [28] l.972 Functions from MMIX-ARITH.
 @<Sub...@>=
 extern octa oplus @,@,@[ARGS((octa y,octa z))@];
   /* unsigned $y+z$ */
@@ -47,7 +47,7 @@ extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
 @y
 @z
 
-@x [31] l.1013
+@x [31] l.1013 Stuff from MMIX-ARITH replaced with prototypes.
 @ While we're talking about classic systems versus future systems, we
 might as well define the |ARGS| macro, which makes function prototypes
 available on {\mc ANSI \CEE/} systems without making them
@@ -89,7 +89,7 @@ trie_node* prune @,@,@[ARGS((trie_node*))@];
 void out_stab @,@,@[ARGS((trie_node*))@];
 @z
 
-@x [39] l.1122
+@x [39] l.1122 We use '@h', so section is renamed.
 @<Preprocessor definitions@>=
 @y
 @<Preprocessor macros@>=
@@ -115,7 +115,7 @@ void report_error @,@,@[ARGS((char*))@];@+@t}\6{@>
 @y
 @z
 
-@x [46] l.1258
+@x [46] l.1258 Untangle functions and variables.
 int err_count; /* this many errors were found */
 @y
 int err_count; /* this many errors were found */
@@ -124,14 +124,14 @@ unsigned char mmo_buf[4];
 int mmo_ptr;
 @z
 
-@x [47] l.1272
+@x [47] l.1272 Untangle functions and variables.
 void mmo_clear @,@,@[ARGS((void))@];
 void mmo_out @,@,@[ARGS((void))@];
 unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
 @y
 @z
 
-@x [47] l.1286
+@x [47] l.1286 Untangle functions and variables.
 unsigned char mmo_buf[4];
 int mmo_ptr;
 @y
@@ -155,7 +155,7 @@ void mmo_sync @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [50] l.1360
+@x [50] l.1360 Change from MMIX home.
   register int j; register unsigned char *p;
 @y
   register int j; register Char *p;
@@ -166,7 +166,7 @@ void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
 @y
 @z
 
-@x [52] l.1416
+@x [52] l.1416 Change from MMIX home.
     listing_bits|=1<<jj;
   }
   listing_bits|=x_bits;
@@ -186,20 +186,20 @@ trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [56] l.1473
+@x [56] l.1473 Untangle functions and variables.
 trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
 @y
 trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
 Char *terminator; /* where the search ended */
 @z
 
-@x [57] l.1483
+@x [57] l.1483 Untangle functions and variables.
 trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
 Char *terminator; /* where the search ended */
 @y
 @z
 
-@x [58] l.1539
+@x [58] l.1539 CWEB knows this since version 3.5 (1999).
 @s bool int
 @y
 @z
@@ -209,307 +209,307 @@ sym_node* new_sym_node @,@,@[ARGS((bool))@];@+@t}\6{@>
 @y
 @z
 
-@x [63] l.1641
+@x [63] l.1641 Format improvement.
 op_spec op_init_table[]={@/
 @y
 op_spec op_init_table[]={@|
 @z
 
-@x [63] l.1648
+@x [63] l.1648 Format improvement.
 {"FEQL", 0x03, 0x240a8},@/
 @y
 {"FEQL", 0x03, 0x240a8},@|
 @z
 
-@x [63] l.1656
+@x [63] l.1656 Format improvement.
 {"FIXU", 0x07, 0x26288},@/
 @y
 {"FIXU", 0x07, 0x26288},@|
 @z
 
-@x [63] l.1664
+@x [63] l.1664 Format improvement.
 {"SFLOTU", 0x0e, 0x26282},@/
 @y
 {"SFLOTU", 0x0e, 0x26282},@|
 @z
 
-@x [63] l.1672
+@x [63] l.1672 Format improvement.
 {"FEQLE", 0x13, 0x240a8},@/
 @y
 {"FEQLE", 0x13, 0x240a8},@|
 @z
 
-@x [63] l.1680
+@x [63] l.1680 Format improvement.
 {"FINT", 0x17, 0x26288},@/
 @y
 {"FINT", 0x17, 0x26288},@|
 @z
 
-@x [63] l.1688
+@x [63] l.1688 Format improvement.
 {"DIVU", 0x1e, 0x240a2},@/
 @y
 {"DIVU", 0x1e, 0x240a2},@|
 @z
 
-@x [63] l.1696
+@x [63] l.1696 Format improvement.
 {"SUBU", 0x26, 0x240a2},@/
 @y
 {"SUBU", 0x26, 0x240a2},@|
 @z
 
-@x [63] l.1704
+@x [63] l.1704 Format improvement.
 {"16ADDU", 0x2e, 0x240a2},@/
 @y
 {"16ADDU", 0x2e, 0x240a2},@|
 @z
 
-@x [63] l.1712
+@x [63] l.1712 Format improvement.
 {"NEGU", 0x36, 0x26082},@/
 @y
 {"NEGU", 0x36, 0x26082},@|
 @z
 
-@x [63] l.1720
+@x [63] l.1720 Format improvement.
 {"SRU", 0x3e, 0x240a2},@/
 @y
 {"SRU", 0x3e, 0x240a2},@|
 @z
 
-@x [63] l.1728
+@x [63] l.1728 Format improvement.
 {"BOD", 0x46, 0x22081},@/
 @y
 {"BOD", 0x46, 0x22081},@|
 @z
 
-@x [63] l.1736
+@x [63] l.1736 Format improvement.
 {"BEV", 0x4e, 0x22081},@/
 @y
 {"BEV", 0x4e, 0x22081},@|
 @z
 
-@x [63] l.1744
+@x [63] l.1744 Format improvement.
 {"PBOD", 0x56, 0x22081},@/
 @y
 {"PBOD", 0x56, 0x22081},@|
 @z
 
-@x [63] l.1752
+@x [63] l.1752 Format improvement.
 {"PBEV", 0x5e, 0x22081},@/
 @y
 {"PBEV", 0x5e, 0x22081},@|
 @z
 
-@x [63] l.1760
+@x [63] l.1760 Format improvement.
 {"CSOD", 0x66, 0x240a2},@/
 @y
 {"CSOD", 0x66, 0x240a2},@|
 @z
 
-@x [63] l.1768
+@x [63] l.1768 Format improvement.
 {"CSEV", 0x6e, 0x240a2},@/
 @y
 {"CSEV", 0x6e, 0x240a2},@|
 @z
 
-@x [63] l.1776
+@x [63] l.1776 Format improvement.
 {"ZSOD", 0x76, 0x240a2},@/
 @y
 {"ZSOD", 0x76, 0x240a2},@|
 @z
 
-@x [63] l.1784
+@x [63] l.1784 Format improvement.
 {"ZSEV", 0x7e, 0x240a2},@/
 @y
 {"ZSEV", 0x7e, 0x240a2},@|
 @z
 
-@x [63] l.1792
+@x [63] l.1792 Format improvement.
 {"LDWU", 0x86, 0xa60a2},@/
 @y
 {"LDWU", 0x86, 0xa60a2},@|
 @z
 
-@x [63] l.1800
+@x [63] l.1800 Format improvement.
 {"LDOU", 0x8e, 0xa60a2},@/
 @y
 {"LDOU", 0x8e, 0xa60a2},@|
 @z
 
-@x [63] l.1808
+@x [63] l.1808 Format improvement.
 {"LDUNC", 0x96, 0xa60a2},@/
 @y
 {"LDUNC", 0x96, 0xa60a2},@|
 @z
 
-@x [63] l.1816
+@x [63] l.1816 Format improvement.
 {"GO", 0x9e, 0xa60a2},@/
 @y
 {"GO", 0x9e, 0xa60a2},@|
 @z
 
-@x [63] l.1824
+@x [63] l.1824 Format improvement.
 {"STWU", 0xa6, 0xa60a2},@/
 @y
 {"STWU", 0xa6, 0xa60a2},@|
 @z
 
-@x [63] l.1832
+@x [63] l.1832 Format improvement.
 {"STOU", 0xae, 0xa60a2},@/
 @y
 {"STOU", 0xae, 0xa60a2},@|
 @z
 
-@x [63] l.1840
+@x [63] l.1840 Format improvement.
 {"STUNC", 0xb6, 0xa60a2},@/
 @y
 {"STUNC", 0xb6, 0xa60a2},@|
 @z
 
-@x [63] l.1848
+@x [63] l.1848 Format improvement.
 {"PUSHGO", 0xbe, 0xa6062},@/
 @y
 {"PUSHGO", 0xbe, 0xa6062},@|
 @z
 
-@x [63] l.1856
+@x [63] l.1856 Format improvement.
 {"XOR", 0xc6, 0x240a2},@/
 @y
 {"XOR", 0xc6, 0x240a2},@|
 @z
 
-@x [63] l.1864
+@x [63] l.1864 Format improvement.
 {"NXOR", 0xce, 0x240a2},@/
 @y
 {"NXOR", 0xce, 0x240a2},@|
 @z
 
-@x [63] l.1872
+@x [63] l.1872 Format improvement.
 {"ODIF", 0xd6, 0x240a2},@/
 @y
 {"ODIF", 0xd6, 0x240a2},@|
 @z
 
-@x [63] l.1880
+@x [63] l.1880 Format improvement.
 {"MXOR", 0xde, 0x240a2},@/
 @y
 {"MXOR", 0xde, 0x240a2},@|
 @z
 
-@x [63] l.1888
+@x [63] l.1888 Format improvement.
 {"SETL", 0xe3, 0x22080},@/
 @y
 {"SETL", 0xe3, 0x22080},@|
 @z
 
-@x [63] l.1896
+@x [63] l.1896 Format improvement.
 {"INCL", 0xe7, 0x22080},@/
 @y
 {"INCL", 0xe7, 0x22080},@|
 @z
 
-@x [63] l.1904
+@x [63] l.1904 Format improvement.
 {"ORL", 0xeb, 0x22080},@/
 @y
 {"ORL", 0xeb, 0x22080},@|
 @z
 
-@x [63] l.1912
+@x [63] l.1912 Format improvement.
 {"ANDNL", 0xef, 0x22080},@/
 @y
 {"ANDNL", 0xef, 0x22080},@|
 @z
 
-@x [63] l.1920
+@x [63] l.1920 Format improvement.
 {"PUT", 0xf6, 0x22002},@/
 @y
 {"PUT", 0xf6, 0x22002},@|
 @z
 
-@x [63] l.1928
+@x [63] l.1928 Format improvement.
 {"UNSAVE", 0xfb, 0x23a00},@/
 @y
 {"UNSAVE", 0xfb, 0x23a00},@|
 @z
 
-@x [63] l.1936
+@x [63] l.1936 Format improvement.
 {"TRIP", 0xff, 0x27554},@/
 @y
 {"TRIP", 0xff, 0x27554},@|
 @z
 
-@x [63] l.1940
+@x [63] l.1940 Format improvement.
 {"LDA", 0x22, 0xa60a2},@/
 @y
 {"LDA", 0x22, 0xa60a2},@|
 @z
 
-@x [63] l.1946
+@x [63] l.1946 Format improvement.
 {"PREFIX", PREFIX, 0x141000},@/
 @y
 {"PREFIX", PREFIX, 0x141000},@|
 @z
 
-@x [63] l.1950
+@x [63] l.1950 Format improvement.
 {"WYDE", WYDE, 0x11f000},
 @y
 {"WYDE", WYDE, 0x11f000},@|
 @z
 
-@x [63] l.1954
+@x [63] l.1954 Format improvement.
 {"OCTA", OCTA, 0x13f000},@/
 @y
 {"OCTA", OCTA, 0x13f000},@|
 @z
 
-@x [63] l.1958
+@x [63] l.1958 Format improvement.
 {"ESPEC", ESPEC, 0x141000},@/
 @y
 {"ESPEC", ESPEC, 0x141000},@|
 @z
 
-@x [69] l.2009
+@x [69] l.2009 Format improvement.
 {"ROUND_NEAR",0,4},@/
 @y
 {"ROUND_NEAR",0,4},@|
 @z
 
-@x [69] l.2011
+@x [69] l.2011 Format improvement.
 {"Inf",0x7ff00000,0},@/
 @y
 {"Inf",0x7ff00000,0},@|
 @z
 
-@x [69] l.2015
+@x [69] l.2015 Format improvement.
 {"Pool_Segment",0x40000000,0},
 @y
 {"Pool_Segment",0x40000000,0},@|
 @z
 
-@x [69] l.2017
+@x [69] l.2017 Format improvement.
 {"Stack_Segment",0x60000000,0},@/
 @y
 {"Stack_Segment",0x60000000,0},@|
 @z
 
-@x [69] l.2033
+@x [69] l.2033 Format improvement.
 {"X_BIT",0,0x01},@/
 @y
 {"X_BIT",0,0x01},@|
 @z
 
-@x [69] l.2049
+@x [69] l.2049 Format improvement.
 {"X_Handler",0,0x80},@/
 @y
 {"X_Handler",0,0x80},@|
 @z
 
-@x [69] l.2055
+@x [69] l.2055 Format improvement.
 {"StdErr",0,2},@/
 @y
 {"StdErr",0,2},@|
 @z
 
-@x [69] l.2065
+@x [69] l.2065 Format improvement.
 {"BinaryReadWrite",0,4},@/
 @y
 {"BinaryReadWrite",0,4},@|
@@ -525,18 +525,18 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 @y
 @z
 
-@x [74] l.2181
+@x [74] l.2181 Block-local variable.
   register sym_node *pp;
 @y
 @z
 
-@x [76] l.2229
+@x [76] l.2229 Change from MMIX home.
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
-@x [78] l.2248
+@x [78] l.2248 Block-local variable.
   *sym_ptr='\0';
   fprintf(listing_file," %s = ",sym_buf+1);
   pp=t->sym;
@@ -546,52 +546,52 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
-@x [95] l.2446
+@x [95] l.2446 RAII.
 acc.h=acc.l=0;
 @y
 acc=zero_octa;
 @z
 
-@x [97] l.2471
+@x [97] l.2471 GCC warning.
  case '&': rt_op=and;@+break;
 @y
   @=/* fall through */@>@;
  case '&': rt_op=and;@+break;
 @z
 
-@x [98] l.2499
+@x [98] l.2499 Change from MMIX home.
  @t\4@>@<Cases for unary operators@>@;
 @y
  case outer_rp: case inner_rp:@+goto scan_close; /* should not happen */
  @t\4@>@<Cases for unary operators@>@;
 @z
 
-@x [109] l.2742
+@x [109] l.2742 CWEB behavior changed between versions 2.8 and 3.0.
     do @<Fix prior references to this label@>@;@+while (pp->link);
 @y
     do @<Fix prior references to this label@>@; while (pp->link);
 @z
 
-@x [114] l.279ß
+@x [114] l.279ß RAII.
   octa o;
   o=ominus(cur_loc,qq->equiv);
 @y
   octa o=ominus(cur_loc,qq->equiv);
 @z
 
-@x [115] l.2815
+@x [115] l.2815 GCC warning.
 if (new_link==DEFINED) {
 @y
 { if (new_link==DEFINED) {
 @z
 
-@x [115] l.2821
+@x [115] l.2821 GCC warning.
 }
 @y
 } }
 @z
 
-@x [116] l.2831
+@x [116] l.2831 GCC warning.
 case 2:@+if (!(op_bits&two_arg_bit))
     if (op_bits&one_arg_bit)
       derr("opcode `%s' must not have two operands",op_field)@;
@@ -603,14 +603,14 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else derr("opcode `%s' must have more than two operands",op_field); }
 @z
 
-@x [116] l.2840
+@x [116] l.2840 GCC warning.
 case 3:@+if (!(op_bits&three_arg_bit))
 @y
   @=/* fall through */@>@;
 case 3:@+if (!(op_bits&three_arg_bit))
 @z
 
-@x [116] l.2853
+@x [116] l.2853 GCC warning.
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
@@ -620,7 +620,7 @@ case 3:@+if (!(op_bits&three_arg_bit))
     else derr("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x [127] l.3004
+@x [127] l.3004 RAII.
   octa o;
   o=val_stack[1].equiv, k=0;
 @y
@@ -628,31 +628,31 @@ case 3:@+if (!(op_bits&three_arg_bit))
   k=0;
 @z
 
-@x [127] l.3109
+@x [127] l.3109 Change from MMIX home.
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
 @z
 
-@x [132] l.3121
+@x [132] l.3121 Change from MMIX home.
  case ESPEC: spec_mode=false;@+goto bypass;
 @y
  case ESPEC: spec_mode=false;@+if (held_bits) mmo_clear();@+goto bypass;
 @z
 
-@x [134] l.3128
+@x [134] l.3128 GCC warning.
 if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @y
 { if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @z
 
-@x [134] l.3136
+@x [134] l.3136 GCC warning.
 }
 @y
 } }
 @z
 
-@x [136] l.3166
+@x [136] l.3166 Improved module structure with interfaces.
 #include <time.h>
 @#
 @<Preprocessor definitions@>@;
@@ -665,7 +665,7 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @<Preprocessor macros@>@;
 @z
 
-@x [136] l.3171
+@x [136] l.3171 Prototypes.
 @<Subroutines@>@;
 @y
 @<Prototypes@>@;
