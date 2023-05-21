@@ -22,5 +22,4 @@
 @x [31] l.468
 @* Index.
 @y
-@q Bug on C/TIE !!! @>
 @z
