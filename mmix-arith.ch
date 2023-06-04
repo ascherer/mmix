@@ -46,8 +46,14 @@ typedef uint32_t tetra;
 
 @x [4] l.69 RAII.
 octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
+octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
+octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
-octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
+const octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
+const octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
+const octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
+const octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @z
 
 @x [5] l.78
@@ -605,10 +611,11 @@ following header file.
 #endif /* |MMIX_ARITH_H| */
 
 @ @<Exported...@>=
-extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
-extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
-extern octa inf_octa; /* floating point $+\infty$ */
-extern octa standard_NaN; /* floating point NaN(.5) */
+extern const octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+extern const octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+extern const octa inf_octa; /* floating point $+\infty$ */
+extern const octa standard_NaN; /* floating point NaN(.5) */
+@#
 extern octa aux; /* auxiliary output of a subroutine */
 extern bool overflow; /* set by certain subroutines for signed arithmetic */
 extern int cur_round; /* the current rounding mode */
