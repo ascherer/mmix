@@ -535,6 +535,15 @@ octa floatit @,@,@[ARGS((octa,int,int,int))@];@+@t}\6{@>
 @y
 @z
 
+@x [90] l.1712 RAII.
+  register int ex;@+register tetra t;
+  t=sfpack(z,e,s,r);
+  ex=exceptions;
+@y
+  register tetra t=sfpack(z,e,s,r);
+  register int ex=exceptions;
+@z
+
 @x [91] l.1722
 octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
