@@ -9,7 +9,7 @@ the module called \.{mmix-config}. The program file is either
 the module called {\mc MMIX-CONFIG}. The program file is either
 @z
 
-@x [2] l.39 Improved module structure with intefaces.
+@x [2] l.39 Improved module structure with interfaces.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
