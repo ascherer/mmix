@@ -239,6 +239,12 @@ octa mmix_fread(handle,buffer,size,mmputchars,stdin_chr)
   octa o=neg_one;
 @z
 
+@x [12] l.154
+  o.h=0, o.l=n;
+@y
+  o=(octa){0,n};
+@z
+
 @x [14] l.172 Decouple 'mixins'.
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fgets(handle,buffer,size)
@@ -382,6 +388,19 @@ octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 @x [22] l.364
 octa mmix_ftell @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
 @y
+@z
+
+@x [22] l.369
+  octa o;
+@y
+@z
+
+@x [22] l.372
+  if (x<0) return neg_one;
+  o.h=0, o.l=x;  
+  return o;
+@y
+  return x<0 ? neg_one : (octa){0,x};
 @z
 
 @x [23] l.381
