@@ -251,6 +251,12 @@ ftype sfunpack(x,f,e,s)
 static ftype sfunpack(x,f,e,s)
 @z
 
+@x [38] l.646
+  f->h=(x>>1)&0x3fffff, f->l=x<<31;
+@y
+  *f=(octa){(x>>1)&0x3fffff, x<<31};
+@z
+
 @x [39] l.665
 octa load_sf @,@,@[ARGS((tetra))@];@+@t}\6{@>
 @y
