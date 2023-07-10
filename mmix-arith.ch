@@ -158,8 +158,9 @@ octa oand @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @x [25] l.349 RAII.
 {@+ octa x;
   x.h=y.h&z.h;@+ x.l=y.l&z.l;
+  return x;
 @y
-{@+ octa x={y.h&z.h, y.l&z.l};
+{ return (octa){y.h&z.h, y.l&z.l};
 @z
 
 @x [25] l.354
@@ -170,8 +171,9 @@ octa oandn @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @x [25] l.357 RAII.
 {@+ octa x;
   x.h=y.h&~z.h;@+ x.l=y.l&~z.l;
+  return x;
 @y
-{@+ octa x={y.h&~z.h, y.l&~z.l};
+{ return (octa){y.h&~z.h, y.l&~z.l};
 @z
 
 @x [25] l.362
@@ -182,8 +184,9 @@ octa oxor @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @x [25] l.365 RAII.
 {@+ octa x;
   x.h=y.h^z.h;@+ x.l=y.l^z.l;
+  return x;
 @y
-{@+ octa x={y.h^z.h, y.l^z.l};
+{ return (octa){y.h^z.h, y.l^z.l};
 @z
 
 @x [26] l.387
