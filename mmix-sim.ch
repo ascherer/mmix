@@ -232,10 +232,22 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  mmo_load(incr(cur_loc,-delta<<2),tet);
 @z
 
+@x [37] l.1048
+aux.h=0x60000000;@+ aux.l=0x18;
+@y
+aux=(octa){0x60000000, 0x18};
+@z
+
 @x [37] l.1054 RAII.
 G=zbyte;@+ L=0;
 @y
 G=zbyte;@+ L=0;@+ O=0;
+@z
+
+@x [37] l.1056
+inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
+@y
+inst_ptr=(octa){(ll-2)->tet, (ll-1)->tet}; /* \.{Main} */
 @z
 
 @x [42] l.1102
@@ -394,6 +406,18 @@ int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
  default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @z
 
+@x [94] l.2141
+ x.h=ll->tet;@+ x.l=(ll+1)->tet;
+@y
+ x=(octa){ll->tet, (ll+1)->tet};
+@z
+
+@x [95] l.2166
+ a.h=ll->tet;@+ a.l=(ll+1)->tet; /* for trace output */
+@y
+ a=(octa){ll->tet, (ll+1)->tet}; /* for trace output */
+@z
+
 @x [95] l.2159 GCC warning.
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @y
@@ -401,10 +425,22 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
+@x [96] l.2185
+   x.h=0, x.l=1;
+@y
+   x=(octa){0, 1};
+@z
+
+@x [96] l.2190
+   b.h=ll->tet, b.l=(ll+1)->tet;
+@y
+   b=(octa){ll->tet, (ll+1)->tet};
+@z
+
 @x [98] l.2216 Change from MMIX home.
   if (z.l>L || z.h) z.h=0, z.l=L;
 @y
-  if (z.l>(tetra)L || z.h) z.h=0, z.l=L;
+  if (z.l>(tetra)L || z.h) z=(octa){0, L};
 @z
 
 @x [99] l.2222 Change from MMIX home.
@@ -413,11 +449,27 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
+@x [105] l.2335
+}@+else g[k].h=ll->tet, g[k].l=(ll+1)->tet;
+@y
+}@+else g[k]=(octa){ll->tet, (ll+1)->tet};
+@z
+
 @x [107] l.2366 GCC warning.
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @y
   @=/* else fall through */@>@;
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
+@z
+
+@x [108] l.2388
+ g[rXX].h=sign_bit, g[rXX].l=inst;
+ g[rYY]=y, g[rZZ]=z;
+ z.h=0, z.l=zz;
+@y
+ g[rXX]=(octa){sign_bit, inst};
+ g[rYY]=y, g[rZZ]=z;
+ z=(octa){0, zz};
 @z
 
 @x [108] l.2395 Decouple 'mixins'.
@@ -440,6 +492,16 @@ case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+
 case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
 case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
 case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
+@z
+
+@x ]111] l.2433
+  mb.h=ll->tet, mb.l=(ll+1)->tet;
+  ll=mem_find(a);@+test_load_bkpt(ll);@+test_load_bkpt(ll+1);
+  ma.h=ll->tet, ma.l=(ll+1)->tet;
+@y
+  mb=(octa){ll->tet, (ll+1)->tet};
+  ll=mem_find(a);@+test_load_bkpt(ll);@+test_load_bkpt(ll+1);
+  ma=(octa){ll->tet, (ll+1)->tet};
 @z
 
 @x [112,113] l.2443 Decouple 'mixins'.
@@ -499,6 +561,14 @@ static char stdin_chr()
     if (!fgets(stdin_buf,256,stdin))
 @y
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
+@z
+
+@x [123] l.2596
+  inst_ptr.h=0, inst_ptr.l=k<<4;
+  g[rX].h=sign_bit, g[rX].l=inst;
+@y
+  inst_ptr=(octa){0, k<<4};
+  g[rX]=(octa){sign_bit, inst};
 @z
 
 @x [125] l.2630 GCC warning.
@@ -663,6 +733,12 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
     if (val.h==0 && val.l<(tetra)L) L=val.l;
 @z
 
+@x [159] l.3289
+    aux.h=ll->tet;@+ aux.l=(ll+1)->tet;
+@y
+    aux=(octa){ll->tet, (ll+1)->tet};
+@z
+
 @x [160] l.3301
 void print_string @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
@@ -671,6 +747,18 @@ void print_string @,@,@[ARGS((octa))@];@+@t}\6{@>
 @x [162] l.3347
 void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 @y
+@z
+
+@x [163] l.3374
+x.h=0x40000000, x.l=0x8;
+@y
+x=(octa){0x40000000, 0x8};
+@z
+
+@x [164] l.3386
+x.h=0, x.l=0xf0;
+@y
+x=(octa){0, 0xf0};
 @z
 
 @x [165] l.3412
