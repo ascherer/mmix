@@ -66,13 +66,37 @@ g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @:g}{\|g (global registers)@>
 @z
 
+@x [12] l.290
+cur_dat.h=(RESUME<<24)+1, cur_dat.l=0, cur_loc.h=5, cur_loc.l=0;
+@y
+cur_dat=(octa){(RESUME<<24)+1, 0};@+ cur_loc=(octa){5, 0};
+@z
+
+@x [12] l.293
+cur_loc.h=6, cur_loc.l=8;
+@y
+cur_loc=(octa){6, 8};
+@z
+
+@x [12] l.295
+cur_dat.h=(GET<<24)+rQ, cur_dat.l=(PUTI<<24)+(rQ<<16), cur_loc.l=0;
+@y
+cur_dat=(octa){(GET<<24)+rQ, (PUTI<<24)+(rQ<<16)};@+ cur_loc.l=0;
+@z
+
+@x [12] l.297
+cur_dat.h=0, cur_dat.l=7; /* generate a PTE with \.{rwx} permission */
+@y
+cur_dat=(octa){0, 7}; /* generate a PTE with \.{rwx} permission */
+@z
+
 @x [13] l.374 Don't ignore return code from fgets().
   fgets(buffer,BUF_SIZE,stdin);
 @y
   if (!fgets(buffer,BUF_SIZE,stdin)) break;
 @z
 
-@x [13} l.380 Improved typography.
+@x [13] l.380 Improved typography.
   @<Cases for interaction@>@;
 @y
   @t\4@>@<Cases for interaction@>@;
@@ -148,6 +172,12 @@ examining the pipeline.
 @x [20] l.489
 static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [20] l.494
+    y.h=yhl+ylh;@+ y.l<<=3;
+@y
+    y=(octa){yhl+ylh, y.l<<=3};
 @z
 
 @x [21] l.505 Change from MMIX home.
