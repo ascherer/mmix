@@ -52,6 +52,28 @@ typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
+@x [8] l.111
+    if (o.l<=t) x.l=o.l+delta, x.h=o.h;
+    else x.l=o.l-t-1, x.h=o.h+1;
+@y
+    if (o.l<=t) x=(octa){o.h, o.l+delta};
+    else x=(octa){o.h+1, o.l-t-1};
+@z
+
+@x [8] l.115
+    if (o.l>=t) x.l=o.l-t, x.h=o.h;
+    else x.l=o.l+(0xffffffff+delta)+1, x.h=o.h-1;
+@y
+    if (o.l>=t) x=(octa){o.h, o.l-t};
+    else x=(octa){o.h-1, o.l+(0xffffffff+delta)+1};
+@z
+
+@x [17] l.217
+cur_loc.h=cur_loc.l=0;
+@y
+cur_loc=(octa){0,0};
+@z
+
 @x [39] l.457 Change from MMIX home.
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
