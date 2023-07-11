@@ -115,6 +115,14 @@ octa omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
 @z
 
+@x [11] l.182
+aux.h=(w[7]<<16)+w[6], aux.l=(w[5]<<16)+w[4];
+acc.h=(w[3]<<16)+w[2], acc.l=(w[1]<<16)+w[0];
+@y
+aux=(octa){(w[7]<<16)+w[6], (w[5]<<16)+w[4]};
+acc=(octa){(w[3]<<16)+w[2], (w[1]<<16)+w[0]};
+@z
+
 @x [12] l.191
 octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
@@ -130,6 +138,14 @@ octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @x [13] l.215
 octa odiv @,@,@[ARGS((octa,octa,octa))@];@+@t}\6{@>
 @y
+@z
+
+@x [19] l.272
+acc.h=(q[3]<<16)+q[2], acc.l=(q[1]<<16)+q[0];
+aux.h=(u[3]<<16)+u[2], aux.l=(u[1]<<16)+u[0];
+@y
+acc=(octa){(q[3]<<16)+q[2], (q[1]<<16)+q[0]};
+aux=(octa){(u[3]<<16)+u[2], (u[1]<<16)+u[0]};
 @z
 
 @x [23] l.305 Change from MMIX home.
@@ -515,6 +531,18 @@ octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
  case inf: case zro: default: return z;
 @z
 
+@x [87] l.1632
+if (ze<=1020) xf.h=0,xf.l=1;
+@y
+if (ze<=1020) xf=(octa){0,1};
+@z
+
+@x [87] l.1647
+if (xf.l) xf.h=0x3ff00000, xf.l=0;
+@y
+if (xf.l) xf=(octa){0x3ff00000, 0};
+@z
+
 @x [88] l.1654
 octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 @y
@@ -579,6 +607,18 @@ octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
  case inf: case zro: x=z;@+break;
 @y
  default: case inf: case zro: x=z;@+break;
+@z
+
+@x [92] l.1754
+xf.h=0, xf.l=2;
+@y
+xf=(octa){0, 2};
+@z
+
+@x [92] l.1757
+rf.h=0, rf.l=(zf.h>>22)-1;
+@y
+rf=(octa){0, (zf.h>>22)-1};
 @z
 
 @x [93] l.1778
