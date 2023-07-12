@@ -166,6 +166,31 @@ octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
  case 0+0: default: return q;
 @z
 
+@x [25] l.342
+implement directly, but three of them occur often enough to deserve
+packaging as subroutines.
+@y
+implement directly, and they occur often enough to deserve
+packaging as subroutines.
+@z
+
+@x [25] l.345
+@<Subr...@>=
+@y
+@<Subr...@>=
+octa oor(y,z) /* compute $y\lor z$ */
+  octa y,z;
+{ @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
+@#
+octa oorn(y,z) /* compute $y\lor\bar z$ */
+  octa y,z;
+{ @+ return (octa){y.h|~z.h, y.l|~z.l}; @+ }
+@#
+octa onor(y,z) /* compute $\overline{y\lor z}$ */
+  octa y,z;
+{ @+ return (octa){~(y.h|z.h), ~(y.l|z.l)}; @+ }
+@z
+
 @x [25] l.346
 octa oand @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 @y
@@ -175,8 +200,9 @@ octa oand @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 {@+ octa x;
   x.h=y.h&z.h;@+ x.l=y.l&z.l;
   return x;
+}
 @y
-{ return (octa){y.h&z.h, y.l&z.l};
+{ @+ return (octa){y.h&z.h, y.l&z.l}; @+ }
 @z
 
 @x [25] l.354
@@ -188,8 +214,13 @@ octa oandn @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 {@+ octa x;
   x.h=y.h&~z.h;@+ x.l=y.l&~z.l;
   return x;
+}
 @y
-{ return (octa){y.h&~z.h, y.l&~z.l};
+{ @+ return (octa){y.h&~z.h, y.l&~z.l}; @+ }
+@#
+octa onand(y,z) /* compute $\overline{y\land z}$ */
+  octa y,z;
+{ @+ return (octa){~(y.h&z.h), ~(y.l&z.l)}; @+ }
 @z
 
 @x [25] l.362
@@ -201,8 +232,13 @@ octa oxor @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 {@+ octa x;
   x.h=y.h^z.h;@+ x.l=y.l^z.l;
   return x;
+}
 @y
-{ return (octa){y.h^z.h, y.l^z.l};
+{ @+ return (octa){y.h^z.h, y.l^z.l}; @+ }
+@#
+octa onxor(y,z) /* compute $\overline{y\oplus z}$ */
+  octa y,z;
+{ @+ return (octa){~(y.h^z.h), ~(y.l^z.l)}; @+ }
 @z
 
 @x [26] l.387
@@ -700,12 +736,24 @@ extern octa odiv @,@,@[ARGS((octa,octa,octa))@];
   /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
 extern octa signed_odiv @,@,@[ARGS((octa,octa))@];
   /* signed $y/z$, when $z\ne0$; $|aux|=y\bmod z$ */
+@#
+extern octa oor @,@,@[ARGS((octa,octa))@];
+  /* $y\lor z$ */
+extern octa oorn @,@,@[ARGS((octa,octa))@];
+  /* $y\lor\bar z$ */
+extern octa onor @,@,@[ARGS((octa,octa))@];
+  /* $\overline{y\lor z}$ */
 extern octa oand @,@,@[ARGS((octa,octa))@];
   /* $y\land z$ */
 extern octa oandn @,@,@[ARGS((octa,octa))@];
   /* $y\land \bar z$ */
+extern octa onand @,@,@[ARGS((octa,octa))@];
+  /* $\overline{y\land z}$ */
 extern octa oxor @,@,@[ARGS((octa,octa))@];
   /* $y\oplus z$ */
+extern octa onxor @,@,@[ARGS((octa,octa))@];
+  /* $\overline{y\oplus z}$ */
+@#
 extern int count_bits @,@,@[ARGS((tetra))@];
   /* $x=\nu(z)$ */
 @#

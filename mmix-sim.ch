@@ -369,18 +369,40 @@ void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [86] l.1952
+@x [86] l.1945
+case OR: case ORI: case ORH: case ORMH: case ORML: case ORL:
+ x.h=y.h|z.h;@+ x.l=y.l|z.l;@+ goto store_x;
+case ORN: case ORNI:
+ x.h=y.h|~z.h;@+ x.l=y.l|~z.l;@+ goto store_x;
+case NOR: case NORI:
+ x.h=~(y.h|z.h);@+ x.l=~(y.l|z.l);@+ goto store_x;
+case XOR: case XORI:
  x.h=y.h^z.h;@+ x.l=y.l^z.l;@+ goto store_x;
 case AND: case ANDI:
  x.h=y.h&z.h;@+ x.l=y.l&z.l;@+ goto store_x;
 case ANDN: case ANDNI: case ANDNH: case ANDNMH: case ANDNML: case ANDNL:
  x.h=y.h&~z.h;@+ x.l=y.l&~z.l;@+ goto store_x;
+case NAND: case NANDI:
+ x.h=~(y.h&z.h);@+ x.l=~(y.l&z.l);@+ goto store_x;
+case NXOR: case NXORI:
+ x.h=~(y.h^z.h);@+ x.l=~(y.l^z.l);@+ goto store_x;
 @y
- x=oxor(y,z);@+ goto store_x;
+case OR: case ORI: case ORH: case ORMH: case ORML: case ORL:
+ x=oor(y,z);@+ goto store_x;
+case ORN: case ORNI:
+ x=oorn(y,z);@+ goto store_x;
+case NOR: case NORI:
+ x=onor(y,z);@+ goto store_x;
 case AND: case ANDI:
  x=oand(y,z);@+ goto store_x;
 case ANDN: case ANDNI: case ANDNH: case ANDNMH: case ANDNML: case ANDNL:
  x=oandn(y,z);@+ goto store_x;
+case NAND: case NANDI:
+ x=onand(y,z);@+ goto store_x;
+case XOR: case XORI:
+ x=oxor(y,z);@+ goto store_x;
+case NXOR: case NXORI:
+ x=onxor(y,z);@+ goto store_x;
 @z
 
 @x [89] l.2027 Change from MMIX home.
