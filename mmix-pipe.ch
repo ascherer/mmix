@@ -313,6 +313,23 @@ mem.addr=neg_one;
   @t\4@>@<Special cases for states in later stages@>;
 @z
 
+@x [25] l.2603
+case and: data->x.o.h=data->y.o.h & data->z.o.h;
+   data->x.o.l=data->y.o.l & data->z.o.l; break;
+case andn: data->x.o.h=data->y.o.h &~data->z.o.h;
+   data->x.o.l=data->y.o.l &~data->z.o.l; break;
+@y
+case and: data->x.o=oand(data->y.o, data->z.o); break;
+case andn: data->x.o=oandn(data->y.o, data->z.o); break;
+@z
+
+@x [25] l.2609
+case xor: data->x.o.h=data->y.o.h ^ data->z.o.h;
+   data->x.o.l=data->y.o.l ^ data->z.o.l; break;
+@y
+case xor: data->x.o=oxor(data->y.o, data->z.o); break;
+@z
+
 @x [142] l.2666
 case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
           data->x.o.l=(data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l);
