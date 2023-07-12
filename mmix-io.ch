@@ -239,7 +239,7 @@ octa mmix_fread(handle,buffer,size,mmputchars,stdin_chr)
   octa o=neg_one;
 @z
 
-@x [12] l.154
+@x [12] l.154 Compound literal.
   o.h=0, o.l=n;
 @y
   o=(octa){0,n};
@@ -395,7 +395,7 @@ octa mmix_ftell @,@,@[ARGS((unsigned char))@];@+@t}\6{@>
 @y
 @z
 
-@x [22] l.372
+@x [22] l.372 Compound literal.
   if (x<0) return neg_one;
   o.h=0, o.l=x;  
   return o;
