@@ -369,6 +369,20 @@ void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
+@x [86] l.1952
+ x.h=y.h^z.h;@+ x.l=y.l^z.l;@+ goto store_x;
+case AND: case ANDI:
+ x.h=y.h&z.h;@+ x.l=y.l&z.l;@+ goto store_x;
+case ANDN: case ANDNI: case ANDNH: case ANDNMH: case ANDNML: case ANDNL:
+ x.h=y.h&~z.h;@+ x.l=y.l&~z.l;@+ goto store_x;
+@y
+ x=oxor(y,z);@+ goto store_x;
+case AND: case ANDI:
+ x=oand(y,z);@+ goto store_x;
+case ANDN: case ANDNI: case ANDNH: case ANDNMH: case ANDNML: case ANDNL:
+ x=oandn(y,z);@+ goto store_x;
+@z
+
 @x [89] l.2027 Change from MMIX home.
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
