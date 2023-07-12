@@ -105,7 +105,7 @@ void update_listing_loc @,@,@[ARGS((int))@];@+@t}\6{@>
 @y
 @z
 
-@x l. [42] l.1169
+@x l. [42] l.1169 Compound literal.
   listing_loc.h=cur_loc.h;@+
   listing_loc.l=(cur_loc.l&-4)|k;
 @y
@@ -474,7 +474,7 @@ op_spec op_init_table[]={@|
 {"ESPEC", ESPEC, 0x141000},@|
 @z
 
-@x [64] l.1972
+@x [64] l.1972 Compound literal.
   pp->equiv.h=op_init_table[j].code, pp->equiv.l=op_init_table[j].bits;
 @y
   pp->equiv=(octa){op_init_table[j].code, op_init_table[j].bits};
@@ -528,7 +528,7 @@ op_spec op_init_table[]={@|
 {"BinaryReadWrite",0,4},@|
 @z
 
-@x [70] l.2098
+@x [70] l.2098 Compound literal.
   pp->equiv.h=predefs[j].h, pp->equiv.l=predefs[j].l;
 @y
   pp->equiv=(octa){predefs[j].h, predefs[j].l};
@@ -565,19 +565,19 @@ void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
-@x [92] l.2419
+@x [92] l.2419 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
 acc=(octa){0, (unsigned char)*p};
 @z
 
-@x [93] l.2424
+@x [93] l.2424 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
 acc=(octa){0, (unsigned char)*p};
 @z
 
-@x [94] l.2433
+@x [94] l.2433 Compound literal.
 acc.h=0, acc.l=*p-'0';
 @y
 acc=(octa){0, *p-'0'};
@@ -603,7 +603,7 @@ acc=zero_octa;
  @t\4@>@<Cases for unary operators@>@;
 @z
 
-@x [107] l.2688
+@x [107] l.2688 Compound literal.
   acc.h=-1, acc.l=-(1<<j);
 @y
   acc=(octa){-1, -(1<<j)};
