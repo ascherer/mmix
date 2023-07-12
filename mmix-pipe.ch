@@ -345,8 +345,8 @@ case nxor: data->x.o=onxor(data->y.o, data->z.o); break;
 case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
           data->x.o.l=(data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l);
 @y
-case mux: data->x.o=(octa){(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h),@|
-          (data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l)};
+case mux: data->x.o=oor(oand(data->y.o, data->b.o),
+                        oandn(data->z.o, data->b.o));
 @z
 
 @x [157] l.2968 Change from MMIX home.
