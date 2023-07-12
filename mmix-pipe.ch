@@ -222,13 +222,13 @@ a trivial program that computes the value of the standard library function
 @d SUBSUBVERSION 2 /* further qualification to version number */
 @z
 
-@x [89] l.1883
+@x [89] l.1883 Compound literal.
   g[j].addr.h=sign_bit, g[j].addr.l=j, g[j].known=true;
 @y
   g[j].addr=(octa){sign_bit, j}, g[j].known=true;
 @z
 
-@x [89] l.1887
+@x [89] l.1887 Compound literal.
 g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
 g[rN].o.l=ABSTIME; /* see comment and warning above */
 @y
@@ -236,7 +236,7 @@ g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   ABSTIME}; /* see comment and warning above */
 @z
 
-@x [89] l.1890
+@x [89] l.1890 Compound literal.
   l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
 @y
   l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
@@ -266,13 +266,13 @@ if (cool->mem_x)
 rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @z
 
-@x [116] l.2222
+@x [116] l.2222 Compound literal.
 mem.addr.h=mem.addr.l=-1;
 @y
 mem.addr=neg_one;
 @z
 
-@x [119] l.2278
+@x [119] l.2278 Compound literal.
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
   cool->x.known=true, cool->x.o=(octa){0, x};
@@ -313,7 +313,7 @@ mem.addr=neg_one;
   @t\4@>@<Special cases for states in later stages@>;
 @z
 
-@x [138] l.2597
+@x [138] l.2597 'oxor' was never used before.
 case or: data->x.o.h=data->y.o.h | data->z.o.h;
    data->x.o.l=data->y.o.l | data->z.o.l; break;
 case orn: data->x.o.h=data->y.o.h |~data->z.o.h;
@@ -341,7 +341,7 @@ case xor: data->x.o=oxor(data->y.o, data->z.o); break;
 case nxor: data->x.o=onxor(data->y.o, data->z.o); break;
 @z
 
-@x [142] l.2666
+@x [142] l.2666 Compound literal.
 case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
           data->x.o.l=(data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l);
 @y
@@ -355,7 +355,7 @@ case mux: data->x.o=(octa){(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h),
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
-@x [179] l.3325
+@x [179] l.3325 Compound literal.
   p->tag.h=sign_bit, p->tag.l=0;
 @y
   p->tag=(octa){sign_bit, 0};
@@ -394,13 +394,13 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
-@x [219] l.3921
+@x [219] l.3921 Compound literal.
   addr.h=c->outbuf.tag.h;@+ addr.l=c->outbuf.tag.l&-Scache->bb;
 @y
   addr=(octa){c->outbuf.tag.h, c->outbuf.tag.l&-Scache->bb};
 @z
 
-@x [221] l.3942
+@x [221] l.3942 Compound literal.
 Scache->outbuf.tag.h=c->outbuf.tag.h;
 Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 @y
@@ -415,19 +415,19 @@ Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
 @t\4@>@<Cases 5 through 9, for the S-cache@>;
 @z
 
-@x [233] l.4152
+@x [233] l.4152 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
 @z
 
-@x [235} l.4199
+@x [235} l.4199 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
 @z
 
-@x [236] l.4292
+@x [236] l.4292 Move variable here.
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @y
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
@@ -466,7 +466,7 @@ Extern bool page_bad; /* does rV violate the rules? */
 {@+octa rv=data->z.o;
 @z
 
-@x [239] l.4350
+@x [239] l.4350 Compound literals.
   else if (page_s<32) page_mask.h=0,page_mask.l=(1<<page_s)-1;
   else page_mask.h=(1<<(page_s-32))-1,page_mask.l=0xffffffff;
 @y
@@ -481,7 +481,7 @@ Extern bool page_bad; /* does rV violate the rules? */
 {@+octa t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
 @z
 
-@x [243] l.4395
+@x [243] l.4395 Compound literal.
   co[2*j].ctl->z.o.h=0, co[2*j].ctl->z.o.l=(aaaaa.l&0x3ff)<<3;
 @y
   co[2*j].ctl->z.o=(octa){0, (aaaaa.l&0x3ff)<<3};
@@ -493,7 +493,7 @@ Extern bool page_bad; /* does rV violate the rules? */
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
-@x [259] l.4649
+@x [259] l.4649 Compound literal.
 Dcache->outbuf.tag.h=write_head->addr.h;
 Dcache->outbuf.tag.l=write_head->addr.l&(-Dcache->bb);
 @y
@@ -598,20 +598,20 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [338] l.6029
+@x [338] l.6029 Compound literal.
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 @y
 cool->x.known=true, cool->x.o=(octa){0, cool_L};
 @z
 
-@x [342] l.6065
+@x [342] l.6065 Compound literal.
     data->x.o.h=g[rG].o.l<<24;
     data->x.o.l=g[rA].o.l;
 @y
     data->x.o=(octa){g[rG].o.l<<24, g[rA].o.l};
 @z
 
-@x [344] l.6106
+@x [344] l.6106 Compound literal.
 case bdif: data->x.o.h=byte_diff(data->y.o.h,data->z.o.h);
            data->x.o.l=byte_diff(data->y.o.l,data->z.o.l);@+ break;
 case wdif: data->x.o.h=wyde_diff(data->y.o.h,data->z.o.h);
@@ -629,7 +629,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
  case FEQLE: default: goto cmp_fin;
 @z
 
-@x [353] l.6209
+@x [353] l.6209 Compound literal.
   data->z.o.h=0, data->z.o.l=data->y.o.l&0x7;
 @y
   data->z.o=(octa){0, data->y.o.l&0x7};
@@ -747,7 +747,7 @@ void mmputchars(buf,size,addr)
 static void mmputchars(buf,size,addr)
 @z
 
-@x [386] l.6803
+@x [386] l.6803 Compound literal.
   x.h=(*p<<24)+(*(p+1)<<16)+(*(p+2)<<8)+*(p+3);
   x.l=(*(p+4)<<24)+(*(p+5)<<16)+(*(p+6)<<8)+*(p+7);
 @y
