@@ -54,9 +54,43 @@ static char buffer[BUF_SIZE];
 static FILE *prog_file;
 @z
 
-@x [10] l.221
+@x [10] l.220
+@<Sub...@>=
 static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
+@d oops { @+
+  fprintf(stderr,"Premature end of file on %s!\n",prog_file_name); @+
+@.Premature end of file...@>
+  return false; @+ }
+
+@<Sub...@>=
+@z
+
+@x [10] l.226
+  t1=fgetc(prog_file);@+ if (t1==EOF) goto oops;
+  t2=fgetc(prog_file);@+ if (t2==EOF) goto oops;
+  t3=fgetc(prog_file);@+ if (t3==EOF) goto oops;
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  t0=fgetc(prog_file);@+ if (t0==EOF) goto oops;
+  t1=fgetc(prog_file);@+ if (t1==EOF) goto oops;
+  t2=fgetc(prog_file);@+ if (t2==EOF) goto oops;
+  t3=fgetc(prog_file);@+ if (t3==EOF) goto oops;
+  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  return true;
+oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
+@.Premature end of file...@>
+  return false;
+@y
+  t1=fgetc(prog_file);@+ if (t1==EOF) oops;
+  t2=fgetc(prog_file);@+ if (t2==EOF) oops;
+  t3=fgetc(prog_file);@+ if (t3==EOF) oops;
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  t0=fgetc(prog_file);@+ if (t0==EOF) oops;
+  t1=fgetc(prog_file);@+ if (t1==EOF) oops;
+  t2=fgetc(prog_file);@+ if (t2==EOF) oops;
+  t3=fgetc(prog_file);@+ if (t3==EOF) oops;
+  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  return true;
 @z
 
 @x [12] l.284 Change from MMIX home.
