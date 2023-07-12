@@ -53,7 +53,7 @@ typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
-@x [8] l.111
+@x [8] l.111 Compound literal.
     if (o.l<=t) x.l=o.l+delta, x.h=o.h;
     else x.l=o.l-t-1, x.h=o.h+1;
 @y
@@ -61,7 +61,7 @@ typedef uint8_t byte; /* a monobyte */
     else x=(octa){o.h+1, o.l-t-1};
 @z
 
-@x [8] l.115
+@x [8] l.115 Compound literal.
     if (o.l>=t) x.l=o.l-t, x.h=o.h;
     else x.l=o.l+(0xffffffff+delta)+1, x.h=o.h-1;
 @y
@@ -69,7 +69,7 @@ typedef uint8_t byte; /* a monobyte */
     else x=(octa){o.h-1, o.l+(0xffffffff+delta)+1};
 @z
 
-@x [17] l.217
+@x [17] l.217 Compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=(octa){0,0};
