@@ -347,6 +347,14 @@ a trivial program that computes the value of the standard library function
 @d SUBSUBVERSION 3 /* further qualification to version number */
 @z
 
+@x [77] l.1808 Compound literal.
+g[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+g[rN].l=ABSTIME; /* see comment and warning above */
+@y
+g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+  ABSTIME}; /* see comment and warning above */
+@z
+
 @x [80] l.1842 Change from MMIX home.
 if (xx>=G) {
 @y
