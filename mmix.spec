@@ -90,6 +90,9 @@ printf "10000\nq" | ./mmmix plain.mmconfig hello.mmb
 ./mmix -Dsilly.mmb silly.mmo
 printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
 
+grep "Warning" silly.out > silly.err
+sed -i -e "/Warning/d" silly.out
+
 echo "i silly.run" | ./mmix -i silly > silly.out.new 2>silly.err.new
 diff -u silly.out silly.out.new ||:
 diff -u silly.err silly.err.new ||:
