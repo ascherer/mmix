@@ -405,6 +405,12 @@ case NXOR: case NXORI:
  x=onxor(y,z);@+ goto store_x;
 @z
 
+@x [87] l.1978 Use bit-fiddling functions from MMIX-ARITH.
+ x.h=(y.h&b.h)|(z.h&~b.h);@+ x.l=(y.l&b.l)|(z.l&~b.l);
+@y
+ x=oor(oand(y,b), oandn(z,b)); @+
+@z
+
 @x [89] l.2027 Change from MMIX home.
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
