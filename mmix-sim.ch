@@ -232,7 +232,7 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  mmo_load(incr(cur_loc,-delta<<2),tet);
 @z
 
-@x [37] l.1048
+@x [37] l.1048 Compound literal.
 aux.h=0x60000000;@+ aux.l=0x18;
 @y
 aux=(octa){0x60000000, 0x18};
@@ -244,7 +244,7 @@ G=zbyte;@+ L=0;
 G=zbyte;@+ L=0;@+ O=0;
 @z
 
-@x [37] l.1056
+@x [37] l.1056 Compound literal.
 inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 @y
 inst_ptr=(octa){(ll-2)->tet, (ll-1)->tet}; /* \.{Main} */
@@ -369,7 +369,7 @@ void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
 @z
 
-@x [86] l.1945
+@x [86] l.1945 Add missing bit-fiddling functions to MMIX-ARITH.
 case OR: case ORI: case ORH: case ORMH: case ORML: case ORL:
  x.h=y.h|z.h;@+ x.l=y.l|z.l;@+ goto store_x;
 case ORN: case ORNI:
@@ -442,13 +442,13 @@ int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
  default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @z
 
-@x [94] l.2141
+@x [94] l.2141 Compound literal.
  x.h=ll->tet;@+ x.l=(ll+1)->tet;
 @y
  x=(octa){ll->tet, (ll+1)->tet};
 @z
 
-@x [95] l.2166
+@x [95] l.2166 Compound literal.
  a.h=ll->tet;@+ a.l=(ll+1)->tet; /* for trace output */
 @y
  a=(octa){ll->tet, (ll+1)->tet}; /* for trace output */
@@ -461,19 +461,19 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
-@x [96] l.2185
+@x [96] l.2185 Compound literal.
    x.h=0, x.l=1;
 @y
    x=(octa){0, 1};
 @z
 
-@x [96] l.2190
+@x [96] l.2190 Compound literal.
    b.h=ll->tet, b.l=(ll+1)->tet;
 @y
    b=(octa){ll->tet, (ll+1)->tet};
 @z
 
-@x [98] l.2216 Change from MMIX home.
+@x [98] l.2216 Change from MMIX home. Compound literal.
   if (z.l>L || z.h) z.h=0, z.l=L;
 @y
   if (z.l>(tetra)L || z.h) z=(octa){0, L};
@@ -485,7 +485,7 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
-@x [105] l.2335
+@x [105] l.2335 Compound literal.
 }@+else g[k].h=ll->tet, g[k].l=(ll+1)->tet;
 @y
 }@+else g[k]=(octa){ll->tet, (ll+1)->tet};
@@ -498,7 +498,7 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
-@x [108] l.2388
+@x [108] l.2388 Compound literal.
  g[rXX].h=sign_bit, g[rXX].l=inst;
  g[rYY]=y, g[rZZ]=z;
  z.h=0, z.l=zz;
@@ -530,7 +530,7 @@ case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
 case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
 @z
 
-@x ]111] l.2433
+@x ]111] l.2433 Compound literal.
   mb.h=ll->tet, mb.l=(ll+1)->tet;
   ll=mem_find(a);@+test_load_bkpt(ll);@+test_load_bkpt(ll+1);
   ma.h=ll->tet, ma.l=(ll+1)->tet;
@@ -599,7 +599,7 @@ static char stdin_chr()
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
 @z
 
-@x [123] l.2596
+@x [123] l.2596 Compound literal.
   inst_ptr.h=0, inst_ptr.l=k<<4;
   g[rX].h=sign_bit, g[rX].l=inst;
 @y
@@ -769,7 +769,7 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
     if (val.h==0 && val.l<(tetra)L) L=val.l;
 @z
 
-@x [159] l.3289
+@x [159] l.3289 Compound literal.
     aux.h=ll->tet;@+ aux.l=(ll+1)->tet;
 @y
     aux=(octa){ll->tet, (ll+1)->tet};
@@ -785,13 +785,13 @@ void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 @y
 @z
 
-@x [163] l.3374
+@x [163] l.3374 Compound literal.
 x.h=0x40000000, x.l=0x8;
 @y
 x=(octa){0x40000000, 0x8};
 @z
 
-@x [164] l.3386
+@x [164] l.3386 Compound literal.
 x.h=0, x.l=0xf0;
 @y
 x=(octa){0, 0xf0};
