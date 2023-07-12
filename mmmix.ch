@@ -54,7 +54,7 @@ static char buffer[BUF_SIZE];
 static FILE *prog_file;
 @z
 
-@x [10] l.220
+@x [10] l.220 Purge a few 'goto's.
 @<Sub...@>=
 static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
 @y
@@ -66,7 +66,7 @@ static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
 @<Sub...@>=
 @z
 
-@x [10] l.226
+@x [10] l.226 Purge a few 'goto's.
   t1=fgetc(prog_file);@+ if (t1==EOF) goto oops;
   t2=fgetc(prog_file);@+ if (t2==EOF) goto oops;
   t3=fgetc(prog_file);@+ if (t3==EOF) goto oops;
@@ -100,25 +100,25 @@ g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @:g}{\|g (global registers)@>
 @z
 
-@x [12] l.290
+@x [12] l.290 Compound literal.
 cur_dat.h=(RESUME<<24)+1, cur_dat.l=0, cur_loc.h=5, cur_loc.l=0;
 @y
 cur_dat=(octa){(RESUME<<24)+1, 0};@+ cur_loc=(octa){5, 0};
 @z
 
-@x [12] l.293
+@x [12] l.293 Compound literal.
 cur_loc.h=6, cur_loc.l=8;
 @y
 cur_loc=(octa){6, 8};
 @z
 
-@x [12] l.295
+@x [12] l.295 Compound literal.
 cur_dat.h=(GET<<24)+rQ, cur_dat.l=(PUTI<<24)+(rQ<<16), cur_loc.l=0;
 @y
 cur_dat=(octa){(GET<<24)+rQ, (PUTI<<24)+(rQ<<16)};@+ cur_loc.l=0;
 @z
 
-@x [12] l.297
+@x [12] l.297 Compound literal.
 cur_dat.h=0, cur_dat.l=7; /* generate a PTE with \.{rwx} permission */
 @y
 cur_dat=(octa){0, 7}; /* generate a PTE with \.{rwx} permission */
@@ -208,7 +208,7 @@ static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
 @y
 @z
 
-@x [20] l.494
+@x [20] l.494 Compound literal.
     y.h=yhl+ylh;@+ y.l<<=3;
 @y
     y=(octa){yhl+ylh, y.l<<=3};
