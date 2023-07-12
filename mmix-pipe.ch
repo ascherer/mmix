@@ -216,10 +216,30 @@ a trivial program that computes the value of the standard library function
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
-@x [91] l.1876 Change from MMIX home.
+@x [89] l.1876 Change from MMIX home.
 @d SUBSUBVERSION 0 /* further qualification to version number */
 @y
 @d SUBSUBVERSION 2 /* further qualification to version number */
+@z
+
+@x [89] l.1883
+  g[j].addr.h=sign_bit, g[j].addr.l=j, g[j].known=true;
+@y
+  g[j].addr=(octa){sign_bit, j}, g[j].known=true;
+@z
+
+@x [89] l.1887
+g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+g[rN].o.l=ABSTIME; /* see comment and warning above */
+@y
+g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+  ABSTIME}; /* see comment and warning above */
+@z
+
+@x [89] l.1890
+  l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
+@y
+  l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
 @z
 
 @x [91] l.1902 Change from MMIX home.
@@ -244,6 +264,18 @@ if (rename_regs<(cool->ren_x?1:0)+(cool->ren_a?1:0)) goto stall;
 if (cool->mem_x)
   { if (mem_slots) mem_slots--;@+else goto stall; }
 rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
+@z
+
+@x [116] l.2222
+mem.addr.h=mem.addr.l=-1;
+@y
+mem.addr=neg_one;
+@z
+
+@x [119] l.2278
+  cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
+@y
+  cool->x.known=true, cool->x.o=(octa){0, x};
 @z
 
 @x [120] l.2306 Change from MMIX home.
@@ -281,10 +313,24 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
   @t\4@>@<Special cases for states in later stages@>;
 @z
 
+@x [142] l.2666
+case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
+          data->x.o.l=(data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l);
+@y
+case mux: data->x.o=(octa){(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h),@|
+          (data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l)};
+@z
+
 @x [157] l.2968 Change from MMIX home.
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
+@z
+
+@x [179] l.3325
+  p->tag.h=sign_bit, p->tag.l=0;
+@y
+  p->tag=(octa){sign_bit, 0};
 @z
 
 @x [187] l.3418 Change from MMIX home.
@@ -320,12 +366,37 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
+@x [219] l.3921
+  addr.h=c->outbuf.tag.h;@+ addr.l=c->outbuf.tag.l&-Scache->bb;
+@y
+  addr=(octa){c->outbuf.tag.h, c->outbuf.tag.l&-Scache->bb};
+@z
+
+@x [221] l.3942
+Scache->outbuf.tag.h=c->outbuf.tag.h;
+Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
+@y
+Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
+@z
+
 @x [232] l.4137 Improved typography.
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
 @y
 @t\4@>@<Cases 0 through 4, for the D-cache@>;
 @t\4@>@<Cases 5 through 9, for the S-cache@>;
+@z
+
+@x [233] l.4152
+  data->y.o.h=i, data->y.o.l=j;
+@y
+  data->y.o=(octa){i, j};
+@z
+
+@x [235} l.4199
+  data->y.o.h=i, data->y.o.l=j;
+@y
+  data->y.o=(octa){i, j};
 @z
 
 @x [236] l.4292
@@ -367,6 +438,14 @@ Extern bool page_bad; /* does rV violate the rules? */
 {@+octa rv=data->z.o;
 @z
 
+@x [239] l.4350
+  else if (page_s<32) page_mask.h=0,page_mask.l=(1<<page_s)-1;
+  else page_mask.h=(1<<(page_s-32))-1,page_mask.l=0xffffffff;
+@y
+  else if (page_s<32) page_mask=(octa){0, (1<<page_s)-1};
+  else page_mask=(octa){(1<<(page_s-32))-1, 0xffffffff};
+@z
+
 @x [241] l.4370 RAII.
 {@+octa t;
   t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
@@ -374,10 +453,24 @@ Extern bool page_bad; /* does rV violate the rules? */
 {@+octa t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
 @z
 
+@x [243] l.4395
+  co[2*j].ctl->z.o.h=0, co[2*j].ctl->z.o.l=(aaaaa.l&0x3ff)<<3;
+@y
+  co[2*j].ctl->z.o=(octa){0, (aaaaa.l&0x3ff)<<3};
+@z
+
 @x [257] l.4621 Change from MMIX home.
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
+@z
+
+@x [259] l.4649
+Dcache->outbuf.tag.h=write_head->addr.h;
+Dcache->outbuf.tag.l=write_head->addr.l&(-Dcache->bb);
+@y
+Dcache->outbuf.tag=(octa){write_head->addr.h,
+  write_head->addr.l&(-Dcache->bb)};
 @z
 
 @x [269] l.4855 Change from MMIX home.
@@ -477,10 +570,41 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
+@x [338] l.6029
+cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
+@y
+cool->x.known=true, cool->x.o=(octa){0, cool_L};
+@z
+
+@x [342] l.6065
+    data->x.o.h=g[rG].o.l<<24;
+    data->x.o.l=g[rA].o.l;
+@y
+    data->x.o=(octa){g[rG].o.l<<24, g[rA].o.l};
+@z
+
+@x [344] l.6106
+case bdif: data->x.o.h=byte_diff(data->y.o.h,data->z.o.h);
+           data->x.o.l=byte_diff(data->y.o.l,data->z.o.l);@+ break;
+case wdif: data->x.o.h=wyde_diff(data->y.o.h,data->z.o.h);
+           data->x.o.l=wyde_diff(data->y.o.l,data->z.o.l);@+ break;
+@y
+case bdif: data->x.o=(octa){byte_diff(data->y.o.h,data->z.o.h),
+                            byte_diff(data->y.o.l,data->z.o.l)};@+ break;
+case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
+                            wyde_diff(data->y.o.l,data->z.o.l)};@+ break;
+@z
+
 @x [348] l.6199 Change from MMIX home.
  case FEQLE: goto cmp_fin;
 @y
  case FEQLE: default: goto cmp_fin;
+@z
+
+@x [353] l.6209
+  data->z.o.h=0, data->z.o.l=data->y.o.l&0x7;
+@y
+  data->z.o=(octa){0, data->y.o.l&0x7};
 @z
 
 @x [364] l.6458 Change from MMIX home.
@@ -593,6 +717,14 @@ static int mmgetchars(buf,size,addr,stop)
 void mmputchars(buf,size,addr)
 @y
 static void mmputchars(buf,size,addr)
+@z
+
+@x [386] l.6803
+  x.h=(*p<<24)+(*(p+1)<<16)+(*(p+2)<<8)+*(p+3);
+  x.l=(*(p+4)<<24)+(*(p+5)<<16)+(*(p+6)<<8)+*(p+7);
+@y
+  x=(octa){(*p<<24)+(*(p+1)<<16)+(*(p+2)<<8)+*(p+3),@|
+    (*(p+4)<<24)+(*(p+5)<<16)+(*(p+6)<<8)+*(p+7)};
 @z
 
 @x [387] l.6821 Factor out private stuff (mixins).
