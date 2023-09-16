@@ -19,10 +19,41 @@
 @<Type definition@>@;
 @z
 
+@x [1] l.29
+  register int j,delta,postamble=0;
+  register char *p;
+@y
+  register int j,delta;
+  register char *p;
+  bool postamble=false;
+@z
+
 @x [1] l.34 CWEB 3.0 does this.
   do @<List the next item@>@;@+while (!postamble);
 @y
   do @<List the next item@>@; while (!postamble);
+@z
+
+@x [2] l.41
+listing=1, verbose=0;
+@y
+listing=true, verbose=false;
+@z
+
+@x [2] l.43
+  if (argv[j][1]=='s') listing=0;
+  else if (argv[j][1]=='v') verbose=1;
+@y
+  if (argv[j][1]=='s') listing=false;
+  else if (argv[j][1]=='v') verbose=true;
+@z
+
+@x [4] l.62
+int listing; /* are we listing everything? */
+int verbose; /* are we also showing the tetras of input as they are read? */
+@y
+bool listing; /* are we listing everything? */
+bool verbose; /* are we also showing the tetras of input as they are read? */
 @z
 
 @x [5] l.66 Purge MMIX-ARITH stuff.
@@ -73,6 +104,12 @@ typedef uint8_t byte; /* a monobyte */
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=(octa){0,0};
+@z
+
+@x [22] l.316
+case lop_post: postamble=1;
+@y
+case lop_post: postamble=true;
 @z
 
 @x [39] l.457 Change from MMIX home.
