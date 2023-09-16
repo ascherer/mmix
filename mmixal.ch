@@ -539,6 +539,36 @@ trie_node* prune @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 @y
 @z
 
+@x [73] l.2152
+  register int useful=0;
+@y
+  bool useful=false;
+@z
+
+@x [73] l.2154
+    if (t->sym->serial) useful=1;
+@y
+    if (t->sym->serial) useful=true;
+@z
+
+@x [73] l.2159
+    if (t->left) useful=1;
+@y
+    if (t->left) useful=true;
+@z
+
+@x [73] l.2163
+    if (t->mid) useful=1;
+@y
+    if (t->mid) useful=true;
+@z
+
+@x [73] l.2167
+    if (t->right) useful=1;
+@y
+    if (t->right) useful=true;
+@z
+
 @x [74] l.2176
 void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 @y
