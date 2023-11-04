@@ -283,6 +283,12 @@ rounds towards an even number in case of a tie.
  case ROUND_NEAR: default: o=incr(o, o.l&4? 2: 1);@+break;
 @z
 
+@x [33] l.545 Change from MMIX home.
+else if (o.h<0x100000) exceptions |= U_BIT; /* tininess */
+@y
+else if (o.h<0x800000) exceptions |= U_BIT; /* tininess */
+@z
+
 @x [34] l.553 Factor out private stuff.
 tetra sfpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 tetra sfpack(f,e,s,r)
