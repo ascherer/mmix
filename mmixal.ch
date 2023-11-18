@@ -61,8 +61,7 @@ with a prototype, then with an old-style definition.
 #define ARGS(list) ()
 #endif
 @y
-@ Each subroutine below is declared first with a prototype, then with an
-old-style definition.
+@ Each subroutine below is declared and defined with a prototype.
 @s trie_node int
 
 @<Prototypes@>=
