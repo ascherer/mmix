@@ -52,6 +52,7 @@ utilities respectively.
 * Modified `Makefile` for target optimization
 * Use C99/C++ types `bool`, `uint8_t` and `uint32_t`
 * **New in 2023: Completely updated module structure with new header files**
+* **New in 2023: Purge `ARGS` macro in preparation for C2x**
 
 ## Postscript
 
