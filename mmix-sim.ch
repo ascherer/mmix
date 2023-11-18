@@ -54,39 +54,42 @@ this work with new compilers as well as the old standbys.
 #define ARGS(list) ()
 #endif
 @y
-@ We declare subroutines twice, once with a prototype and once
-with the old-style~\CEE/ conventions.
+@ We declare subroutines with their prototypes.
 @s mem_node int
 @s mem_tetra int
 
 @<Proto...@>=
-void print_hex @,@,@[ARGS((octa))@];
-void print_int @,@,@[ARGS((octa))@];
-mem_node* new_mem @,@,@[ARGS((void))@];
-mem_tetra* mem_find @,@,@[ARGS((octa))@];
-void read_tet @,@,@[ARGS((void))@];
-byte read_byte @,@,@[ARGS((void))@];
-void make_map @,@,@[ARGS((void))@];
-void print_line @,@,@[ARGS((int))@];
-void show_line @,@,@[ARGS((void))@];
-void print_freqs @,@,@[ARGS((mem_node*))@];
-void stack_store @,@,@[ARGS((void))@];
-void stack_load @,@,@[ARGS((void))@];
-int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
-void trace_print @,@,@[ARGS((octa))@];
-void show_stats @,@,@[ARGS((bool))@];
-void scan_option @,@,@[ARGS((char*,bool))@];
-void catchint @,@,@[ARGS((int))@];
-octa scan_hex @,@,@[ARGS((char*,octa))@];
-void print_string @,@,@[ARGS((octa))@];
-void show_breaks @,@,@[ARGS((mem_node*))@];
-void dump @,@,@[ARGS((mem_node*))@];
-void dump_tet @,@,@[ARGS((tetra))@];
+void print_hex(octa);
+void print_int(octa);
+mem_node* new_mem(void);
+mem_tetra* mem_find(octa);
+void read_tet(void);
+byte read_byte(void);
+void make_map(void);
+void print_line(int);
+void show_line(void);
+void print_freqs(mem_node*);
+void stack_store(void);
+void stack_load(void);
+int register_truth(octa,mmix_opcode);
+void trace_print(octa);
+void show_stats(bool);
+void scan_option(char*,bool);
+void catchint(int);
+octa scan_hex(char*,octa);
+void print_string(octa);
+void show_breaks(mem_node*);
+void dump(mem_node*);
+void dump_tet(tetra);
 @z
 
-@x [12] l.578
+@x [12] l.578 C99 prototypes for C2x.
 void print_hex @,@,@[ARGS((octa))@];@+@t}\6{@>
+void print_hex(o)
+  octa o;
 @y
+void print_hex(
+  octa o)
 @z
 
 @x [13] l.592 Stuff from MMIX-ARITH.
@@ -158,14 +161,20 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
-@x [15] l.672
+@x [15] l.672 C99 prototypes for C2x.
 void print_int @,@,@[ARGS((octa))@];@+@t}\6{@>
+void print_int(o)
+  octa o;
 @y
+void print_int(
+  octa o)
 @z
 
 @x [17] l.743
 mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
+mem_node* new_mem()
 @y
+mem_node* new_mem(void)
 @z
 
 @x [17] l.746 RAII.
@@ -175,9 +184,13 @@ mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
   register mem_node *p=(mem_node*)calloc(1,sizeof(mem_node));
 @z
 
-@x [20] l.774
+@x [20] l.774 C99 prototypes for C2x.
 mem_tetra* mem_find @,@,@[ARGS((octa))@];@+@t}\6{@>
+mem_tetra* mem_find(addr)
+  octa addr;
 @y
+mem_tetra* mem_find(
+  octa addr)
 @z
 
 @x [20] l.778 RAII.
@@ -193,14 +206,18 @@ mem_tetra* mem_find @,@,@[ARGS((octa))@];@+@t}\6{@>
   register mem_node *p=last_mem;
 @z
 
-@x [26] l.890
+@x [26] l.890 C99 prototypes for C2x.
 void read_tet @,@,@[ARGS((void))@];@+@t}\6{@>
+void read_tet()
 @y
+void read_tet(void)
 @z
 
-@x [27] l.899
+@x [27] l.899 C99 prototypes for C2x.
 byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
+byte read_byte()
 @y
+byte read_byte(void)
 @z
 
 @x [32] l.961 RAII.
@@ -250,19 +267,27 @@ inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 inst_ptr=(octa){(ll-2)->tet, (ll-1)->tet}; /* \.{Main} */
 @z
 
-@x [42] l.1102
+@x [42] l.1102 C99 prototypes for C2x.
 void make_map @,@,@[ARGS((void))@];@+@t}\6{@>
+void make_map()
 @y
+void make_map(void)
 @z
 
-@x [45] l.1149
+@x [45] l.1149 C99 prototypes for C2x.
 void print_line @,@,@[ARGS((int))@];@+@t}\6{@>
+void print_line(k)
+  int k;
 @y
+void print_line(
+  int k)
 @z
 
-@x [47] l.1176
+@x [47] l.1176 C99 prototypes for C2x.
 void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
+void show_line()
 @y
+void show_line(void)
 @z
 
 @x [47] l.1183 Change from MMIX home.
@@ -281,9 +306,13 @@ void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
   else src_file=freopen(file_info[cur_file].name,"r",src_file);
 @z
 
-@x [50] l.1225
+@x [50] l.1225 C99 prototypes for C2x.
 void print_freqs @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
+void print_freqs(p)
+  mem_node *p;
 @y
+void print_freqs(
+  mem_node *p)
 @z
 
 @x [50] l.1230 Block-local variable.
@@ -367,14 +396,18 @@ if (xx>=G) {
 } }
 @z
 
-@x [82] l.1865
+@x [82] l.1865 C99 prototypes for C2x.
 void stack_store @,@,@[ARGS((void))@];@+@t}\6{@>
+void stack_store()
 @y
+void stack_store(void)
 @z
 
-@x [83] l.1886
+@x [83] l.1886 C99 prototypes for C2x.
 void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
+void stack_load()
 @y
+void stack_load(void)
 @z
 
 @x [86] l.1945 Add missing bit-fiddling functions to MMIX-ARITH.
@@ -439,9 +472,15 @@ case FCMP: k=fcomp(y,z);
 case FCMP: k=fcomp(y,z);
 @z
 
-@x [91] l.2068
+@x [91] l.2068 C99 prototypes for C2x.
 int register_truth @,@,@[ARGS((octa,mmix_opcode))@];@+@t}\6{@>
+int register_truth(o,op)
+  octa o;
+  mmix_opcode op;
 @y
+int register_truth(
+  octa o,
+  mmix_opcode op)
 @z
 
 @x [91] l.2079 RAII.
@@ -581,30 +620,44 @@ section \X108:Trips and traps\X.  Similar functions are defined in the
 meta-simulator {\mc MMIX-PIPE}.
 
 @<Proto...@>=
-static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
-static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
-static char stdin_chr @,@,@[ARGS((void))@];
+static int mmgetchars(char*,int,octa,int);
+static void mmputchars(unsigned char*,int,octa);
+static char stdin_chr(void);
 @z
 
 @x [114] l.2468 Decouple 'mixins'.
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];@+@t}\6{@>
 int mmgetchars(buf,size,addr,stop)
+  char *buf;
+  int size;
+  octa addr;
+  int stop;
 @y
-static int mmgetchars(buf,size,addr,stop)
+static int mmgetchars(
+  char *buf,
+  int size,
+  octa addr,
+  int stop)
 @z
 
 @x [117] l.2516 Decouple 'mixins'.
 void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];@+@t}\6{@>
 void mmputchars(buf,size,addr)
+  unsigned char *buf;
+  int size;
+  octa addr;
 @y
-static void mmputchars(buf,size,addr)
+static void mmputchars(
+  unsigned char *buf,
+  int size,
+  octa addr)
 @z
 
 @x [120] l.2558 Decouple 'mixins'.
 char stdin_chr @,@,@[ARGS((void))@];@+@t}\6{@>
 char stdin_chr()
 @y
-static char stdin_chr()
+static char stdin_chr(void)
 @z
 
 @x [120] l.2567 Replace magic number.
@@ -643,7 +696,11 @@ char *stream_name[]={"StdIn","StdOut","StdErr"};
 @.StdErr@>
 @#
 void trace_print @,@,@[ARGS((octa))@];@+@t}\6{@>
+void trace_print(o)
+  octa o;
 @y
+void trace_print(
+  octa o)
 @z
 
 @x [137] l.2835 Change from MMIX home.
@@ -675,9 +732,13 @@ char *stream_name[]={"StdIn","StdOut","StdErr"};
 char left_paren[]={0,'[','^','_','('}; /* denotes the rounding mode */
 @z
 
-@x [140] l.2862
+@x [140] l.2862 C99 prototypes for C2x.
 void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
+void show_stats(verbose)
+  bool verbose;
 @y
+void show_stats(
+  bool verbose)
 @z
 
 @x [141] l.2887 Improved module structure with interfaces.
@@ -690,16 +751,30 @@ void show_stats @,@,@[ARGS((bool))@];@+@t}\6{@>
 @h
 @z
 
-@x [141] l.2891 Prototypes.
+@x [141] l.2891 C99 prototypes for C2x.
 @<Subroutines@>@;
+@#
+int main(argc,argv)
+  int argc;
+  char *argv[];
 @y
 @<Prototypes@>@;
 @<Subroutines@>@;
+@#
+int main(
+  int argc,
+  char *argv[])
 @z
 
-@x [143] l.2946
+@x [143] l.2946 C99 prototypes for C2x.
 void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
+void scan_option(arg,usage)
+  char *arg; /* command line argument (without the `\.-') */
+  bool usage; /* should we exit with usage note if unrecognized? */
 @y
+void scan_option(
+  char *arg, /* command line argument (without the `\.-') */
+  bool usage) /* should we exit with usage note if unrecognized? */
 @z
 
 @x [143] l.2967 GCC warning
@@ -721,9 +796,13 @@ void scan_option @,@,@[ARGS((char*,bool))@];@+@t}\6{@>
   }@+else@+ for (k=0;usage_help[k][1]!='b';k++) printf("%s",usage_help[k]);
 @z
 
-@x [148] l.3064
+@x [148] l.3064 C99 prototypes for C2x.
 void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
+void catchint(n)
+  int n;
 @y
+void catchint(
+  int n)
 @z
 
 @x [148] l.3068 Change from MMIX home.
@@ -757,9 +836,15 @@ void catchint @,@,@[ARGS((int))@];@+@t}\6{@>
       else ready=true; }
 @z
 
-@x [154] l.3194
+@x [154] l.3194 C99 prototypes for C2x.
 octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
+octa scan_hex(s,offset)
+  char *s;
+  octa offset;
 @y
+octa scan_hex(
+  char *s,
+  octa offset)
 @z
 
 @x [154] l.3199 RAII.
@@ -789,14 +874,22 @@ octa scan_hex @,@,@[ARGS((char*,octa))@];@+@t}\6{@>
     aux=(octa){ll->tet, (ll+1)->tet};
 @z
 
-@x [160] l.3301
+@x [160] l.3301 C99 prototypes for C2x.
 void print_string @,@,@[ARGS((octa))@];@+@t}\6{@>
+void print_string(o)
+  octa o;
 @y
+void print_string(
+  octa o)
 @z
 
-@x [162] l.3347
+@x [162] l.3347 C99 prototypes for C2x.
 void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
+void show_breaks(p)
+  mem_node *p;
 @y
+void show_breaks(
+  mem_node *p)
 @z
 
 @x [163] l.3374 Compound literal.
@@ -811,8 +904,20 @@ x.h=0, x.l=0xf0;
 x=(octa){0, 0xf0};
 @z
 
-@x [165] l.3412
+@x [165] l.3412 C99 prototypes for C2x.
 void dump @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 void dump_tet @,@,@[ARGS((tetra))@];@+@t}\6{@>
+void dump(p)
+  mem_node *p;
 @y
+void dump(
+  mem_node *p)
+@z
+
+@x [166] l.3434 C99 prototypes for C2x.
+void dump_tet(t)
+  tetra t;
+@y
+void dump_tet(
+  tetra t)
 @z
