@@ -40,6 +40,16 @@ static char *config_file_name, *prog_file_name;
 @<Subroutines@>@;
 @z
 
+@x [2] l.48 C99 prototypes for C2x.
+int main(argc,argv)
+  int argc;
+  char *argv[];
+@y
+int main(
+  int argc,
+  char *argv[])
+@z
+
 @x [5] l.115 Untangle private stuff.
 octa cur_loc;
 octa cur_dat;
@@ -57,6 +67,7 @@ static FILE *prog_file;
 @x [10] l.220 Purge a few 'goto's.
 @<Sub...@>=
 static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
+static bool undump_octa()
 @y
 @d oops { @+
   fprintf(stderr,"Premature end of file on %s!\n",prog_file_name); @+
@@ -64,6 +75,7 @@ static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
   return false; @+ }
 
 @<Sub...@>=
+static bool undump_octa(void)
 @z
 
 @x [10] l.226 Purge a few 'goto's.
@@ -185,8 +197,8 @@ so we had better move it ``up'' (together with the |static| variable~|d|
 in the previous section). Instead, we place some internal prototypes here.
 
 @<Proto...@>=
-static bool undump_octa @,@,@[ARGS((void))@];
-static octa sl3 @,@,@[ARGS((octa))@];
+static bool undump_octa(void);
+static octa sl3(octa);
 @z
 
 @x [18] l.469 Change from MMIX home.
@@ -205,7 +217,11 @@ examining the pipeline.
 
 @x [20] l.489
 static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
+static octa sl3(y) /* shift left by 3 bits */
+  octa y;
 @y
+static octa sl3( /* shift left by 3 bits */
+  octa y)
 @z
 
 @x [20] l.494 Compound literal.
