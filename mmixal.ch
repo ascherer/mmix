@@ -66,27 +66,27 @@ old-style definition.
 @s trie_node int
 
 @<Prototypes@>=
-void flush_listing_line @,@,@[ARGS((char*))@];
-void update_listing_loc @,@,@[ARGS((int))@];
-void listing_clear @,@,@[ARGS((void))@];
-void report_error @,@,@[ARGS((char*))@];
+void flush_listing_line(char*);
+void update_listing_loc(int);
+void listing_clear(void);
+void report_error(char*);
 @#
-void mmo_clear @,@,@[ARGS((void))@];
-void mmo_out @,@,@[ARGS((void))@];
-void mmo_tetra @,@,@[ARGS((tetra))@];
-void mmo_byte @,@,@[ARGS((unsigned char))@];
-void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
-void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
-void mmo_loc @,@,@[ARGS((void))@];
-void mmo_sync @,@,@[ARGS((void))@];
+void mmo_clear(void);
+void mmo_out(void);
+void mmo_tetra(tetra);
+void mmo_byte(unsigned char);
+void mmo_lop(char,unsigned char,unsigned char);
+void mmo_lopp(char,unsigned short);
+void mmo_loc(void);
+void mmo_sync(void);
 @#
-void assemble @,@,@[ARGS((char,tetra,unsigned char))@];
+void assemble(char,tetra,unsigned char);
 @#
-trie_node* new_trie_node @,@,@[ARGS((void))@];
-trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
-sym_node* new_sym_node @,@,@[ARGS((bool))@];
-trie_node* prune @,@,@[ARGS((trie_node*))@];
-void out_stab @,@,@[ARGS((trie_node*))@];
+trie_node* new_trie_node(void);
+trie_node *trie_search(trie_node*,Char*);
+sym_node* new_sym_node(bool);
+trie_node* prune(trie_node*);
+void out_stab(trie_node*);
 @z
 
 @x [39] l.1122 We use '@h', so section is renamed.
@@ -95,14 +95,22 @@ void out_stab @,@,@[ARGS((trie_node*))@];
 @<Preprocessor macros@>=
 @z
 
-@x [41] l.1145
+@x [41] l.1145 C99 prototypes for C2x.
 void flush_listing_line @,@,@[ARGS((char*))@];@+@t}\6{@>
+void flush_listing_line(s)
+  char *s;
 @y
+void flush_listing_line(
+  char *s)
 @z
 
-@x [42] l.1161
+@x [42] l.1161 C99 prototypes for C2x.
 void update_listing_loc @,@,@[ARGS((int))@];@+@t}\6{@>
+void update_listing_loc(k)
+  int k; /* the location to display, mod 4 */
 @y
+void update_listing_loc(
+  int k) /* the location to display, mod 4 */
 @z
 
 @x l. [42] l.1169 Compound literal.
@@ -112,14 +120,20 @@ void update_listing_loc @,@,@[ARGS((int))@];@+@t}\6{@>
   listing_loc=(octa){cur_loc.h, (cur_loc.l&-4)|k};
 @z
 
-@x [44] l.1195
+@x [44] l.1195 C99 prototypes for C2x.
 void listing_clear @,@,@[ARGS((void))@];@+@t}\6{@>
+void listing_clear()
 @y
+void listing_clear(void)
 @z
 
-@x [45] l.1229
+@x [45] l.1229 C99 prototypes for C2x.
 void report_error @,@,@[ARGS((char*))@];@+@t}\6{@>
+void report_error(message)
+  char *message;
 @y
+void report_error(
+  char *message)
 @z
 
 @x [46] l.1258 Untangle functions and variables.
@@ -135,31 +149,71 @@ int mmo_ptr;
 void mmo_clear @,@,@[ARGS((void))@];
 void mmo_out @,@,@[ARGS((void))@];
 unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
+void mmo_clear() /* clears |hold_buf|, when |held_bits!=0| */
 @y
+void mmo_clear(void) /* clears |hold_buf|, when |held_bits!=0| */
 @z
 
 @x [47] l.1286 Untangle functions and variables.
 unsigned char mmo_buf[4];
 int mmo_ptr;
+void mmo_out() /* output the contents of |mmo_buf| */
 @y
+void mmo_out(void) /* output the contents of |mmo_buf| */
 @z
 
-@x [48] l.1295
+@x [48] l.1295 C99 prototypes for C2x.
 void mmo_tetra @,@,@[ARGS((tetra))@];
 void mmo_byte @,@,@[ARGS((unsigned char))@];
 void mmo_lop @,@,@[ARGS((char,unsigned char,unsigned char))@];
 void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
+void mmo_tetra(t) /* output a tetrabyte */
+  tetra t;
 @y
+void mmo_tetra( /* output a tetrabyte */
+  tetra t)
 @z
 
-@x [49] l.1335
+@x [48] l.1307 C99 prototypes for C2x.
+void mmo_byte(b)
+  unsigned char b;
+@y
+void mmo_byte(
+  unsigned char b)
+@z
+
+@x [48] l.1314 C99 prototypes for C2x.
+void mmo_lop(x,y,z) /* output a loader operation */
+  char x;
+  unsigned char y,z;
+@y
+void mmo_lop( /* output a loader operation */
+  char x,
+  unsigned char y, unsigned char z)
+@z
+
+@x [48] l.1322 C99 prototypes for C2x.
+void mmo_lopp(x,yz) /* output a loader operation with two-byte operand */
+  char x;
+  unsigned short yz;
+@y
+void mmo_lopp( /* output a loader operation with two-byte operand */
+  char x,
+  unsigned short yz)
+@z
+
+@x [49] l.1335 C99 prototypes for C2x.
 void mmo_loc @,@,@[ARGS((void))@];@+@t}\6{@>
+void mmo_loc()
 @y
+void mmo_loc(void)
 @z
 
-@x [50] l.1357
+@x [50] l.1357 C99 prototypes for C2x.
 void mmo_sync @,@,@[ARGS((void))@];@+@t}\6{@>
+void mmo_sync()
 @y
+void mmo_sync(void)
 @z
 
 @x [50] l.1360 Change from MMIX home.
@@ -168,9 +222,17 @@ void mmo_sync @,@,@[ARGS((void))@];@+@t}\6{@>
   register int j; register Char *p;
 @z
 
-@x [52] l.1399
+@x [52] l.1399 C99 prototypes for C2x.
 void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
+void assemble(k,dat,x_bits)
+  char k;
+  tetra dat;
+  unsigned char x_bits;
 @y
+void assemble(
+  char k,
+  tetra dat,
+  unsigned char x_bits)
 @z
 
 @x [52] l.1416 Change from MMIX home.
@@ -188,9 +250,11 @@ void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
     }
 @z
 
-@x [54] l.1455
+@x [54] l.1455 C99 prototypes for C2x.
 trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
+trie_node* new_trie_node()
 @y
+trie_node* new_trie_node(void)
 @z
 
 @x [56] l.1473 Untangle functions and variables.
@@ -203,7 +267,13 @@ Char *terminator; /* where the search ended */
 @x [57] l.1483 Untangle functions and variables.
 trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
 Char *terminator; /* where the search ended */
+trie_node *trie_search(t,s)
+  trie_node *t;
+  Char *s;
 @y
+trie_node *trie_search(
+  trie_node *t,
+  Char *s)
 @z
 
 @x [58] l.1539 CWEB knows this since version 3.5 (1999).
@@ -211,9 +281,13 @@ Char *terminator; /* where the search ended */
 @y
 @z
 
-@x [59] l.1562
+@x [59] l.1562 C99 prototypes for C2x.
 sym_node* new_sym_node @,@,@[ARGS((bool))@];@+@t}\6{@>
+sym_node* new_sym_node(serialize)
+  bool serialize; /* should the new node receive a unique serial number? */
 @y
+sym_node* new_sym_node(
+  bool serialize) /* should the new node receive a unique serial number? */
 @z
 
 @x [63] l.1641 Format improvement.
@@ -534,9 +608,13 @@ op_spec op_init_table[]={@|
   pp->equiv=(octa){predefs[j].h, predefs[j].l};
 @z
 
-@x [73] l.2148
+@x [73] l.2148 C99 prototypes for C2x.
 trie_node* prune @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
+trie_node* prune(t)
+  trie_node* t;
 @y
+trie_node* prune(
+  trie_node* t)
 @z
 
 @x [73] l.2152
@@ -569,9 +647,13 @@ trie_node* prune @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
     if (t->right) useful=true;
 @z
 
-@x [74] l.2176
+@x [74] l.2176 C99 prototypes for C2x.
 void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
+void out_stab(t)
+  trie_node* t;
 @y
+void out_stab(
+  trie_node* t)
 @z
 
 @x [74] l.2181 Block-local variable.
@@ -738,9 +820,17 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @<Preprocessor macros@>@;
 @z
 
-@x [136] l.3171 Prototypes.
+@x [136] l.3171 C99 prototypes for C2x.
 @<Subroutines@>@;
+@#
+int main(argc,argv)
+  int argc;@+
+  char *argv[];
 @y
 @<Prototypes@>@;
 @<Subroutines@>@;
+@#
+int main(
+  int argc,
+  char *argv[])
 @z
