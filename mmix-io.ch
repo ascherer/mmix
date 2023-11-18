@@ -72,7 +72,7 @@ typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 #include <stdio.h> /* |@!FILE| */
 @#
 #include "mmix-arith.h" /* |@!octa| */
-#
+@#
 extern void mmix_io_init(void);
 extern octa mmix_fopen(unsigned char,octa,octa, /* mixin */
 @t\qquad@>
