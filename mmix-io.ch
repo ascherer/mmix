@@ -102,7 +102,7 @@ extern octa mmix_fwrite(unsigned char,octa,octa, /* mixin */
 extern octa mmix_fputs(unsigned char,octa, /* mixin */
 @t\qquad@>
   int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
-@,)@];
+@,);
 extern octa mmix_fputws(unsigned char,octa, /* mixin */
 @t\qquad@>
   int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
@@ -165,7 +165,7 @@ octa mmix_fopen(
   unsigned char handle,
   octa name, octa mode,@|
 @t\4\4@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
 @,)
 @z
 
@@ -238,9 +238,9 @@ octa mmix_fread(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
 @t\4\4@>
-  char @[(*stdin_chr)(void)@]
+  char @,(*stdin_chr)(void)
 @,)
 @z
 
@@ -267,9 +267,9 @@ octa mmix_fgets(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
 @t\4\4@>
-  char @[(*stdin_chr)(void)@]
+  char @,(*stdin_chr)(void)
 @,)
 @z
 
@@ -300,9 +300,9 @@ octa mmix_fgetws(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
 @t\4\4@>
-  char @[(*stdin_chr)(void)@]
+  char @,(*stdin_chr)(void)
 @,)
 @z
 
@@ -333,7 +333,7 @@ octa mmix_fwrite(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
 @,)
 @z
 
@@ -353,7 +353,7 @@ octa mmix_fputs(
   unsigned char handle,
   octa string,@|
 @t\4\4@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
 @,)
 @z
 
@@ -380,7 +380,7 @@ octa mmix_fputws(
   unsigned char handle,
   octa string,@|
 @t\4\4@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
 @,)
 @z
 
