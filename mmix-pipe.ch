@@ -58,7 +58,9 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #endif /* |MMIX_PIPE_H| */
 @z
 
-@x [6] l.161 Stuff from MMIX-ARITH.
+@x [6] l.159 Stuff from MMIX-ARITH.
+@ Subroutines of this program are declared first with a prototype,
+as in {\mc ANSI C}, then with an old-style \CEE/ function definition.
 The following preprocessor commands make this work correctly with both
 new-style and old-style compilers.
 @^prototypes for functions@>
@@ -70,12 +72,48 @@ new-style and old-style compilers.
 #define ARGS(list) ()
 #endif
 @y
+@ Subroutines of this program are declared and defined with a prototype,
+as in {\mc ANSI C}.
 @z
 
-@x [10] l.229 GCC warning.
+@x [9] l.215 C99 prototypes for C2x.
+Extern void MMIX_init @,@,@[ARGS((void))@];
+Extern void MMIX_run @,@,@[ARGS((int cycs, octa breakpoint))@];
+Extern int MMIX_silent @,@,@[ARGS((void))@];
+@y
+Extern void MMIX_init(void);
+Extern void MMIX_run(int cycs, octa breakpoint);
+Extern int MMIX_silent(void);
+@z
+
+@x [10] l.220 C99 prototypes for C2x.
+void MMIX_init()
+@y
+void MMIX_init(void)
+@z
+
+@x [10] l.226 C99 prototypes for C2x.
+int MMIX_silent()
+@y
+int MMIX_silent(void)
+@z
+
+@x [10] l.228 GCC warning.
+  octa breakpoint;
   @<Local variables@>;
 @y
-  @<Local variables@>;@+(void)breakpoint_hit;
+  octa breakpoint;@+@t}\6{@>
+  @<Local variables@>;@+(void)breakpoint_hit;@#
+@z
+
+@x [10] l.236 C99 prototypes for C2x.
+void MMIX_run(cycs,breakpoint)
+  int cycs;
+  octa breakpoint;
+@y
+void MMIX_run(
+  int cycs,
+  octa breakpoint)
 @z
 
 @x [10] l.256 Change from MMIX home.
@@ -88,6 +126,18 @@ new-style and old-style compilers.
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
 @ (This section remains empty for historic reasons.)
+@z
+
+@x [13,14] l.279 C99 prototypes for C2x.
+static void expire @,@,@[ARGS((void))@];
+
+@ @<Sub...@>=
+static void expire() /* the last gasp before dying */
+@y
+static void expire(void);
+
+@ @<Sub...@>=
+static void expire(void) /* the last gasp before dying */
 @z
 
 @x [17] l.326 Stuff from MMIX-ARITH.
@@ -105,6 +155,20 @@ for the assembler and for the non-pipelined simulator.
 @s uint32_t int
 @s tetra int
 @s octa int
+@z
+
+@x [18,19] l.337 C99 prototypes for C2x.
+static void print_octa @,@,@[ARGS((octa))@];
+
+@ @<Sub...@>=
+static void print_octa(o)
+  octa o;
+@y
+static void print_octa(octa);
+
+@ @<Sub...@>=
+static void print_octa(
+  octa o)
 @z
 
 @x [20] l.347 Stuff from MMIX-ARITH.
@@ -178,12 +242,183 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
 @y
 @z
 
+@x [23,24] l.459 C99 prototypes for C2x.
+static void print_coroutine_id @,@,@[ARGS((coroutine*))@];
+static void errprint_coroutine_id @,@,@[ARGS((coroutine*))@];
+
+@ @<Sub...@>=
+static void print_coroutine_id(c)
+  coroutine *c;
+@y
+static void print_coroutine_id(coroutine*);
+static void errprint_coroutine_id(coroutine*);
+
+@ @<Sub...@>=
+static void print_coroutine_id(
+  coroutine *c)
+@z
+
+@x [10] l.470 C99 prototypes for C2x.
+static void errprint_coroutine_id(c)
+  coroutine *c;
+@y
+static void errprint_coroutine_id(
+  coroutine *c)
+@z
+
+@x [27,28| l.507 C99 prototypes for C2x.
+static void schedule @,@,@[ARGS((coroutine*,int,int))@];
+
+@ @<Sub...@>=
+static void schedule(c,d,s)
+  coroutine *c;
+  int d,s;
+@y
+static void schedule(coroutine*,int,int);
+
+@ @<Sub...@>=
+static void schedule(
+  coroutine *c,
+  int d, int s)
+@z
+
+@x [30,31] l.540 C99 prototypes for C2x.
+static void startup @,@,@[ARGS((coroutine*,int))@];
+
+@ @<Sub...@>=
+static void startup(c,d)
+  coroutine *c;
+  int d;
+@y
+static void startup(coroutine*,int);
+
+@ @<Sub...@>=
+static void startup(
+  coroutine *c,
+  int d)
+@z
+
+@x [32,33] l.560 C99 prototypes for C2x.
+static void unschedule @,@,@[ARGS((coroutine*))@];
+
+@ @<Sub...@>=
+static void unschedule(c)
+  coroutine *c;
+@y
+static void unschedule(coroutine*);
+
+@ @<Sub...@>=
+static void unschedule(
+  coroutine *c)
+@z
+
+@x [34,35] l.583 C99 prototypes for C2x.
+static coroutine *queuelist @,@,@[ARGS((int))@];
+
+@ @<Sub...@>=
+static coroutine* queuelist(t)
+  int t;
+@y
+static coroutine *queuelist(int);
+
+@ @<Sub...@>=
+static coroutine* queuelist(
+  int t)
+@z
+
+@x [38,39] l.623 C99 prototypes for C2x.
+Extern void print_locks @,@,@[ARGS((void))@];
+
+@ @<External r...@>=
+void print_locks()
+@y
+Extern void print_locks(void);
+
+@ @<External r...@>=
+void print_locks(void)
+@z
+
+@x [42,43] l.679 C99 prototypes for C2x.
+static void print_spec @,@,@[ARGS((spec))@];
+
+@ @<Sub...@>=
+static void print_spec(s)
+  spec s;
+@y
+static void print_spec(spec);
+static void print_specnode(specnode);
+
+@ @<Sub...@>=
+static void print_spec(
+  spec s)
+@z
+
+@x [43] l.691 C99 prototypes for C2x.
+static void print_specnode(s)
+  specnode s;
+@y
+static void print_specnode(
+  specnode s)
+@z
+
+@x [45,46] l.772 C99 prototypes for C2x.
+static void print_control_block @,@,@[ARGS((control*))@];
+
+@ @<Sub...@>=
+static void print_control_block(c)
+  control *c;
+@y
+static void print_control_block(control*);
+
+@ @<Sub...@>=
+static void print_control_block(
+  control *c)
+@z
+
 @x [52] l.1129 Change from MMIX home.
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
 followed by rG~(19) and rA~(21) packed into eight bytes.
 @y
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
 followed by~19 and~21.
+@z
+
+@x [55,56] l.1199 C99 prototypes for C2x.
+static void print_bits @,@,@[ARGS((int))@];
+
+@ @<Subr...@>=
+static void print_bits(x)
+  int x;
+@y
+static void print_bits(int);
+
+@ @<Subr...@>=
+static void print_bits(
+  int x)
+@z
+
+@x [61,62] l.1423 C99 prototypes for C2x.
+static void print_reorder_buffer @,@,@[ARGS((void))@];
+
+@ @<Sub...@>=
+static void print_reorder_buffer()
+@y
+static void print_reorder_buffer(void);
+
+@ @<Sub...@>=
+static void print_reorder_buffer(void)
+@z
+
+@x [72,73] l.1548 C99 prototypes for C2x.
+static void print_fetch_buffer @,@,@[ARGS((void))@];
+
+@ @<Sub...@>=
+static void print_fetch_buffer()
+@y
+static void print_fetch_buffer(void);
+
+@ @<Sub...@>=
+static void print_fetch_buffer(void)
 @z
 
 @x [75] l.1620 Improved typography.
@@ -242,10 +477,66 @@ g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
 @z
 
+@x [90,91] l.1895 C99 prototypes for C2x.
+static void print_specnode_id @,@,@[ARGS((octa))@];
+
+@ @<Sub...@>=
+static void print_specnode_id(a)
+  octa a;
+@y
+static void print_specnode_id(octa);
+
+@ @<Sub...@>=
+static void print_specnode_id(
+  octa a)
+@z
+
 @x [91] l.1902 Change from MMIX home.
     if (a.l<32) printf(special_name[a.l]);
 @y
     if (a.l<32) printf("%s",special_name[a.l]);
+@z
+
+@x [92,93] l.1914 C99 prototypes for C2x.
+static spec specval @,@,@[ARGS((specnode*))@];
+
+@ @<Sub...@>=
+static spec specval(r)
+  specnode *r;
+@y
+static spec specval(specnode*);
+
+@ @<Sub...@>=
+static spec specval(
+  specnode *r)
+@z
+
+@x [94,95] l.1929 C99 prototypes for C2x.
+static void spec_install @,@,@[ARGS((specnode*,specnode*))@];
+
+@ @<Sub...@>=
+static void spec_install(r,t) /* insert |t| into list |r| */
+  specnode *r,*t;
+@y
+static void spec_install(specnode*,specnode*);
+
+@ @<Sub...@>=
+static void spec_install( /* insert |t| into list |r| */
+  specnode *r, specnode *t)
+@z
+
+@x [96,97] l.1945 C99 prototypes for C2x.
+static void spec_rem @,@,@[ARGS((specnode*))@];
+
+@ @<Sub...@>=
+static void spec_rem(t) /* remove |t| from its list */
+  specnode *t;
+@y
+static void spec_rem(specnode*);
+
+@ @<Sub...@>=
+static void spec_rem( /* remove |t| from its list */
+  specnode *t)
 @z
 
 @x [101] l.2009 Improved typography.
@@ -349,10 +640,130 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
                         oandn(data->z.o, data->b.o));
 @z
 
+@x [156,157] l.2960 C99 prototypes for C2x.
+static int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
+
+@ @<Sub...@>=
+static int register_truth(o,op)
+  octa o;
+  mmix_opcode op;
+@y
+static int register_truth(octa,mmix_opcode);
+
+@ @<Sub...@>=
+static int register_truth(
+  octa o,
+  mmix_opcode op)
+@z
+
 @x [157] l.2968 Change from MMIX home.
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
+@z
+
+@x [158,159] l.2982 C99 prototypes for C2x.
+static int issued_between @,@,@[ARGS((control*,control*))@];
+
+@ @<Sub...@>=
+static int issued_between(c,cc)
+  control *c,*cc;
+@y
+static int issued_between(control*,control*);
+
+@ @<Sub...@>=
+static int issued_between(
+  control *c, control *cc)
+@z
+
+@x [161,162] l.3027 C99 prototypes for C2x.
+Extern void print_stats @,@,@[ARGS((void))@];
+
+@ @<External r...@>=
+void print_stats()
+@y
+Extern void print_stats(void);
+
+@ @<External r...@>=
+void print_stats(void)
+@z
+
+@x [168,169] l.3223 C99 prototypes for C2x.
+static bool is_dirty @,@,@[ARGS((cache*,cacheblock*))@];
+
+@ @<Sub...@>=
+static bool is_dirty(c,p)
+  cache *c; /* the cache containing it */
+  cacheblock *p; /* a cache block */
+@y
+static bool is_dirty(cache*,cacheblock*);
+
+@ @<Sub...@>=
+static bool is_dirty(
+  cache *c, /* the cache containing it */
+  cacheblock *p) /* a cache block */
+@z
+
+@x [169,170] l.3239 C99 prototypes for C2x.
+static void print_cache_block @,@,@[ARGS((cacheblock,cache*))@];
+
+@ @<Sub...@>=
+static void print_cache_block(p,c)
+  cacheblock p;
+  cache *c;
+@y
+static void print_cache_block(cacheblock,cache*);
+
+@ @<Sub...@>=
+static void print_cache_block(
+  cacheblock p,
+  cache *c)
+@z
+
+@x [173,174] l.3253 C99 prototypes for C2x.
+static void print_cache_locks @,@,@[ARGS((cache*))@];
+
+@ @<Sub...@>=
+static void print_cache_locks(c)
+  cache *c;
+@y
+static void print_cache_locks(cache*);
+
+@ @<Sub...@>=
+static void print_cache_locks(
+  cache *c)
+@z
+
+@x [175,176] l.3273 C99 prototypes for C2x.
+Extern void print_cache @,@,@[ARGS((cache*,bool))@];
+
+@ @<External r...@>=
+void print_cache(c,dirty_only)
+  cache *c;
+  bool dirty_only;
+@y
+Extern void print_cache(cache*,bool);
+
+@ @<External r...@>=
+void print_cache(
+  cache *c,
+  bool dirty_only)
+@z
+
+@x [178,179] l.3317 C99 prototypes for C2x.
+Extern void clean_block @,@,@[ARGS((cache*,cacheblock*))@];
+
+@ @<External r...@>=
+void clean_block(c,p)
+  cache *c;
+  cacheblock *p;
+@y
+Extern void clean_block(cache*,cacheblock*);
+
+@ @<External r...@>=
+void clean_block(
+  cache *c,
+  cacheblock *p)
 @z
 
 @x [179] l.3325 Compound literal.
@@ -361,10 +772,128 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
   p->tag=(octa){sign_bit, 0};
 @z
 
+@x [180] l.3334 C99 prototypes for C2x.
+Extern void zap_cache @,@,@[ARGS((cache*))@];
+@y
+Extern void zap_cache(cache*);
+@z
+
+@x [181] l.3340 C99 prototypes for C2x.
+void zap_cache(c)
+  cache *c;
+@y
+void zap_cache(
+  cache *c)
+@z
+
+@x [182,183] l.3357 C99 prototypes for C2x.
+static int get_reader @,@,@[ARGS((cache*))@];
+
+@ @<Sub...@>=
+static int get_reader(c)
+  cache *c;
+@y
+static int get_reader(cache*);
+
+@ @<Sub...@>=
+static int get_reader(
+  cache *c)
+@z
+
+@x [184,185] l.3375 C99 prototypes for C2x.
+static void copy_block @,@,@[ARGS((cache*,cacheblock*,cache*,cacheblock*))@];
+
+@ @<Sub...@>=
+static void copy_block(c,p,cc,pp)
+  cache *c,*cc;
+  cacheblock *p,*pp;
+@y
+static void copy_block(cache*,cacheblock*,cache*,cacheblock*);
+
+@ @<Sub...@>=
+static void copy_block(
+  cache *c, cacheblock *p,
+  cache *cc, cacheblock *pp)
+@z
+
+@x [186,187] l.3401 C99 prototypes for C2x.
+static cacheblock* choose_victim @,@,@[ARGS((cacheset,int,replace_policy))@];
+
+@ @<Sub...@>=
+static cacheblock* choose_victim(s,aa,policy)
+  cacheset s; 
+  int aa; /* setsize */
+  replace_policy policy;
+@y
+static cacheblock* choose_victim(cacheset,int,replace_policy);
+
+@ @<Sub...@>=
+static cacheblock* choose_victim(
+  cacheset s,
+  int aa, /* setsize */
+  replace_policy policy)
+@z
+
 @x [187] l.3418 Change from MMIX home.
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
  default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
+@z
+
+@x [188,189] l.3426 C99 prototypes for C2x.
+static void note_usage @,@,@[ARGS((cacheblock*,cacheset,int,replace_policy))@];
+
+@ @<Sub...@>=
+static void note_usage(l,s,aa,policy)
+  cacheblock *l; /* a cache block that's probably worth preserving */
+  cacheset s; /* the set that contains $l$ */
+  int aa; /* setsize */
+  replace_policy policy;
+@y
+static void note_usage(cacheblock*,cacheset,int,replace_policy);
+
+@ @<Sub...@>=
+static void note_usage(
+  cacheblock *l, /* a cache block that's probably worth preserving */
+  cacheset s, /* the set that contains $l$ */
+  int aa, /* setsize */
+  replace_policy policy)
+@z
+
+@x [190,191] l.3455 C99 prototypes for C2x.
+static void demote_usage @,@,@[ARGS((cacheblock*,cacheset,int,replace_policy))@];
+
+@ @<Sub...@>=
+static void demote_usage(l,s,aa,policy)
+  cacheblock *l; /* a cache block we probably don't need */
+  cacheset s; /* the set that contains $l$ */
+  int aa; /* setsize */
+  replace_policy policy;
+@y
+static void demote_usage(cacheblock*,cacheset,int,replace_policy);
+
+@ @<Sub...@>=
+static void demote_usage(
+  cacheblock *l, /* a cache block we probably don't need */
+  cacheset s, /* the set that contains $l$ */
+  int aa, /* setsize */
+  replace_policy policy)
+@z
+
+@x [192,193] l.3489 C99 prototypes for C2x.
+static cacheblock* cache_search @,@,@[ARGS((cache*,octa))@];
+
+@ @<Sub...@>=
+static cacheblock* cache_search(c,alf)
+  cache *c; /* the cache to be searched */
+  octa alf; /* the key */
+@y
+static cacheblock* cache_search(cache*,octa);
+
+@ @<Sub...@>=
+static cacheblock* cache_search(
+  cache *c, /* the cache to be searched */
+  octa alf) /* the key */
 @z
 
 @x [193] l.3496 RAII.
@@ -376,6 +905,88 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
   register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @z
 
+@x [195,196] l.3519 C99 prototypes for C2x.
+static cacheblock* use_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
+
+@ @<Sub...@>=
+static cacheblock *use_and_fix(c,p)
+  cache *c;
+  cacheblock *p;
+@y
+static cacheblock* use_and_fix(cache*,cacheblock*);
+
+@ @<Sub...@>=
+static cacheblock *use_and_fix(
+  cache *c,
+  cacheblock *p)
+@z
+
+@x [198,199] l.3557 C99 prototypes for C2x.
+static cacheblock* demote_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
+
+@ @<Sub...@>=
+static cacheblock *demote_and_fix(c,p)
+  cache *c;
+  cacheblock *p;
+@y
+static cacheblock* demote_and_fix(cache*,cacheblock*);
+
+@ @<Sub...@>=
+static cacheblock *demote_and_fix(
+  cache *c,
+  cacheblock *p)
+@z
+
+@x [200,201] l.3574 C99 prototypes for C2x.
+static void load_cache @,@,@[ARGS((cache*,cacheblock*))@];
+
+@ @<Sub...@>=
+static void load_cache(c,p)
+  cache *c;
+  cacheblock *p;
+@y
+static void load_cache(cache*,cacheblock*);
+
+@ @<Sub...@>=
+static void load_cache(
+  cache *c,
+  cacheblock *p)
+@z
+
+@x [202,203] l.3598 C99 prototypes for C2x.
+static void flush_cache @,@,@[ARGS((cache*,cacheblock*,bool))@];
+
+@ @<Sub...@>=
+static void flush_cache(c,p,keep)
+  cache *c;
+  cacheblock *p; /* a block inside cache |c| */
+  bool keep; /* should we preserve the data in |p|? */
+@y
+static void flush_cache(cache*,cacheblock*,bool);
+
+@ @<Sub...@>=
+static void flush_cache(
+  cache *c,
+  cacheblock *p, /* a block inside cache |c| */
+  bool keep) /* should we preserve the data in |p|? */
+@z
+
+@x [204,205] l.3644 C99 prototypes for C2x.
+static cacheblock* alloc_slot @,@,@[ARGS((cache*,octa))@];
+
+@ @<Sub...@>=
+static cacheblock* alloc_slot(c,alf)
+  cache *c;
+  octa alf; /* key that probably isn't in the cache */
+@y
+static cacheblock* alloc_slot(cache*,octa);
+
+@ @<Sub...@>=
+static cacheblock* alloc_slot(
+  cache *c,
+  octa alf) /* key that probably isn't in the cache */
+@z
+
 @x [208] l.3724 Stuff from MMIX-MEM.
 @<Sub...@>=
 extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
@@ -383,6 +994,34 @@ extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
 extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
  /* likewise */
 @y
+@z
+
+@x [209,210] l.3742 C99 prototypes for C2x.
+Extern octa mem_read @,@,@[ARGS((octa addr))@];
+
+@ @<External r...@>=
+octa mem_read(addr)
+  octa addr;
+@y
+Extern octa mem_read(octa addr);
+
+@ @<External r...@>=
+octa mem_read(
+  octa addr)
+@z
+
+@x [212,213] l.3769 C99 prototypes for C2x.
+Extern void mem_write @,@,@[ARGS((octa addr,octa val))@];
+
+@ @<External r...@>=
+void mem_write(addr,val)
+  octa addr,val;
+@y
+Extern void mem_write(octa addr,octa val);
+
+@ @<External r...@>=
+void mem_write(
+  octa addr, octa val)
 @z
 
 @x [216] l.3838 RAII.
@@ -474,6 +1113,20 @@ Extern bool page_bad; /* does rV violate the rules? */
   else page_mask=(octa){(1<<(page_s-32))-1, 0xffffffff};
 @z
 
+@x [240,241] l.4365 C99 prototypes for C2x.
+static octa phys_addr @,@,@[ARGS((octa,octa))@];
+
+@ @<Sub...@>=
+static octa phys_addr(virt,trans)
+  octa virt,trans;
+@y
+static octa phys_addr(octa,octa);
+
+@ @<Sub...@>=
+static octa phys_addr(
+  octa virt, octa trans)
+@z
+
 @x [241] l.4370 RAII.
 {@+octa t;
   t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
@@ -485,6 +1138,46 @@ Extern bool page_bad; /* does rV violate the rules? */
   co[2*j].ctl->z.o.h=0, co[2*j].ctl->z.o.l=(aaaaa.l&0x3ff)<<3;
 @y
   co[2*j].ctl->z.o=(octa){0, (aaaaa.l&0x3ff)<<3};
+@z
+
+@x [250,251] l.4487 C99 prototypes for C2x.
+static void print_write_buffer @,@,@[ARGS((void))@];
+
+@ @<Sub...@>=
+static void print_write_buffer()
+@y
+static void print_write_buffer(void);
+
+@ @<Sub...@>=
+static void print_write_buffer(void)
+@z
+
+@x [252,253] l.4511 C99 prototypes for C2x.
+Extern void print_pipe @,@,@[ARGS((void))@];
+
+@ @<External r...@>=
+void print_pipe()
+@y
+Extern void print_pipe(void);
+
+@ @<External r...@>=
+void print_pipe(void)
+@z
+
+@x [254,255] l.4540 C99 prototypes for C2x.
+static octa* write_search @,@,@[ARGS((control*,octa))@];
+
+@ @<Sub...@>=
+static octa *write_search(ctl,addr)
+  control *ctl;
+  octa addr;
+@y
+static octa* write_search(control*,octa);
+
+@ @<Sub...@>=
+static octa *write_search(
+  control *ctl,
+  octa addr)
 @z
 
 @x [257] l.4621 Change from MMIX home.
@@ -700,9 +1393,9 @@ section |@<Magic...@>|.  Similar functions are defined in the simplified \MMIX\
 computer {\mc MMIX-SIM}.
 
 @<Internal proto...@>=
-static int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];
-static void mmputchars @,@,@[ARGS((unsigned char*,int,octa))@];
-static char stdin_chr @,@,@[ARGS((void))@];
+static int mmgetchars(char*,int,octa,int);
+static void mmputchars(unsigned char*,int,octa);
+static char stdin_chr(void);
 @z
 
 @x [377] l.6611 Decouple 'mixins' from other private stuff..
@@ -712,20 +1405,24 @@ char stdin_chr @,@,@[ARGS((void))@];
 octa magic_read @,@,@[ARGS((octa))@];
 void magic_write @,@,@[ARGS((octa,octa))@];
 @y
-static octa magic_read @,@,@[ARGS((octa))@];
-static void magic_write @,@,@[ARGS((octa,octa))@];
+static octa magic_read(octa);
+static void magic_write(octa,octa);
 @z
 
 @x [378] l.6623 Factor out private stuff.
 octa magic_read(addr)
+  octa addr;
 @y
-static octa magic_read(addr)
+static octa magic_read(
+  octa addr)
 @z
 
 @x [379] l.6656 Factor out private stuff.
 void magic_write(addr,val)
+  octa addr,val;
 @y
-static void magic_write(addr,val)
+static void magic_write(
+  octa addr, octa val)
 @z
 
 @x [380] l.6695 RAII.
@@ -737,14 +1434,28 @@ static void magic_write(addr,val)
 
 @x [381] l.6714 Factor out private stuff (mixins).
 int mmgetchars(buf,size,addr,stop)
+  char *buf;
+  int size;
+  octa addr;
+  int stop;
 @y
-static int mmgetchars(buf,size,addr,stop)
+static int mmgetchars(
+  char *buf,
+  int size,
+  octa addr,
+  int stop)
 @z
 
 @x [384] l.6772 Factor out private stuff (mixins).
 void mmputchars(buf,size,addr)
+  unsigned char *buf;
+  int size;
+  octa addr;
 @y
-static void mmputchars(buf,size,addr)
+static void mmputchars(
+  unsigned char *buf,
+  int size,
+  octa addr)
 @z
 
 @x [386] l.6803 Compound literal.
@@ -758,7 +1469,7 @@ static void mmputchars(buf,size,addr)
 @x [387] l.6821 Factor out private stuff (mixins).
 char stdin_chr()
 @y
-static char stdin_chr()
+static char stdin_chr(void)
 @z
 
 @x [387] l.6827 Don't ignore return code from fgets().

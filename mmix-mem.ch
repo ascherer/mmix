@@ -34,7 +34,13 @@ extern octa shift_right @,@,@[ARGS((octa y,int s,int u))@];
 
 @x [2] l.40
 octa spec_read @,@,@[ARGS((octa,int))@];@+@t}\6{@>
+octa spec_read(addr,size)
+  octa addr;
+  int size;
 @y
+octa spec_read(
+  octa addr,
+  int size)
 @z
 
 @x [2] l.45 RAII. Don't ignore return code from fgets().
@@ -66,7 +72,13 @@ case 2: val.h=0;@+@=/* fall through */@>@;
 
 @x [3] l.75
 void spec_write @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
+void spec_write(addr,val,size)
+  octa addr,val;
+  int size;
 @y
+void spec_write(
+  octa addr, octa val,
+  int size)
 @z
 
 @x [5/6] l.99 Stuff from MMMIX. Improved module structure.
@@ -80,8 +92,8 @@ after the input.
 @d BUF_SIZE 100
 
 @c
-octa read_hex(p)
-  char *p;
+octa read_hex(
+  char *p)
 {
   unsigned char d[BUF_SIZE];
   register int j,k;
@@ -106,14 +118,14 @@ octa read_hex(p)
 #ifndef MMIX_MEM_H
 #define MMIX_MEM_H
 @#
-#include "mmix-arith.h" /* |@!ARGS|, |@!octa| */
+#include "mmix-arith.h" /* |octa| */
 @#
-extern octa spec_read @,@,@[ARGS((octa,int))@];
+extern octa spec_read(octa,int);
   /* for memory mapped I/O */
-extern void spec_write @,@,@[ARGS((octa,octa,int))@];
+extern void spec_write(octa,octa,int);
   /* likewise */
 @#
-extern octa read_hex @,@,@[ARGS((char *))@];
+extern octa read_hex(char *);
   /* see {\mc MMMIX} */
 @#
 #endif /* |MMIX_MEM_H| */
