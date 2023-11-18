@@ -13,10 +13,18 @@
 #include <string.h>
 #include <stdint.h>
 @#
-#include "mmix-arith.h" /* |@!ARGS|, |@!tetra|, |@!octa|;
+#include "mmix-arith.h" /* |@!tetra|, |@!octa|;
   we do \\{not} link against \.{mmix-arith.o} */
 @#
 @<Type definition@>@;
+@z
+
+@x [1] l.26 C99 prototypes for C2x.
+int main(argc,argv)
+  int argc;@+char*argv[];
+@y
+int main(
+  int argc,char*argv[])
 @z
 
 @x [1] l.29
@@ -84,6 +92,17 @@ typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
+@x [8] l.102 C99 prototypes for C2x.
+octa incr @,@,@[ARGS((octa,int))@];
+octa incr(o,delta)
+  octa o;
+  int delta;
+@y
+octa incr(
+  octa o,
+  int delta)
+@z
+
 @x [8] l.111 Compound literal.
     if (o.l<=t) x.l=o.l+delta, x.h=o.h;
     else x.l=o.l-t-1, x.h=o.h+1;
@@ -100,6 +119,20 @@ typedef uint8_t byte; /* a monobyte */
     else x=(octa){o.h-1, o.l+(0xffffffff+delta)+1};
 @z
 
+@x [9] l.127 C99 prototypes for C2x.
+void read_tet @,@,@[ARGS((void))@];
+void read_tet()
+@y
+void read_tet(void)
+@z
+
+@x [9] l.142 C99 prototypes for C2x.
+byte read_byte @,@,@[ARGS((void))@];
+byte read_byte()
+@y
+byte read_byte(void)
+@z
+
 @x [17] l.217 Compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
@@ -110,6 +143,13 @@ cur_loc=(octa){0,0};
 case lop_post: postamble=1;
 @y
 case lop_post: postamble=true;
+@z
+
+@x [26] l.386 C99 prototypes for C2x.
+void print_stab @,@,@[ARGS((void))@];
+void print_stab()
+@y
+void print_stab(void)
 @z
 
 @x [39] l.457 Change from MMIX home.
