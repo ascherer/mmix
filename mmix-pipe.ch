@@ -103,7 +103,7 @@ int MMIX_silent(void)
   @<Local variables@>;
 @y
   octa breakpoint;@+@t}\6{@>
-  @<Local variables@>;@+(void)breakpoint_hit;@#
+  @<Local variables@>;@#
 @z
 
 @x [10] l.236 C99 prototypes for C2x.
