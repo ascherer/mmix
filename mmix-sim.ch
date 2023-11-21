@@ -57,6 +57,7 @@ this work with new compilers as well as the old standbys.
 @ We declare subroutines with their prototypes.
 @s mem_node int
 @s mem_tetra int
+@s mmix_opcode int
 
 @<Proto...@>=
 void print_hex(octa);
