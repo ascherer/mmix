@@ -1291,6 +1291,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
+@x [304] Use 'breakpoint_hit' at least once (in MMIX_silent).
+if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h)
+@y
+if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h
+  && breakpoint_hit==false )
+@z
+
 @x [338] l.6029 Compound literal.
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 @y
