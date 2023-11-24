@@ -126,17 +126,20 @@ void listing_clear()
 void listing_clear(void)
 @z
 
-@x [45] l.1221
+@x [45] l.1219
+@d err(m) {@+report_error(m);@+if (m[0]!='*') goto bypass;@+}
+@d derr(m,p) {@+sprintf(err_buf,m,p);
+   report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
+@d dderr(m,p,q) {@+sprintf(err_buf,m,p,q);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @y
-   @+err(err_buf);@+}
+@d err(m,...) {@+sprintf(err_buf,m @,@, __VA_OPT__(,) __VA_ARGS__);
+   report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @z
 
-@x [45] l.1223
-   report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
+@x [45] l.1224
 @d panic(m) {@+sprintf(err_buf,"!%s",m);@+report_error(err_buf);@+}
 @y
-   @+err(err_buf);@+}
 @d panic(p) dpanic("%s",p)
 @z
 
@@ -690,6 +693,14 @@ void out_stab(
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
+@x [86] l.2371
+ if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
+ derr("syntax error after character `%c'",*(p-2));
+@y
+ if (*(p-1)) err("syntax error at character `%c'",*(p-1));
+ err("syntax error after character `%c'",*(p-2));
+@z
+
 @x [92] l.2419 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
@@ -714,11 +725,23 @@ acc.h=acc.l=0;
 acc=zero_octa;
 @z
 
+@x [97] l.2469
+  derr("syntax error at `%c'",*(p-2));
+@y
+  err("syntax error at `%c'",*(p-2));
+@z
+
 @x [97] l.2471 GCC warning.
  case '&': rt_op=and;@+break;
 @y
   @=/* fall through */@>@;
  case '&': rt_op=and;@+break;
+@z
+
+@x [97] l.2476
+ default: derr("syntax error at `%c'",*(p-1));
+@y
+ default: err("syntax error at `%c'",*(p-1));
 @z
 
 @x [98] l.2499 Change from MMIX home.
@@ -728,10 +751,74 @@ acc=zero_octa;
  @t\4@>@<Cases for unary operators@>@;
 @z
 
+@x [100] l.2523
+                 derr("can %s pure values only",verb)
+@y
+                 err("can %s pure values only",verb)
+@z
+
+@x [101] l.2544
+      derr("can %s pure values only",verb)
+@y
+      err("can %s pure values only",verb)
+@z
+
+@x [102] l.2602
+  derr("cannot use `%s' in special mode",op_field);
+@y
+  err("cannot use `%s' in special mode",op_field);
+@z
+
+@x [102] l.2605
+  derr("*label field of `%s' instruction is ignored",op_field);
+@y
+  err("*label field of `%s' instruction is ignored",op_field);
+@z
+
+@x [103] l.2622
+  if (*p && !isspace(*p)) derr("label syntax error at `%c'",*p);
+@y
+  if (*p && !isspace(*p)) err("label syntax error at `%c'",*p);
+@z
+
+@x [103] l.2627
+  derr("improper local label `%s'",lab_field);
+@y
+  err("improper local label `%s'",lab_field);
+@z
+
+@x [104] l.2638
+if (!isspace(*p) && *p && op_field[0]) derr("opcode syntax error at `%c'",*p);
+@y
+if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
+@z
+
+@x [104] l.2642
+  if (op_field[0]) derr("unknown operation code `%s'",op_field);
+@.unknown operation code@>
+  if (lab_field[0]) derr("*no opcode; label `%s' will be ignored",lab_field);
+@y
+  if (op_field[0]) err("unknown operation code `%s'",op_field);
+@.unknown operation code@>
+  if (lab_field[0]) err("*no opcode; label `%s' will be ignored",lab_field);
+@z
+
 @x [107] l.2688 Compound literal.
   acc.h=-1, acc.l=-(1<<j);
 @y
   acc=(octa){-1, -(1<<j)};
+@z
+
+@x [109] l.2732
+      if (pp->serial) derr("symbol `%s' is already defined",lab_field);
+@y
+      if (pp->serial) err("symbol `%s' is already defined",lab_field);
+@z
+
+@x [109] l.2735
+      derr("*redefinition of predefined symbol `%s'",lab_field);
+@y
+      err("*redefinition of predefined symbol `%s'",lab_field);
 @z
 
 @x [109] l.2742 CWEB behavior changed between versions 2.8 and 3.0.
@@ -747,6 +834,20 @@ acc=zero_octa;
   octa o=ominus(cur_loc,qq->equiv);
 @z
 
+@x [114] l.2793
+    dderr("*relative address in location #%08x%08x not divisible by 4",
+@y
+    err("*relative address in location #%08x%08x not divisible by 4",
+@z
+
+@x [114] l.2810
+  if (k) dderr("relative address in location #%08x%08x is too far away",
+               qq->equiv.h,qq->equiv.l);
+@y
+  if (k) err("relative address in location #%08x%08x is too far away",
+               qq->equiv.h,qq->equiv.l);
+@z
+
 @x [115] l.2815 GCC warning.
 if (new_link==DEFINED) {
 @y
@@ -759,6 +860,12 @@ if (new_link==DEFINED) {
 } }
 @z
 
+@x [116] l.2828
+    derr("opcode `%s' needs more than one operand",op_field);
+@y
+    err("opcode `%s' needs more than one operand",op_field);
+@z
+
 @x [116] l.2831 GCC warning.
 case 2:@+if (!(op_bits&two_arg_bit))
     if (op_bits&one_arg_bit)
@@ -767,25 +874,79 @@ case 2:@+if (!(op_bits&two_arg_bit))
 @y
 case 2:@+if (!(op_bits&two_arg_bit)) {
     if (op_bits&one_arg_bit)
-      derr("opcode `%s' must not have two operands",op_field)@;
-    else derr("opcode `%s' must have more than two operands",op_field); }
+      err("opcode `%s' must not have two operands",op_field)@;
+    else err("opcode `%s' must have more than two operands",op_field); }
 @z
 
 @x [116] l.2840 GCC warning.
 case 3:@+if (!(op_bits&three_arg_bit))
+    derr("opcode `%s' must not have three operands",op_field);
+  @<Do a three-operand operation@>;
+default: derr("too many operands for opcode `%s'",op_field);
 @y
   @=/* fall through */@>@;
 case 3:@+if (!(op_bits&three_arg_bit))
+    err("opcode `%s' must not have three operands",op_field);
+  @<Do a three-operand operation@>;
+default: err("too many operands for opcode `%s'",op_field);
 @z
 
-@x [116] l.2853 GCC warning.
+@x [117] l.2853 GCC warning.
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
 @y
   { if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
-    else derr("*constant doesn't fit in %d bytes",k); }
+    else err("*constant doesn't fit in %d bytes",k); }
+@z
+
+@x [121] l.2899
+    derr("*Z field of `%s' should not be a register number",op_field);
+@y
+    err("*Z field of `%s' should not be a register number",op_field);
+@z
+
+@x [121] l.2903
+  derr("*Z field of `%s' should be a register number",op_field);
+@y
+  err("*Z field of `%s' should be a register number",op_field);
+@z
+
+@x [122] l.2914
+    derr("*Y field of `%s' should not be a register number",op_field);
+@y
+    err("*Y field of `%s' should not be a register number",op_field);
+@z
+
+@x [122] l.2917
+  derr("*Y field of `%s' should be a register number",op_field);
+@y
+  err("*Y field of `%s' should be a register number",op_field);
+@z
+
+@x [123] l.2929
+    derr("*X field of `%s' should not be a register number",op_field);
+@y
+    err("*X field of `%s' should not be a register number",op_field);
+@z
+
+@x [123] l.2932
+  derr("*X field of `%s' should be a register number",op_field);
+@y
+  err("*X field of `%s' should be a register number",op_field);
+@z
+
+@x [124] l.2947
+    derr("*YZ field of `%s' should not be a register number",op_field);
+@y
+    err("*YZ field of `%s' should not be a register number",op_field);
+@z
+
+@x [124] l.2958
+    derr("*YZ field of `%s' should be a register number",op_field);
+@y
+    err("*YZ field of `%s' should be a register number",op_field);
 @z
 
 @x [127] l.3004 RAII.
@@ -796,7 +957,19 @@ case 3:@+if (!(op_bits&three_arg_bit))
   k=0;
 @z
 
-@x [127] l.3109 Change from MMIX home.
+@x [129] l.3050
+    derr("*operand of `%s' should not be a register number",op_field);
+@y
+    err("*operand of `%s' should not be a register number",op_field);
+@z
+
+@x [129] l.3054
+    derr("*operand of `%s' should be a register number",op_field);
+@y
+    err("*operand of `%s' should be a register number",op_field);
+@z
+
+@x [132] l.3109 Change from MMIX home.
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
