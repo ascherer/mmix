@@ -126,6 +126,18 @@ void listing_clear()
 void listing_clear(void)
 @z
 
+@x [45] l.1221
+   report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
+@y
+   @+err(err_buf);@+}
+@z
+
+@x [45] l.1223
+   report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
+@y
+   @+err(err_buf);@+}
+@z
+
 @x [45] l.1229 C99 prototypes for C2x.
 void report_error @,@,@[ARGS((char*))@];@+@t}\6{@>
 void report_error(message)
