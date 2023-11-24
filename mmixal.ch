@@ -134,8 +134,10 @@ void listing_clear(void)
 
 @x [45] l.1223
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
+@d panic(m) {@+sprintf(err_buf,"!%s",m);@+report_error(err_buf);@+}
 @y
    @+err(err_buf);@+}
+@d panic(p) dpanic("%s",p)
 @z
 
 @x [45] l.1229 C99 prototypes for C2x.
