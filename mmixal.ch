@@ -133,14 +133,16 @@ void listing_clear(void)
 @d dderr(m,p,q) {@+sprintf(err_buf,m,p,q);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @y
-@d err(m,...) {@+sprintf(err_buf,m @,@, __VA_OPT__(,) __VA_ARGS__);
+@d err(m,...) {@+sprintf(@[err_buf,m @,@, __VA_OPT__(,) @,@, __VA_ARGS__@]);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @z
 
 @x [45] l.1224
 @d panic(m) {@+sprintf(err_buf,"!%s",m);@+report_error(err_buf);@+}
+@d dpanic(m,p) {@+err_buf[0]='!';@+sprintf(err_buf+1,m,p);@+
 @y
-@d panic(p) dpanic("%s",p)
+@d panic(m,...) {@+err_buf[0]='!';@+sprintf(@[err_buf+1,m @,@,
+   __VA_OPT__(,) @,@, __VA_ARGS__@]);
 @z
 
 @x [45] l.1229 C99 prototypes for C2x.
@@ -159,6 +161,12 @@ int err_count; /* this many errors were found */
 unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
 unsigned char mmo_buf[4];
 int mmo_ptr;
+@z
+
+@x [47] l.1268
+     dpanic("Can't write on %s",obj_file_name)
+@y
+     panic("Can't write on %s",obj_file_name)
 @z
 
 @x [47] l.1272 Untangle functions and variables.
@@ -1019,4 +1027,28 @@ int main(argc,argv)
 int main(
   int argc,
   char *argv[])
+@z
+
+@x [138] l.3216
+if (!src_file) dpanic("Can't open the source file %s",src_file_name);
+@y
+if (!src_file) panic("Can't open the source file %s",src_file_name);
+@z
+
+@x [138] l.3225
+if (!obj_file) dpanic("Can't open the object file %s",obj_file_name);
+@y
+if (!obj_file) panic("Can't open the object file %s",obj_file_name);
+@z
+
+@x [138] l.3228
+  if (!listing_file) dpanic("Can't open the listing file %s",listing_name);
+@y
+  if (!listing_file) panic("Can't open the listing file %s",listing_name);
+@z
+
+@x [142] l.3252
+  dpanic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);
+@y
+  panic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);
 @z
