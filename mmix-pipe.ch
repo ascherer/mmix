@@ -26,6 +26,8 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #include "mmix-mem.h" /* |@!spec_read|, |@!spec_write| */
 #include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, etc. */
 @#
+#include <stdarg.h> /* |vfprintf|, |va_start|, |va_end| */
+@#
 @z
 
 @x [3] l.130 Improved module structure with interfaces.
@@ -121,11 +123,41 @@ void MMIX_run(
 @y
 @z
 
-@x [11] l.259 Use standard C99 type. ('wow' was never used anywhere.)
+@x [11,12] l.259 Use standard C99 type. ('wow' was never used anywhere.)
 @ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
+
+@ @<Local var...@>=
+register int i,j,m;
+bool breakpoint_hit=false;
+bool halted=false;
 @y
-@ (This section remains empty for historic reasons.)
+@ @<Local var...@>=
+register int i,j,m;
+bool breakpoint_hit=false;
+bool halted=false;
+
+@ First we need a function to print error messages.
+
+@<Subroutines@>=
+static void errprint(const char *fmt, ...)
+{
+  va_list ap;
+  va_start(ap, fmt);
+  (void) vfprintf(stderr, fmt, ap);
+  va_end(ap);
+}
+@z
+
+@x [13] l.271
+@d errprint0(f) fprintf(stderr,f)
+@d errprint1(f,a) fprintf(stderr,f,a)
+@d errprint2(f,a,b) fprintf(stderr,f,a,b)
+@d panic(x)@+ {@+errprint0("Panic: ");@+x;@+errprint0("!\n");@+expire();@+}
+@d confusion(m) errprint1("This can't happen: %s",m)
+@y
+@d panic(x)@+ {@+errprint("Panic: ");@+x;@+errprint("!\n");@+expire();@+}
+@d confusion(m) errprint("This can't happen: %s",m)
 @z
 
 @x [13,14] l.279 C99 prototypes for C2x.
@@ -138,6 +170,14 @@ static void expire(void);
 
 @ @<Sub...@>=
 static void expire(void) /* the last gasp before dying */
+@z
+
+@x [14] l.284
+  if (ticks.h) errprint2("(Clock time is %dH+%d.)\n",ticks.h,ticks.l);
+  else errprint1("(Clock time is %d.)\n",ticks.l);
+@y
+  if (ticks.h) errprint("(Clock time is %dH+%d.)\n",ticks.h,ticks.l);
+  else errprint("(Clock time is %d.)\n",ticks.l);
 @z
 
 @x [17] l.326 Stuff from MMIX-ARITH.
@@ -242,6 +282,12 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
 @y
 @z
 
+@x [22] l.421
+  panic(errprint0("Incorrect implementation of type tetra"));
+@y
+  panic(errprint("Incorrect implementation of type tetra"));
+@z
+
 @x [23,24] l.459 C99 prototypes for C2x.
 static void print_coroutine_id @,@,@[ARGS((coroutine*))@];
 static void errprint_coroutine_id @,@,@[ARGS((coroutine*))@];
@@ -258,12 +304,20 @@ static void print_coroutine_id(
   coroutine *c)
 @z
 
-@x [10] l.470 C99 prototypes for C2x.
+@x [25] l.470 C99 prototypes for C2x.
 static void errprint_coroutine_id(c)
   coroutine *c;
 @y
 static void errprint_coroutine_id(
   coroutine *c)
+@z
+
+@x [25] l.473
+  if (c) errprint2("%s:%d",c->name,c->stage);
+  else errprint0("??");
+@y
+  if (c) errprint("%s:%d",c->name,c->stage);
+  else errprint("??");
 @z
 
 @x [27,28| l.507 C99 prototypes for C2x.
@@ -280,6 +334,14 @@ static void schedule(coroutine*,int,int);
 static void schedule(
   coroutine *c,
   int d, int s)
+@z
+
+@x [28] l.517
+   panic(confusion("Scheduling ");errprint_coroutine_id(c);
+         errprint1(" with delay %d",d));
+@y
+   panic(confusion("Scheduling ");errprint_coroutine_id(c);
+         errprint(" with delay %d",d));
 @z
 
 @x [30,31] l.540 C99 prototypes for C2x.
@@ -1010,6 +1072,12 @@ octa mem_read(
   octa addr)
 @z
 
+@x [210] l.3755
+        errprint2("uninitialized memory read at %08x%08x",addr.h,addr.l);
+@y
+        errprint("uninitialized memory read at %08x%08x",addr.h,addr.l);
+@z
+
 @x [212,213] l.3769 C99 prototypes for C2x.
 Extern void mem_write @,@,@[ARGS((octa addr,octa val))@];
 
@@ -1022,6 +1090,26 @@ Extern void mem_write(octa addr,octa val);
 @ @<External r...@>=
 void mem_write(
   octa addr, octa val)
+@z
+
+@x [213] l.3782
+        panic(errprint1("More than %d memory chunks are needed",
+@.More...chunks are needed@>
+                 mem_chunks_max));
+@y
+        panic(errprint("More than %d memory chunks are needed",
+@.More...chunks are needed@>
+                 mem_chunks_max));
+@z
+
+@x [213] l.3787
+        panic(errprint1("I can't allocate memory chunk number %d",
+@.I can't allocate...@>
+                 mem_chunks));
+@y
+        panic(errprint("I can't allocate memory chunk number %d",
+@.I can't allocate...@>
+                 mem_chunks));
 @z
 
 @x [216] l.3838 RAII.
