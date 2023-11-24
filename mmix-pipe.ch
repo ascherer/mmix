@@ -126,27 +126,8 @@ void MMIX_run(
 @x [11,12] l.259 Use standard C99 type. ('wow' was never used anywhere.)
 @ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
-
-@ @<Local var...@>=
-register int i,j,m;
-bool breakpoint_hit=false;
-bool halted=false;
 @y
-@ @<Local var...@>=
-register int i,j,m;
-bool breakpoint_hit=false;
-bool halted=false;
-
-@ First we need a function to print error messages.
-
-@<Subroutines@>=
-static void errprint(const char *fmt, ...)
-{
-  va_list ap;
-  va_start(ap, fmt);
-  (void) vfprintf(stderr, fmt, ap);
-  va_end(ap);
-}
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [13] l.271
@@ -166,9 +147,18 @@ static void expire @,@,@[ARGS((void))@];
 @ @<Sub...@>=
 static void expire() /* the last gasp before dying */
 @y
+static void errprint(const char*, ...);
 static void expire(void);
 
 @ @<Sub...@>=
+static void errprint(const char *fmt, ...)
+{
+  va_list ap;
+  va_start(ap, fmt);
+  (void) vfprintf(stderr, fmt, ap);
+  va_end(ap);
+}
+@#
 static void expire(void) /* the last gasp before dying */
 @z
 
