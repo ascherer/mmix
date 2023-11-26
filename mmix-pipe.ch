@@ -384,6 +384,12 @@ static coroutine* queuelist(
   int t)
 @z
 
+@x [36] l.600
+coroutine sentinel; /* dummy coroutine at origin of circular list */
+@y
+static coroutine sentinel; /* dummy coroutine at origin of circular list */
+@z
+
 @x [38,39] l.623 C99 prototypes for C2x.
 Extern void print_locks @,@,@[ARGS((void))@];
 
@@ -394,6 +400,12 @@ Extern void print_locks(void);
 
 @ @<External r...@>=
 void print_locks(void)
+@z
+
+@x [41] l.676
+spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
+@y
+static spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
 @z
 
 @x [42,43] l.679 C99 prototypes for C2x.
@@ -433,12 +445,42 @@ static void print_control_block(
   control *c)
 @z
 
+@x [48] l.851
+char *opcode_name[]={@|
+@y
+static char *opcode_name[]={@|
+@z
+
+@x [50] l.992
+char *internal_op_name[]={
+@y
+static char *internal_op_name[]={
+@z
+
+@x [51] l.1088
+internal_opcode internal_op[256]={@|
+@y
+static internal_opcode internal_op[256]={@|
+@z
+
 @x [52] l.1129 Change from MMIX home.
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
 followed by rG~(19) and rA~(21) packed into eight bytes.
 @y
 \.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
 followed by~19 and~21.
+@z
+
+@x [53] l.1167
+char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
+@y
+static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
+@z
+
+@x [54] l.1196
+char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
+@y
+static char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
 @z
 
 @x [55,56] l.1199 C99 prototypes for C2x.
@@ -467,6 +509,24 @@ static void print_reorder_buffer(void);
 static void print_reorder_buffer(void)
 @z
 
+@x [65] l.1465
+int dispatch_count; /* how many dispatched on this cycle */
+bool suppress_dispatch; /* should dispatching be bypassed? */
+int doing_interrupt; /* how many cycles of interrupt preparations remain */
+lockvar dispatch_lock; /* lock to prevent instruction issues */
+@y
+static int dispatch_count; /* how many dispatched on this cycle */
+static bool suppress_dispatch; /* should dispatching be bypassed? */
+static int doing_interrupt; /* how many cycles of interrupt preparations remain */
+static lockvar dispatch_lock; /* lock to prevent instruction issues */
+@z
+
+@x [70] l.1539
+fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
+@y
+static fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
+@z
+
 @x [72,73] l.1548 C99 prototypes for C2x.
 static void print_fetch_buffer @,@,@[ARGS((void))@];
 
@@ -489,6 +549,28 @@ static void print_fetch_buffer(void)
   if (cool==reorder_bot) new_cool=reorder_top;@+else new_cool=cool-1;
 @y
   new_cool=cool==reorder_bot?reorder_top:cool-1;
+@z
+
+@x [78] l.1667
+control *new_cool; /* the reorder position following |cool| */
+int resuming; /* set nonzero if resuming an interrupted instruction */
+tetra support[8]; /* big-endian bitmap for all opcodes supported */
+@y
+static control *new_cool; /* the reorder position following |cool| */
+static int resuming; /* set nonzero if resuming an interrupted instruction */
+static tetra support[8]; /* big-endian bitmap for all opcodes supported */
+@z
+
+@x [83] l.1745
+unsigned char flags[256]={@|@t\1\1@>
+@y
+static unsigned char flags[256]={@|@t\1\1@>
+@z
+
+@x [88] l.1857
+int lring_mask; /* for calculations modulo |lring_size| */
+@y
+static int lring_mask; /* for calculations modulo |lring_size| */
 @z
 
 @x [89] l.1865 Different approach for ABSTIME.
@@ -597,10 +679,26 @@ static void spec_rem( /* remove |t| from its list */
   specnode *t)
 @z
 
+@x [99] l.1975
+int cool_L,cool_G; /* values of rL and rG before the |cool| instruction */
+unsigned int cool_hist,peek_hist; /* history bits for branch prediction */
+octa new_O,new_S; /* values of rO, rS after |cool| */
+@y
+static int cool_L,cool_G; /* values of rL and rG before the |cool| instruction */
+static unsigned int cool_hist,peek_hist; /* history bits for branch prediction */
+static octa new_O,new_S; /* values of rO, rS after |cool| */
+@z
+
 @x [101] l.2009 Improved typography.
 @<Special cases of instruction dispatch@>@;
 @y
 @t\4@>@<Special cases of instruction dispatch@>@;
+@z
+
+@x [107] l.2062
+unsigned char third_operand[256]={@|@t\1\1@>
+@y
+static unsigned char third_operand[256]={@|@t\1\1@>
 @z
 
 @x [111] l.2135 Change from MMIX home.
@@ -637,6 +735,16 @@ mem.addr=neg_one;
     if (x<new_L)
 @y
     if (x<(unsigned int)new_L)
+@z
+
+@x [127] l.2432
+coroutine mem_locker; /* trivial coroutine that vanishes */
+coroutine Dlocker; /* another */
+control vanish_ctl; /* such coroutines share a common control block */
+@y
+static coroutine mem_locker; /* trivial coroutine that vanishes */
+static coroutine Dlocker; /* another */
+static control vanish_ctl; /* such coroutines share a common control block */
 @z
 
 @x [130] l.2473 Improved typography.
@@ -696,6 +804,24 @@ case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
 @y
 case mux: data->x.o=oor(oand(data->y.o, data->b.o),
                         oandn(data->z.o, data->b.o));
+@z
+
+@x [148] l.2979
+octa new_Q; /* when rQ increases in any bit position, so should this */
+bool stack_overflow; /* stack overflow not yet reported */
+@y
+static octa new_Q; /* when rQ increases in any bit position, so should this */
+static bool stack_overflow; /* stack overflow not yet reported */
+@z
+
+@x [154] l.2936
+int bp_amask,bp_cmask,bp_bcmask,bp_nmask,bp_npower;
+int bp_rev_stat,bp_ok_stat; /* how often we overrode and agreed */
+int bp_bad_stat,bp_good_stat; /* how often we failed and succeeded */
+@y
+static int bp_amask,bp_cmask,bp_bcmask,bp_nmask,bp_npower;
+static int bp_rev_stat,bp_ok_stat; /* how often we overrode and agreed */
+static int bp_bad_stat,bp_good_stat; /* how often we failed and succeeded */
 @z
 
 @x [156,157] l.2960 C99 prototypes for C2x.
@@ -963,6 +1089,12 @@ static cacheblock* cache_search(
   register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @z
 
+@x [194] l.3510
+cacheset hit_set;
+@y
+static cacheset hit_set;
+@z
+
 @x [195,196] l.3519 C99 prototypes for C2x.
 static cacheblock* use_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
 
@@ -1130,6 +1262,16 @@ Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
 @z
 
+@x [230] l.4124
+coroutine clean_co;
+control clean_ctl;
+lockvar clean_lock;
+@y
+static coroutine clean_co;
+static control clean_ctl;
+static lockvar clean_lock;
+@z
+
 @x [232] l.4137 Improved typography.
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
@@ -1144,10 +1286,22 @@ Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
   data->y.o=(octa){i, j};
 @z
 
-@x [235} l.4199 Compound literal.
+@x [234} l.4199 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
+@z
+
+@x [235] l.4271
+control IPTctl[5], DPTctl[5]; /* control blocks for I and D page translation */
+coroutine IPTco[10], DPTco[10]; /* each coroutine is a two-stage pipeline */
+char *IPTname[5]={"IPT0","IPT1","IPT2","IPT3","IPT4"};
+char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
+@y
+static control IPTctl[5], DPTctl[5]; /* control blocks for I and D page translation */
+static coroutine IPTco[10], DPTco[10]; /* each coroutine is a two-stage pipeline */
+static char *IPTname[5]={"IPT0","IPT1","IPT2","IPT3","IPT4"};
+static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 @z
 
 @x [236] l.4292 Move variable here.
@@ -1222,6 +1376,14 @@ static octa phys_addr(
   co[2*j].ctl->z.o.h=0, co[2*j].ctl->z.o.l=(aaaaa.l&0x3ff)<<3;
 @y
   co[2*j].ctl->z.o=(octa){0, (aaaaa.l&0x3ff)<<3};
+@z
+
+@x [248] l.4474
+coroutine write_co; /* coroutine that empties the write buffer */
+control write_ctl; /* its control block */
+@y
+static coroutine write_co; /* coroutine that empties the write buffer */
+static control write_ctl; /* its control block */
 @z
 
 @x [250,251] l.4487 C99 prototypes for C2x.
@@ -1338,6 +1500,16 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     octa after=shift_right(shift_left(data->b.o,i),i,0);
 @z
 
+@x [285] l.5204
+int fetch_lo, fetch_hi; /* the active region of that buffer */
+coroutine fetch_co;
+control fetch_ctl;
+@y
+static int fetch_lo, fetch_hi; /* the active region of that buffer */
+static coroutine fetch_co;
+static control fetch_ctl;
+@z
+
 @x [288] l.5238 Improved typography.
   @<Other cases for the fetch coroutine@>@;
 @y
@@ -1375,11 +1547,31 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
+@x [303] l.5420
+bool sleepy; /* have we just emitted the page table emulation call? */
+@y
+static bool sleepy; /* have we just emitted the page table emulation call? */
+@z
+
 @x [304] Use 'breakpoint_hit' at least once (in MMIX_silent).
 if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h)
 @y
 if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h
   && breakpoint_hit==false )
+@z
+
+@x [305] l.5450
+int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
+@y
+static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
+@z
+
+@x [315] l.5607
+bool trying_to_interrupt; /* encouraging interruptible operations to pause */
+bool nullifying; /* stopping dispatch to nullify a load/store command */
+@y
+static bool trying_to_interrupt; /* encouraging interruptible operations to pause */
+static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @z
 
 @x [338] l.6029 Compound literal.
@@ -1458,6 +1650,12 @@ case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
   trap_loc=incr(g[rWW].o,-4);
 @y
   octa trap_loc=incr(g[rWW].o,-4);
+@z
+
+@x [374] l.6590
+char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
+@y
+static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @z
 
 @x [376] l.6594 Decouple 'mixins'.
@@ -1573,4 +1771,14 @@ static char stdin_chr(void)
     for (p=stdin_buf;p<stdin_buf+254;p++) if(*p=='\n') break;
 @y
     for (p=stdin_buf;p<stdin_buf+sizeof(stdin_buf)-2;p++) if(*p=='\n') break;
+@z
+
+@x [388] l.6836
+char stdin_buf[256]; /* standard input to the simulated program */
+char *stdin_buf_start; /* current position in that buffer */
+char *stdin_buf_end; /* current end of that buffer */
+@y
+static char stdin_buf[256]; /* standard input to the simulated program */
+static char *stdin_buf_start; /* current position in that buffer */
+static char *stdin_buf_end; /* current end of that buffer */
 @z
