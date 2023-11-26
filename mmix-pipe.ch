@@ -33,12 +33,18 @@ Readers of this program should be familiar with the explanation of \MMIX's
 @x [3] l.130 Improved module structure with interfaces.
 @<Header definitions@>@;
 @<Type definitions@>@;
-@y
-@z
-
-@x [3] l.335 Improved module structure with interfaces.
+@<Global variables@>@;
+@<External variables@>@;
+@<Internal prototypes@>@;
 @<External prototypes@>@;
+@<Subroutines@>@;
+@<External routines@>@;
 @y
+@<Global variables@>@;
+@<Internal prototypes@>@;
+@<Subroutines@>@;
+@<External variables@>@;
+@<External routines@>@;
 @z
 
 @x [5] l.152 Improved module structure with interfaces.
