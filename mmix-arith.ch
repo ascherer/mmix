@@ -28,10 +28,13 @@ typedef enum{@+false,true@+} bool;
 
 @x [1] l.41 Factor out private stuff.
 @<Global variables@>@;
+@<Subroutines@>
 @y
-@<Global variables@>@;
-@<Private variable@>@;
+@<Global variable@>@;
 @<Internal prototypes@>@;
+@<Subroutines@>@;
+@<External variables@>@;
+@<External routines@>@;
 @z
 
 @x [2] l.44 C99 prototypes for C2x.
@@ -63,22 +66,26 @@ typedef uint32_t tetra;
 @z
 
 @x [4] l.69 RAII.
+@<Glob...@>=
 octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
+@<External variables@>=
 const octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
 const octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 const octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 const octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @z
 
-@x [5] l.78 C99 prototypes for C2x.
+@x [5] l.77 C99 prototypes for C2x.
+@<Subr...@>=
 octa oplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa oplus(y,z) /* compute $y+z$ */
   octa y,z;
 @y
+@<External routines@>=
 octa oplus( /* compute $y+z$ */
   octa y, octa z)
 @z
@@ -108,12 +115,14 @@ octa ominus( /* compute $y-z$ */
 {@+ octa x={y.h-z.h, y.l-z.l};
 @z
 
-@x [6] l.102 C99 prototypes for C2x.
+@x [6] l.101 C99 prototypes for C2x.
+@<Subr...@>=
 octa incr @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 octa incr(y,delta) /* compute $y+\delta$ */
   octa y;
   int delta;
 @y
+@<External routines@>=
 octa incr( /* compute $y+\delta$ */
   octa y,
   int delta)
@@ -132,12 +141,14 @@ octa incr( /* compute $y+\delta$ */
   }@+else {if (x.l>y.l) x.h--;}
 @z
 
-@x [7] l.117 C99 prototypes for C2x.
+@x [7] l.116 C99 prototypes for C2x.
+@<Subr...@>=
 octa shift_left @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 octa shift_left(y,s) /* shift left by $s$ bits, where $0\le s\le64$ */
   octa y;
   int s;
 @y
+@<External routines@>=
 octa shift_left( /* shift left by $s$ bits, where $0\le s\le64$ */
   octa y,
   int s)
@@ -154,13 +165,21 @@ octa shift_right( /* shift right, arithmetically if $u=0$ */
   int s, int u)
 @z
 
-@x [8] l.150 C99 prototypes for C2x.
+@x [8] l.149 C99 prototypes for C2x.
+@<Subr...@>=
 octa omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa omult(y,z)
   octa y,z;
 @y
+@<External routines@>=
 octa omult(
   octa y, octa z)
+@z
+
+@x [9] l.173
+@ @<Glob...@>=
+@y
+@ @<External variables@>=
 @z
 
 @x [11] l.182 Compound literals.
@@ -171,11 +190,13 @@ aux=(octa){(w[7]<<16)+w[6], (w[5]<<16)+w[4]};
 acc=(octa){(w[3]<<16)+w[2], (w[1]<<16)+w[0]};
 @z
 
-@x [12] l.191 C99 prototypes for C2x.
+@x [12] l.190 C99 prototypes for C2x.
+@<Subr...@>=
 octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa signed_omult(y,z)
   octa y,z;
 @y
+@<External routines@>=
 octa signed_omult(
   octa y, octa z)
 @z
@@ -187,11 +208,13 @@ octa signed_omult(
   octa acc=omult(y,z);
 @z
 
-@x [13] l.215 C99 prototypes for C2x.
+@x [13] l.214 C99 prototypes for C2x.
+@<Subr...@>=
 octa odiv @,@,@[ARGS((octa,octa,octa))@];@+@t}\6{@>
 octa odiv(x,y,z)
   octa x,y,z;
 @y
+@<External routines@>=
 octa odiv(
   octa x, octa y, octa z)
 @z
@@ -210,11 +233,13 @@ if (u[j+n]!=k) {
 if (u[j+n]!=(tetra)k) {
 @z
 
-@x [24] l.317 C99 prototypes for C2x.
+@x [24] l.316 C99 prototypes for C2x.
+@<Subr...@>=
 octa signed_odiv @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa signed_odiv(y,z)
   octa y,z;
 @y
+@<External routines@>=
 octa signed_odiv(
   octa y, octa z)
 @z
@@ -237,7 +262,7 @@ packaging as subroutines.
 @x [25] l.345 Add missing bit-fiddling functions.
 @<Subr...@>=
 @y
-@<Subr...@>=
+@<External routines@>=
 octa oor( /* compute $y\lor z$ */
   octa y, octa z)
 { @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
@@ -302,42 +327,56 @@ octa onxor( /* compute $\overline{y\oplus z}$ */
 { @+ return (octa){~(y.h^z.h), ~(y.l^z.l)}; @+ }
 @z
 
-@x [26] l.387 C99 prototypes for C2x.
+@x [26] l.386 C99 prototypes for C2x.
+@<Subr...@>=
 int count_bits @,@,@[ARGS((tetra))@];@+@t}\6{@>
 int count_bits(x)
   tetra x;
 @y
+@<External routines@>=
 int count_bits(
   tetra x)
 @z
 
-@x [27] l.403 C99 prototypes for C2x.
+@x [27] l.402 C99 prototypes for C2x.
+@<Subr...@>=
 tetra byte_diff @,@,@[ARGS((tetra,tetra))@];@+@t}\6{@>
 tetra byte_diff(y,z)
   tetra y,z;
 @y
+@<External routines@>=
 tetra byte_diff(
   tetra y, tetra z)
 @z
 
-@x [28] l.421 C99 prototypes for C2x.
+@x [28] l.420 C99 prototypes for C2x.
+@<Subr...@>=
 tetra wyde_diff @,@,@[ARGS((tetra,tetra))@];@+@t}\6{@>
 tetra wyde_diff(y,z)
   tetra y,z;
 @y
+@<External routines@>=
 tetra wyde_diff(
   tetra y, tetra z)
 @z
 
-@x [29] l.434 C99 prototypes for C2x.
+@x [29] l.433 C99 prototypes for C2x.
+@<Subr...@>=
 octa bool_mult @,@,@[ARGS((octa,octa,bool))@];@+@t}\6{@>
 octa bool_mult(y,z,xor)
   octa y,z; /* the operands */
   bool xor; /* do we do xor instead of or? */
 @y
+@<External routines@>=
 octa bool_mult(
   octa y, octa z, /* the operands */
   bool xor) /* do we do xor instead of or? */
+@z
+
+@x [30] l.463
+@<Glob...@>=
+@y
+@<External variables@>=
 @z
 
 @x [31] l.505 Factor out private stuff.
@@ -353,6 +392,12 @@ static octa fpack(
   int e, /* the raw exponent */
   char s, /* the sign */
   int r) /* the rounding mode */
+@z
+
+@x [32] l.529
+@ @<Glob...@>=
+@y
+@ @<External variables@>=
 @z
 
 @x [33] l.532 Change from MMIX home.
@@ -426,11 +471,13 @@ static ftype sfunpack(
   *f=(octa){(x>>1)&0x3fffff, x<<31};
 @z
 
-@x [39] l.665 C99 prototypes for C2x.
+@x [39] l.664 C99 prototypes for C2x.
+@<Subr...@>=
 octa load_sf @,@,@[ARGS((tetra))@];@+@t}\6{@>
 octa load_sf(z)
   tetra z; /* 32 bits to be loaded into a 64-bit register */
 @y
+@<External routines@>=
 octa load_sf(
   tetra z) /* 32 bits to be loaded into a 64-bit register */
 @z
@@ -442,11 +489,13 @@ octa load_sf(
   octa f,x;@+int e;@+char s;@+ftype t=sfunpack(z,&f,&e,&s);
 @z
 
-@x [40] l.682 C99 prototypes for C2x.
+@x [40] l.681 C99 prototypes for C2x.
+@ @<Subr...@>=
 tetra store_sf @,@,@[ARGS((octa))@];@+@t}\6{@>
 tetra store_sf(x)
   octa x; /* 64 bits to be loaded into a 32-bit word */
 @y
+@ @<External routines@>=
 tetra store_sf(
   octa x) /* 64 bits to be loaded into a 32-bit word */
 @z
@@ -464,11 +513,13 @@ tetra store_sf(
  default: case zro: z=0;@+break;
 @z
 
-@x [41] l.707 C99 prototypes for C2x.
+@x [41] l.706 C99 prototypes for C2x.
+@<Subr...@>=
 octa fmult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa fmult(y,z)
   octa y,z;
 @y
+@<External routines@>=
 octa fmult(
   octa y, octa z)
 @z
@@ -505,11 +556,13 @@ case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 @z
 
-@x [44] l.750 C99 prototypes for C2x.
+@x [44] l.749 C99 prototypes for C2x.
+@ @<Subr...@>=
 octa fdivide @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa fdivide(y,z)
   octa y,z;
 @y
+@ @<External routines@>=
 octa fdivide(
   octa y, octa z)
 @z
@@ -542,11 +595,13 @@ octa fdivide(
  default: case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @z
 
-@x [46] l.792 C99 prototypes for C2x.
+@x [46] l.791 C99 prototypes for C2x.
+@<Subr...@>=
 octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa fplus(y,z)
   octa y,z;
 @y
+@<External routines@>=
 octa fplus(
   octa y, octa z)
 @z
@@ -583,18 +638,21 @@ octa fplus(
  default: case 4*zro+zro: x=zero_octa;
 @z
 
-@x [50] l.885 C99 prototypes for C2x.
+@x [50] l.884 C99 prototypes for C2x.
+@<Subr...@>=
 int fepscomp @,@,@[ARGS((octa,octa,octa,int))@];@+@t}\6{@>
 int fepscomp(y,z,e,s)
   octa y,z,e; /* the operands */
   int s; /* test similarity? */
 @y
+@<External routines@>=
 int fepscomp(
   octa y, octa z, octa e, /* the operands */
   int s) /* test similarity? */
 @z
 
-@x [54] l.974
+@x [54] l.973
+@<Subr...@>=
 static void bignum_times_ten @,@,@[ARGS((bignum*))@];
 static void bignum_dec @,@,@[ARGS((bignum*,bignum*,tetra))@];
 static int bignum_compare @,@,@[ARGS((bignum*,bignum*))@];
@@ -602,6 +660,7 @@ void print_float @,@,@[ARGS((octa))@];@+@t}\6{@>
 void print_float(x)
   octa x;
 @y
+@<External routines@>=
 void print_float(
   octa x)
 @z
@@ -638,12 +697,14 @@ else if (strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
 else if (strlen(s)>=(size_t)e) printf("%.*s.%s",e,s,s+e);
 @z
 
-@x [68] l.1342 C99 prototypes for C2x.
+@x [68] l.1341 C99 prototypes for C2x.
+@<Subr...@>=
 static void bignum_double @,@,@[ARGS((bignum*))@];
 int scan_const @,@,@[ARGS((char*))@];@+@t}\6{@>
 int scan_const(s)
   char *s;
 @y
+@<External routines@>=
 int scan_const(
   char *s)
 @z
@@ -660,6 +721,12 @@ int scan_const(
   next_char=s;@+return -1;
 @z
 
+@x [69] l.1360
+@ @<Glob...@>=
+@y
+@ @<External variables@>=
+@z
+
 @x [73] l.1402 GCC warning.
     if (q>buf0 || *p!='0')
        if (q<buf_max) *q++=*p;
@@ -668,16 +735,6 @@ int scan_const(
     if (q>buf0 || *p!='0') {
        if (q<buf_max) *q++=*p;
        else if (*(q-1)=='0') *(q-1)=*p; }
-@z
-
-@x [75] l.1431 Factor out private stuff.
-@d buf_max (buf+777)
-
-@<Glob...@>=
-@y
-@d buf_max (buf+777)
-
-@<Priv...@>=
 @z
 
 @x [76] l.1439 GCC warning.
@@ -700,11 +757,13 @@ static void bignum_double(
   bignum *f)
 @z
 
-@x [85] l.1579 C99 prototypes for C2x.
+@x [85] l.1578 C99 prototypes for C2x.
+@<Subr...@>=
 int fcomp @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 int fcomp(y,z)
   octa y,z;
 @y
+@<External routines@>=
 int fcomp(
   octa y, octa z)
 @z
@@ -731,12 +790,14 @@ int fcomp(
  default: case 4*zro+zro: return 0;
 @z
 
-@x [86] l.1612 C99 prototypes for C2x.
+@x [86] l.1611 C99 prototypes for C2x.
+@<Subr...@>=
 octa fintegerize @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 octa fintegerize(z,r)
   octa z; /* the operand */
   int r; /* the rounding mode */
 @y
+@<External routines@>=
 octa fintegerize(
   octa z, /* the operand */
   int r) /* the rounding mode */
@@ -774,12 +835,14 @@ if (xf.l) xf.h=0x3ff00000, xf.l=0;
 if (xf.l) xf=(octa){0x3ff00000, 0};
 @z
 
-@x [88] l.1654 C99 prototypes for C2x.
+@x [88] l.1653 C99 prototypes for C2x.
+@<Subr...@>=
 octa fixit @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 octa fixit(z,r)
   octa z; /* the operand */
   int r; /* the rounding mode */
 @y
+@<External routines@>=
 octa fixit(
   octa z, /* the operand */
   int r) /* the rounding mode */
@@ -804,7 +867,8 @@ octa fixit(
  case zro: default: return zero_octa;
 @z
 
-@x [89] l.1685 C99 prototypes for C2x.
+@x [89] l.1684 C99 prototypes for C2x.
+@<Subr...@>=
 octa floatit @,@,@[ARGS((octa,int,int,int))@];@+@t}\6{@>
 octa floatit(z,r,u,p)
   octa z; /* octabyte to float */
@@ -812,6 +876,7 @@ octa floatit(z,r,u,p)
   int u; /* unsigned? */
   int p; /* short precision? */
 @y
+@<External routines@>=
 octa floatit(
   octa z, /* octabyte to float */
   int r, /* rounding mode */
@@ -828,12 +893,14 @@ octa floatit(
   register int ex=exceptions;
 @z
 
-@x [91] l.1722 C99 prototypes for C2x.
+@x [91] l.1721 C99 prototypes for C2x.
+@<Subr...@>=
 octa froot @,@,@[ARGS((octa,int))@];@+@t}\6{@>
 octa froot(z,r)
   octa z; /* the operand */
   int r; /* the rounding mode */
 @y
+@<External routines@>=
 octa froot(
   octa z, /* the operand */
   int r) /* the rounding mode */
@@ -874,12 +941,14 @@ rf.h=0, rf.l=(zf.h>>22)-1;
 rf=(octa){0, (zf.h>>22)-1};
 @z
 
-@x [93] l.1778 C99 prototypes for C2x.
+@x [93] l.1777 C99 prototypes for C2x.
+@<Subr...@>=
 octa fremstep @,@,@[ARGS((octa,octa,int))@];@+@t}\6{@>
 octa fremstep(y,z,delta)
   octa y,z;
   int delta;
 @y
+@<External routines@>=
 octa fremstep(
   octa y, octa z,
   int delta)
