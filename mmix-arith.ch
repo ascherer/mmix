@@ -53,6 +53,21 @@ new-style and old-style compilers.
 @y
 @ Subroutines of this program are declared and defined with a prototype,
 as in {\mc ANSI C}.
+
+@s ftype int
+@s octa int
+@s tetra int
+
+@<Internal...@>=
+static octa fpack(octa,int,char,int);
+static tetra sfpack(octa,int,char,int);
+static ftype funpack(octa,octa*,int*,char*);
+static ftype sfunpack(tetra,octa*,int*,char*);
+@#
+static void bignum_times_ten(bignum*);
+static void bignum_dec(bignum*,bignum*,tetra);
+static int bignum_compare(bignum*,bignum*);
+static void bignum_double(bignum*);
 @z
 
 @x [3] l.51 Use standard C99 types.
@@ -65,18 +80,29 @@ typedef unsigned int tetra;
 typedef uint32_t tetra;
 @z
 
-@x [4] l.69 RAII.
+@x [4] l.66 RAII.
+@ @d sign_bit ((unsigned)0x80000000)
+
 @<Glob...@>=
 octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
-@<External variables@>=
-const octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
-const octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
-const octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
-const octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
+@ The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
+declare variables that are accessed in other modules. Actually
+all appearances of `\&{Extern}' are defined to be blank here, but
+`\&{Extern}' will become `\&{extern}' in the header file |@(mmix-arith.h@>|.
+We might as well use it for the |@<Exported...@>|.
+
+@d Extern  /* blank for us, \&{extern} for them */
+@f Extern extern
+
+@c
+Extern const octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
+Extern const octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
+Extern const octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
+Extern const octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -178,8 +204,12 @@ octa omult(
 
 @x [9] l.173
 @ @<Glob...@>=
+octa aux; /* secondary output of subroutines with multiple outputs */
+bool overflow; /* set by certain subroutines for signed arithmetic */
 @y
 @ @<External variables@>=
+Extern octa aux; /* secondary output of subroutines with multiple outputs */
+Extern bool overflow; /* set by certain subroutines for signed arithmetic */
 @z
 
 @x [11] l.182 Compound literals.
@@ -196,6 +226,8 @@ octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa signed_omult(y,z)
   octa y,z;
 @y
+@d sign_bit ((unsigned)0x80000000)
+
 @<External routines@>=
 octa signed_omult(
   octa y, octa z)
@@ -375,8 +407,10 @@ octa bool_mult(
 
 @x [30] l.463
 @<Glob...@>=
+int cur_round; /* the current rounding mode */
 @y
 @<External variables@>=
+Extern int cur_round; /* the current rounding mode */
 @z
 
 @x [31] l.505 Factor out private stuff.
@@ -396,8 +430,10 @@ static octa fpack(
 
 @x [32] l.529
 @ @<Glob...@>=
+int exceptions; /* bits possibly destined for rA */
 @y
 @ @<External variables@>=
+Extern int exceptions; /* bits possibly destined for rA */
 @z
 
 @x [33] l.532 Change from MMIX home.
@@ -723,8 +759,12 @@ int scan_const(
 
 @x [69] l.1360
 @ @<Glob...@>=
+octa val; /* value returned by |scan_const| */
+char *next_char; /* pointer returned by |scan_const| */
 @y
 @ @<External variables@>=
+Extern octa val; /* value returned by |scan_const| */
+Extern char *next_char; /* pointer returned by |scan_const| */
 @z
 
 @x [73] l.1402 GCC warning.
@@ -877,7 +917,7 @@ octa floatit(z,r,u,p)
   int p; /* short precision? */
 @y
 @<External routines@>=
-octa floatit(
+extern octa floatit(
   octa z, /* octabyte to float */
   int r, /* rounding mode */
   int u, /* unsigned? */
@@ -979,9 +1019,8 @@ octa fremstep(
 @x [96] l.1845 Improved module structure with interface.
 @* Index.  
 @y
-@* Public interface. This program module, {\mc MMIX-ARITH}, is central to the
-whole \MMIX\ system. Each user of its functionality should include the
-following header file.
+@* Public interface. This program module is central to the whole \MMIX\ system.
+Each user of its functionality should include the following header file.
 
 @(mmix-arith.h@>=
 #ifndef MMIX_ARITH_H
@@ -989,111 +1028,96 @@ following header file.
 #include <stdbool.h> /* |@!bool| */
 #include <stdint.h>  /* |@!uint32_t| */
 @#
+#define Extern extern
 @<Tetrabyte and octabyte type definitions@>@;
-@<Exported variables@>@;
+@<Exported constants@>@;
+@<External variables@>@;
 @<External prototypes@>@;
+#undef Extern
 @#
 #endif /* |MMIX_ARITH_H| */
 
-@ @<Exported...@>=
-extern const octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
-extern const octa neg_one; /* |neg_one.h=neg_one.l=-1| */
-extern const octa inf_octa; /* floating point $+\infty$ */
-extern const octa standard_NaN; /* floating point NaN(.5) */
-@#
-extern octa aux; /* auxiliary output of a subroutine */
-extern bool overflow; /* set by certain subroutines for signed arithmetic */
-extern int cur_round; /* the current rounding mode */
-extern int exceptions; /* bits set by floating point operations */
-extern octa val; /* value returned by |scan_const| */
-extern char *next_char; /* where a scanned constant ended */
+@ @<Exported constants@>=
+Extern const octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
+Extern const octa neg_one; /* |neg_one.h=neg_one.l=-1| */
+Extern const octa inf_octa; /* floating point $+\infty$ */
+Extern const octa standard_NaN; /* floating point NaN(.5) */
 
 @ @<External proto...@>=
-extern octa oplus(octa,octa);
+Extern octa oplus(octa,octa);
   /* unsigned $y+z$ */
-extern octa ominus(octa,octa);
+Extern octa ominus(octa,octa);
   /* unsigned $y-z$ */
-extern octa incr(octa,int);
+Extern octa incr(octa,int);
   /* unsigned $y+\delta$ ($\delta$ is signed) */
-extern octa shift_left(octa,int);
+Extern octa shift_left(octa,int);
   /* $y\LL s$, $0\le s\le64$ */
-extern octa shift_right(octa,int,int);
+Extern octa shift_right(octa,int,int);
   /* $y\GG s$, signed if |!u| */
-extern octa omult(octa,octa);
+Extern octa omult(octa,octa);
   /* unsigned $(|aux|,x)=y\times z$ */
-extern octa signed_omult(octa,octa);
+Extern octa signed_omult(octa,octa);
   /* signed $x=y\times z$, setting |overflow| */
-extern octa odiv(octa,octa,octa);
+Extern octa odiv(octa,octa,octa);
   /* unsigned $(x,y)/z$; $|aux|=(x,y)\bmod z$ */
-extern octa signed_odiv(octa,octa);
+Extern octa signed_odiv(octa,octa);
   /* signed $y/z$, when $z\ne0$; $|aux|=y\bmod z$ */
 @#
-extern octa oor(octa,octa);
+Extern octa oor(octa,octa);
   /* $y\lor z$ */
-extern octa oorn(octa,octa);
+Extern octa oorn(octa,octa);
   /* $y\lor\bar z$ */
-extern octa onor(octa,octa);
+Extern octa onor(octa,octa);
   /* $\overline{y\lor z}$ */
-extern octa oand(octa,octa);
+Extern octa oand(octa,octa);
   /* $y\land z$ */
-extern octa oandn(octa,octa);
+Extern octa oandn(octa,octa);
   /* $y\land \bar z$ */
-extern octa onand(octa,octa);
+Extern octa onand(octa,octa);
   /* $\overline{y\land z}$ */
-extern octa oxor(octa,octa);
+Extern octa oxor(octa,octa);
   /* $y\oplus z$ */
-extern octa onxor(octa,octa);
+Extern octa onxor(octa,octa);
   /* $\overline{y\oplus z}$ */
 @#
-extern int count_bits(tetra);
+Extern int count_bits(tetra);
   /* $x=\nu(z)$ */
 @#
-extern tetra byte_diff(tetra,tetra);
+Extern tetra byte_diff(tetra,tetra);
   /* half of \.{BDIF} */
-extern tetra wyde_diff(tetra,tetra);
+Extern tetra wyde_diff(tetra,tetra);
   /* half of \.{WDIF} */
-extern octa bool_mult(octa,octa,bool);
+Extern octa bool_mult(octa,octa,bool);
   /* \.{MOR} or \.{MXOR} */
 @#
-extern octa load_sf(tetra);
+Extern octa load_sf(tetra);
   /* load short float */
-extern tetra store_sf(octa);
+Extern tetra store_sf(octa);
   /* store short float */
-extern octa fmult(octa,octa);
+Extern octa fmult(octa,octa);
   /* floating point $x=y\otimes z$ */
-extern octa fdivide(octa,octa);
+Extern octa fdivide(octa,octa);
   /* floating point $x=y\oslash z$ */
-extern octa fplus(octa,octa);
+Extern octa fplus(octa,octa);
   /* floating point $x=y\oplus z$ */
-extern int fepscomp(octa,octa,octa,int);
+Extern int fepscomp(octa,octa,octa,int);
   /* $x=|sim|?\ [y\sim z\ (\epsilon)]:\ [y\approx z\ (\epsilon)]$ */
-extern void print_float(octa);
+Extern void print_float(octa);
   /* print octabyte as floating decimal */
-extern int scan_const(char*);
+Extern int scan_const(char*);
   /* |val| = floating or integer constant; returns the type */
-extern int fcomp(octa,octa);
+Extern int fcomp(octa,octa);
   /* $-1$, 0, 1, or 2 if $y<z$, $y=z$, $y>z$, $y\parallel z$ */
-extern octa fintegerize(octa,int);
+Extern octa fintegerize(octa,int);
   /* floating point $x={\rm round}(z)$ */
-extern octa fixit(octa,int);
+Extern octa fixit(octa,int);
   /* float to fix */
-extern octa floatit(octa,int,int,int);
+Extern octa floatit(octa,int,int,int);
   /* fix to float */
-extern octa froot(octa,int);
+Extern octa froot(octa,int);
   /* floating point $x=\sqrt z$ */
-extern octa fremstep(octa,octa,int);
+Extern octa fremstep(octa,octa,int);
   /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
-
-@ @<Internal...@>=
-static octa fpack(octa,int,char,int);
-static tetra sfpack(octa,int,char,int);
-static ftype funpack(octa,octa*,int*,char*);
-static ftype sfunpack(tetra,octa*,int*,char*);
-@#
-static void bignum_times_ten(bignum*);
-static void bignum_dec(bignum*,bignum*,tetra);
-static int bignum_compare(bignum*,bignum*);
-static void bignum_double(bignum*);
 
 @* Index.
 @z
