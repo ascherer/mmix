@@ -742,6 +742,11 @@ void show_stats(
   bool verbose)
 @z
 
+@x [141] l.2882
+#include <stdio.h>
+@y
+@z
+
 @x [141] l.2887 Improved module structure with interfaces.
 #include "abstime.h"
 @y
