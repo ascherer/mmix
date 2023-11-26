@@ -11,7 +11,6 @@
 @<Type definitions@>@;
 @y
 #include <string.h>
-#include <stdint.h>
 @#
 #include "mmix-arith.h" /* |@!tetra|, |@!octa|;
   we do \\{not} link against \.{mmix-arith.o} */
