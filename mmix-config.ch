@@ -522,8 +522,8 @@ if (!dispatch_stat) panic("Can't allocate dispatch counts");
 @#
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
 #include <stdarg.h> /* |vfprintf|, |va_start|, |va_end| */
-#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
 #include <ctype.h> /* |isspace| */
+#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
 #include <limits.h> /* |INT_MAX| */
 @#
 @h

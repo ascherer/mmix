@@ -5,12 +5,14 @@
 @s octa int
 @z
 
-@x [1] l.20 Use standard C99 types. Use MMIX-ARITH interface stuff.
+@x [1] l.19 Use standard C99 types. Use MMIX-ARITH interface stuff.
+#include <time.h>
 #include <string.h>
 @<Prototype preparations@>@;
 @<Type definitions@>@;
 @y
 #include <string.h>
+#include <time.h>
 @#
 #include "mmix-arith.h" /* |@!tetra|, |@!octa|;
   we do \\{not} link against \.{mmix-arith.o} */

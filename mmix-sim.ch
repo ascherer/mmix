@@ -19,6 +19,9 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 @* Basics. Most of the stuff in the following sections comes from the {\mc
 MMIX-ARITH} module.
+
+@c
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 @z
 
 @x [10] l.555 Use standard C99 type.
@@ -1158,6 +1161,9 @@ extern void mmix_fake_stdin @,@,@[ARGS((FILE*))@];
 Here we need only write three primitive
 interfaces on which they depend.
 
+@c
+#include "mmix-io.h" /* |@!mmix_io_init| */
+
 @ The following three functions are used in {\mc MMIX-IO} as ``mixins'' in
 section \X108:Trips and traps\X.  Similar functions are defined in the
 meta-simulator {\mc MMIX-PIPE}.
@@ -1284,7 +1290,7 @@ void show_stats(
   bool verbose)
 @z
 
-@x [141] l.2882
+@x [141] l.2882 #included in "mmix-io.h"
 #include <stdio.h>
 @y
 @z
@@ -1292,9 +1298,6 @@ void show_stats(
 @x [141] l.2887 Improved module structure with interfaces.
 #include "abstime.h"
 @y
-@#
-#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
-#include "mmix-io.h" /* |@!mmix_io_init| */
 @#
 @h
 @z

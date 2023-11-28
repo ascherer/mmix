@@ -13,6 +13,9 @@ for the simulators.
 @s uint32_t int
 @s tetra int
 @s octa int
+
+@c
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 @z
 
 @x [27] l.960 Variables from MMIX-ARITH.
@@ -1001,15 +1004,9 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 } }
 @z
 
-@x [136] l.3166 Improved module structure with interfaces.
-#include <time.h>
-@#
+@x [136] l.3168 Improved module structure with interfaces.
 @<Preprocessor definitions@>@;
 @y
-#include <time.h>
-@#
-#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
-@#
 @h
 @<Preprocessor macros@>@;
 @z
