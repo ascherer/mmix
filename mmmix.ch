@@ -24,7 +24,6 @@ the module called {\mc MMIX-CONFIG}. The program file is either
 #include <string.h> /* |@!strlen| */
 @#
 @h
-@#
 @z
 
 @x [2] l.44 Untangle private stuff.
