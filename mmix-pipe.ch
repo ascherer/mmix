@@ -3,8 +3,8 @@
 @y
 @z
 
-@x [1] l.17 Improved typography.
-file called \.{mmix\_pipe.h}. The header file is used by the main routine and
+@x [1] l.17 Improved usability.
+file called \.{mmix-pipe.h}. The header file is used by the main routine and
 @y
 file called |@(mmix-pipe.h@>|. The header file is used by the main routine and
 @z

@@ -262,21 +262,6 @@ void assemble(
   unsigned char x_bits)
 @z
 
-@x [52] l.1416 Change from MMIX home.
-    listing_bits|=1<<jj;
-  }
-  listing_bits|=x_bits;
-  if (((l+k)&3)==0) {
-    if (listing_file) listing_clear();
-    mmo_clear();
-@y
-    listing_bits|=x_bits;
-    if (((l+j+1)&3)==0) {
-      if (listing_file) listing_clear();
-      mmo_clear();
-    }
-@z
-
 @x [54] l.1455 C99 prototypes for C2x.
 trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
 trie_node* new_trie_node()
@@ -984,12 +969,6 @@ default: err("too many operands for opcode `%s'",op_field);
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
-@z
-
-@x [132] l.3121 Change from MMIX home.
- case ESPEC: spec_mode=false;@+goto bypass;
-@y
- case ESPEC: spec_mode=false;@+if (held_bits) mmo_clear();@+goto bypass;
 @z
 
 @x [134] l.3128 GCC warning.
