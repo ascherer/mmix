@@ -70,11 +70,16 @@ static int bignum_compare(bignum*,bignum*);
 static void bignum_double(bignum*);
 @z
 
-@x [3] l.51 Use standard C99 types.
+@x [3] l.57 Use standard C99 types.
+@ The definition of type \&{tetra} should be changed, if necessary, so that
+it represents an unsigned 32-bit integer.
+@^system dependencies@>
+
 @<Tetra...@>=
 typedef unsigned int tetra;
  /* for systems conforming to the LP-64 data model */
 @y
+@ The definition of type \&{tetra} should represent an unsigned 32-bit integer.
 @s uint32_t int
 @<Tetra...@>=
 typedef uint32_t tetra;
