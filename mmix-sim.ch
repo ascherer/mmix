@@ -11,17 +11,13 @@ pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1-8]$, and
 M$_8[\$0\ll3+\$1]$ is zero. (Register~\$1 will point to an octabyte in
 @z
 
-@x [9] l.546 Use standard C99 type.
-@* Basics. To get started, we define a type that provides semantic sugar.
-
+@x [9] l.548 Use standard C99 type.
 @<Type...@>=
 typedef enum {@!false,@!true}@+@!bool;
 @y
-@* Basics. Most of the stuff in the following sections comes from the {\mc
-MMIX-ARITH} module.
-
-@c
-#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
+@s uint8_t int
+@<Type...@>=
+typedef uint8_t byte; /* a monobyte */
 @z
 
 @x [10] l.555 Use standard C99 type.
@@ -34,15 +30,18 @@ represents unsigned 32-bit integers.
 @s uint8_t int
 @s tetra int
 @s octa int
+
+@c
+#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 @z
 
-@x [10] l.561 Stuff from MMIX-ARITH.
+@x [10] l.560 Stuff from MMIX-ARITH.
+@<Type...@>=
 typedef unsigned int tetra;
   /* for systems conforming to the LP-64 data model */
 typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 typedef unsigned char byte; /* a monobyte */
 @y
-typedef uint8_t byte; /* a monobyte */
 @z
 
 @x [11] l.566 Improved module structure with interface.
