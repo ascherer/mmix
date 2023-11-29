@@ -588,7 +588,7 @@ switch (r) {
 o = o>>2;
 o += (e-0x380)<<23;
 if (o>=0x7f800000) exceptions |= O_BIT+X_BIT; /* overflow */
-else if (o<0x100000) exceptions |= U_BIT; /* tininess */
+else if (o<0x800000) exceptions |= U_BIT; /* tininess */
 if (s=='-') o |= sign_bit;
 return o;
 

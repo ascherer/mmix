@@ -14,7 +14,7 @@
 ultra-configurable \MMIX\ pipeline: It defines the |MMIX_run| routine, which
 does most of the
 work. Another routine, |MMIX_init|, is also defined here, and so is a header
-file called \.{mmix\_pipe.h}. The header file is used by the main routine and
+file called \.{mmix-pipe.h}. The header file is used by the main routine and
 by other routines like |MMIX_config|, which are compiled separately.
 
 Readers of this program should be familiar with the explanation of \MMIX\

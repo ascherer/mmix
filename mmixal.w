@@ -1403,8 +1403,13 @@ void assemble(k,dat,x_bits)
   unsigned char x_bits;
 {
   register int j,jj,l;
-  if (spec_mode) l=spec_mode_loc;
-  else {
+  if (spec_mode) {
+   l=spec_mode_loc;
+   if (l&(k-1)) {
+     if (held_bits==1 && k==2) spec_mode_loc=l=l+1,hold_buf[1]=0,held_bits=3;
+     else spec_mode_loc=l=(l+k)&-k,mmo_clear();
+   }
+  }@+else {
     l=cur_loc.l;
     @<Make sure |cur_loc| and |mmo_cur_loc| refer to the same tetrabyte@>;
     if (!held_bits && !(cur_loc.h&0xe0000000)) mmo_sync();
@@ -1416,10 +1421,7 @@ void assemble(k,dat,x_bits)
     listing_bits|=1<<jj;
   }
   listing_bits|=x_bits;
-  if (((l+k)&3)==0) {
-    if (listing_file) listing_clear();
-    mmo_clear();
-  }
+  if (((l+k)&3)==0) mmo_clear();
   if (spec_mode) spec_mode_loc+=k; else cur_loc=incr(cur_loc,k);
 }
 
@@ -3118,7 +3120,7 @@ switch(opcode) {
    mmo_loc();@+mmo_sync();
    mmo_lopp(lop_spec,val_stack[0].equiv.l);
    spec_mode=true;@+spec_mode_loc=0;@+ goto bypass;
- case ESPEC: spec_mode=false;@+goto bypass;
+ case ESPEC: spec_mode=false;@+if (held_bits) mmo_clear();@+goto bypass;
 }
 
 @ @<Glob...@>=
