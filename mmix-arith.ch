@@ -470,12 +470,6 @@ static tetra sfpack(
   int r) /* the rounding mode */
 @z
 
-@x [35] l.591 Change from MMIX home.
-else if (o<0x100000) exceptions |= U_BIT; /* tininess */
-@y
-else if (o<0x800000) exceptions |= U_BIT; /* tininess */
-@z
-
 @x [37] l.610 Factor out private stuff.
 ftype funpack @,@,@[ARGS((octa,octa*,int*,char*))@];@+@t}\6{@>
 ftype funpack(x,f,e,s)
