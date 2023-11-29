@@ -11,8 +11,8 @@ Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
-Version: 20230213
-Release: 3
+Version: 20231125
+Release: 1
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if "%{_vendor}" == "debbuild"
@@ -116,6 +116,9 @@ diff -u silly.err silly.err.new ||:
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %changelog
+* Wed Nov 25 2023 Andreas Scherer <andreas_tex@freenet.de>
+- Update from DEK
+
 * Sat Apr 15 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Second patch for Makefile
 
