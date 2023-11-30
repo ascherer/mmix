@@ -89,7 +89,7 @@ mmixal: mmix-arith.o mmixal.c
 mmix:   mmix-arith.o mmix-io.o mmix-sim.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-mmotype: mmotype.c
+mmotype: mmotype.c mmix-arith.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 tarfile: $(ALL)
