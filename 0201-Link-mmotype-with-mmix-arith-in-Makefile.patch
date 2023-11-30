@@ -1,0 +1,25 @@
+From e79e26115f5e1ff287ab98a0c56505c9934870a1 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Thu, 30 Nov 2023 17:08:41 +0100
+Subject: [PATCH 201/201] Link mmotype with mmix-arith in Makefile.
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 9f669e6..9a59c82 100644
+--- a/Makefile
++++ b/Makefile
+@@ -89,7 +89,7 @@ mmixal: mmix-arith.o mmixal.c
+ mmix:   mmix-arith.o mmix-io.o mmix-sim.o
+ 	$(CC) $(CFLAGS) $^ -o $@
+ 
+-mmotype: mmotype.c
++mmotype: mmotype.c mmix-arith.o
+ 	$(CC) $(CFLAGS) $^ -o $@
+ 
+ tarfile: $(ALL)
+-- 
+2.43.0
+
