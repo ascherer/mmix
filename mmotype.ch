@@ -14,8 +14,7 @@
 #include <string.h>
 #include <time.h>
 @#
-#include "mmix-arith.h" /* |@!tetra|, |@!octa|;
-  we do \\{not} link against \.{mmix-arith.o} */
+#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!incr| */
 @#
 @<Type definition@>@;
 @z
@@ -93,31 +92,30 @@ typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 typedef uint8_t byte; /* a monobyte */
 @z
 
-@x [8] l.102 C99 prototypes for C2x.
+@x [8] l.99 Use 'incr' from MMIX-ARITH.
+@ The |incr| subroutine adds a signed integer to an (unsigned) octabyte.
+
+@<Sub...@>=
 octa incr @,@,@[ARGS((octa,int))@];
 octa incr(o,delta)
   octa o;
   int delta;
-@y
-octa incr(
-  octa o,
-  int delta)
-@z
-
-@x [8] l.111 Compound literal.
+{
+  register tetra t;
+  octa x;
+  if (delta>=0) {
+    t=0xffffffff-delta;
     if (o.l<=t) x.l=o.l+delta, x.h=o.h;
     else x.l=o.l-t-1, x.h=o.h+1;
-@y
-    if (o.l<=t) x=(octa){o.h, o.l+delta};
-    else x=(octa){o.h+1, o.l-t-1};
-@z
-
-@x [8] l.115 Compound literal.
+  } else {
+    t=-delta;
     if (o.l>=t) x.l=o.l-t, x.h=o.h;
     else x.l=o.l+(0xffffffff+delta)+1, x.h=o.h-1;
+  }
+  return x;
+}
 @y
-    if (o.l>=t) x=(octa){o.h, o.l-t};
-    else x=(octa){o.h-1, o.l+(0xffffffff+delta)+1};
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [9] l.127 C99 prototypes for C2x.
@@ -137,7 +135,7 @@ byte read_byte(void)
 @x [17] l.217 Compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
-cur_loc=(octa){0,0};
+cur_loc=zero_octa;
 @z
 
 @x [22] l.316
