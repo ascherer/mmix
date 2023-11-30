@@ -46,6 +46,7 @@ Source9: mmix-mem.ch
 Patch29: 0029-DRY-up-the-Makefile.patch
 Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
 Patch110: 0110-Avoid-redundant-date-values.patch
+Patch201: 0201-Link-mmotype-with-mmix-arith-in-Makefile.patch
 %endif
 
 %description
@@ -116,7 +117,10 @@ diff -u silly.err silly.err.new ||:
 %{?with_tex:%doc %{_docdir}/%{name}}
 
 %changelog
-* Wed Nov 25 2023 Andreas Scherer <andreas_tex@freenet.de>
+* Thu Nov 30 2023 Andreas Scherer <andreas_tex@freenet.de>
+- Fourth patch for Makefile
+
+* Wed Nov 29 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Update from DEK
 
 * Sat Apr 15 2023 Andreas Scherer <andreas_tex@freenet.de>
