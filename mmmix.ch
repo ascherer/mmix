@@ -49,6 +49,18 @@ int main(
   char *argv[])
 @z
 
+@x [3] l.76 Use 'panic' macro.
+if (argc!=n+2) {
+  fprintf(stderr,"Usage: %s [-s] configfile progfile\n",argv[0]);
+@.Usage: ...@>
+  exit(-3);
+}
+@y
+if (argc!=n+2)
+  panic(-3,"Usage: %s [-s] configfile progfile\n",argv[0]);
+@.Usage: ...@>
+@z
+
 @x [5] l.115 Untangle private stuff.
 octa cur_loc;
 octa cur_dat;
@@ -61,6 +73,78 @@ static octa cur_dat;
 static bool new_chunk;
 static char buffer[BUF_SIZE];
 static FILE *prog_file;
+@z
+
+@x [6] l.124 Use 'panic' macro.
+  if (!prog_file) {
+    fprintf(stderr,"Panic: Can't open MMIX hexadecimal file %s!\n",prog_file_name);
+@.Can't open...@>
+    exit(-3);
+  }
+@y
+  if (!prog_file)
+    panic(-3,"Panic: Can't open MMIX hexadecimal file %s!\n",prog_file_name);
+@.Can't open...@>
+@z
+
+@x [6] l.132 Use 'panic' macro.
+    if (buffer[strlen(buffer)-1]!='\n') {
+      fprintf(stderr,"Panic: Hexadecimal file line too long: `%s...'!\n",buffer);
+@.Hexadecimal file line...@>
+      exit(-3);
+    }
+@y
+    if (buffer[strlen(buffer)-1]!='\n')
+      panic(-3,"Panic: Hexadecimal file line too long: `%s...'!\n",buffer);
+@.Hexadecimal file line...@>
+@z
+
+@x [6] l.139 Use 'panic' macro.
+    else {
+      fprintf(stderr,"Panic: Improper hexadecimal file line: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+      exit(-3);
+    }
+@y
+    else
+      panic(-3,"Panic: Improper hexadecimal file line: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+@z
+
+@x [7] l.149 Use 'panic' macro.
+  if (sscanf(buffer,"%4x%8x",&cur_loc.h,&cur_loc.l)!=2) {
+    fprintf(stderr,"Panic: Improper hexadecimal file location: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+    exit(-3);
+  }
+@y
+  if (sscanf(buffer,"%4x%8x",&cur_loc.h,&cur_loc.l)!=2)
+    panic(-3,"Panic: Improper hexadecimal file location: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+@z
+
+@x [8] l.159 Use 'panic' macro.
+  if (sscanf(buffer+1,"%8x%8x",&cur_dat.h,&cur_dat.l)!=2) {
+    fprintf(stderr,"Panic: Improper hexadecimal file data: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+    exit(-3);
+  }
+@y
+  if (sscanf(buffer+1,"%8x%8x",&cur_dat.h,&cur_dat.l)!=2)
+    panic(-3,"Panic: Improper hexadecimal file data: `%s'!\n",buffer);
+@.Improper hexadecimal...@>
+@z
+
+@x [9] l.197 Use 'panic' macro.
+  if (!prog_file) {
+    fprintf(stderr,"Panic: Can't open MMIX binary file %s!\n",prog_file_name);
+@.Can't open...@>
+    exit(-3);
+  }
+@y
+  if (!prog_file)
+    panic(-3,"Panic: Can't open MMIX binary file %s!\n",prog_file_name);
+@.Can't open...@>
 @z
 
 @x [10] l.220 Purge a few 'goto's.
@@ -102,6 +186,32 @@ oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
   t3=fgetc(prog_file);@+ if (t3==EOF) oops;
   cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;
   return true;
+@z
+
+@x [11] l.249 Use 'panic' macro.
+  if (bad_address) {
+    fprintf(stderr,"Panic: Unsupported virtual address %08x%08x!\n",
+@.Unsupported virtual address@>
+                     cur_loc.h,cur_loc.l);
+    exit(-5);
+  }
+@y
+  if (bad_address)
+    panic(-5,"Panic: Unsupported virtual address %08x%08x!\n",
+@.Unsupported virtual address@>
+                     cur_loc.h,cur_loc.l);
+@z
+
+@x [12] l.276 Use 'panic' macro.
+if (cur_loc.h!=3) {
+  fprintf(stderr,"Panic: MMIX binary file didn't set up the stack!\n");
+@.MMIX binary file...@>
+  exit(-6);
+}
+@y
+if (cur_loc.h!=3)
+  panic(-6,"Panic: MMIX binary file didn't set up the stack!\n");
+@.MMIX binary file...@>
 @z
 
 @x [12] l.284 Change from MMIX home.
@@ -192,8 +302,13 @@ static octa bp={-1,-1}; /* breakpoint */
 static octa tmp; /* an octabyte of temporary interest */
 
 @ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
-so we had better move it ``up'' (together with the |static| variable~|d|
-in the previous section). Instead, we place some internal prototypes here.
+so we had better move it ``down'' (together with the |static| variable~|d|
+in the previous section).
+Instead, we place some internal prototypes here.
+We also have room for the variadic macro |panic| used in error situations.
+
+@d panic(r,m,...) {@+fprintf(stderr,
+  @[m @,@m __VA_OPT__(,) @,@, __VA_ARGS__@]);@+exit(r);@+}
 
 @<Proto...@>=
 static bool undump_octa(void);
