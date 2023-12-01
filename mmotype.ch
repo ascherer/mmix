@@ -151,7 +151,7 @@ void print_stab()
 void print_stab(void)
 @z
 
-@x [39] l.457 Change from MMIX home.
+@x [30] l.457 Change from MMIX home.
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
 @y
