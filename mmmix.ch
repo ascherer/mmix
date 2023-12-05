@@ -18,8 +18,7 @@ the module called {\mc MMIX-CONFIG}. The program file is either
 #include "mmix-arith.h" /* |@!zero_octa|, |@!neg_one|, |@!incr| */
 #include "mmix-config.h" /* |@!MMIX_config| */
 #include "mmix-io.h" /* |@!mmix_io_init| */
-#include "mmix-mem.h" /* |@!read_hex| */
-#include "mmix-pipe.h" /* |@!MMIX_init| et al. */
+#include "mmix-pipe.h" /* |@!MMIX_init|, |@!read_hex| et al. */
 @#
 #include <string.h> /* |@!strlen| */
 @#
