@@ -1,7 +1,7 @@
 From c1192ac8217e40a7ba00dbc404b2a71971509e2d Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 16 Apr 2023 12:06:50 +0200
-Subject: [PATCH 110/201] Avoid redundant 'date' values.
+Subject: [PATCH 110/206] Avoid redundant 'date' values.
 
 Due to the mutual dependencies between MMIX-IO and the MMIX simulators
 MMIX-PIPE and MMIX-SIM respectively, each invocation of 'make (all)'

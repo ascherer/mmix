@@ -1,0 +1,32 @@
+From 715aa348f7c6522d0c8a03ad8026c7f1a0c957f7 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Tue, 5 Dec 2023 09:25:26 +0100
+Subject: [PATCH 206/206] Clean up Makefile.
+
+Purge the use of MMIX-MEM.
+
+MMIX-IO does not depend on MMIX-PIPE, at least not directly. It requires
+the three 'mixins', but these also come from MMIX-SIM.
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9a59c82..1a3c488 100644
+--- a/Makefile
++++ b/Makefile
+@@ -78,9 +78,9 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
+ 	perl -pe "s/(#define ABSTIME) \d*/\1 `date +%s`/" -i $<
+ 	$(CC) $(CFLAGS) -c $<
+ 
+-mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
++mmix-config.c: mmix-pipe.c
+ 
+-mmmix:  mmix-arith.o mmix-config.o mmix-mem.o mmix-io.o mmix-pipe.o mmmix.c
++mmmix:  mmix-arith.o mmix-config.o mmix-io.o mmix-pipe.o mmmix.c
+ 	$(CC) $(CFLAGS) $^ -o $@
+ 
+ mmixal: mmix-arith.o mmixal.c
+-- 
+2.43.0
+
