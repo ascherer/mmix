@@ -76,36 +76,36 @@ typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 extern void mmix_io_init(void);
 extern octa mmix_fopen(unsigned char,octa,octa, /* mixin */
 @t\qquad@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @[(*mmgetchars)(char*,int,octa,int)@]
 @,);
 extern void mmix_fake_stdin(FILE*);
 extern octa mmix_fclose(unsigned char);
 extern octa mmix_fread(unsigned char,octa,octa, /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
 extern octa mmix_fgets(unsigned char,octa,octa, /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
 extern octa mmix_fgetws(unsigned char,octa,octa, /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char* buf,int size,octa addr)@],@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
 extern octa mmix_fwrite(unsigned char,octa,octa, /* mixin */
 @t\qquad@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @[(*mmgetchars)(char*,int,octa,int)@]
 @,);
 extern octa mmix_fputs(unsigned char,octa, /* mixin */
 @t\qquad@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @[(*mmgetchars)(char*,int,octa,int)@]
 @,);
 extern octa mmix_fputws(unsigned char,octa, /* mixin */
 @t\qquad@>
-  int @[(*mmgetchars)(char* buf,int size,octa addr,int stop)@]
+  int @[(*mmgetchars)(char*,int,octa,int)@]
 @,);
 extern octa mmix_fseek(unsigned char,octa);
 extern octa mmix_ftell(unsigned char);
@@ -165,7 +165,7 @@ octa mmix_fopen(
   unsigned char handle,
   octa name, octa mode,@|
 @t\4\4@>
-  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
+  int @,(*mmgetchars)(char*,int,octa,int)
 @,)
 @z
 
@@ -238,7 +238,7 @@ octa mmix_fread(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
+  void @,(*mmputchars)(unsigned char*,int,octa),@|
 @t\4\4@>
   char @,(*stdin_chr)(void)
 @,)
@@ -267,7 +267,7 @@ octa mmix_fgets(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
+  void @,(*mmputchars)(unsigned char*,int,octa),@|
 @t\4\4@>
   char @,(*stdin_chr)(void)
 @,)
@@ -300,7 +300,7 @@ octa mmix_fgetws(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  void @,(*mmputchars)(unsigned char* buf,int size,octa addr),@|
+  void @,(*mmputchars)(unsigned char*,int,octa),@|
 @t\4\4@>
   char @,(*stdin_chr)(void)
 @,)
@@ -333,7 +333,7 @@ octa mmix_fwrite(
   unsigned char handle,
   octa buffer, octa size,@|
 @t\4\4@>
-  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
+  int @,(*mmgetchars)(char*,int,octa,int)
 @,)
 @z
 
@@ -353,7 +353,7 @@ octa mmix_fputs(
   unsigned char handle,
   octa string,@|
 @t\4\4@>
-  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
+  int @,(*mmgetchars)(char*,int,octa,int)
 @,)
 @z
 
@@ -380,7 +380,7 @@ octa mmix_fputws(
   unsigned char handle,
   octa string,@|
 @t\4\4@>
-  int @,(*mmgetchars)(char* buf,int size,octa addr,int stop)
+  int @,(*mmgetchars)(char*,int,octa,int)
 @,)
 @z
 
