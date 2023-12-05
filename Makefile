@@ -78,9 +78,9 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
 	perl -pe "s/(#define ABSTIME) \d*/\1 `date +%s`/" -i $<
 	$(CC) $(CFLAGS) -c $<
 
-mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
+mmix-config.c: mmix-pipe.c
 
-mmmix:  mmix-arith.o mmix-config.o mmix-mem.o mmix-io.o mmix-pipe.o mmmix.c
+mmmix:  mmix-arith.o mmix-config.o mmix-io.o mmix-pipe.o mmmix.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 mmixal: mmix-arith.o mmixal.c
