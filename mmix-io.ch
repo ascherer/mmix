@@ -69,16 +69,18 @@ typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @(mmix-io.h@>=
 #ifndef MMIX_IO_H
 #define MMIX_IO_H
-#include <stdio.h> /* |@!FILE| */
 @#
 #include "mmix-arith.h" /* |@!octa| */
+#include <stdio.h> /* |@!FILE| */
 @#
 extern void mmix_io_init(void);
+extern void mmix_fake_stdin(FILE*);
+extern void print_trip_warning(int,octa);
+@#
 extern octa mmix_fopen(unsigned char,octa,octa, /* mixin */
 @t\qquad@>
   int @[(*mmgetchars)(char*,int,octa,int)@]
 @,);
-extern void mmix_fake_stdin(FILE*);
 extern octa mmix_fclose(unsigned char);
 extern octa mmix_fread(unsigned char,octa,octa, /* mixins */
 @t\qquad@>
@@ -109,7 +111,6 @@ extern octa mmix_fputws(unsigned char,octa, /* mixin */
 @,);
 extern octa mmix_fseek(unsigned char,octa);
 extern octa mmix_ftell(unsigned char);
-extern void print_trip_warning(int,octa);
 @#
 #endif /* |MMIX_IO_H| */
 @z
