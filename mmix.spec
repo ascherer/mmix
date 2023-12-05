@@ -39,7 +39,6 @@ Source5: mmix-config.ch
 Source6: mmix-io.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
-Source9: mmix-mem.ch
 %endif
 
 %if %{with patches}
@@ -47,6 +46,7 @@ Patch29: 0029-DRY-up-the-Makefile.patch
 Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
 Patch110: 0110-Avoid-redundant-date-values.patch
 Patch201: 0201-Link-mmotype-with-mmix-arith-in-Makefile.patch
+Patch206: 0206-Clean-up-Makefile.patch
 %endif
 
 %description
