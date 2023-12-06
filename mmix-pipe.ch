@@ -25,7 +25,6 @@ Readers of this program should be familiar with the explanation of \MMIX's
   see |@(mmix-pipe.h@>| */
 #include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, etc. */
 @#
-#include <stdio.h> /* |@!printf| */
 #include <stdarg.h> /* |@!vfprintf|, |@!va_start|, |@!va_end| */
 @#
 @z
