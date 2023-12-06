@@ -518,7 +518,7 @@ if (!dispatch_stat) panic("Can't allocate dispatch counts");
 @y
 #include "mmix-config.h" /* we use our own interface first;
   see |@(mmix-config.h@>| */
-#include "mmix-pipe.h" /* |@!internal_op_code| and much more */
+#include "mmix-pipe.h" /* |@!internal_opcode| and much more */
 @#
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
 #include <stdarg.h> /* |vfprintf|, |va_start|, |va_end| */
