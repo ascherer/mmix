@@ -231,8 +231,6 @@ octa signed_omult @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa signed_omult(y,z)
   octa y,z;
 @y
-@d sign_bit ((unsigned)0x80000000)
-
 @<External routines@>=
 octa signed_omult(
   octa y, octa z)
@@ -1028,6 +1026,7 @@ Each user of its functionality should include the following header file.
 #include <stdint.h>  /* |@!uint32_t| */
 @#
 #define Extern extern
+#define sign_bit ((unsigned)0x80000000)
 @<Tetrabyte and octabyte type definitions@>@;
 @<Exported constants@>@;
 @<External variables@>@;
