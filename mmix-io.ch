@@ -398,6 +398,14 @@ octa mmix_fputws(
     if (fwrite(buf,1,n,sfile[handle].fp)!=(size_t)n) return neg_one;
 @z
 
+@x [21] l.343
+@ @d sign_bit ((unsigned)0x80000000)
+
+@<Sub...@>=
+@y
+@ @<Sub...@>=
+@z
+
 @x [21] l.346 C99 prototypes for C2x.
 octa mmix_fseek @,@,@[ARGS((unsigned char,octa))@];@+@t}\6{@>
 octa mmix_fseek(handle,offset)
