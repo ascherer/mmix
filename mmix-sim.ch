@@ -164,6 +164,12 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
+@x [14] l.669
+@d sign_bit ((unsigned)0x80000000)
+
+@y
+@z
+
 @x [15] l.672 C99 prototypes for C2x.
 void print_int @,@,@[ARGS((octa))@];@+@t}\6{@>
 void print_int(o)
