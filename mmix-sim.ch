@@ -32,7 +32,7 @@ represents unsigned 32-bit integers.
 @s octa int
 
 @c
-#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
+#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!sign_bit| */
 @z
 
 @x [10] l.560 Stuff from MMIX-ARITH.
