@@ -54,7 +54,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #define MMIX_PIPE_H
 #include <math.h> /* we'll override |fsqrt| below */
 #include <stdlib.h> /* we'll override |div| and |random| below */
-#include "mmix-arith.h" /* |@!tetra|, |@!octa|, etc. */
+#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!sign_bit|, etc. */
 @z
 
 @x [5] l.157 Improved module structure with interfaces.
