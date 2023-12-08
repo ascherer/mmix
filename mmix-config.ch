@@ -345,6 +345,14 @@ static void alloc_cache(
      "Can't allocate data for outbuffer of %s",name);
 @z
 
+@x [32] l.865
+@ @d sign_bit 0x80000000
+
+@<Allocate the cache sets for cache |c|@>=
+@y
+@ @<Allocate the cache sets for cache |c|@>=
+@z
+
 @x [32] l.869
 if (!c->set) panic(errprint1(
      "Can't allocate cache sets for %s",name));

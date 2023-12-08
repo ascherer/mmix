@@ -560,6 +560,14 @@ static int resuming; /* set nonzero if resuming an interrupted instruction */
 static tetra support[8]; /* big-endian bitmap for all opcodes supported */
 @z
 
+@x [80] l.1677
+@ @d sign_bit ((unsigned)0x80000000)
+
+@<Determine the flags, |f|, and the internal opcode, |i|@>=
+@y
+@ @<Determine the flags, |f|, and the internal opcode, |i|@>=
+@z
+
 @x [83] l.1745
 unsigned char flags[256]={@|@t\1\1@>
 @y
