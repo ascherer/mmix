@@ -297,7 +297,7 @@ octa read_hex(p)
 }
 @y
 static int n,m; /* temporary integer */
-static octa bp={-1,-1}; /* breakpoint */
+static octa bp=neg_one; /* breakpoint */
 static octa tmp; /* an octabyte of temporary interest */
 
 @ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
