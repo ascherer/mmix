@@ -98,16 +98,9 @@ octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 declare variables that are accessed in other modules. Actually
 all appearances of `\&{Extern}' are defined to be blank here, but
 `\&{Extern}' will become `\&{extern}' in the header file |@(mmix-arith.h@>|.
-We might as well use it for the |@<Exported...@>|.
 
 @d Extern  /* blank for us, \&{extern} for them */
 @f Extern extern
-
-@c
-Extern const octa zero_octa={0,0}; /* |zero_octa.h=zero_octa.l=0| */
-Extern const octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
-Extern const octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
-Extern const octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -1026,7 +1019,6 @@ Each user of its functionality should include the following header file.
 #include <stdint.h>  /* |@!uint32_t| */
 @#
 #define Extern extern
-#define sign_bit ((unsigned)0x80000000)
 @<Tetrabyte and octabyte type definitions@>@;
 @<Exported constants@>@;
 @<External variables@>@;
@@ -1036,10 +1028,12 @@ Each user of its functionality should include the following header file.
 #endif /* |MMIX_ARITH_H| */
 
 @ @<Exported constants@>=
-Extern const octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
-Extern const octa neg_one; /* |neg_one.h=neg_one.l=-1| */
-Extern const octa inf_octa; /* floating point $+\infty$ */
-Extern const octa standard_NaN; /* floating point NaN(.5) */
+#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
+#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
+#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
+#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
+@#
+#define sign_bit ((unsigned)0x80000000)
 
 @ @<External proto...@>=
 Extern octa oplus(octa,octa);
