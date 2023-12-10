@@ -1015,6 +1015,7 @@ Each user of its functionality should include the following header file.
 @(mmix-arith.h@>=
 #ifndef MMIX_ARITH_H
 #define MMIX_ARITH_H
+@#
 #include <stdbool.h> /* |@!bool| */
 #include <stdint.h>  /* |@!uint32_t| */
 @#
