@@ -424,6 +424,12 @@ static octa fpack(
   int r) /* the rounding mode */
 @z
 
+@x [31] l.516
+      if (e<-54) o.h=0, o.l=1;
+@y
+      if (e<-54) o=(octa){0,1};
+@z
+
 @x [32] l.529
 @ @<Glob...@>=
 int exceptions; /* bits possibly destined for rA */
@@ -664,6 +670,12 @@ octa fplus(
  default: case 4*zro+zro: x=zero_octa;
 @z
 
+@x [49] l.863
+  else if (d>54) zf.h=0, zf.l=1; /* tricky but OK */
+@y
+  else if (d>54) zf=(octa){0,1}; /* tricky but OK */
+@z
+
 @x [50] l.884 C99 prototypes for C2x.
 @<Subr...@>=
 int fepscomp @,@,@[ARGS((octa,octa,octa,int))@];@+@t}\6{@>
@@ -689,6 +701,14 @@ void print_float(x)
 @<External routines@>=
 void print_float(
   octa x)
+@z
+
+@x [57] l.1055
+  f.h=0x3fffff, f.l=0xffffffff;
+  g.h=0x400000, g.l=2;
+@y
+  f=(octa){0x3fffff,0xffffffff};
+  g=(octa){0x400000,2};
 @z
 
 @x [60] l.1122 C99 prototypes for C2x.
