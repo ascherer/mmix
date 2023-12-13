@@ -1577,12 +1577,30 @@ int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @z
 
+@x [308] l.5516
+  data->go.o.h=0, data->go.o.l=m;
+@y
+  data->go.o=(octa){0,m};
+@z
+
 @x [315] l.5607
 bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 bool nullifying; /* stopping dispatch to nullify a load/store command */
 @y
 static bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 static bool nullifying; /* stopping dispatch to nullify a load/store command */
+@z
+
+@x [320] l.5688
+  g[rX].o.h=sign_bit, g[rX].o.l=j;
+@y
+  g[rX].o=(octa){sign_bit,j};
+@z
+
+@x [329] l.5892
+  case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=g[rL].o.l;
+@y
+  case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
 @z
 
 @x [338] l.6029 Compound literal.
