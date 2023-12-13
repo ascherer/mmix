@@ -1003,6 +1003,18 @@ case NXOR: case NXORI:
  x=oor(oand(y,b), oandn(z,b)); @+
 @z
 
+@x [87] l.1987
+ x.h=byte_diff(y.h,z.h);@+x.l=byte_diff(y.l,z.l);@+goto store_x;
+@y
+ x=(octa){byte_diff(y.h,z.h),byte_diff(y.l,z.l)};@+goto store_x;
+@z
+
+@x [87] l.1989
+ x.h=wyde_diff(y.h,z.h);@+x.l=wyde_diff(y.l,z.l);@+goto store_x;
+@y
+ x=(octa){wyde_diff(y.h,z.h),wyde_diff(y.l,z.l)};@+goto store_x;
+@z
+
 @x [89] l.2027 Change from MMIX home.
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
