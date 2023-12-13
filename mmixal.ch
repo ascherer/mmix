@@ -753,6 +753,18 @@ acc=zero_octa;
                  err("can %s pure values only",verb)
 @z
 
+@x [100] l.2533
+ top_val.equiv.h=~top_val.equiv.h, top_val.equiv.l=~top_val.equiv.l;
+@y
+ top_val.equiv=(octa){~top_val.equiv.h,~top_val.equiv.l};
+@z
+
+@x [100] l.2541
+ top_val.equiv.h=0, top_val.equiv.l=top_val.link->sym->serial;
+@y
+ top_val.equiv=(octa){0,top_val.link->sym->serial};
+@z
+
 @x [101] l.2544
       derr("can %s pure values only",verb)
 @y
@@ -803,6 +815,12 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   acc.h=-1, acc.l=-(1<<j);
 @y
   acc=(octa){-1, -(1<<j)};
+@z
+
+@x [109] l.2730
+  }@+else if (opcode==GREG) cur_loc.h=0, cur_loc.l=cur_greg, new_link=REGISTER;
+@y
+  }@+else if (opcode==GREG) cur_loc=(octa){0,cur_greg}, new_link=REGISTER;
 @z
 
 @x [109] l.2732
