@@ -241,7 +241,7 @@ cur_dat=(octa){(GET<<24)+rQ, (PUTI<<24)+(rQ<<16)};@+ cur_loc.l=0;
 @x [12] l.297 Compound literal.
 cur_dat.h=0, cur_dat.l=7; /* generate a PTE with \.{rwx} permission */
 @y
-cur_dat=(octa){0, 7}; /* generate a PTE with \.{rwx} permission */
+cur_dat=seven_octa; /* generate a PTE with \.{rwx} permission */
 @z
 
 @x [13] l.374 Don't ignore return code from fgets().
@@ -339,8 +339,9 @@ static octa sl3( /* shift left by 3 bits */
 
 @x [20] l.494 Compound literal.
     y.h=yhl+ylh;@+ y.l<<=3;
+  return y;
 @y
-    y=(octa){yhl+ylh, y.l<<=3};
+  return (octa){yhl+ylh, y.l<<=3};
 @z
 
 @x [21] l.505 Change from MMIX home.
