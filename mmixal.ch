@@ -771,6 +771,24 @@ acc=zero_octa;
       err("can %s pure values only",verb)
 @z
 
+@x [101] l.2582
+ next_val.equiv.h&=top_val.equiv.h, next_val.equiv.l&=top_val.equiv.l;
+@y
+ next_val.equiv = oand(next_val.equiv,top_val.equiv); @+
+@z
+
+@x [101] l.2585
+ next_val.equiv.h|=top_val.equiv.h, next_val.equiv.l|=top_val.equiv.l;
+@y
+ next_val.equiv = oor(next_val.equiv,top_val.equiv); @+
+@z
+
+@x [101] l.2588
+ next_val.equiv.h^=top_val.equiv.h, next_val.equiv.l^=top_val.equiv.l;
+@y
+ next_val.equiv = oxor(next_val.equiv,top_val.equiv); @+
+@z
+
 @x [102] l.2602
   derr("cannot use `%s' in special mode",op_field);
 @y
