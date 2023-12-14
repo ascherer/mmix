@@ -291,6 +291,10 @@ packaging as subroutines.
 @<Subr...@>=
 @y
 @<External routines@>=
+octa onot( /* compute $\bar x$ */
+  octa x)
+{ @+ return (octa){~x.h,~x.l}; @+ }
+@#
 octa oor( /* compute $y\lor z$ */
   octa y, octa z)
 { @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
@@ -1076,6 +1080,8 @@ Extern octa odiv(octa,octa,octa);
 Extern octa signed_odiv(octa,octa);
   /* signed $y/z$, when $z\ne0$; $|aux|=y\bmod z$ */
 @#
+Extern octa onot(octa);
+  /* $\bar x$ */
 Extern octa oor(octa,octa);
   /* $y\lor z$ */
 Extern octa oorn(octa,octa);

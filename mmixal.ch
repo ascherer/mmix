@@ -756,7 +756,7 @@ acc=zero_octa;
 @x [100] l.2533
  top_val.equiv.h=~top_val.equiv.h, top_val.equiv.l=~top_val.equiv.l;
 @y
- top_val.equiv=(octa){~top_val.equiv.h,~top_val.equiv.l};
+ top_val.equiv=onot(top_val.equiv); @+
 @z
 
 @x [100] l.2541
