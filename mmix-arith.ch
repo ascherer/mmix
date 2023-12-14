@@ -301,11 +301,11 @@ octa oor( /* compute $y\lor z$ */
 @#
 octa oorn( /* compute $y\lor\bar z$ */
   octa y, octa z)
-{ @+ return (octa){y.h|~z.h, y.l|~z.l}; @+ }
+{ @+ return oor(y, onot(z)); @+ }
 @#
 octa onor( /* compute $\overline{y\lor z}$ */
   octa y, octa z)
-{ @+ return (octa){~(y.h|z.h), ~(y.l|z.l)}; @+ }
+{ @+ return onot(oor(y, z)); @+ }
 @#
 @z
 
@@ -334,11 +334,11 @@ octa oandn(y,z) /* compute $y\land\bar z$ */
 @y
 octa oandn( /* compute $y\land\bar z$ */
   octa y, octa z)
-{ @+ return (octa){y.h&~z.h, y.l&~z.l}; @+ }
+{ @+ return oand(y, onot(z)); @+ }
 @#
 octa onand( /* compute $\overline{y\land z}$ */
   octa y, octa z)
-{ @+ return (octa){~(y.h&z.h), ~(y.l&z.l)}; @+ }
+{ @+ return onot(oand(y, z)); @+ }
 @z
 
 @x [25] l.362 C99 prototypes for C2x.
@@ -356,7 +356,7 @@ octa oxor( /* compute $y\oplus z$ */
 @#
 octa onxor( /* compute $\overline{y\oplus z}$ */
   octa y, octa z)
-{ @+ return (octa){~(y.h^z.h), ~(y.l^z.l)}; @+ }
+{ @+ return onot(oxor(y, z)); @+ }
 @z
 
 @x [26] l.386 C99 prototypes for C2x.
