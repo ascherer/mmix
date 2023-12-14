@@ -817,6 +817,12 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
                         oandn(data->z.o, data->b.o));
 @z
 
+@x [146] l.2746
+      hot->x.o.h |= new_Q.h, hot->x.o.l |= new_Q.l;
+@y
+      hot->x.o = oor(hot->x.o,new_Q);
+@z
+
 @x [148] l.2979
 octa new_Q; /* when rQ increases in any bit position, so should this */
 bool stack_overflow; /* stack overflow not yet reported */
