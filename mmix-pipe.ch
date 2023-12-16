@@ -1603,9 +1603,15 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
   g[rX].o=(octa){sign_bit,j};
 @z
 
-@x [329] l.5892
+@x [329] l.5888
+  case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
+           new_Q.l |= data->z.o.l &~ g[rQ].o.l;
+           data->z.o.l |= new_Q.l;@+
+           data->z.o.h |= new_Q.h;@+break;
   case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=g[rL].o.l;
 @y
+  case rQ: new_Q = oor(new_Q,oandn(data->z.o,g[rQ].o));
+           data->z.o = oor(data->z.o,new_Q);
   case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
 @z
 
