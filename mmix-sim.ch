@@ -1101,6 +1101,12 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
+@x [103] l.2295
+if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
+@y
+if (k==rZ+1) x=(octa){G<<24, g[rA].l};
+@z
+
 @x [105] l.2335 Compound literal.
 }@+else g[k].h=ll->tet, g[k].l=(ll+1)->tet;
 @y
