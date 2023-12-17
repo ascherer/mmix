@@ -291,20 +291,16 @@ packaging as subroutines.
 @<Subr...@>=
 @y
 @<External routines@>=
-octa onot( /* compute $\bar x$ */
-  octa x)
+octa onot(octa x) /* compute $\bar x$ */
 { @+ return (octa){~x.h,~x.l}; @+ }
 @#
-octa oor( /* compute $y\lor z$ */
-  octa y, octa z)
+octa oor(octa y, octa z) /* compute $y\lor z$ */
 { @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
 @#
-octa oorn( /* compute $y\lor\bar z$ */
-  octa y, octa z)
+octa oorn(octa y, octa z) /* compute $y\lor\bar z$ */
 { @+ return oor(y, onot(z)); @+ }
 @#
-octa onor( /* compute $\overline{y\lor z}$ */
-  octa y, octa z)
+octa onor(octa y, octa z) /* compute $\overline{y\lor z}$ */
 { @+ return onot(oor(y, z)); @+ }
 @#
 @z
@@ -318,8 +314,7 @@ octa oand(y,z) /* compute $y\land z$ */
   return x;
 }
 @y
-octa oand( /* compute $y\land z$ */
-  octa y, octa z)
+octa oand(octa y, octa z) /* compute $y\land z$ */
 { @+ return (octa){y.h&z.h, y.l&z.l}; @+ }
 @z
 
@@ -332,12 +327,10 @@ octa oandn(y,z) /* compute $y\land\bar z$ */
   return x;
 }
 @y
-octa oandn( /* compute $y\land\bar z$ */
-  octa y, octa z)
+octa oandn(octa y, octa z) /* compute $y\land\bar z$ */
 { @+ return oand(y, onot(z)); @+ }
 @#
-octa onand( /* compute $\overline{y\land z}$ */
-  octa y, octa z)
+octa onand(octa y, octa z) /* compute $\overline{y\land z}$ */
 { @+ return onot(oand(y, z)); @+ }
 @z
 
@@ -350,12 +343,10 @@ octa oxor(y,z) /* compute $y\oplus z$ */
   return x;
 }
 @y
-octa oxor( /* compute $y\oplus z$ */
-  octa y, octa z)
+octa oxor(octa y, octa z) /* compute $y\oplus z$ */
 { @+ return (octa){y.h^z.h, y.l^z.l}; @+ }
 @#
-octa onxor( /* compute $\overline{y\oplus z}$ */
-  octa y, octa z)
+octa onxor(octa y, octa z) /* compute $\overline{y\oplus z}$ */
 { @+ return onot(oxor(y, z)); @+ }
 @z
 
