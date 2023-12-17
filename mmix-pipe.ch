@@ -1520,6 +1520,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     octa after=shift_right(shift_left(data->b.o,i),i,0);
 @z
 
+@x [282] l.5147
+  data->x.o.h^=mask.h&(data->x.o.h^data->b.o.h);
+  data->x.o.l^=mask.l&(data->x.o.l^data->b.o.l);
+@y
+  data->x.o = oxor(data->x.o, oand(mask, oxor(data->x.o, data->b.o)));
+@z
+
 @x [285] l.5204
 int fetch_lo, fetch_hi; /* the active region of that buffer */
 coroutine fetch_co;
