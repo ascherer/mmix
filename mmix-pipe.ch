@@ -1385,8 +1385,11 @@ static octa phys_addr(
 @x [241] l.4370 RAII.
 {@+octa t;
   t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
+  return oplus(t,oand(virt,page_mask));
 @y
-{@+octa t=oandn(trans,page_mask); /* zero out the \\{ynp} fields of a PTE */
+{
+  return oplus(oand(virt,page_mask), oandn(trans,page_mask));
+    /* zero out the \\{ynp} fields of a PTE */
 @z
 
 @x [243] l.4395 Compound literal.
