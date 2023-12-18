@@ -799,14 +799,14 @@ case xor: data->x.o.h=data->y.o.h ^ data->z.o.h;
 case nxor: data->x.o.h=data->y.o.h ^~data->z.o.h;
    data->x.o.l=data->y.o.l ^~data->z.o.l; break;
 @y
-case or: data->x.o=oor(data->y.o, data->z.o); break;
-case orn: data->x.o=oorn(data->y.o, data->z.o); break;
-case nor: data->x.o=onor(data->y.o, data->z.o); break;
-case and: data->x.o=oand(data->y.o, data->z.o); break;
-case andn: data->x.o=oandn(data->y.o, data->z.o); break;
-case nand: data->x.o=onand(data->y.o, data->z.o); break;
-case xor: data->x.o=oxor(data->y.o, data->z.o); break;
-case nxor: data->x.o=onxor(data->y.o, data->z.o); break;
+case or: data->x.o=oor(data->y.o, data->z.o); @+ break;
+case orn: data->x.o=oorn(data->y.o, data->z.o); @+ break;
+case nor: data->x.o=onor(data->y.o, data->z.o); @+ break;
+case and: data->x.o=oand(data->y.o, data->z.o); @+ break;
+case andn: data->x.o=oandn(data->y.o, data->z.o); @+ break;
+case nand: data->x.o=onand(data->y.o, data->z.o); @+ break;
+case xor: data->x.o=oxor(data->y.o, data->z.o); @+ break;
+case nxor: data->x.o=onxor(data->y.o, data->z.o); @+ break;
 @z
 
 @x [142] l.2666 Compound literal.
