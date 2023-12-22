@@ -299,6 +299,11 @@ void show_line()
 void show_line(void)
 @z
 
+@x [47] l.1179
+  register int k;
+@y
+@z
+
 @x [47] l.1183 Change from MMIX home.
     if (shown_line>0)
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
@@ -307,6 +312,12 @@ void show_line(void)
     if (shown_line>0) {
       if (cur_line<shown_line) printf("--------\n"); /* indicate upward move */
       else printf("     ...\n"); /* indicate the gap */ }
+@z
+
+@x [47] l.1187
+  }@+else@+ for (k=shown_line+1;k<=cur_line;k++) print_line(k);
+@y
+  }@+else@+ for (int k=shown_line+1;k<=cur_line;k++) print_line(k);
 @z
 
 @x [49] l.1204 Don't ignore return code from freopen().
@@ -325,8 +336,15 @@ void print_freqs(
 @z
 
 @x [50] l.1230 Block-local variable.
+  register int j;
   octa cur_loc;
 @y
+@z
+
+@x [50] l.1232
+  for (j=0;j<512;j++) if (p->dat[j].freq)
+@y
+  for (int j=0;j<512;j++) if (p->dat[j].freq)
 @z
 
 @x [51] l.1242 RAII. Block-local variable.
@@ -1152,7 +1170,7 @@ case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
 case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
 @z
 
-@x ]111] l.2433 Compound literal.
+@x [111] l.2433 Compound literal.
   mb.h=ll->tet, mb.l=(ll+1)->tet;
   ll=mem_find(a);@+test_load_bkpt(ll);@+test_load_bkpt(ll+1);
   ma.h=ll->tet, ma.l=(ll+1)->tet;
@@ -1466,6 +1484,24 @@ void show_breaks(
   mem_node *p)
 @z
 
+@x [162] l.3351
+  register int j;
+  octa cur_loc;
+@y
+@z
+
+@x [162] l.3354
+  for (j=0;j<512;j++) if (p->dat[j].bkpt) {
+@y
+  for (int j=0;j<512;j++) if (p->dat[j].bkpt) {
+@z
+
+@x [162] l.3355
+    cur_loc=incr(p->loc,4*j);
+@y
+    octa cur_loc=incr(p->loc,4*j);
+@z
+
 @x [163] l.3374 Compound literal.
 x.h=0x40000000, x.l=0x8;
 @y
@@ -1486,6 +1522,20 @@ void dump(p)
 @y
 void dump(
   mem_node *p)
+@z
+
+@x [165] l.3417
+  register int j;
+  octa cur_loc;
+@y
+@z
+
+@x [165] l.3420
+  for (j=0;j<512;j+=2) if (p->dat[j].tet || p->dat[j+1].tet) {
+    cur_loc=incr(p->loc,4*j);
+@y
+  for (int j=0;j<512;j+=2) if (p->dat[j].tet || p->dat[j+1].tet) {
+    octa cur_loc=incr(p->loc,4*j);
 @z
 
 @x [166] l.3434 C99 prototypes for C2x.

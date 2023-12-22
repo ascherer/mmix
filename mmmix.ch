@@ -366,6 +366,17 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @:g}{\|g (global registers)@>
 @z
 
+@x [24] l.549
+case '!':@+ { register int j;
+   for (j=0;j<funit_count;j++)
+     printf("unit %s %d\n",funit[j].name,funit[j].k);
+ }
+@y
+case '!':@+
+   for (int j=0;j<funit_count;j++)
+     printf("unit %s %d\n",funit[j].name,funit[j].k);
+@z
+
 @x [25] l.556 Untangle private stuff from MMIX-ARITH.
 bool silent=false;
 bool bad_address;
