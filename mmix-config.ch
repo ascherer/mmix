@@ -439,8 +439,20 @@ if (!c->set) panic(
 
 @x [36] l.963
 if (!ring) panic(errprint0("Can't allocate the scheduling ring"));
+@.Can't allocate...@>
+{@+register coroutine *p;
+  for (p=ring;p<ring+ring_size;p++) {
+    p->name=""; /* header nodes are nameless */
+    p->stage=max_stage;
+  }
+}
 @y
 if (!ring) panic("Can't allocate the scheduling ring");
+@.Can't allocate...@>
+for (coroutine* p=ring;p<ring+ring_size;p++) {
+  p->name=""; /* header nodes are nameless */
+  p->stage=max_stage;
+}
 @z
 
 @x [37] l.975
