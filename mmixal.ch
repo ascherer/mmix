@@ -288,6 +288,12 @@ trie_node *trie_search(
   Char *s)
 @z
 
+@x [57] l.1493
+  while (1) {
+@y
+  while (true) {
+@z
+
 @x [58] l.1539 CWEB knows this since version 3.5 (1999).
 @s bool int
 @y
@@ -689,6 +695,12 @@ void out_stab(
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
+@x [85] l.2341
+while (1) {
+@y
+while (true) {
+@z
+
 @x [86] l.2371
  if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
  derr("syntax error after character `%c'",*(p-2));
@@ -1039,6 +1051,18 @@ int main(argc,argv)
 int main(
   int argc,
   char *argv[])
+@z
+
+@x [136] l.3183
+  while(1) {
+@y
+  while (true) {
+@z
+
+@x [136] l.3185
+    while(1) {
+@y
+    while (true) {
 @z
 
 @x [138] l.3216

@@ -86,6 +86,12 @@ static FILE *prog_file;
 @.Can't open...@>
 @z
 
+@x [6] l.130
+  while (1) {
+@y
+  while (true) {
+@z
+
 @x [6] l.132 Use 'panic' macro.
     if (buffer[strlen(buffer)-1]!='\n') {
       fprintf(stderr,"Panic: Hexadecimal file line too long: `%s...'!\n",buffer);
@@ -140,10 +146,12 @@ static FILE *prog_file;
 @.Can't open...@>
     exit(-3);
   }
+  while (1) {
 @y
   if (!prog_file)
     panic(-3,"Panic: Can't open MMIX binary file %s!\n",prog_file_name);
 @.Can't open...@>
+  while (true) {
 @z
 
 @x [10] l.220 Purge a few 'goto's.
@@ -185,6 +193,12 @@ oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
   t3=fgetc(prog_file);@+ if (t3==EOF) oops;
   cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;
   return true;
+@z
+
+@x [11] l.242
+while (1) {
+@y
+while (true) {
 @z
 
 @x [11] l.249 Use 'panic' macro.
@@ -242,6 +256,12 @@ cur_dat=(octa){(GET<<24)+rQ, (PUTI<<24)+(rQ<<16)};@+ cur_loc.l=0;
 cur_dat.h=0, cur_dat.l=7; /* generate a PTE with \.{rwx} permission */
 @y
 cur_dat=seven_octa; /* generate a PTE with \.{rwx} permission */
+@z
+
+@x [13] l.371
+while (1) {
+@y
+while (true) {
 @z
 
 @x [13] l.374 Don't ignore return code from fgets().
