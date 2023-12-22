@@ -51,6 +51,12 @@ static void get_token() /* set |token| to the next token of the configuration fi
 static void get_token(void) /* set |token| to the next token of the configuration file */
 @z
 
+@x [10] l.376
+  while(1) { /* scan past white space */
+@y
+  while (true) { /* scan past white space */
+@z
+
 @x [10] l.382
         panic(errprint1("config file line too long: `%s...'",buffer));
 @y
