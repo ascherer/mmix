@@ -319,6 +319,16 @@ static void errprint_coroutine_id(
   else errprint("??");
 @z
 
+@x [26] l.496
+@<Initialize e...@>=
+{@+register coroutine *p;
+  for (p=ring;p<ring+ring_size;p++) p->next=p;
+}
+@y
+@<Initialize e...@>=@+
+  for (coroutine* p=ring;p<ring+ring_size;p++) p->next=p;
+@z
+
 @x [27,28| l.507 C99 prototypes for C2x.
 static void schedule @,@,@[ARGS((coroutine*,int,int))@];
 
@@ -500,6 +510,13 @@ static void print_bits(
   int x)
 @z
 
+@x [56] l.1205
+  register int b,j;
+  for (j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
+@y
+  for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
+@z
+
 @x [61,62] l.1423 C99 prototypes for C2x.
 static void print_reorder_buffer @,@,@[ARGS((void))@];
 
@@ -510,6 +527,18 @@ static void print_reorder_buffer(void);
 
 @ @<Sub...@>=
 static void print_reorder_buffer(void)
+@z
+
+@x [63] l. 1430
+  else {@+register control *p;
+@y
+  else {
+@z
+
+@x [63] l.1434
+    for (p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
+@y
+    for (control* p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
 @z
 
 @x [65] l.1465
@@ -542,6 +571,18 @@ static void print_fetch_buffer(void);
 static void print_fetch_buffer(void)
 @z
 
+@x [73] l.1555
+  else {@+register fetch *p;
+@y
+  else {
+@z
+
+@x [73] l.1558
+    for (p=head;p!=tail; p=(p==fetch_bot? fetch_top: p-1)) {
+@y
+    for (fetch* p=head;p!=tail; p=(p==fetch_bot? fetch_top: p-1)) {
+@z
+
 @x [75] l.1620 Improved typography.
   if (head==fetch_bot) new_head=fetch_top;@+else new_head=head-1;
 @y
@@ -562,6 +603,16 @@ tetra support[8]; /* big-endian bitmap for all opcodes supported */
 static control *new_cool; /* the reorder position following |cool| */
 static int resuming; /* set nonzero if resuming an interrupted instruction */
 static tetra support[8]; /* big-endian bitmap for all opcodes supported */
+@z
+
+@x [79] l.1672
+{@+register func *u;
+  for (u=funit;u<=funit+funit_count;u++)
+    for (i=0;i<8;i++) support[i] |= u->ops[i];
+}
+@y
+for (func* u=funit;u<=funit+funit_count;u++)
+  for (i=0;i<8;i++) support[i] |= u->ops[i];
 @z
 
 @x [80] l.1677
@@ -889,6 +940,17 @@ Extern void print_stats(void);
 void print_stats(void)
 @z
 
+@x [162] l.3032
+  register int j;
+@y
+@z
+
+@x [162] l.3038
+  for (j=0;j<=dispatch_max;j++)
+@y
+  for (int j=0;j<=dispatch_max;j++)
+@z
+
 @x [168,169] l.3223 C99 prototypes for C2x.
 static bool is_dirty @,@,@[ARGS((cache*,cacheblock*))@];
 
@@ -905,6 +967,17 @@ static bool is_dirty(
   cacheblock *p) /* a cache block */
 @z
 
+@x [170] l.3230
+  register int j;
+@y
+@z
+
+@x [170] l.3233
+  for (j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
+@y
+  for (int j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
+@z
+
 @x [169,170] l.3239 C99 prototypes for C2x.
 static void print_cache_block @,@,@[ARGS((cacheblock,cache*))@];
 
@@ -919,6 +992,18 @@ static void print_cache_block(cacheblock,cache*);
 static void print_cache_block(
   cacheblock p,
   cache *c)
+@z
+
+@x [172] l.3245
+{@+register int i,j,b=c->bb>>3,g=c->gg>>3;
+@y
+{@+register int b=c->bb>>3,g=c->gg>>3;
+@z
+
+@x [172] l.3247
+  for (i=j=0; j<b;j++,i+=((j&(g-1))?0:1))
+@y
+  for (int i=0, j=0; j<b;j++,i+=((j&(g-1))?0:1))
 @z
 
 @x [173,174] l.3253 C99 prototypes for C2x.
@@ -1001,6 +1086,14 @@ static int get_reader(
   cache *c)
 @z
 
+@x [183] l.3363
+{@+ register int j;
+  for (j=0;j<c->ports;j++)
+@y
+{
+  for (int j=0;j<c->ports;j++)
+@z
+
 @x [184,185] l.3375 C99 prototypes for C2x.
 static void copy_block @,@,@[ARGS((cache*,cacheblock*,cache*,cacheblock*))@];
 
@@ -1015,6 +1108,24 @@ static void copy_block(cache*,cacheblock*,cache*,cacheblock*);
 static void copy_block(
   cache *c, cacheblock *p,
   cache *cc, cacheblock *pp)
+@z
+
+@x [185] l.3382
+  register int j,jj,i,ii,lim; register int off=p->tag.l&(cc->bb-1);
+@y
+  register int off=p->tag.l&(cc->bb-1);
+@z
+
+@x [185] l.3385
+  for (j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
+@y
+  for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
+@z
+
+@x [185] l.3387
+    for (i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
+@y
+    for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @z
 
 @x [186,187] l.3401 C99 prototypes for C2x.
@@ -1033,6 +1144,17 @@ static cacheblock* choose_victim(
   cacheset s,
   int aa, /* setsize */
   replace_policy policy)
+@z
+
+@x [187] l.3409
+  register cacheblock *p;
+@y
+@z
+
+@x [187] l.3414
+ case lru: for (p=s;p<s+aa;p++)
+@y
+ case lru: for (cacheblock* p=s;p<s+aa;p++)
 @z
 
 @x [187] l.3418 Change from MMIX home.
@@ -1061,6 +1183,25 @@ static void note_usage(
   replace_policy policy)
 @z
 
+@x [189] l.3435
+  register cacheblock *p;
+  register int j,m,r;
+@y
+  register int r;
+@z
+
+@x [189] l.3440
+    for (p=s;p<s+aa;p++) if (p->rank>r) p->rank--;
+@y
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank>r) p->rank--;
+@z
+
+@x [189] l.3444
+    for (j=1,m=aa>>1;m;m>>=1)
+@y
+    for (int j=1,m=aa>>1;m;m>>=1)
+@z
+
 @x [190,191] l.3455 C99 prototypes for C2x.
 static void demote_usage @,@,@[ARGS((cacheblock*,cacheset,int,replace_policy))@];
 
@@ -1079,6 +1220,25 @@ static void demote_usage(
   cacheset s, /* the set that contains $l$ */
   int aa, /* setsize */
   replace_policy policy)
+@z
+
+@x [191] l.3464
+  register cacheblock *p;
+  register int j,m,r;
+@y
+  register int r;
+@z
+
+@x [191] l.3469
+    for (p=s;p<s+aa;p++) if (p->rank<r) p->rank++;
+@y
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank<r) p->rank++;
+@z
+
+@x [191] l.3473
+    for (j=1,m=aa>>1;m;m>>=1)
+@y
+    for (int j=1,m=aa>>1;m;m>>=1)
 @z
 
 @x [192,193] l.3489 C99 prototypes for C2x.
@@ -1158,6 +1318,17 @@ static void load_cache(cache*,cacheblock*);
 static void load_cache(
   cache *c,
   cacheblock *p)
+@z
+
+@x [201] l.3481
+  register int i;
+@y
+@z
+
+@x [201] l.3483
+  for (i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
+@y
+  for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @z
 
 @x [202,203] l.3598 C99 prototypes for C2x.
@@ -1418,6 +1589,18 @@ static void print_write_buffer(void);
 static void print_write_buffer(void)
 @z
 
+@x [251] l.4494
+  else {@+register write_node *p;
+@y
+  else {
+@z
+
+@x [251] l.3386
+    for (p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
+@y
+    for (write_node* p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
+@z
+
 @x [252,253] l.4511 C99 prototypes for C2x.
 Extern void print_pipe @,@,@[ARGS((void))@];
 
@@ -1662,6 +1845,21 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
   data->z.o=(octa){0, data->y.o.l&0x7};
 @z
 
+@x [357] l.6335
+{
+  register control *cc;
+  for (cc=data;cc!=hot;) {
+    cc=(cc==reorder_top? reorder_bot: cc+1);
+    if (cc->owner && (cc->i==ld || cc->i==ldunc || cc->i==pst)) wait(1);
+  }
+}
+@y
+for (control* cc=data;cc!=hot;) {
+  cc=(cc==reorder_top? reorder_bot: cc+1);
+  if (cc->owner && (cc->i==ld || cc->i==ldunc || cc->i==pst)) wait(1);
+}
+@z
+
 @x [364] l.6458 Change from MMIX home.
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
@@ -1757,12 +1955,48 @@ static octa magic_read(
   octa addr)
 @z
 
+@x [378] l.6626
+  register write_node *q;
+  register cacheblock *p;
+@y
+@z
+
+@x [378] l.6628
+  for (q=write_tail;;) {
+@y
+  for (write_node* q=write_tail;;) {
+@z
+
+@x [378] l.6634
+    p=cache_search(Dcache,addr);
+@y
+    cacheblock* p=cache_search(Dcache,addr);
+@z
+
 @x [379] l.6656 Factor out private stuff.
 void magic_write(addr,val)
   octa addr,val;
 @y
 static void magic_write(
   octa addr, octa val)
+@z
+
+@x [379] l.6659
+  register write_node *q;
+  register cacheblock *p;
+@y
+@z
+
+@x [379] l.6661
+  for (q=write_tail;;) {
+@y
+  for (write_node* q=write_tail;;) {
+@z
+
+@x [379] l.6667
+    p=cache_search(Dcache,addr);
+@y
+    cacheblock* p=cache_search(Dcache,addr);
 @z
 
 @x [380] l.6695 RAII.
