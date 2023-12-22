@@ -296,6 +296,12 @@ octa mmix_fgets(
 @y
 @z
 
+@x [14] l.187
+  while (1) {
+@y
+  while (true) {
+@z
+
 @x [15] l.199 Change from MMIX home.
 if (size.l<s && !size.h) s=size.l;
 @y
@@ -326,7 +332,9 @@ octa mmix_fgetws(
 
 @x [16] l.242 RAII.
   o=zero_octa;
+  while (1) {
 @y
+  while (true) {
 @z
 
 @x [17] l.256 Change from MMIX home.
@@ -347,6 +355,12 @@ octa mmix_fwrite(
 @t\4\4@>
   int @,(*mmgetchars)(char*,int,octa,int)
 @,)
+@z
+
+@x [18] l.284
+  while (1) {
+@y
+  while (true) {
 @z
 
 @x [18] l.288 Change from MMIX home.
@@ -376,6 +390,12 @@ octa mmix_fputs(
   octa o=zero_octa;
 @z
 
+@x [19] l.307
+  while (1) {
+@y
+  while (true) {
+@z
+
 @x [19] l.309 Change from MMIX home.
     if (fwrite(buf,1,n,sfile[handle].fp)!=n) return neg_one;
 @y
@@ -401,6 +421,12 @@ octa mmix_fputws(
   o=zero_octa;
 @y
   octa o=zero_octa;
+@z
+
+@x [20] l.331
+  while (1) {
+@y
+  while (true) {
 @z
 
 @x [20] l.333 Change from MMIX home.
