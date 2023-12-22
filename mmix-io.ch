@@ -245,10 +245,12 @@ octa mmix_fread(
 @,)
 @z
 
-@x [12] l.144 RAII.
+@x [12] l.143 RAII.
+  register int n;
   octa o;
   o=neg_one;
 @y
+  register int n=size.l;
   octa o=neg_one;
 @z
 
@@ -256,6 +258,17 @@ octa mmix_fread(
   o.h=0, o.l=n;
 @y
   o=(octa){0,n};
+@z
+
+@x [13] l.159
+if (sfile[handle].fp==stdin) {
+  register unsigned char *p;
+  for (p=buf,n=size.l; p<buf+n; p++) *p=stdin_chr();
+} else {
+@y
+if (sfile[handle].fp==stdin)
+  for (unsigned char* p=buf; p<buf+n; p++) *p=stdin_chr();
+else {
 @z
 
 @x [14] l.172 Decouple 'mixins'.
