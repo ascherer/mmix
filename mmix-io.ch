@@ -258,17 +258,6 @@ octa mmix_fread(
   o=(octa){0,n};
 @z
 
-@x [13] l.159
-if (sfile[handle].fp==stdin) {
-  register unsigned char *p;
-  for (p=buf,n=size.l; p<buf+n; p++) *p=stdin_chr();
-} else {
-@y
-if (sfile[handle].fp==stdin)
-  for (unsigned char* p=buf,n=size.l; p<buf+n; p++) *p=stdin_chr();
-else {
-@z
-
 @x [14] l.172 Decouple 'mixins'.
 octa mmix_fgets @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fgets(handle,buffer,size)
