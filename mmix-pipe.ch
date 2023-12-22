@@ -1629,6 +1629,18 @@ static octa *write_search(
   octa addr)
 @z
 
+@x [255] l.4557
+qloop:@+ for (;;) {
+@y
+qloop:@+ while (true) {
+@z
+
+@x [256] l.4585
+  if (hot->i!=sync) for (;;) {
+@y
+  if (hot->i!=sync) while (true) {
+@z
+
 @x [257] l.4621 Change from MMIX home.
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y

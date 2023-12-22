@@ -732,6 +732,12 @@ static void bignum_dec(
   tetra r) /* the radix */
 @z
 
+@x [65] l.1262
+  while (1) {
+@y
+  while (true) {
+@z
+
 @x [67] l.1301 Change from MMIX home.
 else if (strlen(s)>=e) printf("%.*s.%s",e,s,s+e);
 @y

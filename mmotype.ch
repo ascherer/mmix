@@ -138,6 +138,12 @@ cur_loc.h=cur_loc.l=0;
 cur_loc=zero_octa;
 @z
 
+@x [21] l.302
+ while(1) {
+@y
+ while (true) {
+@z
+
 @x [22] l.316
 case lop_post: postamble=1;
 @y
