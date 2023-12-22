@@ -258,6 +258,12 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  mmo_load(incr(cur_loc,-delta<<2),tet);
 @z
 
+@x [36] l.1033
+case lop_spec:@+ while(1) {
+@y
+case lop_spec:@+ while (true) {
+@z
+
 @x [37] l.1048 Compound literal.
 aux.h=0x60000000;@+ aux.l=0x18;
 @y
@@ -1356,6 +1362,12 @@ int main(argc,argv)
 int main(
   int argc,
   char *argv[])
+@z
+
+@x [141] l.2903
+  while (1) {
+@y
+  while (true) {
 @z
 
 @x [143] l.2946 C99 prototypes for C2x.
