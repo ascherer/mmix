@@ -53,6 +53,7 @@ new-style and old-style compilers.
 @y
 @ Subroutines of this program are declared and defined with a prototype,
 as in {\mc ANSI C}.
+@^prototypes for functions@>
 
 @s ftype int
 @s octa int
@@ -79,7 +80,10 @@ it represents an unsigned 32-bit integer.
 typedef unsigned int tetra;
  /* for systems conforming to the LP-64 data model */
 @y
-@ The definition of type \&{tetra} should represent an unsigned 32-bit integer.
+@ The definition of type \&{tetra}
+represents an unsigned 32-bit integer.
+@^system dependencies@>
+
 @s uint32_t int
 @<Tetra...@>=
 typedef uint32_t tetra;
@@ -101,6 +105,14 @@ all appearances of `\&{Extern}' are defined to be blank here, but
 
 @d Extern  /* blank for us, \&{extern} for them */
 @f Extern extern
+
+@<Exported constants@>=
+#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
+#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
+#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
+#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
+@#
+#define sign_bit ((unsigned)0x80000000)
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -110,8 +122,7 @@ octa oplus(y,z) /* compute $y+z$ */
   octa y,z;
 @y
 @<External routines@>=
-octa oplus( /* compute $y+z$ */
-  octa y, octa z)
+octa oplus(octa y, octa z) /* compute $y+z$ */
 @z
 
 @x [5] l.83 RAII.
@@ -127,8 +138,7 @@ octa ominus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa ominus(y,z) /* compute $y-z$ */
   octa y,z;
 @y
-octa ominus( /* compute $y-z$ */
-  octa y, octa z)
+octa ominus(octa y, octa z) /* compute $y-z$ */
 @z
 
 @x [5] l.91 RAII.
@@ -147,9 +157,7 @@ octa incr(y,delta) /* compute $y+\delta$ */
   int delta;
 @y
 @<External routines@>=
-octa incr( /* compute $y+\delta$ */
-  octa y,
-  int delta)
+octa incr(octa y, int delta) /* compute $y+\delta$ */
 @z
 
 @x [6] l.106 RAII.
@@ -173,9 +181,8 @@ octa shift_left(y,s) /* shift left by $s$ bits, where $0\le s\le64$ */
   int s;
 @y
 @<External routines@>=
-octa shift_left( /* shift left by $s$ bits, where $0\le s\le64$ */
-  octa y,
-  int s)
+octa shift_left(octa y, int s)
+  /* shift left by $s$ bits, where $0\le s\le64$ */
 @z
 
 @x [7] l.129 C99 prototypes for C2x.
@@ -184,9 +191,8 @@ octa shift_right(y,s,u) /* shift right, arithmetically if $u=0$ */
   octa y;
   int s,u;
 @y
-octa shift_right( /* shift right, arithmetically if $u=0$ */
-  octa y,
-  int s, int u)
+octa shift_right(octa y, int s, int u)
+  /* shift right, arithmetically if $u=0$ */
 @z
 
 @x [8] l.149 C99 prototypes for C2x.
@@ -196,8 +202,7 @@ octa omult(y,z)
   octa y,z;
 @y
 @<External routines@>=
-octa omult(
-  octa y, octa z)
+octa omult(octa y, octa z)
 @z
 
 @x [9] l.173
@@ -281,10 +286,8 @@ octa signed_odiv(
 
 @x [25] l.342 Add missing bit-fiddling functions.
 implement directly, but three of them occur often enough to deserve
-packaging as subroutines.
 @y
 implement directly, and they occur often enough to deserve
-packaging as subroutines.
 @z
 
 @x [25] l.345 Add missing bit-fiddling functions.
@@ -1049,15 +1052,8 @@ Each user of its functionality should include the following header file.
 @#
 #endif /* |MMIX_ARITH_H| */
 
-@ @<Exported constants@>=
-#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
-#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
-#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
-#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
-@#
-#define sign_bit ((unsigned)0x80000000)
-
 @ @<External proto...@>=
+@^prototypes for functions@>
 Extern octa oplus(octa,octa);
   /* unsigned $y+z$ */
 Extern octa ominus(octa,octa);
