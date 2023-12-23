@@ -546,11 +546,11 @@ if (!dispatch_stat) panic("Can't allocate dispatch counts");
   see |@(mmix-config.h@>| */
 #include "mmix-pipe.h" /* |@!internal_opcode| and much more */
 @#
-#include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
-#include <stdarg.h> /* |vfprintf|, |va_start|, |va_end| */
-#include <ctype.h> /* |isspace| */
-#include <string.h> /* |strcpy|, |strlen|, |strcmp| */
-#include <limits.h> /* |INT_MAX| */
+#include <stdio.h> /* |@!fopen|, |@!fgets|, |@!sscanf|, |@!rewind| */
+#include <stdarg.h> /* |@!vfprintf|, |@!va_start|, |@!va_end| */
+#include <ctype.h> /* |@!isspace| */
+#include <string.h> /* |@!strcpy|, |@!strlen|, |@!strcmp| */
+#include <limits.h> /* |@!INT_MAX| */
 @#
 @h
 @#
