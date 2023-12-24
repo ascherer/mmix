@@ -93,7 +93,7 @@ Extern void MMIX_run @,@,@[ARGS((int cycs, octa breakpoint))@];
 Extern int MMIX_silent @,@,@[ARGS((void))@];
 @y
 Extern void MMIX_init(void);
-Extern void MMIX_run(int cycs, octa breakpoint);
+Extern void MMIX_run(int, octa);
 Extern int MMIX_silent(void);
 @z
 
