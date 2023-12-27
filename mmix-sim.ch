@@ -3,12 +3,40 @@
 @y
 @z
 
+@x [4] l.250 Issue #15.
+on that file. It returns 0 if the file was opened successfully; otherwise
+@y
+on that file. It returns 0 if the file was opened successfully; otherwise it
+@z
+
+@x [4] l.293 Issue #15.
+\hskip5em\hbox{(|file[handle]|?
+     |(file[handle]=freopen(name,mode_string[mode],file[handle]))|:}\hfill\cr
+\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|)? 0: $-1$},%
+@y
+\hskip5em\hbox{(|file[handle]| ?
+     |(file[handle]=freopen(name,mode_string[mode],file[handle]))| :}\hfill\cr
+\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|) ? 0 : $-1$},%
+@z
+
+@x [4] l.393 Issue #15.
+              offset<0? SEEK_END: SEEK_SET)|? $-1$: 0.}$$
+@y
+              offset<0? SEEK_END: SEEK_SET)? -1: 0|.}$$
+@z
+
 @x [6] l.443 Change from MMIX home.
 pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1]$, and
 M$_8[\$0\ll3+\$1+8]$ is zero. (Register~\$1 will point to an octabyte in
 @y
 pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1-8]$, and
 M$_8[\$0\ll3+\$1]$ is zero. (Register~\$1 will point to an octabyte in
+@z
+
+@x [6] l.460 Issue #15.
+$$\.{PUT rW, \$255;{ } PUT rB, \$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
+@y
+$$\.{PUT rW,\$255;{ } PUT rB,\$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
 @z
 
 @x [9] l.548 Use standard C99 type.
@@ -379,6 +407,18 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
  "rC","rN","rO","rS","rI","rT","rTT","rK",@|
  "rQ","rU","rV","rG","rL","rA","rF","rP",@|
  "rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
+@z
+
+@x [59] l.1344 Issue #15.
+@ To complete our lists of lists,
+@y
+@ To complete our list of lists,
+@z
+
+@x [59] l.1346 Issue #15.
+that are built in to \.{MMIXAL}.
+@y
+that are built into \.{MMIXAL}.
 @z
 
 @x [62] l.1409 RAII.
