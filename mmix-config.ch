@@ -3,6 +3,12 @@
 @y
 @z
 
+@x [4] l.212 Issue #15
+\bull ports (default 1), number of processes that can simultaneous
+@y
+\bull ports (default 1), number of processes that can simultaneously
+@z
+
 @x [7] l.328 Improve typography.
 in the \.{mmix-pipe} module, which defines and discusses the data structures
 @y
