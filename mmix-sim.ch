@@ -16,7 +16,13 @@ on that file. It returns 0 if the file was opened successfully; otherwise it
 @y
 \hskip5em\hbox{(|file[handle]| ?
      |(file[handle]=freopen(name,mode_string[mode],file[handle]))| :}\hfill\cr
-\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|) ? 0 : $-1$},%
+\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|) ? 0 : $-1$}%
+@z
+
+@x [4] l.367 Issue #15
+$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|,}$$
+@y
+$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|}$$
 @z
 
 @x [4] l.393 Issue #15.
