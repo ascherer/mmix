@@ -1067,6 +1067,12 @@ case NXOR: case NXORI:
  x=onxor(y,z);@+ goto store_x;
 @z
 
+@x [87] l.1971 Issue #16.
+  a=shift_right(x,shift_amt,0);
+@y
+  a=shift_right(x,shift_amt,false);
+@z
+
 @x [87] l.1978 Use bit-fiddling functions from MMIX-ARITH.
  x.h=(y.h&b.h)|(z.h&~b.h);@+ x.l=(y.l&b.l)|(z.l&~b.l);
 @y
@@ -1132,6 +1138,12 @@ int register_truth(
  x.h=ll->tet;@+ x.l=(ll+1)->tet;
 @y
  x=(octa){ll->tet, (ll+1)->tet};
+@z
+
+@x [95] l.2155 Issue #16.
+   a=shift_right(shift_left(b,i),i,0);
+@y
+   a=shift_right(shift_left(b,i),i,false);
 @z
 
 @x [95] l.2166 Compound literal.
