@@ -948,8 +948,8 @@ octa floatit(z,r,u,p)
 extern octa floatit(
   octa z, /* octabyte to float */
   int r, /* rounding mode */
-  int u, /* unsigned? */
-  int p) /* short precision? */
+  bool u, /* unsigned? */
+  bool p) /* short precision? */
 @z
 
 @x [90] l.1712 RAII.
@@ -1138,7 +1138,7 @@ Extern octa fintegerize(octa,int);
   /* floating point $x={\rm round}(z)$ */
 Extern octa fixit(octa,int);
   /* float to fix */
-Extern octa floatit(octa,int,int,int);
+Extern octa floatit(octa,int,bool,bool);
   /* fix to float */
 Extern octa froot(octa,int);
   /* floating point $x=\sqrt z$ */
