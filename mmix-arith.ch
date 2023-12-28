@@ -191,8 +191,8 @@ octa shift_right(y,s,u) /* shift right, arithmetically if $u=0$ */
   octa y;
   int s,u;
 @y
-octa shift_right(octa y, int s, int u)
-  /* shift right, arithmetically if $u=0$ */
+octa shift_right(octa y, int s, bool u)
+  /* shift right, arithmetically if $u=false$ */
 @z
 
 @x [8] l.149 C99 prototypes for C2x.
@@ -399,6 +399,12 @@ octa bool_mult(
   bool xor) /* do we do xor instead of or? */
 @z
 
+@x [29] l.442 Issue #16.
+  for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,1))
+@y
+  for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,true))
+@z
+
 @x [30] l.463
 @<Glob...@>=
 int cur_round; /* the current rounding mode */
@@ -428,6 +434,12 @@ static octa fpack(
       if (e<-54) o=(octa){0,1};
 @z
 
+@x [31] l.518 Issue #16.
+        o=shift_right(f,-e,1);
+@y
+        o=shift_right(f,-e,true);
+@z
+
 @x [32] l.529
 @ @<Glob...@>=
 int exceptions; /* bits possibly destined for rA */
@@ -448,6 +460,12 @@ rounds towards an even number in case of a tie.
  case ROUND_NEAR: o=incr(o, o.l&4? 2: 1);@+break;
 @y
  case ROUND_NEAR: default: o=incr(o, o.l&4? 2: 1);@+break;
+@z
+
+@x [33] l.547 Issue #16.
+o = shift_right(o,2,1);
+@y
+o = shift_right(o,2,true);
 @z
 
 @x [34] l.553 Factor out private stuff.
@@ -523,6 +541,12 @@ octa load_sf(
   t=sfunpack(z,&f,&e,&s);
 @y
   octa f,x;@+int e;@+char s;@+ftype t=sfunpack(z,&f,&e,&s);
+@z
+
+@x [39] l.675 Issue #16.
+ case nan: x=shift_right(f,2,1);@+x.h|=0x7ff00000;@+break;
+@y
+ case nan: x=shift_right(f,2,true);@+x.h|=0x7ff00000;@+break;
 @z
 
 @x [40] l.681 C99 prototypes for C2x.
@@ -631,6 +655,12 @@ octa fdivide(
  default: case 4*zro+zro: case 4*inf+inf: x=standard_NaN;
 @z
 
+@x [45] l.781 Issue #16.
+  xf=shift_right(xf,1,1);
+@y
+  xf=shift_right(xf,1,true);
+@z
+
 @x [46] l.791 C99 prototypes for C2x.
 @<Subr...@>=
 octa fplus @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
@@ -674,10 +704,30 @@ octa fplus(
  default: case 4*zro+zro: x=zero_octa;
 @z
 
-@x [49] l.863
+@x [47] l.831 Issue #16.
+    if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,1), xf.l|=d;
+@y
+    if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,true), xf.l|=d;
+@z
+
+@x [47] l.834 Issue #16.
+    if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,1), xf.l|=d;
+@y
+    if (xf.h>=0x800000) xe++, d=xf.l&1, xf=shift_right(xf,1,true), xf.l|=d;
+@z
+
+@x [49] l.862 Compound literal and issue #16.
+  if (d<=2) zf=shift_right(zf,d,1); /* exact result */
   else if (d>54) zf.h=0, zf.l=1; /* tricky but OK */
 @y
+  if (d<=2) zf=shift_right(zf,d,true); /* exact result */
   else if (d>54) zf=(octa){0,1}; /* tricky but OK */
+@z
+
+@x [47] l.867 Issue #16.
+    zf=shift_right(o,d,1);
+@y
+    zf=shift_right(o,d,true);
 @z
 
 @x [50] l.879
@@ -699,6 +749,18 @@ int fepscomp(y,z,e,s)
 int fepscomp(
   octa y, octa z, octa e, /* the operands */
   bool s) /* test similarity? */
+@z
+
+@x [51] l.932 Issue #16.
+else ef=shift_right(ef,1021-ee,1);
+@y
+else ef=shift_right(ef,1021-ee,true);
+@z
+
+@x [53] l.959 Issue #16.
+else o=shift_right(zf,d,1),oo=shift_left(o,d);
+@y
+else o=shift_right(zf,d,true),oo=shift_left(o,d);
 @z
 
 @x [54] l.973
@@ -747,6 +809,18 @@ static void bignum_dec(f,g,r)
 static void bignum_dec(
   bignum *f, bignum *g,
   tetra r) /* the radix */
+@z
+
+@x [63] l.1198 Issue #16.
+ff.dat[k-1]=shift_right(f,magic_offset+28-e-28*k,1).l&0xfffffff;
+gg.dat[k-1]=shift_right(g,magic_offset+28-e-28*k,1).l&0xfffffff;
+ff.dat[k]=shift_right(f,magic_offset-e-28*k,1).l&0xfffffff;
+gg.dat[k]=shift_right(g,magic_offset-e-28*k,1).l&0xfffffff;
+@y
+ff.dat[k-1]=shift_right(f,magic_offset+28-e-28*k,true).l&0xfffffff;
+gg.dat[k-1]=shift_right(g,magic_offset+28-e-28*k,true).l&0xfffffff;
+ff.dat[k]=shift_right(f,magic_offset-e-28*k,true).l&0xfffffff;
+gg.dat[k]=shift_right(g,magic_offset-e-28*k,true).l&0xfffffff;
 @z
 
 @x [65] l.1262
@@ -897,6 +971,12 @@ if (ze<=1020) xf.h=0,xf.l=1;
 if (ze<=1020) xf=(octa){0,1};
 @z
 
+@x [87] l.1634 Issue #16.
+  xf=shift_right(zf,1074-ze,1);
+@y
+  xf=shift_right(zf,1074-ze,true);
+@z
+
 @x [87] l.1647 Compound literal.
 if (xf.l) xf.h=0x3ff00000, xf.l=0;
 @y
@@ -935,6 +1015,12 @@ octa fixit(
  case zro: default: return zero_octa;
 @z
 
+@x [88] l.1669 Issue #16.
+   if (ze<=1076) o=shift_right(zf,1076-ze,1);
+@y
+   if (ze<=1076) o=shift_right(zf,1076-ze,true);
+@z
+
 @x [89] l.1684 C99 prototypes for C2x.
 @<Subr...@>=
 octa floatit @,@,@[ARGS((octa,int,int,int))@];@+@t}\6{@>
@@ -950,6 +1036,12 @@ extern octa floatit(
   int r, /* rounding mode */
   bool u, /* unsigned? */
   bool p) /* short precision? */
+@z
+
+@x [89] l.1703 Issue #16.
+    z=shift_right(z,1,1);
+@y
+    z=shift_right(z,1,true);
 @z
 
 @x [90] l.1712 RAII.
@@ -1044,6 +1136,12 @@ octa fremstep(
  default: zero_out: x=zero_octa;
 @z
 
+@x [94] l.1823 Issue #16.
+yf=shift_right(yf,1,1);
+@y
+yf=shift_right(yf,1,true);
+@z
+
 @x [96] l.1845 Improved module structure with interface.
 @* Index.  
 @y
@@ -1076,7 +1174,7 @@ Extern octa incr(octa,int);
   /* unsigned $y+\delta$ ($\delta$ is signed) */
 Extern octa shift_left(octa,int);
   /* $y\LL s$, $0\le s\le64$ */
-Extern octa shift_right(octa,int,int);
+Extern octa shift_right(octa,int,bool);
   /* $y\GG s$, signed if |!u| */
 Extern octa omult(octa,octa);
   /* unsigned $(|aux|,x)=y\times z$ */
