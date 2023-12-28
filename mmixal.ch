@@ -783,6 +783,12 @@ acc=zero_octa;
       err("can %s pure values only",verb)
 @z
 
+@x [101] l.2579 Issue #16.
+ else next_val.equiv=shift_right(next_val.equiv,top_val.equiv.l,1);
+@y
+ else next_val.equiv=shift_right(next_val.equiv,top_val.equiv.l,true);
+@z
+
 @x [101] l.2582
  next_val.equiv.h&=top_val.equiv.h, next_val.equiv.l&=top_val.equiv.l;
 @y
@@ -882,6 +888,12 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
     dderr("*relative address in location #%08x%08x not divisible by 4",
 @y
     err("*relative address in location #%08x%08x not divisible by 4",
+@z
+
+@x [114] l.2798 Issue #16.
+  o=shift_right(o,2,0);@+
+@y
+  o=shift_right(o,2,false);@+
 @z
 
 @x [114] l.2810
@@ -993,6 +1005,14 @@ default: err("too many operands for opcode `%s'",op_field);
     err("*YZ field of `%s' should be a register number",op_field);
 @z
 
+@x [126] l.2990 Issue #16.
+  source=shift_right(cur_loc,2,0);
+  dest=shift_right(val_stack[1].equiv,2,0);
+@y
+  source=shift_right(cur_loc,2,false);
+  dest=shift_right(val_stack[1].equiv,2,false);
+@z
+
 @x [127] l.3004 RAII.
   octa o;
   o=val_stack[1].equiv, k=0;
@@ -1011,6 +1031,14 @@ default: err("too many operands for opcode `%s'",op_field);
     derr("*operand of `%s' should be a register number",op_field);
 @y
     err("*operand of `%s' should be a register number",op_field);
+@z
+
+@x [131] l.3086 Issue #16.
+  source=shift_right(cur_loc,2,0);
+  dest=shift_right(val_stack[0].equiv,2,0);
+@y
+  source=shift_right(cur_loc,2,false);
+  dest=shift_right(val_stack[0].equiv,2,false);
 @z
 
 @x [132] l.3109 Change from MMIX home.
