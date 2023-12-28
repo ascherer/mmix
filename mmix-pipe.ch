@@ -860,6 +860,20 @@ case xor: data->x.o=oxor(data->y.o, data->z.o); @+ break;
 case nxor: data->x.o=onxor(data->y.o, data->z.o); @+ break;
 @z
 
+@x [141] l.2655 Issue #16.
+    tmpo=shift_right(data->x.o,shift_amt,0);
+@y
+    tmpo=shift_right(data->x.o,shift_amt,false);
+@z
+
+@x [141] l.2658 Issue #16.
+case shru: data->x.o=shift_right(data->y.o,shift_amt,1);@+data->i=sh;@+ break;
+case shr:  data->x.o=shift_right(data->y.o,shift_amt,0);@+data->i=sh;@+ break;
+@y
+case shru: data->x.o=shift_right(data->y.o,shift_amt,true);@+data->i=sh;@+ break;
+case shr:  data->x.o=shift_right(data->y.o,shift_amt,false);@+data->i=sh;@+ break;
+@z
+
 @x [142] l.2666 Compound literal.
 case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
           data->x.o.l=(data->y.o.l&data->b.o.l)+(data->z.o.l&~data->b.o.l);
@@ -1531,6 +1545,16 @@ Extern bool page_bad; /* does rV violate the rules? */
 {@+octa rv=data->z.o;
 @z
 
+@x [239] l.4345 Issue #16.
+  rv=shift_right(rv,13,1);
+  page_r=rv.l&0x7ffffff;
+  rv=shift_right(rv,27,1);
+@y
+  rv=shift_right(rv,13,true);
+  page_r=rv.l&0x7ffffff;
+  rv=shift_right(rv,27,true);
+@z
+
 @x [239] l.4350 Compound literals.
   else if (page_s<32) page_mask.h=0,page_mask.l=(1<<page_s)-1;
   else page_mask.h=(1<<(page_s-32))-1,page_mask.l=0xffffffff;
@@ -1563,10 +1587,18 @@ static octa phys_addr(
     /* zero out the \\{ynp} fields of a PTE */
 @z
 
-@x [243] l.4395 Compound literal.
+@x [243] l.4393 Issue #16.
+aaaaa=shift_right(aaaaa,page_s,1); /* the page address */
+@y
+aaaaa=shift_right(aaaaa,page_s,true); /* the page address */
+@z
+
+@x [243] l.4395 Compound literal. Issue #16.
   co[2*j].ctl->z.o.h=0, co[2*j].ctl->z.o.l=(aaaaa.l&0x3ff)<<3;
+  aaaaa=shift_right(aaaaa,10,1);
 @y
   co[2*j].ctl->z.o=(octa){0, (aaaaa.l&0x3ff)<<3};
+  aaaaa=shift_right(aaaaa,10,true);
 @z
 
 @x [248] l.4474
@@ -1712,7 +1744,15 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @y
   if (!(data->op&2)) {
     octa before=data->b.o;
-    octa after=shift_right(shift_left(data->b.o,i),i,0);
+    octa after=shift_right(shift_left(data->b.o,i),i,false);
+@z
+
+@x [282] l.5145 Issue #16.
+  mask=shift_right(shift_left(neg_one,i),j,1);
+  data->b.o=shift_right(shift_left(data->b.o,i),j,1);
+@y
+  mask=shift_right(shift_left(neg_one,i),j,true);
+  data->b.o=shift_right(shift_left(data->b.o,i),j,true);
 @z
 
 @x [282] l.5147
@@ -1820,6 +1860,12 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
   case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
 @z
 
+@x [334] l.5974 Issue #16.
+new_O=new_S=shift_right(cool->z.o,3,1);
+@y
+new_O=new_S=shift_right(cool->z.o,3,true);
+@z
+
 @x [338] l.6029 Compound literal.
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 @y
@@ -1831,6 +1877,12 @@ cool->x.known=true, cool->x.o=(octa){0, cool_L};
     data->x.o.l=g[rA].o.l;
 @y
     data->x.o=(octa){g[rG].o.l<<24, g[rA].o.l};
+@z
+
+@x [343] l.6087 Issue #16.
+  for (j=mul0;aux.l||aux.h;j++) aux=shift_right(aux,8,1);
+@y
+  for (j=mul0;aux.l||aux.h;j++) aux=shift_right(aux,8,true);
 @z
 
 @x [344] l.6106 Compound literal.
@@ -2150,7 +2202,7 @@ static void spec_write(
 {
   if (verbose&show_spec_bit) {
     size&=0x3, addr.l&=-(1<<size);
-    val=shift_right(val,(8-(1<<size)-(addr.l&7))<<3,1);
+    val=shift_right(val,(8-(1<<size)-(addr.l&7))<<3,true);
     printf("   (spec_write ");
     switch (size) {
   case 0: printf("%02x",val.l);@+break;
