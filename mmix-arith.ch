@@ -680,6 +680,14 @@ octa fplus(
   else if (d>54) zf=(octa){0,1}; /* tricky but OK */
 @z
 
+@x [50] l.879
+or |e| is negative. It returns 1 if |s=0| and $y\approx z\ (e)$ or if
+|s!=0| and $y\sim z\ (e)$,
+@y
+or |e| is negative. It returns 1 if |s=false| and $y\approx z\ (e)$ or if
+|s=true| and $y\sim z\ (e)$,
+@z
+
 @x [50] l.884 C99 prototypes for C2x.
 @<Subr...@>=
 int fepscomp @,@,@[ARGS((octa,octa,octa,int))@];@+@t}\6{@>
@@ -690,7 +698,7 @@ int fepscomp(y,z,e,s)
 @<External routines@>=
 int fepscomp(
   octa y, octa z, octa e, /* the operands */
-  int s) /* test similarity? */
+  bool s) /* test similarity? */
 @z
 
 @x [54] l.973
@@ -1118,8 +1126,8 @@ Extern octa fdivide(octa,octa);
   /* floating point $x=y\oslash z$ */
 Extern octa fplus(octa,octa);
   /* floating point $x=y\oplus z$ */
-Extern int fepscomp(octa,octa,octa,int);
-  /* $x=|sim|?\ [y\sim z\ (\epsilon)]:\ [y\approx z\ (\epsilon)]$ */
+Extern int fepscomp(octa,octa,octa,bool);
+  /* $x=|sim|\,?\,[y\sim z\ (\epsilon)]\,:\,[y\approx z\ (\epsilon)]$ */
 Extern void print_float(octa);
   /* print octabyte as floating decimal */
 Extern int scan_const(char*);
