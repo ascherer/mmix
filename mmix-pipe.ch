@@ -87,14 +87,34 @@ new-style and old-style compilers.
 as in {\mc ANSI C}.
 @z
 
-@x [9] l.215 C99 prototypes for C2x.
+@x [9,10] l.204 Reshuffle MMIX_silent.
+@ The |MMIX_init()| routine should be called exactly once, after
+|MMIX_config()| has done its work but before the simulator starts to execute
+any programs. Then |MMIX_run()| can be called as often as the user likes.
+
+The |MMIX_silent()| routine is a noninteractive variant of |MMIX_run()|:
+It will return the value of register |g[255].l| when executing a
+\.{TRAP} \.{0,Halt,0} instruction.
+
+@s octa int
+
+@<External proto...@>=
 Extern void MMIX_init @,@,@[ARGS((void))@];
 Extern void MMIX_run @,@,@[ARGS((int cycs, octa breakpoint))@];
 Extern int MMIX_silent @,@,@[ARGS((void))@];
+
+@ @<External routines@>=
 @y
+@ @<External proto...@>=
 Extern void MMIX_init(void);
 Extern void MMIX_run(int, octa);
 Extern int MMIX_silent(void);
+
+@ The |MMIX_init()| routine should be called exactly once, after
+|MMIX_config()| has done its work but before the simulator starts to execute
+any programs. Then |MMIX_run()| can be called as often as the user likes.
+
+@<External routines@>=
 @z
 
 @x [10] l.220 C99 prototypes for C2x.
@@ -103,18 +123,18 @@ void MMIX_init()
 void MMIX_init(void)
 @z
 
-@x [10] l.226 C99 prototypes for C2x.
+@x [10] l.226 Reshuffle MMIX_silent.
 int MMIX_silent()
-@y
-int MMIX_silent(void)
-@z
-
-@x [10] l.228 GCC warning.
+{
   octa breakpoint;
   @<Local variables@>;
+  while (true) {
+    @<Perform one machine cycle@>;
+    if (halted) return specval(&g[255]).o.l;
+  }
+}
+@#
 @y
-  octa breakpoint;@+@t}\6{@>
-  @<Local variables@>;@#
 @z
 
 @x [10] l.236 C99 prototypes for C2x.
@@ -136,7 +156,20 @@ void MMIX_run(
 @ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
-@ (This section remains empty for historic reasons.)
+@ The |MMIX_silent()| routine is a noninteractive variant of |MMIX_run()|:
+It will return the value of register |g[255].l| when executing a
+\.{TRAP} \.{0,Halt,0} instruction.
+
+@<External routines@>=
+int MMIX_silent(void)
+{
+  octa breakpoint;@+@t}\6{@>
+  @<Local variables@>;@#
+  while (true) {
+    @<Perform one machine cycle@>;
+    if (halted) return specval(&g[255]).o.l;
+  }
+}
 @z
 
 @x [13] l.271
