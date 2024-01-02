@@ -61,7 +61,6 @@ definition in that module.
 @y
 represents unsigned 32-bit integers.
 @s uint32_t int
-@s uint8_t int
 @s tetra int
 @s octa int
 
