@@ -205,6 +205,17 @@ octa omult(y,z)
 octa omult(octa y, octa z)
 @z
 
+@x [8] l.155 Zero-initialization.
+  tetra u[4],v[4],w[8];
+@y
+  tetra u[4],v[4],w[8]={0};
+@z
+
+@x [8] l.159 Zero-initialization.
+  for (j=0;j<4;j++) w[j]=0;
+@y
+@z
+
 @x [9] l.173
 @ @<Glob...@>=
 octa aux; /* secondary output of subroutines with multiple outputs */
