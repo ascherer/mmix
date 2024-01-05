@@ -3,3 +3,5 @@
 @$octa {MMIX-ARITH}3 \&{struct}@>
 @$h {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
+@$zero_octa {MMIX-ARITH}4 \&{octa}@>
+@$incr {MMIX-ARITH}6 \&{octa} (\,)@>
