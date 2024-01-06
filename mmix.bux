@@ -11,3 +11,21 @@
 @$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
+
+@$MMIX_config {MMIX-CONFIG}30 \&{void} (\,)@>
+
+@$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
+
+@$MMIX_init {MMIX-PIPE}10 \&{void} (\,)@>
+@$MMIX_run {MMIX-PIPE}10 \&{void} (\,)@>
+@$MMIX_silent {MMIX-PIPE}11 \&{int} (\,)@>
+@$GET {MMIX-PIPE}47 \&{enum}@>
+@$g {MMIX-PIPE}86 \&{specnode} [\,]@>
+@$ticks {MMIX-PIPE}87 \&{octa}@>
+@$data {MMIX-PIPE}124 \&{control} ${*}$@>
+@$print_stats {MMIX-PIPE}162 \&{void} (\,)@>
+@$chunk {MMIX-PIPE}206 \&{octa} ${*}$@>
+@$mem_hash {MMIX-PIPE}207 \&{int}@>
+@$last_h {MMIX-PIPE}211 \&{int}@>
+@$mem_write {MMIX-PIPE}213 \&{void} (\,)@>
+@$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
