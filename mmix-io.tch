@@ -1,0 +1,8 @@
+@x
+@* Interface.  Here comes the exported interface of this program module.
+@y
+@* Interface.  Here comes the exported interface of this program module.
+@-mmgetchars@>
+@-mmputchars@>
+@-stdin_chr@>
+@z
