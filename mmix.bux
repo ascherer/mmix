@@ -4,4 +4,10 @@
 @$h {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$zero_octa {MMIX-ARITH}4 \&{octa}@>
+@$neg_one {MMIX-ARITH}4 \&{octa}@>
+@$inf_octa {MMIX-ARITH}4 \&{octa}@>
+@$standard_NaN {MMIX-ARITH}4 \&{octa}@>
+@$sign_bit {MMIX-ARITH}4 \&{octa}@>
+@$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
+@$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
