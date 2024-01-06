@@ -1,8 +1,35 @@
-@x
+@x [4]
 @* Interface.  Here comes the exported interface of this program module.
 @y
 @* Interface.  Here comes the exported interface of this program module.
+@-MMIX_IO_H@>
 @-mmgetchars@>
 @-mmputchars@>
 @-stdin_chr@>
+@z
+
+@x [8]
+octa mmix_fopen(
+@y
+@$mmgetchars {MMIX-IO}4 ``mixins''@>
+octa mmix_fopen(
+@z
+
+@x [10]
+@ If the simulator is being used interactively, we can avoid competition
+@y
+@r @ If the simulator is being used interactively, we can avoid competition
+@z
+
+@x [12]
+octa mmix_fread(
+@y
+@$mmputchars {MMIX-IO}4 ``mixins''@>
+@$stdin_chr {MMIX-IO}4 ``mixins''@>
+octa mmix_fread(
+@z
+
+@x [25]
+@* Index.
+@y
 @z
