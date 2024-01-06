@@ -77,38 +77,34 @@ extern void mmix_io_init(void);
 extern void mmix_fake_stdin(FILE*);
 extern void print_trip_warning(int,octa);
 @#
-extern octa mmix_fopen(unsigned char,octa,octa, /* mixin */
-@t\qquad@>
+extern octa mmix_fopen(unsigned char,octa,octa,@|
   int @[(*mmgetchars)(char*,int,octa,int)@]
-@,);
+@,); /* mixin */
 extern octa mmix_fclose(unsigned char);
-extern octa mmix_fread(unsigned char,octa,octa, /* mixins */
+extern octa mmix_fread(unsigned char,octa,octa,@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
-extern octa mmix_fgets(unsigned char,octa,octa, /* mixins */
+extern octa mmix_fgets(unsigned char,octa,octa,@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
-extern octa mmix_fgetws(unsigned char,octa,octa, /* mixins */
+extern octa mmix_fgetws(unsigned char,octa,octa,@|
+  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
 @t\qquad@>
-  void @[(*mmputchars)(unsigned char*,int,octa)@],@|
   char @[(*stdin_chr)(void)@]
 @,);
-extern octa mmix_fwrite(unsigned char,octa,octa, /* mixin */
-@t\qquad@>
+extern octa mmix_fwrite(unsigned char,octa,octa,@|
   int @[(*mmgetchars)(char*,int,octa,int)@]
-@,);
-extern octa mmix_fputs(unsigned char,octa, /* mixin */
-@t\qquad@>
+@,); /* mixin */
+extern octa mmix_fputs(unsigned char,octa,@|
   int @[(*mmgetchars)(char*,int,octa,int)@]
-@,);
-extern octa mmix_fputws(unsigned char,octa, /* mixin */
-@t\qquad@>
+@,); /* mixin */
+extern octa mmix_fputws(unsigned char,octa,@|
   int @[(*mmgetchars)(char*,int,octa,int)@]
-@,);
+@,); /* mixin */
 extern octa mmix_fseek(unsigned char,octa);
 extern octa mmix_ftell(unsigned char);
 @#
