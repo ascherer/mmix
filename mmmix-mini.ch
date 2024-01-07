@@ -22,6 +22,8 @@
 @-d@>
 @-r@>
 @-m@>
+@-__VA_OPT__@>
+@-__VA_ARGS__@>
 @d panic(r,m,...) {@+fprintf(stderr,
 @z
 
