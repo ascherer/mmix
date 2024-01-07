@@ -215,6 +215,12 @@ while (true) {
                      cur_loc.h,cur_loc.l);
 @z
 
+@x [12] l.273 Redundant; comes from 'mmix-pipe.h'.
+@d rQ 16
+
+@y
+@z
+
 @x [12] l.276 Use 'panic' macro.
 if (cur_loc.h!=3) {
   fprintf(stderr,"Panic: MMIX binary file didn't set up the stack!\n");
