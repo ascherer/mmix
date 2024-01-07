@@ -34,6 +34,7 @@
 @$rI {MMIX-PIPE}52 =12@>
 @$rK {MMIX-PIPE}52 =15@>
 @$rO {MMIX-PIPE}52 =10@>
+@$rQ {MMIX-PIPE}52 =16@>
 @$rS {MMIX-PIPE}52 =11@>
 @$rT {MMIX-PIPE}52 =13@>
 @$rTT {MMIX-PIPE}52 =14@>
