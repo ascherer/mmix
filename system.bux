@@ -69,6 +69,10 @@
 @$LC_CTYPE "<locale.h>" \zip@>
 @$LC_MESSAGES "<locale.h>" \zip@>
 
+@$va_end "<stdarg.h>" \zip@>
+@$va_start "<stdarg.h>" \zip@>
+@$vfprintf "<stdarg.h>" \zip@>
+
 @$bool "<stdbool.h>" \zip@>
 @$false "<stdbool.h>" \zip@>
 @$true "<stdbool.h>" \zip@>
