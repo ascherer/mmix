@@ -16,6 +16,15 @@
   printf("Eh? Sorry, I don't understand. (Type h for help)\n"); @+
 @z
 
+@x [17]
+@d panic(r,m,...) {@+fprintf(stderr,
+@y
+@-d@>
+@-r@>
+@-m@>
+@d panic(r,m,...) {@+fprintf(stderr,
+@z
+
 @x [19]
 @ The register stack pointers, rO and rS, are not kept up to date
 @y

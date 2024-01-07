@@ -16,16 +16,41 @@
 
 @$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
 
+@$verbose {MMIX-PIPE}4 \&{int}@>
 @$MMIX_init {MMIX-PIPE}10 \&{void} (\,)@>
 @$MMIX_run {MMIX-PIPE}10 \&{void} (\,)@>
 @$MMIX_silent {MMIX-PIPE}11 \&{int} (\,)@>
-@$GET {MMIX-PIPE}47 \&{enum}@>
+@$print_locks {MMIX-PIPE}38 \&{void} (\,)@>
+@$o {MMIX-PIPE}40 \&{octa}@>
+@$p {MMIX-PIPE}40 \&{specnode\_struct} ${*}$@>
+@$GET {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$NEGI {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$PUTI {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$RESUME {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$UNSAVE {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$set {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$reorder_bot {MMIX-PIPE}60 \&{control} ${*}$@>
+@$reorder_top {MMIX-PIPE}60 \&{control} ${*}$@>
+@$hot {MMIX-PIPE}60 \&{control} ${*}$@>
+@$cool {MMIX-PIPE}60 \&{control} ${*}$@>
+@$old_hot {MMIX-PIPE}60 \&{control} ${*}$@>
+@$loc {MMIX-PIPE}68 \&{octa}@>
+@$inst {MMIX-PIPE}68 \&{tetra}@>
+@$head {MMIX-PIPE}69 \&{fetch} ${*}$@>
+@$tail {MMIX-PIPE}69 \&{fetch} ${*}$@>
 @$g {MMIX-PIPE}86 \&{specnode} [\,]@>
+@$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
+@$lring_size {MMIX-PIPE}86 \&{int}@>
 @$ticks {MMIX-PIPE}87 \&{octa}@>
 @$data {MMIX-PIPE}124 \&{control} ${*}$@>
 @$print_stats {MMIX-PIPE}162 \&{void} (\,)@>
+@$print_cache {MMIX-PIPE}175 \&{void} (\,)@>
+@$tag {MMIX-PIPE}206 \&{tetra}@>
 @$chunk {MMIX-PIPE}206 \&{octa} ${*}$@>
 @$mem_hash {MMIX-PIPE}207 \&{int}@>
 @$last_h {MMIX-PIPE}211 \&{int}@>
+@$mem_read {MMIX-PIPE}210 \&{octa} (\,)@>
 @$mem_write {MMIX-PIPE}213 \&{void} (\,)@>
+@$print_pipe {MMIX-PIPE}252 \&{void} (\,)@>
+@$inst_ptr {MMIX-PIPE}284 \&{spec}@>
 @$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
