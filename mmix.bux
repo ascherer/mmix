@@ -39,7 +39,6 @@
 @$head {MMIX-PIPE}69 \&{fetch} ${*}$@>
 @$tail {MMIX-PIPE}69 \&{fetch} ${*}$@>
 @$g {MMIX-PIPE}86 \&{specnode} [\,]@>
-@$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
 @$lring_size {MMIX-PIPE}86 \&{int}@>
 @$ticks {MMIX-PIPE}87 \&{octa}@>
 @$data {MMIX-PIPE}124 \&{control} ${*}$@>
