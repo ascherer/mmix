@@ -23,26 +23,53 @@
 @$print_locks {MMIX-PIPE}38 \&{void} (\,)@>
 @$o {MMIX-PIPE}40 \&{octa}@>
 @$p {MMIX-PIPE}40 \&{specnode\_struct} ${*}$@>
+@$cur_O {MMIX-PIPE}44 \&{octa}@>
+@$cur_S {MMIX-PIPE}44 \&{octa}@>
 @$GET {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$NEGI {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$PUTI {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$RESUME {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$UNSAVE {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$set {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$rI {MMIX-PIPE}52 =12@>
+@$rK {MMIX-PIPE}52 =15@>
+@$rO {MMIX-PIPE}52 =10@>
+@$rS {MMIX-PIPE}52 =11@>
+@$rT {MMIX-PIPE}52 =13@>
+@$rTT {MMIX-PIPE}52 =14@>
+@$rV {MMIX-PIPE}52 =18@>
+@$P_BIT {MMIX-PIPE}54 =$(\T{1}\LL\T{0})$@>
 @$reorder_bot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$reorder_top {MMIX-PIPE}60 \&{control} ${*}$@>
 @$hot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$cool {MMIX-PIPE}60 \&{control} ${*}$@>
 @$old_hot {MMIX-PIPE}60 \&{control} ${*}$@>
+@$deissues {MMIX-PIPE}60 \&{int}@>
 @$loc {MMIX-PIPE}68 \&{octa}@>
 @$inst {MMIX-PIPE}68 \&{tetra}@>
+@$interrupt {MMIX-PIPE}68 \&{unsigned} \&{int}@>
+@$noted {MMIX-PIPE}68 \&{bool}@>
+@$hist {MMIX-PIPE}68 \&{unsigned} \&{int}@>
+@$fetch_bot {MMIX-PIPE}69 \&{fetch} ${*}$@>
+@$fetch_top {MMIX-PIPE}69 \&{fetch} ${*}$@>
 @$head {MMIX-PIPE}69 \&{fetch} ${*}$@>
 @$tail {MMIX-PIPE}69 \&{fetch} ${*}$@>
+@$name {MMIX-PIPE}76 \&{char} [\,]@>
+@$k {MMIX-PIPE}76 \&{int}@>
+@$funit {MMIX-PIPE}77 \&{func} ${*}$@>
+@$funit_count {MMIX-PIPE}77 \&{int}@>
 @$g {MMIX-PIPE}86 \&{specnode} [\,]@>
 @$lring_size {MMIX-PIPE}86 \&{int}@>
 @$ticks {MMIX-PIPE}87 \&{octa}@>
+@$cool_O {MMIX-PIPE}98 \&{octa}@>
+@$cool_S {MMIX-PIPE}98 \&{octa}@>
 @$data {MMIX-PIPE}124 \&{control} ${*}$@>
 @$print_stats {MMIX-PIPE}162 \&{void} (\,)@>
+@$Icache {MMIX-PIPE}168 \&{cache} ${*}$@>
+@$Dcache {MMIX-PIPE}168 \&{cache} ${*}$@>
+@$Scache {MMIX-PIPE}168 \&{cache} ${*}$@>
+@$ITcache {MMIX-PIPE}168 \&{cache} ${*}$@>
+@$DTcache {MMIX-PIPE}168 \&{cache} ${*}$@>
 @$print_cache {MMIX-PIPE}175 \&{void} (\,)@>
 @$tag {MMIX-PIPE}206 \&{tetra}@>
 @$chunk {MMIX-PIPE}206 \&{octa} ${*}$@>
@@ -50,6 +77,13 @@
 @$last_h {MMIX-PIPE}211 \&{int}@>
 @$mem_read {MMIX-PIPE}210 \&{octa} (\,)@>
 @$mem_write {MMIX-PIPE}213 \&{void} (\,)@>
+@$page_n {MMIX-PIPE}238 \&{int}@>
+@$page_r {MMIX-PIPE}238 \&{int}@>
+@$page_s {MMIX-PIPE}238 \&{int}@>
+@$page_f {MMIX-PIPE}238 \&{int}@>
+@$page_b {MMIX-PIPE}238 \&{int} [\,]@>
+@$page_mask {MMIX-PIPE}238 \&{octa}@>
+@$page_bad {MMIX-PIPE}238 \&{bool}@>
 @$print_pipe {MMIX-PIPE}252 \&{void} (\,)@>
 @$inst_ptr {MMIX-PIPE}284 \&{spec}@>
 @$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
