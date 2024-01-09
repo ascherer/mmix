@@ -112,7 +112,7 @@ all appearances of `\&{Extern}' are defined to be blank here, but
 #define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
 #define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
 @#
-#define sign_bit ((unsigned)0x80000000)
+#define sign_bit ((tetra)0x80000000)
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
