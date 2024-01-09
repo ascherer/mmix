@@ -84,8 +84,10 @@ typedef unsigned int tetra;
 represents an unsigned 32-bit integer.
 @^system dependencies@>
 
+@s uint8_t int
 @s uint32_t int
 @<Tetra...@>=
+typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra;
 @z
 
