@@ -45,13 +45,13 @@ $$\.{PUT rW, \$255;{ } PUT rB, \$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
 $$\.{PUT rW,\$255;{ } PUT rB,\$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
 @z
 
-@x [9] l.548 Use standard C99 type.
+@x [9] l.546 Use standard C99 type.
+@* Basics. To get started, we define a type that provides semantic sugar.
+
 @<Type...@>=
 typedef enum {@!false,@!true}@+@!bool;
 @y
-@s uint8_t int
-@<Type...@>=
-typedef uint8_t byte; /* a monobyte */
+@* Basics. (Nothing to see here, for historic reasons.)
 @z
 
 @x [10] l.555 Use standard C99 type.
@@ -61,11 +61,12 @@ definition in that module.
 @y
 represents unsigned 32-bit integers.
 @s uint32_t int
+@s byte int
 @s tetra int
 @s octa int
 
 @c
-#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!sign_bit| */
+#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit| */
 @z
 
 @x [10] l.560 Stuff from MMIX-ARITH.

@@ -56,7 +56,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #include <math.h> /* we'll override |fsqrt| below */
 #include <stdlib.h> /* we'll override |div| and |random| below */
 @#
-#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!sign_bit|, etc. */
+#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, etc. */
 @#
 @z
 
@@ -225,6 +225,7 @@ typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
 @y
 for the assembler and for the non-pipelined simulator.
 @s uint32_t int
+@s byte int
 @s tetra int
 @s octa int
 @z
@@ -1873,6 +1874,12 @@ bool nullifying; /* stopping dispatch to nullify a load/store command */
 @y
 static bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 static bool nullifying; /* stopping dispatch to nullify a load/store command */
+@z
+
+@x [320] l.5682
+@d pack_bytes(a,b,c,d) ((((((unsigned)(a)<<8)+(b))<<8)+(c))<<8)+(d)
+@y
+@d pack_bytes(a,b,c,d) ((((((byte)(a)<<8)+(b))<<8)+(c))<<8)+(d)
 @z
 
 @x [320] l.5688
