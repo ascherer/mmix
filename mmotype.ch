@@ -1,6 +1,7 @@
 @x [1] l.14
 @s tetra int
 @y
+@s byte int
 @s tetra int
 @s octa int
 @z
@@ -14,9 +15,8 @@
 #include <string.h>
 #include <time.h>
 @#
-#include "mmix-arith.h" /* |@!tetra|, |@!octa|, |@!incr| */
+#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!incr| */
 @#
-@<Type definition@>@;
 @z
 
 @x [1] l.26 C99 prototypes for C2x.
@@ -87,9 +87,6 @@ typedef unsigned char byte; /* a monobyte */
 typedef unsigned int tetra; /* a tetrabyte */
 typedef struct {@+tetra h,l;}@+octa; /* an octabyte */
 @y
-@s uint8_t int
-@<Type...@>=
-typedef uint8_t byte; /* a monobyte */
 @z
 
 @x [8] l.99 Use 'incr' from MMIX-ARITH.
