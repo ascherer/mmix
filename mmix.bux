@@ -11,6 +11,8 @@
 @$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
+@$shift_left {MMIX-ARITH}7 \&{octa} (\,)@>
+@$shift_right {MMIX-ARITH}7 \&{octa} (\,)@>
 
 @$MMIX_config {MMIX-CONFIG}30 \&{void} (\,)@>
 
