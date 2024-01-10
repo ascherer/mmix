@@ -18,7 +18,8 @@ octa mmix_fopen(
 @x [10]
 @ If the simulator is being used interactively, we can avoid competition
 @y
-@r @ If the simulator is being used interactively, we can avoid competition
+@r
+@ If the simulator is being used interactively, we can avoid competition
 @z
 
 @x [12]
