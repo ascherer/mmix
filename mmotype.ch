@@ -112,7 +112,14 @@ octa incr(o,delta)
   return x;
 }
 @y
-@ (This section remains empty for historic reasons.)
+@ We had better check that our 32-bit assumption holds.
+
+@<Initialize e...@>=
+if (shift_left(neg_one,1).h!=0xffffffff) {
+  fprintf(stderr,"Panic: Incorrect implementation of type tetra!\n");
+@.Incorrect implementation...@>
+  exit(-8);
+}
 @z
 
 @x [9] l.127 C99 prototypes for C2x.
