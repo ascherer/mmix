@@ -1,4 +1,5 @@
 @$ARGS {MMIX-ARITH}2 =macro (\,)@>
+@$byte {MMIX-ARITH}3 \&{uint8\_t}@>
 @$tetra {MMIX-ARITH}3 \&{uint32\_t}@>
 @$octa {MMIX-ARITH}3 \&{struct}@>
 @$h {MMIX-ARITH}3 \&{tetra}@>
