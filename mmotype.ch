@@ -136,6 +136,12 @@ byte read_byte()
 byte read_byte(void)
 @z
 
+@x [13] l.171 Fix glitch with 'cweave -f'.
+    read_tet();@+break;
+@y
+    read_tet();@+break;@/
+@z
+
 @x [17] l.217 Compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
