@@ -331,6 +331,8 @@ so we had better move it ``down'' (together with the |static| variable~|d|
 in the previous section).
 Instead, we place some internal prototypes here.
 We also have room for the variadic macro |panic| used in error situations.
+[Former module {\mc MMIX-MEM} has been fully disolved into main module
+{\mc MMIX-PIPE} to avoid further design discrepancies.]
 
 @d panic(r,m,...) {@+fprintf(stderr,
   @[m @,@m __VA_OPT__(,) @,@, __VA_ARGS__@]);@+exit(r);@+}
