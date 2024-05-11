@@ -2267,7 +2267,7 @@ after the input.
 @d BUF_SIZE 100
 
 @<External routines@>=
-Extern octa read_hex(
+octa read_hex(
   char *p)
 {
   unsigned char d[BUF_SIZE];
