@@ -1044,7 +1044,7 @@ octa floatit(z,r,u,p)
   int p; /* short precision? */
 @y
 @<External routines@>=
-extern octa floatit(
+octa floatit(
   octa z, /* octabyte to float */
   int r, /* rounding mode */
   bool u, /* unsigned? */
