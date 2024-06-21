@@ -127,7 +127,7 @@ octa oplus(y,z) /* compute $y+z$ */
 octa oplus(octa y, octa z) /* compute $y+z$ */
 @z
 
-@x [5] l.83 RAII.
+@x [5] l.81 RAII.
 {@+ octa x;
   x.h=y.h+z.h;@+
   x.l=y.l+z.l;
@@ -475,7 +475,7 @@ rounds towards an even number in case of a tie.
  case ROUND_NEAR: default: o=incr(o, o.l&4? 2: 1);@+break;
 @z
 
-@x [33] l.547 Issue #16.
+@x [33] l.542 Issue #16.
 o = shift_right(o,2,1);
 @y
 o = shift_right(o,2,true);
@@ -737,7 +737,7 @@ octa fplus(
   else if (d>54) zf=(octa){0,1}; /* tricky but OK */
 @z
 
-@x [47] l.867 Issue #16.
+@x [49] l.867 Issue #16.
     zf=shift_right(o,d,1);
 @y
     zf=shift_right(o,d,true);
@@ -814,7 +814,7 @@ static int bignum_compare(
   bignum *f, bignum *g)
 @z
 
-@x [63] l.1167 C99 prototypes for C2x.
+@x [62] l.1157 C99 prototypes for C2x.
 static void bignum_dec(f,g,r)
   bignum *f,*g;
   tetra r; /* the radix */
@@ -1127,7 +1127,7 @@ octa fremstep(
   int delta)
 @z
 
-@x [93] l.1789 RAII.
+@x [93] l.1783 RAII.
   ftype yt,zt;
   int ye,ze;
   char xs,ys,zs;
@@ -1156,7 +1156,7 @@ yf=shift_right(yf,1,true);
 @z
 
 @x [96] l.1845 Improved module structure with interface.
-@* Index.  
+@* Index.
 @y
 @* Public interface. This program module is central to the whole \MMIX\ system.
 Each user of its functionality should include the following header file.
