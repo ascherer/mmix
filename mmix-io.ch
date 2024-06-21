@@ -56,7 +56,7 @@ up to accommodate older versions of \CEE/.
 #endif
 @z
 
-@x [3] l.48 Improved module structure with interface.
+@x [3] l.44 Improved module structure with interface.
 @ The unsigned 32-bit type \&{tetra} must agree with its definition
 in the simulators.
 
@@ -166,7 +166,7 @@ octa mmix_fopen(
 @,)
 @z
 
-@x {8] l.99 Change from MMIX home.
+@x [8] l.99 Change from MMIX home.
   if (mode.h || mode.l>4) goto abort;
   if (mmgetchars(name_buf,FILENAME_MAX,name,0)==FILENAME_MAX) goto abort;
   if (sfile[handle].mode!=0 && handle>2) fclose(sfile[handle].fp);
@@ -381,7 +381,7 @@ octa mmix_fputs(
 @,)
 @z
 
-@x [19] l.304 RAII.
+@x [19] l.303 RAII.
   octa o;
   o=zero_octa;
 @y
@@ -468,7 +468,7 @@ octa mmix_ftell(
 
 @x [22] l.372 Compound literal.
   if (x<0) return neg_one;
-  o.h=0, o.l=x;  
+  o.h=0, o.l=x;
   return o;
 @y
   return x<0 ? neg_one : (octa){0,x};

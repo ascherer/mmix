@@ -15,7 +15,7 @@ Readers of this program should be familiar with the explanation of \MMIX\
 Readers of this program should be familiar with the explanation of \MMIX's
 @z
 
-@x [3] l.128 Improved module structure with interfaces.
+@x [3] l.125 Improved module structure with interfaces.
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -87,7 +87,7 @@ new-style and old-style compilers.
 as in {\mc ANSI C}.
 @z
 
-@x [9,10] l.204 Reshuffle MMIX_silent.
+@x [9] l.204 Reshuffle MMIX_silent.
 @ The |MMIX_init()| routine should be called exactly once, after
 |MMIX_config()| has done its work but before the simulator starts to execute
 any programs. Then |MMIX_run()| can be called as often as the user likes.
@@ -152,7 +152,7 @@ void MMIX_run(
 @y
 @z
 
-@x [11,12] l.259 Use standard C99 type. ('wow' was never used anywhere.)
+@x [11] l.259 Use standard C99 type. ('wow' was never used anywhere.)
 @ @<Type...@>=
 typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @y
@@ -183,7 +183,7 @@ int MMIX_silent(void)
 @d confusion(m) errprint("This can't happen: %s",m)
 @z
 
-@x [13,14] l.279 C99 prototypes for C2x.
+@x [13] l.279 C99 prototypes for C2x.
 static void expire @,@,@[ARGS((void))@];
 
 @ @<Sub...@>=
@@ -230,7 +230,7 @@ for the assembler and for the non-pipelined simulator.
 @s octa int
 @z
 
-@x [18,19] l.337 C99 prototypes for C2x.
+@x [18] l.337 C99 prototypes for C2x.
 static void print_octa @,@,@[ARGS((octa))@];
 
 @ @<Sub...@>=
@@ -321,7 +321,7 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
   panic(errprint("Incorrect implementation of type tetra"));
 @z
 
-@x [23,24] l.459 C99 prototypes for C2x.
+@x [24] l.459 C99 prototypes for C2x.
 static void print_coroutine_id @,@,@[ARGS((coroutine*))@];
 static void errprint_coroutine_id @,@,@[ARGS((coroutine*))@];
 
@@ -363,7 +363,7 @@ static void errprint_coroutine_id(
   for (coroutine* p=ring;p<ring+ring_size;p++) p->next=p;
 @z
 
-@x [27,28| l.507 C99 prototypes for C2x.
+@x [27] l.507 C99 prototypes for C2x.
 static void schedule @,@,@[ARGS((coroutine*,int,int))@];
 
 @ @<Sub...@>=
@@ -387,7 +387,7 @@ static void schedule(
          errprint(" with delay %d",d));
 @z
 
-@x [30,31] l.540 C99 prototypes for C2x.
+@x [30] l.540 C99 prototypes for C2x.
 static void startup @,@,@[ARGS((coroutine*,int))@];
 
 @ @<Sub...@>=
@@ -403,7 +403,7 @@ static void startup(
   int d)
 @z
 
-@x [32,33] l.560 C99 prototypes for C2x.
+@x [32] l.560 C99 prototypes for C2x.
 static void unschedule @,@,@[ARGS((coroutine*))@];
 
 @ @<Sub...@>=
@@ -417,7 +417,7 @@ static void unschedule(
   coroutine *c)
 @z
 
-@x [34,35] l.583 C99 prototypes for C2x.
+@x [34] l.583 C99 prototypes for C2x.
 static coroutine *queuelist @,@,@[ARGS((int))@];
 
 @ @<Sub...@>=
@@ -437,7 +437,7 @@ coroutine sentinel; /* dummy coroutine at origin of circular list */
 static coroutine sentinel; /* dummy coroutine at origin of circular list */
 @z
 
-@x [38,39] l.623 C99 prototypes for C2x.
+@x [38] l.623 C99 prototypes for C2x.
 Extern void print_locks @,@,@[ARGS((void))@];
 
 @ @<External r...@>=
@@ -455,7 +455,7 @@ spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
 static spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
 @z
 
-@x [42,43] l.679 C99 prototypes for C2x.
+@x [42] l.679 C99 prototypes for C2x.
 static void print_spec @,@,@[ARGS((spec))@];
 
 @ @<Sub...@>=
@@ -478,7 +478,7 @@ static void print_specnode(
   specnode s)
 @z
 
-@x [45,46] l.772 C99 prototypes for C2x.
+@x [45] l.772 C99 prototypes for C2x.
 static void print_control_block @,@,@[ARGS((control*))@];
 
 @ @<Sub...@>=
@@ -530,7 +530,7 @@ char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
 static char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
 @z
 
-@x [55,56] l.1199 C99 prototypes for C2x.
+@x [55] l.1199 C99 prototypes for C2x.
 static void print_bits @,@,@[ARGS((int))@];
 
 @ @<Subr...@>=
@@ -551,7 +551,7 @@ static void print_bits(
   for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
 @z
 
-@x [61,62] l.1423 C99 prototypes for C2x.
+@x [62] l.1423 C99 prototypes for C2x.
 static void print_reorder_buffer @,@,@[ARGS((void))@];
 
 @ @<Sub...@>=
@@ -563,7 +563,7 @@ static void print_reorder_buffer(void);
 static void print_reorder_buffer(void)
 @z
 
-@x [63] l. 1430
+@x [63] l.1430
   else {@+register control *p;
 @y
   else {
@@ -593,7 +593,7 @@ fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
 static fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
 @z
 
-@x [72,73] l.1548 C99 prototypes for C2x.
+@x [72] l.1548 C99 prototypes for C2x.
 static void print_fetch_buffer @,@,@[ARGS((void))@];
 
 @ @<Sub...@>=
@@ -713,7 +713,7 @@ g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
 @z
 
-@x [90,91] l.1895 C99 prototypes for C2x.
+@x [90] l.1895 C99 prototypes for C2x.
 static void print_specnode_id @,@,@[ARGS((octa))@];
 
 @ @<Sub...@>=
@@ -733,7 +733,7 @@ static void print_specnode_id(
     if (a.l<32) printf("%s",special_name[a.l]);
 @z
 
-@x [92,93] l.1914 C99 prototypes for C2x.
+@x [92] l.1914 C99 prototypes for C2x.
 static spec specval @,@,@[ARGS((specnode*))@];
 
 @ @<Sub...@>=
@@ -747,7 +747,7 @@ static spec specval(
   specnode *r)
 @z
 
-@x [94,95] l.1929 C99 prototypes for C2x.
+@x [94] l.1929 C99 prototypes for C2x.
 static void spec_install @,@,@[ARGS((specnode*,specnode*))@];
 
 @ @<Sub...@>=
@@ -761,7 +761,7 @@ static void spec_install( /* insert |t| into list |r| */
   specnode *r, specnode *t)
 @z
 
-@x [96,97] l.1945 C99 prototypes for C2x.
+@x [96] l.1945 C99 prototypes for C2x.
 static void spec_rem @,@,@[ARGS((specnode*))@];
 
 @ @<Sub...@>=
@@ -922,7 +922,7 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
       hot->x.o = oor(hot->x.o,new_Q);
 @z
 
-@x [148] l.2979
+@x [148] l.2797
 octa new_Q; /* when rQ increases in any bit position, so should this */
 bool stack_overflow; /* stack overflow not yet reported */
 @y
@@ -940,7 +940,7 @@ static int bp_rev_stat,bp_ok_stat; /* how often we overrode and agreed */
 static int bp_bad_stat,bp_good_stat; /* how often we failed and succeeded */
 @z
 
-@x [156,157] l.2960 C99 prototypes for C2x.
+@x [156] l.2960 C99 prototypes for C2x.
 static int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
 
 @ @<Sub...@>=
@@ -962,7 +962,7 @@ static int register_truth(
  default: case 0: b=o.h>>31;@+break; /* negative? */
 @z
 
-@x [158,159] l.2982 C99 prototypes for C2x.
+@x [158] l.2982 C99 prototypes for C2x.
 static int issued_between @,@,@[ARGS((control*,control*))@];
 
 @ @<Sub...@>=
@@ -976,7 +976,7 @@ static int issued_between(
   control *c, control *cc)
 @z
 
-@x [161,162] l.3027 C99 prototypes for C2x.
+@x [161] l.3027 C99 prototypes for C2x.
 Extern void print_stats @,@,@[ARGS((void))@];
 
 @ @<External r...@>=
@@ -999,7 +999,7 @@ void print_stats(void)
   for (int j=0;j<=dispatch_max;j++)
 @z
 
-@x [168,169] l.3223 C99 prototypes for C2x.
+@x [169] l.3223 C99 prototypes for C2x.
 static bool is_dirty @,@,@[ARGS((cache*,cacheblock*))@];
 
 @ @<Sub...@>=
@@ -1020,13 +1020,13 @@ static bool is_dirty(
 @y
 @z
 
-@x [170] l.3233
+@x [170] l.3232
   for (j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
 @y
   for (int j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
 @z
 
-@x [169,170] l.3239 C99 prototypes for C2x.
+@x [171] l.3239 C99 prototypes for C2x.
 static void print_cache_block @,@,@[ARGS((cacheblock,cache*))@];
 
 @ @<Sub...@>=
@@ -1054,7 +1054,7 @@ static void print_cache_block(
   for (int i=0, j=0; j<b;j++,i+=((j&(g-1))?0:1))
 @z
 
-@x [173,174] l.3253 C99 prototypes for C2x.
+@x [173] l.3253 C99 prototypes for C2x.
 static void print_cache_locks @,@,@[ARGS((cache*))@];
 
 @ @<Sub...@>=
@@ -1068,7 +1068,7 @@ static void print_cache_locks(
   cache *c)
 @z
 
-@x [175,176] l.3273 C99 prototypes for C2x.
+@x [175] l.3273 C99 prototypes for C2x.
 Extern void print_cache @,@,@[ARGS((cache*,bool))@];
 
 @ @<External r...@>=
@@ -1084,7 +1084,7 @@ void print_cache(
   bool dirty_only)
 @z
 
-@x [178,179] l.3317 C99 prototypes for C2x.
+@x [178] l.3317 C99 prototypes for C2x.
 Extern void clean_block @,@,@[ARGS((cache*,cacheblock*))@];
 
 @ @<External r...@>=
@@ -1120,7 +1120,7 @@ void zap_cache(
   cache *c)
 @z
 
-@x [182,183] l.3357 C99 prototypes for C2x.
+@x [182] l.3357 C99 prototypes for C2x.
 static int get_reader @,@,@[ARGS((cache*))@];
 
 @ @<Sub...@>=
@@ -1134,7 +1134,7 @@ static int get_reader(
   cache *c)
 @z
 
-@x [183] l.3363
+@x [183] l.3362
 {@+ register int j;
   for (j=0;j<c->ports;j++)
 @y
@@ -1142,7 +1142,7 @@ static int get_reader(
   for (int j=0;j<c->ports;j++)
 @z
 
-@x [184,185] l.3375 C99 prototypes for C2x.
+@x [184] l.3375 C99 prototypes for C2x.
 static void copy_block @,@,@[ARGS((cache*,cacheblock*,cache*,cacheblock*))@];
 
 @ @<Sub...@>=
@@ -1176,12 +1176,12 @@ static void copy_block(
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @z
 
-@x [186,187] l.3401 C99 prototypes for C2x.
+@x [186] l.3401 C99 prototypes for C2x.
 static cacheblock* choose_victim @,@,@[ARGS((cacheset,int,replace_policy))@];
 
 @ @<Sub...@>=
 static cacheblock* choose_victim(s,aa,policy)
-  cacheset s; 
+  cacheset s;
   int aa; /* setsize */
   replace_policy policy;
 @y
@@ -1205,13 +1205,13 @@ static cacheblock* choose_victim(
  case lru: for (cacheblock* p=s;p<s+aa;p++)
 @z
 
-@x [187] l.3418 Change from MMIX home.
+@x [187] l.3416 Change from MMIX home.
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
  default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @z
 
-@x [188,189] l.3426 C99 prototypes for C2x.
+@x [188] l.3426 C99 prototypes for C2x.
 static void note_usage @,@,@[ARGS((cacheblock*,cacheset,int,replace_policy))@];
 
 @ @<Sub...@>=
@@ -1250,7 +1250,7 @@ static void note_usage(
     for (int j=1,m=aa>>1;m;m>>=1)
 @z
 
-@x [190,191] l.3455 C99 prototypes for C2x.
+@x [190] l.3455 C99 prototypes for C2x.
 static void demote_usage @,@,@[ARGS((cacheblock*,cacheset,int,replace_policy))@];
 
 @ @<Sub...@>=
@@ -1289,7 +1289,7 @@ static void demote_usage(
     for (int j=1,m=aa>>1;m;m>>=1)
 @z
 
-@x [192,193] l.3489 C99 prototypes for C2x.
+@x [192] l.3489 C99 prototypes for C2x.
 static cacheblock* cache_search @,@,@[ARGS((cache*,octa))@];
 
 @ @<Sub...@>=
@@ -1320,7 +1320,7 @@ cacheset hit_set;
 static cacheset hit_set;
 @z
 
-@x [195,196] l.3519 C99 prototypes for C2x.
+@x [195] l.3519 C99 prototypes for C2x.
 static cacheblock* use_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
 
 @ @<Sub...@>=
@@ -1336,7 +1336,7 @@ static cacheblock *use_and_fix(
   cacheblock *p)
 @z
 
-@x [198,199] l.3557 C99 prototypes for C2x.
+@x [198] l.3557 C99 prototypes for C2x.
 static cacheblock* demote_and_fix @,@,@[ARGS((cache*,cacheblock*))@];
 
 @ @<Sub...@>=
@@ -1352,7 +1352,7 @@ static cacheblock *demote_and_fix(
   cacheblock *p)
 @z
 
-@x [200,201] l.3574 C99 prototypes for C2x.
+@x [200] l.3574 C99 prototypes for C2x.
 static void load_cache @,@,@[ARGS((cache*,cacheblock*))@];
 
 @ @<Sub...@>=
@@ -1368,18 +1368,18 @@ static void load_cache(
   cacheblock *p)
 @z
 
-@x [201] l.3481
+@x [201] l.3581
   register int i;
 @y
 @z
 
-@x [201] l.3483
+@x [201] l.3583
   for (i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @y
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @z
 
-@x [202,203] l.3598 C99 prototypes for C2x.
+@x [202] l.3598 C99 prototypes for C2x.
 static void flush_cache @,@,@[ARGS((cache*,cacheblock*,bool))@];
 
 @ @<Sub...@>=
@@ -1397,7 +1397,7 @@ static void flush_cache(
   bool keep) /* should we preserve the data in |p|? */
 @z
 
-@x [204,205] l.3644 C99 prototypes for C2x.
+@x [204] l.3644 C99 prototypes for C2x.
 static cacheblock* alloc_slot @,@,@[ARGS((cache*,octa))@];
 
 @ @<Sub...@>=
@@ -1422,7 +1422,7 @@ extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
 @y
 @z
 
-@x [209,210] l.3742 C99 prototypes for C2x.
+@x [209] l.3742 C99 prototypes for C2x.
 Extern octa mem_read @,@,@[ARGS((octa addr))@];
 
 @ @<External r...@>=
@@ -1442,7 +1442,7 @@ octa mem_read(
         errprint("uninitialized memory read at %08x%08x",addr.h,addr.l);
 @z
 
-@x [212,213] l.3769 C99 prototypes for C2x.
+@x [212] l.3769 C99 prototypes for C2x.
 Extern void mem_write @,@,@[ARGS((octa addr,octa val))@];
 
 @ @<External r...@>=
@@ -1522,7 +1522,7 @@ static lockvar clean_lock;
   data->y.o=(octa){i, j};
 @z
 
-@x [234} l.4199 Compound literal.
+@x [234] l.4199 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
@@ -1597,7 +1597,7 @@ Extern bool page_bad; /* does rV violate the rules? */
   else page_mask=(octa){(1<<(page_s-32))-1, 0xffffffff};
 @z
 
-@x [240,241] l.4365 C99 prototypes for C2x.
+@x [240] l.4365 C99 prototypes for C2x.
 static octa phys_addr @,@,@[ARGS((octa,octa))@];
 
 @ @<Sub...@>=
@@ -1643,7 +1643,7 @@ static coroutine write_co; /* coroutine that empties the write buffer */
 static control write_ctl; /* its control block */
 @z
 
-@x [250,251] l.4487 C99 prototypes for C2x.
+@x [250] l.4487 C99 prototypes for C2x.
 static void print_write_buffer @,@,@[ARGS((void))@];
 
 @ @<Sub...@>=
@@ -1661,13 +1661,13 @@ static void print_write_buffer(void)
   else {
 @z
 
-@x [251] l.3386
+@x [251] l.4496
     for (p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
 @y
     for (write_node* p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
 @z
 
-@x [252,253] l.4511 C99 prototypes for C2x.
+@x [252] l.4511 C99 prototypes for C2x.
 Extern void print_pipe @,@,@[ARGS((void))@];
 
 @ @<External r...@>=
@@ -1679,7 +1679,7 @@ Extern void print_pipe(void);
 void print_pipe(void)
 @z
 
-@x [254,255] l.4540 C99 prototypes for C2x.
+@x [254] l.4540 C99 prototypes for C2x.
 static octa* write_search @,@,@[ARGS((control*,octa))@];
 
 @ @<Sub...@>=
@@ -1827,7 +1827,7 @@ static control fetch_ctl;
      if (data->i==prego) goto fin_ex;@+else wait(1); }
 @z
 
-@x [290] l.5354 Change from MMIX home.
+@x [298] l.5354 Change from MMIX home.
    if (!p) /* hey, it was present after all */
      if (data->i==prego) goto fin_ex;@+else goto new_fetch;
 @y
@@ -1843,13 +1843,13 @@ static control fetch_ctl;
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [303] l.5420
+@x [303] l.5426
 bool sleepy; /* have we just emitted the page table emulation call? */
 @y
 static bool sleepy; /* have we just emitted the page table emulation call? */
 @z
 
-@x [304] Use 'breakpoint_hit' at least once (in MMIX_silent).
+@x [304] l.5443 Use 'breakpoint_hit' at least once (in MMIX_silent).
 if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h)
 @y
 if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h
@@ -1943,7 +1943,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
  case FEQLE: default: goto cmp_fin;
 @z
 
-@x [353] l.6209 Compound literal.
+@x [353] l.6269 Compound literal.
   data->z.o.h=0, data->z.o.l=data->y.o.l&0x7;
 @y
   data->z.o=(octa){0, data->y.o.l&0x7};
@@ -1964,7 +1964,7 @@ for (control* cc=data;cc!=hot;) {
 }
 @z
 
-@x [364] l.6458 Change from MMIX home.
+@x [364] l.6459 Change from MMIX home.
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
@@ -2011,7 +2011,7 @@ char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @z
 
-@x [376] l.6594 Decouple 'mixins'.
+@x [375] l.6594 Decouple 'mixins'.
 Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 

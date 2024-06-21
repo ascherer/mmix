@@ -48,7 +48,7 @@ int main(
   char *argv[])
 @z
 
-@x [3] l.76 Use 'panic' macro.
+@x [3] l.75 Use 'panic' macro.
 if (argc!=n+2) {
   fprintf(stderr,"Usage: %s [-s] configfile progfile\n",argv[0]);
 @.Usage: ...@>
@@ -289,7 +289,7 @@ while (true) {
 @:g}{\|g (global registers)@>
 @z
 
-@x [16,17] l.430 Avoid cyclic dependeny. Move this part to MMIX-MEM.
+@x [16] l.430 Avoid cyclic dependeny. Move this part to MMIX-MEM.
 int n,m; /* temporary integer */
 octa bp={-1,-1}; /* breakpoint */
 octa tmp; /* an octabyte of temporary interest */

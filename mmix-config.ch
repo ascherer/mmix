@@ -337,7 +337,7 @@ static void alloc_cache(
      "Can't allocate dirty bits for inbuffer of %s",name);
 @z
 
-@x l.[31] l.854
+@x [31] l.854
     if (!c->inbuf.data) panic(errprint1(
      "Can't allocate data for inbuffer of %s",name));
   c->outbuf.dirty=(char*)calloc(c->bb>>c->g,sizeof(char));
@@ -349,7 +349,7 @@ static void alloc_cache(
 @y
     if (!c->inbuf.data) panic(
      "Can't allocate data for inbuffer of %s",name);
-  c->outbuf.dirty=(char*)calloc(c->bb>>c->g,sizeof(char));  
+  c->outbuf.dirty=(char*)calloc(c->bb>>c->g,sizeof(char));
   if (!c->outbuf.dirty) panic(
      "Can't allocate dirty bits for outbuffer of %s",name);
   c->outbuf.data=(octa *)calloc(c->bb>>3,sizeof(octa));
