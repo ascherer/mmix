@@ -3,6 +3,15 @@
 @y
 @z
 
+@x [0] l.11
+@s specnode int
+@y
+@s specnode int
+
+\input pdfwebtocfront
+
+@z
+
 @x [2] l.29 Improved typography.
 the module called \.{mmix-config}. The program file is either
 @y

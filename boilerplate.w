@@ -7,6 +7,14 @@
 \font\ninett=cmtt9
 \def\botofcontents{\vskip 0pt plus 1filll
     \ninerm\baselineskip10pt
+\noindent Editor's Note: The present variant of this {\ninett MMIX}ware file
+has been heavily modified with an associated change file.  None of these
+modifications have been approved by Prof.~Knuth and neither he nor
+Prof.~Ruckert take any responsibility for this incarnation.
+\smallskip\noindent Consult the online project
+\pdfURL{{\ninett https://github.com/ascherer/mmix}}{https://github.com/ascherer/mmix}
+for context and rationale.
+\vskip1in
     \noindent\copyright\ 1999 Donald E. Knuth
     \bigskip\noindent
     This file may be freely copied and distributed, provided that

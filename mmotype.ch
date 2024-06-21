@@ -1,3 +1,12 @@
+@x [0] l.7
+\def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
+@y
+\def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
+
+\input pdfwebtocfront
+
+@z
+
 @x [1] l.14
 @s tetra int
 @y
