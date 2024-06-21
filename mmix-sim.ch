@@ -198,7 +198,7 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
-@x [14] l.669
+@x [15] l.669
 @d sign_bit ((unsigned)0x80000000)
 
 @y
@@ -375,7 +375,7 @@ void print_freqs(
   mem_node *p)
 @z
 
-@x [50] l.1230 Block-local variable.
+@x [50] l.1229 Block-local variable.
   register int j;
   octa cur_loc;
 @y
@@ -997,7 +997,7 @@ a trivial program that computes the value of the standard library function
 @d SUBSUBVERSION 3 /* further qualification to version number */
 @z
 
-@x [77] l.1808 Compound literal.
+@x [77] l.1807 Compound literal.
 g[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
 g[rN].l=ABSTIME; /* see comment and warning above */
 @y
@@ -1122,7 +1122,7 @@ int register_truth(
   mmix_opcode op)
 @z
 
-@x [91] l.2079 RAII.
+@x [91] l.2072 RAII.
 {@+register int b;
 @y
 {@+register int b=0;
@@ -1152,7 +1152,7 @@ int register_truth(
  a=(octa){ll->tet, (ll+1)->tet}; /* for trace output */
 @z
 
-@x [95] l.2159 GCC warning.
+@x [95] l.2169 GCC warning.
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @y
   @=/* fall through */@>@;
@@ -1244,7 +1244,7 @@ case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
   ma=(octa){ll->tet, (ll+1)->tet};
 @z
 
-@x [112,113] l.2443 Decouple 'mixins'.
+@x [112] l.2440 Decouple 'mixins'.
 Here we need only declare those subroutines, and write three primitive
 interfaces on which they depend.
 
@@ -1320,7 +1320,7 @@ static char stdin_chr(void)
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
 @z
 
-@x [123] l.2596 Compound literal.
+@x [123] l.2600 Compound literal.
   inst_ptr.h=0, inst_ptr.l=k<<4;
   g[rX].h=sign_bit, g[rX].l=inst;
 @y

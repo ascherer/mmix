@@ -115,7 +115,7 @@ void update_listing_loc(
   int k) /* the location to display, mod 4 */
 @z
 
-@x l. [42] l.1169 Compound literal.
+@x [42] l.1169 Compound literal.
   listing_loc.h=cur_loc.h;@+
   listing_loc.l=(cur_loc.l&-4)|k;
 @y
@@ -262,21 +262,21 @@ void assemble(
   unsigned char x_bits)
 @z
 
-@x [54] l.1455 C99 prototypes for C2x.
+@x [55] l.1457 C99 prototypes for C2x.
 trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
 trie_node* new_trie_node()
 @y
 trie_node* new_trie_node(void)
 @z
 
-@x [56] l.1473 Untangle functions and variables.
+@x [56] l.1475 Untangle functions and variables.
 trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
 @y
 trie_node *cur_prefix; /* root of subtrie for unqualified symbols */
 Char *terminator; /* where the search ended */
 @z
 
-@x [57] l.1483 Untangle functions and variables.
+@x [57] l.1485 Untangle functions and variables.
 trie_node *trie_search @,@,@[ARGS((trie_node*,Char*))@];
 Char *terminator; /* where the search ended */
 trie_node *trie_search(t,s)
@@ -294,12 +294,12 @@ trie_node *trie_search(
   while (true) {
 @z
 
-@x [58] l.1539 CWEB knows this since version 3.5 (1999).
+@x [58] l.1541 CWEB knows this since version 3.5 (1999).
 @s bool int
 @y
 @z
 
-@x [59] l.1562 C99 prototypes for C2x.
+@x [59] l.1564 C99 prototypes for C2x.
 sym_node* new_sym_node @,@,@[ARGS((bool))@];@+@t}\6{@>
 sym_node* new_sym_node(serialize)
   bool serialize; /* should the new node receive a unique serial number? */
@@ -308,325 +308,325 @@ sym_node* new_sym_node(
   bool serialize) /* should the new node receive a unique serial number? */
 @z
 
-@x [63] l.1641 Format improvement.
+@x [63] l.1643 Format improvement.
 op_spec op_init_table[]={@/
 @y
 op_spec op_init_table[]={@|
 @z
 
-@x [63] l.1648 Format improvement.
+@x [63] l.1650 Format improvement.
 {"FEQL", 0x03, 0x240a8},@/
 @y
 {"FEQL", 0x03, 0x240a8},@|
 @z
 
-@x [63] l.1656 Format improvement.
+@x [63] l.1658 Format improvement.
 {"FIXU", 0x07, 0x26288},@/
 @y
 {"FIXU", 0x07, 0x26288},@|
 @z
 
-@x [63] l.1664 Format improvement.
+@x [63] l.1666 Format improvement.
 {"SFLOTU", 0x0e, 0x26282},@/
 @y
 {"SFLOTU", 0x0e, 0x26282},@|
 @z
 
-@x [63] l.1672 Format improvement.
+@x [63] l.1674 Format improvement.
 {"FEQLE", 0x13, 0x240a8},@/
 @y
 {"FEQLE", 0x13, 0x240a8},@|
 @z
 
-@x [63] l.1680 Format improvement.
+@x [63] l.1682 Format improvement.
 {"FINT", 0x17, 0x26288},@/
 @y
 {"FINT", 0x17, 0x26288},@|
 @z
 
-@x [63] l.1688 Format improvement.
+@x [63] l.1690 Format improvement.
 {"DIVU", 0x1e, 0x240a2},@/
 @y
 {"DIVU", 0x1e, 0x240a2},@|
 @z
 
-@x [63] l.1696 Format improvement.
+@x [63] l.1698 Format improvement.
 {"SUBU", 0x26, 0x240a2},@/
 @y
 {"SUBU", 0x26, 0x240a2},@|
 @z
 
-@x [63] l.1704 Format improvement.
+@x [63] l.1706 Format improvement.
 {"16ADDU", 0x2e, 0x240a2},@/
 @y
 {"16ADDU", 0x2e, 0x240a2},@|
 @z
 
-@x [63] l.1712 Format improvement.
+@x [63] l.1714 Format improvement.
 {"NEGU", 0x36, 0x26082},@/
 @y
 {"NEGU", 0x36, 0x26082},@|
 @z
 
-@x [63] l.1720 Format improvement.
+@x [63] l.1722 Format improvement.
 {"SRU", 0x3e, 0x240a2},@/
 @y
 {"SRU", 0x3e, 0x240a2},@|
 @z
 
-@x [63] l.1728 Format improvement.
+@x [63] l.1730 Format improvement.
 {"BOD", 0x46, 0x22081},@/
 @y
 {"BOD", 0x46, 0x22081},@|
 @z
 
-@x [63] l.1736 Format improvement.
+@x [63] l.1738 Format improvement.
 {"BEV", 0x4e, 0x22081},@/
 @y
 {"BEV", 0x4e, 0x22081},@|
 @z
 
-@x [63] l.1744 Format improvement.
+@x [63] l.1746 Format improvement.
 {"PBOD", 0x56, 0x22081},@/
 @y
 {"PBOD", 0x56, 0x22081},@|
 @z
 
-@x [63] l.1752 Format improvement.
+@x [63] l.1754 Format improvement.
 {"PBEV", 0x5e, 0x22081},@/
 @y
 {"PBEV", 0x5e, 0x22081},@|
 @z
 
-@x [63] l.1760 Format improvement.
+@x [63] l.1762 Format improvement.
 {"CSOD", 0x66, 0x240a2},@/
 @y
 {"CSOD", 0x66, 0x240a2},@|
 @z
 
-@x [63] l.1768 Format improvement.
+@x [63] l.1770 Format improvement.
 {"CSEV", 0x6e, 0x240a2},@/
 @y
 {"CSEV", 0x6e, 0x240a2},@|
 @z
 
-@x [63] l.1776 Format improvement.
+@x [63] l.1778 Format improvement.
 {"ZSOD", 0x76, 0x240a2},@/
 @y
 {"ZSOD", 0x76, 0x240a2},@|
 @z
 
-@x [63] l.1784 Format improvement.
+@x [63] l.1786 Format improvement.
 {"ZSEV", 0x7e, 0x240a2},@/
 @y
 {"ZSEV", 0x7e, 0x240a2},@|
 @z
 
-@x [63] l.1792 Format improvement.
+@x [63] l.1794 Format improvement.
 {"LDWU", 0x86, 0xa60a2},@/
 @y
 {"LDWU", 0x86, 0xa60a2},@|
 @z
 
-@x [63] l.1800 Format improvement.
+@x [63] l.1802 Format improvement.
 {"LDOU", 0x8e, 0xa60a2},@/
 @y
 {"LDOU", 0x8e, 0xa60a2},@|
 @z
 
-@x [63] l.1808 Format improvement.
+@x [63] l.1810 Format improvement.
 {"LDUNC", 0x96, 0xa60a2},@/
 @y
 {"LDUNC", 0x96, 0xa60a2},@|
 @z
 
-@x [63] l.1816 Format improvement.
+@x [63] l.1818 Format improvement.
 {"GO", 0x9e, 0xa60a2},@/
 @y
 {"GO", 0x9e, 0xa60a2},@|
 @z
 
-@x [63] l.1824 Format improvement.
+@x [63] l.1826 Format improvement.
 {"STWU", 0xa6, 0xa60a2},@/
 @y
 {"STWU", 0xa6, 0xa60a2},@|
 @z
 
-@x [63] l.1832 Format improvement.
+@x [63] l.1834 Format improvement.
 {"STOU", 0xae, 0xa60a2},@/
 @y
 {"STOU", 0xae, 0xa60a2},@|
 @z
 
-@x [63] l.1840 Format improvement.
+@x [63] l.1842 Format improvement.
 {"STUNC", 0xb6, 0xa60a2},@/
 @y
 {"STUNC", 0xb6, 0xa60a2},@|
 @z
 
-@x [63] l.1848 Format improvement.
+@x [63] l.1850 Format improvement.
 {"PUSHGO", 0xbe, 0xa6062},@/
 @y
 {"PUSHGO", 0xbe, 0xa6062},@|
 @z
 
-@x [63] l.1856 Format improvement.
+@x [63] l.1858 Format improvement.
 {"XOR", 0xc6, 0x240a2},@/
 @y
 {"XOR", 0xc6, 0x240a2},@|
 @z
 
-@x [63] l.1864 Format improvement.
+@x [63] l.1866 Format improvement.
 {"NXOR", 0xce, 0x240a2},@/
 @y
 {"NXOR", 0xce, 0x240a2},@|
 @z
 
-@x [63] l.1872 Format improvement.
+@x [63] l.1874 Format improvement.
 {"ODIF", 0xd6, 0x240a2},@/
 @y
 {"ODIF", 0xd6, 0x240a2},@|
 @z
 
-@x [63] l.1880 Format improvement.
+@x [63] l.1882 Format improvement.
 {"MXOR", 0xde, 0x240a2},@/
 @y
 {"MXOR", 0xde, 0x240a2},@|
 @z
 
-@x [63] l.1888 Format improvement.
+@x [63] l.1890 Format improvement.
 {"SETL", 0xe3, 0x22080},@/
 @y
 {"SETL", 0xe3, 0x22080},@|
 @z
 
-@x [63] l.1896 Format improvement.
+@x [63] l.1898 Format improvement.
 {"INCL", 0xe7, 0x22080},@/
 @y
 {"INCL", 0xe7, 0x22080},@|
 @z
 
-@x [63] l.1904 Format improvement.
+@x [63] l.1906 Format improvement.
 {"ORL", 0xeb, 0x22080},@/
 @y
 {"ORL", 0xeb, 0x22080},@|
 @z
 
-@x [63] l.1912 Format improvement.
+@x [63] l.1914 Format improvement.
 {"ANDNL", 0xef, 0x22080},@/
 @y
 {"ANDNL", 0xef, 0x22080},@|
 @z
 
-@x [63] l.1920 Format improvement.
+@x [63] l.1922 Format improvement.
 {"PUT", 0xf6, 0x22002},@/
 @y
 {"PUT", 0xf6, 0x22002},@|
 @z
 
-@x [63] l.1928 Format improvement.
+@x [63] l.1930 Format improvement.
 {"UNSAVE", 0xfb, 0x23a00},@/
 @y
 {"UNSAVE", 0xfb, 0x23a00},@|
 @z
 
-@x [63] l.1936 Format improvement.
+@x [63] l.1938 Format improvement.
 {"TRIP", 0xff, 0x27554},@/
 @y
 {"TRIP", 0xff, 0x27554},@|
 @z
 
-@x [63] l.1940 Format improvement.
+@x [63] l.1942 Format improvement.
 {"LDA", 0x22, 0xa60a2},@/
 @y
 {"LDA", 0x22, 0xa60a2},@|
 @z
 
-@x [63] l.1946 Format improvement.
+@x [63] l.1948 Format improvement.
 {"PREFIX", PREFIX, 0x141000},@/
 @y
 {"PREFIX", PREFIX, 0x141000},@|
 @z
 
-@x [63] l.1950 Format improvement.
+@x [63] l.1952 Format improvement.
 {"WYDE", WYDE, 0x11f000},
 @y
 {"WYDE", WYDE, 0x11f000},@|
 @z
 
-@x [63] l.1954 Format improvement.
+@x [63] l.1956 Format improvement.
 {"OCTA", OCTA, 0x13f000},@/
 @y
 {"OCTA", OCTA, 0x13f000},@|
 @z
 
-@x [63] l.1958 Format improvement.
+@x [63] l.1960 Format improvement.
 {"ESPEC", ESPEC, 0x141000},@/
 @y
 {"ESPEC", ESPEC, 0x141000},@|
 @z
 
-@x [64] l.1972 Compound literal.
+@x [64] l.1974 Compound literal.
   pp->equiv.h=op_init_table[j].code, pp->equiv.l=op_init_table[j].bits;
 @y
   pp->equiv=(octa){op_init_table[j].code, op_init_table[j].bits};
 @z
 
-@x [69] l.2009 Format improvement.
+@x [69] l.2011 Format improvement.
 {"ROUND_NEAR",0,4},@/
 @y
 {"ROUND_NEAR",0,4},@|
 @z
 
-@x [69] l.2011 Format improvement.
+@x [69] l.2013 Format improvement.
 {"Inf",0x7ff00000,0},@/
 @y
 {"Inf",0x7ff00000,0},@|
 @z
 
-@x [69] l.2015 Format improvement.
+@x [69] l.2017 Format improvement.
 {"Pool_Segment",0x40000000,0},
 @y
 {"Pool_Segment",0x40000000,0},@|
 @z
 
-@x [69] l.2017 Format improvement.
+@x [69] l.2019 Format improvement.
 {"Stack_Segment",0x60000000,0},@/
 @y
 {"Stack_Segment",0x60000000,0},@|
 @z
 
-@x [69] l.2033 Format improvement.
+@x [69] l.2035 Format improvement.
 {"X_BIT",0,0x01},@/
 @y
 {"X_BIT",0,0x01},@|
 @z
 
-@x [69] l.2049 Format improvement.
+@x [69] l.2051 Format improvement.
 {"X_Handler",0,0x80},@/
 @y
 {"X_Handler",0,0x80},@|
 @z
 
-@x [69] l.2055 Format improvement.
+@x [69] l.2057 Format improvement.
 {"StdErr",0,2},@/
 @y
 {"StdErr",0,2},@|
 @z
 
-@x [69] l.2065 Format improvement.
+@x [69] l.2067 Format improvement.
 {"BinaryReadWrite",0,4},@/
 @y
 {"BinaryReadWrite",0,4},@|
 @z
 
-@x [70] l.2098 Compound literal.
+@x [70] l.2100 Compound literal.
   pp->equiv.h=predefs[j].h, pp->equiv.l=predefs[j].l;
 @y
   pp->equiv=(octa){predefs[j].h, predefs[j].l};
 @z
 
-@x [73] l.2148 C99 prototypes for C2x.
+@x [73] l.2150 C99 prototypes for C2x.
 trie_node* prune @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 trie_node* prune(t)
   trie_node* t;
@@ -635,37 +635,37 @@ trie_node* prune(
   trie_node* t)
 @z
 
-@x [73] l.2152
+@x [73] l.2154
   register int useful=0;
 @y
   bool useful=false;
 @z
 
-@x [73] l.2154
+@x [73] l.2156
     if (t->sym->serial) useful=1;
 @y
     if (t->sym->serial) useful=true;
 @z
 
-@x [73] l.2159
+@x [73] l.2161
     if (t->left) useful=1;
 @y
     if (t->left) useful=true;
 @z
 
-@x [73] l.2163
+@x [73] l.2165
     if (t->mid) useful=1;
 @y
     if (t->mid) useful=true;
 @z
 
-@x [73] l.2167
+@x [73] l.2169
     if (t->right) useful=1;
 @y
     if (t->right) useful=true;
 @z
 
-@x [74] l.2176 C99 prototypes for C2x.
+@x [74] l.2178 C99 prototypes for C2x.
 void out_stab @,@,@[ARGS((trie_node*))@];@+@t}\6{@>
 void out_stab(t)
   trie_node* t;
@@ -674,18 +674,18 @@ void out_stab(
   trie_node* t)
 @z
 
-@x [74] l.2181 Block-local variable.
+@x [74] l.2183 Block-local variable.
   register sym_node *pp;
 @y
 @z
 
-@x [76] l.2229 Change from MMIX home.
+@x [76] l.2231 Change from MMIX home.
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
-@x [78] l.2248 Block-local variable.
+@x [78] l.2250 Block-local variable.
   *sym_ptr='\0';
   fprintf(listing_file," %s = ",sym_buf+1);
   pp=t->sym;
@@ -701,7 +701,7 @@ while (1) {
 while (true) {
 @z
 
-@x [86] l.2371
+@x [86] l.2373
  if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
  derr("syntax error after character `%c'",*(p-2));
 @y
@@ -709,57 +709,57 @@ while (true) {
  err("syntax error after character `%c'",*(p-2));
 @z
 
-@x [92] l.2419 Compound literal.
+@x [92] l.2421 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
 acc=(octa){0, (unsigned char)*p};
 @z
 
-@x [93] l.2424 Compound literal.
+@x [93] l.2426 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
 acc=(octa){0, (unsigned char)*p};
 @z
 
-@x [94] l.2433 Compound literal.
+@x [94] l.2435 Compound literal.
 acc.h=0, acc.l=*p-'0';
 @y
 acc=(octa){0, *p-'0'};
 @z
 
-@x [95] l.2446 RAII.
+@x [95] l.2448 RAII.
 acc.h=acc.l=0;
 @y
 acc=zero_octa;
 @z
 
-@x [97] l.2469
+@x [97] l.2471
   derr("syntax error at `%c'",*(p-2));
 @y
   err("syntax error at `%c'",*(p-2));
 @z
 
-@x [97] l.2471 GCC warning.
+@x [97] l.2473 GCC warning.
  case '&': rt_op=and;@+break;
 @y
   @=/* fall through */@>@;
  case '&': rt_op=and;@+break;
 @z
 
-@x [97] l.2476
+@x [97] l.2478
  default: derr("syntax error at `%c'",*(p-1));
 @y
  default: err("syntax error at `%c'",*(p-1));
 @z
 
-@x [98] l.2499 Change from MMIX home.
+@x [98] l.2500 Change from MMIX home.
  @t\4@>@<Cases for unary operators@>@;
 @y
  case outer_rp: case inner_rp:@+goto scan_close; /* should not happen */
  @t\4@>@<Cases for unary operators@>@;
 @z
 
-@x [100] l.2523
+@x [100] l.2525
                  derr("can %s pure values only",verb)
 @y
                  err("can %s pure values only",verb)
@@ -777,7 +777,7 @@ acc=zero_octa;
  top_val.equiv=(octa){0,top_val.link->sym->serial};
 @z
 
-@x [101] l.2544
+@x [101] l.2546
       derr("can %s pure values only",verb)
 @y
       err("can %s pure values only",verb)
@@ -807,37 +807,37 @@ acc=zero_octa;
  next_val.equiv = oxor(next_val.equiv,top_val.equiv); @+
 @z
 
-@x [102] l.2602
+@x [102] l.2604
   derr("cannot use `%s' in special mode",op_field);
 @y
   err("cannot use `%s' in special mode",op_field);
 @z
 
-@x [102] l.2605
+@x [102] l.2607
   derr("*label field of `%s' instruction is ignored",op_field);
 @y
   err("*label field of `%s' instruction is ignored",op_field);
 @z
 
-@x [103] l.2622
+@x [103] l.2624
   if (*p && !isspace(*p)) derr("label syntax error at `%c'",*p);
 @y
   if (*p && !isspace(*p)) err("label syntax error at `%c'",*p);
 @z
 
-@x [103] l.2627
+@x [103] l.2629
   derr("improper local label `%s'",lab_field);
 @y
   err("improper local label `%s'",lab_field);
 @z
 
-@x [104] l.2638
+@x [104] l.2640
 if (!isspace(*p) && *p && op_field[0]) derr("opcode syntax error at `%c'",*p);
 @y
 if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
 @z
 
-@x [104] l.2642
+@x [104] l.2644
   if (op_field[0]) derr("unknown operation code `%s'",op_field);
 @.unknown operation code@>
   if (lab_field[0]) derr("*no opcode; label `%s' will be ignored",lab_field);
@@ -847,7 +847,7 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   if (lab_field[0]) err("*no opcode; label `%s' will be ignored",lab_field);
 @z
 
-@x [107] l.2688 Compound literal.
+@x [107] l.2690 Compound literal.
   acc.h=-1, acc.l=-(1<<j);
 @y
   acc=(octa){-1, -(1<<j)};
@@ -859,32 +859,32 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   }@+else if (opcode==GREG) cur_loc=(octa){0,cur_greg}, new_link=REGISTER;
 @z
 
-@x [109] l.2732
+@x [109] l.2734
       if (pp->serial) derr("symbol `%s' is already defined",lab_field);
 @y
       if (pp->serial) err("symbol `%s' is already defined",lab_field);
 @z
 
-@x [109] l.2735
+@x [109] l.2737
       derr("*redefinition of predefined symbol `%s'",lab_field);
 @y
       err("*redefinition of predefined symbol `%s'",lab_field);
 @z
 
-@x [109] l.2742 CWEB behavior changed between versions 2.8 and 3.0.
+@x [109] l.2744 CWEB behavior changed between versions 2.8 and 3.0.
     do @<Fix prior references to this label@>@;@+while (pp->link);
 @y
     do @<Fix prior references to this label@>@; while (pp->link);
 @z
 
-@x [114] l.279ß RAII.
+@x [114] l.2792 ß RAII.
   octa o;
   o=ominus(cur_loc,qq->equiv);
 @y
   octa o=ominus(cur_loc,qq->equiv);
 @z
 
-@x [114] l.2793
+@x [114] l.2795
     dderr("*relative address in location #%08x%08x not divisible by 4",
 @y
     err("*relative address in location #%08x%08x not divisible by 4",
@@ -896,7 +896,7 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   o=shift_right(o,2,false);@+
 @z
 
-@x [114] l.2810
+@x [114] l.2812
   if (k) dderr("relative address in location #%08x%08x is too far away",
                qq->equiv.h,qq->equiv.l);
 @y
@@ -904,25 +904,25 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
                qq->equiv.h,qq->equiv.l);
 @z
 
-@x [115] l.2815 GCC warning.
+@x [115] l.2817 GCC warning.
 if (new_link==DEFINED) {
 @y
 { if (new_link==DEFINED) {
 @z
 
-@x [115] l.2821 GCC warning.
+@x [115] l.2823 GCC warning.
 }
 @y
 } }
 @z
 
-@x [116] l.2828
+@x [116] l.2830
     derr("opcode `%s' needs more than one operand",op_field);
 @y
     err("opcode `%s' needs more than one operand",op_field);
 @z
 
-@x [116] l.2831 GCC warning.
+@x [116] l.2833 GCC warning.
 case 2:@+if (!(op_bits&two_arg_bit))
     if (op_bits&one_arg_bit)
       derr("opcode `%s' must not have two operands",op_field)@;
@@ -934,7 +934,7 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else err("opcode `%s' must have more than two operands",op_field); }
 @z
 
-@x [116] l.2840 GCC warning.
+@x [116] l.2842 GCC warning.
 case 3:@+if (!(op_bits&three_arg_bit))
     derr("opcode `%s' must not have three operands",op_field);
   @<Do a three-operand operation@>;
@@ -947,7 +947,7 @@ case 3:@+if (!(op_bits&three_arg_bit))
 default: err("too many operands for opcode `%s'",op_field);
 @z
 
-@x [117] l.2853 GCC warning.
+@x [117] l.2858 GCC warning.
     if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else derr("*constant doesn't fit in %d bytes",k);
@@ -957,49 +957,49 @@ default: err("too many operands for opcode `%s'",op_field);
     else err("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x [121] l.2899
+@x [121] l.2901
     derr("*Z field of `%s' should not be a register number",op_field);
 @y
     err("*Z field of `%s' should not be a register number",op_field);
 @z
 
-@x [121] l.2903
+@x [121] l.2905
   derr("*Z field of `%s' should be a register number",op_field);
 @y
   err("*Z field of `%s' should be a register number",op_field);
 @z
 
-@x [122] l.2914
+@x [122] l.2916
     derr("*Y field of `%s' should not be a register number",op_field);
 @y
     err("*Y field of `%s' should not be a register number",op_field);
 @z
 
-@x [122] l.2917
+@x [122] l.2919
   derr("*Y field of `%s' should be a register number",op_field);
 @y
   err("*Y field of `%s' should be a register number",op_field);
 @z
 
-@x [123] l.2929
+@x [123] l.2931
     derr("*X field of `%s' should not be a register number",op_field);
 @y
     err("*X field of `%s' should not be a register number",op_field);
 @z
 
-@x [123] l.2932
+@x [123] l.2934
   derr("*X field of `%s' should be a register number",op_field);
 @y
   err("*X field of `%s' should be a register number",op_field);
 @z
 
-@x [124] l.2947
+@x [124] l.2949
     derr("*YZ field of `%s' should not be a register number",op_field);
 @y
     err("*YZ field of `%s' should not be a register number",op_field);
 @z
 
-@x [124] l.2958
+@x [124] l.2960
     derr("*YZ field of `%s' should be a register number",op_field);
 @y
     err("*YZ field of `%s' should be a register number",op_field);
@@ -1013,7 +1013,7 @@ default: err("too many operands for opcode `%s'",op_field);
   dest=shift_right(val_stack[1].equiv,2,false);
 @z
 
-@x [127] l.3004 RAII.
+@x [127] l.3008 RAII.
   octa o;
   o=val_stack[1].equiv, k=0;
 @y
@@ -1021,13 +1021,13 @@ default: err("too many operands for opcode `%s'",op_field);
   k=0;
 @z
 
-@x [129] l.3050
+@x [129] l.3052
     derr("*operand of `%s' should not be a register number",op_field);
 @y
     err("*operand of `%s' should not be a register number",op_field);
 @z
 
-@x [129] l.3054
+@x [129] l.3056
     derr("*operand of `%s' should be a register number",op_field);
 @y
     err("*operand of `%s' should be a register number",op_field);
@@ -1041,32 +1041,32 @@ default: err("too many operands for opcode `%s'",op_field);
   dest=shift_right(val_stack[0].equiv,2,false);
 @z
 
-@x [132] l.3109 Change from MMIX home.
+@x [132] l.3111 Change from MMIX home.
  case LOCAL:@+if (val_stack[0].equiv.l>lreg) lreg=val_stack[0].equiv.l;
 @y
  case LOCAL:@+if (val_stack[0].equiv.l>(tetra)lreg) lreg=val_stack[0].equiv.l;
 @z
 
-@x [134] l.3128 GCC warning.
+@x [134] l.3130 GCC warning.
 if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @y
 { if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @z
 
-@x [134] l.3136 GCC warning.
+@x [134] l.3138 GCC warning.
 }
 @y
 } }
 @z
 
-@x [136] l.3168 Improved module structure with interfaces.
+@x [136] l.3170 Improved module structure with interfaces.
 @<Preprocessor definitions@>@;
 @y
 @h
 @<Preprocessor macros@>@;
 @z
 
-@x [136] l.3171 C99 prototypes for C2x.
+@x [136] l.3173 C99 prototypes for C2x.
 @<Subroutines@>@;
 @#
 int main(argc,argv)
@@ -1093,25 +1093,25 @@ int main(
     while (true) {
 @z
 
-@x [138] l.3216
+@x [138] l.3218
 if (!src_file) dpanic("Can't open the source file %s",src_file_name);
 @y
 if (!src_file) panic("Can't open the source file %s",src_file_name);
 @z
 
-@x [138] l.3225
+@x [138] l.3227
 if (!obj_file) dpanic("Can't open the object file %s",obj_file_name);
 @y
 if (!obj_file) panic("Can't open the object file %s",obj_file_name);
 @z
 
-@x [138] l.3228
+@x [138] l.3230
   if (!listing_file) dpanic("Can't open the listing file %s",listing_name);
 @y
   if (!listing_file) panic("Can't open the listing file %s",listing_name);
 @z
 
-@x [142] l.3252
+@x [142] l.3254
   dpanic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);
 @y
   panic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);

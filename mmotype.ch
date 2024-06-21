@@ -129,7 +129,7 @@ void read_tet()
 void read_tet(void)
 @z
 
-@x [9] l.142 C99 prototypes for C2x.
+@x [10] l.142 C99 prototypes for C2x.
 byte read_byte @,@,@[ARGS((void))@];
 byte read_byte()
 @y
