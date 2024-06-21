@@ -3,6 +3,15 @@
 @y
 @z
 
+@x [0] l.15
+@s bignum int
+@y
+@s bignum int
+
+\input pdfwebtocfront
+
+@z
+
 @x [1] l.34 Improved module structure with interfaces.
 #include <stdio.h>
 #include <string.h>
