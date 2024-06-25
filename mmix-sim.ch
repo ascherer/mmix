@@ -266,6 +266,12 @@ byte read_byte()
 byte read_byte(void)
 @z
 
+@x [29] l.926
+   @t\4@>@<Cases for lopcodes in the main loop@>@;
+@y
+@/ @t\4@>@<Cases for lopcodes in the main loop@>@;
+@z
+
 @x [32] l.961 RAII.
 cur_loc.h=cur_loc.l=0;
 @y
@@ -1475,6 +1481,12 @@ void catchint(
 @y
   if (n!=SIGINT) return;
   interrupt=true;
+@z
+
+@x [149] l.3084
+  @t\4@>@<Cases that change |cur_disp_mode|@>;
+@y
+@/@t\4@>@<Cases that change |cur_disp_mode|@>;
 @z
 
 @x [149] l.3093 Change from MMIX home.
