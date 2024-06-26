@@ -1,3 +1,9 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
 @x [3]
 @ The command line might also contain additional options, some day.
 @y
