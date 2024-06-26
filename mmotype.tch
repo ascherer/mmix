@@ -1,3 +1,9 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
 @x [20] l.262
 @ The space for file names isn't allocated until we are sure we need it.
 @y

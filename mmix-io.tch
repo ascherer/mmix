@@ -1,3 +1,9 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
 @x [4]
 @* Interface.  Here comes the exported interface of this program module.
 @y
