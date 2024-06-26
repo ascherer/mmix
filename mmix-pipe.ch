@@ -797,7 +797,7 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
 @x [101] l.2009 Improved typography.
 @<Special cases of instruction dispatch@>@;
 @y
-@t\4@>@<Special cases of instruction dispatch@>@;
+@/@t\4@>@<Special cases of instruction dispatch@>@;
 @z
 
 @x [107] l.2062
@@ -855,7 +855,7 @@ static control vanish_ctl; /* such coroutines share a common control block */
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
-  @t\4@>@<Special cases for states in the first stage@>;
+  @/@t\4@>@<Special cases for states in the first stage@>;
 @z
 
 @x [132] l.2517 Improved typography.
@@ -863,16 +863,16 @@ static control vanish_ctl; /* such coroutines share a common control block */
   @<Cases to compute the virtual address of a memory operation@>;
   @<Cases for stage 1 execution@>;
 @y
-  @t\4@>@<Cases to compute the results of register-to-register operation@>;
-  @t\4@>@<Cases to compute the virtual address of a memory operation@>;
-  @t\4@>@<Cases for stage 1 execution@>;
+  @/@t\4@>@<Cases to compute the results of register-to-register operation@>;
+  @/@t\4@>@<Cases to compute the virtual address of a memory operation@>;
+  @/@t\4@>@<Cases for stage 1 execution@>;
   default:@+;
 @z
 
 @x [135] l.2572 Improved typography.
   @<Special cases for states in later stages@>;
 @y
-  @t\4@>@<Special cases for states in later stages@>;
+  @/@t\4@>@<Special cases for states in later stages@>;
 @z
 
 @x [138] l.2597 'oxor' was never used before.
@@ -1521,8 +1521,8 @@ static lockvar clean_lock;
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
 @y
-@t\4@>@<Cases 0 through 4, for the D-cache@>;
-@t\4@>@<Cases 5 through 9, for the S-cache@>;
+@/@t\4@>@<Cases 0 through 4, for the D-cache@>;
+@/@t\4@>@<Cases 5 through 9, for the S-cache@>;
 @z
 
 @x [233] l.4152 Compound literal.
@@ -1818,7 +1818,7 @@ static control fetch_ctl;
 @x [288] l.5238 Improved typography.
   @<Other cases for the fetch coroutine@>@;
 @y
-  @t\4@>@<Other cases for the fetch coroutine@>@;
+  @/@t\4@>@<Other cases for the fetch coroutine@>@;
 @z
 
 @x [297] l.5334 RAII.

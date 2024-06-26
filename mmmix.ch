@@ -288,7 +288,7 @@ while (true) {
 @x [13] l.380 Improved typography.
   @<Cases for interaction@>@;
 @y
-  @t\4@>@<Cases for interaction@>@;
+  @/@t\4@>@<Cases for interaction@>@;
 @z
 
 @x [15] l.424 Change from MMIX home.
