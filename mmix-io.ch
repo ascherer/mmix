@@ -80,33 +80,40 @@ extern void mmix_io_init(void);
 extern void mmix_fake_stdin(FILE*);
 extern void print_trip_warning(int,octa);
 @#
-extern octa mmix_fopen(unsigned char,octa,octa,@|
-  int @[(*mmgetchars)(char*,int,octa,int)@]
+extern octa mmix_fopen(unsigned char,octa,octa,@/
+@t\qquad@>
+  int @[@] (*mmgetchars)(char*,int,octa,int)
 @,); /* mixin */
 extern octa mmix_fclose(unsigned char);
-extern octa mmix_fread(unsigned char,octa,octa,@|
-  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
+extern octa mmix_fread(unsigned char,octa,octa,@/
 @t\qquad@>
-  char @[(*stdin_chr)(void)@]
-@,);
-extern octa mmix_fgets(unsigned char,octa,octa,@|
-  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
+  void @[@] (*mmputchars)(unsigned char*,int,octa), /* mixins */
 @t\qquad@>
-  char @[(*stdin_chr)(void)@]
+  char @[@] (*stdin_chr)(void)
 @,);
-extern octa mmix_fgetws(unsigned char,octa,octa,@|
-  void @[(*mmputchars)(unsigned char*,int,octa)@], /* mixins */
+extern octa mmix_fgets(unsigned char,octa,octa,@/
 @t\qquad@>
-  char @[(*stdin_chr)(void)@]
+  void @[@] (*mmputchars)(unsigned char*,int,octa), /* mixins */
+@t\qquad@>
+  char @[@] (*stdin_chr)(void)
 @,);
-extern octa mmix_fwrite(unsigned char,octa,octa,@|
-  int @[(*mmgetchars)(char*,int,octa,int)@]
+extern octa mmix_fgetws(unsigned char,octa,octa,@/
+@t\qquad@>
+  void @[@] (*mmputchars)(unsigned char*,int,octa), /* mixins */
+@t\qquad@>
+  char @[@] (*stdin_chr)(void)
+@,);
+extern octa mmix_fwrite(unsigned char,octa,octa,@/
+@t\qquad@>
+  int @[@] (*mmgetchars)(char*,int,octa,int)
 @,); /* mixin */
-extern octa mmix_fputs(unsigned char,octa,@|
-  int @[(*mmgetchars)(char*,int,octa,int)@]
+extern octa mmix_fputs(unsigned char,octa,@/
+@t\qquad@>
+  int @[@] (*mmgetchars)(char*,int,octa,int)
 @,); /* mixin */
-extern octa mmix_fputws(unsigned char,octa,@|
-  int @[(*mmgetchars)(char*,int,octa,int)@]
+extern octa mmix_fputws(unsigned char,octa,@/
+@t\qquad@>
+  int @[@] (*mmgetchars)(char*,int,octa,int)
 @,); /* mixin */
 extern octa mmix_fseek(unsigned char,octa);
 extern octa mmix_ftell(unsigned char);
@@ -163,10 +170,8 @@ octa mmix_fopen(handle,name,mode)
 @y
 octa mmix_fopen(
   unsigned char handle,
-  octa name, octa mode,@|
-@t\4\4@>
-  int @,(*mmgetchars)(char*,int,octa,int)
-@,)
+  octa name, octa mode,@/
+  int @[@] (*mmgetchars)(char*,int,octa,int) @,)
 @z
 
 @x [8] l.99 Change from MMIX home.
@@ -236,11 +241,9 @@ octa mmix_fread(handle,buffer,size)
 @y
 octa mmix_fread(
   unsigned char handle,
-  octa buffer, octa size,@|
-@t\4\4@>
-  void @,(*mmputchars)(unsigned char*,int,octa),@|
-@t\4\4@>
-  char @,(*stdin_chr)(void)
+  octa buffer, octa size,@/
+  void @[@] (*mmputchars)(unsigned char*,int,octa),@/
+  char @[@] (*stdin_chr)(void)
 @,)
 @z
 
@@ -278,12 +281,9 @@ octa mmix_fgets(handle,buffer,size)
 @y
 octa mmix_fgets(
   unsigned char handle,
-  octa buffer, octa size,@|
-@t\4\4@>
-  void @,(*mmputchars)(unsigned char*,int,octa),@|
-@t\4\4@>
-  char @,(*stdin_chr)(void)
-@,)
+  octa buffer, octa size,@/
+  void @[@] (*mmputchars)(unsigned char*,int,octa),@/
+  char @[@] (*stdin_chr)(void) @,)
 @z
 
 @x [14] l.180 RAII.
@@ -317,12 +317,9 @@ octa mmix_fgetws(handle,buffer,size)
 @y
 octa mmix_fgetws(
   unsigned char handle,
-  octa buffer, octa size,@|
-@t\4\4@>
-  void @,(*mmputchars)(unsigned char*,int,octa),@|
-@t\4\4@>
-  char @,(*stdin_chr)(void)
-@,)
+  octa buffer, octa size,@/
+  void @[@] (*mmputchars)(unsigned char*,int,octa),@/
+  char @[@] (*stdin_chr)(void) @,)
 @z
 
 @x [16] l.235 RAII.
@@ -352,10 +349,8 @@ octa mmix_fwrite(handle,buffer,size)
 @y
 octa mmix_fwrite(
   unsigned char handle,
-  octa buffer, octa size,@|
-@t\4\4@>
-  int @,(*mmgetchars)(char*,int,octa,int)
-@,)
+  octa buffer, octa size,@/
+  int @[@] (*mmgetchars)(char*,int,octa,int) @,)
 @z
 
 @x [18] l.284
@@ -378,10 +373,8 @@ octa mmix_fputs(handle,string)
 @y
 octa mmix_fputs(
   unsigned char handle,
-  octa string,@|
-@t\4\4@>
-  int @,(*mmgetchars)(char*,int,octa,int)
-@,)
+  octa string,@/
+  int @[@] (*mmgetchars)(char*,int,octa,int) @,)
 @z
 
 @x [19] l.303 RAII.
@@ -411,10 +404,8 @@ octa mmix_fputws(handle,string)
 @y
 octa mmix_fputws(
   unsigned char handle,
-  octa string,@|
-@t\4\4@>
-  int @,(*mmgetchars)(char*,int,octa,int)
-@,)
+  octa string,@/
+  int @[@] (*mmgetchars)(char*,int,octa,int) @,)
 @z
 
 @x [20] l.327 RAII.
