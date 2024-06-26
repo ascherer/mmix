@@ -145,10 +145,10 @@ byte read_byte()
 byte read_byte(void)
 @z
 
-@x [13] l.171 Fix glitch with 'cweave -f'.
-    read_tet();@+break;
+@x [13] l.172 Fix glitch with 'cweave -f'.
+   @t\4@>@<Cases for lopcodes in the main loop@>@;
 @y
-    read_tet();@+break;@/
+ @/@t\4@>@<Cases for lopcodes in the main loop@>@;
 @z
 
 @x [17] l.217 Compound literal.
