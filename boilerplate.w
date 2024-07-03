@@ -14,7 +14,8 @@ Prof.~Ruckert take any responsibility for this incarnation.
 \smallskip\noindent Consult the online project
 \pdfURL{{\ninett https://github.com/ascherer/mmix}}{https://github.com/ascherer/mmix}
 for context and rationale.
-\vskip1in
+\readchanges % The following sections were changed...
+\vskip 0pt plus 1filll
     \noindent\copyright\ 1999 Donald E. Knuth
     \bigskip\noindent
     This file may be freely copied and distributed, provided that
@@ -33,3 +34,18 @@ for context and rationale.
     in order to help promote computer science research,
     but no warranty of any kind should be assumed.}
 
+\def\changedsections{\jobname.chs}
+\def\readchanges{\input \changedsections}
+\newread\testread \newwrite\writechanges
+\openin\testread=\changedsections\relax
+\ifeof\testread % First run
+  \let\readchanges=\relax
+  \let\CH=\ch
+  \def\ch#1.{\begingroup
+    \let\\=\BS \let\*=\let \let\ch=\relax
+    \immediate\openout\writechanges=\changedsections
+    \immediate\write\writechanges{\par\noindent\ch#1.}
+    \immediate\closeout\writechanges
+    \let\ch=\CH \ch#1.
+    \endgroup}
+\fi
