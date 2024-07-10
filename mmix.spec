@@ -44,9 +44,10 @@ Source8: mmotype.ch
 %if %{with patches}
 Patch29: 0029-DRY-up-the-Makefile.patch
 Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
-Patch110: 0110-Avoid-redundant-date-values.patch
-Patch201: 0201-Link-mmotype-with-mmix-arith-in-Makefile.patch
-Patch206: 0206-Clean-up-Makefile.patch
+Patch109: 0109-Avoid-redundant-date-values.patch
+Patch199: 0199-Link-mmotype-with-mmix-arith-in-Makefile.patch
+Patch204: 0204-Clean-up-Makefile.patch
+Patch272: 0272-Resurrect-the-shared-object-idea.patch
 %endif
 
 %description
