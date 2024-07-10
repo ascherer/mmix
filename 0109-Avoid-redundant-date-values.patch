@@ -1,7 +1,7 @@
-From c1192ac8217e40a7ba00dbc404b2a71971509e2d Mon Sep 17 00:00:00 2001
+From 0757f135c45e8a4cbeabc9ead4050bfeb2bb2be0 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sun, 16 Apr 2023 12:06:50 +0200
-Subject: [PATCH 110/206] Avoid redundant 'date' values.
+Subject: [PATCH 109/272] Avoid redundant 'date' values.
 
 Due to the mutual dependencies between MMIX-IO and the MMIX simulators
 MMIX-PIPE and MMIX-SIM respectively, each invocation of 'make (all)'
@@ -13,7 +13,7 @@ present) instead of appending the new value.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 2df3698..9f669e6 100644
+index e477110..35a2e8d 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -75,7 +75,7 @@ clean:
@@ -26,5 +26,5 @@ index 2df3698..9f669e6 100644
  
  mmix-config.c mmix-io.c: mmix-pipe.c mmix-mem.c
 -- 
-2.43.0
+2.48.1
 
