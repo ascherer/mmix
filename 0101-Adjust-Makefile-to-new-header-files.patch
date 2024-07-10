@@ -1,7 +1,7 @@
-From 4c19cf220cd2bca2a16773a007329594e373ccb8 Mon Sep 17 00:00:00 2001
+From 5baa7d8f458752ca8a9d180dcca620f3f814695c Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sat, 15 Apr 2023 18:40:32 +0200
-Subject: [PATCH 101/206] Adjust Makefile to new header files.
+Subject: [PATCH 101/272] Adjust Makefile to new header files.
 
 ---
  Makefile | 6 +++---
@@ -29,5 +29,5 @@ index f52ca3f..2df3698 100644
  
  mmixal: mmix-arith.o mmixal.c
 -- 
-2.43.0
+2.45.2
 

@@ -12,7 +12,7 @@ License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
 Version: 20231125
-Release: 1
+Release: 2
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if "%{_vendor}" == "debbuild"
@@ -47,6 +47,7 @@ Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
 Patch110: 0110-Avoid-redundant-date-values.patch
 Patch201: 0201-Link-mmotype-with-mmix-arith-in-Makefile.patch
 Patch206: 0206-Clean-up-Makefile.patch
+Patch272: 0272-Resurrect-the-shared-object-idea.patch
 %endif
 
 %description
@@ -101,11 +102,19 @@ diff -u silly.err silly.err.new ||:
 %install
 %{__rm} -rf %{buildroot}
 %{__install} -d %{buildroot}%{_bindir} \
+	%{buildroot}%{_libdir}/%{name} \
 	%{buildroot}%{_datadir}/%{name}
 %{?with_tex:%{__install} -d %{buildroot}%{_docdir}/%{name}}
 %{__install} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
 %{__install} -m 644 *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
 %{?with_tex:%{__install} -m 644 *.pdf %{buildroot}%{_docdir}/%{name}}
+
+%if %{with patches}
+%{__install} libmmix.so %{buildroot}%{_libdir}/%{name}
+%{__install} -d %{buildroot}%{_sysconfdir}/ld.so.conf.d
+%{__echo} "%{_libdir}/%{name}" > \
+	%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%endif
 
 %files
 %defattr(-,root,root,-)
@@ -115,8 +124,21 @@ diff -u silly.err silly.err.new ||:
 %{_bindir}/mmmix
 %{_datadir}/%{name}
 %{?with_tex:%doc %{_docdir}/%{name}}
+%if %{with patches}
+%{_libdir}/%{name}/libmmix.so
+%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%endif
+
+%post
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
+
+%postun
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
 
 %changelog
+* Wed Jul 10 2024 Andreas Scherer <andreas_tex@freenet.de>
+- Ressurrect the shared object idea
+
 * Thu Nov 30 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Fourth patch for Makefile
 
