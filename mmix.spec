@@ -93,8 +93,7 @@ grep "Warning" silly.out > silly.err
 sed -i -e "/Warning/d" silly.out
 
 echo "i silly.run" | ./mmix -i silly > silly.out.new 2>silly.err.new
-diff -u silly.out silly.out.new ||:
-diff -u silly.err silly.err.new ||:
+for f in out err; do diff -u silly.$f silly.$f.new ||:; done
 
 %install
 %{__rm} -rf %{buildroot}
