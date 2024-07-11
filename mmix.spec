@@ -31,23 +31,23 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source0: https://www-cs-faculty.stanford.edu/~knuth/programs/%{name}-%{version}.tar.gz
 %if %{with changes}
-Source1: mmix-sim.ch
-Source2: mmix-pipe.ch
-Source3: mmixal.ch
-Source4: mmix-arith.ch
-Source5: mmix-config.ch
-Source6: mmix-io.ch
+Source1: mmix-arith.ch
+Source2: mmix-config.ch
+Source3: mmix-io.ch
+Source4: mmix-pipe.ch
+Source5: mmix-sim.ch
+Source6: mmixal.ch
 Source7: mmmix.ch
 Source8: mmotype.ch
 %endif
 
 %if %{with patches}
-Patch29: 0029-DRY-up-the-Makefile.patch
-Patch101: 0101-Adjust-Makefile-to-new-header-files.patch
-Patch109: 0109-Avoid-redundant-date-values.patch
-Patch199: 0199-Link-mmotype-with-mmix-arith-in-Makefile.patch
-Patch204: 0204-Clean-up-Makefile.patch
-Patch272: 0272-Resurrect-the-shared-object-idea.patch
+Patch0029: 0029-DRY-up-the-Makefile.patch
+Patch0101: 0101-Adjust-Makefile-to-new-header-files.patch
+Patch0109: 0109-Avoid-redundant-date-values.patch
+Patch0199: 0199-Link-mmotype-with-mmix-arith-in-Makefile.patch
+Patch0204: 0204-Clean-up-Makefile.patch
+Patch0272: 0272-Resurrect-the-shared-object-idea.patch
 %endif
 
 %description
@@ -80,17 +80,14 @@ for i in al-intro -doc -sim-intro; do %{__ps2pdf} mmix$i.ps; done
 %endif
 
 %check
-./mmixal -x -b 250 -l copy.mml copy.mms
+PATH=.:$PATH %{__make} copy.mmo
 ./mmix copy copy.mms > copy.out
 diff -u copy.mms copy.out
 
-./mmixal -x -b 250 -l hello.mml hello.mms
-./mmix -Dhello.mmb hello.mmo
-printf "10000\nq" | ./mmmix plain.mmconfig hello.mmb
-
-./mmixal -x -b 250 -l silly.mml silly.mms
-./mmix -Dsilly.mmb silly.mmo
-printf "10000\nq" | ./mmmix plain.mmconfig silly.mmb
+for f in hello silly; do
+  PATH=.:$PATH %{__make} $f.mmo $f.mmb
+  printf "10000\nq" | ./mmmix plain.mmconfig $f.mmb
+done
 
 grep "Warning" silly.out > silly.err
 sed -i -e "/Warning/d" silly.out
