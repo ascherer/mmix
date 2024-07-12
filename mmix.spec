@@ -27,6 +27,7 @@ Distribution: openSUSE 42 (x86_64)
 %global __echo %(which echo)
 %global __ps2pdf %(which ps2pdf)
 %endif
+%global __sed_i %{__sed} -i
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Source0: https://www-cs-faculty.stanford.edu/~knuth/programs/%{name}-%{version}.tar.gz
@@ -61,15 +62,15 @@ for f in %sources; do
   case $f in *.ch) %{__cp} $f . ;; esac
 done
 %if %{with patches}
-%{__sed} "s/CFLAGS = -g/& -Wall -Wextra -Wno-implicit-fallthrough/" -i Makefile
+%{__sed_i} -e "s/CFLAGS = -g/& -Wall -Wextra -Wno-implicit-fallthrough/" Makefile
 %else
-%{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-pipe.ch
-%{__sed} "s/@d ABSTIME/& 123456789/" -i mmix-sim.ch
+%{__sed_i} -e "s/@d ABSTIME/& 123456789/" mmix-pipe.ch
+%{__sed_i} -e "s/@d ABSTIME/& 123456789/" mmix-sim.ch
 %endif
 %endif
 %if ! %{with debuginfo}
-%{__sed} "s/CFLAGS = -g/CFLAGS = -O/" -i Makefile
-%{?with_patches:%{__sed} "s/LDFLAGS =/& -s/" -i Makefile}
+%{__sed_i} -e "s/CFLAGS = -g/CFLAGS = -O/" Makefile
+%{?with_patches:%{__sed_i} -e "s/LDFLAGS =/& -s/" Makefile}
 %endif
 
 %build
@@ -90,7 +91,7 @@ for f in hello silly; do
 done
 
 grep "Warning" silly.out > silly.err
-sed -i -e "/Warning/d" silly.out
+%{__sed_i} -e "/Warning/d" silly.out
 
 echo "i silly.run" | ./mmix -i silly > silly.out.new 2>silly.err.new
 for f in out err; do diff -u silly.$f silly.$f.new ||:; done
