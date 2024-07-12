@@ -64,12 +64,11 @@ done
 %if %{with patches}
 %{__sed_i} -e "s/CFLAGS = -g/& -Wall -Wextra -Wno-implicit-fallthrough/" Makefile
 %else
-%{__sed_i} -e "s/@d ABSTIME/& 123456789/" mmix-pipe.ch
-%{__sed_i} -e "s/@d ABSTIME/& 123456789/" mmix-sim.ch
+%{__sed_i} -e "s/@d ABSTIME/& 123456789/" mmix-pipe.ch mmix-sim.ch
 %endif
 %endif
 %if ! %{with debuginfo}
-%{__sed_i} -e "s/CFLAGS = -g/CFLAGS = -O/" Makefile
+%{__sed_i} -e "/CFLAGS = /s/-g/-O/" Makefile
 %{?with_patches:%{__sed_i} -e "s/LDFLAGS =/& -s/" Makefile}
 %endif
 
