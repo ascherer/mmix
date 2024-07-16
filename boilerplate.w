@@ -48,4 +48,5 @@ for context and rationale.
     \immediate\closeout\writechanges
     \let\ch=\CH \ch#1.
     \endgroup}
+\else\closein\testread % Second run
 \fi
