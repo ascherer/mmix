@@ -36,6 +36,12 @@ octa mmix_fread(
 octa mmix_fread(
 @z
 
+@x [17]
+    *p++=stdin_chr();@+*p++=stdin_chr();
+@y
+    *p++=stdin_chr();@+*p++=stdin_chr(); @+
+@z
+
 @x [25]
 @* Index.
 @y
