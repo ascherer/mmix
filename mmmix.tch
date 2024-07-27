@@ -18,6 +18,13 @@
 @ @<Change the current location@>=
 @z
 
+@x [10]
+  t0=fgetc(prog_file);@+ if (t0==EOF) oops;
+@y
+  @t}$\vskip1in\quad${@>
+  t0=fgetc(prog_file);@+ if (t0==EOF) oops;
+@z
+
 @x [13]
   printf("Eh? Sorry, I don't understand. (Type h for help)\n");
 @y
