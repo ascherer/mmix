@@ -227,9 +227,9 @@ octa mmix_fclose(
   sfile[handle].mode=0;
 @y
   sfile[handle].mode=0;
-  if (((handle==0 && sfile[handle].fp!=stdin) ||
-      (handle==1 && sfile[handle].fp!=stdout) ||
-      (handle==2 && sfile[handle].fp!=stderr) ||
+  if (((handle==0 && sfile[handle].fp!=stdin) || @|
+      (handle==1 && sfile[handle].fp!=stdout) || @|
+      (handle==2 && sfile[handle].fp!=stderr) || @|
       handle>2) && fclose(sfile[handle].fp)!=0) return neg_one;
 @z
 

@@ -195,12 +195,12 @@ oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
   t1=fgetc(prog_file);@+ if (t1==EOF) oops;
   t2=fgetc(prog_file);@+ if (t2==EOF) oops;
   t3=fgetc(prog_file);@+ if (t3==EOF) oops;
-  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@/
   t0=fgetc(prog_file);@+ if (t0==EOF) oops;
   t1=fgetc(prog_file);@+ if (t1==EOF) oops;
   t2=fgetc(prog_file);@+ if (t2==EOF) oops;
   t3=fgetc(prog_file);@+ if (t3==EOF) oops;
-  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;
+  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;@/
   return true;
 @z
 

@@ -332,6 +332,25 @@ void make_map()
 void make_map(void)
 @z
 
+@x [43] l.1124
+in hopes that other operating systems provide a similar way to do the job.
+@y
+in hopes that other operating systems provide a similar way to do the job.
+We apply a \.{CWEB} coding trick to make the \&{stat} type name distinct
+from the function of the same name.
+@^system dependencies@>
+
+@d mstat s@&t@&a@&t /* this is a \.{CWEB} coding trick: */
+@f mstat int /* `\&{mstat}' will be equivalent to `\&{struct stat}' */
+@f stat x /* but function `|stat|' will not be treated as a reserved word */
+@z
+
+@x [44] l.1134
+  struct stat stat_buf;
+@y
+  struct mstat stat_buf;
+@z
+
 @x [45] l.1149 C99 prototypes for C2x.
 void print_line @,@,@[ARGS((int))@];@+@t}\6{@>
 void print_line(k)
