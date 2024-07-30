@@ -903,10 +903,11 @@ case xor: data->x.o=oxor(data->y.o, data->z.o); @+ break;
 case nxor: data->x.o=onxor(data->y.o, data->z.o); @+ break;
 @z
 
-@x [141] l.2655 Issue #16.
+@x [141] l.2654 Issue #16.
+ {@+octa tmpo;
     tmpo=shift_right(data->x.o,shift_amt,0);
 @y
-    tmpo=shift_right(data->x.o,shift_amt,false);
+ {@+octa tmpo=shift_right(data->x.o,shift_amt,false);
 @z
 
 @x [141] l.2658 Issue #16.
@@ -937,6 +938,19 @@ bool stack_overflow; /* stack overflow not yet reported */
 @y
 static octa new_Q; /* when rQ increases in any bit position, so should this */
 static bool stack_overflow; /* stack overflow not yet reported */
+@z
+
+@x [151] l.2886
+  if (bp_table) {@+register int h;
+@y
+  if (bp_table) {
+@z
+
+@x [151] l.2889
+    h=bp_table[m];
+    if (h&bp_npower) predicted^=0x10;
+@y
+    if (bp_table[m]&bp_npower) predicted^=0x10;
 @z
 
 @x [154] l.2936
