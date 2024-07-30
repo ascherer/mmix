@@ -252,6 +252,13 @@ static void pcs( /* subroutine to process a cache spec */
         "Configuration error: `%c' is not a hex digit",token[j]);
 @z
 
+@x [26] l.744 Bug reported 2024-07-30.
+  funit[j].co=(coroutine*)calloc(n,sizeof(coroutine));
+@y
+  funit[j].co=(coroutine*)calloc(n,sizeof(coroutine));
+  if (!funit[j].co) panic("Can't allocate coroutine %d",j);
+@z
+
 @x [27] l.752 Change from MMIX home.
 for (j=div;j<=max_pipe_op;j++) int_stages[j]=strlen(pipe_seq[j]);
 @y
