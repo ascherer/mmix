@@ -828,6 +828,12 @@ acc=zero_octa;
   err("*label field of `%s' instruction is ignored",op_field);
 @z
 
+@x [102] l.2615
+@<Do the operation@>;
+@y
+@<Do the \9{o}operation@>;
+@z
+
 @x [103] l.2624
   if (*p && !isspace(*p)) derr("label syntax error at `%c'",*p);
 @y
@@ -925,6 +931,12 @@ if (new_link==DEFINED) {
 } }
 @z
 
+@x [116] l.2825
+@ @<Do the operation@>=
+@y
+@ @<Do the \9{o}operation@>=
+@z
+
 @x [116] l.2830
     derr("opcode `%s' needs more than one operand",op_field);
 @y
@@ -966,6 +978,22 @@ default: err("too many operands for opcode `%s'",op_field);
     else err("*constant doesn't fit in %d bytes",k); }
 @z
 
+@x [119] l.2883
+@<Do the Z field@>;
+@<Do the Y field@>;
+assemble_X: @<Do the X field@>;
+@y
+@<Do the \9{z}Z field@>;
+@<Do the \9{y}Y field@>;
+assemble_X: @<Do the \9{x}X field@>;
+@z
+
+@x [121] l.2896
+@ @<Do the Z field@>=
+@y
+@ @<Do the \9{z}Z field@>=
+@z
+
 @x [121] l.2901
     derr("*Z field of `%s' should not be a register number",op_field);
 @y
@@ -976,6 +1004,12 @@ default: err("too many operands for opcode `%s'",op_field);
   derr("*Z field of `%s' should be a register number",op_field);
 @y
   err("*Z field of `%s' should be a register number",op_field);
+@z
+
+@x [122] l.2911
+@ @<Do the Y field@>=
+@y
+@ @<Do the \9{y}Y field@>=
 @z
 
 @x [122] l.2916
@@ -990,6 +1024,12 @@ default: err("too many operands for opcode `%s'",op_field);
   err("*Y field of `%s' should be a register number",op_field);
 @z
 
+@x [123] l.2926
+@ @<Do the X field@>=
+@y
+@ @<Do the \9{x}X field@>=
+@z
+
 @x [123] l.2931
     derr("*X field of `%s' should not be a register number",op_field);
 @y
@@ -1002,16 +1042,46 @@ default: err("too many operands for opcode `%s'",op_field);
   err("*X field of `%s' should be a register number",op_field);
 @z
 
+@x [124] l.2944
+    @<Assemble YZ as a future reference and |goto assemble_X|@>@;
+@y
+    @<Assemble \9{y}YZ as a future reference and |goto assemble_X|@>@;
+@z
+
 @x [124] l.2949
     derr("*YZ field of `%s' should not be a register number",op_field);
 @y
     err("*YZ field of `%s' should not be a register number",op_field);
 @z
 
+@x [124] l.2956
+    @<Assemble YZ as a memory address and |goto assemble_X|@>;
+@y
+    @<Assemble \9{y}YZ as a memory address and |goto assemble_X|@>;
+@z
+
 @x [124] l.2960
     derr("*YZ field of `%s' should be a register number",op_field);
 @y
     err("*YZ field of `%s' should be a register number",op_field);
+@z
+
+@x [124] l.2963
+    @<Assemble YZ as a relative address and |goto assemble_X|@>;
+@y
+    @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>;
+@z
+
+@x [125] l.2971
+@ @<Assemble YZ as a future reference...@>=
+@y
+@ @<Assemble \9{y}YZ as a future reference...@>=
+@z
+
+@x [126] l.2984
+@ @<Assemble YZ as a relative address and |goto assemble_X|@>=
+@y
+@ @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>=
 @z
 
 @x [126] l.2990 Issue #16.
@@ -1022,12 +1092,36 @@ default: err("too many operands for opcode `%s'",op_field);
   dest=shift_right(val_stack[1].equiv,2,false);
 @z
 
+@x [127] l.3006
+@ @<Assemble YZ as a memory address and |goto assemble_X|@>=
+@y
+@ @<Assemble \9{y}YZ as a memory address and |goto assemble_X|@>=
+@z
+
 @x [127] l.3008 RAII.
   octa o;
   o=val_stack[1].equiv, k=0;
 @y
   octa o=val_stack[1].equiv;
   k=0;
+@z
+
+@x [127] l.3017
+  else @<Assemble instructions to put supplementary data in \$255@>;
+@y
+  else @<Assemble \9{i}instructions to put supplementary data in \$255@>;
+@z
+
+@x [128] l.3026
+@<Assemble instructions to put supplementary data in \$255@>=
+@y
+@<Assemble \9{i}instructions to put supplementary data in \$255@>=
+@z
+
+@x [129] l.3047
+    @<Assemble XYZ as a future reference and |goto assemble_inst|@>@;
+@y
+    @<Assemble \9{x}XYZ as a future reference and |goto assemble_inst|@>@;
 @z
 
 @x [129] l.3052
@@ -1040,6 +1134,24 @@ default: err("too many operands for opcode `%s'",op_field);
     derr("*operand of `%s' should be a register number",op_field);
 @y
     err("*operand of `%s' should be a register number",op_field);
+@z
+
+@x [129] l.3058
+    @<Assemble XYZ as a relative address and |goto assemble_inst|@>;
+@y
+    @<Assemble \9{x}XYZ as a relative address and |goto assemble_inst|@>;
+@z
+
+@x [130] l.3067
+@ @<Assemble XYZ as a future reference...@>=
+@y
+@ @<Assemble \9{x}XYZ as a future reference...@>=
+@z
+
+@x [131] l.3080
+@ @<Assemble XYZ as a relative address...@>=
+@y
+@ @<Assemble \9{x}XYZ as a relative address...@>=
 @z
 
 @x [131] l.3086 Issue #16.
