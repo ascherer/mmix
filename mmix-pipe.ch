@@ -955,10 +955,22 @@ static coroutine Dlocker; /* another */
 static control vanish_ctl; /* such coroutines share a common control block */
 @z
 
+@x [130] l.2469
+ case 0: @<Wait for input data if necessary; set |state=1| if it's there@>;
+@y
+ case 0: @<Wait\9{1} for input data if necessary; set |state=1| if it's there@>;
+@z
+
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
   @/@t\4@>@<Special cases for states in the first stage@>;
+@z
+
+@x [131] l.2480
+@<Wait for input data if necessary; set |state=1| if it's there@>=
+@y
+@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
 @z
 
 @x [132] l.2517 Improved typography.
@@ -2004,10 +2016,22 @@ static coroutine fetch_co;
 static control fetch_ctl;
 @z
 
+@x [288] l.5228
+ case 0: @<Wait, if necessary, until the instruction pointer is known@>;
+@y
+ case 0: @<Wait\9{2}, if necessary, until the instruction pointer is known@>;
+@z
+
 @x [288] l.5238 Improved typography.
   @<Other cases for the fetch coroutine@>@;
 @y
   @/@t\4@>@<Other cases for the fetch coroutine@>@;
+@z
+
+@x [290] l.5244
+@ @<Wait, if necessary, until the instruction pointer is known@>=
+@y
+@ @<Wait\9{2}, if necessary, until the instruction pointer is known@>=
 @z
 
 @x [297] l.5334 RAII.
@@ -2165,10 +2189,22 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
   data->z.o=(octa){0, data->y.o.l&0x7};
 @z
 
+@x [356] l.6323
+ case 2: case 3: @<Wait if there's an unfinished load ahead of us@>;
+@y
+ case 2: case 3: @<Wait\9{3} if there's an unfinished load ahead of us@>;
+@z
+
 @x [356] l.6327
   @<Clean the data caches@>;
 @y
   @<Clean the \9{d}data caches@>;
+@z
+
+@x [357] l.6334
+@ @<Wait if there's an unfinished load ahead of us@>=
+@y
+@ @<Wait\9{3} if there's an unfinished load ahead of us@>=
 @z
 
 @x [357] l.6335
@@ -2192,10 +2228,28 @@ for (control* cc=data;cc!=hot;) {
 @ @<Clean the \9{d}data caches@>=
 @z
 
+@x [361] l.6389
+@<Wait till write buffer is empty@>;
+@y
+@<Wait\9{4} till write buffer is empty@>;
+@z
+
+@x [362] l.6400
+@ @<Wait till write buffer is empty@>=
+@y
+@ @<Wait\9{4} till write buffer is empty@>=
+@z
+
 @x [364] l.6441
  @<Clean the I-cache block for |data->z.o|, if any@>;
 @y
  @<Clean the \9{i}I-cache block for |data->z.o|, if any@>;
+@z
+
+@x [364] l.6444
+ @<Wait till write buffer is empty@>;
+@y
+ @<Wait\9{4} till write buffer is empty@>;
 @z
 
 @x [364] l.6447
@@ -2208,6 +2262,12 @@ for (control* cc=data;cc!=hot;) {
  @<Clean the S-cache block for |data->z.o|, if any@>;
 @y
  @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
+@z
+
+@x [364] l.6456
+ @<Wait till write buffer is empty@>;
+@y
+ @<Wait\9{4} till write buffer is empty@>;
 @z
 
 @x [364] l.6459 Change from MMIX home.
