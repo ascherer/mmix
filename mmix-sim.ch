@@ -272,6 +272,18 @@ byte read_byte(void)
 @/ @t\4@>@<Cases for lopcodes in the main loop@>@;
 @z
 
+@x [29] l.932
+  @<Load |tet| as a normal item@>;
+@y
+  @<Load \9{t}|tet| as a normal item@>;
+@z
+
+@x [30] l.942
+@<Load |tet| as a normal item@>=
+@y
+@<Load \9{t}|tet| as a normal item@>=
+@z
+
 @x [32] l.961 RAII.
 cur_loc.h=cur_loc.l=0;
 @y
@@ -995,6 +1007,20 @@ op_info info[256]={@t\1@>@/
 {"GET",0x20,0,0,1,"%l = %s = %#x"},@/
 @z
 
+@x [71] l.1742
+  if (f&X_is_source_bit) @<Set |b| from register X@>;
+  if (info[op].third_operand) @<Set |b| from special register@>;
+@y
+  if (f&X_is_source_bit) @<Set \9{b}|b| from register X@>;
+  if (info[op].third_operand) @<Set \9{b}|b| from special register@>;
+@z
+
+@x [74] l.1772
+@ @<Set |b| from register X@>=
+@y
+@ @<Set \9{b}|b| from register X@>=
+@z
+
 @x [75] l.1779 RAII.
 register int G,L,O; /* accessible copies of key registers */
 @y
@@ -1031,6 +1057,12 @@ g[rN].l=ABSTIME; /* see comment and warning above */
 @y
 g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   ABSTIME}; /* see comment and warning above */
+@z
+
+@x [79] l.1838
+@ @<Set |b| from special register@>=
+@y
+@ @<Set \9{b}|b| from special register@>=
 @z
 
 @x [80] l.1842 Change from MMIX home.
@@ -1199,6 +1231,18 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
    b=(octa){ll->tet, (ll+1)->tet};
 @z
 
+@x [97] l.2208
+    else if (xx==rL) @<Set $L=z=\min(z,L)$@>@;
+@y
+    else if (xx==rL) @<Set \9{l}$L=z=\min(z,L)$@>@;
+@z
+
+@x [98] l.2213
+@ @<Set $L=z=\min(z,L)$@>=
+@y
+@ @<Set \9{l}$L=z=\min(z,L)$@>=
+@z
+
 @x [98] l.2216 Change from MMIX home. Compound literal.
   if (z.l>L || z.h) z.h=0, z.l=L;
 @y
@@ -1215,6 +1259,18 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
 @y
 if (k==rZ+1) x=(octa){G<<24, g[rA].l};
+@z
+
+@x [104] l.2313
+   @<Load |g[k]| from the register stack@>;
+@y
+   @<Load \9{g}|g[k]| from the register stack@>;
+@z
+
+@x [105] l.2328
+@ @<Load |g[k]| from the register stack@>=
+@y
+@ @<Load \9{g}|g[k]| from the register stack@>=
 @z
 
 @x [105] l.2335 Compound literal.
@@ -1333,6 +1389,26 @@ static void mmputchars(
   unsigned char *buf,
   int size,
   octa addr)
+@z
+
+@x [117] l.2528
+    if ((a.l&0x3) || m>size-4) @<Load and write one byte@>@;
+    else @<Load and write four bytes@>;
+@y
+    if ((a.l&0x3) || m>size-4) @<Load \9{a}and write one byte@>@;
+    else @<Load \9{a}and write four bytes@>;
+@z
+
+@x [118] l.2533
+@ @<Load and write one byte@>=
+@y
+@ @<Load \9{a}and write one byte@>=
+@z
+
+@x [119] l.2540
+@ @<Load and write four bytes@>=
+@y
+@ @<Load \9{a}and write four bytes@>=
 @z
 
 @x [120] l.2558 Decouple 'mixins'.
@@ -1550,6 +1626,18 @@ octa scan_hex(
 @y
   register char *p;
   octa o=zero_octa;
+@z
+
+@x [157] l.3248
+  if (k<32) @<Set |g[k]=val| only if permissible@>;
+@y
+  if (k<32) @<Set \9{g}|g[k]=val| only if permissible@>;
+@z
+
+@x [158] l.3259
+@<Set |g[k]=val| only if permissible@>=
+@y
+@<Set \9{g}|g[k]=val| only if permissible@>=
 @z
 
 @x [158] l.3266 Change from MMIX home.
