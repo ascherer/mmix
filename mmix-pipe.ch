@@ -584,6 +584,12 @@ static void print_reorder_buffer(void)
     for (control* p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
 @z
 
+@x [64] l.1451
+  @<Check for external interrupt@>;
+@y
+  @<Check for \9{e}external interrupt@>;
+@z
+
 @x [65] l.1465
 int dispatch_count; /* how many dispatched on this cycle */
 bool suppress_dispatch; /* should dispatching be bypassed? */
@@ -800,10 +806,71 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
 @/@t\4@>@<Special cases of instruction dispatch@>@;
 @z
 
+@x [103] l.2028
+  if (f&0x10) @<Set |cool->b| from register X@>@;
+@y
+  if (f&0x10) @<Set \9{c}|cool->b| from register X@>@;
+@z
+@x [103] l.2030
+    @<Set |cool->b| and/or |cool->ra| from special register@>;
+@y
+    @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>;
+@z
+@x [103] l.2032
+  else if (f&0x2) @<Set |cool->z| from register Z@>@;
+  else if ((op&0xf0)==0xe0) @<Set |cool->z| as an immediate wyde@>;
+@y
+  else if (f&0x2) @<Set \9{c}|cool->z| from register Z@>@;
+  else if ((op&0xf0)==0xe0) @<Set \9{c}|cool->z| as an immediate wyde@>;
+@z
+@x [103] l.2035
+  else if (f&0x8) @<Set |cool->y| from register Y@>@;
+@y
+  else if (f&0x8) @<Set \9{c}|cool->y| from register Y@>@;
+@z
+
+@x [104] l.2038
+@ @<Set |cool->z| from register Z@>=
+@y
+@ @<Set \9{c}|cool->z| from register Z@>=
+@z
+
+@x [105] l.2044
+@ @<Set |cool->y| from register Y@>=
+@y
+@ @<Set \9{c}|cool->y| from register Y@>=
+@z
+
+@x [106] l.2050
+@ @<Set |cool->b| from register X@>=
+@y
+@ @<Set \9{c}|cool->b| from register X@>=
+@z
+
 @x [107] l.2062
 unsigned char third_operand[256]={@|@t\1\1@>
 @y
 static unsigned char third_operand[256]={@|@t\1\1@>
+@z
+
+@x [108] l.2099
+@<Set |cool->b| and/or |cool->ra| from special register@>=
+@y
+@<Set \9{c}|cool->b| and/or |cool->ra| from special register@>=
+@z
+
+@x [109] l.2107
+@ @<Set |cool->z| as an immediate wyde@>=
+@y
+@ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@z
+
+@x [110] l.2129
+      @<Insert an instruction to advance gamma@>@;
+    else @<Insert an instruction to advance beta and L@>;
+@y
+      @<Insert \9{a}an instruction to advance gamma@>@;
+    else @<Insert \9{a}an instruction to advance beta and L@>;
 @z
 
 @x [111] l.2135 Change from MMIX home.
@@ -818,16 +885,52 @@ if (cool->mem_x)
 rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @z
 
+@x [112] l.2144
+@<Insert an instruction to advance beta and L@>=
+@y
+@<Insert \9{a}an instruction to advance beta and L@>=
+@z
+
+@x [113] l.2162
+@<Insert an instruction to advance gamma@>=
+@y
+@<Insert \9{a}an instruction to advance gamma@>=
+@z
+
+@x [114] l.2181
+@<Insert an instruction to decrease gamma@>=
+@y
+@<Insert \9{a}an instruction to decrease gamma@>=
+@z
+
 @x [116] l.2222 Compound literal.
 mem.addr.h=mem.addr.l=-1;
 @y
 mem.addr=neg_one;
 @z
 
+@x [119] l.2274
+      @<Insert an instruction to advance gamma@>@;
+@y
+      @<Insert \9{a}an instruction to advance gamma@>@;
+@z
+
 @x [119] l.2278 Compound literal.
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
   cool->x.known=true, cool->x.o=(octa){0, x};
+@z
+
+@x [120] l.2300
+    @<Insert an instruction to decrease gamma@>;
+@y
+    @<Insert \9{a}an instruction to decrease gamma@>;
+@z
+
+@x [120] l.2305
+      @<Insert an instruction to decrease gamma@>;
+@y
+      @<Insert \9{a}an instruction to decrease gamma@>;
 @z
 
 @x [120] l.2306 Change from MMIX home.
@@ -1508,10 +1611,22 @@ void mem_write(
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
+@x [217] l.3890
+    if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
+@y
+    if (block_diff) @<Copy \9{s}|Scache->inbuf| to slot |p|@>@;
+@z
+
 @x [219] l.3921 Compound literal.
   addr.h=c->outbuf.tag.h;@+ addr.l=c->outbuf.tag.l&-Scache->bb;
 @y
   addr=(octa){c->outbuf.tag.h, c->outbuf.tag.l&-Scache->bb};
+@z
+
+@x [220] l.3932
+@ @<Copy |Scache->inbuf| to slot |p|@>=
+@y
+@ @<Copy \9{s}|Scache->inbuf| to slot |p|@>=
 @z
 
 @x [221] l.3942 Compound literal.
@@ -1519,6 +1634,18 @@ Scache->outbuf.tag.h=c->outbuf.tag.h;
 Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 @y
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
+@z
+
+@x [224] l.4031
+  case 3: @<Copy data from |p| into |c->inbuf|@>;
+@y
+  case 3: @<Copy \9{d}data from |p| into |c->inbuf|@>;
+@z
+
+@x [226] l.4063
+@<Copy data from |p| into |c->inbuf|@>=
+@y
+@<Copy \9{d}data from |p| into |c->inbuf|@>=
 @z
 
 @x [230] l.4124
@@ -1744,10 +1871,22 @@ Dcache->outbuf.tag=(octa){write_head->addr.h,
   write_head->addr.l&(-Dcache->bb)};
 @z
 
+@x [266] l.4765
+    @<Do load/store stage~1 with known physical address@>;
+@y
+    @<Do load/store stage 1 with known physical address@>;
+@z
+
 @x [269] l.4855 Change from MMIX home.
 if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
 @y
 if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
+@z
+
+@x [271] l.4879
+@ @<Do load/store stage~1 with known physical address@>=
+@y
+@ @<Do load/store stage 1 with known physical address@>=
 @z
 
 @x [271] l.4901 Change from MMIX home.
@@ -1768,10 +1907,34 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
 @z
 
+@x [273] l.4988
+  @<Check for a hit in pending writes@>;
+@y
+  @<Check for \9{a}a hit in pending writes@>;
+@z
+
+@x [274] l.5005
+@<Check for |prest| with a fully spanned cache block@>;
+@y
+@<Check for \9{p}|prest| with a fully spanned cache block@>;
+@z
+
+@x [275] l.5027
+@<Check for |prest| with a fully spanned cache block@>=
+@y
+@<Check for \9{p}|prest| with a fully spanned cache block@>=
+@z
+
 @x [275] l.5030 Change from MMIX home.
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=Dcache->bb)
 @y
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
+@z
+
+@x [278] l.5055
+@ @<Check for a hit in pending writes@>=
+@y
+@ @<Check for \9{a}a hit in pending writes@>=
 @z
 
 @x [279] l.5089 Change from MMIX home.
@@ -1793,6 +1956,18 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    if (Dcache && (tetra)(Dcache->bb)<data->b.o.l) data->b.o.l=Dcache->bb;
    @=/* fall through */@>@;
  default: goto do_syncid;
+@z
+
+@x [281] l.5131
+  fin_st: @<Insert |data->b.o| into the proper field of |data->x.o|,
+@y
+  fin_st: @<Insert \9{d}|data->b.o| into the proper field of |data->x.o|,
+@z
+
+@x [282] l.5138
+@ @<Insert |data->b.o| into the proper field...@>=
+@y
+@ @<Insert \9{d}|data->b.o| into the proper field...@>=
 @z
 
 @x [282] l.5141 Change from MMIX home.
@@ -1891,6 +2066,12 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
   data->go.o=(octa){0,m};
 @z
 
+@x [314] l.5586
+@<Check for external interrupt@>=
+@y
+@<Check for \9{e}external interrupt@>=
+@z
+
 @x [315] l.5607
 bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 bool nullifying; /* stopping dispatch to nullify a load/store command */
@@ -1927,6 +2108,18 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 new_O=new_S=shift_right(cool->z.o,3,1);
 @y
 new_O=new_S=shift_right(cool->z.o,3,true);
+@z
+
+@x [337] l.6007
+      @<Insert an instruction to advance gamma@>@;
+@y
+      @<Insert \9{a}an instruction to advance gamma@>@;
+@z
+
+@x [337] l.6013
+ case 1:@+if (cool_O.l!=cool_S.l) @<Insert an instruction to advance gamma@>@;
+@y
+ case 1:@+if (cool_O.l!=cool_S.l) @<Insert \9{a}an instruction to advance gamma@>@;
 @z
 
 @x [338] l.6029 Compound literal.
@@ -1972,6 +2165,12 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
   data->z.o=(octa){0, data->y.o.l&0x7};
 @z
 
+@x [356] l.6327
+  @<Clean the data caches@>;
+@y
+  @<Clean the \9{d}data caches@>;
+@z
+
 @x [357] l.6335
 {
   register control *cc;
@@ -1987,10 +2186,52 @@ for (control* cc=data;cc!=hot;) {
 }
 @z
 
+@x [361] l.6387
+@ @<Clean the data caches@>=
+@y
+@ @<Clean the \9{d}data caches@>=
+@z
+
+@x [364] l.6441
+ @<Clean the I-cache block for |data->z.o|, if any@>;
+@y
+ @<Clean the \9{i}I-cache block for |data->z.o|, if any@>;
+@z
+
+@x [364] l.6447
+ @<Clean the D-cache block for |data->z.o|, if any@>;
+@y
+ @<Clean the \9{d}D-cache block for |data->z.o|, if any@>;
+@z
+
+@x [364] l.6451
+ @<Clean the S-cache block for |data->z.o|, if any@>;
+@y
+ @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
+@z
+
 @x [364] l.6459 Change from MMIX home.
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
+@z
+
+@x [365] l.6474
+@ @<Clean the I-cache block for |data->z.o|, if any@>=
+@y
+@ @<Clean the \9{i}I-cache block for |data->z.o|, if any@>=
+@z
+
+@x [366] l.6484
+@ @<Clean the D-cache block for |data->z.o|, if any@>=
+@y
+@ @<Clean the \9{d}D-cache block for |data->z.o|, if any@>=
+@z
+
+@x [367] l.6494
+@ @<Clean the S-cache block for |data->z.o|, if any@>=
+@y
+@ @<Clean the \9{s}S-cache block for |data->z.o|, if any@>=
 @z
 
 @x [369] l.6519 Change from MMIX home.

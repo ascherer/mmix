@@ -151,6 +151,18 @@ byte read_byte(void)
  @/@t\4@>@<Cases for lopcodes in the main loop@>@;
 @z
 
+@x [13] l.176
+  if (listing) @<List |tet| as a normal item@>;
+@y
+  if (listing) @<List \9{t}|tet| as a normal item@>;
+@z
+
+@x [15] l.190
+@<List |tet| as a normal item@>=
+@y
+@<List \9{t}|tet| as a normal item@>=
+@z
+
 @x [17] l.217 Compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
