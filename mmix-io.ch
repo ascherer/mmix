@@ -35,28 +35,10 @@ up to accommodate older versions of \CEE/.
 #else
 #define ARGS(list) ()
 #endif
-#ifndef FILENAME_MAX
-#define FILENAME_MAX 256
-#endif
-#ifndef SEEK_SET
-#define SEEK_SET 0
-#endif
-#ifndef SEEK_END
-#define SEEK_END 2
-#endif
 @y
 @ We set things up to accommodate older versions of \CEE/.
 
 @<Preproc...@>=
-#ifndef FILENAME_MAX
-#define FILENAME_MAX 256
-#endif
-#ifndef SEEK_SET
-#define SEEK_SET 0
-#endif
-#ifndef SEEK_END
-#define SEEK_END 2
-#endif
 @z
 
 @x [3] l.44 Improved module structure with interface.
