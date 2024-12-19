@@ -75,7 +75,8 @@ extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
 extern octa aux; /* auxiliary output of a subroutine */
 extern bool overflow; /* set by certain subroutines for signed arithmetic */
 @y
-@ (This section remains empty for historic reasons.)
+@ @c @+
+#include "mmix-lop.h" /* loader opcodes from |@(mmix-lop.h@>| */
 @z
 
 @x [28] l.972 Functions from MMIX-ARITH.
@@ -1231,9 +1232,6 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @x [136] l.3170 Improved module structure with interfaces.
 @<Preprocessor definitions@>@;
 @y
-@#
-#include "mmix-lop.h" /* loader opcodes from |@(mmix-lop.h@>| */
-@#
 @h
 @<Preprocessor macros@>@;
 @z
