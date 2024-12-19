@@ -7,6 +7,47 @@
 
 @z
 
+@x [22] l.710
+@d mm 0x98
+@y
+@(mmix-lop.h@>=
+#ifndef MMIX_LOP_H
+#define MMIX_LOP_H
+#define mm 0x98 /* the escape code of \.{mmo} format */
+@z
+
+@x [24] l.915
+@d lop_quote 0x0 /* the quotation lopcode */
+@d lop_loc 0x1 /* the location lopcode */
+@d lop_skip 0x2 /* the skip lopcode */
+@d lop_fixo 0x3 /* the octabyte-fix lopcode */
+@d lop_fixr 0x4 /* the relative-fix lopcode */
+@d lop_fixrx 0x5 /* extended relative-fix lopcode */
+@d lop_file 0x6 /* the file name lopcode */
+@d lop_line 0x7 /* the file position lopcode */
+@d lop_spec 0x8 /* the special hook lopcode */
+@d lop_pre 0x9 /* the preamble lopcode */
+@d lop_post 0xa /* the postamble lopcode */
+@d lop_stab 0xb /* the symbol table lopcode */
+@d lop_end 0xc /* the end-it-all lopcode */
+@y
+@(mmix-lop.h@>=
+#define lop_quote 0x0 /* the quotation lopcode */
+#define lop_loc 0x1 /* the location lopcode */
+#define lop_skip 0x2 /* the skip lopcode */
+#define lop_fixo 0x3 /* the octabyte-fix lopcode */
+#define lop_fixr 0x4 /* the relative-fix lopcode */
+#define lop_fixrx 0x5 /* extended relative-fix lopcode */
+#define lop_file 0x6 /* the file name lopcode */
+#define lop_line 0x7 /* the file position lopcode */
+#define lop_spec 0x8 /* the special hook lopcode */
+#define lop_pre 0x9 /* the preamble lopcode */
+#define lop_post 0xa /* the postamble lopcode */
+#define lop_stab 0xb /* the symbol table lopcode */
+#define lop_end 0xc /* the end-it-all lopcode */
+#endif /* |MMIX_LOP_H| */
+@z
+
 @x [26] l.950 Use C99 standard types. 'tetra' comes from MMIX-ARITH.
 for the simulators. The definition of type \&{tetra} should be changed, if
 necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
@@ -1190,6 +1231,9 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @x [136] l.3170 Improved module structure with interfaces.
 @<Preprocessor definitions@>@;
 @y
+@#
+#include "mmix-lop.h" /* loader opcodes from |@(mmix-lop.h@>| */
+@#
 @h
 @<Preprocessor macros@>@;
 @z

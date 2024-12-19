@@ -1,6 +1,7 @@
 @x [0] l.12 Use standard C99 type.
 @s bool normal @q unreserve a C++ keyword @>
 @y
+\def\MMIXAL{\.{MMIXAL}}
 
 \input pdfwebtocfront
 
@@ -250,6 +251,28 @@ mem_tetra* mem_find(
   octa key={addr.h, addr.l&0xfffff800};
   register int offset=addr.l&0x7fc;
   register mem_node *p=last_mem;
+@z
+
+@x [23] l.830
+Here we need to define only the basic constants used for interpretation.
+
+@d mm 0x98 /* the escape code of \.{mmo} format */
+@d lop_quote 0x0 /* the quotation lopcode */
+@d lop_loc 0x1 /* the location lopcode */
+@d lop_skip 0x2 /* the skip lopcode */
+@d lop_fixo 0x3 /* the octabyte-fix lopcode */
+@d lop_fixr 0x4 /* the relative-fix lopcode */
+@d lop_fixrx 0x5 /* extended relative-fix lopcode */
+@d lop_file 0x6 /* the file name lopcode */
+@d lop_line 0x7 /* the file position lopcode */
+@d lop_spec 0x8 /* the special hook lopcode */
+@d lop_pre 0x9 /* the preamble lopcode */
+@d lop_post 0xa /* the postamble lopcode */
+@d lop_stab 0xb /* the symbol table lopcode */
+@d lop_end 0xc /* the end-it-all lopcode */
+@y
+@c
+#include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @z
 
 @x [26] l.890 C99 prototypes for C2x.
