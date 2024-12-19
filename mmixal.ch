@@ -237,6 +237,13 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
   char x,
   unsigned short yz)
 @z
+@x [48] l.1326
+  mmo_buf[0]=mm;@+ mmo_buf[1]=x;@+
+  mmo_buf[2]=yz>>8;@+ mmo_buf[3]=yz&0xff;
+  mmo_out();
+@y
+  mmo_lop(x,yz>>8,yz&0xff);
+@z
 
 @x [49] l.1335 C99 prototypes for C2x.
 void mmo_loc @,@,@[ARGS((void))@];@+@t}\6{@>
