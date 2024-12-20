@@ -91,3 +91,18 @@
 @$print_pipe {MMIX-PIPE}252 \&{void} (\,)@>
 @$inst_ptr {MMIX-PIPE}284 \&{spec}@>
 @$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
+
+@$mm {MMIXAL}22 =\T{\^98}@>
+@$lop_quote {MMIXAL}24 =\T{\^0}@>
+@$lop_loc {MMIXAL}24 =\T{\^1}@>
+@$lop_skip {MMIXAL}24 =\T{\^2}@>
+@$lop_fixo {MMIXAL}24 =\T{\^3}@>
+@$lop_fixr {MMIXAL}24 =\T{\^4}@>
+@$lop_fixrx {MMIXAL}24 =\T{\^5}@>
+@$lop_file {MMIXAL}24 =\T{\^6}@>
+@$lop_line {MMIXAL}24 =\T{\^7}@>
+@$lop_spec {MMIXAL}24 =\T{\^8}@>
+@$lop_pre {MMIXAL}24 =\T{\^9}@>
+@$lop_post {MMIXAL}24 =\T{\^a}@>
+@$lop_stab {MMIXAL}24 =\T{\^b}@>
+@$lop_end {MMIXAL}24 =\T{\^c}@>
