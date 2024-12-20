@@ -55,7 +55,8 @@ $$\.{PUT rW,\$255;{ } PUT rB,\$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
 @<Type...@>=
 typedef enum {@!false,@!true}@+@!bool;
 @y
-@* Basics. (Nothing to see here, for historic reasons.)
+@* Basics. Standard type |@!bool| comes from \.{<stdbool.h>} via
+\.{"mmix-arith.h"}.
 @z
 
 @x [10] l.555 Use standard C99 type.
