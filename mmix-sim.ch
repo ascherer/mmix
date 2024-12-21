@@ -479,6 +479,22 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
  "rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
 @z
 
+@x [57] l.1322
+@ Here are the bit codes for arithmetic exceptions. These codes, except
+|H_BIT|, are defined also in {\mc MMIX-ARITH}.
+@y
+@ Here are the bit codes for arithmetic exceptions. A~full list of these
+codes is defined in {\mc MMIX-PIPE}.
+@z
+@x [57] l.1326
+@d Z_BIT (1<<9) /* floating division by zero */
+@y
+@z
+@x [57] l.1328
+@d O_BIT (1<<11) /* floating overflow */
+@y
+@z
+
 @x [59] l.1344 Issue #15.
 @ To complete our lists of lists,
 @y
