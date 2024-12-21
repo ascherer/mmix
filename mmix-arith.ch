@@ -435,6 +435,18 @@ int cur_round; /* the current rounding mode */
 Extern int cur_round; /* the current rounding mode */
 @z
 
+@x [31] l.489
+tiny, |X_BIT| if and only if the result is inexact.
+@y
+tiny, |X_BIT| if and only if the result is inexact.
+A~full list of these codes is defined in {\mc MMIX-PIPE}.
+@z
+@x [31] l.500
+@d V_BIT (1<<14) /* integer overflow */
+@d D_BIT (1<<15) /* integer divide check */
+@y
+@z
+
 @x [31] l.505 Factor out private stuff.
 octa fpack @,@,@[ARGS((octa,int,char,int))@];@+@t}\6{@>
 octa fpack(f,e,s,r)
