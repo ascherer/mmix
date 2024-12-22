@@ -1,0 +1,108 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
+@x [16]
+read from the |CPV| table.)
+@y
+read from the |CPV| table.)
+@-aa@>
+@-bb@>
+@-cc@>
+@-gg@>
+@-vv@>
+@-repl@>
+@-vrepl@>
+@-mode@>
+@-access_time@>
+@-copy_in_time@>
+@-copy_out_time@>
+@-filler@>
+@-ctl@>
+@-filler_ctl@>
+@-ptr_a@>
+@-go@>
+@-flusher@>
+@-flusher_ctl@>
+@-ports@>
+@-name@>
+@z
+
+@x [18]
+@<Count and allocate the functional units@>=
+@y
+@-name@>
+@-ops@>
+@<Count and allocate the functional units@>=
+@z
+
+@x [22]
+  pcs(Scache);@+continue;
+}
+
+@ @<Sub...@>=
+@y
+  pcs(Scache);@+continue;
+}
+
+@ @-ppol@> @%ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@> @<Sub...@>=
+@z
+
+@x [23]
+  else token_prescanned=true; /* oops, we should rescan that token */
+}
+
+@ @<Sub...@>=
+@y
+  else token_prescanned=true; /* oops, we should rescan that token */
+}
+
+@ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@> @-access_time@> @-copy_in_time@> @-copy_out_time@> @-mode@> @-ports@> @-repl@> @-vrepl@> @<Sub...@>=
+@z
+
+@x [24]
+@ @<If |token| is an operation name, process a pipe spec@>=
+@y
+@ @-name@> @<If |token| is an operation name, process a pipe spec@>=
+@z
+
+@x [25]
+@ @<Process a functional spec@>=
+@y
+@ @-name@> @-ops@> @<Process a functional spec@>=
+@z
+
+@x [26]
+@<Allocate coroutines in each functional unit@>=
+@y
+@-co@> @-name@> @-stage@>
+@<Allocate coroutines in each functional unit@>=
+@z
+
+@x [29]
+@ @<Determine the number of stages...@>=
+@y
+@ @-name@> @-ops@> @<Determine the number of stages...@>=
+@z
+
+@x [30]
+themselves.
+@y
+themselves.
+@-b@>
+@-bb@>
+@z
+
+@x [39]
+@(mmix-config.h@>=
+@y
+@-MMIX_CONFIG_H@>
+@(mmix-config.h@>=
+@z
+
+@x [41]
+@*Index.
+@y
+@z

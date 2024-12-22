@@ -1,0 +1,13 @@
+@i mmix.bux
+
+@$acctm {MMIX-CONFIG}13 \&{c\_param}@>
+@$assoc {MMIX-CONFIG}13 \&{c\_param}@>
+@$blksz {MMIX-CONFIG}13 \&{c\_param}@>
+@$citm {MMIX-CONFIG}13 \&{c\_param}@>
+@$cotm {MMIX-CONFIG}13 \&{c\_param}@>
+@$gran {MMIX-CONFIG}13 \&{c\_param}@>
+@$prts {MMIX-CONFIG}13 \&{c\_param}@>
+@$setsz {MMIX-CONFIG}13 \&{c\_param}@>
+@$vctsz {MMIX-CONFIG}13 \&{c\_param}@>
+@$wra {MMIX-CONFIG}13 \&{c\_param}@>
+@$wrb {MMIX-CONFIG}13 \&{c\_param}@>
