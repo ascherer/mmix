@@ -33,7 +33,99 @@
 @$PUTI {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$RESUME {MMIX-PIPE}47 \&{mmix\_opcode}@>
 @$UNSAVE {MMIX-PIPE}47 \&{mmix\_opcode}@>
+@$max_pipe_op {MMIX-PIPE}49 =macro@>
+@$max_real_command {MMIX-PIPE}49 =macro@>
+@$mul0 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul1 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul2 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul3 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul4 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul5 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul6 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul7 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul8 {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$div {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$sh {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mux {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$sadd {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mor {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fadd {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fmul {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fdiv {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fsqrt {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fint {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fix {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$flot {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$feps {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fcmp {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$funeq {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$fsub {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$frem {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mul {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$mulu {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$divu {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$add {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$addu {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$sub {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$subu {MMIX-PIPE}49 \&{internal\_opcode}@>
 @$set {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$or {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$orn {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$nor {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$and {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$andn {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$nand {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$xor {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$nxor {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$shlu {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$shru {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$shl {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$shr {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$cmp {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$cmpu {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$bdif {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$wdif {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$tdif {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$odif {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$zset {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$cset {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$get {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$put {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$ld {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$ldptp {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$ldpte {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$ldunc {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$ldvts {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$preld {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$prest {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$st {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$syncd {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$syncid {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$pst {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$stunc {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$cswap {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$br {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$pbr {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$pushj {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$go {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$prego {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$pushgo {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$pop {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$resume {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$save {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$unsave {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$sync {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$jmp {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$noop {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$trap {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$trip {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$incgamma {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$decgamma {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$incrl {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$sav {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$unsav {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$resum {MMIX-PIPE}49 \&{internal\_opcode}@>
+@$internal_op {MMIX-PIPE}51 \&{internal\_opcode} [\,]@>
 @$rI {MMIX-PIPE}52 =12@>
 @$rK {MMIX-PIPE}52 =15@>
 @$rO {MMIX-PIPE}52 =10@>
@@ -43,12 +135,17 @@
 @$rTT {MMIX-PIPE}52 =14@>
 @$rV {MMIX-PIPE}52 =18@>
 @$P_BIT {MMIX-PIPE}54 =$(\T{1}\LL\T{0})$@>
+@$fetch_max {MMIX-PIPE}59 \&{int}@>
+@$dispatch_max {MMIX-PIPE}59 \&{int}@>
+@$peekahead {MMIX-PIPE}59 \&{int}@>
+@$commit_max {MMIX-PIPE}59 \&{int}@>
 @$reorder_bot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$reorder_top {MMIX-PIPE}60 \&{control} ${*}$@>
 @$hot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$cool {MMIX-PIPE}60 \&{control} ${*}$@>
 @$old_hot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$deissues {MMIX-PIPE}60 \&{int}@>
+@$security_disabled {MMIX-PIPE}66 \&{bool}@>
 @$loc {MMIX-PIPE}68 \&{octa}@>
 @$inst {MMIX-PIPE}68 \&{tetra}@>
 @$interrupt {MMIX-PIPE}68 \&{unsigned} \&{int}@>
@@ -64,11 +161,27 @@
 @$funit_count {MMIX-PIPE}77 \&{int}@>
 @$g {MMIX-PIPE}86 \&{specnode} [\,]@>
 @$lring_size {MMIX-PIPE}86 \&{int}@>
+@$max_rename_regs {MMIX-PIPE}86 \&{int}@>
+@$max_mem_slots {MMIX-PIPE}86 \&{int}@>
+@$rename_rergs {MMIX-PIPE}86 \&{int}@>
+@$mem_slots {MMIX-PIPE}86 \&{int}@>
 @$ticks {MMIX-PIPE}87 \&{octa}@>
 @$cool_O {MMIX-PIPE}98 \&{octa}@>
 @$cool_S {MMIX-PIPE}98 \&{octa}@>
 @$data {MMIX-PIPE}124 \&{control} ${*}$@>
+@$pipe_limit {MMIX-PIPE}136 =90@>
+@$pipe_seq {MMIX-PIPE}136 \&{unsigned} \&{char} [\,]@>
+@$bp_a {MMIX-PIPE}150 \&{int}@>
+@$bp_b {MMIX-PIPE}150 \&{int}@>
+@$bp_c {MMIX-PIPE}150 \&{int}@>
+@$bp_n {MMIX-PIPE}150 \&{int}@>
 @$print_stats {MMIX-PIPE}162 \&{void} (\,)@>
+@$random {MMIX-PIPE}164 \&{replace\_policy}@>
+@$serial {MMIX-PIPE}164 \&{replace\_policy}@>
+@$pseudo_lru {MMIX-PIPE}164 \&{replace\_policy}@>
+@$lru {MMIX-PIPE}164 \&{replace\_policy}@>
+@$WRITE_BACK {MMIX-PIPE}166 =1@>
+@$WRITE_ALLOC {MMIX-PIPE}166 =2@>
 @$Icache {MMIX-PIPE}168 \&{cache} ${*}$@>
 @$Dcache {MMIX-PIPE}168 \&{cache} ${*}$@>
 @$Scache {MMIX-PIPE}168 \&{cache} ${*}$@>
@@ -77,10 +190,17 @@
 @$print_cache {MMIX-PIPE}175 \&{void} (\,)@>
 @$tag {MMIX-PIPE}206 \&{tetra}@>
 @$chunk {MMIX-PIPE}206 \&{octa} ${*}$@>
-@$mem_hash {MMIX-PIPE}207 \&{int}@>
+@$mem_chunks {MMIX-PIPE}207 \&{int}@>
+@$mem_chunks_max {MMIX-PIPE}207 \&{int}@>
+@$hash_prime {MMIX-PIPE}207 \&{int}@>
+@$mem_hash {MMIX-PIPE}207 \&{chunknode} ${*}$@>
 @$last_h {MMIX-PIPE}211 \&{int}@>
 @$mem_read {MMIX-PIPE}210 \&{octa} (\,)@>
 @$mem_write {MMIX-PIPE}213 \&{void} (\,)@>
+@$mem_addr_time {MMIX-PIPE}214 \&{int}@>
+@$bus_words {MMIX-PIPE}214 \&{int}@>
+@$mem_read_time {MMIX-PIPE}214 \&{int}@>
+@$mem_write_time {MMIX-PIPE}214 \&{int}@>
 @$page_n {MMIX-PIPE}238 \&{int}@>
 @$page_r {MMIX-PIPE}238 \&{int}@>
 @$page_s {MMIX-PIPE}238 \&{int}@>
@@ -88,8 +208,12 @@
 @$page_b {MMIX-PIPE}238 \&{int} [\,]@>
 @$page_mask {MMIX-PIPE}238 \&{octa}@>
 @$page_bad {MMIX-PIPE}238 \&{bool}@>
+@$holding_time {MMIX-PIPE}247 \&{int}@>
 @$print_pipe {MMIX-PIPE}252 \&{void} (\,)@>
 @$inst_ptr {MMIX-PIPE}284 \&{spec}@>
+@$frem_max {MMIX-PIPE}349 \&{int}@>
+@$denin_penalty {MMIX-PIPE}349 \&{int}@>
+@$denout_penalty {MMIX-PIPE}349 \&{int}@>
 @$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
 
 @$mm {MMIXAL}22 =\T{\^98}@>
