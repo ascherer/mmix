@@ -1,0 +1,33 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
+@x [36]
+@d zero_exponent (-1000) /* zero is assumed to have this exponent */
+@y
+@d zero_exponent (-1000) /* zero is assumed to have this exponent */
+@$inf {MMIX-ARITH}36 \&{ftype}@>
+@$nan {MMIX-ARITH}36 \&{ftype}@>
+@$num {MMIX-ARITH}36 \&{ftype}@>
+@$zro {MMIX-ARITH}36 \&{ftype}@>
+@z
+
+@x [96]
+@(mmix-arith.h@>=
+@y
+@-MMIX_ARITH_H@>
+@(mmix-arith.h@>=
+@z
+
+@x [97]
+@ @<External proto...@>=
+@y
+@ @-sim@> @<External proto...@>=
+@z
+
+@x [98]
+@* Index.
+@y
+@z
