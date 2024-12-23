@@ -77,12 +77,36 @@ octa fplus(
 @+@=/* else fall through */@>@;
 @z
 
+@x [54]
+representation that will be input as precisely the same value.
+@y
+representation that will be input as precisely the same value.
+@$e {MMIX-ARITH}56 \&{register} \&{int}@>
+@$f {MMIX-ARITH}56 \&{octa}@>
+@$g {MMIX-ARITH}56 \&{octa}@>
+@$s {MMIX-ARITH}66 \&{char} [\,]@>
+@z
+
+@x [59]
+If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
+@y
+@-f@> If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
+@z
+
 @x [60]
 @ Here, for example, is how we go from $f$ to $10f$, assuming that
 @y
 @r @ Here, for example, is how we go from $f$ to $10f$, assuming that
 @z
 
+@x [63]
+is exactly~1 the integer part of~$g$ will also be exactly~1.
+@y
+is exactly~1 the integer part of~$g$ will also be exactly~1.
+@$ff {MMIX-ARITH}66 \&{bignum}@>
+@$f {MMIX-ARITH}56 \&{octa}@>
+@$g {MMIX-ARITH}56 \&{octa}@>
+@z
 @x [63]
 ff.a=(ff.dat[k-1]? k-1: k);
 ff.b=(ff.dat[k+1]? k+1: k);
@@ -93,6 +117,21 @@ ff.a=(ff.dat[k-1]? k-1: k); @+
 ff.b=(ff.dat[k+1]? k+1: k);
 gg.a=(gg.dat[k-1]? k-1: k); @+
 gg.b=(gg.dat[k+1]? k+1: k);
+@z
+
+@x [64]
+But no harm is done, because |bignum_compare| is not used.
+@y
+But no harm is done, because |bignum_compare| is not used.
+@$p {MMIX-ARITH}66 \&{register} \&{char} ${*}$@>
+@z
+
+@x [65]
+and we do not terminate the process when $f=0$ or $g=1$.
+@y
+and we do not terminate the process when $f=0$ or $g=1$.
+@$x {MMIX-ARITH}54 \&{octa}@>
+@$tt {MMIX-ARITH}66 \&{bignum}@>
 @z
 
 @x [67]
@@ -106,6 +145,12 @@ gg.b=(gg.dat[k+1]? k+1: k);
 @y
 \<floating magnitude>\is\<digit string>\<exponent>\mid\cr\hskip12em
 @z
+@x [68]
+The value of |exceptions| set by |scan_const| is not necessarily correct.
+@y
+The value of |exceptions| set by |scan_const| is not necessarily correct.
+@$p {MMIX-ARITH}70 \&{register} \&{char} ${*}$@>
+@z
 
 @x [70]
 @ @<Local variables for |scan_const|@>=
@@ -113,7 +158,7 @@ gg.b=(gg.dat[k+1]? k+1: k);
 @r @ @<Local variables for |scan_const|@>=
 @z
 
-@x ]73]
+@x [73]
   exp=0;
 @y
 @+ exp=0;
@@ -125,6 +170,19 @@ gg.b=(gg.dat[k+1]? k+1: k);
 @+ p++;
 @z
 
+@x [78]
+@ @<Return a floating point constant@>=
+@y
+@ @$ff {MMIX-ARITH}81 \&{bignum}@> @<Return a floating point constant@>=
+@z
+
+@x [79]
+by $10^{9k}$, for $36\ge k\ge-120$.
+@y
+by $10^{9k}$, for $36\ge k\ge-120$.
+@$k {MMIX-ARITH}81 \&{register} \&{int}@>
+@$x {MMIX-ARITH}81 \&{register} \&{int}@>
+@z
 @x [79]
   exp=-99999;@+ goto packit;
 @y
@@ -184,7 +242,7 @@ if (ye>=ze) { @+
 @x [97]
 @ @<External proto...@>=
 @y
-@ @-sim@> @<External proto...@>=
+@ @-sim@> @-u@> @<External proto...@>=
 @z
 
 @x [98]
