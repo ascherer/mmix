@@ -15,7 +15,7 @@
 @$shift_left {MMIX-ARITH}7 \&{octa} (\,)@>
 @$shift_right {MMIX-ARITH}7 \&{octa} (\,)@>
 
-@$MMIX_config {MMIX-CONFIG}30 \&{void} (\,)@>
+@$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
 @$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
 
