@@ -4,6 +4,44 @@
 @y
 @z
 
+@x [1]
+$$\vbox{\halign{\tt#\hfil\cr
+@y
+\begingroup\def\tt{\ninett}\baselineskip10pt
+$$\vbox{\halign{\tt#\hfil\cr
+@z
+@x [1]
+}}$$
+@y
+}}$$
+\endgroup
+@z
+
+@x [6]
+$$\vbox{\halign{\tt#\hfil\cr
+@y
+\begingroup\def\tt{\ninett}\baselineskip10pt
+$$\vbox{\halign{\tt#\hfil\cr
+@z
+@x [6]
+}}$$
+@y
+}}$$
+\endgroup
+@z
+
+@x [12]
+@ A simple data structure makes it fairly easy to deal with
+@y
+@r @ A simple data structure makes it fairly easy to deal with
+@z
+
+@x [15]
+@ Most of the parameters are external variables declared in the header
+@y
+@ Most of the parameters are variables declared in the header
+@z
+
 @x [16]
 read from the |CPV| table.)
 @y
@@ -38,6 +76,12 @@ read from the |CPV| table.)
 @<Count and allocate the functional units@>=
 @z
 
+@x [21]
+@ @<If |token| is a cache name, process a cache spec@>=
+@y
+@r @ @<If |token| is a cache name, process a cache spec@>=
+@z
+
 @x [22]
   pcs(Scache);@+continue;
 }
@@ -47,7 +91,8 @@ read from the |CPV| table.)
   pcs(Scache);@+continue;
 }
 
-@ @-ppol@> @%ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@> @<Sub...@>=
+@ @-ppol@> @% @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
+@<Sub...@>=
 @z
 
 @x [23]
@@ -59,13 +104,32 @@ read from the |CPV| table.)
   else token_prescanned=true; /* oops, we should rescan that token */
 }
 
-@ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@> @-access_time@> @-copy_in_time@> @-copy_out_time@> @-mode@> @-ports@> @-repl@> @-vrepl@> @<Sub...@>=
+@ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
+@-access_time@>
+@-copy_in_time@>
+@-copy_out_time@>
+@-mode@>
+@-ports@>
+@-repl@>
+@-vrepl@>
+@<Sub...@>=
+@z
+@x [23]
+static void pcs( /* subroutine to process a cache spec */
+  cache *c)
+{
+  register int j,n;
+@y
+static void pcs(cache *c) /* subroutine to process a cache spec */
+{ @+ register int j,n;
 @z
 
 @x [24]
 @ @<If |token| is an operation name, process a pipe spec@>=
 @y
-@ @-name@> @<If |token| is an operation name, process a pipe spec@>=
+@ @$j {MMIX-CONFIG}38 \&{register} \&{int}@>
+@$n {MMIX-CONFIG}38 \&{register} \&{int}@>
+@<If |token| is an operation name, process a pipe spec@>=
 @z
 
 @x [25]
@@ -95,11 +159,127 @@ themselves.
 @-bb@>
 @z
 
+@x [31]
+static void alloc_cache(
+@y
+@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
+@-a@> @-aa@>
+@-b@> @-bb@>
+@-c@> @-cc@>
+@-g@> @-gg@>
+@-v@> @-vv@>
+@$cache {MMIX-PIPE}167 \&{struct}@>
+@$cacheblock {MMIX-PIPE}167 \&{struct}@>
+@$tagmask {MMIX-PIPE}167 \&{int}@>
+@$mode {MMIX-PIPE}167 \&{int}@>
+@$inbuf {MMIX-PIPE}167 \&{cacheblock}@>
+@$outbuf {MMIX-PIPE}167 \&{cacheblock}@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$dirty {MMIX-PIPE}167 \&{char} ${*}$@>
+static void alloc_cache(
+@z
+@x [31]
+  c->a=lg(c->aa);
+  c->b=lg(c->bb);
+  c->c=lg(c->cc);
+  c->g=lg(c->gg);
+  c->v=lg(c->vv);
+@y
+  c->a=lg(c->aa); @+
+  c->b=lg(c->bb); @+
+  c->c=lg(c->cc); @+
+  c->g=lg(c->gg); @+
+  c->v=lg(c->vv);
+@z
+
+@x [32]
+@ @<Allocate the cache sets for cache |c|@>=
+@y
+@ @-aa@> @-bb@> @-cc@> @-g@>
+@$c {MMIX-CONFIG}31 \&{cache} ${*}$@>
+@$tag {MMIX-PIPE}167 \&{octa}@>
+@$set {MMIX-PIPE}167 \&{cacheset} ${*}$@>
+@<Allocate the cache sets for cache |c|@>=
+@z
+
+@x [33]
+@ @<Allocate the victim cache for cache |c|@>=
+@y
+@ @-bb@> @-vv@> @-g@>
+@$victim {MMIX-PIPE}167 \&{cacheset}@>
+@%
+@$cacheset {MMIX-PIPE}167 \&{cacheblock} ${*}$@>
+@<Allocate the victim cache for cache |c|@>=
+@z
+
+@x [34]
+@ @<Allocate reader coroutines for cache |c|@>=
+@y
+@ @$ports {MMIX-PIPE}167 \&{int}@>
+@$reader {MMIX-PIPE}167 \&{coroutine} ${*}$@>
+@$stage {MMIX-PIPE}23 \&{int}@>
+@%
+@$coroutine {MMIX-PIPE}167 \&{struct}@>
+@<Allocate reader coroutines for cache |c|@>=
+@z
+
+@x [35]
+@ @<Allocate the caches@>=
+@y
+@ @-bb@>
+@-gg@>
+@$filler {MMIX-PIPE}167 \&{coroutine}@>
+@$flusher {MMIX-PIPE}167 \&{coroutine}@>
+@<Allocate the caches@>=
+@z
+
+@x [36]
+@ Now we are nearly done. The only nontrivial task remaining is
+@y
+@r @ Now we are nearly done. The only nontrivial task remaining is
+@z
+@x [36]
+scheduler and schedulee.
+@y
+scheduler and schedulee.
+@-bb@>
+@-name@>
+@$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
+@$ring_size {MMIX-PIPE}29 \&{int}@>
+@$j {MMIX-CONFIG}38 \&{int}@>
+@$n {MMIX-CONFIG}38 \&{int}@>
+@z
+
+@x [37]
+@ @s chunknode int
+@y
+@ @s chunknode int
+@-bb@>
+@$dispatch_stat {MMIX-PIPE}66 \&{int} ${*}$@>
+@$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
+@$bp_table {MMIX-PIPE}150 \&{char} ${*}$@>
+@$no_hardware_PT {MMIX-PIPE}242 \&{bool}@>
+@$wbuf_bot {MMIX-PIPE}247 \&{write\_node} ${*}$@>
+@$wbuf_top {MMIX-PIPE}247 \&{write\_node} ${*}$@>
+@$fetched {MMIX-PIPE}284 \&{octa} ${*}$@>
+@%
+@$specnode {MMIX-PIPE}40 \&{struct}@>
+@$write_node {MMIX-PIPE}246 \&{struct}@>
+@z
+
 @x [39]
 @(mmix-config.h@>=
 @y
 @-MMIX_CONFIG_H@>
 @(mmix-config.h@>=
+@z
+
+@x [40]
+@ @<Private prototypes@>=
+@y
+@ @%
+@$replace_policy {MMIX-PIPE}23 \&{enum}@>
+@<Private prototypes@>=
 @z
 
 @x [41]
