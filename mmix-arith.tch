@@ -4,6 +4,21 @@
 @y
 @z
 
+@x [31]
+  char s, /* the sign */
+  int r) /* the rounding mode */
+{
+@y
+  char s, /* the sign */
+  int r) /* the rounding mode */
+{ @+
+@z
+
+@x [36]
+@ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
+@y
+@r @ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
+@z
 @x [36]
 @d zero_exponent (-1000) /* zero is assumed to have this exponent */
 @y
@@ -12,6 +27,151 @@
 @$nan {MMIX-ARITH}36 \&{ftype}@>
 @$num {MMIX-ARITH}36 \&{ftype}@>
 @$zro {MMIX-ARITH}36 \&{ftype}@>
+@z
+
+@x [40]
+  if (s=='-') x.h|=sign_bit;
+  return x;
+}
+
+@ @<External routines@>=
+@y
+  if (s=='-') x.h|=sign_bit;
+  return x;
+}
+
+@r @ @<External routines@>=
+@z
+
+@x [44]
+if (x.h||x.l) xf.l|=1; /* adjust the sticky bit */
+return fpack(xf,xe,xs,cur_round);
+@y
+if (x.h||x.l) xf.l|=1; /* adjust the sticky bit */
+return fpack(xf,xe,xs,cur_round);
+@r
+@z
+
+@x [46]
+octa fplus(
+  octa y, octa z)
+{
+@y
+octa fplus(
+  octa y, octa z)
+{ @+
+@z
+@x [46]
+  ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
+@y
+  ftype yt=funpack(y,&yf,&ye,&ys),zt=funpack(z,&zf,&ze,&zs);
+@z
+@x [46]
+  @=/* else fall through */@>@;
+@y
+@+@=/* else fall through */@>@;
+@z
+@x [46]
+  @=/* else fall through */@>@;
+@y
+@+@=/* else fall through */@>@;
+@z
+
+@x [60]
+@ Here, for example, is how we go from $f$ to $10f$, assuming that
+@y
+@r @ Here, for example, is how we go from $f$ to $10f$, assuming that
+@z
+
+@x [63]
+ff.a=(ff.dat[k-1]? k-1: k);
+ff.b=(ff.dat[k+1]? k+1: k);
+gg.a=(gg.dat[k-1]? k-1: k);
+gg.b=(gg.dat[k+1]? k+1: k);
+@y
+ff.a=(ff.dat[k-1]? k-1: k); @+
+ff.b=(ff.dat[k+1]? k+1: k);
+gg.a=(gg.dat[k-1]? k-1: k); @+
+gg.b=(gg.dat[k+1]? k+1: k);
+@z
+
+@x [67]
+@ At this point the significant digits are in string |s|, and |s[0]!='0'|.
+@y
+@r @ At this point the significant digits are in string |s|, and |s[0]!='0'|.
+@z
+
+@x [68]
+\<floating magnitude>\is\<digit string>\<exponent>\mid
+@y
+\<floating magnitude>\is\<digit string>\<exponent>\mid\cr\hskip12em
+@z
+
+@x [70]
+@ @<Local variables for |scan_const|@>=
+@y
+@r @ @<Local variables for |scan_const|@>=
+@z
+
+@x ]73]
+  exp=0;
+@y
+@+ exp=0;
+@z
+
+@x [75]
+  p++;
+@y
+@+ p++;
+@z
+
+@x [79]
+  exp=-99999;@+ goto packit;
+@y
+  @+ exp=-99999;@+ goto packit; @+
+@z
+
+@x [80]
+@ @<Put the 9-digit number...@>=
+{
+@y
+@ @<Put the 9-digit number...@>=
+{ @+
+@z
+
+@x [82]
+  register tetra *p,*q; register int x,carry;
+@y
+  @+ register tetra *p,*q; register int x,carry;
+@z
+
+@x [88]
+@ To convert floating point to fixed point, we use |fixit|.
+@y
+@r @ To convert floating point to fixed point, we use |fixit|.
+@z
+
+@x [91]
+  octa x,xf,rf,zf;
+  int ze;
+@y
+  octa x,xf,rf,zf;
+  int ze; @+
+@z
+@x [91]
+  else@+switch (zt) {
+@y
+  else switch (zt) {
+@z
+
+@x [94]
+if (ye>=ze) {
+  exceptions|=E_BIT;@+return fpack(yf,ye,ys,ROUND_OFF);
+}
+@y
+if (ye>=ze) { @+
+  exceptions|=E_BIT;@+return fpack(yf,ye,ys,ROUND_OFF); @+
+}
 @z
 
 @x [96]
