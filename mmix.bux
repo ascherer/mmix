@@ -169,6 +169,15 @@
 @$cool_O {MMIX-PIPE}98 \&{octa}@>
 @$cool_S {MMIX-PIPE}98 \&{octa}@>
 @$data {MMIX-PIPE}124 \&{control} ${*}$@>
+@$max_stage {MMIX-PIPE}129 =99@>
+@$vanish {MMIX-PIPE}129 =98@>
+@$flush_to_mem {MMIX-PIPE}129 =97@>
+@$flush_to_S {MMIX-PIPE}129 =96@>
+@$fill_from_mem {MMIX-PIPE}129 =95@>
+@$fill_from_S {MMIX-PIPE}129 =94@>
+@$fill_from_virt {MMIX-PIPE}129 =93@>
+@$write_from_wbuf {MMIX-PIPE}129 =92@>
+@$cleanup {MMIX-PIPE}129 =91@>
 @$pipe_limit {MMIX-PIPE}136 =90@>
 @$pipe_seq {MMIX-PIPE}136 \&{unsigned} \&{char} [\,]@>
 @$bp_a {MMIX-PIPE}150 \&{int}@>
