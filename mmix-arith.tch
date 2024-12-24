@@ -5,6 +5,18 @@
 @z
 
 @x [31]
+@^accuracy loss@>
+@y
+@^accuracy loss@>
+@-X_BIT@>
+@-Z_BIT@>
+@-U_BIT@>
+@-O_BIT@>
+@-I_BIT@>
+@-W_BIT@>
+@-E_BIT@>
+@z
+@x [31]
   char s, /* the sign */
   int r) /* the rounding mode */
 {
@@ -19,28 +31,16 @@
 @y
 @r @ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
 @z
-@x [36]
-@d zero_exponent (-1000) /* zero is assumed to have this exponent */
-@y
-@d zero_exponent (-1000) /* zero is assumed to have this exponent */
-@$inf {MMIX-ARITH}36 \&{ftype}@>
-@$nan {MMIX-ARITH}36 \&{ftype}@>
-@$num {MMIX-ARITH}36 \&{ftype}@>
-@$zro {MMIX-ARITH}36 \&{ftype}@>
-@z
 
 @x [40]
   if (s=='-') x.h|=sign_bit;
   return x;
 }
-
-@ @<External routines@>=
 @y
   if (s=='-') x.h|=sign_bit;
   return x;
 }
-
-@r @ @<External routines@>=
+@r
 @z
 
 @x [44]
@@ -69,12 +69,12 @@ octa fplus(
 @x [46]
   @=/* else fall through */@>@;
 @y
-@+@=/* else fall through */@>@;
+  @+ @=/* else fall through */@>@;
 @z
 @x [46]
   @=/* else fall through */@>@;
 @y
-@+@=/* else fall through */@>@;
+  @+ @=/* else fall through */@>@;
 @z
 
 @x [54]
