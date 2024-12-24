@@ -118,10 +118,9 @@ read from the |CPV| table.)
 static void pcs( /* subroutine to process a cache spec */
   cache *c)
 {
-  register int j,n;
 @y
 static void pcs(cache *c) /* subroutine to process a cache spec */
-{ @+ register int j,n;
+{ @+
 @z
 
 @x [24]
@@ -155,27 +154,13 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 themselves.
 @y
 themselves.
-@-b@>
-@-bb@>
+@-b@> @-bb@> @-lg@>
 @z
 
 @x [31]
 static void alloc_cache(
 @y
-@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
-@-a@> @-aa@>
-@-b@> @-bb@>
-@-c@> @-cc@>
-@-g@> @-gg@>
-@-v@> @-vv@>
-@$cache {MMIX-PIPE}167 \&{struct}@>
-@$cacheblock {MMIX-PIPE}167 \&{struct}@>
-@$tagmask {MMIX-PIPE}167 \&{int}@>
-@$mode {MMIX-PIPE}167 \&{int}@>
-@$inbuf {MMIX-PIPE}167 \&{cacheblock}@>
-@$outbuf {MMIX-PIPE}167 \&{cacheblock}@>
-@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
-@$dirty {MMIX-PIPE}167 \&{char} ${*}$@>
+@-a@> @-aa@> @-b@> @-bb@> @-c@> @-cc@> @-g@> @-gg@> @-v@> @-vv@>
 static void alloc_cache(
 @z
 @x [31]
@@ -197,8 +182,6 @@ static void alloc_cache(
 @y
 @ @-aa@> @-bb@> @-cc@> @-g@>
 @$c {MMIX-CONFIG}31 \&{cache} ${*}$@>
-@$tag {MMIX-PIPE}167 \&{octa}@>
-@$set {MMIX-PIPE}167 \&{cacheset} ${*}$@>
 @<Allocate the cache sets for cache |c|@>=
 @z
 
@@ -206,30 +189,21 @@ static void alloc_cache(
 @ @<Allocate the victim cache for cache |c|@>=
 @y
 @ @-bb@> @-vv@> @-g@>
-@$victim {MMIX-PIPE}167 \&{cacheset}@>
-@%
-@$cacheset {MMIX-PIPE}167 \&{cacheblock} ${*}$@>
+@% @$cacheset {MMIX-PIPE}167 \&{cacheblock} ${*}$@>
 @<Allocate the victim cache for cache |c|@>=
 @z
 
 @x [34]
 @ @<Allocate reader coroutines for cache |c|@>=
 @y
-@ @$ports {MMIX-PIPE}167 \&{int}@>
-@$reader {MMIX-PIPE}167 \&{coroutine} ${*}$@>
-@$stage {MMIX-PIPE}23 \&{int}@>
-@%
-@$coroutine {MMIX-PIPE}167 \&{struct}@>
+@ @% @$coroutine {MMIX-PIPE}167 \&{struct}@>
 @<Allocate reader coroutines for cache |c|@>=
 @z
 
 @x [35]
 @ @<Allocate the caches@>=
 @y
-@ @-bb@>
-@-gg@>
-@$filler {MMIX-PIPE}167 \&{coroutine}@>
-@$flusher {MMIX-PIPE}167 \&{coroutine}@>
+@ @-bb@> @-gg@>
 @<Allocate the caches@>=
 @z
 
@@ -242,10 +216,7 @@ static void alloc_cache(
 scheduler and schedulee.
 @y
 scheduler and schedulee.
-@-bb@>
-@-name@>
-@$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
-@$ring_size {MMIX-PIPE}29 \&{int}@>
+@-bb@> @-name@>
 @$j {MMIX-CONFIG}38 \&{int}@>
 @$n {MMIX-CONFIG}38 \&{int}@>
 @z
@@ -255,13 +226,7 @@ scheduler and schedulee.
 @y
 @ @s chunknode int
 @-bb@>
-@$dispatch_stat {MMIX-PIPE}66 \&{int} ${*}$@>
 @$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
-@$bp_table {MMIX-PIPE}150 \&{char} ${*}$@>
-@$no_hardware_PT {MMIX-PIPE}242 \&{bool}@>
-@$wbuf_bot {MMIX-PIPE}247 \&{write\_node} ${*}$@>
-@$wbuf_top {MMIX-PIPE}247 \&{write\_node} ${*}$@>
-@$fetched {MMIX-PIPE}284 \&{octa} ${*}$@>
 @%
 @$specnode {MMIX-PIPE}40 \&{struct}@>
 @$write_node {MMIX-PIPE}246 \&{struct}@>
@@ -277,8 +242,7 @@ scheduler and schedulee.
 @x [40]
 @ @<Private prototypes@>=
 @y
-@ @%
-@$replace_policy {MMIX-PIPE}23 \&{enum}@>
+@ @% @$replace_policy {MMIX-PIPE}23 \&{enum}@>
 @<Private prototypes@>=
 @z
 

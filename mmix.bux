@@ -144,6 +144,7 @@
 @$cool {MMIX-PIPE}60 \&{control} ${*}$@>
 @$old_hot {MMIX-PIPE}60 \&{control} ${*}$@>
 @$deissues {MMIX-PIPE}60 \&{int}@>
+@$dispatch_stat {MMIX-PIPE}66 \&{int} ${*}$@>
 @$security_disabled {MMIX-PIPE}66 \&{bool}@>
 @$loc {MMIX-PIPE}68 \&{octa}@>
 @$inst {MMIX-PIPE}68 \&{tetra}@>
@@ -183,6 +184,7 @@
 @$bp_b {MMIX-PIPE}150 \&{int}@>
 @$bp_c {MMIX-PIPE}150 \&{int}@>
 @$bp_n {MMIX-PIPE}150 \&{int}@>
+@$bp_table {MMIX-PIPE}150 \&{char} ${*}$@>
 @$print_stats {MMIX-PIPE}162 \&{void} (\,)@>
 @$random {MMIX-PIPE}164 \&{replace\_policy}@>
 @$serial {MMIX-PIPE}164 \&{replace\_policy}@>
@@ -216,9 +218,12 @@
 @$page_b {MMIX-PIPE}238 \&{int} [\,]@>
 @$page_mask {MMIX-PIPE}238 \&{octa}@>
 @$page_bad {MMIX-PIPE}238 \&{bool}@>
+@$wbuf_bot {MMIX-PIPE}247 \&{write\_node} ${*}$@>
+@$wbuf_top {MMIX-PIPE}247 \&{write\_node} ${*}$@>
 @$holding_time {MMIX-PIPE}247 \&{int}@>
 @$print_pipe {MMIX-PIPE}252 \&{void} (\,)@>
 @$inst_ptr {MMIX-PIPE}284 \&{spec}@>
+@$fetched {MMIX-PIPE}284 \&{octa} ${*}$@>
 @$frem_max {MMIX-PIPE}349 \&{int}@>
 @$denin_penalty {MMIX-PIPE}349 \&{int}@>
 @$denout_penalty {MMIX-PIPE}349 \&{int}@>
