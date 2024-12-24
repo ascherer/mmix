@@ -1,1 +1,3 @@
-mmix.bux
+@i mmix.bux
+
+@$P_BIT {MMIX-PIPE}54 =$(\T{1}\LL\T{0})$@>
