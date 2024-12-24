@@ -11,3 +11,24 @@
 @$vctsz {MMIX-CONFIG}13 \&{c\_param}@>
 @$wra {MMIX-CONFIG}13 \&{c\_param}@>
 @$wrb {MMIX-CONFIG}13 \&{c\_param}@>
+@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
+
+@$stage {MMIX-PIPE}23 \&{int}@>
+@$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
+@$ring_size {MMIX-PIPE}29 \&{int}@>
+@$cache {MMIX-PIPE}167 \&{struct}@>
+@$cacheblock {MMIX-PIPE}167 \&{struct}@>
+@$tagmask {MMIX-PIPE}167 \&{int}@>
+@$mode {MMIX-PIPE}167 \&{int}@>
+@$inbuf {MMIX-PIPE}167 \&{cacheblock}@>
+@$outbuf {MMIX-PIPE}167 \&{cacheblock}@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$dirty {MMIX-PIPE}167 \&{char} ${*}$@>
+@$tag {MMIX-PIPE}167 \&{octa}@>
+@$set {MMIX-PIPE}167 \&{cacheset} ${*}$@>
+@$victim {MMIX-PIPE}167 \&{cacheset}@>
+@$ports {MMIX-PIPE}167 \&{int}@>
+@$reader {MMIX-PIPE}167 \&{coroutine} ${*}$@>
+@$filler {MMIX-PIPE}167 \&{coroutine}@>
+@$flusher {MMIX-PIPE}167 \&{coroutine}@>
+@$no_hardware_PT {MMIX-PIPE}242 \&{bool}@>
