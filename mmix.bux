@@ -134,7 +134,6 @@
 @$rT {MMIX-PIPE}52 =13@>
 @$rTT {MMIX-PIPE}52 =14@>
 @$rV {MMIX-PIPE}52 =18@>
-@$P_BIT {MMIX-PIPE}54 =$(\T{1}\LL\T{0})$@>
 @$fetch_max {MMIX-PIPE}59 \&{int}@>
 @$dispatch_max {MMIX-PIPE}59 \&{int}@>
 @$peekahead {MMIX-PIPE}59 \&{int}@>
