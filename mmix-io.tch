@@ -28,6 +28,13 @@ octa mmix_fopen(
 @ If the simulator is being used interactively, we can avoid competition
 @z
 
+@x [11]
+octa mmix_fclose(
+@y
+@$mode {MMIX-IO}5 \&{int}@>
+octa mmix_fclose(
+@z
+
 @x [12]
 octa mmix_fread(
 @y
