@@ -49,6 +49,31 @@ octa mmix_fread(
     *p++=stdin_chr();@+*p++=stdin_chr(); @+
 @z
 
+@x [24]
+static char *trip_warning[]={
+@y
+static char *trip_warning[]={ @|
+@z
+@x [24]
+"TRIP",
+"integer divide check",
+"integer overflow",
+"float-to-fix overflow",
+"invalid floating point operation",
+"floating point overflow",
+"floating point underflow",
+"floating point division by zero",
+@y
+"TRIP", @|
+"integer divide check", @|
+"integer overflow", @|
+"float-to-fix overflow", @|
+"invalid floating point operation", @|
+"floating point overflow", @|
+"floating point underflow", @|
+"floating point division by zero", @|
+@z
+
 @x [25]
 @* Index.
 @y
