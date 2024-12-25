@@ -1,0 +1,567 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
+@x [11]
+\<primary expression>\is\<constant>\mid\<symbol>\mid\<local operand>\mid
+  \.{@@}\mid\cr
+\hskip12pc\.(\<expression>\.)\mid\<unary operator>\<primary expression>\cr
+@y
+\<primary expression>\is\<constant>\mid\<symbol>\mid\<local operand>\mid\cr
+\hskip12pc\.{@@}\mid\.(\<expression>\.)\mid\cr
+\hskip12pc\<unary operator>\<primary expression>\cr
+@z
+
+@x [12]
+@ A symbol is called a {\it future reference\/} until it has been defined.
+@y
+@r @ A symbol is called a {\it future reference\/} until it has been defined.
+@z
+
+@x [22]
+@(mmix-lop.h@>=
+@y
+@-MMIX_LOP_H@>
+@(mmix-lop.h@>=
+@z
+
+@x [24]
+#endif /* |MMIX_LOP_H| */
+@y
+#endif /* |MMIX_LOP_H| */
+@-MMIX_LOP_H@>
+@z
+
+@x [31]
+@<Prototypes@>=
+@y
+@-flush_listing_line@>
+@-update_listing_loc@>
+@-listing_clear@>
+@-report_error@>
+@-mmo_clear@>
+@-mmo_out@>
+@-mmo_tetra@>
+@-mmo_byte@>
+@-mmo_lop@>
+@-mmo_lopp@>
+@-mmo_loc@>
+@-mmo_sync@>
+@-assemble@>
+@-new_trie_node@>
+@-trie_search@>
+@-new_sync_mode@>
+@-prune@>
+@-out_stab@>
+@<Prototypes@>=
+@z
+
+@x [45]
+@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(,) @,@, __VA_ARGS__@]);
+@y
+@-__VA_OPT__@> @-__VA_ARGS__@>
+@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(,) @,@, __VA_ARGS__@]);
+@z
+
+@x [47]
+@d mmo_write(buf) if (fwrite(buf,1,4,obj_file)!=4)
+@y
+@-buf@>
+@d mmo_write(buf) if (fwrite(buf,1,4,obj_file)!=4)
+@z
+
+@x [48]
+void mmo_tetra( /* output a tetrabyte */
+@y
+@-mmo_tetra@>
+void mmo_tetra( /* output a tetrabyte */
+@z
+@x [48]
+void mmo_lop( /* output a loader operation */
+@y
+@-mmo_lop@>
+void mmo_lop( /* output a loader operation */
+@z
+@x [48]
+void mmo_lopp( /* output a loader operation with two-byte operand */
+@y
+@-mmo_lopp@>
+void mmo_lopp( /* output a loader operation with two-byte operand */
+@z
+
+@x [52]
+@ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
+@y
+@r @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
+@z
+
+@x [57]
+@ The |trie_search| subroutine starts at a given node of the trie and finds
+@y
+@r @ The |trie_search| subroutine starts at a given node of the trie and finds
+@z
+@x [57]
+@d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
+@y
+@-c@>
+@d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
+@z
+
+@x [59]
+  register sym_node *p=sym_avail;
+@y
+  @+ register sym_node *p=sym_avail;
+@z
+@x [59]
+    p=next_sym_node;
+    if (p==last_sym_node) {
+@y
+    if ((p=next_sym_node)==last_sym_node) {
+@z
+
+@x [63]
+{"FUN", 0x02, 0x240a8},
+@y
+{"FUN", 0x02, 0x240a8},@|
+@z
+@x [63]
+{"FEQL", 0x03, 0x240a8},@|
+@y
+{"FEQL", 0x03, 0x240a8},
+@z
+@x [63]
+{"FIX", 0x05, 0x26288},
+@y
+{"FIX", 0x05, 0x26288},@|
+@z
+@x [63]
+{"FIXU", 0x07, 0x26288},@|
+@y
+{"FIXU", 0x07, 0x26288},
+@z
+@x [63]
+{"FLOT", 0x08, 0x26282},
+@y
+{"FLOT", 0x08, 0x26282},@|
+@z
+@x [63]
+{"FUNE", 0x12, 0x240a8},
+@y
+{"FUNE", 0x12, 0x240a8},@|
+@z
+@x [73]
+{"FEQLE", 0x13, 0x240a8},@|
+{"FEQLE", 0x13, 0x240a8},
+@z
+@x [63]
+{"FREM", 0x16, 0x240a8},
+@y
+{"FREM", 0x16, 0x240a8},@|
+@z
+@x [63]
+{"FINT", 0x17, 0x26288},@|
+@y
+{"FINT", 0x17, 0x26288},
+@z
+@x [63]
+{"MULU", 0x1a, 0x240a2},
+@y
+{"MULU", 0x1a, 0x240a2},@|
+@z
+@x [63]
+{"DIVU", 0x1e, 0x240a2},@|
+@y
+{"DIVU", 0x1e, 0x240a2},
+@z
+@x [63]
+{"ADD", 0x20, 0x240a2},
+@y
+{"ADD", 0x20, 0x240a2},@|
+@z
+@x [63]
+{"16ADDU", 0x2e, 0x240a2},@|
+@y
+{"16ADDU", 0x2e, 0x240a2},
+@z
+@x [63]
+{"CMPU", 0x32, 0x240a2},
+@y
+{"CMPU", 0x32, 0x240a2},@|
+@z
+@x [63]
+{"NEGU", 0x36, 0x26082},@|
+@y
+{"NEGU", 0x36, 0x26082},
+@z
+@x [63]
+{"SL", 0x38, 0x240a2},
+@y
+{"SL", 0x38, 0x240a2},@|
+@z
+@x [63]
+{"BNP", 0x4c, 0x22081},
+@y
+{"BNP", 0x4c, 0x22081},@|
+@z
+@x [63]
+{"BEV", 0x4e, 0x22081},@|
+@y
+{"BEV", 0x4e, 0x22081},
+@z
+@x [63]
+{"PBZ", 0x52, 0x22081},
+@y
+{"PBZ", 0x52, 0x22081},@|
+@z
+@x [63]
+{"PBOD", 0x56, 0x22081},@|
+@y
+{"PBOD", 0x56, 0x22081},
+@z
+@x [63]
+{"PBNN", 0x58, 0x22081},
+@y
+{"PBNN", 0x58, 0x22081},@|
+@z
+@x [63]
+{"CSP", 0x64, 0x240a2},
+@y
+{"CSP", 0x64, 0x240a2},@|
+@z
+@x [63]
+{"CSOD", 0x66, 0x240a2},@|
+@y
+{"CSOD", 0x66, 0x240a2},
+@z
+@x [63]
+{"CSNZ", 0x6a, 0x240a2},
+@y
+{"CSNZ", 0x6a, 0x240a2},@|
+@z
+@x [63]
+{"CSEV", 0x6e, 0x240a2},@|
+@y
+{"CSEV", 0x6e, 0x240a2},
+@z
+@x [63]
+{"ZSN", 0x70, 0x240a2},
+@y
+{"ZSN", 0x70, 0x240a2},@|
+@z
+@x [63]
+{"ZSNP", 0x7c, 0x240a2},
+@y
+{"ZSNP", 0x7c, 0x240a2},@|
+@z
+@x [63]
+{"ZSEV", 0x7e, 0x240a2},@|
+@y
+{"ZSEV", 0x7e, 0x240a2},
+@z
+@x [63]
+{"LDBU", 0x82, 0xa60a2},
+@y
+{"LDBU", 0x82, 0xa60a2},@|
+@z
+@x [63]
+{"LDWU", 0x86, 0xa60a2},@|
+@y
+{"LDWU", 0x86, 0xa60a2},
+@z
+@x [63]
+{"LDT", 0x88, 0xa60a2},
+@y
+{"LDT", 0x88, 0xa60a2},@|
+@z
+@x [63]
+{"CSWAP", 0x94, 0xa60a2},
+@y
+{"CSWAP", 0x94, 0xa60a2},@|
+@z
+@x [63]
+{"LDUNC", 0x96, 0xa60a2},@|
+@y
+{"LDUNC", 0x96, 0xa60a2},
+@z
+@x [63]
+{"PRELD", 0x9a, 0xa6022},
+@y
+{"PRELD", 0x9a, 0xa6022},@|
+@z
+@x [63]
+{"GO", 0x9e, 0xa60a2},@|
+@y
+{"GO", 0x9e, 0xa60a2},
+@z
+@x [63]
+{"STB", 0xa0, 0xa60a2},
+@y
+{"STB", 0xa0, 0xa60a2},@|
+@z
+@x [63]
+{"STO", 0xac, 0xa60a2},
+@y
+{"STO", 0xac, 0xa60a2},@|
+@z
+@x [63]
+{"STOU", 0xae, 0xa60a2},@|
+@y
+{"STOU", 0xae, 0xa60a2},
+@z
+@x [63]
+{"STHT", 0xb2, 0xa60a2},
+@y
+{"STHT", 0xb2, 0xa60a2},@|
+@z
+@x [63]
+{"STUNC", 0xb6, 0xa60a2},@|
+@y
+{"STUNC", 0xb6, 0xa60a2},
+@z
+@x [63]
+{"SYNCD", 0xb8, 0xa6022},
+@y
+{"SYNCD", 0xb8, 0xa6022},@|
+@z
+@x [63]
+{"NOR", 0xc4, 0x240a2},
+@y
+{"NOR", 0xc4, 0x240a2},@|
+@z
+@x [63]
+{"XOR", 0xc6, 0x240a2},@|
+@y
+{"XOR", 0xc6, 0x240a2},
+@z
+@x [63]
+{"ANDN", 0xca, 0x240a2},
+@y
+{"ANDN", 0xca, 0x240a2},@|
+@z
+@x [63]
+{"NXOR", 0xce, 0x240a2},@|
+@y
+{"NXOR", 0xce, 0x240a2},
+@z
+@x [63]
+{"MOR", 0xdc, 0x240a2},
+@y
+{"MOR", 0xdc, 0x240a2},@|
+@z
+@x [63]
+{"MXOR", 0xde, 0x240a2},@|
+@y
+{"MXOR", 0xde, 0x240a2},
+@z
+@x [63]
+{"SETMH", 0xe1, 0x22080},
+@y
+{"SETMH", 0xe1, 0x22080},@|
+@z
+@x [63]
+{"SETL", 0xe3, 0x22080},@|
+@y
+{"SETL", 0xe3, 0x22080},
+@z
+@x [63]
+{"INCH", 0xe4, 0x22080},
+@y
+{"INCH", 0xe4, 0x22080},@|
+@z
+@x [63]
+{"ORML", 0xea, 0x22080},
+@y
+{"ORML", 0xea, 0x22080},@|
+@z
+@x [63]
+{"ORL", 0xeb, 0x22080},@|
+@y
+{"ORL", 0xeb, 0x22080},
+@z
+@x [63]
+{"ANDNMH", 0xed, 0x22080},
+@y
+{"ANDNMH", 0xed, 0x22080},@|
+@z
+@x [63]
+{"ANDNL", 0xef, 0x22080},@|
+@y
+{"ANDNL", 0xef, 0x22080},
+@z
+@x [63]
+{"JMP", 0xf0, 0x21001},
+@y
+{"JMP", 0xf0, 0x21001},@|
+@z
+@x [63]
+{"SAVE", 0xfa, 0x22080},
+@y
+{"SAVE", 0xfa, 0x22080},@|
+@z
+@x [63]
+{"UNSAVE", 0xfb, 0x23a00},@|
+@y
+{"UNSAVE", 0xfb, 0x23a00},
+@z
+@x [63]
+{"SWYM", 0xfd, 0x27554},
+@y
+{"SWYM", 0xfd, 0x27554},@|
+@z
+@x [63]
+{"TRIP", 0xff, 0x27554},@|
+@y
+{"TRIP", 0xff, 0x27554},
+@z
+@x [63]
+{"SET",SET, 0x22180},
+@y
+{"SET",SET, 0x22180},@|
+@z
+@x [63]
+{"LDA", 0x22, 0xa60a2},@|
+@y
+{"LDA", 0x22, 0xa60a2},
+@z
+@x [63]
+{"LOC", LOC, 0x1400},
+@y
+{"LOC", LOC, 0x1400},@|
+@z
+
+@x [69]
+{"ROUND_OFF",0,1},
+@y
+{"ROUND_OFF",0,1},@|
+@z
+@x [69]
+{"I_BIT",0,0x10},
+@y
+{"I_BIT",0,0x10},@|
+@z
+@x [69]
+{"TextWrite",0,1},
+@y
+{"TextWrite",0,1},@|
+@z
+
+@x [73]
+  bool useful=false;
+@y
+  @+ bool useful=false;
+@z
+
+@x [78]
+@ The initial `\.:' of each fully qualified symbol is omitted here, since most
+@y
+@r @ The initial `\.:' of each fully qualified symbol is omitted here, since most
+@z
+
+@x [84]
+@ @<Init...@>=
+@y
+@r @ @<Init...@>=
+@z
+
+@x [89]
+@ @<Scan a backward local@>=
+@y
+@r @ @<Scan a backward local@>=
+@z
+
+@x [93]
+  p++; acc.l=0; err("*null string is treated as zero");
+@.null string...@>
+}@+else if (*(p+1)=='\"') p+=2;
+@y
+  p++; @+ acc.l=0; @+ err("*null string is treated as zero");
+@.null string...@>
+}@+else if (*(p+1)=='\"') p+=2;
+@z
+
+@x [100]
+@ @d unary_check(verb) if (top_val.status!=pure)
+@y
+@ @-verb@> @d unary_check(verb) if (top_val.status!=pure)
+@z
+
+@x [101]
+@ @d binary_check(verb)
+@y
+@ @-verb@>@d binary_check(verb)
+@z
+
+@x [104]
+@ We copy the opcode field to a special buffer because we might
+@y
+@r @ We copy the opcode field to a special buffer because we might
+@z
+
+@x [108]
+  greg--;
+@y
+  greg--; @+
+@z
+
+@x [109]
+  sym_node *new_link=DEFINED;
+@y
+  @+ sym_node *new_link=DEFINED;
+@z
+@x [109]
+  }@+ else if (pp->link==PREDEFINED) pp->serial=++serial_number;
+@y
+  }@+ else @/ if (pp->link==PREDEFINED) pp->serial=++serial_number;
+@z
+
+@x [115]
+@ @<Make special listing to show the label equivalent@>=
+@y
+@r @ @<Make special listing to show the label equivalent@>=
+@z
+
+@x [121]
+@ @<Do the \9{z}Z field@>=
+@y
+@r @ @<Do the \9{z}Z field@>=
+@z
+
+@x [126]
+@ @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>=
+@y
+@r @ @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>=
+@z
+
+@x [130
+@ @<Assemble \9{x}XYZ as a future reference...@>=
+@y
+@r @ @<Assemble \9{x}XYZ as a future reference...@>=
+@z
+
+@x [136]
+@#
+@y
+@z
+@x [136]
+@#
+@y
+@+@t}\6\4\4{@>
+@z
+@x [136]
+  register int j,k; /* all-purpose integers */
+@y
+  @+ register int j,k; /* all-purpose integers */
+@z
+x [136]
+    @<Get the next line of input text, or |break| if the input has ended@>;
+y
+    @+ @<Get the next line of input text, or |break| if the input has ended@>;
+z
+
+@x [146]
+@* Index.
+
+@y
+@z

@@ -14,6 +14,18 @@
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
 @$shift_left {MMIX-ARITH}7 \&{octa} (\,)@>
 @$shift_right {MMIX-ARITH}7 \&{octa} (\,)@>
+@$omult {MMIX-ARITH}8 \&{octa} (\,)@>
+@$aux {MMIX-ARITH}9 \&{octa}@>
+@$odiv {MMIX-ARITH}13 \&{octa} (\,)@>
+@$onot {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oorn {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oand {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oandn {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onand {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oxor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onxor {MMIX-ARITH}25 \&{octa} (\,)@>
 
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
