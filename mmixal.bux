@@ -43,3 +43,4 @@
 @$pure {MMIXAL}82 \&{stat}@>
 @$reg_val {MMIXAL}82 \&{stat}@>
 @$undefined {MMIXAL}82 \&{stat}@>
+@$k {MMIXAL}136 \&{register} \&{int}@>
