@@ -7,27 +7,25 @@
 @x [1]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-\begingroup\def\tt{\ninett}\baselineskip10pt
-$$\vbox{\halign{\tt#\hfil\cr
+$$\begingroup\def\tt{\ninett}\baselineskip10pt
+\vbox{\halign{\tt#\hfil\cr
 @z
 @x [1]
 }}$$
 @y
-}}$$
-\endgroup
+}} \endgroup$$
 @z
 
 @x [6]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-\begingroup\def\tt{\ninett}\baselineskip10pt
-$$\vbox{\halign{\tt#\hfil\cr
+$$\begingroup\def\tt{\ninett}\baselineskip10pt
+\vbox{\halign{\tt#\hfil\cr
 @z
 @x [6]
 }}$$
 @y
-}}$$
-\endgroup
+}}\endgroup$$
 @z
 
 @x [12]
