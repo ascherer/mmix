@@ -9,9 +9,9 @@
   \.{@@}\mid\cr
 \hskip12pc\.(\<expression>\.)\mid\<unary operator>\<primary expression>\cr
 @y
-\<primary expression>\is\<constant>\mid\<symbol>\mid\<local operand>\mid\cr
-\hskip12pc\.{@@}\mid\.(\<expression>\.)\mid\cr
-\hskip12pc\<unary operator>\<primary expression>\cr
+\<primary expression>\is\<constant>\mid\<symbol>\mid\<local operand>\cr
+\hskip12pc\mid\.{@@}\mid\.(\<expression>\.)\cr
+\hskip12pc\mid\<unary operator>\<primary expression>\cr
 @z
 
 @x [12]
@@ -32,6 +32,13 @@
 @y
 #endif /* |MMIX_LOP_H| */
 @-MMIX_LOP_H@>
+@z
+
+@x [28]
+the remainder in~|aux|.
+@y
+the remainder in~|aux|.
+@-y@> @-z@>
 @z
 
 @x [31]
@@ -153,6 +160,7 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @z
 @x [73]
 {"FEQLE", 0x13, 0x240a8},@|
+@y
 {"FEQLE", 0x13, 0x240a8},
 @z
 @x [63]
@@ -465,6 +473,12 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @r @ @<Init...@>=
 @z
 
+@x [85]
+p=operand_list;
+@y
+p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
+@z
+
 @x [89]
 @ @<Scan a backward local@>=
 @y
@@ -499,6 +513,12 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @r @ We copy the opcode field to a special buffer because we might
 @z
 
+@x [107]
+  j=(op_bits&align_bits)>>16;
+@y
+  j=(op_bits&align_bits)>>16; @$j {MMIXAL}136 \&{register} \&{int}@>
+@z
+
 @x [108]
   greg--;
 @y
@@ -514,6 +534,13 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
   }@+ else if (pp->link==PREDEFINED) pp->serial=++serial_number;
 @y
   }@+ else @/ if (pp->link==PREDEFINED) pp->serial=++serial_number;
+@z
+
+@x [114]
+@ @<Fix a future reference from a relative address@>=
+@y
+@ @$k {MMIXAL}136 \&{register} \&{int}@>
+@<Fix a future reference from a relative address@>=
 @z
 
 @x [115]
