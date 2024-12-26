@@ -505,10 +505,28 @@ p=operand_list;
 p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
 @z
 
+@x [88]
+@ @<Scan a forward local@>=
+{
+  tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+}
+@y
+@ @<Scan a forward local@>=
+{ @+
+  tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found; @+
+}
+@z
+
 @x [89]
 @ @<Scan a backward local@>=
+{
+  tt=&backward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+}
 @y
-@r @ @<Scan a backward local@>=
+@ @<Scan a backward local@>=
+{ @+
+  tt=&backward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found; @+
+}
 @z
 
 @x [93]
