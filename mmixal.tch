@@ -48,11 +48,13 @@ Here's how it works: Whenever a memory operation such as
 @z
 
 @x [23]
-The binary output file \.{test.mmo} assembled from \.{test.mms} consists
+00fe0000&(\.{WYDE} \.{a-\$0})\cr
 @y
-
-\break
-The binary output file \.{test.mmo} assembled from \.{test.mms} consists
+00fe0000&(\.{WYDE} \.{a-\$0})\cr
+}$$
+\vfill\eject\null\vskip-.5in
+$$
+\halign{\hskip.5in\tt#&\quad#\hfil\cr
 @z
 
 @x [24]
@@ -61,7 +63,6 @@ The binary output file \.{test.mmo} assembled from \.{test.mms} consists
 \vskip1in
 \bull |lop_spec|: $\rm X=\Hex{08}$, $\rm YZ=type$. Begin special data of
 @z
-
 @x [24]
 #endif /* |MMIX_LOP_H| */
 @y
