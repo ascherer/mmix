@@ -13,11 +13,31 @@
 \hskip12pc\mid\.{@@}\mid\.(\<expression>\.)\cr
 \hskip12pc\mid\<unary operator>\<primary expression>\cr
 @z
-
-@x [12]
-@ A symbol is called a {\it future reference\/} until it has been defined.
+@x [11]
+Binary operators come in two flavors, strong and weak. The strong ones
 @y
-@r @ A symbol is called a {\it future reference\/} until it has been defined.
+\break
+Binary operators come in two flavors, strong and weak. The strong ones
+@z
+
+@x [13]
+@ We noted earlier that each \MMIXAL\ instruction contains
+@y
+@r @ We noted earlier that each \MMIXAL\ instruction contains
+@z
+
+@x [17]
+\bull \<label> \.{OCTA} \<expression list>
+@y
+\vskip1in
+\bull \<label> \.{OCTA} \<expression list>
+@z
+
+@x [18]
+Here's how it works: Whenever a memory operation such as
+@y
+\break
+Here's how it works: Whenever a memory operation such as
 @z
 
 @x [22]
@@ -25,6 +45,21 @@
 @y
 @-MMIX_LOP_H@>
 @(mmix-lop.h@>=
+@z
+
+@x [23]
+The binary output file \.{test.mmo} assembled from \.{test.mms} consists
+@y
+
+\break
+The binary output file \.{test.mmo} assembled from \.{test.mms} consists
+@z
+
+@x [24]
+\bull |lop_spec|: $\rm X=\Hex{08}$, $\rm YZ=type$. Begin special data of
+@y
+\vskip1in
+\bull |lop_spec|: $\rm X=\Hex{08}$, $\rm YZ=type$. Begin special data of
 @z
 
 @x [24]
