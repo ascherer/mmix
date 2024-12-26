@@ -90,7 +90,8 @@ representation that will be input as precisely the same value.
 @x [59]
 If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
 @y
-@-f@> If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
+@-f@>
+If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
 @z
 
 @x [60]
@@ -161,13 +162,13 @@ The value of |exceptions| set by |scan_const| is not necessarily correct.
 @x [73]
   exp=0;
 @y
-@+ exp=0;
+  @+ exp=0;
 @z
 
 @x [75]
   p++;
 @y
-@+ p++;
+  @+ p++;
 @z
 
 @x [78]

@@ -75,8 +75,8 @@ the remainder in~|aux|.
 @x [47]
 @d mmo_write(buf) if (fwrite(buf,1,4,obj_file)!=4)
 @y
-@-buf@>
 @d mmo_write(buf) if (fwrite(buf,1,4,obj_file)!=4)
+@-buf@>
 @z
 
 @x [48]
@@ -112,8 +112,8 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @x [57]
 @d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
 @y
-@-c@>
 @d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
+@-c@>
 @z
 
 @x [59]
@@ -477,12 +477,8 @@ p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
 
 @x [93]
   p++; acc.l=0; err("*null string is treated as zero");
-@.null string...@>
-}@+else if (*(p+1)=='\"') p+=2;
 @y
   p++; @+ acc.l=0; @+ err("*null string is treated as zero");
-@.null string...@>
-}@+else if (*(p+1)=='\"') p+=2;
 @z
 
 @x [100]
@@ -571,11 +567,6 @@ p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
 @y
   @+ register int j,k; /* all-purpose integers */
 @z
-x [136]
-    @<Get the next line of input text, or |break| if the input has ended@>;
-y
-    @+ @<Get the next line of input text, or |break| if the input has ended@>;
-z
 
 @x [146]
 @* Index.
