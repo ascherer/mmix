@@ -420,11 +420,17 @@ octa bool_mult(
   octa y, octa z, /* the operands */
   bool xor) /* do we do xor instead of or? */
 @z
-
 @x [29] l.442 Issue #16.
   for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,1))
 @y
   for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,true))
+@z
+@x [29]
+      if (xor) x.h^=a&c, x.l^=b&c;
+      else x.h|=a&c, x.l|=b&c;
+@y
+      if (xor) x=oxor(x,(octa){a&c,b&c});
+      else x=oor(x,(octa){a&c,b&c});
 @z
 
 @x [30] l.463
