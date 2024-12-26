@@ -65,6 +65,11 @@ static void get_token() /* set |token| to the next token of the configuration fi
 @y
 static void get_token(void) /* set |token| to the next token of the configuration file */
 @z
+@x [10]
+  static char buffer[BUF_SIZE]; /* input lines go here */
+@y
+  @+ static char buffer[BUF_SIZE]; /* input lines go here */
+@z
 
 @x [10] l.376
   while(1) { /* scan past white space */
