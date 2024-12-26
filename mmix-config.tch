@@ -154,7 +154,7 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @x [26]
 @<Allocate coroutines in each functional unit@>=
 @y
-@-co@> @-name@> @-stage@>
+@-k@> @-co@> @-name@> @-stage@>
 @<Allocate coroutines in each functional unit@>=
 @z
 
