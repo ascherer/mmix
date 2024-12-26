@@ -51,6 +51,18 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 }}\endgroup$$
 @z
 
+@x [8]
+  va_list ap;
+  va_start(ap, fmt);
+  (void) vfprintf(stderr, fmt, ap);
+  va_end(ap);@/
+@y
+  @+ va_list ap;
+  va_start(ap, fmt); @+
+  (void) vfprintf(stderr, fmt, ap); @+
+  va_end(ap);@/
+@z
+
 @x [15]
 @ Most of the parameters are external variables declared in the header
 @y
