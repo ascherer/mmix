@@ -16,6 +16,29 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 }}\endgroup$$
 @z
 
+@x [3]
+\bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
+@y
+\break
+\bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
+@z
+
+@x [6]
+and the least significant bit is for opcode 255 (\.{TRIP}).
+@y
+and the least significant bit is for opcode~255~(\.{TRIP}).
+@z
+@x [6]
+For example, we can define a load/store unit (which handles register/memory
+@y
+\vskip2in
+For example, we can define a load/store unit (which handles register/memory
+@z
+@x [6]
+multiplication), a boolean unit (which handles only bitwise operations),
+@y
+multiplication), a~boolean unit (which handles only bitwise operations),
+@z
 @x [6]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
@@ -28,22 +51,10 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 }}\endgroup$$
 @z
 
-@x [12]
-@ A simple data structure makes it fairly easy to deal with
-@y
-@r @ A simple data structure makes it fairly easy to deal with
-@z
-
 @x [15]
 @ Most of the parameters are external variables declared in the header
 @y
 @ Most of the parameters are variables declared in the header
-@z
-@x [15]
-static op_spec OP[]={@|
-@y
-@t}\vfill\eject\null{@>@;
-static op_spec OP[]={@|
 @z
 @x [15]
 {"mul4", mul4, 10},@|
