@@ -39,6 +39,22 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 @y
 @ Most of the parameters are variables declared in the header
 @z
+@x [15]
+static op_spec OP[]={@|
+@y
+@t}\vfill\eject\null{@>@;
+static op_spec OP[]={@|
+@z
+@x [15]
+{"mul4", mul4, 10},@|
+@y
+{"mul4", mul4, 10},
+@z
+@x [15]
+{"fint", fint, 4},@|
+@y
+{"fint", fint, 4},
+@z
 
 @x [16]
 read from the |CPV| table.)
