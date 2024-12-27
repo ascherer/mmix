@@ -74,6 +74,12 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
   va_end(ap);@/
 @z
 
+@x [10]
+  static char buffer[BUF_SIZE]; /* input lines go here */
+@y
+  @+ static char buffer[BUF_SIZE]; /* input lines go here */
+@z
+
 @x [15]
 @ Most of the parameters are external variables declared in the header
 @y
