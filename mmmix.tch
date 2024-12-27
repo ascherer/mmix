@@ -6,12 +6,27 @@
 \ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
 \else \global\pageshift=-0.5in
   \global\hoffset=-0.5in \global\voffset=-0.5in \fi
+
+{\eightpoint \editorsnote \vskip7mm}
 @z
 
-@x [3]
-@ The command line might also contain additional options, some day.
+@x [2]
+@h
+@#
 @y
-@r @ The command line might also contain additional options, some day.
+@h
+@z
+@x [2]
+static char *config_file_name, *prog_file_name;
+@y
+static char *config_file_name, *prog_file_name;@+@t}\6{@>
+@z
+@x [2]
+  MMIX_config(config_file_name);
+  MMIX_init();
+@y
+  MMIX_config(config_file_name); @+
+  MMIX_init(); @+
 @z
 
 @x [7]
