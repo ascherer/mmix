@@ -160,6 +160,11 @@ void read_tet()
 @y
 void read_tet(void)
 @z
+@x [9] l.135
+  yz=(buf[2]<<8)+buf[3];
+@y
+  yz=(y<<8)+z;
+@z
 
 @x [10] l.142 C99 prototypes for C2x.
 byte read_byte @,@,@[ARGS((void))@];
@@ -190,6 +195,12 @@ byte read_byte(void)
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=zero_octa;
+@z
+
+@x [20] l.281
+     *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
+@y
+     memcpy(p,buf,4);
 @z
 
 @x [21] l.302
