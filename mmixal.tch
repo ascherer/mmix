@@ -167,6 +167,13 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @-c@>
 @z
 
+@x [58]
+@d DEFINED (sym_node*)1 /* code value for octabyte equivalents */
+@y
+@-DEFINED@> @-REGISTER@> @-PREDEFINED@>
+@d DEFINED (sym_node*)1 /* code value for octabyte equivalents */
+@z
+
 @x [59]
   register sym_node *p=sym_avail;
 @y

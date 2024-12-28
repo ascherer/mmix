@@ -13,7 +13,7 @@
 @x [1]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-$$\begingroup\def\tt{\ninett}\baselineskip10pt
+$$\begingroup\def\tt{\ninett}\baselineskip11.5pt
 \vbox{\halign{\tt#\hfil\cr
 @z
 @x [1]
@@ -22,11 +22,6 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 }}\endgroup$$
 @z
 
-@x [3]
-@ A \<PV spec> simply assigns a given value to a given parameter. The
-@y
-@r @ A \<PV spec> simply assigns a given value to a given parameter. The
-@z
 @x [3]
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
 @y
@@ -53,7 +48,7 @@ multiplication), a~boolean unit (which handles only bitwise operations),
 @x [6]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-$$\begingroup\def\tt{\ninett}\baselineskip10pt
+$$\begingroup\def\tt{\ninett}\baselineskip11.5pt
 \vbox{\halign{\tt#\hfil\cr
 @z
 @x [6]
@@ -215,7 +210,7 @@ int_stages[mul]=n; @+
 @-st@> @-sub@> @-subu@> @-sync@> @-tdif@> @-trap@> @-trip@> @-unsave@>
 @-wdif@> @-xor@> @-zset@>
 @%
-@$add {MMIX-PIPE}49 =\dots= \\{zset}, \&{internal\_opcode}@>
+@$mul0 {MMIX-PIPE}49 =$\,0,\dots,\\{resum}=89$, \&{internal\_opcode}@>
 @z
 
 @x [29]
