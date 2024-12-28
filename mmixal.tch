@@ -567,6 +567,11 @@ p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
 @y
 @r @ We copy the opcode field to a special buffer because we might
 @z
+@x [104]
+while (isletter(*p)||isdigit(*p)) *q++=*p++;
+@y
+while (isletter(*p)||isdigit(*p)) *q++=*p++; @+
+@z
 
 @x [107]
   j=(op_bits&align_bits)>>16;
