@@ -13,7 +13,7 @@
 @x [1]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-$$\begingroup\def\tt{\ninett}\baselineskip11.5pt
+$$\begingroup\ninepoint
 \vbox{\halign{\tt#\hfil\cr
 @z
 @x [1]
@@ -30,15 +30,14 @@ $$\begingroup\def\tt{\ninett}\baselineskip11.5pt
 @z
 
 @x [6]
+@ The fourth and final kind of specification defines a functional unit:
+@y
+@r @ The fourth and final kind of specification defines a functional unit:
+@z
+@x [6]
 and the least significant bit is for opcode 255 (\.{TRIP}).
 @y
 and the least significant bit is for opcode~255~(\.{TRIP}).
-@z
-@x [6]
-For example, we can define a load/store unit (which handles register/memory
-@y
-\vskip2in
-For example, we can define a load/store unit (which handles register/memory
 @z
 @x [6]
 multiplication), a boolean unit (which handles only bitwise operations),
@@ -48,7 +47,7 @@ multiplication), a~boolean unit (which handles only bitwise operations),
 @x [6]
 $$\vbox{\halign{\tt#\hfil\cr
 @y
-$$\begingroup\def\tt{\ninett}\baselineskip11.5pt
+$$\begingroup\ninepoint
 \vbox{\halign{\tt#\hfil\cr
 @z
 @x [6]
