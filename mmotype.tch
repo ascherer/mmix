@@ -16,10 +16,21 @@
 @r @ @<Initialize everything@>=
 @z
 
+@x [19]
+ read_tet(); delta=tet;
+@y
+ read_tet(); @+ delta=tet;
+@z
+
 @x [20] l.262
 @ The space for file names isn't allocated until we are sure we need it.
 @y
 @r @ The space for file names isn't allocated until we are sure we need it.
+@z
+@x [20]
+     memcpy(p,buf,4);
+@y
+     @+ memcpy(p,buf,4);
 @z
 
 @x [27] l.408

@@ -100,26 +100,13 @@ $$\begingroup\def\tt{\ninett}\baselineskip10pt
 read from the |CPV| table.)
 @y
 read from the |CPV| table.)
-@-aa@>
-@-bb@>
-@-cc@>
-@-gg@>
-@-vv@>
-@-repl@>
-@-vrepl@>
-@-mode@>
-@-access_time@>
-@-copy_in_time@>
-@-copy_out_time@>
-@-filler@>
-@-ctl@>
-@-filler_ctl@>
-@-ptr_a@>
-@-go@>
-@-flusher@>
-@-flusher_ctl@>
-@-ports@>
-@-name@>
+@-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
+@-repl@> @-vrepl@> @-mode@>
+@-access_time@> @-copy_in_time@> @-copy_out_time@>
+@-filler@> @-ctl@> @-filler_ctl@>
+@-ptr_a@> @-go@>
+@-flusher@> @-flusher_ctl@>
+@-ports@> @-name@>
 @z
 
 @x [18]
@@ -159,13 +146,8 @@ read from the |CPV| table.)
 }
 
 @ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
-@-access_time@>
-@-copy_in_time@>
-@-copy_out_time@>
-@-mode@>
-@-ports@>
-@-repl@>
-@-vrepl@>
+@-access_time@> @-copy_in_time@> @-copy_out_time@>
+@-mode@> @-ports@> @-repl@> @-vrepl@>
 @<Sub...@>=
 @z
 @x [23]
@@ -196,6 +178,44 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @y
 @-k@> @-co@> @-name@> @-stage@>
 @<Allocate coroutines in each functional unit@>=
+@z
+@x [26]
+  funit[j].k=n;
+@y
+  funit[j].k=n; @+
+@z
+@x [26]
+    funit[j].co[i].name=funit[j].name;
+@y
+    funit[j].co[i].name=funit[j].name; @+
+@z
+
+@x [27]
+@ @<Build table of pipeline stages needed for each opcode@>=
+@y
+@ @-div@> @-frem@> @-ld@> @-mul@> @-mul0@> @-mul8@> @-st@>
+@<Build table of pipeline stages needed for each opcode@>=
+@z
+@x [27]
+int_stages[mul]=n;
+@y
+int_stages[mul]=n; @+
+@z
+
+@x [28]
+|fsub| by |fadd|, etc.
+@y
+|fsub| by |fadd|, etc.
+@-add@> @-addu@> @-and@> @-andn@> @-bdif@> @-br@> @-cmp@> @-cmpu@>
+@-cset@> @-div@> @-divu@> @-fadd@> @-fcmp@> @-fdiv@> @-feps@> @-fint@>
+@-fix@> @-flot@> @-fmul@> @-frem@> @-fsqrt@> @-fsub@> @-funeq@> @-get@>
+@-go@> @-ld@> @-mor@> @-mul@> @-mul0@> @-mul8@> @-mux@> @-nand@>
+@-noop@> @-nor@> @-nxor@> @-odif@> @-or@> @-orn@> @-pbr@> @-pop@>
+@-prego@> @-pushgo@> @-pushj@> @-put@> @-resume@> @-sadd@> @-save@> @-sh@>
+@-st@> @-sub@> @-subu@> @-sync@> @-tdif@> @-trap@> @-trip@> @-unsave@>
+@-wdif@> @-xor@> @-zset@>
+@%
+@$add {MMIX-PIPE}49 =\dots= \\{zset}, \&{internal\_opcode}@>
 @z
 
 @x [29]
