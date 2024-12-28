@@ -1,16 +1,16 @@
 @i mmix.bux
 
-@$acctm {MMIX-CONFIG}13 \&{c\_param}@>
-@$assoc {MMIX-CONFIG}13 \&{c\_param}@>
-@$blksz {MMIX-CONFIG}13 \&{c\_param}@>
-@$citm {MMIX-CONFIG}13 \&{c\_param}@>
-@$cotm {MMIX-CONFIG}13 \&{c\_param}@>
-@$gran {MMIX-CONFIG}13 \&{c\_param}@>
-@$prts {MMIX-CONFIG}13 \&{c\_param}@>
-@$setsz {MMIX-CONFIG}13 \&{c\_param}@>
-@$vctsz {MMIX-CONFIG}13 \&{c\_param}@>
-@$wra {MMIX-CONFIG}13 \&{c\_param}@>
-@$wrb {MMIX-CONFIG}13 \&{c\_param}@>
+@$assoc {MMIX-CONFIG}13 =0@>
+@$blksz {MMIX-CONFIG}13 =1@>
+@$setsz {MMIX-CONFIG}13 =2@>
+@$gran {MMIX-CONFIG}13 =3@>
+@$vctsz {MMIX-CONFIG}13 =4@>
+@$wrb {MMIX-CONFIG}13 =5@>
+@$wra {MMIX-CONFIG}13 =6@>
+@$acctm {MMIX-CONFIG}13 =7@>
+@$citm {MMIX-CONFIG}13 =8@>
+@$cotm {MMIX-CONFIG}13 =9@>
+@$prts {MMIX-CONFIG}13 =10@>
 @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
 
 @$stage {MMIX-PIPE}23 \&{int}@>

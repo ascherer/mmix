@@ -4,43 +4,48 @@
 @$mmo_lop {MMIXAL}48 \&{void} (\,)@>
 @$mmo_lopp {MMIXAL}48 \&{void} (\,)@>
 
-@$SET {MMIXAL}62 \&{pseudo\_op}@>
-@$IS {MMIXAL}62 \&{pseudo\_op}@>
-@$LOC {MMIXAL}62 \&{pseudo\_op}@>
-@$PREFIX {MMIXAL}62 \&{pseudo\_op}@>
-@$BSPEC {MMIXAL}62 \&{pseudo\_op}@>
-@$ESPEC {MMIXAL}62 \&{pseudo\_op}@>
-@$GREG {MMIXAL}62 \&{pseudo\_op}@>
-@$LOCAL {MMIXAL}62 \&{pseudo\_op}@>
-@$BYTE {MMIXAL}62 \&{pseudo\_op}@>
-@$WYDE {MMIXAL}62 \&{pseudo\_op}@>
-@$TETRA {MMIXAL}62 \&{pseudo\_op}@>
-@$OCTA {MMIXAL}62 \&{pseudo\_op}@>
+@$DEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,1@>
+@$REGISTER {MMIXAL}58 =(\&{sym\_node} ${*}$)\,2@>
+@$PREDEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,3@>
 
-@$negate {MMIXAL}82 \&{stack\_op}@>
-@$serialize {MMIXAL}82 \&{stack\_op}@>
-@$complement {MMIXAL}82 \&{stack\_op}@>
-@$registerize {MMIXAL}82 \&{stack\_op}@>
-@$inner_lp {MMIXAL}82 \&{stack\_op}@>
-@$plus {MMIXAL}82 \&{stack\_op}@>
-@$minus {MMIXAL}82 \&{stack\_op}@>
-@$times {MMIXAL}82 \&{stack\_op}@>
-@$over {MMIXAL}82 \&{stack\_op}@>
-@$frac {MMIXAL}82 \&{stack\_op}@>
-@$mod {MMIXAL}82 \&{stack\_op}@>
-@$shl {MMIXAL}82 \&{stack\_op}@>
-@$shr {MMIXAL}82 \&{stack\_op}@>
-@$and {MMIXAL}82 \&{stack\_op}@>
-@$or {MMIXAL}82 \&{stack\_op}@>
-@$xor {MMIXAL}82 \&{stack\_op}@>
-@$outer_lp {MMIXAL}82 \&{stack\_op}@>
-@$outer_rp {MMIXAL}82 \&{stack\_op}@>
-@$inner_rp {MMIXAL}82 \&{stack\_op}@>
-@$zero {MMIXAL}82 \&{prec}@>
-@$weak {MMIXAL}82 \&{prec}@>
-@$strong {MMIXAL}82 \&{prec}@>
-@$unary {MMIXAL}82 \&{prec}@>
-@$pure {MMIXAL}82 \&{stat}@>
-@$reg_val {MMIXAL}82 \&{stat}@>
-@$undefined {MMIXAL}82 \&{stat}@>
+@$SET {MMIXAL}62 =\T{\^100}@>
+@$IS {MMIXAL}62 =\T{\^101}@>
+@$LOC {MMIXAL}62 =\T{\^102}@>
+@$PREFIX {MMIXAL}62 =\T{\^103}@>
+@$BSPEC {MMIXAL}62 =\T{\^104}@>
+@$ESPEC {MMIXAL}62 =\T{\^105}@>
+@$GREG {MMIXAL}62 =\T{\^106}@>
+@$LOCAL {MMIXAL}62 =\T{\^107}@>
+@$BYTE {MMIXAL}62 =\T{\^108}@>
+@$WYDE {MMIXAL}62 =\T{\^109}@>
+@$TETRA {MMIXAL}62 =\T{\^10a}@>
+@$OCTA {MMIXAL}62 =\T{\^10b}@>
+
+@$negate {MMIXAL}82 =0@>
+@$serialize {MMIXAL}82 =1@>
+@$complement {MMIXAL}82 =2@>
+@$registerize {MMIXAL}82 =3@>
+@$inner_lp {MMIXAL}82 =4@>
+@$plus {MMIXAL}82 =5@>
+@$minus {MMIXAL}82 =6@>
+@$times {MMIXAL}82 =7@>
+@$over {MMIXAL}82 =8@>
+@$frac {MMIXAL}82 =9@>
+@$mod {MMIXAL}82 =10@>
+@$shl {MMIXAL}82 =11@>
+@$shr {MMIXAL}82 =12@>
+@$and {MMIXAL}82 =13@>
+@$or {MMIXAL}82 =14@>
+@$xor {MMIXAL}82 =15@>
+@$outer_lp {MMIXAL}82 =16@>
+@$outer_rp {MMIXAL}82 =17@>
+@$inner_rp {MMIXAL}82 =18@>
+@$zero {MMIXAL}82 =0@>
+@$weak {MMIXAL}82 =1@>
+@$strong {MMIXAL}82 =2@>
+@$unary {MMIXAL}82 =3@>
+@$pure {MMIXAL}82 =0@>
+@$reg_val {MMIXAL}82 =1@>
+@$undefined {MMIXAL}82 =2@>
+
 @$k {MMIXAL}136 \&{register} \&{int}@>
