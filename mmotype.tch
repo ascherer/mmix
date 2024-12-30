@@ -28,6 +28,12 @@
 @r @ The space for file names isn't allocated until we are sure we need it.
 @z
 @x [20]
+   file_name[y]=(char*)calloc(4*z+1,1);
+   if (!file_name[y]) {
+@y
+   if (!(file_name[y]=(char*)calloc(4*z+1,1))) {
+@z
+@x [20]
      memcpy(p,buf,4);
 @y
      @+ memcpy(p,buf,4);
