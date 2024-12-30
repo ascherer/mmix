@@ -276,11 +276,33 @@ Here we need to define only the basic constants used for interpretation.
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @z
 
+@x [26]
+@d mmo_err {
+     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
+@.Bad object file@>
+     exit(-4);
+   }
+@y
+@d mmo_err {
+     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
+@.Bad object file@>
+     exit(-4);
+   }
+@d ybyte buf[2] /* the next-to-least significant byte */
+@d zbyte buf[3] /* the least significant byte */
+@z
+
 @x [26] l.890 C99 prototypes for C2x.
 void read_tet @,@,@[ARGS((void))@];@+@t}\6{@>
 void read_tet()
 @y
 void read_tet(void)
+@z
+
+@x [26] l.894
+  yzbytes=(buf[2]<<8)+buf[3];
+@y
+  yzbytes=(ybyte<<8)+zbyte;
 @z
 
 @x [27] l.899 C99 prototypes for C2x.
@@ -320,6 +342,13 @@ do @<Load the next item@>@;@+while (!postamble);
 do @<Load the next item@>@; while (!postamble);
 @z
 
+@x [33] l.974
+@d ybyte buf[2] /* the next-to-least significant byte */
+@d zbyte buf[3] /* the least significant byte */
+
+@y
+@z
+
 @x [34] l.999 Change from MMIX home.
 case lop_fixr: delta=yzbytes; goto fixr;
 @y
@@ -335,6 +364,12 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  read_tet();@+if (tet&0xfe000000) mmo_err;
  delta=(tet>=0x1000000? (tet&0xffffff)-(1<<j): tet);
  mmo_load(incr(cur_loc,-delta<<2),tet);
+@z
+
+@x [35] l.1023
+     *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
+@y
+     memcpy(p,buf,4);
 @z
 
 @x [36] l.1033
