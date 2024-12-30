@@ -154,6 +154,14 @@ if (shift_left(neg_one,1).h!=0xffffffff) {
 }
 @z
 
+@x [9] l.124
+and pack them into a tetrabyte, instead of reading a single tetrabyte.
+@y
+and pack them into a tetrabyte, instead of reading a single tetrabyte.
+
+@d y buf[2] /* the next-to-least significant byte */
+@d z buf[3] /* the least significant byte */
+@z
 @x [9] l.127 C99 prototypes for C2x.
 void read_tet @,@,@[ARGS((void))@];
 void read_tet()
@@ -195,6 +203,13 @@ byte read_byte(void)
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=zero_octa;
+@z
+
+@x [18] l.225
+@d y buf[2] /* the next-to-least significant byte */
+@d z buf[3] /* the least significant byte */
+
+@y
 @z
 
 @x [20] l.281
