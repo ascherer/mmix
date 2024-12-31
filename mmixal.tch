@@ -580,6 +580,12 @@ while (isletter(*p)||isdigit(*p)) *q++=*p++;
 while (isletter(*p)||isdigit(*p)) *q++=*p++; @+
 @z
 
+@x [106]
+while (*p) {
+@y
+while (*p) { @+
+@z
+
 @x [107]
   j=(op_bits&align_bits)>>16;
 @y
@@ -602,6 +608,11 @@ while (isletter(*p)||isdigit(*p)) *q++=*p++; @+
 @y
   }@+ else @/ if (pp->link==PREDEFINED) pp->serial=++serial_number;
 @z
+@x [109]
+    @<Make special listing to show the label equivalent@>;
+@y
+    { @<Make special listing to show the label equivalent@>; }
+@z
 
 @x [114]
 @ @<Fix a future reference from a relative address@>=
@@ -614,6 +625,16 @@ while (isletter(*p)||isdigit(*p)) *q++=*p++; @+
 @ @<Make special listing to show the label equivalent@>=
 @y
 @r @ @<Make special listing to show the label equivalent@>=
+@z
+@x [115]
+{ if (new_link==DEFINED) {
+@y
+if (new_link==DEFINED) {
+@z
+@x [115]
+} }
+@y
+}
 @z
 
 @x [121]
