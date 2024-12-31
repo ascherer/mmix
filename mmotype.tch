@@ -16,22 +16,33 @@
 @r @ @<Initialize everything@>=
 @z
 
+@x [16] l.205
+  cur_loc=incr(cur_loc,4);@+ cur_loc.l &=-4;
+}
+
+@ @<Glob...@>=
+@y
+  cur_loc=incr(cur_loc,4);@+ cur_loc.l &=-4;
+}
+
+@r @ @<Glob...@>=
+@z
+
 @x [19]
  read_tet(); delta=tet;
 @y
  read_tet(); @+ delta=tet;
 @z
 
-@x [20] l.262
-@ The space for file names isn't allocated until we are sure we need it.
+@x [20] l.278
+@.No room...@>
+   }
+   cur_file=y;
 @y
-@r @ The space for file names isn't allocated until we are sure we need it.
-@z
-@x [20]
-   file_name[y]=(char*)calloc(4*z+1,1);
-   if (!file_name[y]) {
-@y
-   if (!(file_name[y]=(char*)calloc(4*z+1,1))) {
+@.No room...@>
+   }
+@t}$\vskip2pc\quad${@>
+   cur_file=y;
 @z
 @x [20]
      memcpy(p,buf,4);
