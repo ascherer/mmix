@@ -44,7 +44,7 @@ Binary operators come in two flavors, strong and weak. The strong ones
 @x [17]
 \bull \<label> \.{OCTA} \<expression list>
 @y
-\vskip1in
+\vfill
 \bull \<label> \.{OCTA} \<expression list>
 @z
 
