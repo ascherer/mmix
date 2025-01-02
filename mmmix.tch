@@ -29,17 +29,61 @@ static char *config_file_name, *prog_file_name;@+@t}\6{@>
   MMIX_init(); @+
 @z
 
+@x [4]
+if (strlen(prog_file_name)>4 &&
+@y
+if (strlen(prog_file_name)>4 && @|
+@z
+@x [4]
+  @<Input an \MMIX\ binary file@>@;
+else @<Input a rudimentary hexadecimal file@>;
+@y
+  { @<Input an \MMIX\ binary file@>; } @+
+else { @<Input a rudimentary hexadecimal file@>; }
+@z
+
+@x [6]
+@ @<Input a rudimentary hexadecimal file@>=
+{
+@y
+@ @<Input a rudimentary hexadecimal file@>=
+@z
+@x [6]
+}
+@y
+@z
+
 @x [7]
 @ @<Change the current location@>=
 @y
 @r @ @<Change the current location@>=
 @z
 
-@x [10]
-  t0=fgetc(prog_file);@+ if (t0==EOF) oops;
+@x [9]
+@<Input an \MMIX\ binary file@>=
+{
 @y
-  @t}$\vskip1in\quad${@>
-  t0=fgetc(prog_file);@+ if (t0==EOF) oops;
+@<Input an \MMIX\ binary file@>=
+@z
+@x [9]
+    new_chunk=true;
+@y
+    new_chunk=true; @+
+@z
+@x [9]
+}
+@y
+@z
+
+@x [10]
+@d oops { @+
+@y
+@d oops @+ { @+
+@z
+@x [10]
+  register int t0,t1,t2,t3;
+@y
+  @+ register int t0,t1,t2,t3;
 @z
 
 @x [13]
