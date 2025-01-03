@@ -1,0 +1,377 @@
+@x [5]
+@(mmix-pipe.h@>=
+@y
+@-MMIX_PIPE_H@>
+@(mmix-pipe.h@>=
+@z
+
+@x [7]
+@ Some of the names that are natural for this program are in
+@y
+@r @ Some of the names that are natural for this program are in
+@z
+@x [7]
+bypass the library names here.
+@y
+bypass the library names here.
+@-my_div@> @-my_fsqrt@> @-my_random@>
+@z
+
+@x [8]
+@ The amount of verbosity depends on the following bit codes.
+
+@<Header def...@>=
+#define issue_bit (1<<0)
+@y
+@ The amount of verbosity depends on the following bit codes.
+
+@d issue_bit (1<<0)
+@z
+@x [8]
+#define pipe_bit (1<<1)
+@y
+@d pipe_bit (1<<1)
+@z
+@x [8]
+#define coroutine_bit (1<<2)
+@y
+@d coroutine_bit (1<<2)
+@z
+@x [8]
+#define schedule_bit (1<<3)
+@y
+@d schedule_bit (1<<3)
+@z
+@x [8]
+#define uninit_mem_bit (1<<4)
+@y
+@d uninit_mem_bit (1<<4)
+@z
+@x [8]
+#define interactive_read_bit (1<<5)
+@y
+@d interactive_read_bit (1<<5)
+@z
+@x [8]
+#define show_spec_bit (1<<6)
+@y
+@d show_spec_bit (1<<6)
+@z
+@x [8]
+#define show_pred_bit (1<<7)
+@y
+@d show_pred_bit (1<<7)
+@z
+@x [8]
+#define show_wholecache_bit (1<<8)
+@y
+@d show_wholecache_bit (1<<8)
+@z
+
+@x [12]
+@ @<Local var...@>=
+@y
+@r @ @<Local var...@>=
+@z
+
+@x [26]
+@ Coroutine control is masterminded by a ring of queues, one each for
+@y
+@r @ Coroutine control is masterminded by a ring of queues, one each for
+@z
+
+@x [27]
+|schedule(c,d,s)|. (The |s| parameter is used only if scheduling is
+@y
+the function |schedule(c,d,s)|. (The |s| parameter is used only if scheduling is
+@z
+
+@x [35]
+static coroutine *queuelist(int);
+
+@ @<Sub...@>=
+@y
+static coroutine *queuelist(int);
+
+@r @ @<Sub...@>=
+@z
+
+@x [48]
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+
+@ @<Glob...@>=
+@y
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+
+@r @ @<Glob...@>=
+@z
+
+@x [50]
+static char *internal_op_name[]={
+@y
+static char *internal_op_name[]={@|
+@z
+@x [50]
+"mul8",
+@y
+"mul8",@|
+@z
+@x [50]
+"fsqrt",
+@y
+"fsqrt",@|
+@z
+@x [50]
+"frem",
+@y
+"frem",@|
+@z
+@x [50]
+"set",
+@y
+"set",@|
+@z
+@x [50]
+"nxor",
+@y
+"nxor",@|
+@z
+@x [50]
+"odif",
+@y
+"odif",@|
+@z
+@x [50]
+"ldvts",
+@y
+"ldvts",@|
+@z
+@x [50]
+"cswap",
+@y
+"cswap",@|
+@z
+@x [50]
+"resume",
+@y
+"resume",@|
+@z
+@x [50]
+"trip",
+@y
+"trip",@|
+@z
+
+@x [54]
+@ Here are the bit codes that affect trips and traps. The first eight
+@y
+@r @ Here are the bit codes that affect trips and traps. The first eight
+@z
+
+@x [57]
+Most of them are implementation-dependent, but a few are defined in general.
+
+@<Header def...@>=
+#define POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
+#define PARITY_ERROR (1<<1) /* try to save the file systems */
+#define NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
+#define REBOOT_SIGNAL (1<<4) /* it's time to start over */
+#define INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
+#define STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
+@y
+Most of them are implementation-dependent, but a few are defined in general.
+
+@d POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
+@d PARITY_ERROR (1<<1) /* try to save the file systems */
+@d NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
+@d REBOOT_SIGNAL (1<<4) /* it's time to start over */
+@d INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
+@d STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
+@z
+
+@x [61]
+hot=cool=reorder_top;
+@y
+hot=cool=reorder_top; @+
+@z
+
+@x [78]
+@ It is convenient to have
+@y
+@r @ It is convenient to have
+@z
+
+@x [84]
+@ @<Convert relative...@>=
+{
+@y
+@ @<Convert relative...@>=
+{ @+
+@z
+@x [84]
+  cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL;
+@y
+  cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL; @+
+@z
+
+@x [89]
+@ The |addr| fields in the specnode lists for registers are used
+to identify that register in diagnostic messages. Such addresses
+@y
+@ The |addr| fields in the specnode lists are used
+to identify the register in diagnostic messages. Such addresses
+@z
+
+@x [94]
+static void spec_install(specnode*,specnode*);
+@y
+static void spec_install(specnode*,specnode*);
+@-spec_install@>
+@z
+
+@x [95]
+static void spec_install( /* insert |t| into list |r| */
+@y
+@-spec_install@>
+static void spec_install( /* insert |t| into list |r| */
+@z
+
+@x [96]
+static void spec_rem(specnode*);
+
+@ @<Sub...@>=
+@y
+static void spec_rem(specnode*);
+@-spec_rem@>
+
+@ @<Sub...@>=
+@-spec_rem@>
+@z
+
+@x [109]
+@ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@y
+@r @ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@z
+
+@x [114]
+@ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
+@y
+@r @ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
+@z
+
+@x [118]
+@ When new data is \.{PUT} into special registers 8 or 15--20 (namely rC, rK,
+rQ, rU, rV, rG, or~rL) it can affect many things. Therefore we stop
+@y
+@ When new data is \.{PUT} into special registers 8 or 15--20 (namely |rC|, |rK|,
+|rQ|, |rU|, |rV|, |rG|, or~|rL|) it can affect many things. Therefore we stop
+@z
+
+@x [122]
+when the page table method isn't implemented in hardware.
+@y
+when the page table method isn't implemented in hardware.
+\vskip1in
+@z
+
+@x [125]
+    print_control_block(data);@+printf("\n");
+  }
+@y
+    print_control_block(data);@+printf("\n"); @+
+  }
+@z
+
+@x [131]
+if (data->y.p) {
+@y
+if (data->y.p) { @+
+@z
+@x [131]
+if (data->z.p) {
+@y
+if (data->z.p) { @+
+@z
+@x [131]
+if (data->b.p) {
+@y
+if (data->b.p) { @+
+@z
+@x [131]
+if (data->ra.p) {
+@y
+if (data->ra.p) { @+
+@z
+
+@x [138]
+@ Here are the basic boolean operations, which account for 24 of \MMIX's
+@y
+@r @ Here are the basic boolean operations, which account for 24 of \MMIX's
+@z
+
+@x [144]
+@ The other operations will be deferred until later, now that we understand
+@y
+@r @ The other operations will be deferred until later, now that we understand
+@z
+
+@x [145]
+  cool_O=cool->cur_O;@+ cool_S=cool->cur_S;
+@y
+  cool_O=cool->cur_O;@+ cool_S=cool->cur_S; @+
+@z
+
+@x [149]
+  }@+else if ((g[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
+@y
+  }@+else @/ if ((g[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
+@z
+
+@x [152]
+@ We update the |bp_table| when an instruction is issued.
+@y
+@r @ We update the |bp_table| when an instruction is issued.
+@z
+
+@x [160]
+@ If more than one functional unit is able to process branch instructions and
+@y
+@r @ If more than one functional unit is able to process branch instructions and
+@z
+
+@x [170]
+static bool is_dirty(cache*,cacheblock*);
+
+@ @<Sub...@>=
+@y
+static bool is_dirty(cache*,cacheblock*);
+
+@r @ @<Sub...@>=
+@z
+
+@x [185]
+  for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
+@y
+  for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
+@$jj {MMIX-PIPE}185 \&{int}@>
+@z
+@x [185]
+    for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
+@y
+    for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
+@$ii {MMIX-PIPE}185 \&{int}@>
+@$lim {MMIX-PIPE}185 \&{int}@>
+@z
+
+@x [238]
+convenience. Whenever rV changes, we recompute all these variables.
+@y
+convenience. Whenever rV changes, we recompute all these variables.
+@-b@> @-f@> @-n@> @-r@> @-s@>
+@z
+
+@x [395]
+@* Index.
+@y
+@z
