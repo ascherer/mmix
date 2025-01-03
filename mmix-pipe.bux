@@ -1,0 +1,8 @@
+@i mmix.bux
+
+@$MMIX_config {MMIX-CONFIG}1 \&{void} (\,)@>
+@$mmix_fclose {MMIX-CONFIG}1 \&{void} (\,)@>
+@$mmix_fopen {MMIX-CONFIG}1 \&{void} (\,)@>
+
+@$spec_install {MMIX-PIPE}95 \&{static} \&{void} (\,)@>
+@$spec_rem {MMIX-PIPE}97 \&{static} \&{void} (\,)@>

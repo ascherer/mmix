@@ -16,7 +16,10 @@
 @$shift_right {MMIX-ARITH}7 \&{octa} (\,)@>
 @$omult {MMIX-ARITH}8 \&{octa} (\,)@>
 @$aux {MMIX-ARITH}9 \&{octa}@>
+@$overflow {MMIX-ARITH}9 \&{octa}@>
+@$signed_omult {MMIX-ARITH}12 \&{octa} (\,)@>
 @$odiv {MMIX-ARITH}13 \&{octa} (\,)@>
+@$signed_odiv {MMIX-ARITH}13 \&{octa} (\,)@>
 @$onot {MMIX-ARITH}25 \&{octa} (\,)@>
 @$oor {MMIX-ARITH}25 \&{octa} (\,)@>
 @$oorn {MMIX-ARITH}25 \&{octa} (\,)@>
@@ -26,10 +29,38 @@
 @$onand {MMIX-ARITH}25 \&{octa} (\,)@>
 @$oxor {MMIX-ARITH}25 \&{octa} (\,)@>
 @$onxor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$nxor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$count_bits {MMIX-ARITH}26 \&{int} (\,)@>
+@$byte_diff {MMIX-ARITH}27 \&{tetra} (\,)@>
+@$wyde_diff {MMIX-ARITH}28 \&{tetra} (\,)@>
+@$bool_mult {MMIX-ARITH}29 \&{octa} (\,)@>
+@$cur_round {MMIX-ARITH}30 \&{int}@>
+@$exceptions {MMIX-ARITH}32 \&{int}@>
+@$load_sf {MMIX-ARITH}39 \&{octa} (\,)@>
+@$store_sf {MMIX-ARITH}40 \&{tetra} (\,)@>
+@$fmult {MMIX-ARITH}41 \&{octa} (\,)@>
+@$fdivide {MMIX-ARITH}44 \&{octa} (\,)@>
+@$fplus {MMIX-ARITH}46 \&{octa} (\,)@>
+@$fepscomp {MMIX-ARITH}50 \&{int} (\,)@>
+@$fcomp {MMIX-ARITH}85 \&{int} (\,)@>
+@$fintegerize {MMIX-ARITH}86 \&{octa} (\,)@>
+@$fixit {MMIX-ARITH}88 \&{octa} (\,)@>
+@$floatit {MMIX-ARITH}89 \&{octa} (\,)@>
+@$froot {MMIX-ARITH}91 \&{octa} (\,)@>
+@$fremstep {MMIX-ARITH}93 \&{octa} (\,)@>
 
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
 @$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
+@$mmix_fread {MMIX-IO}12 \&{octa} (\,)@>
+@$mmix_fgets {MMIX-IO}14 \&{octa} (\,)@>
+@$mmix_fgetws {MMIX-IO}16 \&{octa} (\,)@>
+@$mmix_fwrite {MMIX-IO}18 \&{octa} (\,)@>
+@$mmix_fputs {MMIX-IO}19 \&{octa} (\,)@>
+@$mmix_fputws {MMIX-IO}20 \&{octa} (\,)@>
+@$mmix_fseek {MMIX-IO}21 \&{octa} (\,)@>
+@$mmix_ftell {MMIX-IO}22 \&{octa} (\,)@>
+@$print_trip_warning {MMIX-IO}23 \&{void} (\,)@>
 
 @$verbose {MMIX-PIPE}4 \&{int}@>
 @$MMIX_init {MMIX-PIPE}10 \&{void} (\,)@>
@@ -390,15 +421,42 @@
 @$sav {MMIX-PIPE}49 =87@>
 @$unsav {MMIX-PIPE}49 =88@>
 @$resum {MMIX-PIPE}49 =89@>
+
 @$internal_op {MMIX-PIPE}51 \&{internal\_opcode} [\,]@>
+@$rA {MMIX-PIPE}52 =21@>
+@$rB {MMIX-PIPE}52 =0@>
+@$rC {MMIX-PIPE}52 =8@>
+@$rD {MMIX-PIPE}52 =1@>
+@$rE {MMIX-PIPE}52 =2@>
+@$rF {MMIX-PIPE}52 =22@>
+@$rG {MMIX-PIPE}52 =19@>
+@$rH {MMIX-PIPE}52 =3@>
 @$rI {MMIX-PIPE}52 =12@>
+@$rJ {MMIX-PIPE}52 =4@>
 @$rK {MMIX-PIPE}52 =15@>
+@$rL {MMIX-PIPE}52 =20@>
+@$rM {MMIX-PIPE}52 =5@>
+@$rN {MMIX-PIPE}52 =9@>
+@$rN {MMIX-PIPE}52 =9@>
 @$rO {MMIX-PIPE}52 =10@>
+@$rP {MMIX-PIPE}52 =23@>
 @$rQ {MMIX-PIPE}52 =16@>
+@$rR {MMIX-PIPE}52 =6@>
 @$rS {MMIX-PIPE}52 =11@>
 @$rT {MMIX-PIPE}52 =13@>
-@$rTT {MMIX-PIPE}52 =14@>
+@$rU {MMIX-PIPE}52 =17@>
 @$rV {MMIX-PIPE}52 =18@>
+@$rW {MMIX-PIPE}52 =24@>
+@$rX {MMIX-PIPE}52 =25@>
+@$rY {MMIX-PIPE}52 =26@>
+@$rZ {MMIX-PIPE}52 =27@>
+@$rBB {MMIX-PIPE}52 =7@>
+@$rTT {MMIX-PIPE}52 =14@>
+@$rWW {MMIX-PIPE}52 =28@>
+@$rXX {MMIX-PIPE}52 =29@>
+@$rYY {MMIX-PIPE}52 =30@>
+@$rZZ {MMIX-PIPE}52 =31@>
+
 @$fetch_max {MMIX-PIPE}59 \&{int}@>
 @$dispatch_max {MMIX-PIPE}59 \&{int}@>
 @$peekahead {MMIX-PIPE}59 \&{int}@>
@@ -492,6 +550,19 @@
 @$frem_max {MMIX-PIPE}349 \&{int}@>
 @$denin_penalty {MMIX-PIPE}349 \&{int}@>
 @$denout_penalty {MMIX-PIPE}349 \&{int}@>
+
+@$Halt {MMIX-PIPE}371 =0@>
+@$Fopen {MMIX-PIPE}371 =1@>
+@$Fclose {MMIX-PIPE}371 =2@>
+@$Fread {MMIX-PIPE}371 =3@>
+@$Fgets {MMIX-PIPE}371 =4@>
+@$Fgetws {MMIX-PIPE}371 =5@>
+@$Fwrite {MMIX-PIPE}371 =6@>
+@$Fputs {MMIX-PIPE}371 =7@>
+@$Fputws {MMIX-PIPE}371 =8@>
+@$Fseek {MMIX-PIPE}371 =9@>
+@$Ftell {MMIX-PIPE}371 =10@>
+
 @$read_hex {MMIX-PIPE}393 \&{octa} (\,)@>
 
 @$mm {MMIXAL}22 =\T{\^98}@>
