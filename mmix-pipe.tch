@@ -1,3 +1,9 @@
+@x [0]
+\input pdfwebtocfront
+
+@y
+@z
+
 @x [5]
 @(mmix-pipe.h@>=
 @y
@@ -364,11 +370,251 @@ static bool is_dirty(cache*,cacheblock*);
 @$lim {MMIX-PIPE}185 \&{int}@>
 @z
 
+@x [213]
+Extern void mem_write(octa addr,octa val);
+
+@ @<External r...@>=
+@y
+Extern void mem_write(octa addr,octa val);
+
+@r @ @<External r...@>=
+@z
+
+@x [217]
+                   /* |p| not moved */
+@y
+@z
+
+@x [218]
+p=alloc_slot(Scache,c->outbuf.tag);
+@y
+p=alloc_slot(Scache,c->outbuf.tag); @+
+@z
+
+@x [225]
+p=alloc_slot(Scache,data->z.o);
+@y
+p=alloc_slot(Scache,data->z.o); @+
+@z
+@x [224]
+set_lock(&Scache->filler,mem_lock);
+@y
+set_lock(&Scache->filler,mem_lock); @+
+@z
+
+@x [227]
+\dots, into the cache if it is not too busy.
+
+@y
+\dots, into the cache if it is not too busy.
+@z
+
+@x [236]
+static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
+
+@ @<Initialize e...@>=
+@y
+static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
+
+@r @ @<Initialize e...@>=
+@z
+
 @x [238]
 convenience. Whenever rV changes, we recompute all these variables.
 @y
 convenience. Whenever rV changes, we recompute all these variables.
 @-b@> @-f@> @-n@> @-r@> @-s@>
+@z
+
+@x [239]
+@ @<Update the \\{page} variables@>=
+@y
+@r @ @<Update the \\{page} variables@>=
+@z
+
+@x [245]
+@ At this point the translation of the given virtual address |data->y.o| is
+@y
+@r @ At this point the translation of the given virtual address |data->y.o| is
+@z
+
+@x [251[
+static void print_write_buffer(void);
+
+@ @<Sub...@>=
+@y
+static void print_write_buffer(void);
+
+@r @ @<Sub...@>=
+@z
+
+@x [256]
+@<Commit to memory...@>=
+{@+register write_node *q=write_tail;
+@y
+@<Commit to memory...@>=
+{ register write_node *q=write_tail;
+@z
+
+@x [259]
+(see |MMIX_config|). Although an uncached store will not be stored in the
+@y
+(see function |MMIX_config()|). Although an uncached store will not be stored in the
+@z
+
+@x [268]
+If the lower $b+c$ bits of the virtual and physical addresses differ,
+@y
+\vskip1cm
+If the lower $b+c$ bits of the virtual and physical addresses differ,
+@z
+
+@x [271]
+@ @<Do load/store stage 1 with known physical address@>=
+{@+octa *m;
+@y
+@ @<Do load/store stage 1 with known physical address@>=
+{octa *m;
+@z
+@x [271]
+    data->state=st_ready;@+pass_after(1);@+goto passit;
+@y
+    data->state=st_ready; pass_after(1);@+goto passit;
+@z
+@x [271]
+    data->state=DT_hit;@+pass_after(1);@+ goto passit;
+@y
+    data->state=DT_hit; pass_after(1);@+ goto passit;
+@z
+
+@x [273]
+@ The second stage might also want to fill the D-cache (and perhaps
+@y
+@r @ The second stage might also want to fill the D-cache (and perhaps
+@z
+
+@x [291]
+@ @d got_IT 19   /* |state| when IT-cache entry has been computed */
+@y
+@r @ @d got_IT 19   /* |state| when IT-cache entry has been computed */
+@z
+
+@x [300]
+@ @<Try to get the contents of location |data->z.o| in the I-cache@>=
+@y
+@r @ @<Try to get the contents of location |data->z.o| in the I-cache@>=
+@z
+
+@x [304]
+@ At this point we check for egregiously invalid instructions. (Sometimes
+@y
+@r @ At this point we check for egregiously invalid instructions. (Sometimes
+@z
+
+@x [308]
+@ Since execution is speculative, an exceptional condition might not
+@y
+@r @ Since execution is speculative, an exceptional condition might not
+@z
+
+@x [314]
+@ The following check is performed at the beginning of every cycle.
+@y
+@r @ The following check is performed at the beginning of every cycle.
+@z
+
+@x [319]
+@ @<Set resumption registers $\rm(rB,\$255)$ or $\rm(rBB,\$255)$@>=
+@y
+@r @ @<Set resumption registers $\rm(rB,\$255)$ or $\rm(rBB,\$255)$@>=
+@z
+
+@x [321]
+@ @<Set resumption registers $\rm(rY,rZ)$ or $\rm(rYY,rZZ)$@>=
+@y
+@r @ @<Set resumption registers $\rm(rY,rZ)$ or $\rm(rYY,rZZ)$@>=
+@z
+
+@x [322]
+      cool->ren_a=true, spec_install(&g[rK],&cool->a);
+      cool->a.known=true, cool->a.o=g[255].o;
+      cool->ren_x=true, spec_install(&g[255],&cool->x);
+      cool->x.known=true, cool->x.o=g[rBB].o;
+@y
+      cool->ren_a=true; spec_install(&g[rK],&cool->a);
+      cool->a.known=true; cool->a.o=g[255].o;
+      cool->ren_x=true; spec_install(&g[255],&cool->x);
+      cool->x.known=true; cool->x.o=g[rBB].o;
+@z
+
+@x [332]
+@ The instruction \.{UNSAVE} $z$ generates a sequence of internal instructions
+@y
+@r @ The instruction \.{UNSAVE} $z$ generates a sequence of internal instructions
+@z
+
+@x [337]
+@ Of course \.{SAVE} is handled essentially like \.{UNSAVE}, but backwards.
+@y
+@r @ Of course \.{SAVE} is handled essentially like \.{UNSAVE}, but backwards.
+@z
+
+@x [346]
+@d ROUND_NEAR 4
+@y
+@d ROUND_NEAR 4
+@t}\vskip1cm{@>
+@z
+
+@x [351]
+@ @<Begin execution of a stage-two operation@>=
+@y
+@r @ @<Begin execution of a stage-two operation@>=
+@z
+
+@x [359]
+if (!Icache) {
+  data->state=11;@+goto switch1;
+@y
+if (!Icache) { @+
+  data->state=11;@+goto switch1; @+
+@z
+
+@x [364]
+ if (!Icache) {
+   data->state=(data->loc.h&sign_bit? 31:33);@+goto switch2;
+@y
+ if (!Icache) { @+
+   data->state=(data->loc.h&sign_bit? 31:33);@+goto switch2; @+
+@z
+@x [364]
+   { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
+@y
+   { if (data->i==syncd) goto fin_ex; else goto next_sync; }
+@z
+
+@x [381]
+@ The subroutine |mmgetchars(buf,size,addr,stop)| reads characters
+@y
+@r @ The subroutine |mmgetchars(buf,size,addr,stop)| reads characters
+@z
+
+@x [384]
+  register unsigned char *p;
+@y
+  @+ register unsigned char *p;
+@z
+
+@x [385]
+  register int s=8*((~a.l)&0x3);
+@y
+  @+ register int s=8*((~a.l)&0x3);
+@z
+
+@x [391]
+@ The default |spec_write| just reports its arguments, without actually
+@y
+@r @ The default |spec_write| just reports its arguments, without actually
 @z
 
 @x [395]
