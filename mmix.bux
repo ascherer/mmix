@@ -52,6 +52,8 @@
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
 @$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
+@$mmix_fopen {MMIX-IO}8 \&{void} (\,)@>
+@$mmix_fclose {MMIX-IO}11 \&{void} (\,)@>
 @$mmix_fread {MMIX-IO}12 \&{octa} (\,)@>
 @$mmix_fgets {MMIX-IO}14 \&{octa} (\,)@>
 @$mmix_fgetws {MMIX-IO}16 \&{octa} (\,)@>
