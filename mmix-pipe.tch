@@ -123,6 +123,16 @@ static char *internal_op_name[]={@|
 "trip",@|
 @z
 
+@x [53]
+static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
+ "rC","rN","rO","rS","rI","rT","rTT","rK","rQ","rU","rV","rG","rL",
+ "rA","rF","rP","rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
+@y
+static char *special_name[32]={@|"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
+ "rC","rN","rO","rS","rI","rT","rTT","rK",@|"rQ","rU","rV","rG","rL",
+ "rA","rF","rP",@|"rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
+@z
+
 @x [54]
 @ Here are the bit codes that affect trips and traps. The first eight
 @y
