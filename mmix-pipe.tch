@@ -67,6 +67,37 @@ static coroutine *queuelist(int);
 @r @ @<Glob...@>=
 @z
 
+@x [49]
+@!or, /* \.{OR[I]}, \.{OR[M][H,L]} */
+@y
+@!or, /* \.{OR[I]}, \.{OR[M][H,L]} */ @+ @t\qquad@>
+@z
+@x [49]
+@!nor, /* \.{NOR[I]} */
+@y
+@!nor, /* \.{NOR[I]} */ @+ @t\qquad@>
+@z
+@x [49]
+@!andn, /* \.{ANDN[I]}, \.{ANDN[M][H,L]} */
+@y
+@!andn, /* \.{ANDN[I]}, \.{ANDN[M][H,L]} */ @+ @t\qquad@>
+@z
+@x [49]
+@!xor, /* \.{XOR[I]} */
+@y
+@!xor, /* \.{XOR[I]} */ @+ @t\qquad@>
+@z
+@x [49]
+@!save, /* \.{SAVE} */
+@y
+@!save, /* \.{SAVE} */ @+ @t\qquad@>
+@z
+@x [49]
+@!trap, /* \.{TRAP} */
+@y
+@!trap, /* \.{TRAP} */ @+ @t\qquad@>
+@z
+
 @x [50]
 static char *internal_op_name[]={
 @y
@@ -209,6 +240,11 @@ static void spec_rem(specnode*);
 @y
 @r @ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 @z
+@x [114]
+  cool->z=cool->b=zero_spec; cool->need_b=false;
+@y
+  cool->z=cool->b=zero_spec; @+ cool->need_b=false;
+@z
 
 @x [118]
 @ When new data is \.{PUT} into special registers 8 or 15--20 (namely rC, rK,
@@ -258,6 +294,31 @@ if (data->ra.p) { @+
 @ Here are the basic boolean operations, which account for 24 of \MMIX's
 @y
 @r @ Here are the basic boolean operations, which account for 24 of \MMIX's
+@z
+@x [138]
+case or: data->x.o=oor(data->y.o, data->z.o); @+ break;
+case orn: data->x.o=oorn(data->y.o, data->z.o); @+ break;
+case nor: data->x.o=onor(data->y.o, data->z.o); @+ break;
+case and: data->x.o=oand(data->y.o, data->z.o); @+ break;
+case andn: data->x.o=oandn(data->y.o, data->z.o); @+ break;
+case nand: data->x.o=onand(data->y.o, data->z.o); @+ break;
+case xor: data->x.o=oxor(data->y.o, data->z.o); @+ break;
+case nxor: data->x.o=onxor(data->y.o, data->z.o); @+ break;
+@y
+case or: data->x.o=oor(data->y.o, data->z.o); break;
+case orn: data->x.o=oorn(data->y.o, data->z.o); break;
+case nor: data->x.o=onor(data->y.o, data->z.o); break;
+case and: data->x.o=oand(data->y.o, data->z.o); break;
+case andn: data->x.o=oandn(data->y.o, data->z.o); break;
+case nand: data->x.o=onand(data->y.o, data->z.o); break;
+case xor: data->x.o=oxor(data->y.o, data->z.o); break;
+case nxor: data->x.o=onxor(data->y.o, data->z.o); break;
+@z
+
+@x [139]
+case subu: data->x.o=ominus(data->y.o,data->z.o);@+ break;
+@y
+case subu: data->x.o=ominus(data->y.o,data->z.o); break;
 @z
 
 @x [144]
@@ -353,6 +414,14 @@ set_lock(&Scache->filler,mem_lock); @+
 \dots, into the cache if it is not too busy.
 @z
 
+@x [235]
+  if (!is_dirty(Scache,p)) {
+    p->tag.h|=data->x.o.h;@+goto Sclean_inc;
+@y
+  if (!is_dirty(Scache,p)) { @+
+    p->tag.h|=data->x.o.h;@+goto Sclean_inc; @+
+@z
+
 @x [236]
 static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 
@@ -374,6 +443,26 @@ convenience. Whenever rV changes, we recompute all these variables.
 @ @<Update the \\{page} variables@>=
 @y
 @r @ @<Update the \\{page} variables@>=
+@z
+@x [239]
+  page_n=rv.l&0x1ff8;
+@y
+  page_n=rv.l&0x1ff8; @+
+@z
+@x [239]
+  page_r=rv.l&0x7ffffff;
+@y
+  page_r=rv.l&0x7ffffff; @+
+@z
+@x [239]
+  page_b[4]=(rv.l>>8)&0xf;
+@y
+  page_b[4]=(rv.l>>8)&0xf; @+
+@z
+@x [239}
+  page_b[2]=(rv.l>>16)&0xf;
+@y
+  page_b[2]=(rv.l>>16)&0xf; @+
 @z
 
 @x [245]
@@ -404,6 +493,36 @@ static void print_write_buffer(void);
 (see |MMIX_config|). Although an uncached store will not be stored in the
 @y
 (see function |MMIX_config|). Although an uncached store will not be stored in the
+@z
+
+@x [260]
+set_lock(&mem_locker,mem_lock); /* a coroutine of type |vanish| */
+@y
+@+ set_lock(&mem_locker,mem_lock); /* a |vanish| coroutine */
+@z
+
+@x [261]
+if (Scache) set_lock(&Dcache->filler,Scache->lock)@;
+else set_lock(&Dcache->filler,mem_lock);
+@y
+set_lock(&Dcache->filler, Scache ? Scache->lock : mem_lock);
+@z
+@x [261]
+set_lock(self,Dcache->fill_lock);
+data->ptr_b=Dcache->filler_ctl.ptr_b=(void *)p;
+Dcache->filler_ctl.z.o=write_head->addr;
+@y
+set_lock(self,Dcache->fill_lock); @+
+Dcache->filler_ctl.z.o=write_head->addr;
+data->ptr_b=Dcache->filler_ctl.ptr_b=(void *)p;
+@z
+
+@x [265]
+  data->z.o=incr(data->z.o,data->xx&-(data->i==prego? Icache: Dcache)->bb);
+  /* (I hope the adder is fast enough) */
+@y
+  /* (I hope the adder is fast enough) */
+  data->z.o=incr(data->z.o,data->xx&-(data->i==prego? Icache: Dcache)->bb);
 @z
 
 @x [268]
@@ -502,6 +621,16 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @r @ Of course \.{SAVE} is handled essentially like \.{UNSAVE}, but backwards.
 @z
+@x [337]
+ case 0: @<Set up the first phase of saving@>;@+break;
+@y
+ case 0: @<Set up the first phase of saving@>; break;
+@z
+@x [337]
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
+@y
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>; break;
+@z
 
 @x [346]
 @d ROUND_NEAR 4
@@ -535,6 +664,41 @@ if (!Icache) { @+
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
 @y
    { if (data->i==syncd) goto fin_ex; else goto next_sync; }
+@z
+
+@x [365]
+p=cache_search(Icache,data->z.o);
+if (p) {
+@y
+if (p=cache_search(Icache,data->z.o)) {
+@z
+
+@x [366]
+p=cache_search(Dcache,data->z.o);
+if (p) {
+@y
+if (p=cache_search(Dcache,data->z.o)) {
+@z
+
+@x [367]
+p=cache_search(Scache,data->z.o);
+if (p) {
+@y
+if (p=cache_search(Scache,data->z.o)) {
+@z
+
+@x [373]
+else if (zz==1) {
+  octa trap_loc=incr(g[rWW].o,-4);
+@y
+else if (zz==1) { @+
+  octa trap_loc=incr(g[rWW].o,-4); @+@t}\6{@>
+@z
+
+@x [374]
+static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
+@y
+@+ static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @z
 
 @x [381]
