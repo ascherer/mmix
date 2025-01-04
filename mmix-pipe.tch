@@ -29,57 +29,6 @@ bypass the library names here.
 @-my_div@> @-my_fsqrt@> @-my_random@>
 @z
 
-@x [8]
-@ The amount of verbosity depends on the following bit codes.
-
-@<Header def...@>=
-#define issue_bit (1<<0)
-@y
-@ The amount of verbosity depends on the following bit codes.
-
-@d issue_bit (1<<0)
-@z
-@x [8]
-#define pipe_bit (1<<1)
-@y
-@d pipe_bit (1<<1)
-@z
-@x [8]
-#define coroutine_bit (1<<2)
-@y
-@d coroutine_bit (1<<2)
-@z
-@x [8]
-#define schedule_bit (1<<3)
-@y
-@d schedule_bit (1<<3)
-@z
-@x [8]
-#define uninit_mem_bit (1<<4)
-@y
-@d uninit_mem_bit (1<<4)
-@z
-@x [8]
-#define interactive_read_bit (1<<5)
-@y
-@d interactive_read_bit (1<<5)
-@z
-@x [8]
-#define show_spec_bit (1<<6)
-@y
-@d show_spec_bit (1<<6)
-@z
-@x [8]
-#define show_pred_bit (1<<7)
-@y
-@d show_pred_bit (1<<7)
-@z
-@x [8]
-#define show_wholecache_bit (1<<8)
-@y
-@d show_wholecache_bit (1<<8)
-@z
-
 @x [12]
 @ @<Local var...@>=
 @y
@@ -178,27 +127,6 @@ static char *internal_op_name[]={@|
 @ Here are the bit codes that affect trips and traps. The first eight
 @y
 @r @ Here are the bit codes that affect trips and traps. The first eight
-@z
-
-@x [57]
-Most of them are implementation-dependent, but a few are defined in general.
-
-@<Header def...@>=
-#define POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
-#define PARITY_ERROR (1<<1) /* try to save the file systems */
-#define NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
-#define REBOOT_SIGNAL (1<<4) /* it's time to start over */
-#define INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
-#define STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
-@y
-Most of them are implementation-dependent, but a few are defined in general.
-
-@d POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
-@d PARITY_ERROR (1<<1) /* try to save the file systems */
-@d NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
-@d REBOOT_SIGNAL (1<<4) /* it's time to start over */
-@d INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
-@d STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
 @z
 
 @x [61]
@@ -465,7 +393,7 @@ static void print_write_buffer(void);
 @x [259]
 (see |MMIX_config|). Although an uncached store will not be stored in the
 @y
-(see function |MMIX_config()|). Although an uncached store will not be stored in the
+(see function |MMIX_config|). Although an uncached store will not be stored in the
 @z
 
 @x [268]

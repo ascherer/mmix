@@ -96,6 +96,57 @@ new-style and old-style compilers.
 as in {\mc ANSI C}.
 @z
 
+@x [8] l.182 Don't expose unnecessary items.
+@ The amount of verbosity depends on the following bit codes.
+
+@<Header def...@>=
+#define issue_bit (1<<0)
+@y
+@ The amount of verbosity depends on the following bit codes.
+
+@d issue_bit (1<<0)
+@z
+@x [8] l.187
+#define pipe_bit (1<<1)
+@y
+@d pipe_bit (1<<1)
+@z
+@x [8] l.189
+#define coroutine_bit (1<<2)
+@y
+@d coroutine_bit (1<<2)
+@z
+@x [8] l.191
+#define schedule_bit (1<<3)
+@y
+@d schedule_bit (1<<3)
+@z
+@x [8] l.193
+#define uninit_mem_bit (1<<4)
+@y
+@d uninit_mem_bit (1<<4)
+@z
+@x [8] l.195
+#define interactive_read_bit (1<<5)
+@y
+@d interactive_read_bit (1<<5)
+@z
+@x [8] l.197
+#define show_spec_bit (1<<6)
+@y
+@d show_spec_bit (1<<6)
+@z
+@x [8] l.199
+#define show_pred_bit (1<<7)
+@y
+@d show_pred_bit (1<<7)
+@z
+@x [8] l.201
+#define show_wholecache_bit (1<<8)
+@y
+@d show_wholecache_bit (1<<8)
+@z
+
 @x [9] l.204 Reshuffle MMIX_silent.
 @ The |MMIX_init()| routine should be called exactly once, after
 |MMIX_config()| has done its work but before the simulator starts to execute
@@ -558,6 +609,27 @@ static void print_bits(
   for (j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
 @y
   for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
+@z
+
+@x [57] l.1211 Don't expose unnecessary items.
+Most of them are implementation-dependent, but a few are defined in general.
+
+@<Header def...@>=
+#define POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
+#define PARITY_ERROR (1<<1) /* try to save the file systems */
+#define NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
+#define REBOOT_SIGNAL (1<<4) /* it's time to start over */
+#define INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
+#define STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
+@y
+Most of them are implementation-dependent, but a few are defined in general.
+
+@d POWER_FAILURE (1<<0) /* try to shut down calmly and quickly */
+@d PARITY_ERROR (1<<1) /* try to save the file systems */
+@d NONEXISTENT_MEMORY (1<<2) /* a memory address can't be used */
+@d REBOOT_SIGNAL (1<<4) /* it's time to start over */
+@d INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
+@d STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
 @z
 
 @x [62] l.1423 C99 prototypes for C2x.
