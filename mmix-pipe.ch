@@ -770,7 +770,7 @@ a trivial program that computes the value of the standard library function
 @x [89] l.1874 Different approach for ABSTIME.
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @y
-@d ABSTIME /* number of seconds in “the epoch” */
+@d ABSTIME /* number of seconds in ``the epoch'' */
 @d VERSION 1 /* version of the \MMIX\ architecture that we support */
 @z
 
