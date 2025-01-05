@@ -2463,8 +2463,9 @@ static octa magic_read(
 
 @x [378] l.6628
   for (q=write_tail;;) {
+    if (q==write_head) break;
 @y
-  for (write_node* q=write_tail;;) {
+  for (write_node* q=write_tail; q!=write_head;) {
 @z
 
 @x [378] l.6634
@@ -2489,8 +2490,9 @@ static void magic_write(
 
 @x [379] l.6661
   for (q=write_tail;;) {
+    if (q==write_head) break;
 @y
-  for (write_node* q=write_tail;;) {
+  for (write_node* q=write_tail; q!=write_head;) {
 @z
 
 @x [379] l.6667
