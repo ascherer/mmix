@@ -256,14 +256,14 @@ hot=cool=reorder_top; @+
 @ @<Commit and/or deissue up to |commit_max| instructions@>=
 @y
 @ @<Commit and/or deissue up to |commit_max| instructions@>=
-@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @z
 
 @x [71]
 @ @d UNKNOWN_SPEC ((specnode*)1)
 @y
 @ @d UNKNOWN_SPEC ((specnode*)1)
-@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
 @z
 
 @x [73]
@@ -271,7 +271,6 @@ static void print_fetch_buffer(void)
 @y
 @-p@> @%
 @$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
-@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
 static void print_fetch_buffer(void)
 @z
 
@@ -285,28 +284,14 @@ static void print_fetch_buffer(void)
   for (i=0;i<8;i++) support[i] |= u->ops[i];
 @y
   for (i=0;i<8;i++) support[i] |= u->ops[i];
-@-u@> @% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
-@z
-
-@x [80]
-@ @<Determine the flags, |f|, and the internal opcode, |i|@>=
-@y
-@ @% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
-@<Determine the flags, |f|, and the internal opcode, |i|@>=
-@z
-
-@x [81]
-@ @<Issue the |cool| instruction@>=
-@y
-@ @<Issue the |cool| instruction@>=
-@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+@-u@>
 @z
 
 @x [82]
 functional unit that supports |op| and has stage~1 unoccupied.
 @y
 functional unit that supports |op| and has stage~1 unoccupied.
-@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@-t@> @-b@>
 @z
 
 @x [84]
@@ -314,23 +299,12 @@ functional unit that supports |op| and has stage~1 unoccupied.
 {
 @y
 @ @<Convert relative...@>=
-{ @+ @%
-@$i {MMIX-PIPE}12 \&{register} \&{int}@>
-@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+{ @+
 @z
 @x [84]
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL;
 @y
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL; @+
-@z
-
-@x [85]
-is made in the common case that the speculative value of~rJ is known.
-@y
-is made in the common case that the speculative value of~rJ is known.
-@%
-@$i {MMIX-PIPE}12 \&{register} \&{int}@>
-@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
 @z
 
 @x [86]
@@ -351,15 +325,8 @@ to identify the register in diagnostic messages. Such addresses
 @x [91]
 static void print_specnode_id(
 @y
-@% @$l {MMIX-ARITH}3 \&{tetra}@>
+@-a@> @% @$l {MMIX-ARITH}3 \&{tetra}@>
 static void print_specnode_id(
-@z
-
-@x [93]
-static spec specval(
-@y
-@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_node} ${*}$@>
-static spec specval(
 @z
 
 @x [94]
@@ -388,10 +355,53 @@ static void spec_rem(specnode*);
 @-spec_rem@>
 @z
 
+@x [100]
+@ @<Install default fields in the |cool| block@>=
+@y
+@ @<Install default fields in the |cool| block@>=
+@$x {MMIX-PIPE}44 \&{specnode}@>
+@z
+
+@x [102]
+have been unsaved, so we aren't fussy about it here.
+@y
+have been unsaved, so we aren't fussy about it here.
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@z
+
+@x [103]
+@ @<Install the operand fields of the |cool| block@>=
+@y
+@ @<Install the operand fields of the |cool| block@>=
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [106]
+@ @<Set \9{c}|cool->b| from register X@>=
+@y
+@ @<Set \9{c}|cool->b| from register X@>=
+@% @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
+
 @x [109]
 @ @<Set \9{c}|cool->z| as an immediate wyde@>=
 @y
 @r @ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [110]
+@ @<Install register X...@>=
+@y
+@ @<Install register X...@>=
+@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [113]
+@<Insert \9{a}an instruction to advance gamma@>=
+@y
+@% @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@<Insert \9{a}an instruction to advance gamma@>=
 @z
 
 @x [114]
