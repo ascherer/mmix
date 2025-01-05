@@ -2270,7 +2270,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
 @x [356] l.6327
   @<Clean the data caches@>;
 @y
-  @<Clean the \9{d}data caches@>;
+  @<Clean the \9{a}data caches@>;
 @z
 
 @x [357] l.6334
@@ -2297,7 +2297,7 @@ for (control* cc=data;cc!=hot;) {
 @x [361] l.6387
 @ @<Clean the data caches@>=
 @y
-@ @<Clean the \9{d}data caches@>=
+@ @<Clean the \9{a}data caches@>=
 @z
 
 @x [361] l.6389
