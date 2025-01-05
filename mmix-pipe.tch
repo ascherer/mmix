@@ -7,7 +7,9 @@
 \else \global\pageshift=-0.5in
   \global\hoffset=-0.5in \global\voffset=-0.5in \fi
 
+\ifx\undefined\eightpoint\else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
+\fi
 @z
 
 @x [5]
@@ -35,16 +37,56 @@ bypass the library names here.
 @r @ @<Local var...@>=
 @z
 
+@x [13}
+@d confusion(m) errprint("This can't happen: %s",m)
+@y
+@d confusion(m) errprint("This can't happen: %s",m)
+@-x@> @-m@>
+@z
+
+@x [21]
+the remainder in~|aux|.
+@y
+the remainder in~|aux|.
+@-y@> @-z@>
+@z
+
 @x [26]
 @ Coroutine control is masterminded by a ring of queues, one each for
 @y
 @r @ Coroutine control is masterminded by a ring of queues, one each for
+@z
+@x [26]
+etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
+@y
+etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
+@-c@> @-h@>
 @z
 
 @x [27]
 |schedule(c,d,s)|. (The |s| parameter is used only if scheduling is
 @y
 the function |schedule(c,d,s)|. (The |s| parameter is used only if scheduling is
+@z
+@x [27]
+generally set |s| to the state at which the scheduled coroutine will begin.)
+@y
+generally set |s| to the state at which the scheduled coroutine will begin.)
+@-c@> @-d@> @-s@>
+@z
+
+@x [32]
+coroutine is not assumed to have any valid data in its |ctl| field.
+@y
+coroutine is not assumed to have any valid data in its |ctl| field.
+@-c@>
+@z
+
+@x [34]
+of Computer Programming}.
+@y
+of Computer Programming}.
+@-t@>
 @z
 
 @x [35]
@@ -55,6 +97,13 @@ static coroutine *queuelist(int);
 static coroutine *queuelist(int);
 
 @r @ @<Sub...@>=
+@z
+
+@x [37]
+@d release_lock(c,l) {@+l=NULL;@+ (c)->lockloc=NULL;@+}
+@y
+@d release_lock(c,l) {@+l=NULL;@+ (c)->lockloc=NULL;@+}
+@-c@> @-l@>
 @z
 
 @x [48]
@@ -86,6 +135,12 @@ static coroutine *queuelist(int);
 @!xor, /* \.{XOR[I]} */
 @y
 @!xor, /* \.{XOR[I]} */ @+ @t\qquad@>
+@z
+@x [49]
+@!go, /* \.{GO[I]} */
+@y
+@!go, /* \.{GO[I]} */
+@-go@>
 @z
 @x [49]
 @!save, /* \.{SAVE} */
@@ -154,6 +209,13 @@ static char *internal_op_name[]={@|
 "trip",@|
 @z
 
+@x [51]
+internal ones.
+@y
+internal ones.
+@-go@> @% @$go {MMIX-PIPE}49 =72@>
+@z
+
 @x [53]
 static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
  "rC","rN","rO","rS","rI","rT","rTT","rK","rQ","rU","rV","rG","rL",
@@ -170,10 +232,47 @@ static char *special_name[32]={@|"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
 @r @ Here are the bit codes that affect trips and traps. The first eight
 @z
 
+@x [56]
+  for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
+@y
+  for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
+@-b@> @-j@>
+@z
+
+@x [59]
+reorder buffer.
+@y
+reorder buffer.
+@-b@> @-x@> @-y@> @-z@>
+@z
+
 @x [61]
 hot=cool=reorder_top;
 @y
 hot=cool=reorder_top; @+
+@z
+
+@x [67]
+@ @<Commit and/or deissue up to |commit_max| instructions@>=
+@y
+@ @<Commit and/or deissue up to |commit_max| instructions@>=
+@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [71]
+@ @d UNKNOWN_SPEC ((specnode*)1)
+@y
+@ @d UNKNOWN_SPEC ((specnode*)1)
+@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+@z
+
+@x [73]
+static void print_fetch_buffer(void)
+@y
+@-p@> @%
+@$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
+@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+static void print_fetch_buffer(void)
 @z
 
 @x [78]
@@ -182,17 +281,63 @@ hot=cool=reorder_top; @+
 @r @ It is convenient to have
 @z
 
+@x {79]
+  for (i=0;i<8;i++) support[i] |= u->ops[i];
+@y
+  for (i=0;i<8;i++) support[i] |= u->ops[i];
+@-u@> @% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [80]
+@ @<Determine the flags, |f|, and the internal opcode, |i|@>=
+@y
+@ @% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@<Determine the flags, |f|, and the internal opcode, |i|@>=
+@z
+
+@x [81]
+@ @<Issue the |cool| instruction@>=
+@y
+@ @<Issue the |cool| instruction@>=
+@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+@z
+
+@x [82]
+functional unit that supports |op| and has stage~1 unoccupied.
+@y
+functional unit that supports |op| and has stage~1 unoccupied.
+@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
 @x [84]
 @ @<Convert relative...@>=
 {
 @y
 @ @<Convert relative...@>=
-{ @+
+{ @+ @%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
 @z
 @x [84]
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL;
 @y
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL; @+
+@z
+
+@x [85]
+is made in the common case that the speculative value of~rJ is known.
+@y
+is made in the common case that the speculative value of~rJ is known.
+@%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
+@z
+
+@x [86]
+rB is internally the same as g[0], because |rB=0|.
+@y
+rB is internally the same as g[0], because |rB=0|.
+@-a@> @-x@>
 @z
 
 @x [89]
@@ -201,6 +346,20 @@ to identify that register in diagnostic messages. Such addresses
 @y
 @ The |addr| fields in the specnode lists are used
 to identify the register in diagnostic messages. Such addresses
+@z
+
+@x [91]
+static void print_specnode_id(
+@y
+@% @$l {MMIX-ARITH}3 \&{tetra}@>
+static void print_specnode_id(
+@z
+
+@x [93]
+static spec specval(
+@y
+@% @$p {MMIX-PIPE}40 \&{struct} \&{specnode\_node} ${*}$@>
+static spec specval(
 @z
 
 @x [94]
