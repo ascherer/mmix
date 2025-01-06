@@ -44,6 +44,13 @@ bypass the library names here.
 @-x@> @-m@>
 @z
 
+@x [19]
+static void print_octa(
+@y
+static void print_octa(
+@-o@>
+@z
+
 @x [21]
 the remainder in~|aux|.
 @y
@@ -60,7 +67,12 @@ the remainder in~|aux|.
 etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
 @y
 etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
-@-c@> @-h@>
+@-c@> @-h@> @-p@>
+@z
+@x [26]
+@<Initialize e...@>=@+
+@y
+@<Initialize e...@>=
 @z
 
 @x [27]
@@ -75,11 +87,25 @@ generally set |s| to the state at which the scheduled coroutine will begin.)
 @-c@> @-d@> @-s@>
 @z
 
+@x [28]
+static void schedule(
+@y
+static void schedule(
+@-p@>
+@z
+
 @x [32]
 coroutine is not assumed to have any valid data in its |ctl| field.
 @y
 coroutine is not assumed to have any valid data in its |ctl| field.
 @-c@>
+@z
+
+@x [33]
+static void unschedule(
+@y
+static void unschedule(
+@-p@>
 @z
 
 @x [34]
@@ -236,7 +262,7 @@ static char *special_name[32]={@|"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
   for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
 @y
   for (int j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
-@-b@> @-j@>
+@-x@> @-b@> @-j@>
 @z
 
 @x [59]
@@ -252,25 +278,32 @@ hot=cool=reorder_top;
 hot=cool=reorder_top; @+
 @z
 
+@x [63]
+    for (control* p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
+@y
+    for (control* p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
+@-p@>
+@z
+
 @x [67]
 @ @<Commit and/or deissue up to |commit_max| instructions@>=
 @y
 @ @<Commit and/or deissue up to |commit_max| instructions@>=
+@%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [71]
 @ @d UNKNOWN_SPEC ((specnode*)1)
 @y
 @ @d UNKNOWN_SPEC ((specnode*)1)
-@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct} ${*}$@>
 @z
 
 @x [73]
 static void print_fetch_buffer(void)
 @y
-@-p@> @%
-@$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
+@-p@> @% @$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
 static void print_fetch_buffer(void)
 @z
 
@@ -284,14 +317,23 @@ static void print_fetch_buffer(void)
   for (i=0;i<8;i++) support[i] |= u->ops[i];
 @y
   for (i=0;i<8;i++) support[i] |= u->ops[i];
-@-u@>
+@-u@> @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [81]
+@ @<Issue the |cool| instruction@>=
+@y
+@ @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@<Issue the |cool| instruction@>=
 @z
 
 @x [82]
 functional unit that supports |op| and has stage~1 unoccupied.
 @y
 functional unit that supports |op| and has stage~1 unoccupied.
-@-t@> @-b@>
+@-t@> @-b@> @%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [84]
@@ -321,11 +363,21 @@ to identify that register in diagnostic messages. Such addresses
 @ The |addr| fields in the specnode lists are used
 to identify the register in diagnostic messages. Such addresses
 @z
+@x [89]
+@d SUBSUBVERSION 2 /* further qualification to version number */
+@y
+@d SUBSUBVERSION 2 /* further qualification to version number */
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
 
 @x [91]
 static void print_specnode_id(
 @y
-@-a@> @% @$l {MMIX-ARITH}3 \&{tetra}@>
+@-a@> @%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 static void print_specnode_id(
 @z
 
@@ -359,7 +411,9 @@ static void spec_rem(specnode*);
 @ @<Install default fields in the |cool| block@>=
 @y
 @ @<Install default fields in the |cool| block@>=
-@$x {MMIX-PIPE}44 \&{specnode}@>
+@%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [102]
@@ -373,46 +427,94 @@ have been unsaved, so we aren't fussy about it here.
 @ @<Install the operand fields of the |cool| block@>=
 @y
 @ @<Install the operand fields of the |cool| block@>=
-@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [104]
+@ @<Set \9{c}|cool->z| from register Z@>=
+@y
+@ @<Set \9{c}|cool->z| from register Z@>=
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
+
+@x [105]
+@ @<Set \9{c}|cool->y| from register Y@>=
+@y
+@ @<Set \9{c}|cool->y| from register Y@>=
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
 
 @x [106]
 @ @<Set \9{c}|cool->b| from register X@>=
 @y
 @ @<Set \9{c}|cool->b| from register X@>=
-@% @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
 
 @x [109]
 @ @<Set \9{c}|cool->z| as an immediate wyde@>=
 @y
 @r @ @<Set \9{c}|cool->z| as an immediate wyde@>=
-@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @z
 
 @x [110]
 @ @<Install register X...@>=
 @y
 @ @<Install register X...@>=
-@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
+
+@x [112]
+in the ring of local registers.
+@y
+in the ring of local registers.
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
 
 @x [113]
 @<Insert \9{a}an instruction to advance gamma@>=
 @y
-@% @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @<Insert \9{a}an instruction to advance gamma@>=
 @z
 
 @x [114]
 @ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 @y
-@r @ The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
+@r @ @%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 @z
 @x [114]
   cool->z=cool->b=zero_spec; cool->need_b=false;
 @y
   cool->z=cool->b=zero_spec; @+ cool->need_b=false;
+@z
+
+@x [117]
+from memory before they write it.
+@y
+from memory before they write it.
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
 
 @x [118]
@@ -422,6 +524,33 @@ rQ, rU, rV, rG, or~rL) it can affect many things. Therefore we stop
 @ When new data is \.{PUT} into special registers 8 or 15--20 (namely |rC|, |rK|,
 |rQ|, |rU|, |rV|, |rG|, or~|rL|) it can affect many things. Therefore we stop
 @z
+@x [118]
+they reach the hot seat.
+@y
+they reach the hot seat.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [119]
+insert an~|incrl| command.
+@y
+insert an~|incrl| command.
+@-x@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
+
+@x [120]
+in order to maintain the condition $\rm rS\le rO$.
+@y
+in order to maintain the condition $\rm rS\le rO$.
+@-x@> @-p@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
 
 @x [122]
 when the page table method isn't implemented in hardware.
@@ -430,12 +559,20 @@ when the page table method isn't implemented in hardware.
 \vskip1in
 @z
 
+@x [124]
+typically have |data->state=0| when a coroutine is first fired~up.
+@y
+typically have |data->state=0| when a coroutine is first fired~up.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
 @x [125]
     print_control_block(data);@+printf("\n");
   }
 @y
     print_control_block(data);@+printf("\n"); @+
   }
+@-c@> @-t@>
 @z
 
 @x [131]
@@ -457,6 +594,27 @@ if (data->b.p) { @+
 if (data->ra.p) {
 @y
 if (data->ra.p) { @+
+@z
+
+@x [132]
+the proper time.
+@y
+the proper time.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [133]
+added to~$t_k$.
+@y
+added to~$t_k$.
+@-s@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [134]
+unit is |self+1|.
+@y
+unit is |self+1|.
+@-s@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [138]
@@ -488,6 +646,13 @@ case nxor: data->x.o=onxor(data->y.o, data->z.o); break;
 case subu: data->x.o=ominus(data->y.o,data->z.o);@+ break;
 @y
 case subu: data->x.o=ominus(data->y.o,data->z.o); break;
+@z
+
+@x [141]
+below.)
+@y
+below.)
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [144]
@@ -534,14 +699,13 @@ static bool is_dirty(cache*,cacheblock*);
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
-@$jj {MMIX-PIPE}185 \&{int}@>
+@-j@> @-jj@>
 @z
 @x [185]
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @y
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
-@$ii {MMIX-PIPE}185 \&{int}@>
-@$lim {MMIX-PIPE}185 \&{int}@>
+@-i@> @-ii@> @-lim@>
 @z
 
 @x [213]
