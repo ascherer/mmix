@@ -731,7 +731,7 @@ don't want to update it yet.
 @ We update the |bp_table| when an instruction is issued.
 @y
 @r @ We update the |bp_table| when an instruction is issued.
-@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@-h@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
@@ -748,6 +748,19 @@ prediction was correct or not.
 @r @ If more than one functional unit is able to process branch instructions and
 @z
 
+@x [162]
+  for (int j=0;j<=dispatch_max;j++)
+@y
+  for (int j=0;j<=dispatch_max;j++) @-j@>
+@z
+
+@x [167]
+  octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
+@y
+  octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
+@-data@>
+@z
+
 @x [170]
 static bool is_dirty(cache*,cacheblock*);
 
@@ -756,6 +769,57 @@ static bool is_dirty(cache*,cacheblock*);
 static bool is_dirty(cache*,cacheblock*);
 
 @r @ @<Sub...@>=
+@-d@> @-j@>
+@z
+
+@x [172]
+{@+register int b=c->bb>>3,g=c->gg>>3;
+@y
+{@+register int b=c->bb>>3,g=c->gg>>3;
+@-b@> @-g@> @-i@> @-j@>
+@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [176]
+  if (c) {@+register int i,j;
+@y
+  if (c) {@+register int i,j; @-i@> @-j@>
+@z
+
+@x [177]
+requested to be verbose.
+@y
+requested to be verbose.
+@%
+@$i {MMIX-PIPE}176 \&{register} \&{int}@>
+@$j {MMIX-PIPE}176 \&{register} \&{int}@>
+@z
+
+@x [179]
+  register int j;
+@y
+  register int j;
+@-j@>
+@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [181]
+  register int i,j;
+@y
+  register int i,j; @-i@> @-j@>
+@z
+
+@x [183]
+  for (int j=0;j<c->ports;j++)
+@y
+  for (int j=0;j<c->ports;j++) @-j@>
+@z
+
+@x [184]
+@ The subroutine |copy_block(c,p,cc,pp)| copies the dirty
+@y
+@ The subroutine |copy_block(c,p,cc,pp)| copies the dirty
+@-c@> @-p@> @-cc@> @-pp@>
 @z
 
 @x [185]
@@ -763,12 +827,114 @@ static bool is_dirty(cache*,cacheblock*);
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @-j@> @-jj@>
+@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
 @x [185]
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @y
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @-i@> @-ii@> @-lim@>
+@z
+
+@x [186]
+has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
+@y
+has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
+@-aa@> @-policy@>
+@z
+
+@x [187]
+  register int l,m;
+@y
+  register int l,m;
+@-l@> @-m@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@z
+
+@x [189]
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank>r) p->rank--;
+@y
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank>r) p->rank--; @-p@>
+@z
+@x [189]
+    for (int j=1,m=aa>>1;m;m>>=1)
+@y
+    for (int j=1,m=aa>>1;m;m>>=1) @-j@> @-m@> @-l@> @-aa@>
+@z
+
+@x [191]
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank<r) p->rank++;
+@y
+    for (cacheblock* p=s;p<s+aa;p++) if (p->rank<r) p->rank++; @-p@>
+@z
+@x [191]
+    for (int j=1,m=aa>>1;m;m>>=1)
+@y
+    for (int j=1,m=aa>>1;m;m>>=1) @-j@> @-m@> @-l@>
+@z
+
+@x [191]
+@d cache_addr(c,alf) c->set[(alf.l&~(c->tagmask))>>c->b]
+@y
+@d cache_addr(c,alf) c->set[(alf.l&~(c->tagmask))>>c->b]
+@-c@> @-alf@> @-aa@>
+@z
+
+@x [193]
+  for (p=s;p<s+c->aa;p++)
+@y
+  for (p=s;p<s+c->aa;p++)
+@$aa {MMIX-PIPE}167 \&{int}@>
+@z
+
+@x [195]
+A pointer to the (possibly moved) cache block is returned.
+@y
+A pointer to the (possibly moved) cache block is returned.
+@-p@> @-c@> @-alf@>
+@z
+
+@x [197]
+pointers escape into other data structures.
+@y
+pointers escape into other data structures.
+@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [200]
+to be placed in the cache block~|p|. 
+@y
+to be placed in the cache block~|p|. 
+@-c@> @-p@>
+@z
+
+@x [201]
+  for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
+@y
+  for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
+@-i@> @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [202]
+Cache block~|p| is also marked clean.
+@y
+Cache block~|p| is also marked clean.
+@-c@> @-p@> @-keep@>
+@z
+
+@x [203]
+static void flush_cache(
+@y
+static void flush_cache(
+@-j@> @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [208]
+@ The separately compiled procedures |spec_read()| and |spec_write()| have the
+@y
+@ The procedures |spec_read()| and |spec_write()| have the
+@-size@>
 @z
 
 @x [213]
@@ -779,6 +945,21 @@ Extern void mem_write(octa addr,octa val);
 Extern void mem_write(octa addr,octa val);
 
 @r @ @<External r...@>=
+@-h@>
+@z
+
+@x [214]
+|mem_addr_time+c*mem_write_time|, respectively.
+@y
+|mem_addr_time+c*mem_write_time|, respectively.
+@-c@>
+@z
+
+@x [216]
+@ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
+@y
+@ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
+@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
 
 @x [217]
