@@ -307,17 +307,30 @@ static void print_fetch_buffer(void)
 static void print_fetch_buffer(void)
 @z
 
+@x [75]
+  register mmix_opcode op;
+@y
+  register mmix_opcode op; @-op@>
+@z
+
 @x [78]
 @ It is convenient to have
 @y
 @r @ It is convenient to have
 @z
 
-@x {79]
+@x [79]
   for (i=0;i<8;i++) support[i] |= u->ops[i];
 @y
   for (i=0;i<8;i++) support[i] |= u->ops[i];
 @-u@> @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
+
+@x [80]
+@ @<Determine the flags, |f|, and the internal opcode, |i|@>=
+@y
+@ @<Determine the flags, |f|, and the internal opcode, |i|@>=
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [81]
@@ -334,6 +347,7 @@ functional unit that supports |op| and has stage~1 unoccupied.
 @-t@> @-b@> @%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [84]
@@ -342,11 +356,19 @@ functional unit that supports |op| and has stage~1 unoccupied.
 @y
 @ @<Convert relative...@>=
 { @+
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 @x [84]
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL;
 @y
   cool->z.o=incr(head->loc,yz<<2), cool->z.p=NULL; @+
+@z
+
+@x [85]
+is made in the common case that the speculative value of~rJ is known.
+@y
+is made in the common case that the speculative value of~rJ is known.
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [86]
@@ -414,6 +436,8 @@ static void spec_rem(specnode*);
 @%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}44 \&{mmix\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [102]
@@ -421,6 +445,8 @@ have been unsaved, so we aren't fussy about it here.
 @y
 have been unsaved, so we aren't fussy about it here.
 @$l {MMIX-ARITH}3 \&{tetra}@>
+@%
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [103]
@@ -428,6 +454,7 @@ have been unsaved, so we aren't fussy about it here.
 @y
 @ @<Install the operand fields of the |cool| block@>=
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [104]
@@ -457,10 +484,18 @@ have been unsaved, so we aren't fussy about it here.
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
 
+@x [108]
+@<Set \9{c}|cool->b| and/or |cool->ra| from special register@>=
+@y
+@<Set \9{c}|cool->b| and/or |cool->ra| from special register@>=
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
+@z
+
 @x [109]
 @ @<Set \9{c}|cool->z| as an immediate wyde@>=
 @y
 @r @ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [110]
@@ -480,6 +515,7 @@ in the ring of local registers.
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [113]
@@ -489,6 +525,7 @@ in the ring of local registers.
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @<Insert \9{a}an instruction to advance gamma@>=
 @z
 
@@ -499,6 +536,7 @@ in the ring of local registers.
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 @z
 @x [114]
@@ -515,6 +553,7 @@ from memory before they write it.
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [118]
@@ -564,6 +603,7 @@ typically have |data->state=0| when a coroutine is first fired~up.
 @y
 typically have |data->state=0| when a coroutine is first fired~up.
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [125]
@@ -667,16 +707,39 @@ below.)
   cool_O=cool->cur_O;@+ cool_S=cool->cur_S; @+
 @z
 
+@x [146]
+@ @<Commit the hottest instruction...@>=
+@y
+@ @<Commit the hottest instruction...@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
 @x [149]
   }@+else if ((g[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
 @y
   }@+else @/ if ((g[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
 @z
 
+@x [151]
+don't want to update it yet.
+@y
+don't want to update it yet.
+@% @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
+@z
+
 @x [152]
 @ We update the |bp_table| when an instruction is issued.
 @y
 @r @ We update the |bp_table| when an instruction is issued.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
+@z
+
+@x [155]
+prediction was correct or not.
+@y
+prediction was correct or not.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [160]
