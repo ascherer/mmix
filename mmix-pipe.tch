@@ -620,6 +620,11 @@ typically have |data->state=0| when a coroutine is first fired~up.
   }
 @-c@> @-t@>
 @z
+@x [125]
+@+ register cacheblock *p,*q;
+@y
+@+ register cacheblock *p,*q; @-p@> @-q@>
+@z
 
 @x [128]
 mem_locker.name="Locker";
@@ -628,13 +633,6 @@ mem_locker.name="Locker";
 mem_locker.name="Locker";
 @z
 
-@x [131]
-@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
-@y
-@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
-@%
-@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct}@>
-@z
 @x [131]
 if (data->y.p) {
 @y
@@ -797,14 +795,14 @@ static bool is_dirty(cache*,cacheblock*);
 static bool is_dirty(cache*,cacheblock*);
 
 @r @ @<Sub...@>=
-@-d@> @-j@>
+@-d@> @-j@> @-p@>
 @z
 
 @x [172]
 {@+register int b=c->bb>>3,g=c->gg>>3;
 @y
 {@+register int b=c->bb>>3,g=c->gg>>3;
-@-b@> @-g@> @-i@> @-j@>
+@-b@> @-g@> @-i@> @-j@> @-p@>
 @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
 
@@ -827,7 +825,7 @@ requested to be verbose.
   register int j;
 @y
   register int j;
-@-j@>
+@-j@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -856,7 +854,7 @@ requested to be verbose.
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
-@-i@> @-ii@> @-lim@> @-j@> @-jj@>
+@-i@> @-ii@> @-lim@> @-j@> @-jj@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -876,6 +874,11 @@ has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
 @-l@> @-m@>
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
+@z
+@x [187]
+ case lru: for (cacheblock* p=s;p<s+aa;p++)
+@y
+ case lru: for (cacheblock* p=s;p<s+aa;p++) @-p@>
 @z
 
 @x [189]
@@ -908,6 +911,12 @@ has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
 @z
 
 @x [193]
+static cacheblock* cache_search(
+@y
+static cacheblock* cache_search( @-p@>
+@z
+
+@x [193]
   for (p=s;p<s+c->aa;p++)
 @y
   for (p=s;p<s+c->aa;p++)
@@ -924,7 +933,7 @@ A pointer to the (possibly moved) cache block is returned.
 @x [196]
       register cacheblock *q=choose_victim(s,c->aa,c->repl);
 @y
-      register cacheblock *q=choose_victim(s,c->aa,c->repl); @-q@>
+      register cacheblock *q=choose_victim(s,c->aa,c->repl); @-p@> @-q@>
 @z
 
 @x [197]
@@ -939,6 +948,12 @@ pointers escape into other data structures.
 @$q {MMIX-PIPE}205 \&{register} \&{cacheblock} ${*}$@>
 @z
 
+@x [199]
+static cacheblock *demote_and_fix(
+@y
+static cacheblock *demote_and_fix( @-p@>
+@z
+
 @x [200]
 to be placed in the cache block~|p|. 
 @y
@@ -950,7 +965,7 @@ to be placed in the cache block~|p|.
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @y
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
-@-i@>
+@-i@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -967,7 +982,7 @@ Cache block~|p| is also marked clean.
 static void flush_cache(
 @y
 static void flush_cache(
-@-j@>
+@-j@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -1026,6 +1041,12 @@ Extern void mem_write(octa addr,octa val);
 @$g {MMIX-PIPE}167 \&{int}@>
 @z
 
+@x [217]
+of the present program are left to the interested reader.
+@y
+of the present program are left to the interested reader.
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
 @x [217]
                    /* |p| not moved */
 @y
