@@ -1036,6 +1036,12 @@ mem.addr=neg_one;
 @z
 
 @x [125]
+@d awaken(c,t)  schedule(c,t,c->ctl->state)
+@y
+@d awaken(c,t)  schedule(c,t,c->ctl->state)
+@s cacheblock int
+@z
+@x [125]
   switch(self->stage) {
 @y
   switch(self->stage) {
