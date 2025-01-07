@@ -1162,6 +1162,11 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 {octa *m;
 @z
 @x [271]
+  data->z.o=data->y.o;@+ data->z.o.h -= sign_bit;
+@y
+  data->z.o=data->y.o; data->z.o.h -= sign_bit;
+@z
+@x [271]
     data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
     data->state=st_ready; pass_after(1);@+goto passit;
