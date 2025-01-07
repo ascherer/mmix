@@ -321,9 +321,9 @@ static void print_fetch_buffer(void)
 @z
 
 @x [79]
-  for (i=0;i<8;i++) support[i] |= u->ops[i];
+  for (int i=0;i<8;i++) support[i] |= u->ops[i];
 @y
-  for (i=0;i<8;i++) support[i] |= u->ops[i];
+  for (int i=0;i<8;i++) support[i] |= u->ops[i];
 @-u@> @% @$i {MMIX-PIPE}10 \&{register} \&{int}@>
 @z
 
