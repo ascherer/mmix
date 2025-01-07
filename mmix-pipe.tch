@@ -629,6 +629,13 @@ mem_locker.name="Locker";
 @z
 
 @x [131]
+@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
+@y
+@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
+@%
+@$p {MMIX-PIPE}40 \&{struct} \&{specnode\_struct}@>
+@z
+@x [131]
 if (data->y.p) {
 @y
 if (data->y.p) { @+
