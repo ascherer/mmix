@@ -310,7 +310,8 @@ static void print_fetch_buffer(void)
 @x [75]
   register mmix_opcode op;
 @y
-  register mmix_opcode op; @-op@>
+  register mmix_opcode op;
+@-op@> @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @z
 
 @x [78]
@@ -323,7 +324,7 @@ static void print_fetch_buffer(void)
   for (i=0;i<8;i++) support[i] |= u->ops[i];
 @y
   for (i=0;i<8;i++) support[i] |= u->ops[i];
-@-u@> @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@-u@> @% @$i {MMIX-PIPE}10 \&{register} \&{int}@>
 @z
 
 @x [80]
@@ -344,7 +345,8 @@ static void print_fetch_buffer(void)
 functional unit that supports |op| and has stage~1 unoccupied.
 @y
 functional unit that supports |op| and has stage~1 unoccupied.
-@-t@> @-b@> @%
+@-t@> @-b@>
+@%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
@@ -390,6 +392,7 @@ to identify the register in diagnostic messages. Such addresses
 @y
 @d SUBSUBVERSION 2 /* further qualification to version number */
 @%
+@$i {MMIX-PIPE}10 \&{register} \&{int}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
@@ -397,7 +400,8 @@ to identify the register in diagnostic messages. Such addresses
 @x [91]
 static void print_specnode_id(
 @y
-@-a@> @%
+@-a@>
+@%
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 static void print_specnode_id(
@@ -453,7 +457,8 @@ have been unsaved, so we aren't fussy about it here.
 @ @<Install the operand fields of the |cool| block@>=
 @y
 @ @<Install the operand fields of the |cool| block@>=
-@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
@@ -602,7 +607,8 @@ when the page table method isn't implemented in hardware.
 typically have |data->state=0| when a coroutine is first fired~up.
 @y
 typically have |data->state=0| when a coroutine is first fired~up.
-@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
@@ -613,6 +619,13 @@ typically have |data->state=0| when a coroutine is first fired~up.
     print_control_block(data);@+printf("\n"); @+
   }
 @-c@> @-t@>
+@z
+
+@x [128]
+mem_locker.name="Locker";
+@y
+@% @$i {MMIX-PIPE}10 \&{register} \&{int}@>
+mem_locker.name="Locker";
 @z
 
 @x [131]
@@ -731,7 +744,9 @@ don't want to update it yet.
 @ We update the |bp_table| when an instruction is issued.
 @y
 @r @ We update the |bp_table| when an instruction is issued.
-@-h@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@-h@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
@@ -740,6 +755,12 @@ prediction was correct or not.
 @y
 prediction was correct or not.
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [158]
+the current |cool| pointer, when |cc=cool|.
+@y
+the current |cool| pointer, when |cc=cool|. @-cc@>
 @z
 
 @x [160]
@@ -758,7 +779,7 @@ prediction was correct or not.
   octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
 @y
   octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
-@-data@>
+@-data@> @-g@>
 @z
 
 @x [170]
@@ -800,7 +821,9 @@ requested to be verbose.
 @y
   register int j;
 @-j@>
-@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [181]
@@ -826,14 +849,10 @@ requested to be verbose.
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
-@-j@> @-jj@>
-@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
-@z
-@x [185]
-    for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
-@y
-    for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
-@-i@> @-ii@> @-lim@>
+@-i@> @-ii@> @-lim@> @-j@> @-jj@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [186]
@@ -899,7 +918,12 @@ A pointer to the (possibly moved) cache block is returned.
 pointers escape into other data structures.
 @y
 pointers escape into other data structures.
-@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$p {MMIX-PIPE}196 \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}205 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}196 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}205 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [200]
@@ -913,7 +937,10 @@ to be placed in the cache block~|p|.
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @y
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
-@-i@> @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@-i@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [202]
@@ -927,7 +954,10 @@ Cache block~|p| is also marked clean.
 static void flush_cache(
 @y
 static void flush_cache(
-@-j@> @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@-j@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [208]
@@ -935,6 +965,16 @@ static void flush_cache(
 @y
 @ The procedures |spec_read()| and |spec_write()| have the
 @-size@>
+@z
+
+@x [210]
+octa mem_read(
+@y
+@-h@>
+@%
+@$h {MMIX-PIPE}210 \&{register} \&{int}@>
+@$h {MMIX-ARITH}3 \&{t}etra@>
+octa mem_read(
 @z
 
 @x [213]
@@ -946,6 +986,9 @@ Extern void mem_write(octa addr,octa val);
 
 @r @ @<External r...@>=
 @-h@>
+@%
+@$h {MMIX-PIPE}213 \&{register} \&{int}@>
+@$h {MMIX-ARITH}3 \&{t}etra@>
 @z
 
 @x [214]
@@ -959,7 +1002,9 @@ Extern void mem_write(octa addr,octa val);
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
 @y
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
-@% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [217]
