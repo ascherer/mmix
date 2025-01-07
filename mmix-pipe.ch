@@ -1045,7 +1045,7 @@ mem.addr=neg_one;
   switch(self->stage) {
 @y
   switch(self->stage) {
-@+ register cacheblock *q;
+@+ register cacheblock *p,*q;
 @+ @t}\6\4{@>
 @z
 
@@ -1987,8 +1987,7 @@ qloop:@+ while (true) {
 @ @<Local var...@>=
 register cacheblock *p,*q;
 @y
-@ @<Local var...@>=
-register cacheblock *p;
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [259] l.4649 Compound literal.
