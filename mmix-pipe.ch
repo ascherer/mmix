@@ -237,6 +237,12 @@ int MMIX_silent(void)
 }
 @z
 
+@x [12]
+register int i,j,m;
+@y
+register int i,j;
+@z
+
 @x [13] l.271
 @d errprint0(f) fprintf(stderr,f)
 @d errprint1(f,a) fprintf(stderr,f,a)
@@ -677,6 +683,13 @@ static int dispatch_count; /* how many dispatched on this cycle */
 static bool suppress_dispatch; /* should dispatching be bypassed? */
 static int doing_interrupt; /* how many cycles of interrupt preparations remain */
 static lockvar dispatch_lock; /* lock to prevent instruction issues */
+@z
+
+@x [67]
+  for (m=commit_max;m>0 && deissues>0; m--)
+@y
+  register int m;
+  for (m=commit_max;m>0 && deissues>0; m--)
 @z
 
 @x [70] l.1539
@@ -1135,14 +1148,19 @@ static bool stack_overflow; /* stack overflow not yet reported */
 @x [151] l.2886
   if (bp_table) {@+register int h;
 @y
-  if (bp_table) {
+  if (bp_table) {@+register int m;
 @z
-
 @x [151] l.2889
     h=bp_table[m];
     if (h&bp_npower) predicted^=0x10;
 @y
     if (bp_table[m]&bp_npower) predicted^=0x10;
+@z
+
+@x [152]
+if (bp_table) {@+register int reversed,h,h_up,h_down;
+@y
+if (bp_table) {@+register int reversed,h,h_up,h_down,m;
 @z
 
 @x [154] l.2936
@@ -2161,6 +2179,13 @@ int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @z
 
+@x [308]
+@<Prepare for exceptional trip handler@>=
+{
+@y
+@<Prepare for exceptional trip handler@>=
+{@+register int m;
+@z
 @x [308] l.5516
   data->go.o.h=0, data->go.o.l=m;
 @y
@@ -2191,6 +2216,14 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
   g[rX].o.h=sign_bit, g[rX].o.l=j;
 @y
   g[rX].o=(octa){sign_bit,j};
+@z
+
+@x [323]
+@<Resume an interrupted operation@>=
+{
+@y
+@<Resume an interrupted operation@>=
+{@+register int m;
 @z
 
 @x [329] l.5888
