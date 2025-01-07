@@ -551,6 +551,11 @@ in the ring of local registers.
 The |decgamma| instruction decreases $\gamma$ and rS by loading an octabyte
 @z
 @x [114]
+      cool->rl.o.l=cool_L-1;
+@y
+      cool->rl.o.l=cool_L-1; @+
+@z
+@x [114]
   cool->z=cool->b=zero_spec; cool->need_b=false;
 @y
   cool->z=cool->b=zero_spec; @+ cool->need_b=false;
@@ -1169,6 +1174,11 @@ static void print_write_buffer(void);
 (see function |MMIX_config|). Although an uncached store will not be stored in the
 @z
 
+@x [260]
+@ @<Write directly from |write_head| to memory@>=
+@y
+@r @ @<Write directly from |write_head| to memory@>=
+@z
 @x [260]
 set_lock(&mem_locker,mem_lock); /* a coroutine of type |vanish| */
 @y
