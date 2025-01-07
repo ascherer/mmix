@@ -182,7 +182,7 @@ void MMIX_init()
 @y
 void MMIX_init(void)
 @z
-@x [10]
+@x [10] l.222
   register int i,j;
 @y
   register int j;
@@ -237,7 +237,7 @@ int MMIX_silent(void)
 }
 @z
 
-@x [12]
+@x [12] l.263
 register int i,j,m;
 @y
 register int i,j;
@@ -685,7 +685,7 @@ static int doing_interrupt; /* how many cycles of interrupt preparations remain 
 static lockvar dispatch_lock; /* lock to prevent instruction issues */
 @z
 
-@x [67]
+@x [67] l.1477
   for (m=commit_max;m>0 && deissues>0; m--)
 @y
   register int m;
@@ -1035,13 +1035,13 @@ mem.addr=neg_one;
     if (x<(unsigned int)new_L)
 @z
 
-@x [125]
+@x [125] l.2404
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @y
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @s cacheblock int
 @z
-@x [125]
+@x [125] l.2415
   switch(self->stage) {
 @y
   switch(self->stage) {
@@ -1170,7 +1170,7 @@ static bool stack_overflow; /* stack overflow not yet reported */
     if (bp_table[m]&bp_npower) predicted^=0x10;
 @z
 
-@x [152]
+@x [152] l.2901
 if (bp_table) {@+register int reversed,h,h_up,h_down;
 @y
 if (bp_table) {@+register int reversed,h,h_up,h_down,m;
@@ -1983,7 +1983,7 @@ qloop:@+ while (true) {
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
-@x [258]
+@x [258] l.4638
 @ @<Local var...@>=
 register cacheblock *p,*q;
 @y
@@ -2199,7 +2199,7 @@ int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @z
 
-@x [308]
+@x [308] l.5505
 @<Prepare for exceptional trip handler@>=
 {
 @y
@@ -2238,7 +2238,7 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
   g[rX].o=(octa){sign_bit,j};
 @z
 
-@x [323]
+@x [323] l.5774
 @<Resume an interrupted operation@>=
 {
 @y
