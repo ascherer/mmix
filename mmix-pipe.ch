@@ -182,6 +182,11 @@ void MMIX_init()
 @y
 void MMIX_init(void)
 @z
+@x [10]
+  register int i,j;
+@y
+  register int j;
+@z
 
 @x [10] l.226 Reshuffle MMIX_silent.
 int MMIX_silent()
@@ -733,7 +738,7 @@ static tetra support[8]; /* big-endian bitmap for all opcodes supported */
 }
 @y
 for (func* u=funit;u<=funit+funit_count;u++)
-  for (i=0;i<8;i++) support[i] |= u->ops[i];
+  for (int i=0;i<8;i++) support[i] |= u->ops[i];
 @z
 
 @x [80] l.1677
