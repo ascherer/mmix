@@ -914,6 +914,12 @@ A pointer to the (possibly moved) cache block is returned.
 @-p@> @-c@> @-alf@>
 @z
 
+@x [196]
+      register cacheblock *q=choose_victim(s,c->aa,c->repl);
+@y
+      register cacheblock *q=choose_victim(s,c->aa,c->repl); @-q@>
+@z
+
 @x [197]
 pointers escape into other data structures.
 @y
@@ -958,6 +964,12 @@ static void flush_cache(
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
+@z
+
+@x [205]
+  register cacheblock *p,*q;
+@y
+  register cacheblock *p,*q; @-p@> @-q@>
 @z
 
 @x [208]
@@ -1093,7 +1105,7 @@ convenience. Whenever rV changes, we recompute all these variables.
 @r @ At this point the translation of the given virtual address |data->y.o| is
 @z
 
-@x [251[
+@x [251]
 static void print_write_buffer(void);
 
 @ @<Sub...@>=
@@ -1103,12 +1115,18 @@ static void print_write_buffer(void);
 @r @ @<Sub...@>=
 @z
 
+@x [255]
+  register write_node *q=write_tail;
+@y
+  register write_node *q=write_tail; @-q@>
+@z
+
 @x [256]
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
 @y
 @<Commit to memory...@>=
-{ register write_node *q=write_tail;
+{ register write_node *q=write_tail; @-q@>
 @z
 
 @x [259]
