@@ -1035,6 +1035,14 @@ mem.addr=neg_one;
     if (x<(unsigned int)new_L)
 @z
 
+@x [125]
+  switch(self->stage) {
+@y
+  switch(self->stage) {
+@+ register cacheblock *q;
+@+ @t}\6\4{@>
+@z
+
 @x [127] l.2432
 coroutine mem_locker; /* trivial coroutine that vanishes */
 coroutine Dlocker; /* another */
@@ -1050,7 +1058,6 @@ static control vanish_ctl; /* such coroutines share a common control block */
 @y
  case 0: @<Wait\9{1} for input data if necessary; set |state=1| if it's there@>;
 @z
-
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
@@ -1970,6 +1977,14 @@ qloop:@+ while (true) {
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
+@x [258]
+@ @<Local var...@>=
+register cacheblock *p,*q;
+@y
+@ @<Local var...@>=
+register cacheblock *p;
+@z
+
 @x [259] l.4649 Compound literal.
 Dcache->outbuf.tag.h=write_head->addr.h;
 Dcache->outbuf.tag.l=write_head->addr.l&(-Dcache->bb);
@@ -1995,7 +2010,6 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @y
 @ @<Do load/store stage 1 with known physical address@>=
 @z
-
 @x [271] l.4901 Change from MMIX home.
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
