@@ -51,6 +51,12 @@ static void print_octa(
 @-o@>
 @z
 
+@x [20]
+  register int j; /* scratch variable */
+@y
+  register int j; /* scratch variable */ @-j@>
+@z
+
 @x [21]
 the remainder in~|aux|.
 @y
@@ -324,7 +330,7 @@ static void print_fetch_buffer(void)
   for (int i=0;i<8;i++) support[i] |= u->ops[i];
 @y
   for (int i=0;i<8;i++) support[i] |= u->ops[i];
-@-u@> @% @$i {MMIX-PIPE}10 \&{register} \&{int}@>
+@-i@> @-u@>
 @z
 
 @x [80]
@@ -392,7 +398,7 @@ to identify the register in diagnostic messages. Such addresses
 @y
 @d SUBSUBVERSION 2 /* further qualification to version number */
 @%
-@$i {MMIX-PIPE}10 \&{register} \&{int}@>
+@$j {MMIX-PIPE}20 \&{register} \&{int}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 @z
@@ -629,7 +635,7 @@ typically have |data->state=0| when a coroutine is first fired~up.
 @x [128]
 mem_locker.name="Locker";
 @y
-@% @$i {MMIX-PIPE}10 \&{register} \&{int}@>
+@% @$j {MMIX-PIPE}20 \&{register} \&{int}@>
 mem_locker.name="Locker";
 @z
 

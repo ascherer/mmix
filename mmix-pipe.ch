@@ -185,7 +185,6 @@ void MMIX_init(void)
 @x [10] l.222
   register int i,j;
 @y
-  register int j;
 @z
 
 @x [10] l.226 Reshuffle MMIX_silent.
@@ -324,7 +323,8 @@ extern bool overflow; /* set by certain subroutines for signed arithmetic */
 extern int exceptions; /* bits set by floating point operations */
 extern int cur_round; /* the current rounding mode */
 @y
-@ (This section remains empty for historic reasons.)
+@ @<Initialize...@>=
+  register int j; /* scratch variable */
 @z
 
 @x [21] l.361 Stuff from MMIX-ARITH.
