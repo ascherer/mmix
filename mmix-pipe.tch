@@ -300,12 +300,6 @@ hot=cool=reorder_top; @+
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
-@x [71]
-@ @d UNKNOWN_SPEC ((specnode*)1)
-@y
-@ @d UNKNOWN_SPEC ((specnode*)1)
-@z
-
 @x [73]
 static void print_fetch_buffer(void)
 @y
@@ -773,6 +767,13 @@ prediction was correct or not.
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
+@x [157]
+static int register_truth(
+@y
+static int register_truth(
+@-o@>
+@z
+
 @x [158]
 the current |cool| pointer, when |cc=cool|.
 @y
@@ -865,7 +866,7 @@ requested to be verbose.
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
-@-i@> @-ii@> @-lim@> @-j@> @-jj@> @-p@>
+@-c@> @-cc@> @-i@> @-ii@> @-lim@> @-j@> @-jj@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -1050,13 +1051,19 @@ Extern void mem_write(octa addr,octa val);
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
+@$tag {MMIX-PIPE}167 \&{octa}@>
 @z
 
 @x [217]
 of the present program are left to the interested reader.
 @y
 of the present program are left to the interested reader.
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$tag {MMIX-PIPE}167 \&{octa}@>
+@%
+@$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [217]
                    /* |p| not moved */
@@ -1067,14 +1074,65 @@ of the present program are left to the interested reader.
 p=alloc_slot(Scache,c->outbuf.tag);
 @y
 p=alloc_slot(Scache,c->outbuf.tag); @+
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [219]
+@ We only need to read |block_diff| bytes, but it's easier to
+@y
+@ We only need to read |block_diff| bytes, but it's easier to
+@%
+@$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [220]
+  register octa *d=p->data;
+@y
+  register octa *d=p->data;
+@%
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [221]
+@ Here we assume that the granularity is~8.
+@y
+@ Here we assume that the granularity is~8.
+@% @$g {MMIX-PIPE}167 \&{int}@>
+@z
+
+@x [222]
+  register coroutine *cc=c->fill_lock;
+@y
+  register coroutine *cc=c->fill_lock; @-cc@>
+@z
+
+@x [223]
+cycle, so that there will be two wakeup calls.
+@y
+cycle, so that there will be two wakeup calls.
+@%
+@$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [224]
+is present.
+@y
+is present.
+@-cc@>
+@%
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [225]
 p=alloc_slot(Scache,data->z.o);
 @y
 p=alloc_slot(Scache,data->z.o); @+
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
-@x [224]
+@x [225]
 set_lock(&Scache->filler,mem_lock);
 @y
 set_lock(&Scache->filler,mem_lock); @+
@@ -1085,6 +1143,47 @@ set_lock(&Scache->filler,mem_lock); @+
 
 @y
 \dots, into the cache if it is not too busy.
+@z
+
+@x [230]
+identify their first dirty block, if any, in |access_time| cycles.
+@y
+identify their first dirty block, if any, in |access_time| cycles.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [231]
+clean_co.name="Clean";
+@y
+clean_co.name="Clean";
+@% @$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@z
+
+@x [232]
+@ @<Cases for control of special...@>=
+@y
+@ @<Cases for control of special...@>=
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [233]
+@ @<Cases 0 through 4, for the D-cache@>=
+@y
+@ @<Cases 0 through 4, for the D-cache@>=
+@%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [234]
+@ @<Cases 5 through 9...@>=
+@y
+@ @<Cases 5 through 9...@>=
+@%
+@$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [235]
