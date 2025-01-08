@@ -1255,6 +1255,13 @@ convenience. Whenever rV changes, we recompute all these variables.
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
 
+@x [249]
+write_co.name="Write";
+@y
+write_co.name="Write";
+@% @$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@z
+
 @x [251]
 static void print_write_buffer(void);
 
@@ -1263,12 +1270,19 @@ static void print_write_buffer(void);
 static void print_write_buffer(void);
 
 @r @ @<Sub...@>=
+@-p@>
 @z
 
 @x [255]
   register write_node *q=write_tail;
 @y
-  register write_node *q=write_tail; @-q@>
+  register write_node *q=write_tail;
+@-addr@> @-ctl@> @-p@> @-q@>
+@%
+@$addr {MMIX-PIPE}40 \&{octa}@>
+@$addr {MMIX-PIPE}246 \&{octa}@>
+@$o {MMIX-PIPE}40 \&{octa}@>
+@$o {MMIX-PIPE}246 \&{octa}@>
 @z
 
 @x [256]
@@ -1276,13 +1290,32 @@ static void print_write_buffer(void);
 {@+register write_node *q=write_tail;
 @y
 @<Commit to memory...@>=
-{ register write_node *q=write_tail; @-q@>
+{ register write_node *q=write_tail;
+@-p@> @-q@>
+@%
+@$addr {MMIX-PIPE}40 \&{octa}@>
+@$addr {MMIX-PIPE}246 \&{octa}@>
+@$o {MMIX-PIPE}40 \&{octa}@>
+@$o {MMIX-PIPE}246 \&{octa}@>
+@z
+
+@x [257]
+to fill a block.
+@y
+to fill a block.
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [259]
 (see |MMIX_config|). Although an uncached store will not be stored in the
 @y
 (see function |MMIX_config|). Although an uncached store will not be stored in the
+@z
+@x [259]
+@<Handle write-around when writing to the D-cache@>=
+@y
+@<Handle write-around when writing to the D-cache@>=
+@% @$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [260]
@@ -1310,6 +1343,13 @@ Dcache->filler_ctl.z.o=write_head->addr;
 set_lock(self,Dcache->fill_lock); @+
 Dcache->filler_ctl.z.o=write_head->addr;
 data->ptr_b=Dcache->filler_ctl.ptr_b=(void *)p;
+@z
+
+@x [262]
+Perhaps the simulator is being too lenient here.
+@y
+Perhaps the simulator is being too lenient here.
+@% @$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [265]
