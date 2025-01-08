@@ -37,7 +37,7 @@ bypass the library names here.
 @r @ @<Local var...@>=
 @z
 
-@x [13}
+@x [13]
 @d confusion(m) errprint("This can't happen: %s",m)
 @y
 @d confusion(m) errprint("This can't happen: %s",m)
@@ -1202,6 +1202,8 @@ static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 
 @r @ @<Initialize e...@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$name {MMIX-PIPE}23 \&{char} ${*}$@>
 @z
 
 @x [238]
@@ -1231,16 +1233,26 @@ convenience. Whenever rV changes, we recompute all these variables.
 @y
   page_b[4]=(rv.l>>8)&0xf; @+
 @z
-@x [239}
+@x [239]
   page_b[2]=(rv.l>>16)&0xf;
 @y
   page_b[2]=(rv.l>>16)&0xf; @+
+@z
+
+@x [240]
+@d trans_key(addr) incr(oandn(addr,page_mask),page_n)
+@y
+@d trans_key(addr) incr(oandn(addr,page_mask),page_n)
+@-addr@>
 @z
 
 @x [245]
 @ At this point the translation of the given virtual address |data->y.o| is
 @y
 @r @ At this point the translation of the given virtual address |data->y.o| is
+@%
+@$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
 
 @x [251]
