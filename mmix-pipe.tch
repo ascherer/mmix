@@ -301,10 +301,20 @@ hot=cool=reorder_top; @+
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
+@x [68]
+  unsigned int interrupt; /* bit codes that might cause interruption */
+@y
+  unsigned int interrupt; /* bit codes that might cause interruption */
+@-interrupt@>
+@z
+
 @x [73]
 static void print_fetch_buffer(void)
 @y
-@-p@> @% @$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
+@-p@>
+@%
+@$interrupt {MMIX-PIPE}68 \&{unsigned} \&{int}@>
+@$p {MMIX-PIPE}73 \&{fetch} ${*}$@>
 static void print_fetch_buffer(void)
 @z
 
@@ -772,7 +782,7 @@ prediction was correct or not.
 static int register_truth(
 @y
 static int register_truth(
-@-o@>
+@-o@> @-op@> @-b@>
 @z
 
 @x [158]
@@ -808,21 +818,29 @@ static bool is_dirty(cache*,cacheblock*);
 static bool is_dirty(cache*,cacheblock*);
 
 @r @ @<Sub...@>=
-@-d@> @-j@> @-p@>
+@-c@> @-d@> @-j@> @-p@>
 @z
 
 @x [172]
 {@+register int b=c->bb>>3,g=c->gg>>3;
 @y
 {@+register int b=c->bb>>3,g=c->gg>>3;
-@-b@> @-g@> @-i@> @-j@> @-p@>
+@-b@> @-c@> @-g@> @-i@> @-j@> @-p@>
 @% @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@z
+
+@x [174]
+static void print_cache_locks(
+@y
+static void print_cache_locks(
+@-c@>
 @z
 
 @x [176]
   if (c) {@+register int i,j;
 @y
-  if (c) {@+register int i,j; @-i@> @-j@>
+  if (c) {@+register int i,j;
+@-c@> @-i@> @-j@>
 @z
 
 @x [177]
@@ -838,7 +856,7 @@ requested to be verbose.
   register int j;
 @y
   register int j;
-@-j@> @-p@>
+@-c@> @-j@> @-p@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -847,13 +865,15 @@ requested to be verbose.
 @x [181]
   register int i,j;
 @y
-  register int i,j; @-i@> @-j@>
+  register int i,j;
+@-c@> @-i@> @-j@>
 @z
 
 @x [183]
   for (int j=0;j<c->ports;j++)
 @y
-  for (int j=0;j<c->ports;j++) @-j@>
+  for (int j=0;j<c->ports;j++)
+@-c@> @-j@>
 @z
 
 @x [184]
@@ -933,6 +953,7 @@ static cacheblock* cache_search( @-p@>
   for (p=s;p<s+c->aa;p++)
 @y
   for (p=s;p<s+c->aa;p++)
+@-c@> @-alf@> @-p@> @-s@>
 @$aa {MMIX-PIPE}167 \&{int}@>
 @z
 
@@ -946,7 +967,8 @@ A pointer to the (possibly moved) cache block is returned.
 @x [196]
       register cacheblock *q=choose_victim(s,c->aa,c->repl);
 @y
-      register cacheblock *q=choose_victim(s,c->aa,c->repl); @-p@> @-q@>
+      register cacheblock *q=choose_victim(s,c->aa,c->repl);
+@-c@> @-p@> @-q@> @-s@>
 @z
 
 @x [197]
@@ -964,7 +986,8 @@ pointers escape into other data structures.
 @x [199]
 static cacheblock *demote_and_fix(
 @y
-static cacheblock *demote_and_fix( @-p@>
+static cacheblock *demote_and_fix(
+@-c@> @-p@>
 @z
 
 @x [200]
@@ -978,7 +1001,8 @@ to be placed in the cache block~|p|.
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @y
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
-@-i@> @-p@>
+@-c@> @-p@>
+@-d@> @-i@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -995,7 +1019,8 @@ Cache block~|p| is also marked clean.
 static void flush_cache(
 @y
 static void flush_cache(
-@-j@> @-p@>
+@-c@> @-p@>
+@-d@> @-dd@> @-j@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -1004,7 +1029,9 @@ static void flush_cache(
 @x [205]
   register cacheblock *p,*q;
 @y
-  register cacheblock *p,*q; @-p@> @-q@>
+  register cacheblock *p,*q;
+@-p@> @-q@>
+@-c@> @-alf@> @-s@>
 @z
 
 @x [208]
@@ -1045,6 +1072,13 @@ Extern void mem_write(octa addr,octa val);
 @-c@>
 @z
 
+@x [215]
+case flush_to_mem: {@+register cache *c=(cache *)data->ptr_a;
+@y
+case flush_to_mem: {@+register cache *c=(cache *)data->ptr_a;
+@-c@>
+@z
+
 @x [216]
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
 @y
@@ -1059,6 +1093,7 @@ Extern void mem_write(octa addr,octa val);
 of the present program are left to the interested reader.
 @y
 of the present program are left to the interested reader.
+@-c@>
 @$tag {MMIX-PIPE}167 \&{octa}@>
 @%
 @$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
@@ -1106,7 +1141,8 @@ p=alloc_slot(Scache,c->outbuf.tag); @+
 @x [222]
   register coroutine *cc=c->fill_lock;
 @y
-  register coroutine *cc=c->fill_lock; @-cc@>
+  register coroutine *cc=c->fill_lock;
+@-c@> @-cc@>
 @z
 
 @x [223]
@@ -1122,7 +1158,7 @@ cycle, so that there will be two wakeup calls.
 is present.
 @y
 is present.
-@-cc@>
+@-c@> @-cc@>
 @%
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
@@ -1409,6 +1445,34 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 \vskip1cm
 If the lower $b+c$ bits of the virtual and physical addresses differ,
 @z
+@x [268]
+@d max(x,y) ((x)<(y)? (y):(x))
+@y
+@d max(x,y) ((x)<(y)? (y):(x))
+@-x@> @-y@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [269]
+@<Check the protection bits and get the physical address@>=
+@y
+@<Check the protection bits and get the physical address@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [270]
+    p=use_and_fix(DTcache,p), data->z.o=p->data[0];
+@y
+    p=use_and_fix(DTcache,p), data->z.o=p->data[0];
+@-m@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
 
 @x [271]
 @ @<Do load/store stage 1 with known physical address@>=
@@ -1416,6 +1480,10 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @ @<Do load/store stage 1 with known physical address@>=
 {octa *m;
+@-m@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [271]
   data->z.o=data->y.o;@+ data->z.o.h -= sign_bit;
@@ -1433,10 +1501,86 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
     data->state=DT_hit; pass_after(1);@+ goto passit;
 @z
 
+@x [272]
+@<Special cases for states in later stages@>=
+@y
+@<Special cases for states in later stages@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
 @x [273]
 @ The second stage might also want to fill the D-cache (and perhaps
 @y
 @r @ The second stage might also want to fill the D-cache (and perhaps
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [274]
+@ @<Try to get the contents of location |data->z.o| in the D-cache@>=
+@y
+@ @<Try to get the contents of location |data->z.o| in the D-cache@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [275]
+@<Check for \9{p}|prest| with a fully spanned cache block@>=
+@y
+@<Check for \9{p}|prest| with a fully spanned cache block@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [276]
+@ @<Special cases for states in later stages@>=
+@y
+@ @<Special cases for states in later stages@>=
+@%
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [278]
+  octa *m=write_search(data,data->z.o);
+@y
+  octa *m=write_search(data,data->z.o);
+@-m@>
+@z
+
+@x [279]
+@<Special cases for states in later stages@>=
+@y
+@<Special cases for states in later stages@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [280]
+@ @<Special cases for states in later stages@>=
+@y
+@ @<Special cases for states in later stages@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [281]
+@<Finish a store command@>=
+@y
+@<Finish a store command@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [282[
+@ @<Insert \9{d}|data->b.o| into the proper field...@>=
+@y
+@ @<Insert \9{d}|data->b.o| into the proper field...@>=
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [291]
