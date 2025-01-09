@@ -935,7 +935,6 @@ has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
 @y
     for (int j=1,m=aa>>1;m;m>>=1) @-j@> @-m@> @-l@>
 @z
-
 @x [191]
 @d cache_addr(c,alf) c->set[(alf.l&~(c->tagmask))>>c->b]
 @y
@@ -948,7 +947,6 @@ static cacheblock* cache_search(
 @y
 static cacheblock* cache_search( @-p@>
 @z
-
 @x [193]
   for (p=s;p<s+c->aa;p++)
 @y
@@ -1575,7 +1573,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
-@x [282[
+@x [282]
 @ @<Insert \9{d}|data->b.o| into the proper field...@>=
 @y
 @ @<Insert \9{d}|data->b.o| into the proper field...@>=
