@@ -1583,16 +1583,93 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
+@x [286]
+fetch_co.name="Fetch";
+@y
+fetch_co.name="Fetch";
+@% @$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@z
+
+@x [288]
+@d wait_or_pass(t) if (data->i==prego) {@+pass_after(t);@+goto passit;@+}
+@y
+@d wait_or_pass(t) if (data->i==prego) {@+pass_after(t);@+goto passit;@+}
+@-t@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [289]
+@ @<Handle special cases for operations like |prego| and |ldvts|@>=
+@y
+@ @<Handle special cases for operations like |prego| and |ldvts|@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
 @x [291]
 @ @d got_IT 19   /* |state| when IT-cache entry has been computed */
 @y
 @r @ @d got_IT 19   /* |state| when IT-cache entry has been computed */
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [292]
+@<Do a simultaneous lookup in the I-cache@>=
+@y
+@<Do a simultaneous lookup in the I-cache@>=
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [293]
+p=use_and_fix(ITcache,p);
+@y
+p=use_and_fix(ITcache,p);
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [294]
+@ At this point |inst_ptr.o| equals |data->y.o|.
+@y
+@ At this point |inst_ptr.o| equals |data->y.o|.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [295]
+@ @<Begin fetch without I-cache lookup@>=
+@y
+@ @<Begin fetch without I-cache lookup@>=
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [296]
+@ @<Begin fetch with known physical address@>=
+@y
+@ @<Begin fetch with known physical address@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [298]
+@ @<Other cases for the fetch coroutine@>=
+@y
+@ @<Other cases for the fetch coroutine@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [300]
 @ @<Try to get the contents of location |data->z.o| in the I-cache@>=
 @y
 @r @ @<Try to get the contents of location |data->z.o| in the I-cache@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [301]
+@<Other cases for the fetch coroutine@>=
+@y
+@<Other cases for the fetch coroutine@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [304]
