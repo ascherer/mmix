@@ -791,6 +791,13 @@ the current |cool| pointer, when |cc=cool|.
 the current |cool| pointer, when |cc=cool|. @-cc@>
 @z
 
+@x [159]
+static int issued_between(
+@y
+static int issued_between(
+@-c@> @-cc@>
+@z
+
 @x [160]
 @ If more than one functional unit is able to process branch instructions and
 @y
@@ -807,7 +814,7 @@ the current |cool| pointer, when |cc=cool|. @-cc@>
   octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
 @y
   octa *data; /* array of $2^{b-3}$ octabytes, the data in a cache block */
-@-data@> @-g@>
+@-c@> @-data@> @-g@>
 @z
 
 @x [170]
@@ -1246,6 +1253,7 @@ static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 @y
 @<Cases for control of special coroutines@>=
 @-c@> @-cc@> @-co@>
+@% @$b {MMIX-PIPE}44 \&{spec}@>
 @z
 
 @x [238]
@@ -1288,11 +1296,26 @@ convenience. Whenever rV changes, we recompute all these variables.
 @-addr@>
 @z
 
+@x [243]
+@<Start up auxiliary coroutines to compute the page table entry@>=
+@y
+@<Start up auxiliary coroutines to compute the page table entry@>=
+@% @$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
+@x [244]
+@<Issue $j$ pseudo-instructions to compute a page table entry@>=
+@y
+@<Issue $j$ pseudo-instructions to compute a page table entry@>=
+@% @$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
 @x [245]
 @ At this point the translation of the given virtual address |data->y.o| is
 @y
 @r @ At this point the translation of the given virtual address |data->y.o| is
 @%
+@$b {MMIX-PIPE}44 \&{spec}@>
 @$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @z
@@ -1449,9 +1472,12 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @d max(x,y) ((x)<(y)? (y):(x))
 @-x@> @-y@>
 @%
+@$c {MMIX-PIPE}167 \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$x {MMIX-PIPE}44 \&{specnode}@>
+@$y {MMIX-PIPE}44 \&{spec}@>
 @z
 
 @x [269]
@@ -1562,6 +1588,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @ @<Special cases for states in later stages@>=
 @%
+@$b {MMIX-PIPE}44 \&{spec}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
@@ -1570,6 +1597,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @<Finish a store command@>=
 @%
+@$b {MMIX-PIPE}44 \&{spec}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
@@ -1578,6 +1606,17 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @ @<Insert \9{d}|data->b.o| into the proper field...@>=
 @%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [283]
+@<Finish a \.{CSWAP}@>=
+@y
+@<Finish a \.{CSWAP}@>=
+@%
+@$a {MMIX-PIPE}44 \&{specnode}@>
+@$b {MMIX-PIPE}44 \&{spec}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
