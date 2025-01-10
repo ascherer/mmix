@@ -305,7 +305,7 @@ hot=cool=reorder_top; @+
   unsigned int interrupt; /* bit codes that might cause interruption */
 @y
   unsigned int interrupt; /* bit codes that might cause interruption */
-@-interrupt@>
+@-loc@> @-inst@> @-interrupt@> @-noted@> @-hist@>
 @z
 
 @x [73]
@@ -1805,16 +1805,46 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
+@x {327]
+@<Cases for stage 1 execution@>=
+@y
+@<Cases for stage 1 execution@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [331]
+@ Computed jumps put the desired destination address into the |go| field.
+@y
+@ Computed jumps put the desired destination address into the |go| field.
+@% @$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
 @x [332]
 @ The instruction \.{UNSAVE} $z$ generates a sequence of internal instructions
 @y
 @r @ The instruction \.{UNSAVE} $z$ generates a sequence of internal instructions
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [334]
+@ @<Set up the first phase of unsaving@>=
+@y
+@ @<Set up the first phase of unsaving@>=
+@% @$a {MMIX-PIPE}44 \&{specnode}@>
+@z
+
+@x [336]
+@ @<Handle an internal \.{UNSAVE} when it's time to load@>=
+@y
+@ @<Handle an internal \.{UNSAVE} when it's time to load@>=
+@% @$a {MMIX-PIPE}44 \&{specnode}@>
 @z
 
 @x [337]
 @ Of course \.{SAVE} is handled essentially like \.{UNSAVE}, but backwards.
 @y
 @r @ Of course \.{SAVE} is handled essentially like \.{UNSAVE}, but backwards.
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 @x [337]
  case 0: @<Set up the first phase of saving@>;@+break;
@@ -1827,17 +1857,101 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
  case 2: case 3: @<Generate an instruction to save |g[yy]|@>; break;
 @z
 
+@x [339]
+@ @<Generate an instruction to save |g[yy]|@>=
+@y
+@ @<Generate an instruction to save |g[yy]|@>=
+@% @$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
+@x {340]
+@<Do the final \.{SAVE}@>=
+@y
+@<Do the final \.{SAVE}@>=
+@%
+@$a {MMIX-PIPE}44 \&{specnode}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [342]
+@ @<Handle an internal \.{SAVE} when it's time to store@>=
+@y
+@ @<Handle an internal \.{SAVE} when it's time to store@>=
+@%
+@$a {MMIX-PIPE}44 \&{specnode}@>
+@$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
+@x [343]
+@<Cases to compute the results of reg...@>=
+@y
+@<Cases to compute the results of reg...@>=
+@%
+@$a {MMIX-PIPE}44 \&{specnode}@>
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [345]
+@<Cases to compute the results...@>=
+@y
+@<Cases to compute the results...@>=
+@% @$b {MMIX-PIPE}44 \&{spec}@>
+@z
+
 @x [346]
 @d ROUND_NEAR 4
 @y
 @d ROUND_NEAR 4
 @t}\vskip1cm{@>
+@-x@>
+@%
+@$a {MMIX-PIPE}44 \&{specnode}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [348]
+@ @<Cases to compute the results of reg...@>=
+@y
+@ @<Cases to compute the results of reg...@>=
+@%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [351]
 @ @<Begin execution of a stage-two operation@>=
 @y
 @r @ @<Begin execution of a stage-two operation@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [352]
+@<Handle special cases for operations like |prego| and |ldvts|@>=
+@y
+@<Handle special cases for operations like |prego| and |ldvts|@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [353]
+@ @<Do stage 1 of \.{LDVTS}@>=
+@y
+@ @<Do stage 1 of \.{LDVTS}@>=
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [354]
+@ @<Special cases for states in later stages@>=
+@y
+@ @<Special cases for states in later stages@>=
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [357]
+for (control* cc=data;cc!=hot;) {
+@y
+for (control* cc=data;cc!=hot;) {
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [359]
@@ -1848,12 +1962,22 @@ if (!Icache) { @+
   data->state=11;@+goto switch1; @+
 @z
 
+@x [361]
+@ @<Clean the \9{a}data caches@>=
+@y
+@ @<Clean the \9{a}data caches@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
 @x [364]
  if (!Icache) {
    data->state=(data->loc.h&sign_bit? 31:33);@+goto switch2;
 @y
  if (!Icache) { @+
    data->state=(data->loc.h&sign_bit? 31:33);@+goto switch2; @+
+@%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 @x [364]
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
@@ -1866,6 +1990,7 @@ p=cache_search(Icache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Icache,data->z.o)) {
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [366]
@@ -1873,6 +1998,7 @@ p=cache_search(Dcache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Dcache,data->z.o)) {
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [367]
@@ -1880,6 +2006,23 @@ p=cache_search(Scache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Scache,data->z.o)) {
+@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [368]
+@ @<Use |cleanup| on the cache blocks for |data->z.o|, if any@>=
+@y
+@ @<Use |cleanup| on the cache blocks for |data->z.o|, if any@>=
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [369]
+@<Continue this command on the next cache block@>=
+@y
+@<Continue this command on the next cache block@>=
+@%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [373]
@@ -1900,6 +2043,7 @@ static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
     if (((Dcache->outbuf.tag.l^addr.l)&-Dcache->bb)==0 &&
 @y
     if (((Dcache->outbuf.tag.l^addr.l)&-Dcache->bb)==0 && @|
+@-p@> @-q@>
 @z
 @x [378]
       if (((Scache->outbuf.tag.l^addr.l)&-Scache->bb)==0 &&
@@ -1944,6 +2088,13 @@ static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
   register int s=8*((~a.l)&0x3);
 @y
   @+ register int s=8*((~a.l)&0x3);
+@z
+
+@x [389]
+read from and write to the memory-mapped addresses.
+@y
+read from and write to the memory-mapped addresses.
+@-size@>
 @z
 
 @x [391]
