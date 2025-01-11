@@ -88,3 +88,7 @@
 @$asctime "<time.h>" \zip@>
 @$localtime "<time.h>" \zip@>
 @$time "<time.h>" \zip@>
+
+@$fgetws "<wchar.h>" \zip@>
+@$fputws "<wchar.h>" \zip@>
+@$wcslen "<wchar.h>" \zip@>
