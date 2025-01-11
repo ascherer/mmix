@@ -414,7 +414,6 @@ static void print_specnode_id(
 @-a@>
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
 static void print_specnode_id(
 @z
 
