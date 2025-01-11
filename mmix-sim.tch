@@ -1,0 +1,163 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifpdf
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\pageshift=-0.5in
+  \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\ifx\undefined\eightpoint\else
+{\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
+\fi
+@z
+
+@x [4]
+@* Rudimentary I/O.
+@y
+@* Rudimentary I/O.
+@-handle@> @-mode@> @-mode_string@> @-name@> @-string@>
+@z
+
+@x [12]
+void print_hex(
+@y
+void print_hex(
+@-o@>
+@z
+
+@x [13]
+@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
+@y
+@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
+@-y@> @-z@>
+@z
+
+@x [14]
+@d panic(m) {@+fprintf(stderr,"Panic: %s!\n",m);@+exit(-2);@+}
+@y
+@d panic(m) {@+fprintf(stderr,"Panic: %s!\n",m);@+exit(-2);@+}
+@-m@>
+@z
+
+@x [15]
+void print_int(
+@y
+void print_int(
+@-o@> @-r@> @-t@> @-j@>
+@z
+
+@x [17]
+mem_node* new_mem(void)
+@y
+mem_node* new_mem(void)
+@-p@>
+@z
+
+@x [20]
+mem_tetra* mem_find(
+@y
+mem_tetra* mem_find(
+@-p@>
+@z
+
+@x [21]
+{@+register mem_node **q;
+@y
+{@+register mem_node **q;
+@-q@>
+@%
+@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${*}$@>
+@z
+
+@x [22]
+  register mem_node **l=&(*q)->left,**r=&(*q)->right;
+@y
+  register mem_node **l=&(*q)->left,**r=&(*q)->right;
+@-l@>
+@%
+@$l {MMIX-ARITH}44 \&{tetra}@>
+@$l {MMIX-SIM}22 \&{register} \&{mem\_mode} ${**}$@>
+@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${*}$@>
+@$q {MMIX-SIM}21 \&{register} \&{mem\_node} ${**}$@>
+@z
+
+@x [27]
+byte read_byte(void)
+@y
+byte read_byte(void)
+@-b@>
+@z
+
+@x [30]
+@d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
+@y
+@d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
+@-loc@> @-val@>
+@z
+
+@x [37]
+for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
+@y
+for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
+@%
+@$tet {MMIX-SIM}16 \&{tetra}@>
+@$tet {MMIX-SIM}25 \&{tetra}@>
+@z
+
+@x [51]
+  octa cur_loc=incr(p->loc,4*j);
+@y
+  octa cur_loc=incr(p->loc,4*j);
+@-cur_loc@>
+@z
+
+@x [82]
+void stack_store(void)
+@y
+void stack_store(void)
+@-ll@> @-k@>
+@z
+
+@x [83]
+void stack_load(void)
+@y
+void stack_load(void)
+@-ll@> @-k@>
+@z
+
+@x [114]
+static int mmgetchars(
+@y
+static int mmgetchars(
+@-buf@> @-size@> @-addr@> @-stop@>
+@-p@> @-m@> @-ll@> @-x@> @-a@>
+@z
+
+@x [117]
+static void mmputchars(
+@y
+static void mmputchars(
+@-buf@> @-size@> @-addr@>
+@-p@> @-m@> @-ll@> @-a@>
+@z
+
+@x [162]
+void show_breaks(
+@y
+void show_breaks(
+@-p@> @-j@> @-cur_loc@>
+@z
+
+@x [165]
+void dump(
+@y
+void dump(
+@-p@> @-j@> @-cur_loc@>
+@z
+
+@x [1]
+@* Index.
+@y
+@z

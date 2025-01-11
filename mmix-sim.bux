@@ -1,0 +1,4 @@
+@i mmix.bux
+
+@$name {MMIX-SIM}38 \&{char} ${*}$@>
+@$p {MMIX-SIM}62 \&{register} \&{char} ${*}$@>
