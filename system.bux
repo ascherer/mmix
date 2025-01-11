@@ -92,3 +92,6 @@
 @$fgetws "<wchar.h>" \zip@>
 @$fputws "<wchar.h>" \zip@>
 @$wcslen "<wchar.h>" \zip@>
+
+@$stat "<sys/stat.h>" \zip@>
+@$st_mtime "<sys/stat.h>" \zip@>

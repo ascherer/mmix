@@ -106,11 +106,51 @@ for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
 @$tet {MMIX-SIM}25 \&{tetra}@>
 @z
 
+@x [42]
+void make_map(void)
+@y
+void make_map(void)
+@-map@> @-k@> @-l@> @-p@>
+@z
+
+@x [43]
+@d mstat s@&t@&a@&t /* this is a \.{CWEB} coding trick: */
+@y
+@d mstat s@&t@&a@&t /* this is a \.{CWEB} coding trick: */
+@-a@> @-s@> @-t@>
+@z
+
+@x [45]
+void print_line(
+@y
+void print_line(
+@-k@> @-buf@>
+@z
+
+@x [47]
+void show_line(void)
+@y
+void show_line(void)
+@-k@>
+@z
+
+@x [50]
+void print_freqs(
+@y
+void print_freqs(
+@-p@> @-j@>
+@z
+
 @x [51]
   octa cur_loc=incr(p->loc,4*j);
 @y
   octa cur_loc=incr(p->loc,4*j);
 @-cur_loc@>
+@%
+@$j {MMIX-SIM}50 \&{int}@>
+@$name {MMIX-SIM}64 \&{char} ${*}$@>
+@$p {MMIX-SIM}50 \&{mem\_node} ${*}$@>
+@$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
 @x [82]
