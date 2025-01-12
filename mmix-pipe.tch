@@ -303,6 +303,61 @@ static char *special_name[32]={@|"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
 @-x@> @-b@> @-j@>
 @z
 
+@x [58]
+This simulator is based on the idea of ``dynamic scheduling with register
+@y
+\vfill
+This simulator is based on the idea of ``dynamic scheduling with register
+@z
+@x [58]
+Some instructions in the reorder buffer may in fact be executed only
+@y
+\vfill
+Some instructions in the reorder buffer may in fact be executed only
+@z
+@x [58]
+The reorder buffer is in fact a queue of \&{control} records, conceptually
+@y
+\vfill
+The reorder buffer is in fact a queue of \&{control} records, conceptually
+@z
+@x [58]
+The best way to get an understanding of speculative execution is perhaps to
+@y
+\vfill
+The best way to get an understanding of speculative execution is perhaps to
+@z
+@x [58]
+Instructions that have completed execution and have not yet been committed are
+@y
+\vfill
+Instructions that have completed execution and have not yet been committed are
+@z
+
+@x [59]
+Suppose the simulated machine fetches the example \.{ADD} instruction
+@y
+\vfill
+Suppose the simulated machine fetches the example \.{ADD} instruction
+@z
+@x [59]
+The dispatch unit of our simulator is able to issue up to |dispatch_max|
+@y
+\vfill
+The dispatch unit of our simulator is able to issue up to |dispatch_max|
+@z
+@x [59]
+We assume that $\rm L>3$, so that \$1, \$2, and~\$3 are local registers.
+@y
+\vfill
+We assume that $\rm L>3$, so that \$1, \$2, and~\$3 are local registers.
+@z
+@x [59]
+At time 1002, the ALU handling the \.{ADD} will stall if its inputs |y|
+@y
+\vfill
+At time 1002, the ALU handling the \.{ADD} will stall if its inputs |y|
+@z
 @x [59]
 reorder buffer.
 @y
