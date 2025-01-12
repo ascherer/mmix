@@ -302,6 +302,11 @@
 @$D_BIT {MMIX-SIM}57 $(\T{1}\LL\T{15})$@>
 @$H_BIT {MMIX-SIM}57 $(\T{1}\LL\T{16})$@>
 
+@$trace_bit {MMIX-SIM}58 $(\T{1}\LL\T{3})$@>
+@$read_bit {MMIX-SIM}58 $(\T{1}\LL\T{2})$@>
+@$write_bit {MMIX-SIM}58 $(\T{1}\LL\T{1})$@>
+@$exec_bit {MMIX-SIM}58 $(\T{1}\LL\T{0})$@>
+
 @$Halt {MMIX-SIM}59 =0@>
 @$Fopen {MMIX-SIM}59 =1@>
 @$Fclose {MMIX-SIM}59 =2@>
@@ -313,3 +318,5 @@
 @$Fputws {MMIX-SIM}59 =8@>
 @$Fseek {MMIX-SIM}59 =9@>
 @$Ftell {MMIX-SIM}59 =10@>
+
+@$g {MMIX-SIM}76 \&{octa} [\,]@>
