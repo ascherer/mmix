@@ -25,7 +25,7 @@
 @x [3]
 \bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
 @y
-\begingroup \ninepoint
+\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
 \bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
 @z
 @x [3]
@@ -47,7 +47,7 @@
 is essentially equivalent to the \CEE/ expression
 @y
 is essentially equivalent to the \CEE/ expression
-\begingroup \ninepoint
+\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
 @z
 @x [4]
       \hskip5em\cr}$$
@@ -105,7 +105,7 @@ $$\displaylines{
 \vskip-14pt
 @y
 \vskip-14pt
-\begingroup \ninepoint
+\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
 @z
 @x [8]
 \noalign{\smallskip}
