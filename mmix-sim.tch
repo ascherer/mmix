@@ -147,11 +147,79 @@ void print_freqs(
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
+@x [57]
+@d X_BIT (1<<8) /* floating inexact */
+@y
+@-X_BIT@> @-U_BIT@> @-I_BIT@> @-W_BIT@> @-V_BIT@> @-D_BIT@> @-H_BIT@>
+@d X_BIT (1<<8) /* floating inexact */
+@z
+
+@x [58]
+@d trace_bit (1<<3)
+@y
+@-trace_bit@> @-read_bit@> @-write_bit@> @-exec_bit@>
+@d trace_bit (1<<3)
+@z
+
+@x [72]
+@<Set |z| from register Z@>=
+@y
+@<Set |z| from register Z@>=
+@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [73]
+@ @<Set |y| from register Y@>=
+@y
+@ @<Set |y| from register Y@>=
+@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [74]
+@ @<Set \9{b}|b| from register X@>=
+@y
+@ @<Set \9{b}|b| from register X@>=
+@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [76]
+octa *l; /* local registers */
+@y
+octa *l; /* local registers */
+@-l@>
+@z
+
+@x [77]
+l=(octa*)calloc(lring_size,sizeof(octa));
+@y
+l=(octa*)calloc(lring_size,sizeof(octa));
+@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [80]
+@ @<Install register~X as the destination...@>=
+@y
+@ @<Install register~X as the destination...@>=
+@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [81]
+@ @<Increase rL@>=
+@y
+@ @<Increase rL@>=
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
 @x [82]
 void stack_store(void)
 @y
 void stack_store(void)
 @-ll@> @-k@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @z
 
 @x [83]
@@ -159,6 +227,16 @@ void stack_load(void)
 @y
 void stack_load(void)
 @-ll@> @-k@>
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [91]
+int register_truth(
+@y
+int register_truth(
+@-o@> @-op@> @-b@>
 @z
 
 @x [114]
@@ -175,6 +253,13 @@ static void mmputchars(
 static void mmputchars(
 @-buf@> @-size@> @-addr@>
 @-p@> @-m@> @-ll@> @-a@>
+@z
+
+@x [160]
+void print_string(
+@y
+void print_string(
+@-o@> @-k@> @-state@> @-b@>
 @z
 
 @x [162]
