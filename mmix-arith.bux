@@ -1,12 +1,12 @@
 @i mmix.bux
 
-@$X_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{8})$@>
-@$Z_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{9})$@>
-@$U_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{10})$@>
-@$O_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{11})$@>
-@$I_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{12})$@>
-@$W_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{13})$@>
-@$E_BIT {MMIX-ARITH}31 $(\T{1}\LL\T{18})$@>
+@$X_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{8})$@>
+@$Z_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{9})$@>
+@$U_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{10})$@>
+@$O_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{11})$@>
+@$I_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{12})$@>
+@$W_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{13})$@>
+@$E_BIT {MMIX-ARITH}31 =$(\T{1}\LL\T{18})$@>
 
 @$zro {MMIX-ARITH}36 =0@>
 @$num {MMIX-ARITH}36 =1@>
