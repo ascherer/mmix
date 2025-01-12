@@ -18,13 +18,7 @@
 @y
 @* Rudimentary I/O.
 @-handle@> @-mode@> @-mode_string@> @-name@> @-string@>
-@z
-
-@x [12]
-void print_hex(
-@y
-void print_hex(
-@-o@>
+@-size@> @-offset@> @-n@> @-buffer@>
 @z
 
 @x [13]
