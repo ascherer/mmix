@@ -4,11 +4,6 @@
 @$octa {MMIX-ARITH}3 \&{struct}@>
 @$h {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$zero_octa {MMIX-ARITH}4 \&{octa}@>
-@$neg_one {MMIX-ARITH}4 \&{octa}@>
-@$inf_octa {MMIX-ARITH}4 \&{octa}@>
-@$standard_NaN {MMIX-ARITH}4 \&{octa}@>
-@$sign_bit {MMIX-ARITH}4 \&{octa}@>
 @$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
@@ -48,6 +43,11 @@
 @$floatit {MMIX-ARITH}89 \&{octa} (\,)@>
 @$froot {MMIX-ARITH}91 \&{octa} (\,)@>
 @$fremstep {MMIX-ARITH}93 \&{octa} (\,)@>
+@$zero_octa {MMIX-ARITH}97 \&{octa}@>
+@$neg_one {MMIX-ARITH}97 \&{octa}@>
+@$inf_octa {MMIX-ARITH}97 \&{octa}@>
+@$standard_NaN {MMIX-ARITH}97 \&{octa}@>
+@$sign_bit {MMIX-ARITH}97 \&{octa}@>
 
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 

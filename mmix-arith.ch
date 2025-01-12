@@ -109,21 +109,7 @@ octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
-@ The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
-declare variables that are accessed in other modules. Actually
-all appearances of `\&{Extern}' are defined to be blank here, but
-`\&{Extern}' will become `\&{extern}' in the header file |@(mmix-arith.h@>|.
-
-@d Extern  /* blank for us, \&{extern} for them */
-@f Extern extern
-
-@<Exported constants@>=
-#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
-#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
-#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
-#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
-@#
-#define sign_bit ((tetra)0x80000000)
+@ Make room for |print_octa|.
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -1188,6 +1174,12 @@ yf=shift_right(yf,1,true);
 @* Public interface. This program module is central to the whole \MMIX\ system.
 Each user of its functionality should include the following header file.
 
+The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
+declare variables that are accessed in other modules.
+
+@d Extern  /* blank for us, \&{extern} for them */
+@s Extern extern
+
 @(mmix-arith.h@>=
 #ifndef MMIX_ARITH_H
 #define MMIX_ARITH_H
@@ -1203,6 +1195,14 @@ Each user of its functionality should include the following header file.
 #undef Extern
 @#
 #endif /* |MMIX_ARITH_H| */
+
+@ @<Exported constants@>=
+#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
+#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
+#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
+#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
+@#
+#define sign_bit ((tetra)0x80000000)
 
 @ @<External proto...@>=
 @^prototypes for functions@>
