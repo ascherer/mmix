@@ -109,7 +109,12 @@ octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
-@ Make room for |print_octa|.
+@ @<External routines@>=
+void print_octa(octa o)
+{
+  if (o.h) printf("%x%08x",o.h,o.l);
+  else printf("%x",o.l);
+}
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -1206,6 +1211,9 @@ declare variables that are accessed in other modules.
 
 @ @<External proto...@>=
 @^prototypes for functions@>
+Extern void print_octa(octa);
+  /* Standard output format */
+@#
 Extern octa oplus(octa,octa);
   /* unsigned $y+z$ */
 Extern octa ominus(octa,octa);

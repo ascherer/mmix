@@ -71,7 +71,8 @@ represents unsigned 32-bit integers.
 @s octa int
 
 @c
-#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit| */
+#include "mmix-arith.h"
+  /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, |@!print_octa| */
 @z
 
 @x [10] l.560 Stuff from MMIX-ARITH.
@@ -101,7 +102,6 @@ this work with new compilers as well as the old standbys.
 @s mmix_opcode int
 
 @<Proto...@>=
-void print_hex(octa);
 void print_int(octa);
 mem_node* new_mem(void);
 mem_tetra* mem_find(octa);
@@ -125,13 +125,17 @@ void dump(mem_node*);
 void dump_tet(tetra);
 @z
 
-@x [12] l.578 C99 prototypes for C2x.
+@x [12] l.577 Move 'print_hex' to MMIX-ARITH.
+@ @<Sub...@>=
 void print_hex @,@,@[ARGS((octa))@];@+@t}\6{@>
 void print_hex(o)
   octa o;
+{
+  if (o.h) printf("%x%08x",o.h,o.l);
+  else printf("%x",o.l);
+}
 @y
-void print_hex(
-  octa o)
+@ @d print_hex print_octa /* Preserve the old function name */
 @z
 
 @x [13] l.592 Stuff from MMIX-ARITH.
