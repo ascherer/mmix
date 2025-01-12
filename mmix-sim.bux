@@ -294,6 +294,14 @@
 @$rYY {MMIX-SIM}55 =30@>
 @$rZZ {MMIX-SIM}55 =31@>
 
+@$X_BIT {MMIX-SIM}57 $(\T{1}\LL\T{8})$@>
+@$U_BIT {MMIX-SIM}57 $(\T{1}\LL\T{10})$@>
+@$I_BIT {MMIX-SIM}57 $(\T{1}\LL\T{12})$@>
+@$W_BIT {MMIX-SIM}57 $(\T{1}\LL\T{13})$@>
+@$V_BIT {MMIX-SIM}57 $(\T{1}\LL\T{14})$@>
+@$D_BIT {MMIX-SIM}57 $(\T{1}\LL\T{15})$@>
+@$H_BIT {MMIX-SIM}57 $(\T{1}\LL\T{16})$@>
+
 @$Halt {MMIX-SIM}59 =0@>
 @$Fopen {MMIX-SIM}59 =1@>
 @$Fclose {MMIX-SIM}59 =2@>
