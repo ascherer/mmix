@@ -65,7 +65,8 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #include <math.h> /* we'll override |fsqrt| below */
 #include <stdlib.h> /* we'll override |div| and |random| below */
 @#
-#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, etc. */
+#include "mmix-arith.h"
+  /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, |@!print_octa|, etc. */
 @#
 @z
 
@@ -300,18 +301,49 @@ for the assembler and for the non-pipelined simulator.
 @s octa int
 @z
 
-@x [18] l.337 C99 prototypes for C2x.
+@x [18] l.336 Move 'print_octa' to MMIX-ARITH.
+@ @<Internal proto...@>=
 static void print_octa @,@,@[ARGS((octa))@];
 
 @ @<Sub...@>=
 static void print_octa(o)
   octa o;
+{
+  if (o.h) printf("%x%08x",o.h,o.l);@+
+  else printf("%x",o.l);
+}
 @y
-static void print_octa(octa);
+@ @<External proto...@>=
+Extern octa read_hex(char *);
+  /* see {\mc MMMIX} */
 
-@ @<Sub...@>=
-static void print_octa(
-  octa o)
+@ Here's a simple program to read an octabyte in hexadecimal notation
+from a buffer. It changes the buffer by storing a null character
+after the input.
+@^radix conversion@>
+
+@d BUF_SIZE 100
+
+@<External routines@>=
+octa read_hex(
+  char *p)
+{
+  unsigned char d[BUF_SIZE];
+  register int j,k;
+  octa val=zero_octa;
+  for (j=0;;j++) {
+    if (p[j]>='0' && p[j]<='9') d[j]=p[j]-'0';
+    else if (p[j]>='a' && p[j]<='f') d[j]=p[j]-'a'+10;
+    else if (p[j]>='A' && p[j]<='F') d[j]=p[j]-'A'+10;
+    else break;
+  }
+  p[j]='\0';
+  for (j--,k=0;k<=j;k++) {
+    if (k>=8) val.h+=d[j-k]<<(4*k-32);
+    else val.l+=d[j-k]<<(4*k);
+  }
+  return val;
+}
 @z
 
 @x [20] l.347 Stuff from MMIX-ARITH.
@@ -2713,38 +2745,6 @@ static void spec_write(
 in 64 bits of an actual memory bus, because $a$ is always a multiple of~$2^s$
 that is less than $2^{63}$. Thus $(a,s)$ can be packed neatly into the
 64-bit number $2a+2^s$. (Think about it.)
-
-@ Here's a simple program to read an octabyte in hexadecimal notation
-from a buffer. It changes the buffer by storing a null character
-after the input.
-@^radix conversion@>
-
-@d BUF_SIZE 100
-
-@<External routines@>=
-octa read_hex(
-  char *p)
-{
-  unsigned char d[BUF_SIZE];
-  register int j,k;
-  octa val=zero_octa;
-  for (j=0;;j++) {
-    if (p[j]>='0' && p[j]<='9') d[j]=p[j]-'0';
-    else if (p[j]>='a' && p[j]<='f') d[j]=p[j]-'a'+10;
-    else if (p[j]>='A' && p[j]<='F') d[j]=p[j]-'A'+10;
-    else break;
-  }
-  p[j]='\0';
-  for (j--,k=0;k<=j;k++) {
-    if (k>=8) val.h+=d[j-k]<<(4*k-32);
-    else val.l+=d[j-k]<<(4*k);
-  }
-  return val;
-}
-
-@ @<External proto...@>=
-Extern octa read_hex(char *);
-  /* see {\mc MMMIX} */
 
 @* Index.
 @z
