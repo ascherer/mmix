@@ -135,7 +135,7 @@ void print_hex(o)
   else printf("%x",o.l);
 }
 @y
-@ @d print_hex print_octa /* Preserve the old function name */
+@ @d print_hex print_octa /* preserve the old function name */
 @z
 
 @x [13] l.592 Stuff from MMIX-ARITH.
