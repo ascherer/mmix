@@ -1214,7 +1214,7 @@ Each user of its functionality should include the following header file.
 @ @<External proto...@>=
 @^prototypes for functions@>
 Extern void print_octa(octa);
-  /* Standard output format */
+  /* standard output format */
 @#
 Extern octa oplus(octa,octa);
   /* unsigned $y+z$ */
