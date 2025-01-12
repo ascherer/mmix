@@ -13,12 +13,110 @@
 \fi
 @z
 
+@x [2]
+\bull \.{-r}\quad Trace details of the register stack. This option
+@y
+\vfill
+\vbox{}
+\vskip2cm
+\bull \.{-r}\quad Trace details of the register stack. This option
+@z
+
+@x [3]
+\bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
+@y
+\begingroup \ninepoint
+\bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
+@z
+@x [3]
+@:Stack_Segment}\.{Stack\_Segment@>
+@y
+@:Stack_Segment}\.{Stack\_Segment@>
+\par
+\endgroup
+@z
+
 @x [4]
 @* Rudimentary I/O.
 @y
 @* Rudimentary I/O.
 @-handle@> @-mode@> @-mode_string@> @-name@> @-string@>
 @-size@> @-offset@> @-n@> @-buffer@>
+@z
+@x [4]
+is essentially equivalent to the \CEE/ expression
+@y
+is essentially equivalent to the \CEE/ expression
+\begingroup \ninepoint
+@z
+@x [4]
+      \hskip5em\cr}$$
+@y
+      \hskip5em\cr}$$
+\endgroup
+@z
+@x [4]
+|mode_string|[\.{BinaryRead}]~=~|"rb"|,
+@y
+\hfil\break|mode_string|[\.{BinaryRead}]~=~|"rb"|,
+@z
+@x [4]
+|mode_string|[\.{BinaryReadWrite}]~=~|"wb+"|.
+@y
+\hfil\break|mode_string|[\.{BinaryReadWrite}]~=~|"wb+"|.
+@z
+@x [4]
+\bull \.{Fread}|(handle,buffer,size)|.
+@y
+\vskip4cm
+\bull \.{Fread}|(handle,buffer,size)|.
+@z
+@x [4]
+\bull \.{Fputs}|(handle,string)|.
+@y
+\vfill\eject
+\bull \.{Fputs}|(handle,string)|.
+@z
+@x [4]
+The file handle should have been opened with mode \.{TextWrite},
+@y
+The file handle should have been opened with either mode \.{TextWrite},
+@z
+@x [4]
+The file handle should have been opened with mode \.{TextWrite},
+@y
+The file handle should have been opened with mode either \.{TextWrite},
+@z
+@x [4]
+The file handle should have been opened with mode \.{BinaryRead},
+@y
+The file handle should have been opened with mode either \.{BinaryRead},
+@z
+@x [4]
+$$\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,@,
+              offset<0? SEEK_END: SEEK_SET)? -1: 0|.}$$
+@y
+$$\displaylines{
+\hskip5em\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,|}\hfill\cr
+\hfill\hbox{|offset<0? SEEK_END: SEEK_SET)? -1: 0|.}\hskip5em\cr}$$
+@z
+
+@x [8]
+\vskip-14pt
+@y
+\vskip-14pt
+\begingroup \ninepoint
+@z
+@x [8]
+\noalign{\smallskip}
+@y
+\noalign{\smallskip}
+@z
+@x [8]
+}$$
+@y
+}$$
+\par \endgroup
 @z
 
 @x [13]
@@ -84,11 +182,23 @@ byte read_byte(void)
 @-b@>
 @z
 
+@x [29]
+@ @<Load the next item@>=
+@y
+@r @ @<Load the next item@>=
+@z
+
 @x [30]
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
 @y
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
 @-loc@> @-val@>
+@z
+
+@x [35]
+@ The space for file names isn't allocated until we are sure we need it.
+@y
+@r @ The space for file names isn't allocated until we are sure we need it.
 @z
 
 @x [37]
@@ -115,6 +225,11 @@ void make_map(void)
 @z
 
 @x [45]
+@ Source lines are listed by the |print_line| routine, preceded by
+@y
+@r @ Source lines are listed by the |print_line| routine, preceded by
+@z
+@x [45]
 void print_line(
 @y
 void print_line(
@@ -136,6 +251,11 @@ void print_freqs(
 @z
 
 @x [51]
+@ An ellipsis (\.{...}) is printed between frequency data for nonconsecutive
+@y
+@r @ An ellipsis (\.{...}) is printed between frequency data for nonconsecutive
+@z
+@x [51]
   octa cur_loc=incr(p->loc,4*j);
 @y
   octa cur_loc=incr(p->loc,4*j);
@@ -145,6 +265,16 @@ void print_freqs(
 @$name {MMIX-SIM}64 \&{char} ${*}$@>
 @$p {MMIX-SIM}50 \&{mem\_node} ${*}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [56]
+@!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
+
+@ @<Glob...@>=
+@y
+@!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
+
+@r @ @<Glob...@>=
 @z
 
 @x [57]
@@ -167,6 +297,11 @@ void print_freqs(
 @<Set |z| from register Z@>=
 @% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @z
+@x [72]
+  if (zz>=G) z=g[zz];
+@y
+  if (zz>=G) z=g[zz]; @+
+@z
 
 @x [73]
 @ @<Set |y| from register Y@>=
@@ -174,12 +309,22 @@ void print_freqs(
 @ @<Set |y| from register Y@>=
 @% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @z
+@x [73]
+  if (yy>=G) y=g[yy];
+@y
+  if (yy>=G) y=g[yy]; @+
+@z
 
 @x [74]
 @ @<Set \9{b}|b| from register X@>=
 @y
 @ @<Set \9{b}|b| from register X@>=
 @% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+@x [74]
+  if (xx>=G) b=g[xx];
+@y
+  if (xx>=G) b=g[xx]; @+
 @z
 
 @x [76]
@@ -189,6 +334,13 @@ octa *l; /* local registers */
 @-l@>
 @z
 
+@x [77]
+g[rT].h=0x80000005;
+g[rTT].h=0x80000006;
+@y
+g[rT].h=0x80000005; @+
+g[rTT].h=0x80000006; @+
+@z
 @x [77]
 l=(octa*)calloc(lring_size,sizeof(octa));
 @y
@@ -232,11 +384,81 @@ void stack_load(void)
 @$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @z
 
+@x [90]
+  @=/* else fall through */@>@;
+@y
+  @+ @=/* else fall through */@>@;
+@z
+@x [90]
+  @=/* else fall through */@>@;
+@y
+  @+ @=/* else fall through */@>@;
+@z
+
 @x [91]
 int register_truth(
 @y
 int register_truth(
 @-o@> @-op@> @-b@>
+@z
+
+@x [93]
+ if (good) good_guesses++;
+ else {
+@y
+ if (good) good_guesses++;
+ else @/ {
+@z
+
+@x [101]
+@ Pushing and popping are rather delicate, because we want to trace
+@y
+@ Pushing and popping are rather delicate, because we want to trace
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [104]
+case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
+@y
+case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
+
+@x [107]
+@ Several loose ends remain to be nailed down.
+@y
+@r @ Several loose ends remain to be nailed down.
+@z
+
+@x [108]
+but \.{TRIP}, \.{TRAP}, and \.{RESUME}.
+
+@y
+but \.{TRIP}, \.{TRAP}, and \.{RESUME}.
+@z
+@x [108]
+@^interrupts@>
+
+@y
+@^interrupts@>
+@z
+@x [108]
+ g[rWW]=inst_ptr;
+ g[rXX]=(octa){sign_bit, inst};
+@y
+ g[rWW]=inst_ptr; @+
+ g[rXX]=(octa){sign_bit, inst}; @+
+@z
+
+@x [111]
+@ @<Prepare memory arguments...@>=
+@y
+@ @<Prepare memory arguments...@>=
+@% @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
 @x [114]
@@ -245,6 +467,25 @@ static int mmgetchars(
 static int mmgetchars(
 @-buf@> @-size@> @-addr@> @-stop@>
 @-p@> @-m@> @-ll@> @-x@> @-a@>
+@% @$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [115]
+@ @<Read and store one byte...@>=
+@y
+@ @<Read and store one byte...@>=
+@%
+@$m {MMIX-SIM}114 \&{register} \&{int}@>
+@$stop {MMIX-SIM}114 \&{int}@>
+@z
+
+@x [116]
+@ @<Read and store up to four bytes...@>=
+@y
+@ @<Read and store up to four bytes...@>=
+@%
+@$m {MMIX-SIM}114 \&{register} \&{int}@>
+@$stop {MMIX-SIM}114 \&{int}@>
 @z
 
 @x [117]
@@ -255,6 +496,177 @@ static void mmputchars(
 @-p@> @-m@> @-ll@> @-a@>
 @z
 
+@x [118]
+@ @<Load \9{a}and write one byte@>=
+@y
+@ @<Load \9{a}and write one byte@>=
+@-s@>
+@%
+@$a {MMIX-SIM}117 \&{octa}@>
+@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${*}$@>
+@$m {MMIX-SIM}117 \&{register} \&{int}@>
+@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${*}$@>
+@$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [119]
+@ @<Load \9{a}and write four bytes@>=
+@y
+@ @<Load \9{a}and write four bytes@>=
+@%
+@$a {MMIX-SIM}117 \&{octa}@>
+@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${*}$@>
+@$m {MMIX-SIM}117 \&{register} \&{int}@>
+@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${*}$@>
+@$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [120]
+static char stdin_chr(void)
+@y
+static char stdin_chr(void)
+@-p@>
+@z
+
+@x [123]
+@ @<Initiate a trip interrupt@>=
+@y
+@r @ @<Initiate a trip interrupt@>=
+@z
+
+@x [131]
+@ This part of the simulator was inspired by ideas of E.~H. Satterthwaite,
+@y
+@r @ This part of the simulator was inspired by ideas of E.~H. Satterthwaite,
+@z
+
+@x [134]
+@ Octabytes are printed as decimal numbers unless a
+@y
+@r @ Octabytes are printed as decimal numbers unless a
+@z
+
+@x [137]
+void trace_print(
+@y
+void trace_print(
+@-o@>
+@z
+
+@x [143]
+void scan_option(
+@y
+void scan_option(
+@-arg@> @-usage@> @-k@>
+@z
+@x [143]
+  @=/* else fall through */@>@;
+@y
+  @+ @=/* else fall through */@>@;
+@z
+
+@x [144]
+char *usage_help[]={@|
+@y
+@#
+char *usage_help[]={@|
+@z
+@x [144]
+"q         quit the simulation\n",@|
+@y
+"q         quit the simulation\n",
+@z
+@x [144]
+"t<x>      trace location x\n",@|
+@y
+"t<x>      trace location x\n",
+@z
+
+@x [145]
+@ @<Open a file for simulated standard input@>=
+@y
+@ @<Open a file for simulated standard input@>=
+@% @$arg {MMIX-SIM}143 \&{char} ${*}$@>
+@z
+
+@x [146]
+@ @<Open a file for dumping binary output@>=
+@y
+@ @<Open a file for dumping binary output@>=
+@% @$arg {MMIX-SIM}143 \&{char} ${*}$@>
+@z
+
+@x [148]
+void catchint(
+@y
+void catchint(
+@-n@>
+@z
+
+@x [149]
+{@+register int repeating;
+@y
+{@+register int repeating;
+@-repeating@>
+@z
+
+@x [152]
+@ @<Cases that change |cur_disp_mode|@>=
+@y
+@ @<Cases that change |cur_disp_mode|@>=
+@% @$repeating {MMIX-SIM}149 \&{register} \&{int}@>
+@z
+
+@x [153]
+@ @<Cases that define |cur_disp_type|@>=
+@y
+@ @<Cases that define |cur_disp_type|@>=
+@% @$repeating {MMIX-SIM}149 \&{register} \&{int}@>
+@z
+
+@x [154]
+@ @<Subr...@>=
+octa scan_hex(
+@y
+@r @ @<Subr...@>=
+octa scan_hex(
+@-s@> @-offset@> @-p@> @-o@>
+@z
+
+@x [155]
+@ @<Scan a string constant@>=
+@y
+@ @<Scan a string constant@>=
+@% @$p {MMIX-SIM}154 \&{register} \&{char} ${*}$@>
+@z
+
+@x [156]
+@ @<Display and/or set the value of the current octabyte@>=
+@y
+@ @<Display and/or set the value of the current octabyte@>=
+@% @$repeating {MMIX-SIM}149 \&{register} \&{int}@>
+@z
+
+@x [157]
+@ @<Set the current octabyte to |val|@>=
+@y
+@ @<Set the current octabyte to |val|@>=
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [159]
+@ @<Display the current octabyte@>=
+@y
+@r @ @<Display the current octabyte@>=
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
 @x [160]
 void print_string(
 @y
@@ -263,10 +675,26 @@ void print_string(
 @z
 
 @x [162]
+@ @<Sub...@>=
 void show_breaks(
 @y
+@r @ @<Sub...@>=
 void show_breaks(
 @-p@> @-j@> @-cur_loc@>
+@z
+
+@x [163]
+@<Load the command line arguments@>=
+@y
+@<Load the command line arguments@>=
+@% @$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [164]
+@ @<Get ready to \.{UNSAVE} the initial context@>=
+@y
+@ @<Get ready to \.{UNSAVE} the initial context@>=
+@% @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
 @x [165]
@@ -274,9 +702,17 @@ void dump(
 @y
 void dump(
 @-p@> @-j@> @-cur_loc@>
+@% @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
-@x [1]
+@x [166]
+void dump_tet(
+@y
+void dump_tet(
+@-t@>
+@z
+
+@x [167]
 @* Index.
 @y
 @z

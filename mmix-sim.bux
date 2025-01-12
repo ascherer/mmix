@@ -320,3 +320,9 @@
 @$Ftell {MMIX-SIM}59 =10@>
 
 @$g {MMIX-SIM}76 \&{octa} [\,]@>
+
+@$decimal {MMIX-SIM}135 =0@>
+@$hex {MMIX-SIM}135 =1@>
+@$zhex {MMIX-SIM}135 =2@>
+@$floating {MMIX-SIM}135 =3@>
+@$handle {MMIX-SIM}135 =4@>

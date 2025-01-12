@@ -39,6 +39,10 @@
 @$fdivide {MMIX-ARITH}44 \&{octa} (\,)@>
 @$fplus {MMIX-ARITH}46 \&{octa} (\,)@>
 @$fepscomp {MMIX-ARITH}50 \&{int} (\,)@>
+@$print_float {MMIX-ARITH}54 \&{void} (\,)@>
+@$scan_const {MMIX-ARITH}68 \&{int} (\,)@>
+@$val {MMIX-ARITH}69 \&{Extern} \&{octa}@>
+@$next_char {MMIX-ARITH}69 \&{Extern} \&{char} ${*}$@>
 @$fcomp {MMIX-ARITH}85 \&{int} (\,)@>
 @$fintegerize {MMIX-ARITH}86 \&{octa} (\,)@>
 @$fixit {MMIX-ARITH}88 \&{octa} (\,)@>
@@ -55,6 +59,7 @@
 
 @$mmix_io_init {MMIX-IO}7 \&{void} (\,)@>
 @$mmix_fopen {MMIX-IO}8 \&{void} (\,)@>
+@$mmix_fake_stdin {MMIX-IO}10 \&{void} (\,)@>
 @$mmix_fclose {MMIX-IO}11 \&{void} (\,)@>
 @$mmix_fread {MMIX-IO}12 \&{octa} (\,)@>
 @$mmix_fgets {MMIX-IO}14 \&{octa} (\,)@>

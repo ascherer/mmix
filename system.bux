@@ -95,3 +95,6 @@
 
 @$stat "<sys/stat.h>" \zip@>
 @$st_mtime "<sys/stat.h>" \zip@>
+
+@$signal "<signal.h>" \zip@>
+@$SIGINT "<signal.h>" \zip@>
