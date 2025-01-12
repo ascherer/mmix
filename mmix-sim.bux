@@ -294,18 +294,18 @@
 @$rYY {MMIX-SIM}55 =30@>
 @$rZZ {MMIX-SIM}55 =31@>
 
-@$X_BIT {MMIX-SIM}57 $(\T{1}\LL\T{8})$@>
-@$U_BIT {MMIX-SIM}57 $(\T{1}\LL\T{10})$@>
-@$I_BIT {MMIX-SIM}57 $(\T{1}\LL\T{12})$@>
-@$W_BIT {MMIX-SIM}57 $(\T{1}\LL\T{13})$@>
-@$V_BIT {MMIX-SIM}57 $(\T{1}\LL\T{14})$@>
-@$D_BIT {MMIX-SIM}57 $(\T{1}\LL\T{15})$@>
-@$H_BIT {MMIX-SIM}57 $(\T{1}\LL\T{16})$@>
+@$X_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{8})$@>
+@$U_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{10})$@>
+@$I_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{12})$@>
+@$W_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{13})$@>
+@$V_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{14})$@>
+@$D_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{15})$@>
+@$H_BIT {MMIX-SIM}57 =$(\T{1}\LL\T{16})$@>
 
-@$trace_bit {MMIX-SIM}58 $(\T{1}\LL\T{3})$@>
-@$read_bit {MMIX-SIM}58 $(\T{1}\LL\T{2})$@>
-@$write_bit {MMIX-SIM}58 $(\T{1}\LL\T{1})$@>
-@$exec_bit {MMIX-SIM}58 $(\T{1}\LL\T{0})$@>
+@$trace_bit {MMIX-SIM}58 =$(\T{1}\LL\T{3})$@>
+@$read_bit {MMIX-SIM}58 =$(\T{1}\LL\T{2})$@>
+@$write_bit {MMIX-SIM}58 =$(\T{1}\LL\T{1})$@>
+@$exec_bit {MMIX-SIM}58 =$(\T{1}\LL\T{0})$@>
 
 @$Halt {MMIX-SIM}59 =0@>
 @$Fopen {MMIX-SIM}59 =1@>
