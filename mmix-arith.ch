@@ -223,7 +223,15 @@ octa omult(octa y, octa z)
 octa aux; /* secondary output of subroutines with multiple outputs */
 bool overflow; /* set by certain subroutines for signed arithmetic */
 @y
-@ @<External variables@>=
+@ The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
+declare variables that are accessed in other modules. Actually
+all appearances of `\&{Extern}' are defined to be blank here, but
+`\&{Extern}' will become `\&{extern}' in the header file |@(mmix-arith.h@>|.
+
+@d Extern  /* blank for us, \&{extern} for them */
+@f Extern extern
+
+@<External variables@>=
 Extern octa aux; /* secondary output of subroutines with multiple outputs */
 Extern bool overflow; /* set by certain subroutines for signed arithmetic */
 @z
@@ -1178,12 +1186,6 @@ yf=shift_right(yf,1,true);
 @y
 @* Public interface. This program module is central to the whole \MMIX\ system.
 Each user of its functionality should include the following header file.
-
-The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
-declare variables that are accessed in other modules.
-
-@d Extern  /* blank for us, \&{extern} for them */
-@s Extern extern
 
 @(mmix-arith.h@>=
 #ifndef MMIX_ARITH_H
