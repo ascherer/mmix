@@ -1,11 +1,12 @@
 @x [0]
 \input pdfwebtocfront
 @y
+\ifpdf
 \pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
 \pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
 \ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
 \else \global\pageshift=-0.5in
-  \global\hoffset=-0.5in \global\voffset=-0.5in \fi
+  \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
 
 \ifx\undefined\eightpoint\else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
@@ -45,10 +46,10 @@ bypass the library names here.
 @z
 
 @x [19]
-static void print_octa(
+octa read_hex(
 @y
-static void print_octa(
-@-o@>
+octa read_hex(
+@-p@> @-d@> @-j@> @-k@> @-val@>
 @z
 
 @x [20]
@@ -64,11 +65,19 @@ the remainder in~|aux|.
 @-y@> @-z@>
 @z
 
-@x [26]
-@ Coroutine control is masterminded by a ring of queues, one each for
+@x [25]
+  if (c) printf("%s:%d",c->name,c->stage);
 @y
-@r @ Coroutine control is masterminded by a ring of queues, one each for
+  if (c) printf("%s:%d",c->name,c->stage); @+
 @z
+@x [25]
+  if (c) errprint("%s:%d",c->name,c->stage);
+  else errprint("??");
+@y
+  if (c) errprint("%s:%d",c->name,c->stage); @+
+  else errprint("??");
+@z
+
 @x [26]
 etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
 @y
@@ -100,6 +109,12 @@ static void schedule(
 @-p@>
 @z
 
+@x [30]
+@ The all-important |ctl| field of a coroutine, which contains the
+@y
+@r @ The all-important |ctl| field of a coroutine, which contains the
+@z
+
 @x [32]
 coroutine is not assumed to have any valid data in its |ctl| field.
 @y
@@ -128,7 +143,7 @@ static coroutine *queuelist(int);
 @y
 static coroutine *queuelist(int);
 
-@r @ @<Sub...@>=
+@ @<Sub...@>=
 @-p@> @-q@>
 @z
 
@@ -137,6 +152,22 @@ static coroutine *queuelist(int);
 @y
 @d release_lock(c,l) {@+l=NULL;@+ (c)->lockloc=NULL;@+}
 @-c@> @-l@>
+@z
+
+@x [39]
+  if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
+@y
+@t}\goodbreak\quad{@>
+  if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
+@z
+
+@x [44]
+the address of the subsequent instruction.
+@y
+the address of the subsequent instruction.
+\vfill
+\vbox{}
+\vskip5mm
 @z
 
 @x [48]
@@ -1353,6 +1384,9 @@ static void print_write_buffer(void);
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
 @y
+\vfill
+\vbox{}
+\vskip1cm
 @<Commit to memory...@>=
 { register write_node *q=write_tail;
 @-p@> @-q@>
