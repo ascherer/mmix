@@ -53,7 +53,7 @@
 @$neg_one {MMIX-ARITH}97 \&{octa}@>
 @$inf_octa {MMIX-ARITH}97 \&{octa}@>
 @$standard_NaN {MMIX-ARITH}97 \&{octa}@>
-@$sign_bit {MMIX-ARITH}97 \&{octa}@>
+@$sign_bit {MMIX-ARITH}97 \&{tetra}@>
 
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
