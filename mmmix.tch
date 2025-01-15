@@ -108,8 +108,3 @@ else { @<Input a rudimentary hexadecimal file@>; }
 @y
 @r @ The register stack pointers, rO and rS, are not kept up to date
 @z
-
-@x [26]
-@* Index.
-@y
-@z

@@ -671,9 +671,3 @@ if (new_link==DEFINED) {
 @y
   @+ register int j,k; /* all-purpose integers */
 @z
-
-@x [146]
-@* Index.
-
-@y
-@z

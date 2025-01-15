@@ -2228,8 +2228,3 @@ read from and write to the memory-mapped addresses.
 @y
 @r @ The default |spec_write| just reports its arguments, without actually
 @z
-
-@x [395]
-@* Index.
-@y
-@z
