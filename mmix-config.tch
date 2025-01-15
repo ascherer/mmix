@@ -315,8 +315,3 @@ scheduler and schedulee.
 @ @% @$replace_policy {MMIX-PIPE}23 \&{enum}@>
 @<Private prototypes@>=
 @z
-
-@x [41]
-@*Index.
-@y
-@z

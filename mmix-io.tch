@@ -80,8 +80,3 @@ static char *trip_warning[]={ @|
 "floating point underflow", @|
 "floating point division by zero", @|
 @z
-
-@x [25]
-@* Index.
-@y
-@z
