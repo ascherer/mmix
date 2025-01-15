@@ -84,12 +84,12 @@ The file handle should have been opened with either mode \.{TextWrite},
 @x [4]
 The file handle should have been opened with mode \.{TextWrite},
 @y
-The file handle should have been opened with mode either \.{TextWrite},
+The file handle should have been opened with either mode \.{TextWrite},
 @z
 @x [4]
 The file handle should have been opened with mode \.{BinaryRead},
 @y
-The file handle should have been opened with mode either \.{BinaryRead},
+The file handle should have been opened with either mode \.{BinaryRead},
 @z
 @x [4]
 $$\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,@,
