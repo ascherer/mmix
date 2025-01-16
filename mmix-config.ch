@@ -618,5 +618,5 @@ static void pcs(cache*);
 static int lg(int);
 static void alloc_cache(cache*,char*);
 
-@*Index.
+@* Index.
 @z

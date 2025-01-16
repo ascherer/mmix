@@ -1,10 +1,10 @@
 @x
-\ifx\undefined\eightpoint \input pdfwebtocfront \else
+{\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 @y
-\ifx\undefined\eightpoint \input pdfwebtocfront \else
 \def\startpdf{\def\pagemode{/PageMode /UseOutlines}
   \ifpdflua\pdfcatalog{\pagemode}
   \else\special{pdf: docview << \pagemode >>}\fi}
+{\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 @z
 
 @x
