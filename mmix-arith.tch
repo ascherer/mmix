@@ -12,6 +12,21 @@
 \fi
 @z
 
+@x [2]
+static octa fpack(octa,int,char,int);
+@y
+@%
+@$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
+@$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
+@$funpack {MMIX-ARITH}37 \&{static} \&{ftype} (\,)@>
+@$sfunpack {MMIX-ARITH}38 \&{static} \&{ftype} (\,)@>
+@$bignum_times_ten {MMIX-ARITH}60 \&{static} \&{void} (\,)@>
+@$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
+@$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
+@$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
+static octa fpack(octa,int,char,int);
+@z
+
 @x [3]
 @ The definition of type \&{tetra}
 @y
@@ -254,8 +269,51 @@ if (ye>=ze) { @+
 @(mmix-arith.h@>=
 @z
 
-@x [97]
+@x [98]
 @ @<External proto...@>=
 @y
 @ @-sim@> @-u@> @<External proto...@>=
+@z
+@x [98]
+Extern void print_octa(octa);
+@y
+@%
+@$print_octa {MMIX-ARITH}4 \&{void} (\,)@>
+@$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
+@$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
+@$incr {MMIX-ARITH}6 \&{octa} (\,)@>
+@$shift_left {MMIX-ARITH}7 \&{octa} (\,)@>
+@$shift_right {MMIX-ARITH}7 \&{octa} (\,)@>
+@$omult {MMIX-ARITH}8 \&{octa} (\,)@>
+@$signed_omult {MMIX-ARITH}12 \&{octa} (\,)@>
+@$odiv {MMIX-ARITH}13 \&{octa} (\,)@>
+@$signed_odiv {MMIX-ARITH}24 \&{octa} (\,)@>
+@$onot {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oorn {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oand {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oandn {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onand {MMIX-ARITH}25 \&{octa} (\,)@>
+@$oxor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$onxor {MMIX-ARITH}25 \&{octa} (\,)@>
+@$count_bits {MMIX-ARITH}26 \&{int} (\,)@>
+@$byte_diff {MMIX-ARITH}27 \&{tetra} (\,)@>
+@$wyde_diff {MMIX-ARITH}28 \&{tetra} (\,)@>
+@$bool_mult {MMIX-ARITH}29 \&{octa} (\,)@>
+@$load_sf {MMIX-ARITH}39 \&{octa} (\,)@>
+@$store_sf {MMIX-ARITH}40 \&{octa} (\,)@>
+@$fmult {MMIX-ARITH}41 \&{octa} (\,)@>
+@$fdivide {MMIX-ARITH}44 \&{octa} (\,)@>
+@$fplus {MMIX-ARITH}46 \&{octa} (\,)@>
+@$fepscomp {MMIX-ARITH}50 \&{int} (\,)@>
+@$print_float {MMIX-ARITH}54 \&{void} (\,)@>
+@$scan_const {MMIX-ARITH}68 \&{int} (\,)@>
+@$fcomp {MMIX-ARITH}85 \&{int} (\,)@>
+@$fintegerize {MMIX-ARITH}86 \&{octa} (\,)@>
+@$fixit {MMIX-ARITH}88 \&{octa} (\,)@>
+@$floatit {MMIX-ARITH}89 \&{octa} (\,)@>
+@$froot {MMIX-ARITH}91 \&{octa} (\,)@>
+@$fremstep {MMIX-ARITH}93 \&{octa} (\,)@>
+Extern void print_octa(octa);
 @z

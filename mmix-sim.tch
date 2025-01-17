@@ -123,6 +123,34 @@ $$\displaylines{
 @y
 @ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
 @-y@> @-z@>
+@-print_int@> @-new_mem@> @-mem_find@> @-read_tet@> @-read_byte@> @-make_map@>
+@-print_line@> @-show_line@> @-print_freqs@> @-stack_store@> @-stack_load@>
+@-register_truth@> @-trace_print@> @-show_stats@> @-scan_option@> @-catchint@>
+@-scan_hex@> @-print_string@> @-show_breaks@>
+@-dump {MMIX-SIM}165 \&{void} (\,)@>
+@-dump_tet {MMIX-SIM}166 \&{void} (\,)@>
+@%
+@$print_int {MMIX-SIM}15 \&{void} (\,)@>
+@$new_mem {MMIX-SIM}17 \&{mem\_node}${*}$ (\,)@>
+@$mem_find {MMIX-SIM}20 \&{mem\_tetra}{*} (\,)@>
+@$read_tet {MMIX-SIM}26 \&{void} (\,)@>
+@$read_byte {MMIX-SIM}27 \&{byte} (\,)@>
+@$make_map {MMIX-SIM}42 \&{void} (\,)@>
+@$print_line {MMIX-SIM}45 \&{void} (\,)@>
+@$show_line {MMIX-SIM}47 \&{void} (\,)@>
+@$print_freqs {MMIX-SIM}50 \&{void} (\,)@>
+@$stack_store {MMIX-SIM}82 \&{void} (\,)@>
+@$stack_load {MMIX-SIM}83 \&{void} (\,)@>
+@$register_truth {MMIX-SIM}91 \&{int} (\,)@>
+@$trace_print {MMIX-SIM}137 \&{void} (\,)@>
+@$show_stats {MMIX-SIM}140 \&{void} (\,)@>
+@$scan_option {MMIX-SIM}143 \&{void} (\,)@>
+@$catchint {MMIX-SIM}148 \&{void} (\,)@>
+@$scan_hex {MMIX-SIM}154 \&{octa} (\,)@>
+@$print_string {MMIX-SIM}160 \&{void} (\,)@>
+@$show_breaks {MMIX-SIM}162 \&{void} (\,)@>
+@$dump {MMIX-SIM}165 \&{void} (\,)@>
+@$dump_tet {MMIX-SIM}166 \&{void} (\,)@>
 @z
 
 @x [14]

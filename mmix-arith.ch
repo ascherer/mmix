@@ -75,8 +75,8 @@ static ftype funpack(octa,octa*,int*,char*);
 static ftype sfunpack(tetra,octa*,int*,char*);
 @#
 static void bignum_times_ten(bignum*);
-static void bignum_dec(bignum*,bignum*,tetra);
 static int bignum_compare(bignum*,bignum*);
+static void bignum_dec(bignum*,bignum*,tetra);
 static void bignum_double(bignum*);
 @z
 
