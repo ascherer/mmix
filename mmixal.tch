@@ -97,24 +97,25 @@ the remainder in~|aux|.
 @x [31]
 @<Prototypes@>=
 @y
-@-flush_listing_line@>
-@-update_listing_loc@>
-@-listing_clear@>
-@-report_error@>
-@-mmo_clear@>
-@-mmo_out@>
-@-mmo_tetra@>
-@-mmo_byte@>
-@-mmo_lop@>
-@-mmo_lopp@>
-@-mmo_loc@>
-@-mmo_sync@>
-@-assemble@>
-@-new_trie_node@>
-@-trie_search@>
-@-new_sync_mode@>
-@-prune@>
-@-out_stab@>
+@%
+@$flush_listing_line {MMIXAL}41 \&{void} (\,)@>
+@$update_listing_loc {MMIXAL}42 \&{void} (\,)@>
+@$listing_clear {MMIXAL}44 \&{void} (\,)@>
+@$report_error {MMIXAL}45 \&{void} (\,)@>
+@$mmo_clear {MMIXAL}47 \&{void} (\,)@>
+@$mmo_out {MMIXAL}47 \&{void} (\,)@>
+@$mmo_tetra {MMIXAL}48 \&{void} (\,)@>
+@$mmo_byte {MMIXAL}48 \&{void} (\,)@>
+@$mmo_lop {MMIXAL}48 \&{void} (\,)@>
+@$mmo_lopp {MMIXAL}48 \&{void} (\,)@>
+@$mmo_loc {MMIXAL}49 \&{void} (\,)@>
+@$mmo_sync {MMIXAL}50 \&{void} (\,)@>
+@$assemble {MMIXAL}52 \&{void} (\,)@>
+@$new_trie_node {MMIXAL}55 \&{trie\_node}${*}$ (\,)@>
+@$trie_search {MMIXAL}57 \&{trie\_node}${*}$ (\,)@>
+@$new_sync_mode {MMIXAL}59 \&{sym\_node}${*}$ (\,)@>
+@$prune {MMIXAL}73 \&{trie\_node}${*}$ (\,)@>
+@$out_stab {MMIXAL}74 \&{void} (\,)@>
 @<Prototypes@>=
 @z
 

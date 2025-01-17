@@ -117,6 +117,7 @@ read from the |CPV| table.)
 @ @<If |token| is a cache name, process a cache spec@>=
 @y
 @r @ @<If |token| is a cache name, process a cache spec@>=
+@% @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @z
 
 @x [22]
@@ -144,6 +145,8 @@ read from the |CPV| table.)
 @ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
 @-access_time@> @-copy_in_time@> @-copy_out_time@>
 @-mode@> @-ports@> @-repl@> @-vrepl@>
+@%
+@$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
 @<Sub...@>=
 @z
 @x [23]
@@ -308,10 +311,24 @@ scheduler and schedulee.
 @-MMIX_CONFIG_H@>
 @(mmix-config.h@>=
 @z
+@x [39]
+extern void MMIX_config(char *);
+@y
+extern void MMIX_config(char *);
+@% @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
+@z
 
 @x [40]
 @ @<Private prototypes@>=
 @y
 @ @% @$replace_policy {MMIX-PIPE}23 \&{enum}@>
+@-panic@> @$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
+@-get_token@> @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
+@-get_int@> @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
+@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache}${*}$ (\,)@>
+@-ppol@> @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
+@-pcs@> @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
+@-lg@> @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
+@-alloc_cache@> @$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
 @<Private prototypes@>=
 @z

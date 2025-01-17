@@ -18,6 +18,16 @@
 @r @ @<Initialize everything@>=
 @z
 
+@x [5]
+@<Prototypes@>=
+@y
+@<Prototypes@>=
+@%
+@$read_tet {MMOTYPE}9 \&{void} (\,)@>
+@$read_byte {MMOTYPE}10 \&{byte} (\,)@>
+@$print_stab {MMOTYPE}26 \&{void} (\,)@>
+@z
+
 @x [16] l.205
   cur_loc=incr(cur_loc,4);@+ cur_loc.l &=-4;
 }
