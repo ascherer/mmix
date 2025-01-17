@@ -117,7 +117,6 @@ read from the |CPV| table.)
 @ @<If |token| is a cache name, process a cache spec@>=
 @y
 @r @ @<If |token| is a cache name, process a cache spec@>=
-@% @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @z
 
 @x [22]
@@ -129,8 +128,7 @@ read from the |CPV| table.)
   pcs(Scache);@+continue;
 }
 
-@ @-ppol@> @% @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
-@<Sub...@>=
+@ @-ppol@> @<Sub...@>=
 @z
 
 @x [23]
@@ -145,8 +143,6 @@ read from the |CPV| table.)
 @ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
 @-access_time@> @-copy_in_time@> @-copy_out_time@>
 @-mode@> @-ports@> @-repl@> @-vrepl@>
-@%
-@$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
 @<Sub...@>=
 @z
 @x [23]
