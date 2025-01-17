@@ -1,5 +1,8 @@
 @i mmix.bux
 
+@$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
+@$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
+@$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
 @$assoc {MMIX-CONFIG}13 =0@>
 @$blksz {MMIX-CONFIG}13 =1@>
 @$setsz {MMIX-CONFIG}13 =2@>
@@ -11,11 +14,15 @@
 @$citm {MMIX-CONFIG}13 =8@>
 @$cotm {MMIX-CONFIG}13 =9@>
 @$prts {MMIX-CONFIG}13 =10@>
-@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
-
+@$new_cache {MMIX-CONFIG}16 \&{static} \&{cache}${*}$ (\,)@>
+@$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
+@$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @$stage {MMIX-PIPE}23 \&{int}@>
 @$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
 @$ring_size {MMIX-PIPE}29 \&{int}@>
+@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
+@$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
+@$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 @$cache {MMIX-PIPE}167 \&{struct}@>
 @$cacheblock {MMIX-PIPE}167 \&{struct}@>
 @$tagmask {MMIX-PIPE}167 \&{int}@>
