@@ -100,6 +100,9 @@ else { @<Input a rudimentary hexadecimal file@>; }
 @-d@> @-r@> @-m@>
 @-__VA_OPT__@>
 @-__VA_ARGS__@>
+@%
+@$undump_octa {MMMIX}10 \&{static} \&{bool} (\,)@>
+@$sl3 {MMMIX}20 \&{static} \&{octa} (\,)@>
 @d panic(r,m,...) {@+fprintf(stderr,
 @z
 

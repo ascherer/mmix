@@ -28,6 +28,12 @@
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @#
 @z
+@x [1]
+@<Subroutines@>@;
+@y
+@<Prototypes@>@;
+@<Subroutines@>@;
+@z
 
 @x [1] l.26 C99 prototypes for C2x.
 int main(argc,argv)
@@ -82,7 +88,11 @@ bool verbose; /* are we also showing the tetras of input as they are read? */
 #define ARGS(list) ()
 #endif
 @y
-@ (This section remains empty for historic reasons.)
+@ We declare subroutines with their prototypes.
+@<Prototypes@>=
+void read_tet(void);
+byte read_byte(void);
+void print_stab(void);
 @z
 
 @x [6] l.74
