@@ -321,7 +321,7 @@ extern void MMIX_config(char *);
 @-panic@> @$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
 @-get_token@> @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
 @-get_int@> @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
-@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache}${*}$ (\,)@>
+@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${*}$(\,)@>
 @-ppol@> @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
 @-pcs@> @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @-lg@> @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
