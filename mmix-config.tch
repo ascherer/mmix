@@ -308,9 +308,9 @@ scheduler and schedulee.
 @(mmix-config.h@>=
 @z
 @x [39]
-extern void MMIX_config(char *);
+extern void MMIX_config(char *); /* public prototype */
 @y
-extern void MMIX_config(char *);
+extern void MMIX_config(char *); /* public prototype */
 @% @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 @z
 

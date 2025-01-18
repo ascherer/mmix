@@ -604,7 +604,7 @@ void MMIX_config(
 #ifndef MMIX_CONFIG_H
 #define MMIX_CONFIG_H
 @#
-extern void MMIX_config(char *);
+extern void MMIX_config(char *); /* public prototype */
 @#
 #endif /* |MMIX_CONFIG_H| */
 
