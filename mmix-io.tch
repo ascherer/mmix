@@ -29,8 +29,8 @@
 @x [8]
 octa mmix_fopen(
 @y
-@$mmgetchars {MMIX-IO}4 ``mixins''@>
 octa mmix_fopen(
+@% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
 @z
 
 @x [10]
@@ -49,15 +49,64 @@ octa mmix_fclose(
 @x [12]
 octa mmix_fread(
 @y
-@$mmputchars {MMIX-IO}4 ``mixins''@>
-@$stdin_chr {MMIX-IO}4 ``mixins''@>
+@% @$mmputchars {MMIX-IO}4 \&{void} (\,), ``mixin''@>
 octa mmix_fread(
+@z
+
+@x [13]
+  for (unsigned char* p=buf; p<buf+n; p++) *p=stdin_chr();
+@y
+  for (unsigned char* p=buf; p<buf+n; p++) *p=stdin_chr();
+@% @$stdin_chr {MMIX-IO}4 \&{char} (\,), ``mixin''@>
+@z
+
+@x [14]
+octa mmix_fgets(
+@y
+octa mmix_fgets(
+@% @$mmputchars {MMIX-IO}4 \&{void} (\,), ``mixin''@>
+@z
+
+@x [15]
+if (size.l<(tetra)s && !size.h) s=(int)size.l;
+@y
+if (size.l<(tetra)s && !size.h) s=(int)size.l;
+@% @$stdin_chr {MMIX-IO}4 \&{char} (\,), ``mixin''@>
+@z
+
+@x [16]
+octa mmix_fgetws(
+@y
+octa mmix_fgetws(
+@% @$mmputchars {MMIX-IO}4 \&{void} (\,), ``mixin''@>
 @z
 
 @x [17]
     *p++=stdin_chr();@+*p++=stdin_chr();
 @y
     *p++=stdin_chr();@+*p++=stdin_chr(); @+
+@% @$stdin_chr {MMIX-IO}4 \&{char} (\,), ``mixin''@>
+@z
+
+@x [18]
+octa mmix_fwrite(
+@y
+octa mmix_fwrite(
+@% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
+@z
+
+@x [19]
+octa mmix_fputs(
+@y
+octa mmix_fputs(
+@% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
+@z
+
+@x [20]
+octa mmix_fputws(
+@y
+octa mmix_fputws(
+@% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
 @z
 
 @x [24]
