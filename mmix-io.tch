@@ -18,12 +18,12 @@
 @* Interface.  Here comes the exported interface of this program module.
 @-MMIX_IO_H@>
 @%
-@$mmgetchars {MMIX-SIM}114 \&{static} \&{int}@>
-@$mmgetchars {MMIX-PIPE}381 \&{static} \&{int}@>
-@$mmputchars {MMIX-SIM}117 \&{static} \&{void}@>
-@$mmputchars {MMIX-PIPE}384 \&{static} \&{void}@>
-@$stdin_chr {MMIX-SIM}120 \&{static} \&{char}@>
-@$stdin_chr {MMIX-PIPE}387 \&{static} \&{char}@>
+@$mmgetchars {MMIX-SIM}114 \&{static} \&{int} (\,)@>
+@$mmgetchars {MMIX-PIPE}381 \&{static} \&{int} (\,)@>
+@$mmputchars {MMIX-SIM}117 \&{static} \&{void} (\,)@>
+@$mmputchars {MMIX-PIPE}384 \&{static} \&{void} (\,)@>
+@$stdin_chr {MMIX-SIM}120 \&{static} \&{char} (\,)@>
+@$stdin_chr {MMIX-PIPE}387 \&{static} \&{char} (\,)@>
 @z
 
 @x [8]
