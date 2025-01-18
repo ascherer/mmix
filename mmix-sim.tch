@@ -481,6 +481,12 @@ but \.{TRIP}, \.{TRAP}, and \.{RESUME}.
  g[rXX]=(octa){sign_bit, inst}; @+
 @z
 
+@x [108]
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
+@y
+case Fwrite: @/ g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
+@z
+
 @x [111]
 @ @<Prepare memory arguments...@>=
 @y
@@ -559,6 +565,22 @@ static char stdin_chr(void)
 @ @<Initiate a trip interrupt@>=
 @y
 @r @ @<Initiate a trip interrupt@>=
+@z
+
+@x [130]ł
+ case RESUME_AGAIN: printf("           (%08x%08x: %08x (%s)) ",
+@y
+ case RESUME_AGAIN: printf("           (%08x%08x: %08x (%s)) ", @|
+@z
+@x [130]
+ case RESUME_CONT: printf("           (%08x%08x: %04xrYrZ (%s)) ",
+@y
+ case RESUME_CONT: printf("           (%08x%08x: %04xrYrZ (%s)) ", @|
+@z
+@x [130]
+ case RESUME_SET: printf("           (%08x%08x: ..%02x..rZ (SET)) ",
+@y
+ case RESUME_SET: printf("           (%08x%08x: ..%02x..rZ (SET)) ", @|
 @z
 
 @x [131]
