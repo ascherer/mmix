@@ -99,7 +99,7 @@ void print_stab(void);
 Here we need to define only the basic constants used for interpretation.
 @y
 @z
-@x [6] l.77
+@x [6] l.76
 @d mm 0x98 /* the escape code of \.{mmo} format */
 @d lop_quote 0x0 /* the quotation lopcode */
 @d lop_loc 0x1 /* the location lopcode */
