@@ -1,0 +1,31 @@
+From bb984a61fdfdb1caa7386ed6e0c96258021eae47 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Wed, 22 Jan 2025 12:34:06 +0100
+Subject: [PATCH 398/398] Make 'doc' in PDF.
+
+Use 'dvipdfm' and move tables-of-contents up front.
+---
+ Makefile | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 5e9de24..b10dcff 100644
+--- a/Makefile
++++ b/Makefile
+@@ -66,9 +66,10 @@ ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
+ 
+ basic:  lib mmixal mmix
+ 
+-doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
+-	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
+-	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
++doc:    mmix-doc.dvi mmixal.dvi mmix-sim.dvi
++	dvipdfm -s 48,1-47 mmix-doc.dvi
++	dvipdfm -s 63,1-13 mmixal.dvi -o mmixal-intro.pdf
++	dvipdfm -s 83,1-8 mmix-sim.dvi -o mmix-sim-intro.pdf
+ 
+ all:    mmixal mmix mmotype mmmix
+ 
+-- 
+2.48.1
+
