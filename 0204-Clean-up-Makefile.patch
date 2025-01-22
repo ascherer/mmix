@@ -1,7 +1,7 @@
 From c5b425a0fe1d5511e13ab48fa1357f4ecd7fa4ff Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 5 Dec 2023 09:25:26 +0100
-Subject: [PATCH 204/272] Clean up Makefile.
+Subject: [PATCH 204/396] Clean up Makefile.
 
 Purge the use of MMIX-MEM.
 

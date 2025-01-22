@@ -49,6 +49,7 @@ Patch0109: 0109-Avoid-redundant-date-values.patch
 Patch0199: 0199-Link-mmotype-with-mmix-arith-in-Makefile.patch
 Patch0204: 0204-Clean-up-Makefile.patch
 Patch0272: 0272-Resurrect-the-shared-object-idea.patch
+Patch0396: 0396-Directly-compile-from-C-main-module-to-executable.patch
 %endif
 
 %description
