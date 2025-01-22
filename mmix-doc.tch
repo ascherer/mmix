@@ -1,0 +1,142 @@
+@x [0]
+\input pdfwebtocfront
+@y
+\ifx\undefined\pdfpagewidth \else
+\pdfpagewidth=\pagewidth \advance\pdfpagewidth by 1in
+\pdfpageheight=\fullpageheight \advance\pdfpageheight by 1in
+\ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
+\else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
+
+\ifx\undefined\eightpoint \input pdfwebtocfront \fi
+@z
+
+@x [4]
+@ A programmer's introduction to \MMIX\ appears in ``Volume~1, Fascicle~1,''
+@y
+@r @ A programmer's introduction to \MMIX\ appears in ``Volume~1, Fascicle~1,''
+@z
+
+@x [13]
+     \<SETML \$X,YZ `set to medium low wyde';
+@y
+     \hskip1cm\break \<SETML \$X,YZ `set to medium low wyde';
+@z
+
+@x [16]
+@ There also are 32 conditional instructions, which choose quickly between
+@y
+@r @ There also are 32 conditional instructions, which choose quickly between
+@z
+
+@x [29]
+@* Subroutine linkage.
+@y
+@* Subroutine linkage.
+@-G@> @-L@>
+@z
+@x [29]
+These conventions for parameter passing are admittedly a bit confusing in the
+@y
+\vfill\eject\null\vskip-\baselineskip
+These conventions for parameter passing are admittedly a bit confusing in the
+@z
+
+@x [31]
+If $\rm XYZ>7$, an illegal instruction interrupt occurs.
+@y
+If $\rm XYZ>7$, an illegal instruction interrupt~occurs.
+@z
+@x [31]
+parallel with ordinary computation.
+
+@y
+parallel with ordinary computation.
+@z
+
+@x [37]
+&\field{24}{24}&&\field88&&\field{24}{24}&&\field88\cr
+@y
+&\field{19}{24}&&\field88&&\field{19}{24}&&\field88\cr
+@z
+@x [37]
+$$\hbox spread-10pt{\tt\spaceskip .5em minus .1em
+@y
+\begingroup\eightpoint
+$$\centerline{\tt\spaceskip .5em minus .1em
+@z
+@x [37]
+   SADD \$2,\$1,\$0; ANDN \$1,\$0,\$1}$$
+@y
+   SADD \$2,\$1,\$0; ANDN \$1,\$0,\$1}$$
+\endgroup
+
+\hskip-1em
+@z
+
+@x [43]
+&\field88&&\field{24}{24}&&\field{32}{32}\cr
+@y
+&\field88&&\field{18}{24}&&\field{26}{32}\cr
+@z
+
+@x [45]
+ \field{27}{27}&&\field{10}{10}&&\field33\cr
+@y
+ \field{13}{27}&&\field{10}{10}&&\field33\cr
+@z
+@x [45]
+&\field{16}{16}&&\field{32}{48-s}&&\field3{s-13}&&\field{10}{10}&&
+@y
+&\field{14}{16}&&\field{20}{48-s}&&\field3{s-13}&&\field{10}{10}&&
+@z
+@x [45]
+&\field11&&\field{50}{50}&&\field{10}{10}&&\field33\cr
+@y
+&\field11&&\field{36}{50}&&\field{10}{10}&&\field33\cr
+@z
+
+@x [46]
+&\field{1.2}1&&\field22&&\field{44.8}{61-s}&&\field3{s-13}&&\field{10}{10}&&
+@y
+&\field{1.2}1&&\field22&&\field{35}{61-s}&&\field3{s-13}&&\field{10}{10}&&
+@z
+
+@x [47]
+the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
+@y
+the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
+\begingroup\eightpoint
+@z
+@x [47]
+Then the process cascades back through PTPs.
+@y
+\endgroup
+
+Then the process cascades back through PTPs.
+\begingroup\eightpoint
+@z
+@x [47]
+Finally we obtain the PTE and communicate it to the machine.
+@y
+\endgroup
+
+Finally we obtain the PTE and communicate it to the machine.
+@z
+@x [47]
+$$\chardef\_=`\_
+@y
+\begingroup\ninepoint
+$$\chardef\_=`\_
+@z
+@x [47]
+&RESUME&1 &\% now the machine will digest the translation\cr}}$$
+@y
+&RESUME&1 &\% now the machine will digest the translation\cr}}$$
+\endgroup
+
+@z
+
+@x [51]
+@*Index. (References are to section numbers, not page numbers.)
+@y
+@z
