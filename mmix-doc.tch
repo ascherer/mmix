@@ -7,7 +7,10 @@
 \ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
 \else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
 
-\ifx\undefined\eightpoint \input pdfwebtocfront \fi
+\ifx\undefined\eightpoint \input pdfwebtocfront \else
+\def\editorsnote{}
+{\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
+\fi
 @z
 
 @x [4]
@@ -135,4 +138,5 @@ $$\chardef\_=`\_
 @x [51]
 @*Index. (References are to section numbers, not page numbers.)
 @y
+@* Index.
 @z
