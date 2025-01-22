@@ -66,9 +66,10 @@ ALL = $(WEBFILES) $(TESTFILES) $(MISCFILES)
 
 basic:  lib mmixal mmix
 
-doc:    mmix-doc.ps mmixal.dvi mmix-sim.dvi
-	dvips -pp 0-13 mmixal.dvi -o mmixal-intro.ps
-	dvips -pp 0-8 mmix-sim.dvi -o mmix-sim-intro.ps
+doc:    mmix-doc.dvi mmixal.dvi mmix-sim.dvi
+	dvipdfm -s 48,1-47 mmix-doc.dvi
+	dvipdfm -s 63,1-13 mmixal.dvi -o mmixal-intro.pdf
+	dvipdfm -s 83,1-8 mmix-sim.dvi -o mmix-sim-intro.pdf
 
 all:    mmixal mmix mmotype mmmix
 
