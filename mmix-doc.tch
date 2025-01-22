@@ -28,6 +28,11 @@
 @r @ There also are 32 conditional instructions, which choose quickly between
 @z
 
+@x [17]
+\smallskip
+@y
+@z
+
 @x [29]
 @* Subroutine linkage.
 @y
@@ -61,16 +66,7 @@ parallel with ordinary computation.
 @x [37]
 $$\hbox spread-10pt{\tt\spaceskip .5em minus .1em
 @y
-\begingroup\eightpoint
-$$\centerline{\tt\spaceskip .5em minus .1em
-@z
-@x [37]
-   SADD \$2,\$1,\$0; ANDN \$1,\$0,\$1}$$
-@y
-   SADD \$2,\$1,\$0; ANDN \$1,\$0,\$1}$$
-\endgroup
-
-\hskip-1em
+$$\hbox spread-10pt{\tt\spaceskip .5em minus .1em \eighttt
 @z
 
 @x [43]
