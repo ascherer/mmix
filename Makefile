@@ -87,13 +87,13 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
 
 mmix-config.c: mmix-pipe.c
 
-mmmix:  mmmix.o lib
+mmmix:  mmmix.c lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 mmixal: mmixal.c lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
-mmix:   mmix-sim.o lib
+mmix:   mmix-sim.c lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 mmotype: mmotype.c lib
