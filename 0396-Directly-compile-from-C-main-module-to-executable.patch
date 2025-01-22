@@ -1,0 +1,32 @@
+From 88bb5525e865faf6716e821d93b1b49d1df8c8a0 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Wed, 22 Jan 2025 11:21:21 +0100
+Subject: [PATCH 396/396] Directly compile from C main module to executable.
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index f6493ce..5e9de24 100644
+--- a/Makefile
++++ b/Makefile
+@@ -87,13 +87,13 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
+ 
+ mmix-config.c: mmix-pipe.c
+ 
+-mmmix:  mmmix.o lib
++mmmix:  mmmix.c lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+ mmixal: mmixal.c lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+-mmix:   mmix-sim.o lib
++mmix:   mmix-sim.c lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+ mmotype: mmotype.c lib
+-- 
+2.48.1
+
