@@ -1,7 +1,7 @@
 From 88bb5525e865faf6716e821d93b1b49d1df8c8a0 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 22 Jan 2025 11:21:21 +0100
-Subject: [PATCH 396/396] Directly compile from C main module to executable.
+Subject: [PATCH 396/398] Directly compile from C main module to executable.
 
 ---
  Makefile | 4 ++--
