@@ -534,18 +534,6 @@ codes is defined in {\mc MMIX-PIPE}.
 @y
 @z
 
-@x [59] l.1344 Issue #15.
-@ To complete our lists of lists,
-@y
-@ To complete our list of lists,
-@z
-
-@x [59] l.1346 Issue #15.
-that are built in to \.{MMIXAL}.
-@y
-that are built into \.{MMIXAL}.
-@z
-
 @x [62] l.1409 RAII.
 register int i,j,k; /* miscellaneous indices */
 @y
