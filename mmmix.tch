@@ -106,6 +106,15 @@ else { @<Input a rudimentary hexadecimal file@>; }
 @d panic(r,m,...) {@+fprintf(stderr,
 @z
 
+@x [18]
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+@y
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@z
+
 @x [19]
 @ The register stack pointers, rO and rS, are not kept up to date
 @y
