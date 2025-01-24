@@ -118,11 +118,10 @@ $$\displaylines{
 \par \endgroup
 @z
 
-@x [13]
-@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
+@x [11]
+@<Proto...@>=
 @y
-@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
-@-y@> @-z@>
+@<Proto...@>=
 @-print_int@> @-new_mem@> @-mem_find@> @-read_tet@> @-read_byte@> @-make_map@>
 @-print_line@> @-show_line@> @-print_freqs@> @-stack_store@> @-stack_load@>
 @-register_truth@> @-trace_print@> @-show_stats@> @-scan_option@> @-catchint@>
@@ -151,6 +150,13 @@ $$\displaylines{
 @$show_breaks {MMIX-SIM}162 \&{void} (\,)@>
 @$dump {MMIX-SIM}165 \&{void} (\,)@>
 @$dump_tet {MMIX-SIM}166 \&{void} (\,)@>
+@z
+
+@x [13]
+@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
+@y
+@ Most of the subroutines in {\mc MMIX-ARITH} return an octabyte as
+@-y@> @-z@>
 @z
 
 @x [14]
@@ -492,6 +498,17 @@ case Fwrite: @/ g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
 @y
 @ @<Prepare memory arguments...@>=
 @% @$tet {MMIX-SIM}16 \&{tetra}@>
+@z
+
+@x [113]
+@<Proto...@>=
+@y
+@<Proto...@>=
+@-mmgetchars@> @-mmputchars@> @-stdin_chr@>
+@%
+@$mmgetchars {MMIX-SIM}114 \&{static} \&{int} (\,)@>
+@$mmputchars {MMIX-SIM}117 \&{static} \&{void} (\,)@>
+@$stdin_chr {MMIX-SIM}120 \&{static} \&{char} (\,)@>
 @z
 
 @x [114]
