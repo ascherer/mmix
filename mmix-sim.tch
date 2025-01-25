@@ -126,8 +126,7 @@ $$\displaylines{
 @-print_line@> @-show_line@> @-print_freqs@> @-stack_store@> @-stack_load@>
 @-register_truth@> @-trace_print@> @-show_stats@> @-scan_option@> @-catchint@>
 @-scan_hex@> @-print_string@> @-show_breaks@>
-@-dump {MMIX-SIM}165 \&{void} (\,)@>
-@-dump_tet {MMIX-SIM}166 \&{void} (\,)@>
+@-dump@> @-dump_tet@>
 @%
 @$print_int {MMIX-SIM}15 \&{void} (\,)@>
 @$new_mem {MMIX-SIM}17 \&{mem\_node} ${*}$(\,)@>
