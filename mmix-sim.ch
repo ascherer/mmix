@@ -280,20 +280,12 @@ Here we need to define only the basic constants used for interpretation.
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @z
 
-@x [26]
-@d mmo_err {
-     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
-@.Bad object file@>
-     exit(-4);
-   }
+@x [25] l.869
+@ @<Glob...@>=
 @y
-@d mmo_err {
-     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
-@.Bad object file@>
-     exit(-4);
-   }
-@d ybyte buf[2] /* the next-to-least significant byte */
+@ @d ybyte buf[2] /* the next-to-least significant byte */
 @d zbyte buf[3] /* the least significant byte */
+@<Glob...@>=
 @z
 
 @x [26] l.890 C99 prototypes for C2x.
