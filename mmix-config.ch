@@ -12,6 +12,14 @@
 
 @z
 
+@x [3] l.92
+\bull localregs (default 256), number of local registers in ring;
+@y
+\bull localregs (default 256), number |lring_size| of local registers
+in ring~|l|;
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [4] l.212 Issue #15
 \bull ports (default 1), number of processes that can simultaneous
 @y

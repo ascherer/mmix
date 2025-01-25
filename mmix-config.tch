@@ -25,6 +25,12 @@ $$\begingroup\ninepoint
 @z
 
 @x [3]
+@:l}{\|l (ring of local registers)@>
+@y
+@:l}{\|l (ring of local registers)@>
+@% @$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
+@z
+@x [3]
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
 @y
 \break
