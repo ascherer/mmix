@@ -431,6 +431,24 @@ void print_line(k)
 void print_line(
   int k)
 @z
+@x [45] l.1153
+  char buf[11];
+@y
+  @+ char buf[11];
+@z
+@x [45] l.1157
+  sprintf(buf,"%d:    ",k);
+@y
+  sprintf(buf,"%d:    ",k); @+
+@z
+
+@x [46] l.1163
+@ @<Preprocessor macros@>=
+@y
+@ @<Preprocessor macros@>=
+@h /* collect all \.{@@d}efinitions here */
+@#
+@z
 
 @x [47] l.1176 C99 prototypes for C2x.
 void show_line @,@,@[ARGS((void))@];@+@t}\6{@>
@@ -1572,7 +1590,6 @@ void show_stats(
 #include "abstime.h"
 @y
 @#
-@h
 @z
 
 @x [141] l.2891 C99 prototypes for C2x.
