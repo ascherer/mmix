@@ -411,6 +411,11 @@ from the function of the same name.
 @f mstat int /* `\&{mstat}' will be equivalent to `\&{struct stat}' */
 @f stat x /* but function `|stat|' will not be treated as a reserved word */
 @z
+@x [43] l.1127
+@<Preprocessor macros@>=
+@y
+@c
+@z
 
 @x [44] l.1134
   struct stat stat_buf;
