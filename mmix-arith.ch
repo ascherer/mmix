@@ -424,7 +424,7 @@ octa bool_mult(
 @y
   for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,true))
 @z
-@x [29]
+@x [29] l.447
       if (xor) x.h^=a&c, x.l^=b&c;
       else x.h|=a&c, x.l|=b&c;
 @y
