@@ -439,7 +439,7 @@ void print_line(
 @x [45] l.1157
   sprintf(buf,"%d:    ",k);
 @y
-  sprintf(buf,"%d:    ",k); @+
+  sprintf(buf,"%d:    ",k&65535); @+
 @z
 
 @x [46] l.1163
