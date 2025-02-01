@@ -124,7 +124,7 @@ for f in out err; do diff -u silly.$f silly.$f.new ||:; done
 * Sat Apr 15 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Second patch for Makefile
 
-* Wed Feb 14 2023 Andreas Scherer <andreas_tex@freenet.de>
+* Tue Feb 14 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Update from DEK
 
 * Mon Apr 05 2021 Andreas Scherer <andreas_tex@freenet.de>
