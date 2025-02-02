@@ -583,7 +583,7 @@ static char stdin_chr(void)
 @r @ @<Initiate a trip interrupt@>=
 @z
 
-@x [130]ł
+@x [130]
  case RESUME_AGAIN: printf("           (%08x%08x: %08x (%s)) ",
 @y
  case RESUME_AGAIN: printf("           (%08x%08x: %08x (%s)) ", @|
