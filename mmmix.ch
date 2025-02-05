@@ -378,7 +378,7 @@ static octa sl3( /* shift left by 3 bits */
     y.h=yhl+ylh;@+ y.l<<=3;
   return y;
 @y
-  return (octa){yhl+ylh, y.l<<=3};
+  return (octa){yhl+ylh, y.l<<3};
 @z
 
 @x [21] l.505 Change from MMIX home.
