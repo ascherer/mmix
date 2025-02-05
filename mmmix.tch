@@ -120,3 +120,10 @@ else { @<Input a rudimentary hexadecimal file@>; }
 @y
 @r @ The register stack pointers, rO and rS, are not kept up to date
 @z
+
+@x [20]
+static octa sl3( /* shift left by 3 bits */
+  octa y)
+@y
+static octa sl3( octa y) /* shift left by 3 bits */
+@z
