@@ -1385,16 +1385,18 @@ void clean_block(
 @z
 
 @x [180] l.3334 C99 prototypes for C2x.
+@<External proto...@>=
 Extern void zap_cache @,@,@[ARGS((cache*))@];
 @y
-Extern void zap_cache(cache*);
+@<Internal...@>=
+static void zap_cache(cache*);
 @z
 
 @x [181] l.3340 C99 prototypes for C2x.
 void zap_cache(c)
   cache *c;
 @y
-void zap_cache(
+static void zap_cache(
   cache *c)
 @z
 
@@ -1937,12 +1939,40 @@ aaaaa=shift_right(aaaaa,page_s,true); /* the page address */
   aaaaa=shift_right(aaaaa,10,true);
 @z
 
-@x [248] l.4474
+@x [1] l.2
+The data will sit at least |holding_time| cycles before it leaves
+the write buffer. This speeds things up when different fields of the same
+octabyte are being stored by different instructions.
+
+@<External v...@>=
+Extern write_node *wbuf_bot, *wbuf_top;
+ /* least and greatest write buffer nodes */
+Extern write_node *write_head, *write_tail;
+ /* front and rear of the write buffer */
+Extern lockvar wbuf_lock; /* is the data in |write_head| being written? */
+Extern int holding_time; /* minimum holding time */
+Extern lockvar speed_lock; /* should we ignore |holding_time|? */
+
+@ @<Glob...@>=
 coroutine write_co; /* coroutine that empties the write buffer */
 control write_ctl; /* its control block */
 @y
+@<Glob...@>=
+static write_node *write_head, *write_tail;
+ /* front and rear of the write buffer */
+static lockvar wbuf_lock; /* is the data in |write_head| being written? */
+static lockvar speed_lock; /* should we ignore |holding_time|? */
 static coroutine write_co; /* coroutine that empties the write buffer */
 static control write_ctl; /* its control block */
+
+@ The data will sit at least |holding_time| cycles before it leaves
+the write buffer. This speeds things up when different fields of the same
+octabyte are being stored by different instructions.
+
+@<External v...@>=
+Extern write_node *wbuf_bot, *wbuf_top;
+ /* least and greatest write buffer nodes */
+Extern int holding_time; /* minimum holding time */
 @z
 
 @x [250] l.4487 C99 prototypes for C2x.
