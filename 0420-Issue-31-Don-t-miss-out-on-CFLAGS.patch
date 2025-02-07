@@ -1,0 +1,48 @@
+From 43ed5975f814f203d3db72098ddccd6aabc9c996 Mon Sep 17 00:00:00 2001
+From: Andreas Scherer <andreas_github@freenet.de>
+Date: Fri, 7 Feb 2025 16:17:28 +0100
+Subject: [PATCH 420/420] Issue #31: Don't miss out on $CFLAGS.
+
+The 'main' modules should also be inspected with '-Wall -Wextra'.
+Moreover, ABSTIME was not correctly initialized in MMIX-SIM.CH.
+---
+ Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b10dcff..25fee23 100644
+--- a/Makefile
++++ b/Makefile
+@@ -71,7 +71,7 @@ doc:    mmix-doc.dvi mmixal.dvi mmix-sim.dvi
+ 	dvipdfm -s 63,1-13 mmixal.dvi -o mmixal-intro.pdf
+ 	dvipdfm -s 83,1-8 mmix-sim.dvi -o mmix-sim-intro.pdf
+ 
+-all:    mmixal mmix mmotype mmmix
++all:    basic mmotype mmmix
+ 
+ clean:
+ 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
+@@ -88,16 +88,16 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
+ 
+ mmix-config.c: mmix-pipe.c
+ 
+-mmmix:  mmmix.c lib
++mmmix:  mmmix.o lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+-mmixal: mmixal.c lib
++mmixal: mmixal.o lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+-mmix:   mmix-sim.c lib
++mmix:   mmix-sim.o lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+-mmotype: mmotype.c lib
++mmotype: mmotype.o lib
+ 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+ 
+ tarfile: $(ALL)
+-- 
+2.48.1
+
