@@ -1,7 +1,7 @@
 From c87768a3ba95268bda649a2a2b8496fcdb7ce6fc Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Thu, 30 Nov 2023 17:08:41 +0100
-Subject: [PATCH 199/398] Link mmotype with mmix-arith in Makefile.
+Subject: [PATCH 199/420] Link mmotype with mmix-arith in Makefile.
 
 ---
  Makefile | 2 +-

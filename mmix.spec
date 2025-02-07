@@ -51,6 +51,7 @@ Patch0204: 0204-Clean-up-Makefile.patch
 Patch0272: 0272-Resurrect-the-shared-object-idea.patch
 Patch0396: 0396-Directly-compile-from-C-main-module-to-executable.patch
 Patch0398: 0398-Make-doc-in-PDF.patch
+Patch0420: 0420-Issue-31-Don-t-miss-out-on-CFLAGS.patch
 %endif
 
 %description
