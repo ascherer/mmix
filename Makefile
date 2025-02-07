@@ -71,7 +71,7 @@ doc:    mmix-doc.dvi mmixal.dvi mmix-sim.dvi
 	dvipdfm -s 63,1-13 mmixal.dvi -o mmixal-intro.pdf
 	dvipdfm -s 83,1-8 mmix-sim.dvi -o mmix-sim-intro.pdf
 
-all:    mmixal mmix mmotype mmmix
+all:    basic mmotype mmmix
 
 clean:
 	rm -f *~ *.o *.c *.h *.tex *.log *.dvi *.toc *.idx *.scn *.ps core
@@ -88,16 +88,16 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
 
 mmix-config.c: mmix-pipe.c
 
-mmmix:  mmmix.c lib
+mmmix:  mmmix.o lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
-mmixal: mmixal.c lib
+mmixal: mmixal.o lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
-mmix:   mmix-sim.c lib
+mmix:   mmix-sim.o lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
-mmotype: mmotype.c lib
+mmotype: mmotype.o lib
 	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
 
 tarfile: $(ALL)
