@@ -1,7 +1,7 @@
-From 31c0314cc3eb7df4bfb671743ea4070a582c39b6 Mon Sep 17 00:00:00 2001
+From f150b1e9f45a97dc5de6f42a947a50d85a37a8ae Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
-Date: Fri, 7 Feb 2025 19:56:59 +0100
-Subject: [PATCH 272/398] Resurrect the shared object idea.
+Date: Wed, 10 Jul 2024 14:20:50 +0200
+Subject: [PATCH 272/420] Resurrect the shared object idea.
 
 Now that the 'extern' mess has been cleared, it's no longer a
 problem to put the reusable MMIX modules into a shared object.
