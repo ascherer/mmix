@@ -28,7 +28,7 @@
 @$print_stab {MMOTYPE}26 \&{void} (\,)@>
 @z
 
-@x [16] l.205
+@x [16]
   cur_loc=incr(cur_loc,4);@+ cur_loc.l &=-4;
 }
 
@@ -46,7 +46,7 @@
  read_tet(); @+ delta=tet;
 @z
 
-@x [20] l.278
+@x [20]
 @.No room...@>
    }
    cur_file=y;
@@ -62,7 +62,7 @@
      @+ memcpy(p,buf,4);
 @z
 
-@x [27] l.408
+@x [27]
 @ The present implementation doesn't support Unicode; characters with
 @y
 @r @ The present implementation doesn't support Unicode; characters with
