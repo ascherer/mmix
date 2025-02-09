@@ -1384,7 +1384,7 @@ void clean_block(
   p->tag=(octa){sign_bit, 0};
 @z
 
-@x [180] l.3334 C99 prototypes for C2x.
+@x [180] l.3333 C99 prototypes for C2x.
 @<External proto...@>=
 Extern void zap_cache @,@,@[ARGS((cache*))@];
 @y
@@ -1939,7 +1939,7 @@ aaaaa=shift_right(aaaaa,page_s,true); /* the page address */
   aaaaa=shift_right(aaaaa,10,true);
 @z
 
-@x [1] l.2
+@x [247] l.4460
 The data will sit at least |holding_time| cycles before it leaves
 the write buffer. This speeds things up when different fields of the same
 octabyte are being stored by different instructions.
