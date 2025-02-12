@@ -2025,7 +2025,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @d ROUND_NEAR 4
 @y
 @d ROUND_NEAR 4
-@t}\ifx\undefined\eightpoint\ekse\vskip1cm\fi{@>
+@t}\ifx\undefined\eightpoint\else\vskip1cm\fi{@>
 @-x@>
 @%
 @$a {MMIX-PIPE}44 \&{specnode}@>
