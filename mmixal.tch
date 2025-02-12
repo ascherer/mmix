@@ -17,7 +17,7 @@
 @x [3]
 If a line begins with the special form `\.\# \<integer> \<string>',
 @y
-\vfill\eject\null
+\ifx\undefined\eightpoint \else \vfill\eject\null \fi
 If a line begins with the special form `\.\# \<integer> \<string>',
 @z
 
@@ -33,7 +33,7 @@ If a line begins with the special form `\.\# \<integer> \<string>',
 @x [11]
 Binary operators come in two flavors, strong and weak. The strong ones
 @y
-\break
+\ifx\undefined\eightpoint \else \break \fi
 Binary operators come in two flavors, strong and weak. The strong ones
 @z
 
@@ -46,14 +46,14 @@ Binary operators come in two flavors, strong and weak. The strong ones
 @x [17]
 \bull \<label> \.{OCTA} \<expression list>
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 \bull \<label> \.{OCTA} \<expression list>
 @z
 
 @x [18]
 Here's how it works: Whenever a memory operation such as
 @y
-\break
+\ifx\undefined\eightpoint \else \break \fi
 Here's how it works: Whenever a memory operation such as
 @z
 
@@ -68,16 +68,18 @@ Here's how it works: Whenever a memory operation such as
 00fe0000&(\.{WYDE} \.{a-\$0})\cr
 @y
 00fe0000&(\.{WYDE} \.{a-\$0})\cr
+\ifx\undefined\eightpoint \else
 }$$
 \vfill\eject\null\vskip-.5in
 $$
 \halign{\hskip.5in\tt#&\quad#\hfil\cr
+\fi
 @z
 
 @x [24]
 \bull |lop_spec|: $\rm X=\Hex{08}$, $\rm YZ=type$. Begin special data of
 @y
-\vskip1in
+\ifx\undefined\eightpoint \else \vskip1in \fi
 \bull |lop_spec|: $\rm X=\Hex{08}$, $\rm YZ=type$. Begin special data of
 @z
 @x [24]
