@@ -15,16 +15,14 @@
 @x [2]
 \bull \.{-r}\quad Trace details of the register stack. This option
 @y
-\vfill
-\vbox{}
-\vskip2cm
+\ifx\undefined\eightpoint \else \vfill \vbox{} \vskip2cm \fi
 \bull \.{-r}\quad Trace details of the register stack. This option
 @z
 
 @x [3]
 \bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
 @y
-\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
+\ifx\undefined\ninepoint \else \begingroup \ninepoint \fi
 \bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
 @z
 @x [3]
@@ -32,7 +30,7 @@
 @y
 @:Stack_Segment}\.{Stack\_Segment@>
 \par
-\endgroup
+\ifx\undefined\ninepoint \else \endgroup \fi
 @z
 
 @x [4]
@@ -46,65 +44,78 @@
 is essentially equivalent to the \CEE/ expression
 @y
 is essentially equivalent to the \CEE/ expression
-\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
+\ifx\undefined\ninepoint \else \begingroup \ninepoint \fi
 @z
 @x [4]
       \hskip5em\cr}$$
 @y
       \hskip5em\cr}$$
-\endgroup
+\ifx\undefined\eightpoint \else \endgroup \fi
 @z
 @x [4]
 |mode_string|[\.{BinaryRead}]~=~|"rb"|,
 @y
-\hfil\break|mode_string|[\.{BinaryRead}]~=~|"rb"|,
+\ifx\undefined\eightpoint \else \hfil\break \fi
+|mode_string|[\.{BinaryRead}]~=~|"rb"|,
 @z
 @x [4]
 |mode_string|[\.{BinaryReadWrite}]~=~|"wb+"|.
 @y
-\hfil\break|mode_string|[\.{BinaryReadWrite}]~=~|"wb+"|.
+\ifx\undefined\eightpoint \else \hfil\break \fi
+|mode_string|[\.{BinaryReadWrite}]~=~|"wb+"|.
 @z
 @x [4]
 \bull \.{Fread}|(handle,buffer,size)|.
 @y
-\vskip4cm
+\ifx\undefined\eightpoint \else \vskip4cm \fi
 \bull \.{Fread}|(handle,buffer,size)|.
 @z
 @x [4]
 \bull \.{Fputs}|(handle,string)|.
 @y
-\vfill\eject
+\ifx\undefined\eightpoint \else \vfill\eject \fi
 \bull \.{Fputs}|(handle,string)|.
 @z
 @x [4]
 The file handle should have been opened with mode \.{TextWrite},
 @y
-The file handle should have been opened with either mode \.{TextWrite},
+The file handle should have been opened with
+\ifx\undefined\eightpoint \else either \fi
+mode \.{TextWrite},
 @z
 @x [4]
 The file handle should have been opened with mode \.{TextWrite},
 @y
-The file handle should have been opened with either mode \.{TextWrite},
+The file handle should have been opened with
+\ifx\undefined\eightpoint \else  either \fi
+mode \.{TextWrite},
 @z
 @x [4]
 The file handle should have been opened with mode \.{BinaryRead},
 @y
-The file handle should have been opened with either mode \.{BinaryRead},
+The file handle should have been opened with
+\ifx\undefined\eightpoint \else either \fi
+mode \.{BinaryRead},
 @z
 @x [4]
 $$\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,@,
               offset<0? SEEK_END: SEEK_SET)? -1: 0|.}$$
 @y
+\ifx\undefined\eightpoint
+$$\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,@,
+              offset<0? SEEK_END: SEEK_SET)? -1: 0|.}$$
+\else
 $$\displaylines{
 \hskip5em\hbox{|fseek(file[handle],@,offset<0? offset+1: offset,|}\hfill\cr
 \hfill\hbox{|offset<0? SEEK_END: SEEK_SET)? -1: 0|.}\hskip5em\cr}$$
+\fi
 @z
 
 @x [8]
 \vskip-14pt
 @y
 \vskip-14pt
-\begingroup \ifx\undefined\ninepoint \else \ninepoint \fi
+\ifx\undefined\ninepoint \else \begingroup \ninepoint \fi
 @z
 @x [8]
 \noalign{\smallskip}
@@ -115,7 +126,7 @@ $$\displaylines{
 }$$
 @y
 }$$
-\par \endgroup
+\ifx\undefined\eightpoint \else \par \endgroup \fi
 @z
 
 @x [11]

@@ -47,7 +47,7 @@
 @x [29]
 These conventions for parameter passing are admittedly a bit confusing in the
 @y
-\vfill\eject\null\vskip-\baselineskip
+\ifx\relax\eightpoint \else \vfill\eject\null\vskip-\baselineskip \fi
 These conventions for parameter passing are admittedly a bit confusing in the
 @z
 
@@ -106,35 +106,36 @@ $$\hbox spread-10pt{\tt\spaceskip .5em minus .1em \eighttt
 the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
 @y
 the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
-\begingroup\eightpoint
+\ifx\relax\eightpoint \else \begingroup\eightpoint \fi
 @z
 @x [47]
 Then the process cascades back through PTPs.
 @y
-\endgroup
+\ifx\relax\eightpoint \else \endgroup \fi
 
 Then the process cascades back through PTPs.
-\begingroup\eightpoint
+\ifx\relax\eightpoint \else \begingroup\eightpoint \fi
 @z
 @x [47]
 Finally we obtain the PTE and communicate it to the machine.
 @y
-\endgroup
+\ifx\relax\eoghtpoint \else \endgroup \fi
 
 Finally we obtain the PTE and communicate it to the machine.
 @z
 @x [47]
 $$\chardef\_=`\_
 @y
-\begingroup\ninepoint
+\ifx\relax\eightpoint \else \begingroup\ninepoint \fi
 $$\chardef\_=`\_
 @z
 @x [47]
 &RESUME&1 &\% now the machine will digest the translation\cr}}$$
 @y
 &RESUME&1 &\% now the machine will digest the translation\cr}}$$
-\endgroup
+\ifx\relax\eoghtpoint \else \endgroup
 
+\fi
 @z
 
 @x [51]
