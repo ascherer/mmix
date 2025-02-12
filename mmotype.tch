@@ -53,7 +53,7 @@
 @y
 @.No room...@>
    }
-@t}$\vskip2pc\quad${@>
+@t}\ifx\undefined\eightpoint\else$\vskip2pc\quad$\fi{@>
    cur_file=y;
 @z
 @x [20]

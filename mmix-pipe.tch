@@ -156,7 +156,7 @@ static coroutine *queuelist(int);
 @x [39]
   if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
 @y
-@t}\goodbreak\quad{@>
+@t}\ifx\undefined\eightpoint\else\goodbreak\quad\fi{@>
   if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
 @z
 
@@ -164,9 +164,7 @@ static coroutine *queuelist(int);
 the address of the subsequent instruction.
 @y
 the address of the subsequent instruction.
-\vfill
-\vbox{}
-\vskip5mm
+\ifx\undefined\eightpoint \else \vfill\vbox{}\vskip5mm \fi
 @z
 
 @x [48]
@@ -305,56 +303,56 @@ static char *special_name[32]={@|"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
 @x [58]
 This simulator is based on the idea of ``dynamic scheduling with register
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 This simulator is based on the idea of ``dynamic scheduling with register
 @z
 @x [58]
 Some instructions in the reorder buffer may in fact be executed only
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 Some instructions in the reorder buffer may in fact be executed only
 @z
 @x [58]
 The reorder buffer is in fact a queue of \&{control} records, conceptually
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 The reorder buffer is in fact a queue of \&{control} records, conceptually
 @z
 @x [58]
 The best way to get an understanding of speculative execution is perhaps to
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 The best way to get an understanding of speculative execution is perhaps to
 @z
 @x [58]
 Instructions that have completed execution and have not yet been committed are
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 Instructions that have completed execution and have not yet been committed are
 @z
 
 @x [59]
 Suppose the simulated machine fetches the example \.{ADD} instruction
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 Suppose the simulated machine fetches the example \.{ADD} instruction
 @z
 @x [59]
 The dispatch unit of our simulator is able to issue up to |dispatch_max|
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 The dispatch unit of our simulator is able to issue up to |dispatch_max|
 @z
 @x [59]
 We assume that $\rm L>3$, so that \$1, \$2, and~\$3 are local registers.
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 We assume that $\rm L>3$, so that \$1, \$2, and~\$3 are local registers.
 @z
 @x [59]
 At time 1002, the ALU handling the \.{ADD} will stall if its inputs |y|
 @y
-\vfill
+\ifx\undefined\eightpoint \else \vfill \fi
 At time 1002, the ALU handling the \.{ADD} will stall if its inputs |y|
 @z
 @x [59]
@@ -700,7 +698,7 @@ in order to maintain the condition $\rm rS\le rO$.
 when the page table method isn't implemented in hardware.
 @y
 when the page table method isn't implemented in hardware.
-\vskip1in
+\ifx\undefined\eightpoint \else \vskip1in \fi
 @z
 
 @x [124]
@@ -1438,9 +1436,7 @@ static void print_write_buffer(void);
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
 @y
-\vfill
-\vbox{}
-\vskip1cm
+\ifx\undefined\eightpoint \else \vfill\vbox{}\vskip1cm \fi
 @<Commit to memory...@>=
 { register write_node *q=write_tail;
 @-p@> @-q@>
@@ -1550,7 +1546,7 @@ Perhaps the simulator is being too lenient here.
 @x [268]
 If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
-\vskip1cm
+\ifx\undefined\eightpoint \else \vskip1cm \fi
 If the lower $b+c$ bits of the virtual and physical addresses differ,
 @z
 @x [268]
@@ -2029,7 +2025,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @d ROUND_NEAR 4
 @y
 @d ROUND_NEAR 4
-@t}\vskip1cm{@>
+@t}\ifx\undefined\eightpoint\ekse\vskip1cm\fi{@>
 @-x@>
 @%
 @$a {MMIX-PIPE}44 \&{specnode}@>
