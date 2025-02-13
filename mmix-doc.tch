@@ -24,7 +24,8 @@
 @x [13]
      \<SETML \$X,YZ `set to medium low wyde';
 @y
-     \hskip1cm\break \<SETML \$X,YZ `set to medium low wyde';
+     \ifx\relax\eightpoint \else \hskip1cm\break \fi
+     \<SETML \$X,YZ `set to medium low wyde';
 @z
 
 @x [16]
@@ -119,7 +120,7 @@ Then the process cascades back through PTPs.
 @x [47]
 Finally we obtain the PTE and communicate it to the machine.
 @y
-\ifx\relax\eoghtpoint \else \endgroup \fi
+\ifx\relax\eightpoint \else \endgroup \fi
 
 Finally we obtain the PTE and communicate it to the machine.
 @z
@@ -133,7 +134,7 @@ $$\chardef\_=`\_
 &RESUME&1 &\% now the machine will digest the translation\cr}}$$
 @y
 &RESUME&1 &\% now the machine will digest the translation\cr}}$$
-\ifx\relax\eoghtpoint \else \endgroup
+\ifx\relax\eightpoint \else \endgroup
 
 \fi
 @z
