@@ -112,7 +112,7 @@ the page number $(a_4a_3a_2a_1a_0)_{1024}$, from right to left:
 @x [47]
 Then the process cascades back through PTPs.
 @y
-\ifx\relax\eightpoint \else \endgroup \fi
+\ifx\relax\eightpoint \else \endgroup \vfill\vbox to0pt{}\vskip1in \fi
 
 Then the process cascades back through PTPs.
 \ifx\relax\eightpoint \else \begingroup\eightpoint \fi
