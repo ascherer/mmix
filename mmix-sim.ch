@@ -300,7 +300,7 @@ void read_tet(void)
   yzbytes=(ybyte<<8)+zbyte;
 @z
 
-@x [27] l.899 C99 prototypes for C2x.
+@x [27] l.898 C99 prototypes for C2x.
 @ @<Sub...@>=
 byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 byte read_byte()
