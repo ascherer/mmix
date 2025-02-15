@@ -106,7 +106,6 @@ void print_int(octa);
 mem_node* new_mem(void);
 mem_tetra* mem_find(octa);
 void read_tet(void);
-byte read_byte(void);
 void make_map(void);
 void print_line(int);
 void show_line(void);
@@ -302,10 +301,18 @@ void read_tet(void)
 @z
 
 @x [27] l.899 C99 prototypes for C2x.
+@ @<Sub...@>=
 byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 byte read_byte()
+{
+  register byte b;
+  if (!byte_count) read_tet();
+  b=buf[byte_count];
+  byte_count=(byte_count+1)&3;
+  return b;
+}
 @y
-byte read_byte(void)
+@ (This section remains empty for historic reasons.)
 @z
 
 @x [29] l.926
@@ -365,7 +372,7 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
 @x [35] l.1023
      *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
 @y
-     memcpy(p,buf,4);
+     @+ memcpy(p,buf,4);
 @z
 
 @x [36] l.1033
@@ -420,7 +427,7 @@ from the function of the same name.
 @x [44] l.1134
   struct stat stat_buf;
 @y
-  struct mstat stat_buf;
+  @+ struct mstat stat_buf;
 @z
 
 @x [45] l.1149 C99 prototypes for C2x.
@@ -440,14 +447,6 @@ void print_line(
   sprintf(buf,"%d:    ",k);
 @y
   sprintf(buf,"%d:    ",k&65535); @+
-@z
-
-@x [46] l.1163
-@ @<Preprocessor macros@>=
-@y
-@ @<Preprocessor macros@>=
-@h /* collect all \.{@@d}efinitions here */
-@#
 @z
 
 @x [47] l.1176 C99 prototypes for C2x.
@@ -1592,6 +1591,12 @@ void show_stats(
 @#
 @z
 
+@x [141] l.2888
+@<Preprocessor macros@>@;
+@y
+@h
+@<Preprocessor macros@>@;
+@z
 @x [141] l.2891 C99 prototypes for C2x.
 @<Subroutines@>@;
 @#

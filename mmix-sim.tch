@@ -218,30 +218,11 @@ mem_tetra* mem_find(
 @$q {MMIX-SIM}21 \&{register} \&{mem\_node} ${**}$@>
 @z
 
-@x [27]
-byte read_byte(void)
-@y
-byte read_byte(void)
-@-b@>
-@z
-
-@x [29]
-@ @<Load the next item@>=
-@y
-@r @ @<Load the next item@>=
-@z
-
 @x [30]
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
 @y
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
 @-loc@> @-val@>
-@z
-
-@x [35]
-@ The space for file names isn't allocated until we are sure we need it.
-@y
-@r @ The space for file names isn't allocated until we are sure we need it.
 @z
 
 @x [37]
@@ -268,11 +249,6 @@ void make_map(void)
 @z
 
 @x [45]
-@ Source lines are listed by the |print_line| routine, preceded by
-@y
-@r @ Source lines are listed by the |print_line| routine, preceded by
-@z
-@x [45]
 void print_line(
 @y
 void print_line(
@@ -287,17 +263,17 @@ void show_line(void)
 @z
 
 @x [50]
+@ Here is a simple application of |show_line|. It is a recursive routine that
+@y
+@r @ Here is a simple application of |show_line|. It is a recursive routine that
+@z
+@x [50]
 void print_freqs(
 @y
 void print_freqs(
 @-p@> @-j@>
 @z
 
-@x [51]
-@ An ellipsis (\.{...}) is printed between frequency data for nonconsecutive
-@y
-@r @ An ellipsis (\.{...}) is printed between frequency data for nonconsecutive
-@z
 @x [51]
   octa cur_loc=incr(p->loc,4*j);
 @y
@@ -308,16 +284,6 @@ void print_freqs(
 @$name {MMIX-SIM}64 \&{char} ${*}$@>
 @$p {MMIX-SIM}50 \&{mem\_node} ${*}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
-@z
-
-@x [56]
-@!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
-
-@ @<Glob...@>=
-@y
-@!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
-
-@r @ @<Glob...@>=
 @z
 
 @x [57]
