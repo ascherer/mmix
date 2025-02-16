@@ -143,7 +143,6 @@ $$\displaylines{
 @$new_mem {MMIX-SIM}17 \&{mem\_node} ${*}$(\,)@>
 @$mem_find {MMIX-SIM}20 \&{mem\_tetra} ${*}$(\,)@>
 @$read_tet {MMIX-SIM}26 \&{void} (\,)@>
-@$read_byte {MMIX-SIM}27 \&{byte} (\,)@>
 @$make_map {MMIX-SIM}42 \&{void} (\,)@>
 @$print_line {MMIX-SIM}45 \&{void} (\,)@>
 @$show_line {MMIX-SIM}47 \&{void} (\,)@>
