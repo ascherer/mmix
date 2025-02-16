@@ -1927,7 +1927,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
-@x {327]
+@x [327]
 @<Cases for stage 1 execution@>=
 @y
 @<Cases for stage 1 execution@>=
@@ -1986,7 +1986,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @% @$b {MMIX-PIPE}44 \&{spec}@>
 @z
 
-@x {340]
+@x [340]
 @<Do the final \.{SAVE}@>=
 @y
 @<Do the final \.{SAVE}@>=

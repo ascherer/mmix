@@ -28,7 +28,7 @@
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @#
 @z
-@x [1]
+@x [1] l.24
 @<Subroutines@>@;
 @y
 @<Prototypes@>@;
