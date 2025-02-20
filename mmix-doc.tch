@@ -13,6 +13,7 @@
 \def\editorsnote{}
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 \fi
+\startpdf % expand PDF outlines
 @z
 
 @x [4]
