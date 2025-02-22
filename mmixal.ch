@@ -7,6 +7,12 @@
 
 @z
 
+@x [18] l.577
+$$\.{AA LOC @@+8;BB LOC @@+8;CC LOC @@+8;DD LOC @@+8;EE LOC @@+8}$$
+@y
+$$\.{AA LOC @@+8; BB LOC @@+8; CC LOC @@+8; DD LOC @@+8; EE LOC @@+8}$$
+@z
+
 @x [22] l.710
 @d mm 0x98
 @y
