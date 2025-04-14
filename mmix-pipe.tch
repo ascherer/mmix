@@ -29,6 +29,7 @@ bypass the library names here.
 @y
 bypass the library names here.
 @-my_div@> @-my_fsqrt@> @-my_random@>
+@-my_fadd@> @-my_fdiv@> @-my_fmul@> @-my_fsub@>
 @z
 
 @x [12]
