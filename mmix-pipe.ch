@@ -97,6 +97,17 @@ new-style and old-style compilers.
 as in {\mc ANSI C}.
 @z
 
+@x [7] l.180 Protect against C23 error for symbol redeclarations.
+#define div my_div
+@y
+#define div my_div
+@#
+#define fadd my_fadd
+#define fdiv my_fdiv
+#define fmul my_fmul
+#define fsub my_fsub
+@z
+
 @x [8] l.182 Don't expose unnecessary items.
 @ The amount of verbosity depends on the following bit codes.
 
