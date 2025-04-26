@@ -955,7 +955,6 @@ necessary, to conform with the definitions found in {\mc MMIX-ARITH}.
 typedef unsigned int tetra;
   /* assumes that an int is exactly 32 bits wide */
 typedef struct { tetra h,l;} octa; /* two tetrabytes make one octabyte */
-typedef enum {@!false,@!true}@+@!bool;
 
 @ @<Glob...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
@@ -3163,6 +3162,7 @@ temporary use of global register~\$255.
 @c
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
 #include <time.h>

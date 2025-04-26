@@ -18,7 +18,7 @@ hold more than 32 bits.
 #include <stdio.h>
 #include <time.h>
 @#
-main()
+int main()
 {
   printf("#define ABSTIME %ld\n",time(NULL));
   return 0;

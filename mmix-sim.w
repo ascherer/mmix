@@ -9,7 +9,6 @@
 \def\dts{\mathinner{\ldotp\ldotp}}
 \def\bull{\smallskip\textindent{$\bullet$}}
 @s xor normal @q unreserve a C++ keyword @>
-@s bool normal @q unreserve a C++ keyword @>
 
 @*Introduction. This program simulates a simplified version of the \MMIX\
 computer. Its main goal is to help people create and test \MMIX\ programs for
@@ -543,10 +542,10 @@ ReadErr  GETA t,1F              readerr: fputs("Trouble r...!",stderr)\cr
 1H       BYTE "Trouble reading!",\#a,0\cr
 }$$
 
-@* Basics. To get started, we define a type that provides semantic sugar.
+@* Basics. The standard type |bool| comes from \.{<stdbool.h>}.
 
 @<Type...@>=
-typedef enum {@!false,@!true}@+@!bool;
+#include <stdbool.h>
 
 @ This program for the 64-bit \MMIX\ architecture is based on 32-bit integer
 arithmetic, because nearly every computer available to the author at the time

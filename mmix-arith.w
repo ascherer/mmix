@@ -10,7 +10,6 @@
 \def\<#1>{\hbox{$\langle\,$#1$\,\rangle$}}\let\is=\longrightarrow
 \def\ff{\\{ff\kern-.05em}}
 @s ff TeX
-@s bool normal @q unreserve a C++ keyword @>
 @s xor normal @q unreserve a C++ keyword @>
 @s bignum int
 
@@ -33,9 +32,9 @@ suitable for loading with \MMIX\ simulators and assemblers.
 @c
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
 @<Stuff for \CEE/ preprocessor@>@;
-typedef enum{@+false,true@+} bool;
 @<Tetrabyte and octabyte type definitions@>@;
 @<Other type definitions@>@;
 @<Global variables@>@;

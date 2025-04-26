@@ -24,7 +24,7 @@ read from and write to the memory-mapped addresses.
 @p
 #include <stdio.h>
 #include "mmix-pipe.h" /* header file for all modules */
-extern octa read_hex(); /* found in the main program module */
+extern octa read_hex @,@,@[ARGS((char *))@]; /* found in the main program module */
 static char buf[20];
 static char *kind[]={"byte","wyde","tetra","octa"};
 extern octa shift_left @,@,@[ARGS((octa y,int s))@];

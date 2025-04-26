@@ -7,7 +7,6 @@
 \def\Hex#1{\hbox{$^{\scriptscriptstyle\#}$\tt#1}} % experimental hex constant
 @s and normal @q unreserve a C++ keyword @>
 @s or normal @q unreserve a C++ keyword @>
-@s bool normal @q unreserve a C++ keyword @>
 @s xor normal @q unreserve a C++ keyword @>
 
 @* Introduction. This program is the heart of the meta-simulator for the
@@ -178,6 +177,11 @@ bypass the library names here.
 #define random my_random
 #define fsqrt my_fsqrt
 #define div my_div
+@#
+#define fadd my_fadd
+#define fsub my_fsub
+#define fmul my_fmul
+#define fdiv my_fdiv
 
 @ The amount of verbosity depends on the following bit codes.
 
@@ -257,7 +261,7 @@ void MMIX_run(cycs,breakpoint)
 }
 
 @ @<Type...@>=
-typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
+#include <stdbool.h>
 
 @ @<Local var...@>=
 register int i,j,m;
