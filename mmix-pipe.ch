@@ -262,7 +262,7 @@ register int i,j;
 @d confusion(m) errprint1("This can't happen: %s",m)
 @y
 @d panic(x)@+ {@+errprint("Panic: ");@+x;@+errprint("!\n");@+expire();@+}
-@d confusion(m) errprint("This can't happen: %s",m)
+@d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
 @z
 
 @x [13] l.279 C99 prototypes for C2x.
@@ -497,7 +497,7 @@ static void schedule(
    panic(confusion("Scheduling ");errprint_coroutine_id(c);
          errprint1(" with delay %d",d));
 @y
-   panic(confusion("Scheduling ");errprint_coroutine_id(c);
+   confusion("Scheduling ", errprint_coroutine_id(c);
          errprint(" with delay %d",d));
 @z
 
@@ -1130,6 +1130,12 @@ static control vanish_ctl; /* such coroutines share a common control block */
   default:@+;
 @z
 
+@x [135] l.2568
+ case 0: panic(confusion("switch2"));
+@y
+ case 0: confusion("switch2");
+@z
+
 @x [135] l.2572 Improved typography.
   @<Special cases for states in later stages@>;
 @y
@@ -1455,6 +1461,12 @@ static void copy_block(
   register int off=p->tag.l&(cc->bb-1);
 @z
 
+@x [185] l.3384
+    panic(confusion("copy block"));
+@y
+    confusion("copy block");
+@z
+
 @x [185] l.3385
   for (j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
@@ -1499,7 +1511,7 @@ static cacheblock* choose_victim(
 @x [187] l.3416 Change from MMIX home.
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
 @y
- default:  panic(confusion("lru victim")); /* what happened? nobody has rank zero */
+ default: confusion("lru victim"); /* what happened? nobody has rank zero */
 @z
 
 @x [188] l.3426 C99 prototypes for C2x.
