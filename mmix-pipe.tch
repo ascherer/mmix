@@ -39,10 +39,10 @@ bypass the library names here.
 @z
 
 @x [13]
-@d confusion(m) errprint("This can't happen: %s",m)
+@d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
 @y
-@d confusion(m) errprint("This can't happen: %s",m)
-@-x@> @-m@>
+@d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
+@-x@> @-m@> @-__VA_ARGS__@>
 @z
 
 @x [19]
