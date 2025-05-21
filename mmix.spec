@@ -82,6 +82,8 @@ done
 %endif
 
 %check
+%{?with_patches:export LD_LIBRARY_PATH=.}
+
 PATH=.:$PATH %{__make} copy.mmo
 ./mmix copy copy.mms > copy.out
 diff -u copy.mms copy.out
@@ -99,11 +101,25 @@ for f in out err; do diff -u silly.$f silly.$f.new ||:; done
 
 %install
 %{__rm} -rf %{buildroot}
+
 %{__install} -d %{buildroot}%{_bindir} \
-	%{buildroot}%{_datadir}/%{name}
+	%{buildroot}%{_datadir}/%{name} \
+	%{buildroot}%{_libdir}/%{name}
+
 %{?with_tex:%{__install} -d %{buildroot}%{_docdir}/%{name}}
+
 %{__install} mmix mmixal mmotype mmmix %{buildroot}%{_bindir}
 %{__install} -m 644 *.mms *.mmconfig *.mmix %{buildroot}%{_datadir}/%{name}
+
+%if %{with patches}
+%{__install} libmmix.so %{buildroot}%{_libdir}/%{name}
+%{__install} -d %{buildroot}%{_sysconfdir}/ld.so.conf.d
+%{__echo} "%{_libdir}/%{name}" > \
+    %{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%else
+%{__install} -m 644 libmmix.a %{buildroot}%{_libdir}/%{name}
+%endif
+
 %{?with_tex:%{__install} -m 644 *.pdf %{buildroot}%{_docdir}/%{name}}
 
 %files
@@ -113,9 +129,24 @@ for f in out err; do diff -u silly.$f silly.$f.new ||:; done
 %{_bindir}/mmotype
 %{_bindir}/mmmix
 %{_datadir}/%{name}
+%if %{with patches}
+%{_libdir}/%{name}/libmmix.so
+%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%else
+%{_libdir}/%{name}/libmmix.a
+%endif
 %{?with_tex:%doc %{_docdir}/%{name}}
 
+%post
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
+
+%postun
+%{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
+
 %changelog
+* Wed May 21 2025 Andreas Scherer <andreas_tex@freenet.de>
+- Installed shared object for general use.
+
 * Thu Nov 30 2023 Andreas Scherer <andreas_tex@freenet.de>
 - Fourth patch for Makefile
 
