@@ -2664,6 +2664,12 @@ static int mmgetchars(
   int stop)
 @z
 
+@x [381] l.6724.
+    fprintf(stderr,"Attempt to get characters from off the page!\n");
+@y
+    errprint("Attempt to get characters from off the page!\n");
+@z
+
 @x [384] l.6772 Factor out private stuff (mixins).
 void mmputchars(buf,size,addr)
   unsigned char *buf;
@@ -2674,6 +2680,12 @@ static void mmputchars(
   unsigned char *buf,
   int size,
   octa addr)
+@z
+
+@x [384] l.6781.
+    fprintf(stderr,"Attempt to put characters off the page!\n");
+@y
+    errprint("Attempt to put characters off the page!\n");
 @z
 
 @x [386] l.6803 Compound literal.
