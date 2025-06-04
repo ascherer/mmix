@@ -1753,6 +1753,12 @@ void print_string(
   octa o)
 @z
 
+@x [161] l.3329 Fixing possible buffer overrun in b command (MMIX home).
+case 'b':@+ for (k=0,p++; !isxdigit(*p); p++)
+@y
+case 'b':@+ for (k=0,p++; *p!=0 && !isxdigit(*p); p++)
+@z
+
 @x [162] l.3347 C99 prototypes for C2x.
 void show_breaks @,@,@[ARGS((mem_node*))@];@+@t}\6{@>
 void show_breaks(p)
