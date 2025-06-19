@@ -28,7 +28,7 @@
 @$print_stab {MMOTYPE}26 \&{void} (\,)@>
 @z
 
-@x [16]
+@x [15]
   cur_loc=incr(cur_loc,4);@+ cur_loc.l &=-4;
 }
 

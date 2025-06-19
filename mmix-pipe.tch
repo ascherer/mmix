@@ -136,7 +136,7 @@ of Computer Programming}.
 @-t@>
 @z
 
-@x [35]
+@x [34]
 static coroutine *queuelist(int);
 
 @ @<Sub...@>=
@@ -168,7 +168,7 @@ the address of the subsequent instruction.
 \ifx\undefined\eightpoint \else \vfill\vbox{}\vskip5mm \fi
 @z
 
-@x [48]
+@x [47]
 @!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
 
 @ @<Glob...@>=
@@ -900,7 +900,7 @@ static int issued_between(
 @-c@> @-data@> @-g@>
 @z
 
-@x [170]
+@x [169]
 static bool is_dirty(cache*,cacheblock*);
 
 @ @<Sub...@>=
@@ -1025,7 +1025,7 @@ has rank~0, and the most recently used entry has rank~$2^a-1=|aa|-1$.
 @y
     for (int j=1,m=aa>>1;m;m>>=1) @-j@> @-m@> @-l@>
 @z
-@x [191]
+@x [192]
 @d cache_addr(c,alf) c->set[(alf.l&~(c->tagmask))>>c->b]
 @y
 @d cache_addr(c,alf) c->set[(alf.l&~(c->tagmask))>>c->b]
@@ -1079,9 +1079,9 @@ static cacheblock *demote_and_fix(
 @z
 
 @x [200]
-to be placed in the cache block~|p|. 
+to be placed in the cache block~|p|.
 @y
-to be placed in the cache block~|p|. 
+to be placed in the cache block~|p|.
 @-c@> @-p@>
 @z
 
@@ -1139,7 +1139,7 @@ octa mem_read(
 octa mem_read(
 @z
 
-@x [213]
+@x [212]
 Extern void mem_write(octa addr,octa val);
 
 @ @<External r...@>=
@@ -1311,7 +1311,7 @@ clean_co.name="Clean";
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
 @z
 
-@x [235]
+@x [234]
   if (!is_dirty(Scache,p)) {
     p->tag.h|=data->x.o.h;@+goto Sclean_inc;
 @y
@@ -1319,7 +1319,7 @@ clean_co.name="Clean";
     p->tag.h|=data->x.o.h;@+goto Sclean_inc; @+
 @z
 
-@x [236]
+@x [235]
 static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 
 @ @<Initialize e...@>=
@@ -1410,7 +1410,7 @@ write_co.name="Write";
 @% @$name {MMIX-PIPE}23 \&{char} ${*}$@>
 @z
 
-@x [251]
+@x [250]
 static void print_write_buffer(void);
 
 @ @<Sub...@>=
