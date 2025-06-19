@@ -125,7 +125,7 @@ read from the |CPV| table.)
 @r @ @<If |token| is a cache name, process a cache spec@>=
 @z
 
-@x [22]
+@x [21]
   pcs(Scache);@+continue;
 }
 
@@ -137,7 +137,7 @@ read from the |CPV| table.)
 @ @-ppol@> @<Sub...@>=
 @z
 
-@x [23]
+@x [22]
   else token_prescanned=true; /* oops, we should rescan that token */
 }
 

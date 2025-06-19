@@ -61,7 +61,7 @@ static octa fpack(octa,int,char,int);
 @r @ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
 @z
 
-@x [40]
+@x [39]
   if (s=='-') x.h|=sign_bit;
   return x;
 }
@@ -72,7 +72,7 @@ static octa fpack(octa,int,char,int);
 @r
 @z
 
-@x [44]
+@x [43]
 if (x.h||x.l) xf.l|=1; /* adjust the sticky bit */
 return fpack(xf,xe,xs,cur_round);
 @y
@@ -194,7 +194,7 @@ The value of |exceptions| set by |scan_const| is not necessarily correct.
   @+ exp=0;
 @z
 
-@x [75]
+@x [74]
   p++;
 @y
   @+ p++;

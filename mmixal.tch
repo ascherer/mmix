@@ -221,7 +221,7 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
 @y
 {"FUNE", 0x12, 0x240a8},@|
 @z
-@x [73]
+@x [63]
 {"FEQLE", 0x13, 0x240a8},@|
 @y
 {"FEQLE", 0x13, 0x240a8},
