@@ -20,12 +20,6 @@ in ring~|l|;
 @:l}{\|l (ring of local registers)@>
 @z
 
-@x [4] l.212 Issue #15
-\bull ports (default 1), number of processes that can simultaneous
-@y
-\bull ports (default 1), number of processes that can simultaneously
-@z
-
 @x [7] l.328 Improve typography.
 in the \.{mmix-pipe} module, which defines and discusses the data structures
 @y
@@ -260,10 +254,9 @@ static void pcs( /* subroutine to process a cache spec */
         "Configuration error: `%c' is not a hex digit",token[j]);
 @z
 
-@x [26] l.744 Bug reported 2024-07-30.
-  funit[j].co=(coroutine*)calloc(n,sizeof(coroutine));
+@x [26] l.745 Bug reported 2024-07-30, fixed 2025-06-20.
+  if (!funit[j].co) panic(errprint1("Can't allocate coroutine %d",j));
 @y
-  funit[j].co=(coroutine*)calloc(n,sizeof(coroutine));
   if (!funit[j].co) panic("Can't allocate coroutine %d",j);
 @z
 
