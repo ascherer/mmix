@@ -1,7 +1,7 @@
-From b2ef00a08361f39c91296fdff6e7a79c8665a40f Mon Sep 17 00:00:00 2001
+From 22d6861170713dd8c5da67c35abe70fa380ea189 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 22 Jan 2025 12:34:06 +0100
-Subject: [PATCH 398/420] Make 'doc' in PDF.
+Subject: [PATCH 398/442] Make 'doc' in PDF.
 
 Use 'dvipdfm' and move tables-of-contents up front.
 ---
@@ -27,5 +27,5 @@ index 5e9de24..b10dcff 100644
  all:    mmixal mmix mmotype mmmix
  
 -- 
-2.48.1
+2.49.0
 

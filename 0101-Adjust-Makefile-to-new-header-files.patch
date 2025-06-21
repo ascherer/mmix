@@ -1,14 +1,14 @@
-From 30c5f37e5920f008a8caf9aeb6da366b690060b0 Mon Sep 17 00:00:00 2001
+From bf1c88179d1b7702f4a9927140a9b43d1e860f19 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Sat, 15 Apr 2023 18:40:32 +0200
-Subject: [PATCH 101/420] Adjust Makefile to new header files.
+Subject: [PATCH 101/442] Adjust Makefile to new header files.
 
 ---
  Makefile | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 08c2b90..e477110 100644
+index 78384ed..0dc71b5 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -74,13 +74,13 @@ clean:
@@ -29,5 +29,5 @@ index 08c2b90..e477110 100644
  
  mmixal: mmix-arith.o mmixal.c
 -- 
-2.48.1
+2.49.0
 

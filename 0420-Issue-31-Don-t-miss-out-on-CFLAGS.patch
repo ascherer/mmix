@@ -1,7 +1,7 @@
-From 43ed5975f814f203d3db72098ddccd6aabc9c996 Mon Sep 17 00:00:00 2001
+From af96eb9e4a23522d85219100968114897c6be215 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Fri, 7 Feb 2025 16:17:28 +0100
-Subject: [PATCH 420/420] Issue #31: Don't miss out on $CFLAGS.
+Subject: [PATCH 420/442] Issue #31: Don't miss out on $CFLAGS.
 
 The 'main' modules should also be inspected with '-Wall -Wextra'.
 Moreover, ABSTIME was not correctly initialized in MMIX-SIM.CH.
@@ -44,5 +44,5 @@ index b10dcff..25fee23 100644
  
  tarfile: $(ALL)
 -- 
-2.48.1
+2.49.0
 
