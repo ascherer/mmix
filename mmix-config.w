@@ -209,7 +209,7 @@ its input buffer into the cache proper; must be $\ge1$.
 \bull copyouttime (default 1), number of cycles to move a cache block
 from the cache proper to its output buffer; must be $\ge1$.
 
-\bull ports (default 1), number of processes that can simultaneous
+\bull ports (default 1), number of processes that can simultaneously
 query the cache; must be $\ge1$.
 
 \smallskip
@@ -742,6 +742,7 @@ for (j=0;j<=funit_count;j++) {
   @<Determine the number of stages, |n|, needed by |funit[j]|@>;
   funit[j].k=n;
   funit[j].co=(coroutine*)calloc(n,sizeof(coroutine));
+  if (!funit[j].co) panic(errprint1("Can't allocate coroutine %d",j));
   for (i=0;i<n;i++) {
     funit[j].co[i].name=funit[j].name;
     funit[j].co[i].stage=i+1;

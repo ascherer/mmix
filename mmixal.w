@@ -86,7 +86,7 @@ interprets and combines to form machine language instructions and data.
 Constants are simplest, so we will discuss them first.
 
 A {\it decimal constant\/} is a sequence of digits, representing a number in
-radix~10. A~{\it hexadecimal constant\/} is a sequence of hexadecimal digits,
+radix~10. A~{\it hexa\-decimal constant\/} is a sequence of hexadecimal digits,
 preceded by~\.\#, representing a number in radix~16:
 $$\vbox{\halign{$#$\hfil\cr
 \<digit>\is\.0\mid\.1\mid\.2\mid\.3\mid\.4\mid

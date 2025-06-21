@@ -292,7 +292,7 @@ is essentially equivalent to the \CEE/ expression
 $$\displaylines{
 \hskip5em\hbox{(|file[handle]|?
      |(file[handle]=freopen(name,mode_string[mode],file[handle]))|:}\hfill\cr
-\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|)? 0: $-1$},%
+\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|)? 0: $-1$}%
       \hskip5em\cr}$$
 if we set |mode_string|[\.{TextRead}]~=~|"r"|,
 |mode_string|[\.{TextWrite}]~=~|"w"|,
@@ -364,7 +364,7 @@ One-byte characters are written from \MMIX's memory to the file, starting
 at address |string|, up to but not including the first byte equal to~zero.
 The number of bytes written is returned, or $-1$ on error.
 The \CEE/ version is
-$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|,}$$
+$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|}$$
 together with |fflush(file[handle])|.
 
 \bull \.{Fputws}|(handle,string)|.
@@ -457,7 +457,7 @@ in this case \$255 holds the location of~\.{Main}.
 @^initialization of a user program@>
 (The routine at \Hex{f0} can pass control to \.{Main} without increasing~rL,
 if it starts with the slightly tricky sequence
-$$\.{PUT rW, \$255;{ } PUT rB, \$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
+$$\.{PUT rW,\$255;{ } PUT rB,\$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
       PUT rX,\$255}$$
 and eventually says \.{RESUME}; this \.{RESUME} command will restore
 \$255 and~rB. But the user program should {\it not\/} really count on
@@ -3326,7 +3326,7 @@ case 't': case 'u': k=*p;
    else ll->bkpt &=~trace_bit;
  }
  break;
-case 'b':@+ for (k=0,p++; !isxdigit(*p); p++)
+case 'b':@+ for (k=0,p++; !isxdigit(*p) && *p!='\0'; p++)
    if (*p=='r') k|=read_bit;
    else if (*p=='w') k|=write_bit;
    else if (*p=='x') k|=exec_bit;
