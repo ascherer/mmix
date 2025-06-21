@@ -1,7 +1,7 @@
-From 4ede2396b01fa45b0d881e8e2d12273efef03653 Mon Sep 17 00:00:00 2001
+From d5dfc6e3bde1c6af9884708982d12a60e7324af6 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 22 Jan 2025 11:21:21 +0100
-Subject: [PATCH 396/420] Directly compile from C main module to executable.
+Subject: [PATCH 396/442] Directly compile from C main module to executable.
 
 ---
  Makefile | 4 ++--
@@ -28,5 +28,5 @@ index f6493ce..5e9de24 100644
  
  mmotype: mmotype.c lib
 -- 
-2.48.1
+2.49.0
 

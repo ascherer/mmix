@@ -1,7 +1,7 @@
-From f150b1e9f45a97dc5de6f42a947a50d85a37a8ae Mon Sep 17 00:00:00 2001
+From 1f84270d55ad1c7168267e5710b71aad4a58db58 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Wed, 10 Jul 2024 14:20:50 +0200
-Subject: [PATCH 272/420] Resurrect the shared object idea.
+Subject: [PATCH 272/442] Resurrect the shared object idea.
 
 Now that the 'extern' mess has been cleared, it's no longer a
 problem to put the reusable MMIX modules into a shared object.
@@ -12,14 +12,14 @@ Even issue #9 doesn't rear its head on MacOS.
  1 file changed, 17 insertions(+), 10 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 6d7cdf0..f6493ce 100644
+index adb6174..f6493ce 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -6,7 +6,9 @@
  #   In fact, CWEB 3.61 is recommended for making hardcopy or PDF documentation.
  
  #   If you prefer optimization to debugging, change -g to something like -O:
--CFLAGS = -g
+-CFLAGS = -g -fPIE
 +CFLAGS = -g -fpic
 +LDFLAGS = -L.
 +LDLIBS = -lmmix
@@ -74,5 +74,5 @@ index 6d7cdf0..f6493ce 100644
  tarfile: $(ALL)
  	tar cvf /tmp/mmix.tar $(ALL)
 -- 
-2.48.1
+2.49.0
 
