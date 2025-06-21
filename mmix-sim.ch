@@ -16,17 +16,11 @@ on that file. It returns 0 if the file was opened successfully; otherwise it
 @x [4] l.293 Issue #15.
 \hskip5em\hbox{(|file[handle]|?
      |(file[handle]=freopen(name,mode_string[mode],file[handle]))|:}\hfill\cr
-\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|)? 0: $-1$},%
+\hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|)? 0: $-1$}%
 @y
 \hskip5em\hbox{(|file[handle]| ?
      |(file[handle]=freopen(name,mode_string[mode],file[handle]))| :}\hfill\cr
 \hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|) ? 0 : $-1$}%
-@z
-
-@x [4] l.367 Issue #15
-$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|,}$$
-@y
-$$\hbox{|fputs(string,file[handle])>=0? strlen(string): -1|}$$
 @z
 
 @x [4] l.393 Issue #15.
@@ -41,12 +35,6 @@ M$_8[\$0\ll3+\$1+8]$ is zero. (Register~\$1 will point to an octabyte in
 @y
 pointer to a string; the last such pointer is M$_8[\$0\ll3+\$1-8]$, and
 M$_8[\$0\ll3+\$1]$ is zero. (Register~\$1 will point to an octabyte in
-@z
-
-@x [6] l.460 Issue #15.
-$$\.{PUT rW, \$255;{ } PUT rB, \$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
-@y
-$$\.{PUT rW,\$255;{ } PUT rB,\$255;{ } SETML \$255,\#F700;{ } % PUTI rB,0!
 @z
 
 @x [9] l.546 Use standard C99 type.
@@ -1753,10 +1741,10 @@ void print_string(
   octa o)
 @z
 
-@x [161] l.3329 Fixing possible buffer overrun in b command (MMIX home).
-case 'b':@+ for (k=0,p++; !isxdigit(*p); p++)
+@x [161] l.3329 Fixing possible buffer overrun in b command (MMIX home, DEK).
+case 'b':@+ for (k=0,p++; !isxdigit(*p) && *p!='\0'; p++)
 @y
-case 'b':@+ for (k=0,p++; *p!=0 && !isxdigit(*p); p++)
+case 'b':@+ for (k=0,p++; *p!='\0' && !isxdigit(*p); p++)
 @z
 
 @x [162] l.3347 C99 prototypes for C2x.

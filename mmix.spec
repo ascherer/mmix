@@ -11,13 +11,13 @@ Summary: The MMIX system
 License: Copyright 1999 Donald E. Knuth
 URL: http://mmix.cs.hm.edu/
 
-Version: 20231125
+Version: 20250620
 Release: 1
 Packager: Andreas Scherer <https://ascherer.github.io/>
 
 %if "%{_vendor}" == "debbuild"
 Group: science
-Distribution: Kubuntu 22.04 (x86_64)
+Distribution: Kubuntu 24.04 (x86_64)
 %if %{with tex}
 BuildRequires: texlive
 %endif
@@ -144,6 +144,9 @@ for f in out err; do diff -u silly.$f silly.$f.new ||:; done
 %{?with_patches:%{__ldconfig} %{_libdir}/%{name}}
 
 %changelog
+* Sat Jun 21 2025 Andreas Scherer <andreas_tex@freenet.de>
+- Update from DEK
+
 * Wed May 21 2025 Andreas Scherer <andreas_tex@freenet.de>
 - Installed shared object for general use.
 
