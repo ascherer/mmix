@@ -1,7 +1,7 @@
-From c5b425a0fe1d5511e13ab48fa1357f4ecd7fa4ff Mon Sep 17 00:00:00 2001
+From 3a536a2e31bd99fac66a40c75bd86da1ad77d348 Mon Sep 17 00:00:00 2001
 From: Andreas Scherer <andreas_github@freenet.de>
 Date: Tue, 5 Dec 2023 09:25:26 +0100
-Subject: [PATCH 204/420] Clean up Makefile.
+Subject: [PATCH 204/442] Clean up Makefile.
 
 Purge the use of MMIX-MEM.
 
@@ -12,7 +12,7 @@ the three 'mixins', but these also come from MMIX-SIM.
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 8441921..6d7cdf0 100644
+index 4cf854c..adb6174 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -78,9 +78,9 @@ mmix-pipe.o mmix-sim.o: $$(subst .o,.c,$$@) mmix-io.c
@@ -28,5 +28,5 @@ index 8441921..6d7cdf0 100644
  
  mmixal: mmix-arith.o mmixal.c
 -- 
-2.48.1
+2.49.0
 
