@@ -260,27 +260,27 @@ static void pcs( /* subroutine to process a cache spec */
   if (!funit[j].co) panic("Can't allocate coroutine %d",j);
 @z
 
-@x [27] l.752 Change from MMIX home.
+@x [27] l.753 Change from MMIX home.
 for (j=div;j<=max_pipe_op;j++) int_stages[j]=strlen(pipe_seq[j]);
 @y
 for (j=div;j<=max_pipe_op;j++)
   int_stages[j]=(int)strlen((const char*)pipe_seq[j]);
 @z
 
-@x [27] l.755 Change from MMIX home.
+@x [27] l.756 Change from MMIX home.
   if (strlen(pipe_seq[j])>n) n=strlen(pipe_seq[j]);
 @y
   if (strlen((const char*)pipe_seq[j])>(size_t)n)
     n=(int)strlen((const char*)pipe_seq[j]);
 @z
 
-@x [28] l.765 Factor out private stuff.
+@x [28] l.766 Factor out private stuff.
 internal_opcode int_op[256]={@|
 @y
 static internal_opcode int_op[256]={@|
 @z
 
-@x [28] l.798 Factor out private stuff.
+@x [28] l.799 Factor out private stuff.
 int int_stages[max_real_command+1];
        /* stages as function of |internal_opcode| */
 int stages[256]; /* stages as function of |mmix_opcode| */
@@ -290,7 +290,7 @@ static int int_stages[max_real_command+1];
 static int stages[256]; /* stages as function of |mmix_opcode| */
 @z
 
-@x [29] l.806
+@x [29] l.807
 if (n==0) panic(errprint1(
        "Configuration error: unit %s doesn't do anything",funit[j].name));
 @y
@@ -298,7 +298,7 @@ if (n==0) panic(
        "Configuration error: unit %s doesn't do anything",funit[j].name);
 @z
 
-@x [30] l.817 C99 prototypes for C2x.
+@x [30] l.818 C99 prototypes for C2x.
 static int lg @,@,@[ARGS((int))@];@+@t}\6{@>
 static int lg(n) /* compute binary logarithm */
   int n;
@@ -307,7 +307,7 @@ static int lg( /* compute binary logarithm */
   int n)
 @z
 
-@x [31] l.826 C99 prototypes for C2x.
+@x [31] l.827 C99 prototypes for C2x.
 static void alloc_cache @,@,@[ARGS((cache*,char*))@];@+@t}\6{@>
 static void alloc_cache(c,name)
   cache *c;
@@ -318,7 +318,7 @@ static void alloc_cache(
   char *name)
 @z
 
-@x [31] l.831
+@x [31] l.832
   if (c->bb<c->gg) panic(errprint1(
       "Configuration error: blocksize of %s is less than granularity",name));
 @.Configuration error...@>
@@ -332,7 +332,7 @@ static void alloc_cache(
       "Configuration error: blocksize of %s must be 8",name);
 @z
 
-@x [31] l.842
+@x [31] l.843
   if (c->a+c->b+c->c>=32) panic(errprint1(
      "Configuration error: %s has >= 4 gigabytes of data",name));
   if (c->gg!=8 && !(c->mode&WRITE_ALLOC)) panic(errprint2(
@@ -346,7 +346,7 @@ static void alloc_cache(
         name,c->gg);
 @z
 
-@x [31] l.850
+@x [31] l.851
   if (!c->inbuf.dirty) panic(errprint1(
      "Can't allocate dirty bits for inbuffer of %s",name));
 @y
@@ -354,7 +354,7 @@ static void alloc_cache(
      "Can't allocate dirty bits for inbuffer of %s",name);
 @z
 
-@x [31] l.854
+@x [31] l.855
     if (!c->inbuf.data) panic(errprint1(
      "Can't allocate data for inbuffer of %s",name));
   c->outbuf.dirty=(char*)calloc(c->bb>>c->g,sizeof(char));
@@ -374,7 +374,7 @@ static void alloc_cache(
      "Can't allocate data for outbuffer of %s",name);
 @z
 
-@x [32] l.865
+@x [32] l.866
 @ @d sign_bit 0x80000000
 
 @<Allocate the cache sets for cache |c|@>=
@@ -382,7 +382,7 @@ static void alloc_cache(
 @ @<Allocate the cache sets for cache |c|@>=
 @z
 
-@x [32] l.869
+@x [32] l.870
 if (!c->set) panic(errprint1(
      "Can't allocate cache sets for %s",name));
 @y
@@ -390,7 +390,7 @@ if (!c->set) panic(
      "Can't allocate cache sets for %s",name);
 @z
 
-@x [32] l.874
+@x [32] l.875
   if (!c->set[j]) panic(errprint2(
     "Can't allocate cache blocks for set %d of %s",j,name));
 @y
@@ -398,7 +398,7 @@ if (!c->set) panic(
     "Can't allocate cache blocks for set %d of %s",j,name);
 @z
 
-@x [32] l.879
+@x [32] l.880
     if (!c->set[j][k].dirty) panic(errprint3(
       "Can't allocate dirty bits for block %d of set %d of %s",k,j,name));
     c->set[j][k].data=(octa *)calloc(c->bb>>3,sizeof(octa));
@@ -412,7 +412,7 @@ if (!c->set) panic(
       "Can't allocate data for block %d of set %d of %s",k,j,name);
 @z
 
-@x [33] l.890
+@x [33] l.891
   if (!c->victim) panic(errprint1(
       "Can't allocate blocks for victim cache of %s",name));
 @y
@@ -420,7 +420,7 @@ if (!c->set) panic(
       "Can't allocate blocks for victim cache of %s",name);
 @z
 
-@x [33] l.895
+@x [33] l.896
     if (!c->victim[k].dirty) panic(errprint2(
       "Can't allocate dirty bits for block %d of victim cache of %s",
                        k,name));
@@ -430,7 +430,7 @@ if (!c->set) panic(
                        k,name);
 @z
 
-@x [33] l.900
+@x [33] l.901
     if (!c->victim[k].data) panic(errprint2(
       "Can't allocate data for block %d of victim cache of %s",k,name));
 @y
@@ -438,7 +438,7 @@ if (!c->set) panic(
       "Can't allocate data for block %d of victim cache of %s",k,name);
 @z
 
-@x [34] l.908
+@x [34] l.909
   if (!c->reader) panic(errprint1(
 @.Can't allocate...@>
         "Can't allocate readers for %s",name));
@@ -448,7 +448,7 @@ if (!c->set) panic(
         "Can't allocate readers for %s",name);
 @z
 
-@x [35] l.934
+@x [35] l.935
   if (Scache->bb<Icache->bb) panic(errprint0(
      "Configuration error: Scache blocks smaller than Icache blocks"));
 @.Configuration error...@>
@@ -466,7 +466,7 @@ if (!c->set) panic(
      "Configuration error: Scache granularity differs from the Dcache");
 @z
 
-@x [36] l.963
+@x [36] l.964
 if (!ring) panic(errprint0("Can't allocate the scheduling ring"));
 @.Can't allocate...@>
 {@+register coroutine *p;
@@ -484,7 +484,7 @@ for (coroutine* p=ring;p<ring+ring_size;p++) {
 }
 @z
 
-@x [37] l.975
+@x [37] l.976
 if (hash_prime<=mem_chunks_max) panic(errprint0(
   "Configuration error: hashprime must exceed memchunksmax"));
 @.Configuration error...@>
@@ -498,7 +498,7 @@ mem_hash=(chunknode *)calloc(hash_prime+1,sizeof(chunknode));
 if (!mem_hash) panic("Can't allocate the hash table");
 @z
 
-@x [37] l.982
+@x [37] l.983
 if (!mem_hash[0].chunk) panic(errprint0("Can't allocate chunk 0"));
 mem_hash[hash_prime].chunk=(octa*)calloc(1<<13,sizeof(octa));
 if (!mem_hash[hash_prime].chunk) panic(errprint0("Can't allocate 0 chunk"));
@@ -508,25 +508,25 @@ mem_hash[hash_prime].chunk=(octa*)calloc(1<<13,sizeof(octa));
 if (!mem_hash[hash_prime].chunk) panic("Can't allocate 0 chunk");
 @z
 
-@x [37] l.987
+@x [37] l.988
 if (!fetch_bot) panic(errprint0("Can't allocate the fetch buffer"));
 @y
 if (!fetch_bot) panic("Can't allocate the fetch buffer");
 @z
 
-@x [37] l.990
+@x [37] l.991
 if (!reorder_bot) panic(errprint0("Can't allocate the reorder buffer"));
 @y
 if (!reorder_bot) panic("Can't allocate the reorder buffer");
 @z
 
-@x [37] l.993
+@x [37] l.994
 if (!wbuf_bot) panic(errprint0("Can't allocate the write buffer"));
 @y
 if (!wbuf_bot) panic("Can't allocate the write buffer");
 @z
 
-@x [37] l.997
+@x [37] l.998
   if (bp_a+bp_b+bp_c>=31) panic(errprint0(
      "Configuration error: Branch table has >= 2 gigabytes of data"));
   bp_table=(char*)calloc(1<<(bp_a+bp_b+bp_c),sizeof(char));
@@ -538,7 +538,7 @@ if (!wbuf_bot) panic("Can't allocate the write buffer");
   if (!bp_table) panic("Can't allocate the branch table");
 @z
 
-@x [37] l.1002 Change from MMIX home.
+@x [37] l.1003 Change from MMIX home.
 l=(specnode*)calloc(lring_size,sizeof(specnode));
 if (!l) panic(errprint0("Can't allocate local registers"));
 @y
@@ -547,7 +547,7 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 if (!l) panic("Can't allocate local registers");
 @z
 
-@x [37] l.1007
+@x [37] l.1008
 if (!fetched) panic(errprint0("Can't allocate prefetch buffer"));
 dispatch_stat=(int*)calloc(dispatch_max+1,sizeof(int));
 if (!dispatch_stat) panic(errprint0("Can't allocate dispatch counts"));
@@ -557,7 +557,7 @@ dispatch_stat=(int*)calloc(dispatch_max+1,sizeof(int));
 if (!dispatch_stat) panic("Can't allocate dispatch counts");
 @z
 
-@x [38] l.1016 Improved module structure with interfaces.
+@x [38] l.1017 Improved module structure with interfaces.
 #include <stdio.h> /* |fopen|, |fgets|, |sscanf|, |rewind| */
 #include <stdlib.h> /* |calloc|, |exit| */
 #include <ctype.h> /* |isspace| */
@@ -579,7 +579,7 @@ if (!dispatch_stat) panic("Can't allocate dispatch counts");
 @#
 @z
 
-@x [38] l.1024 Factor out private stuff.
+@x [38] l.1025 Factor out private stuff.
 @<Subroutines@>@;
 void MMIX_config(filename)
   char *filename;
@@ -590,13 +590,13 @@ void MMIX_config(
   char *filename)
 @z
 
-@x [38] l.1030
+@x [38] l.1031
     panic(errprint1("Can't open configuration file %s",filename));
 @y
     panic("Can't open configuration file %s",filename);
 @z
 
-@x [39] l.1041 Improved module structure with interface.
+@x [39] l.1042 Improved module structure with interface.
 @*Index.
 @y
 @ Here comes the exported interface of this {\mc MMIX-CONFIG} program module.
