@@ -83,7 +83,7 @@
 @$size_t "<stddef.h>" \zip@>
 
 @$uint8_t "<stdint.h>" \zip@>
-@$uint16_t "<stdint.h>" \zip@>
+@$uint32_t "<stdint.h>" \zip@>
 
 @$asctime "<time.h>" \zip@>
 @$localtime "<time.h>" \zip@>
