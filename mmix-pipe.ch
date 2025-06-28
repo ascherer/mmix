@@ -1741,8 +1741,10 @@ octa mem_read(
 
 @x [210] l.3755
         errprint2("uninitialized memory read at %08x%08x",addr.h,addr.l);
+@.uninitialized memory...@>
 @y
-        errprint("uninitialized memory read at %08x%08x",addr.h,addr.l);
+        errprint("Uninitialized memory read at %08x%08x",addr.h,addr.l);
+@.Uninitialized memory...@>
 @z
 
 @x [212] l.3769 C99 prototypes for C2x.

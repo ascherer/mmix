@@ -223,6 +223,14 @@ cur_loc=zero_octa;
 @y
 @z
 
+@x [19] l.256
+ if (delta&0xfe000000) err("increment of lop_fixrx is too large");
+@.increment...too large@>
+@y
+ if (delta&0xfe000000) err("Increment of lop_fixrx is too large");
+@.Increment...too large@>
+@z
+
 @x [20] l.281
      *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
 @y
