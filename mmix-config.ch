@@ -76,8 +76,10 @@ static void get_token(void) /* set |token| to the next token of the configuratio
 
 @x [10] l.382
         panic(errprint1("config file line too long: `%s...'",buffer));
+@.config file line...@>
 @y
-        panic("config file line too long: `%s...'",buffer);
+        panic("Config file line too long: `%s...'",buffer);
+@.Config file line...@>
 @z
 
 @x [11] l.397 C99 prototypes for C2x.
