@@ -624,14 +624,6 @@ internal_opcode internal_op[256]={@|
 static internal_opcode internal_op[256]={@|
 @z
 
-@x [52] l.1129 Change from MMIX home.
-\.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
-followed by rG~(19) and rA~(21) packed into eight bytes.
-@y
-\.{UNSAVE} commands store and restore special registers 0--6 and 23--27,
-followed by~19 and~21.
-@z
-
 @x [53] l.1167
 char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @y
