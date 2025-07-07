@@ -1708,6 +1708,12 @@ static cacheblock* alloc_slot(
   octa alf) /* key that probably isn't in the cache */
 @z
 
+@x [208] l.3719
+@ The separately compiled procedures |spec_read()| and |spec_write()| have the
+@y
+@ The procedures |spec_read()| and |spec_write()| have the
+@z
+
 @x [208] l.3724 Stuff from MMIX-MEM.
 @<Sub...@>=
 extern octa spec_read @,@,@[ARGS((octa addr,int size))@];

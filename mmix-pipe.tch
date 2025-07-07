@@ -1123,7 +1123,7 @@ static void flush_cache(
 @z
 
 @x [208]
-@ The separately compiled procedures |spec_read()| and |spec_write()| have the
+@ The procedures |spec_read()| and |spec_write()| have the
 @y
 @ The procedures |spec_read()| and |spec_write()| have the
 @-size@>
