@@ -1127,6 +1127,11 @@ static void flush_cache(
 @y
 @ The procedures |spec_read()| and |spec_write()| have the
 @-size@>
+@-spec_read@>
+@-spec_write@>
+@%
+@$spec_read {MMIX-PIPE}390 \&{static} \&{octa} (\,)@>
+@$spec_write {MMIX-PIPE}391 \&{static} \&{void} (\,)@>
 @z
 
 @x [210]
