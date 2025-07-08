@@ -55,6 +55,13 @@ Readers of this program should be familiar with the explanation of \MMIX's
 @<External routines@>@;
 @z
 
+@x [4] l.147
+@<External variables@>=
+Extern int verbose; /* controls the level of diagnostic output */
+
+@y
+@z
+
 @x [5] l.152 Improved module structure with interfaces.
 @(mmix-pipe.h@>=
 @y
@@ -177,6 +184,9 @@ Extern int MMIX_silent @,@,@[ARGS((void))@];
 
 @ @<External routines@>=
 @y
+@<External variables@>=
+Extern int verbose; /* controls the level of diagnostic output */
+
 @ @<External proto...@>=
 Extern void MMIX_init(void);
 Extern void MMIX_run(int, octa);
@@ -1721,6 +1731,11 @@ extern octa spec_read @,@,@[ARGS((octa addr,int size))@];
 extern void spec_write @,@,@[ARGS((octa addr,octa val,int size))@];
  /* likewise */
 @y
+@<Internal...@>=
+static octa spec_read(octa,int);
+  /* for memory mapped I/O */
+static void spec_write(octa,octa,int);
+  /* likewise */
 @z
 
 @x [209] l.3742 C99 prototypes for C2x.
@@ -2741,12 +2756,6 @@ Many I/O devices communicate via bytes or wydes or tetras instead of
 octabytes. So these prototype routines have a |size| parameter, to
 distinguish between the various kinds of quantities that \MMIX\ wants to
 read from and write to the memory-mapped addresses.
-
-@<Internal...@>=
-static octa spec_read(octa,int);
-  /* for memory mapped I/O */
-static void spec_write(octa,octa,int);
-  /* likewise */
 
 @ If the |interactive_read_bit| of the |verbose| control is set,
 the user is supposed to supply values dynamically. Otherwise
