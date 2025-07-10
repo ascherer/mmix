@@ -13,6 +13,12 @@ $$\.{AA LOC @@+8;BB LOC @@+8;CC LOC @@+8;DD LOC @@+8;EE LOC @@+8}$$
 $$\.{AA LOC @@+8; BB LOC @@+8; CC LOC @@+8; DD LOC @@+8; EE LOC @@+8}$$
 @z
 
+@x [18] l.618
+instructions `\.{sp}~\.{GREG}~\.{0;fp}~\.{GREG}~\.0'; these instructions
+@y
+instructions `\.{sp}~\.{GREG}~\.{0;} \.{fp}~\.{GREG}~\.0'; these instructions
+@z
+
 @x [22] l.710
 @d mm 0x98
 @y
