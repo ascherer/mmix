@@ -813,6 +813,14 @@ unsigned char flags[256]={@|@t\1\1@>
 static unsigned char flags[256]={@|@t\1\1@>
 @z
 
+@x [85] l.1804
+      } /* otherwise fall through, will wait on |cool->go| */
+ case go: case pushgo: case trap: case resume: case syncid:
+@y
+      } @+@=/* else fall through */@>@; /* will wait on |cool->go| */
+ case go: case pushgo: case trap: case resume: case syncid:
+@z
+
 @x [88] l.1857
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
@@ -1044,6 +1052,23 @@ mem.addr.h=mem.addr.l=-1;
 mem.addr=neg_one;
 @z
 
+@x [117] l.2234
+case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
+case pst:
+@y
+@+@=/* fall through */@>@;
+case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
+@+@=/* fall through */@>@;
+case pst:
+@z
+
+@x [119] l.2271
+case pushj: {@+register int x=cool->xx;
+@y
+@+@=/* fall through */@>@;
+case pushj: {@+register int x=cool->xx;
+@z
+
 @x [119] l.2274
       @<Insert an instruction to advance gamma@>@;
 @y
@@ -1054,6 +1079,13 @@ mem.addr=neg_one;
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
   cool->x.known=true, cool->x.o=(octa){0, x};
+@z
+
+@x [119] l.2286
+case go: inst_ptr.p=&cool->go;@+break;
+@y
+@+@=/* else fall through */@>@;
+case go: inst_ptr.p=&cool->go;@+break;
 @z
 
 @x [120] l.2300
@@ -2077,6 +2109,13 @@ qloop:@+ while (true) {
   if (hot->i!=sync) while (true) {
 @z
 
+@x [257] l.4610
+case write_from_wbuf:
+@y
+@+@=/* fall through */@>@;
+case write_from_wbuf:
+@z
+
 @x [257] l.4621 Change from MMIX home.
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
@@ -2311,6 +2350,13 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
   data->go.o=(octa){0,m};
 @z
 
+@x [312] l.5571
+case trip: if (!g[rJ].up->known) goto stall;
+@y
+@+@=/* fall through */@>@;
+case trip: if (!g[rJ].up->known) goto stall;
+@z
+
 @x [314] l.5586
 @<Check for external interrupt@>=
 @y
@@ -2345,6 +2391,27 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 {@+register int m;
 @z
 
+@x [323] l.5782
+ case RESUME_CONT: resuming+=1+cool->zz;
+@y
+ @+@=/* fall through */@>@;
+ case RESUME_CONT: resuming+=1+cool->zz;
+@z
+
+@x [323] l.5789
+ case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
+@y
+ @+@=/* fall through */@>@;
+ case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
+@z
+
+@x [323] l.5801
+ default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
+@y
+ @+@=/* else fall through */@>@;
+ default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
+@z
+
 @x [329] l.5888
   case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
            new_Q.l |= data->z.o.l &~ g[rQ].o.l;
@@ -2373,6 +2440,13 @@ new_O=new_S=shift_right(cool->z.o,3,true);
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert an instruction to advance gamma@>@;
 @y
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert \9{a}an instruction to advance gamma@>@;
+@z
+
+@x [337] l.6015
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
+@y
+ @+@=/* fall through */@>@;
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
 @z
 
 @x [338] l.6029 Compound literal.
