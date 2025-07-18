@@ -1126,6 +1126,18 @@ case go: inst_ptr.p=&cool->go;@+break;
 @+ @t}\6\4{@>
 @z
 
+@x [125] l.2416
+ case 0:@<Simulate an action of the fetch coroutine@>;
+ case 1:@<Simulate the first stage of an execution pipeline@>;
+ default:@<Simulate later stages of an execution pipeline@>;
+@y
+ case 0:@<Simulate an action of the fetch coroutine@>@;
+ @+@=/* fall through */@>@;
+ case 1:@<Simulate the first stage of an execution pipeline@>@;
+ @+@=/* fall through */@>@;
+ default:@<Simulate later stages of an execution pipeline@>@;
+@z
+
 @x [127] l.2432
 coroutine mem_locker; /* trivial coroutine that vanishes */
 coroutine Dlocker; /* another */
@@ -1835,6 +1847,13 @@ void mem_write(
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
+@x [217] l.3876
+case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
 @x [217] l.3890
     if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
 @y
@@ -1860,6 +1879,20 @@ Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
 @z
 
+@x [222] l.3970
+case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [224] l.4012
+case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
 @x [224] l.4031
   case 3: @<Copy data from |p| into |c->inbuf|@>;
 @y
@@ -1882,6 +1915,13 @@ static control clean_ctl;
 static lockvar clean_lock;
 @z
 
+@x [232] l.4135
+case cleanup: p=(cacheblock*)data->ptr_b;
+@y
+@+@=/* fall through */@>@;
+case cleanup: p=(cacheblock*)data->ptr_b;
+@z
+
 @x [232] l.4137 Improved typography.
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
@@ -1896,10 +1936,31 @@ static lockvar clean_lock;
   data->y.o=(octa){i, j};
 @z
 
+@x [233] l.4166
+case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
+@z
+
 @x [234] l.4199 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
+@z
+
+@x [234] l.4213
+case 8:@+ if (Scache->lock) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 8:@+ if (Scache->lock) wait(1);
+@z
+
+@x [234] l.4224
+case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
+@y
+@+@=/* fall through */@>@;
+case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
 @z
 
 @x [235] l.4271
@@ -1920,6 +1981,27 @@ DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @#
 page_bad=true; /* variable delared below */
+@z
+
+@x [237] l.4304
+case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [237] l.4312
+  case 1:@+if (data->b.p) {
+@y
+  @+@=/* fall through */@>@;
+  case 1:@+if (data->b.p) {
+@z
+
+@x [237] l.4319
+  case 2:@+if (c->lock) wait(1);
+@y
+  @+@=/* fall through */@>@;
+  case 2:@+if (c->lock) wait(1);
 @z
 
 @x [238] l.4329 Exported variables.
@@ -2114,6 +2196,20 @@ case write_from_wbuf:
 @y
 @+@=/* fall through */@>@;
 case write_from_wbuf:
+@z
+
+@x [257] l.4615
+  case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
+@y
+  @+@=/* fall through */@>@;
+  case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
+@z
+
+@x [257] l.4617
+  case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
+@y
+  @+@=/* fall through */@>@;
+  case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @z
 
 @x [257] l.4621 Change from MMIX home.
