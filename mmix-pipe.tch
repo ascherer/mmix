@@ -733,6 +733,12 @@ mem_locker.name="Locker";
 @z
 
 @x [131]
+@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
+@y
+@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=@+
+@z
+
+@x [131]
 if (data->y.p) {
 @y
 if (data->y.p) { @+
@@ -810,12 +816,6 @@ below.)
 @y
 below.)
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@z
-
-@x [144]
-@ The other operations will be deferred until later, now that we understand
-@y
-@r @ The other operations will be deferred until later, now that we understand
 @z
 
 @x [145]
@@ -1199,6 +1199,12 @@ of the present program are left to the interested reader.
 @y
 @z
 
+@x [217]
+    goto terminate;
+@y
+ @+ goto terminate;
+@z
+
 @x [218]
 p=alloc_slot(Scache,c->outbuf.tag);
 @y
@@ -1522,6 +1528,12 @@ Perhaps the simulator is being too lenient here.
 @z
 
 @x [265]
+@d ld_st_launch 7 /* state when load/store command has its memory address */
+
+@y
+@z
+
+@x [265]
   data->z.o=incr(data->z.o,data->xx&-(data->i==prego? Icache: Dcache)->bb);
   /* (I hope the adder is fast enough) */
 @y
@@ -1531,6 +1543,13 @@ Perhaps the simulator is being too lenient here.
 @$o {MMIX-PIPE}40 \&{octa}@>
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [266]
+                  (data->i==syncid && (data->loc.h&sign_bit))? 0: PW_BIT)
+@y
+                  (data->i==syncid && (data->loc.h&sign_bit))? 0: PW_BIT)
+@d ld_st_launch 7 /* state when load/store command has its memory address */
 @z
 
 @x [266]
