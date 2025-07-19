@@ -2483,9 +2483,11 @@ static control fetch_ctl;
 @z
 
 @x [288] l.5231
+   data->state=1;@+ data->interrupt=0;@+ data->x.o=data->z.o=zero_octa;
  case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @y
- @+@=/* fall through */@>@;
+   data->interrupt=0;@+ data->x.o=data->z.o=zero_octa;
+   data->state=1; @+@=/* fall through */@>@;
  case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @z
 
