@@ -1838,6 +1838,13 @@ void mem_write(
                  mem_chunks));
 @z
 
+@x [215] l.3828
+  case 1: set_lock(self,mem_lock);
+@y
+  @+@=/* fall through */@>@;
+  case 1: set_lock(self,mem_lock);
+@z
+
 @x [216] l.3838 RAII.
   register int del=c->gg>>3; /* octabytes per granule */
   octa addr;
@@ -1854,10 +1861,24 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
 case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
+@x [217] l.3882
+  case 1: set_lock(self,Scache->lock);
+@y
+  @+@=/* fall through */@>@;
+  case 1: set_lock(self,Scache->lock);
+@z
+
 @x [217] l.3890
     if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
 @y
     if (block_diff) @<Copy \9{s}|Scache->inbuf| to slot |p|@>@;
+@z
+
+@x [217] l.3893
+  case 4: copy_block(c,&(c->outbuf),Scache,p);
+@y
+  @+@=/* fall through */@>@;
+  case 4: copy_block(c,&(c->outbuf),Scache,p);
 @z
 
 @x [219] l.3921 Compound literal.
@@ -1886,6 +1907,13 @@ case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
 case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
+@x [222] l.3982
+  case 2:@+if (c!=Scache) {
+@y
+  @+@=/* fall through */@>@;
+  case 2:@+if (c!=Scache) {
+@z
+
 @x [224] l.4012
 case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
 @y
@@ -1893,10 +1921,25 @@ case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
 case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
+@x [224] l.4019
+  case 1: @<Start the S-cache filler@>;
+@y
+  @+@=/* fall through */@>@;
+  case 1: @<Start the S-cache filler@>;
+@z
+
 @x [224] l.4031
   case 3: @<Copy data from |p| into |c->inbuf|@>;
 @y
+  @+@=/* fall through */@>@;
   case 3: @<Copy \9{d}data from |p| into |c->inbuf|@>;
+@z
+
+@x [224] l.4035
+  case 5:@+ if (c->lock) wait(1);
+@y
+  @+@=/* fall through */@>@;
+  case 5:@+ if (c->lock) wait(1);
 @z
 
 @x [226] l.4063
@@ -2504,7 +2547,7 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @x [323] l.5801
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
 @y
- @+@=/* else fall through */@>@;
+ @+@=/* fall through */@>@;
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
 @z
 
@@ -2639,6 +2682,13 @@ for (control* cc=data;cc!=hot;) {
 @ @<Wait\9{4} till write buffer is empty@>=
 @z
 
+@x [364] l.6437
+case 30:@+ if (data!=old_hot) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 30:@+ if (data!=old_hot) wait(1);
+@z
+
 @x [364] l.6441
  @<Clean the I-cache block for |data->z.o|, if any@>;
 @y
@@ -2663,6 +2713,13 @@ for (control* cc=data;cc!=hot;) {
  @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
 @z
 
+@x [364] l.6454
+case 33:@+ if (data!=old_hot) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 33:@+ if (data!=old_hot) wait(1);
+@z
+
 @x [364] l.6456
  @<Wait till write buffer is empty@>;
 @y
@@ -2673,6 +2730,20 @@ for (control* cc=data;cc!=hot;) {
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
+@z
+
+@x [364] l.6462
+case 34:@+if (!clean_co.next) goto next_sync;
+@y
+@+@=/* fall through */@>@;
+case 34:@+if (!clean_co.next) goto next_sync;
+@z
+
+@x [364] l.6469
+case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
+@y
+@+@=/* fall through */@>@;
+case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @z
 
 @x [365] l.6474
