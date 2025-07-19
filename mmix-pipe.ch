@@ -813,6 +813,14 @@ unsigned char flags[256]={@|@t\1\1@>
 static unsigned char flags[256]={@|@t\1\1@>
 @z
 
+@x [85] l.1804
+      } /* otherwise fall through, will wait on |cool->go| */
+ case go: case pushgo: case trap: case resume: case syncid:
+@y
+      } @+@=/* else fall through */@>@; /* will wait on |cool->go| */
+ case go: case pushgo: case trap: case resume: case syncid:
+@z
+
 @x [88] l.1857
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
@@ -1044,6 +1052,23 @@ mem.addr.h=mem.addr.l=-1;
 mem.addr=neg_one;
 @z
 
+@x [117] l.2234
+case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
+case pst:
+@y
+@+@=/* fall through */@>@;
+case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
+@+@=/* fall through */@>@;
+case pst:
+@z
+
+@x [119] l.2271
+case pushj: {@+register int x=cool->xx;
+@y
+@+@=/* fall through */@>@;
+case pushj: {@+register int x=cool->xx;
+@z
+
 @x [119] l.2274
       @<Insert an instruction to advance gamma@>@;
 @y
@@ -1054,6 +1079,13 @@ mem.addr=neg_one;
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
   cool->x.known=true, cool->x.o=(octa){0, x};
+@z
+
+@x [119] l.2286
+case go: inst_ptr.p=&cool->go;@+break;
+@y
+@+@=/* else fall through */@>@;
+case go: inst_ptr.p=&cool->go;@+break;
 @z
 
 @x [120] l.2300
@@ -1094,6 +1126,18 @@ mem.addr=neg_one;
 @+ @t}\6\4{@>
 @z
 
+@x [125] l.2416
+ case 0:@<Simulate an action of the fetch coroutine@>;
+ case 1:@<Simulate the first stage of an execution pipeline@>;
+ default:@<Simulate later stages of an execution pipeline@>;
+@y
+ case 0:@<Simulate an action of the fetch coroutine@>@;
+ @+@=/* fall through */@>@;
+ case 1:@<Simulate the first stage of an execution pipeline@>@;
+ @+@=/* fall through */@>@;
+ default:@<Simulate later stages of an execution pipeline@>@;
+@z
+
 @x [127] l.2432
 coroutine mem_locker; /* trivial coroutine that vanishes */
 coroutine Dlocker; /* another */
@@ -1106,8 +1150,11 @@ static control vanish_ctl; /* such coroutines share a common control block */
 
 @x [130] l.2469
  case 0: @<Wait for input data if necessary; set |state=1| if it's there@>;
+ case 1: @<Begin execution of an operation@>;
 @y
  case 0: @<Wait\9{1} for input data if necessary; set |state=1| if it's there@>;
+ @+@=/* fall through */@>@;
+ case 1: @<Begin execution of an operation@>;
 @z
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
@@ -1134,8 +1181,11 @@ static control vanish_ctl; /* such coroutines share a common control block */
 
 @x [135] l.2568
  case 0: panic(confusion("switch2"));
+ case 1: @<Begin execution of a stage-two operation@>;
 @y
  case 0: confusion("switch2");
+ @+@=/* fall through */@>@; /* NOT REACHED! */
+ case 1: @<Begin execution of a stage-two operation@>;
 @z
 
 @x [135] l.2572 Improved typography.
@@ -1193,6 +1243,13 @@ case mux: data->x.o.h=(data->y.o.h&data->b.o.h)+(data->z.o.h&~data->b.o.h);
 @y
 case mux: data->x.o=oor(oand(data->y.o, data->b.o),
                         oandn(data->z.o, data->b.o));
+@z
+
+@x [143] l.2675
+case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
+@y
+@+@=/* else fall through */@>@;
+case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @z
 
 @x [146] l.2746
@@ -1512,8 +1569,12 @@ static cacheblock* choose_victim(
 
 @x [187] l.3416 Change from MMIX home.
   panic(confusion("lru victim")); /* what happened? nobody has rank zero */
+ case pseudo_lru: for (l=1,m=aa>>1; m; m>>=1) l=l+l+s[l].rank;
 @y
+ @=/* fall through */@>@;
  default: confusion("lru victim"); /* what happened? nobody has rank zero */
+ @+@=/* fall through */@>@; /* NOT REACHED!*/
+ case pseudo_lru: for (l=1,m=aa>>1; m; m>>=1) l=l+l+s[l].rank;
 @z
 
 @x [188] l.3426 C99 prototypes for C2x.
@@ -1794,6 +1855,13 @@ void mem_write(
                  mem_chunks));
 @z
 
+@x [215] l.3828
+  case 1: set_lock(self,mem_lock);
+@y
+  @+@=/* fall through */@>@;
+  case 1: set_lock(self,mem_lock);
+@z
+
 @x [216] l.3838 RAII.
   register int del=c->gg>>3; /* octabytes per granule */
   octa addr;
@@ -1803,10 +1871,31 @@ void mem_write(
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
+@x [217] l.3876
+case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [217] l.3882
+  case 1: set_lock(self,Scache->lock);
+@y
+  @+@=/* fall through */@>@;
+  case 1: set_lock(self,Scache->lock);
+@z
+
 @x [217] l.3890
     if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
 @y
     if (block_diff) @<Copy \9{s}|Scache->inbuf| to slot |p|@>@;
+@z
+
+@x [217] l.3893
+  case 4: copy_block(c,&(c->outbuf),Scache,p);
+@y
+  @+@=/* fall through */@>@;
+  case 4: copy_block(c,&(c->outbuf),Scache,p);
 @z
 
 @x [219] l.3921 Compound literal.
@@ -1828,10 +1917,46 @@ Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
 @z
 
+@x [222] l.3970
+case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [222] l.3982
+  case 2:@+if (c!=Scache) {
+@y
+  @+@=/* fall through */@>@;
+  case 2:@+if (c!=Scache) {
+@z
+
+@x [224] l.4012
+case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [224] l.4019
+  case 1: @<Start the S-cache filler@>;
+@y
+  @+@=/* fall through */@>@;
+  case 1: @<Start the S-cache filler@>;
+@z
+
 @x [224] l.4031
   case 3: @<Copy data from |p| into |c->inbuf|@>;
 @y
+  @+@=/* fall through */@>@;
   case 3: @<Copy \9{d}data from |p| into |c->inbuf|@>;
+@z
+
+@x [224] l.4035
+  case 5:@+ if (c->lock) wait(1);
+@y
+  @+@=/* fall through */@>@;
+  case 5:@+ if (c->lock) wait(1);
 @z
 
 @x [226] l.4063
@@ -1850,6 +1975,13 @@ static control clean_ctl;
 static lockvar clean_lock;
 @z
 
+@x [232] l.4135
+case cleanup: p=(cacheblock*)data->ptr_b;
+@y
+@+@=/* fall through */@>@;
+case cleanup: p=(cacheblock*)data->ptr_b;
+@z
+
 @x [232] l.4137 Improved typography.
 @<Cases 0 through 4, for the D-cache@>;
 @<Cases 5 through 9, for the S-cache@>;
@@ -1864,10 +1996,31 @@ static lockvar clean_lock;
   data->y.o=(octa){i, j};
 @z
 
+@x [233] l.4166
+case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
+@z
+
 @x [234] l.4199 Compound literal.
   data->y.o.h=i, data->y.o.l=j;
 @y
   data->y.o=(octa){i, j};
+@z
+
+@x [234] l.4213
+case 8:@+ if (Scache->lock) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 8:@+ if (Scache->lock) wait(1);
+@z
+
+@x [234] l.4224
+case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
+@y
+@+@=/* fall through */@>@;
+case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
 @z
 
 @x [235] l.4271
@@ -1888,6 +2041,27 @@ DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @#
 page_bad=true; /* variable delared below */
+@z
+
+@x [237] l.4304
+case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
+@y
+@+@=/* fall through */@>@;
+case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
+@z
+
+@x [237] l.4312
+  case 1:@+if (data->b.p) {
+@y
+  @+@=/* fall through */@>@;
+  case 1:@+if (data->b.p) {
+@z
+
+@x [237] l.4319
+  case 2:@+if (c->lock) wait(1);
+@y
+  @+@=/* fall through */@>@;
+  case 2:@+if (c->lock) wait(1);
 @z
 
 @x [238] l.4329 Exported variables.
@@ -2077,6 +2251,27 @@ qloop:@+ while (true) {
   if (hot->i!=sync) while (true) {
 @z
 
+@x [257] l.4610
+case write_from_wbuf:
+@y
+@+@=/* fall through */@>@;
+case write_from_wbuf:
+@z
+
+@x [257] l.4615
+  case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
+@y
+  @+@=/* fall through */@>@;
+  case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
+@z
+
+@x [257] l.4617
+  case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
+@y
+  @+@=/* fall through */@>@;
+  case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
+@z
+
 @x [257] l.4621 Change from MMIX home.
     if (ticks.l-write_head->stamp<holding_time && !speed_lock)
 @y
@@ -2096,6 +2291,13 @@ Dcache->outbuf.tag.l=write_head->addr.l&(-Dcache->bb);
 @y
 Dcache->outbuf.tag=(octa){write_head->addr.h,
   write_head->addr.l&(-Dcache->bb)};
+@z
+
+@x [265] l.4750
+case ld: case ldunc: case ldvts:
+@y
+@+@=/* fall through */@>@;
+case ld: case ldunc: case ldvts:
 @z
 
 @x [266] l.4765
@@ -2118,7 +2320,15 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @x [271] l.4901 Change from MMIX home.
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
+  @+@=/* fall through */@>@;
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
+@z
+
+@x [272] l.4948
+ case DT_retry:@+if (DTcache->lock || (j=get_reader(DTcache))<0) wait(1);
+@y
+ @+@=/* fall through */@>@;
+ case DT_retry:@+if (DTcache->lock || (j=get_reader(DTcache))<0) wait(1);
 @z
 
 @x [272] l.4958 Change from MMIX home.
@@ -2131,6 +2341,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    { if (data->i==preld || data->i==prest) goto fin_ex;@+ else goto square_one; }
    if (no_hardware_PT || page_f)
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
+@z
+
+@x [273] l.4987
+ case DT_hit:@+ if (data->i==preld || data->i==prest) goto fin_ex;
+@y
+ @+@=/* fall through */@>@;
+ case DT_hit:@+ if (data->i==preld || data->i==prest) goto fin_ex;
 @z
 
 @x [273] l.4988
@@ -2157,6 +2374,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
 @z
 
+@x [276] l.5035
+case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
+@y
+@+@=/* fall through */@>@;
+case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
+@z
+
 @x [278] l.5055
 @ @<Check for a hit in pending writes@>=
 @y
@@ -2175,6 +2399,13 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
 @z
 
+@x [280] l.5101
+case st_ready:@+ switch (data->i) {
+@y
+@+@=/* fall through */@>@;
+case st_ready:@+ switch (data->i) {
+@z
+
 @x [280] l.5105 GCC warning. Change from MMIX home.
    if (Dcache && Dcache->bb<data->b.o.l) data->b.o.l=Dcache->bb;
    goto do_syncid;
@@ -2182,6 +2413,20 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    if (Dcache && (tetra)(Dcache->bb)<data->b.o.l) data->b.o.l=Dcache->bb;
    @=/* fall through */@>@;
  default: goto do_syncid;
+@z
+
+@x [281] l.5117
+ default: data->x.o=data->b.o;@+goto fin_ex;
+@y
+ @+@=/* fall through */@>@;
+ default: data->x.o=data->b.o;@+goto fin_ex;
+@z
+
+@x [281] l.5125
+ case STHT>>1:@+if (data->z.o.l&4) data->x.o.l=data->b.o.h;
+@y
+ @+@=/* else fall through */@>@;
+ case STHT>>1:@+if (data->z.o.l&4) data->x.o.l=data->b.o.h;
 @z
 
 @x [281] l.5131
@@ -2233,7 +2478,15 @@ static control fetch_ctl;
 @x [288] l.5228
  case 0: @<Wait, if necessary, until the instruction pointer is known@>;
 @y
+ @+@=/* fall through */@>@;
  case 0: @<Wait\9{2}, if necessary, until the instruction pointer is known@>;
+@z
+
+@x [288] l.5231
+ case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
+@y
+ @+@=/* fall through */@>@;
+ case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @z
 
 @x [288] l.5238 Improved typography.
@@ -2269,6 +2522,20 @@ static control fetch_ctl;
 @y
    if (!p) /* hey, it was present after all */
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
+@z
+
+@x [298] l.5366
+ case IT_hit:@+if (data->i==prego) goto fin_ex;@+else goto known_phys;
+@y
+ @+@=/* fall through */@>@;
+ case IT_hit:@+if (data->i==prego) goto fin_ex;@+else goto known_phys;
+@z
+
+@x [301] l.5399
+case fetch_ready:@+if (self->lockloc)
+@y
+@+@=/* fall through */@>@;
+case fetch_ready:@+if (self->lockloc)
 @z
 
 @x [301] l.5403 RAII.
@@ -2311,6 +2578,27 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
   data->go.o=(octa){0,m};
 @z
 
+@x [310] l.5540
+case 4:@+if (dispatch_lock) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 4:@+if (dispatch_lock) wait(1);
+@z
+
+@x [310] l.5543
+case 5:@+if (data!=old_hot) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 5:@+if (data!=old_hot) wait(1);
+@z
+
+@x [312] l.5571
+case trip: if (!g[rJ].up->known) goto stall;
+@y
+@+@=/* fall through */@>@;
+case trip: if (!g[rJ].up->known) goto stall;
+@z
+
 @x [314] l.5586
 @<Check for external interrupt@>=
 @y
@@ -2345,6 +2633,34 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 {@+register int m;
 @z
 
+@x [323] l.5782
+ case RESUME_CONT: resuming+=1+cool->zz;
+@y
+ @+@=/* fall through */@>@;
+ case RESUME_CONT: resuming+=1+cool->zz;
+@z
+
+@x [323] l.5789
+ case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
+@y
+ @+@=/* fall through */@>@;
+ case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
+@z
+
+@x [323] l.5801
+ default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
+@y
+ @+@=/* else fall through */@>@;
+ default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
+@z
+
+@x [327] l.5859
+case incgamma: case save: data->i=st; goto switch1;
+@y
+@+@=/* else fall through */@>@;
+case incgamma: case save: data->i=st; goto switch1;
+@z
+
 @x [329] l.5888
   case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
            new_Q.l |= data->z.o.l &~ g[rQ].o.l;
@@ -2354,7 +2670,15 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @y
   case rQ: new_Q = oor(new_Q,oandn(data->z.o,g[rQ].o));
            data->z.o = oor(data->z.o,new_Q);
+  @+@=/* fall through */@>@;
   case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
+@z
+
+@x [331] l.5926
+case pushgo: add_go: data->go.o=oplus(data->y.o,data->z.o);
+@y
+@+@=/* fall through */@>@;
+case pushgo: add_go: data->go.o=oplus(data->y.o,data->z.o);
 @z
 
 @x [334] l.5974 Issue #16.
@@ -2373,6 +2697,13 @@ new_O=new_S=shift_right(cool->z.o,3,true);
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert an instruction to advance gamma@>@;
 @y
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert \9{a}an instruction to advance gamma@>@;
+@z
+
+@x [337] l.6015
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
+@y
+ @+@=/* fall through */@>@;
+ case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
 @z
 
 @x [338] l.6029 Compound literal.
@@ -2412,6 +2743,13 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
  case FEQLE: default: goto cmp_fin;
 @z
 
+@x [348] l.6202
+case fcmp: j=fcomp(data->y.o,data->z.o);
+@y
+@+@=/* fall through */@>@;
+case fcmp: j=fcomp(data->y.o,data->z.o);
+@z
+
 @x [353] l.6269 Compound literal.
   data->z.o.h=0, data->z.o.l=data->y.o.l&0x7;
 @y
@@ -2422,6 +2760,13 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
  case 2: case 3: @<Wait if there's an unfinished load ahead of us@>;
 @y
  case 2: case 3: @<Wait\9{3} if there's an unfinished load ahead of us@>;
+@z
+
+@x [356] l.6325
+ case 1: data->x.addr=zero_octa;@+goto fin_ex;
+@y
+ @+@=/* fall through */@>@;
+ case 1: data->x.addr=zero_octa;@+goto fin_ex;
 @z
 
 @x [356] l.6327
@@ -2469,6 +2814,13 @@ for (control* cc=data;cc!=hot;) {
 @ @<Wait\9{4} till write buffer is empty@>=
 @z
 
+@x [364] l.6437
+case 30:@+ if (data!=old_hot) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 30:@+ if (data!=old_hot) wait(1);
+@z
+
 @x [364] l.6441
  @<Clean the I-cache block for |data->z.o|, if any@>;
 @y
@@ -2493,6 +2845,13 @@ for (control* cc=data;cc!=hot;) {
  @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
 @z
 
+@x [364] l.6454
+case 33:@+ if (data!=old_hot) wait(1);
+@y
+@+@=/* fall through */@>@;
+case 33:@+ if (data!=old_hot) wait(1);
+@z
+
 @x [364] l.6456
  @<Wait till write buffer is empty@>;
 @y
@@ -2503,6 +2862,20 @@ for (control* cc=data;cc!=hot;) {
    if (data->i==syncd) goto fin_ex;@+ else goto next_sync;
 @y
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
+@z
+
+@x [364] l.6462
+case 34:@+if (!clean_co.next) goto next_sync;
+@y
+@+@=/* fall through */@>@;
+case 34:@+if (!clean_co.next) goto next_sync;
+@z
+
+@x [364] l.6469
+case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
+@y
+@+@=/* fall through */@>@;
+case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @z
 
 @x [365] l.6474
