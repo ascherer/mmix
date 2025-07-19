@@ -1248,7 +1248,7 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
 @x [143] l.2675
 case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @y
-@+@=/* else fall through */@>@;
+@=/* else fall through */@>@;
 case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @z
 
@@ -1894,7 +1894,7 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
 @x [217] l.3893
   case 4: copy_block(c,&(c->outbuf),Scache,p);
 @y
-  @+@=/* fall through */@>@;
+  @=/* fall through */@>@;
   case 4: copy_block(c,&(c->outbuf),Scache,p);
 @z
 
