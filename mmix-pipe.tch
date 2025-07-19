@@ -1305,11 +1305,59 @@ clean_co.name="Clean";
 @x [233]
 @ @<Cases 0 through 4, for the D-cache@>=
 @y
-@ @<Cases 0 through 4, for the D-cache@>=
+@r @ @<Cases 0 through 4, for the D-cache@>=
 @%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@z
+@x [233]
+  set_lock(self,Dcache->lock);
+@y
+  set_lock(self,Dcache->lock); @+
+@z
+@x [233]
+  if (!is_dirty(Dcache,p)) {
+    p->tag.h|=data->x.o.h;@+goto Dclean_inc;
+@y
+  if (!is_dirty(Dcache,p)) { @+
+    p->tag.h|=data->x.o.h;@+goto Dclean_inc; @+
+@z
+@x [233]
+  flush_cache(Dcache,p,data->x.o.h==0);
+@y
+  flush_cache(Dcache,p,data->x.o.h==0); @+
+@z
+@x [233]
+  release_lock(self,Dcache->lock);
+@y
+  release_lock(self,Dcache->lock); @+
+@z
+@x [233]
+  set_lock(self,Dcache->lock);
+@y
+  set_lock(self,Dcache->lock); @+
+@z
+@x [233]
+  if (i==Dcache->cc && j==Dcache->vv) {
+@y
+  if (i==Dcache->cc && j==Dcache->vv) { @+
+@z
+@x [233]
+    wait(Dcache->access_time);
+@y
+    wait(Dcache->access_time); @+
+@z
+@x [233]
+  p=cache_search(Dcache,data->z.o);
+  if (p) {
+@y
+  if (p=cache_search(Dcache,data->z.o)) { @+
+@z
+@x [233]
+    if (is_dirty(Dcache,p)) goto Dclean;
+@y
+    if (is_dirty(Dcache,p)) goto Dclean; @+
 @z
 
 @x [234]
