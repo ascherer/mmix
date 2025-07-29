@@ -199,7 +199,7 @@ void listing_clear(void)
 @d dderr(m,p,q) {@+sprintf(err_buf,m,p,q);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @y
-@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(,) @,@, __VA_ARGS__@]);
+@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @z
 
@@ -208,7 +208,7 @@ void listing_clear(void)
 @d dpanic(m,p) {@+err_buf[0]='!';@+sprintf(err_buf+1,m,p);@+
 @y
 @d panic(m,...) {@+sprintf(err_buf,
-   @["!"@&m @,@, __VA_OPT__(,) @,@, __VA_ARGS__@]);
+   @["!"@&m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @z
 
 @x [45] l.1229 C99 prototypes for C2x.
