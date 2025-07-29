@@ -344,7 +344,7 @@ We also have room for the variadic macro |panic| used in error situations.
 {\mc MMIX-PIPE} to avoid further design discrepancies.]
 
 @d panic(r,m,...) {@+fprintf(stderr,
-  @[m @,@m __VA_OPT__(,) @,@, __VA_ARGS__@]);@+exit(r);@+}
+  @[m @,@m __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);@+exit(r);@+}
 
 @<Proto...@>=
 static bool undump_octa(void);
