@@ -767,6 +767,12 @@ static void print_fetch_buffer(void)
     for (fetch* p=head;p!=tail; p=(p==fetch_bot? fetch_top: p-1)) {
 @z
 
+@x [74]
+@ The best way to understand the dispatching process is once again
+@y
+@r @ The best way to understand the dispatching process is once again
+@z
+
 @x [75] l.1620 Improved typography.
   if (head==fetch_bot) new_head=fetch_top;@+else new_head=head-1;
 @y
