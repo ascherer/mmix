@@ -224,6 +224,26 @@ mem_tetra* mem_find(
 @-loc@> @-val@>
 @z
 
+@x [33]
+case lop_loc:@+if (zbyte==2) {
+   j=ybyte;@+ read_tet();@+ cur_loc.h=(j<<24)+tet;
+ }@+else if (zbyte==1) cur_loc.h=ybyte<<24;
+@y
+case lop_loc:@+if (zbyte==2) { @+
+   j=ybyte;@+ read_tet();@+ cur_loc.h=(j<<24)+tet; @+
+ } else if (zbyte==1) cur_loc.h=ybyte<<24;
+@z
+
+@x [34]
+case lop_fixo:@+if (zbyte==2) {
+   j=ybyte;@+ read_tet();@+ tmp.h=(j<<24)+tet;
+ }@+else if (zbyte==1) tmp.h=ybyte<<24;
+@y
+case lop_fixo:@+if (zbyte==2) { @+
+   j=ybyte;@+ read_tet();@+ tmp.h=(j<<24)+tet; @+
+ } else if (zbyte==1) tmp.h=ybyte<<24;
+@z
+
 @x [37]
 for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
 @y
