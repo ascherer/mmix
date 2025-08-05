@@ -317,6 +317,7 @@ implement directly, and they occur often enough to deserve
 @<External routines@>=
 octa onot(octa x) /* compute $\bar x$ */
 { @+ return (octa){~x.h,~x.l}; @+ }
+@#
 @z
 
 @x [25] l.346 C99 prototypes for C2x.
@@ -773,8 +774,8 @@ octa fplus(
 or |e| is negative. It returns 1 if |s=0| and $y\approx z\ (e)$ or if
 |s!=0| and $y\sim z\ (e)$,
 @y
-or |e| is negative. It returns 1 if |s=false| and $y\approx z\ (e)$ or if
-|s=true| and $y\sim z\ (e)$,
+or |e| is negative. It returns 1 if |s==false| and $y\approx z\ (e)$ or if
+|s==true| and $y\sim z\ (e)$,
 @z
 
 @x [50] l.884 C99 prototypes for C2x.
