@@ -317,16 +317,6 @@ implement directly, and they occur often enough to deserve
 @<External routines@>=
 octa onot(octa x) /* compute $\bar x$ */
 { @+ return (octa){~x.h,~x.l}; @+ }
-@#
-octa oor(octa y, octa z) /* compute $y\lor z$ */
-{ @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
-@#
-octa oorn(octa y, octa z) /* compute $y\lor\bar z$ */
-{ @+ return oor(y, onot(z)); @+ }
-@#
-octa onor(octa y, octa z) /* compute $\overline{y\lor z}$ */
-{ @+ return onot(oor(y, z)); @+ }
-@#
 @z
 
 @x [25] l.346 C99 prototypes for C2x.
@@ -356,6 +346,16 @@ octa oandn(octa y, octa z) /* compute $y\land\bar z$ */
 @#
 octa onand(octa y, octa z) /* compute $\overline{y\land z}$ */
 { @+ return onot(oand(y, z)); @+ }
+@#
+octa oor(octa y, octa z) /* compute $y\lor z$ */
+{ @+ return (octa){y.h|z.h, y.l|z.l}; @+ }
+@#
+octa oorn(octa y, octa z) /* compute $y\lor\bar z$ */
+{ @+ return oor(y, onot(z)); @+ }
+@#
+octa onor(octa y, octa z) /* compute $\overline{y\lor z}$ */
+{ @+ return onot(oor(y, z)); @+ }
+@#
 @z
 
 @x [25] l.362 C99 prototypes for C2x.
@@ -1237,18 +1237,18 @@ Extern octa signed_odiv(octa,octa);
 @#
 Extern octa onot(octa);
   /* $\bar x$ */
-Extern octa oor(octa,octa);
-  /* $y\lor z$ */
-Extern octa oorn(octa,octa);
-  /* $y\lor\bar z$ */
-Extern octa onor(octa,octa);
-  /* $\overline{y\lor z}$ */
 Extern octa oand(octa,octa);
   /* $y\land z$ */
 Extern octa oandn(octa,octa);
   /* $y\land \bar z$ */
 Extern octa onand(octa,octa);
   /* $\overline{y\land z}$ */
+Extern octa oor(octa,octa);
+  /* $y\lor z$ */
+Extern octa oorn(octa,octa);
+  /* $y\lor\bar z$ */
+Extern octa onor(octa,octa);
+  /* $\overline{y\lor z}$ */
 Extern octa oxor(octa,octa);
   /* $y\oplus z$ */
 Extern octa onxor(octa,octa);
