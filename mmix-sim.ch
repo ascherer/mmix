@@ -23,6 +23,12 @@ on that file. It returns 0 if the file was opened successfully; otherwise it
 \hfill\hbox{|(file[handle]=fopen(name,mode_string[mode]))|) ? 0 : $-1$}%
 @z
 
+@x [4] l.388
+example, |offset=0| ``rewinds'' the file to its very beginning;
+@y
+example, |offset==0| ``rewinds'' the file to its very beginning;
+@z
+
 @x [4] l.393 Issue #15.
               offset<0? SEEK_END: SEEK_SET)|? $-1$: 0.}$$
 @y
@@ -1432,6 +1438,12 @@ static void mmputchars(unsigned char*,int,octa);
 static char stdin_chr(void);
 @z
 
+@x [114] l.2462
+no other criterion; if |stop=0| a null character will also terminate
+@y
+no other criterion; if |stop==0| a null character will also terminate
+@z
+
 @x [114] l.2468 Decouple 'mixins'.
 int mmgetchars @,@,@[ARGS((char*,int,octa,int))@];@+@t}\6{@>
 int mmgetchars(buf,size,addr,stop)
@@ -1513,6 +1525,23 @@ static char stdin_chr(void)
 @y
   @=/* else fall through */@>@;
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
+@z
+
+@x [133] l.2743
+floating point rounding. If |round_mode=ROUND_NEAR|, |ROUND_OFF|,
+@y
+floating point rounding. If |round_mode==ROUND_NEAR|, |ROUND_OFF|,
+@z
+
+@x [133] l.2771
+the following operator if |z=0|. For example, the
+@y
+the following operator if |z==0|. For example, the
+@z
+@x [133] l.2773
+means to treat the address as simply `\.{\%\#y}' if |z=0|,
+@y
+means to treat the address as simply `\.{\%\#y}' if |z==0|,
 @z
 
 @x [137] l.2820 Untangle variables from functions.
@@ -1604,6 +1633,12 @@ int main(
   while (1) {
 @y
   while (true) {
+@z
+
+@x [142] l.2923
+the wizards who decided to allow |argc=0| were mistaken when they defined
+@y
+the wizards who decided to allow |argc==0| were mistaken when they defined
 @z
 
 @x [143] l.2946 C99 prototypes for C2x.
