@@ -79,9 +79,9 @@ the remainder in~|aux|.
 @z
 
 @x [26]
-etc., from back to front, and we have |c->stage<=c->next->stage| unless |c==h|.
+etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
 @y
-etc., from back to front, and we have |c->stage<=c->next->stage| unless |c==h|.
+etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
 @-c@> @-h@> @-p@>
 @z
 @x [26]
@@ -469,9 +469,9 @@ is made in the common case that the speculative value of~rJ is known.
 @z
 
 @x [86]
-rB is internally the same as g[0], because |rB==0|.
+rB is internally the same as g[0], because |rB=0|.
 @y
-rB is internally the same as g[0], because |rB==0|.
+rB is internally the same as g[0], because |rB=0|.
 @-a@> @-x@>
 @z
 
@@ -869,9 +869,9 @@ static int register_truth(
 @z
 
 @x [158]
-the current |cool| pointer, when |cc==cool|.
+the current |cool| pointer, when |cc=cool|.
 @y
-the current |cool| pointer, when |cc==cool|. @-cc@>
+the current |cool| pointer, when |cc=cool|. @-cc@>
 @z
 
 @x [159]

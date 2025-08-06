@@ -477,17 +477,6 @@ static void errprint_coroutine_id(
   else errprint("??");
 @z
 
-@x [26] l.489
-|next| fields. A list head~$h$ with |stage=max_stage| comes at the end and the
-@y
-|next| fields. A list head~$h$ with |stage==max_stage| comes at the end and the
-@z
-@x [26] l.492
-etc., from back to front, and we have |c->stage<=c->next->stage| unless |c=h|.
-@y
-etc., from back to front, and we have |c->stage<=c->next->stage| unless |c==h|.
-@z
-
 @x [26] l.496
 @<Initialize e...@>=
 {@+register coroutine *p;
@@ -838,12 +827,6 @@ static unsigned char flags[256]={@|@t\1\1@>
  case go: case pushgo: case trap: case resume: case syncid:
 @z
 
-@x [86] l.1840
-rB is internally the same as g[0], because |rB=0|.
-@y
-rB is internally the same as g[0], because |rB==0|.
-@z
-
 @x [88] l.1857
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
@@ -1135,14 +1118,6 @@ case go: inst_ptr.p=&cool->go;@+break;
     if (x<(unsigned int)new_L)
 @z
 
-@x [124] l.2362
-For example, the coroutines with |stage=2| are the second stages in the
-pipelines of the functional units. A coroutine with |stage=0| works
-@y
-For example, the coroutines with |stage==2| are the second stages in the
-pipelines of the functional units. A coroutine with |stage==0| works
-@z
-
 @x [125] l.2404
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @y
@@ -1345,12 +1320,6 @@ static int register_truth(
  case 0: b=o.h>>31;@+break; /* negative? */
 @y
  default: case 0: b=o.h>>31;@+break; /* negative? */
-@z
-
-@x [158] l.2979
-the current |cool| pointer, when |cc=cool|.
-@y
-the current |cool| pointer, when |cc==cool|.
 @z
 
 @x [158] l.2982 C99 prototypes for C2x.
@@ -1573,18 +1542,6 @@ static void copy_block(
     for (i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @y
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
-@z
-
-@x [186] l.3394
-implement the $r$~table when |policy=pseudo_lru|,
-and we don't need |rank| at all when |policy=random|. Of course we use an
-$a$-bit counter to implement |policy=serial|. In the other case,
-|policy=lru|, we need an $a$-bit |rank| field; the least recently used entry
-@y
-implement the $r$~table when |policy==pseudo_lru|,
-and we don't need |rank| at all when |policy==random|. Of course we use an
-$a$-bit counter to implement |policy==serial|. In the other case,
-|policy==lru|, we need an $a$-bit |rank| field; the least recently used entry
 @z
 
 @x [186] l.3401 C99 prototypes for C2x.
@@ -1828,12 +1785,6 @@ static cacheblock* alloc_slot(
   octa alf) /* key that probably isn't in the cache */
 @z
 
-@x [207] l.3710
-than~that. The default values |mem_chunks_max=1000| and |hash_prime=2003| are
-@y
-than~that. The default values |mem_chunks_max==1000| and |hash_prime==2003| are
-@z
-
 @x [208] l.3719
 @ The separately compiled procedures |spec_read()| and |spec_write()| have the
 @y
@@ -1970,12 +1921,6 @@ Scache->outbuf.tag.h=c->outbuf.tag.h;
 Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 @y
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
-@z
-
-@x [222] l.3966
-If |c=Scache|, the S-cache will be locked and the caller will not
-@y
-If |c==Scache|, the S-cache will be locked and the caller will not
 @z
 
 @x [222] l.3970
@@ -2543,7 +2488,7 @@ static control fetch_ctl;
  case 0: @<Wait\9{2}, if necessary, until the instruction pointer is known@>;
 @z
 
-@x [288] l.5230
+@x [288] l.5231
    data->state=1;@+ data->interrupt=0;@+ data->x.o=data->z.o=zero_octa;
  case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @y
@@ -3099,12 +3044,6 @@ static void magic_write(
   arg_loc=g[rBB].o;
 @y
   octa arg_loc=g[rBB].o;
-@z
-
-@x [381] l.6708
-no other criterion; if |stop=0| a null character will also terminate
-@y
-no other criterion; if |stop==0| a null character will also terminate
 @z
 
 @x [381] l.6714 Factor out private stuff (mixins).
