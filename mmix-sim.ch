@@ -267,12 +267,22 @@ Here we need to define only the basic constants used for interpretation.
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @z
 
+@x [24] l.867
+byte_count=0;
+@y
+@z
+
 @x [25] l.869
 @ @<Glob...@>=
 @y
 @ @d ybyte buf[2] /* the next-to-least significant byte */
 @d zbyte buf[3] /* the least significant byte */
 @<Glob...@>=
+@z
+
+@x [25] l.872
+int byte_count; /* index of the next-to-be-read byte */
+@y
 @z
 
 @x [26] l.890 C99 prototypes for C2x.
