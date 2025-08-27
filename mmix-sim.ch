@@ -1577,6 +1577,22 @@ void show_stats(verbose)
 void show_stats(
   bool verbose)
 @z
+@x [140] l.2866
+  octa o;
+@y
+@z
+@x [140] l.2872
+  if (!verbose) return;
+  o = halted? incr(inst_ptr,-4): inst_ptr;
+  printf("  (%s at location #%08x%08x)\n",
+     halted? "halted": "now", o.h, o.l);
+@y
+  if (verbose) {
+    octa o = halted? incr(inst_ptr,-4): inst_ptr;
+    printf("  (%s at location #%08x%08x)\n",
+      halted? "halted": "now", o.h, o.l);
+  }
+@z
 
 @x [141] l.2882 #included in "mmix-io.h"
 #include <stdio.h>
