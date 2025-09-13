@@ -402,6 +402,12 @@ static void print_fetch_buffer(void)
 static void print_fetch_buffer(void)
 @z
 
+@x [74]
+@ The best way to understand the dispatching process is once again
+@y
+@r @ The best way to understand the dispatching process is once again
+@z
+
 @x [75]
   register mmix_opcode op;
 @y

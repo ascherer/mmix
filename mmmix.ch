@@ -365,7 +365,7 @@ examining the pipeline.
 @:g}{\|g (global registers)@>
 @z
 
-@x [20] l.489
+@x [20] l.489 C99 prototypes for C2x.
 static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
 static octa sl3(y) /* shift left by 3 bits */
   octa y;
@@ -403,7 +403,7 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @:g}{\|g (global registers)@>
 @z
 
-@x [24] l.549
+@x [24] l.549 Block-local variables.
 case '!':@+ { register int j;
    for (j=0;j<funit_count;j++)
      printf("unit %s %d\n",funit[j].name,funit[j].k);

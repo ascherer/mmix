@@ -244,7 +244,7 @@ octa mmix_fread(
   o=(octa){0,n};
 @z
 
-@x [13] l.159
+@x [13] l.159 Block-local variable.
 if (sfile[handle].fp==stdin) {
   register unsigned char *p;
   for (p=buf,n=size.l; p<buf+n; p++) *p=stdin_chr();
@@ -409,7 +409,7 @@ octa mmix_fputws(
     if (fwrite(buf,1,n,sfile[handle].fp)!=(size_t)n) return neg_one;
 @z
 
-@x [21] l.343
+@x [21] l.343 Use constant value from MMIX-ARITH.
 @ @d sign_bit ((unsigned)0x80000000)
 
 @<Sub...@>=
@@ -437,7 +437,7 @@ octa mmix_ftell(
   unsigned char handle)
 @z
 
-@x [22] l.369
+@x [22] l.369 Purge local variable.
   octa o;
 @y
 @z
