@@ -55,7 +55,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 @<External routines@>@;
 @z
 
-@x [4] l.147
+@x [4] l.147 Use improved interfaces.
 @<External variables@>=
 Extern int verbose; /* controls the level of diagnostic output */
 
@@ -204,7 +204,7 @@ void MMIX_init()
 @y
 void MMIX_init(void)
 @z
-@x [10] l.222
+@x [10] l.222 Block-local variables.
   register int i,j;
 @y
 @z
@@ -258,13 +258,13 @@ int MMIX_silent(void)
 }
 @z
 
-@x [12] l.263
+@x [12] l.263 Block-local variables.
 register int i,j,m;
 @y
 register int i,j;
 @z
 
-@x [13] l.271
+@x [13] l.271 Variadic macro for error reporting.
 @d errprint0(f) fprintf(stderr,f)
 @d errprint1(f,a) fprintf(stderr,f,a)
 @d errprint2(f,a,b) fprintf(stderr,f,a,b)
@@ -275,7 +275,7 @@ register int i,j;
 @d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
 @z
 
-@x [13] l.279 C99 prototypes for C2x.
+@x [13] l.279 C99 prototypes for C2x. Variadic function for error reporting.
 static void expire @,@,@[ARGS((void))@];
 
 @ @<Sub...@>=
@@ -296,7 +296,7 @@ static void errprint(const char *fmt, ...)
 static void expire(void) /* the last gasp before dying */
 @z
 
-@x [14] l.284
+@x [14] l.284 Variadic function for error reporting.
   if (ticks.h) errprint2("(Clock time is %dH+%d.)\n",ticks.h,ticks.l);
   else errprint1("(Clock time is %d.)\n",ticks.l);
 @y
@@ -439,7 +439,7 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
 @y
 @z
 
-@x [22] l.421
+@x [22] l.421 Variadic function for error reporting.
   panic(errprint0("Incorrect implementation of type tetra"));
 @y
   panic(errprint("Incorrect implementation of type tetra"));
@@ -469,7 +469,7 @@ static void errprint_coroutine_id(
   coroutine *c)
 @z
 
-@x [25] l.473
+@x [25] l.473 Variadic function for error reporting.
   if (c) errprint2("%s:%d",c->name,c->stage);
   else errprint0("??");
 @y
@@ -477,7 +477,7 @@ static void errprint_coroutine_id(
   else errprint("??");
 @z
 
-@x [26] l.496
+@x [26] l.496 Block-local variable.
 @<Initialize e...@>=
 {@+register coroutine *p;
   for (p=ring;p<ring+ring_size;p++) p->next=p;
@@ -503,7 +503,7 @@ static void schedule(
   int d, int s)
 @z
 
-@x [28] l.517
+@x [28] l.517 Variadic macro for error reporting.
    panic(confusion("Scheduling ");errprint_coroutine_id(c);
          errprint1(" with delay %d",d));
 @y
@@ -555,7 +555,7 @@ static coroutine* queuelist(
   int t)
 @z
 
-@x [36] l.600
+@x [36] l.600 Private variable.
 coroutine sentinel; /* dummy coroutine at origin of circular list */
 @y
 static coroutine sentinel; /* dummy coroutine at origin of circular list */
@@ -573,7 +573,7 @@ Extern void print_locks(void);
 void print_locks(void)
 @z
 
-@x [41] l.676
+@x [41] l.676 Private variable.
 spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
 @y
 static spec zero_spec; /* |zero_spec.o.h=zero_spec.o.l=0| and |zero_spec.p=NULL| */
@@ -616,31 +616,31 @@ static void print_control_block(
   control *c)
 @z
 
-@x [48] l.851
+@x [48] l.851 Private variable.
 char *opcode_name[]={@|
 @y
 static char *opcode_name[]={@|
 @z
 
-@x [50] l.992
+@x [50] l.992 Private variable.
 char *internal_op_name[]={
 @y
 static char *internal_op_name[]={
 @z
 
-@x [51] l.1088
+@x [51] l.1088 Private variable.
 internal_opcode internal_op[256]={@|
 @y
 static internal_opcode internal_op[256]={@|
 @z
 
-@x [53] l.1167
+@x [53] l.1167 Private variable.
 char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @y
 static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @z
 
-@x [54] l.1196
+@x [54] l.1196 Private variable.
 char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
 @y
 static char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
@@ -660,7 +660,7 @@ static void print_bits(
   int x)
 @z
 
-@x [56] l.1205
+@x [56] l.1205 Block-local variables.
   register int b,j;
   for (j=0,b=E_BIT;(x&(b+b-1))&&b;j++,b>>=1)
 @y
@@ -700,25 +700,25 @@ static void print_reorder_buffer(void);
 static void print_reorder_buffer(void)
 @z
 
-@x [63] l.1430
+@x [63] l.1430 Block-local variables.
   else {@+register control *p;
 @y
   else {
 @z
 
-@x [63] l.1434
+@x [63] l.1434 Block-local variables.
     for (p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
 @y
     for (control* p=hot;p!=cool; p=(p==reorder_bot? reorder_top: p-1)) {
 @z
 
-@x [64] l.1451
+@x [64] l.1451 Sort name of section.
   @<Check for external interrupt@>;
 @y
   @<Check for \9{e}external interrupt@>;
 @z
 
-@x [65] l.1465
+@x [65] l.1465 Private variables.
 int dispatch_count; /* how many dispatched on this cycle */
 bool suppress_dispatch; /* should dispatching be bypassed? */
 int doing_interrupt; /* how many cycles of interrupt preparations remain */
@@ -730,14 +730,14 @@ static int doing_interrupt; /* how many cycles of interrupt preparations remain 
 static lockvar dispatch_lock; /* lock to prevent instruction issues */
 @z
 
-@x [67] l.1477
+@x [67] l.1477 Block-local variable.
   for (m=commit_max;m>0 && deissues>0; m--)
 @y
   register int m;
   for (m=commit_max;m>0 && deissues>0; m--)
 @z
 
-@x [70] l.1539
+@x [70] l.1539 Private variable.
 fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
 @y
 static fetch *old_tail; /* rear of the fetch buffer available on the current cycle */
@@ -755,22 +755,16 @@ static void print_fetch_buffer(void);
 static void print_fetch_buffer(void)
 @z
 
-@x [73] l.1555
+@x [73] l.1555 Block-local variable.
   else {@+register fetch *p;
 @y
   else {
 @z
 
-@x [73] l.1558
+@x [73] l.1558 Block-local variable.
     for (p=head;p!=tail; p=(p==fetch_bot? fetch_top: p-1)) {
 @y
     for (fetch* p=head;p!=tail; p=(p==fetch_bot? fetch_top: p-1)) {
-@z
-
-@x [74]
-@ The best way to understand the dispatching process is once again
-@y
-@r @ The best way to understand the dispatching process is once again
 @z
 
 @x [75] l.1620 Improved typography.
@@ -785,7 +779,7 @@ static void print_fetch_buffer(void)
   new_cool=cool==reorder_bot?reorder_top:cool-1;
 @z
 
-@x [78] l.1667
+@x [78] l.1667 Private variables.
 control *new_cool; /* the reorder position following |cool| */
 int resuming; /* set nonzero if resuming an interrupted instruction */
 tetra support[8]; /* big-endian bitmap for all opcodes supported */
@@ -795,7 +789,7 @@ static int resuming; /* set nonzero if resuming an interrupted instruction */
 static tetra support[8]; /* big-endian bitmap for all opcodes supported */
 @z
 
-@x [79] l.1672
+@x [79] l.1672 Block-local variables.
 {@+register func *u;
   for (u=funit;u<=funit+funit_count;u++)
     for (i=0;i<8;i++) support[i] |= u->ops[i];
@@ -805,7 +799,7 @@ for (func* u=funit;u<=funit+funit_count;u++)
   for (int i=0;i<8;i++) support[i] |= u->ops[i];
 @z
 
-@x [80] l.1677
+@x [80] l.1677 Use constant value from MMIX-ARITH.
 @ @d sign_bit ((unsigned)0x80000000)
 
 @<Determine the flags, |f|, and the internal opcode, |i|@>=
@@ -813,7 +807,7 @@ for (func* u=funit;u<=funit+funit_count;u++)
 @ @<Determine the flags, |f|, and the internal opcode, |i|@>=
 @z
 
-@x [83] l.1745
+@x [83] l.1745 Private variable.
 unsigned char flags[256]={@|@t\1\1@>
 @y
 static unsigned char flags[256]={@|@t\1\1@>
@@ -827,7 +821,7 @@ static unsigned char flags[256]={@|@t\1\1@>
  case go: case pushgo: case trap: case resume: case syncid:
 @z
 
-@x [88] l.1857
+@x [88] l.1857 Private variable.
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
 static int lring_mask; /* for calculations modulo |lring_size| */
@@ -939,7 +933,7 @@ static void spec_rem( /* remove |t| from its list */
   specnode *t)
 @z
 
-@x [99] l.1975
+@x [99] l.1975 Private variable.
 int cool_L,cool_G; /* values of rL and rG before the |cool| instruction */
 unsigned int cool_hist,peek_hist; /* history bits for branch prediction */
 octa new_O,new_S; /* values of rO, rS after |cool| */
@@ -955,66 +949,66 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
 @/@t\4@>@<Special cases of instruction dispatch@>@;
 @z
 
-@x [103] l.2028
+@x [103] l.2028 Sort name of section.
   if (f&0x10) @<Set |cool->b| from register X@>@;
 @y
   if (f&0x10) @<Set \9{c}|cool->b| from register X@>@;
 @z
-@x [103] l.2030
+@x [103] l.2030 Sort name of section.
     @<Set |cool->b| and/or |cool->ra| from special register@>;
 @y
     @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>;
 @z
-@x [103] l.2032
+@x [103] l.2032 Sort name of section.
   else if (f&0x2) @<Set |cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set |cool->z| as an immediate wyde@>;
 @y
   else if (f&0x2) @<Set \9{c}|cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set \9{c}|cool->z| as an immediate wyde@>;
 @z
-@x [103] l.2035
+@x [103] l.2035 Sort name of section.
   else if (f&0x8) @<Set |cool->y| from register Y@>@;
 @y
   else if (f&0x8) @<Set \9{c}|cool->y| from register Y@>@;
 @z
 
-@x [104] l.2038
+@x [104] l.2038 Sort name of section.
 @ @<Set |cool->z| from register Z@>=
 @y
 @ @<Set \9{c}|cool->z| from register Z@>=
 @z
 
-@x [105] l.2044
+@x [105] l.2044 Sort name of section.
 @ @<Set |cool->y| from register Y@>=
 @y
 @ @<Set \9{c}|cool->y| from register Y@>=
 @z
 
-@x [106] l.2050
+@x [106] l.2050 Sort name of section.
 @ @<Set |cool->b| from register X@>=
 @y
 @ @<Set \9{c}|cool->b| from register X@>=
 @z
 
-@x [107] l.2062
+@x [107] l.2062 Private variable.
 unsigned char third_operand[256]={@|@t\1\1@>
 @y
 static unsigned char third_operand[256]={@|@t\1\1@>
 @z
 
-@x [108] l.2099
+@x [108] l.2099 Sort name of section.
 @<Set |cool->b| and/or |cool->ra| from special register@>=
 @y
 @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>=
 @z
 
-@x [109] l.2107
+@x [109] l.2107 Sort name of section.
 @ @<Set |cool->z| as an immediate wyde@>=
 @y
 @ @<Set \9{c}|cool->z| as an immediate wyde@>=
 @z
 
-@x [110] l.2129
+@x [110] l.2129 Sort name of section.
       @<Insert an instruction to advance gamma@>@;
     else @<Insert an instruction to advance beta and L@>;
 @y
@@ -1034,19 +1028,19 @@ if (cool->mem_x)
 rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @z
 
-@x [112] l.2144
+@x [112] l.2144 Sort name of section.
 @<Insert an instruction to advance beta and L@>=
 @y
 @<Insert \9{a}an instruction to advance beta and L@>=
 @z
 
-@x [113] l.2162
+@x [113] l.2162 Sort name of section.
 @<Insert an instruction to advance gamma@>=
 @y
 @<Insert \9{a}an instruction to advance gamma@>=
 @z
 
-@x [114] l.2181
+@x [114] l.2181 Sort name of section.
 @<Insert an instruction to decrease gamma@>=
 @y
 @<Insert \9{a}an instruction to decrease gamma@>=
@@ -1075,7 +1069,7 @@ case pushj: {@+register int x=cool->xx;
 case pushj: {@+register int x=cool->xx;
 @z
 
-@x [119] l.2274
+@x [119] l.2274 Sort name of section.
       @<Insert an instruction to advance gamma@>@;
 @y
       @<Insert \9{a}an instruction to advance gamma@>@;
@@ -1094,13 +1088,13 @@ case go: inst_ptr.p=&cool->go;@+break;
 case go: inst_ptr.p=&cool->go;@+break;
 @z
 
-@x [120] l.2300
+@x [120] l.2300 Sort name of section.
     @<Insert an instruction to decrease gamma@>;
 @y
     @<Insert \9{a}an instruction to decrease gamma@>;
 @z
 
-@x [120] l.2305
+@x [120] l.2305 Sort name of section.
       @<Insert an instruction to decrease gamma@>;
 @y
       @<Insert \9{a}an instruction to decrease gamma@>;
@@ -1118,13 +1112,13 @@ case go: inst_ptr.p=&cool->go;@+break;
     if (x<(unsigned int)new_L)
 @z
 
-@x [125] l.2404
+@x [125] l.2404 Improved formatting.
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @y
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @s cacheblock int
 @z
-@x [125] l.2415
+@x [125] l.2415 Block-local variables.
   switch(self->stage) {
 @y
   switch(self->stage) {
@@ -1144,7 +1138,7 @@ case go: inst_ptr.p=&cool->go;@+break;
  default:@<Simulate later stages of an execution pipeline@>@;
 @z
 
-@x [127] l.2432
+@x [127] l.2432 Private variables.
 coroutine mem_locker; /* trivial coroutine that vanishes */
 coroutine Dlocker; /* another */
 control vanish_ctl; /* such coroutines share a common control block */
@@ -1168,7 +1162,7 @@ static control vanish_ctl; /* such coroutines share a common control block */
   @/@t\4@>@<Special cases for states in the first stage@>;
 @z
 
-@x [131] l.2480
+@x [131] l.2480 Sort name of section.
 @<Wait for input data if necessary; set |state=1| if it's there@>=
 @y
 @<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
@@ -1258,13 +1252,13 @@ case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @z
 
-@x [146] l.2746
+@x [146] l.2746 Use new bit-fiddling function.
       hot->x.o.h |= new_Q.h, hot->x.o.l |= new_Q.l;
 @y
       hot->x.o = oor(hot->x.o,new_Q);
 @z
 
-@x [148] l.2797
+@x [148] l.2797 Private variable.
 octa new_Q; /* when rQ increases in any bit position, so should this */
 bool stack_overflow; /* stack overflow not yet reported */
 @y
@@ -1272,25 +1266,25 @@ static octa new_Q; /* when rQ increases in any bit position, so should this */
 static bool stack_overflow; /* stack overflow not yet reported */
 @z
 
-@x [151] l.2886
+@x [151] l.2886 Block-local variable.
   if (bp_table) {@+register int h;
 @y
   if (bp_table) {@+register int m;
 @z
-@x [151] l.2889
+@x [151] l.2889 Block-local variable.
     h=bp_table[m];
     if (h&bp_npower) predicted^=0x10;
 @y
     if (bp_table[m]&bp_npower) predicted^=0x10;
 @z
 
-@x [152] l.2901
+@x [152] l.2901 Block-local variable.
 if (bp_table) {@+register int reversed,h,h_up,h_down;
 @y
 if (bp_table) {@+register int reversed,h,h_up,h_down,m;
 @z
 
-@x [154] l.2936
+@x [154] l.2936 Private variables.
 int bp_amask,bp_cmask,bp_bcmask,bp_nmask,bp_npower;
 int bp_rev_stat,bp_ok_stat; /* how often we overrode and agreed */
 int bp_bad_stat,bp_good_stat; /* how often we failed and succeeded */
@@ -1348,12 +1342,12 @@ Extern void print_stats(void);
 void print_stats(void)
 @z
 
-@x [162] l.3032
+@x [162] l.3032 Block-local variable.
   register int j;
 @y
 @z
 
-@x [162] l.3038
+@x [162] l.3038 Block-local variable.
   for (j=0;j<=dispatch_max;j++)
 @y
   for (int j=0;j<=dispatch_max;j++)
@@ -1375,12 +1369,12 @@ static bool is_dirty(
   cacheblock *p) /* a cache block */
 @z
 
-@x [170] l.3230
+@x [170] l.3230 Block-local variable.
   register int j;
 @y
 @z
 
-@x [170] l.3232
+@x [170] l.3232 Block-local variable.
   for (j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
 @y
   for (int j=0;j<c->bb;d++,j+=c->gg) if (*d) return true;
@@ -1402,13 +1396,13 @@ static void print_cache_block(
   cache *c)
 @z
 
-@x [172] l.3245
+@x [172] l.3245 Block-local variable.
 {@+register int i,j,b=c->bb>>3,g=c->gg>>3;
 @y
 {@+register int b=c->bb>>3,g=c->gg>>3;
 @z
 
-@x [172] l.3247
+@x [172] l.3247 Block-local variable.
   for (i=j=0; j<b;j++,i+=((j&(g-1))?0:1))
 @y
   for (int i=0, j=0; j<b;j++,i+=((j&(g-1))?0:1))
@@ -1496,7 +1490,7 @@ static int get_reader(
   cache *c)
 @z
 
-@x [183] l.3362
+@x [183] l.3362 Block-local variable.
 {@+ register int j;
   for (j=0;j<c->ports;j++)
 @y
@@ -1520,25 +1514,25 @@ static void copy_block(
   cache *cc, cacheblock *pp)
 @z
 
-@x [185] l.3382
+@x [185] l.3382 Block-local variable.
   register int j,jj,i,ii,lim; register int off=p->tag.l&(cc->bb-1);
 @y
   register int off=p->tag.l&(cc->bb-1);
 @z
 
-@x [185] l.3384
+@x [185] l.3384 Variadic macro for error reporting.
     panic(confusion("copy block"));
 @y
     confusion("copy block");
 @z
 
-@x [185] l.3385
+@x [185] l.3385 Block-local variable.
   for (j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @y
   for (int j=0,jj=off>>c->g;j<c->bb>>c->g;j++,jj++) if (p->dirty[j]) {
 @z
 
-@x [185] l.3387
+@x [185] l.3387 Block-local variable.
     for (i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
 @y
     for (int i=j<<(c->g-3),ii=jj<<(c->g-3),lim=(j+1)<<(c->g-3);
@@ -1562,12 +1556,12 @@ static cacheblock* choose_victim(
   replace_policy policy)
 @z
 
-@x [187] l.3409
+@x [187] l.3409 Block-local variable.
   register cacheblock *p;
 @y
 @z
 
-@x [187] l.3414
+@x [187] l.3414 Block-local variable.
  case lru: for (p=s;p<s+aa;p++)
 @y
  case lru: for (cacheblock* p=s;p<s+aa;p++)
@@ -1603,20 +1597,20 @@ static void note_usage(
   replace_policy policy)
 @z
 
-@x [189] l.3435
+@x [189] l.3435 Block-local variable.
   register cacheblock *p;
   register int j,m,r;
 @y
   register int r;
 @z
 
-@x [189] l.3440
+@x [189] l.3440 Block-local variable.
     for (p=s;p<s+aa;p++) if (p->rank>r) p->rank--;
 @y
     for (cacheblock* p=s;p<s+aa;p++) if (p->rank>r) p->rank--;
 @z
 
-@x [189] l.3444
+@x [189] l.3444 Block-local variable.
     for (j=1,m=aa>>1;m;m>>=1)
 @y
     for (int j=1,m=aa>>1;m;m>>=1)
@@ -1642,20 +1636,20 @@ static void demote_usage(
   replace_policy policy)
 @z
 
-@x [191] l.3464
+@x [191] l.3464 Block-local variable.
   register cacheblock *p;
   register int j,m,r;
 @y
   register int r;
 @z
 
-@x [191] l.3469
+@x [191] l.3469 Block-local variable.
     for (p=s;p<s+aa;p++) if (p->rank<r) p->rank++;
 @y
     for (cacheblock* p=s;p<s+aa;p++) if (p->rank<r) p->rank++;
 @z
 
-@x [191] l.3473
+@x [191] l.3473 Block-local variable.
     for (j=1,m=aa>>1;m;m>>=1)
 @y
     for (int j=1,m=aa>>1;m;m>>=1)
@@ -1686,7 +1680,7 @@ static cacheblock* cache_search(
   register cacheset s=cache_addr(c,alf); /* the set corresponding to |alf| */
 @z
 
-@x [194] l.3510
+@x [194] l.3510 Private variable.
 cacheset hit_set;
 @y
 static cacheset hit_set;
@@ -1740,12 +1734,12 @@ static void load_cache(
   cacheblock *p)
 @z
 
-@x [201] l.3581
+@x [201] l.3581 Block-local variable.
   register int i;
 @y
 @z
 
-@x [201] l.3583
+@x [201] l.3583 Block-local variable.
   for (i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
 @y
   for (int i=0;i<c->bb>>c->g;i++) p->dirty[i]=false;
@@ -1785,7 +1779,7 @@ static cacheblock* alloc_slot(
   octa alf) /* key that probably isn't in the cache */
 @z
 
-@x [208] l.3719
+@x [208] l.3719 Merge MMIX-MEM.
 @ The separately compiled procedures |spec_read()| and |spec_write()| have the
 @y
 @ The procedures |spec_read()| and |spec_write()| have the
@@ -1819,7 +1813,7 @@ octa mem_read(
   octa addr)
 @z
 
-@x [210] l.3755
+@x [210] l.3755 Variadic function for error reporting.
         errprint2("uninitialized memory read at %08x%08x",addr.h,addr.l);
 @.uninitialized memory...@>
 @y
@@ -1841,7 +1835,7 @@ void mem_write(
   octa addr, octa val)
 @z
 
-@x [213] l.3782
+@x [213] l.3782 Variadic function for error reporting.
         panic(errprint1("More than %d memory chunks are needed",
 @.More...chunks are needed@>
                  mem_chunks_max));
@@ -1851,7 +1845,7 @@ void mem_write(
                  mem_chunks_max));
 @z
 
-@x [213] l.3787
+@x [213] l.3787 Variadic function for error reporting.
         panic(errprint1("I can't allocate memory chunk number %d",
 @.I can't allocate...@>
                  mem_chunks));
@@ -1891,7 +1885,7 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
   case 1: set_lock(self,Scache->lock);
 @z
 
-@x [217] l.3890
+@x [217] l.3890 Sort name of section.
     if (block_diff) @<Copy |Scache->inbuf| to slot |p|@>@;
 @y
     if (block_diff) @<Copy \9{s}|Scache->inbuf| to slot |p|@>@;
@@ -1910,7 +1904,7 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
   addr=(octa){c->outbuf.tag.h, c->outbuf.tag.l&-Scache->bb};
 @z
 
-@x [220] l.3932
+@x [220] l.3932 Sort name of section.
 @ @<Copy |Scache->inbuf| to slot |p|@>=
 @y
 @ @<Copy \9{s}|Scache->inbuf| to slot |p|@>=
@@ -1965,13 +1959,13 @@ case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
   case 5:@+ if (c->lock) wait(1);
 @z
 
-@x [226] l.4063
+@x [226] l.4063 Sort name of section.
 @<Copy data from |p| into |c->inbuf|@>=
 @y
 @<Copy \9{d}data from |p| into |c->inbuf|@>=
 @z
 
-@x [230] l.4124
+@x [230] l.4124 Private variables.
 coroutine clean_co;
 control clean_ctl;
 lockvar clean_lock;
@@ -2029,7 +2023,7 @@ case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
 case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
 @z
 
-@x [235] l.4271
+@x [235] l.4271 Private variables.
 control IPTctl[5], DPTctl[5]; /* control blocks for I and D page translation */
 coroutine IPTco[10], DPTco[10]; /* each coroutine is a two-stage pipeline */
 char *IPTname[5]={"IPT0","IPT1","IPT2","IPT3","IPT4"};
@@ -2157,7 +2151,7 @@ aaaaa=shift_right(aaaaa,page_s,true); /* the page address */
   aaaaa=shift_right(aaaaa,10,true);
 @z
 
-@x [247] l.4460
+@x [247] l.4460 Private variables.
 The data will sit at least |holding_time| cycles before it leaves
 the write buffer. This speeds things up when different fields of the same
 octabyte are being stored by different instructions.
@@ -2205,13 +2199,13 @@ static void print_write_buffer(void);
 static void print_write_buffer(void)
 @z
 
-@x [251] l.4494
+@x [251] l.4494 Block-local variable.
   else {@+register write_node *p;
 @y
   else {
 @z
 
-@x [251] l.4496
+@x [251] l.4496 Block-local variable.
     for (p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
 @y
     for (write_node* p=write_head;p!=write_tail; p=(p==wbuf_bot? wbuf_top: p-1)) {
@@ -2284,7 +2278,7 @@ case write_from_wbuf:
     if (ticks.l-write_head->stamp<(tetra)holding_time && !speed_lock)
 @z
 
-@x [258] l.4638
+@x [258] l.4638 Block-local variable.
 @ @<Local var...@>=
 register cacheblock *p,*q;
 @y
@@ -2306,7 +2300,7 @@ case ld: case ldunc: case ldvts:
 case ld: case ldunc: case ldvts:
 @z
 
-@x [266] l.4765
+@x [266] l.4765 Sort name of section.
     @<Do load/store stage~1 with known physical address@>;
 @y
     @<Do load/store stage 1 with known physical address@>;
@@ -2318,7 +2312,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
 if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @z
 
-@x [271] l.4879
+@x [271] l.4879 Sort name of section.
 @ @<Do load/store stage~1 with known physical address@>=
 @y
 @ @<Do load/store stage 1 with known physical address@>=
@@ -2356,19 +2350,19 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
  case DT_hit:@+ if (data->i==preld || data->i==prest) goto fin_ex;
 @z
 
-@x [273] l.4988
+@x [273] l.4988 Sort name of section.
   @<Check for a hit in pending writes@>;
 @y
   @<Check for \9{a}a hit in pending writes@>;
 @z
 
-@x [274] l.5005
+@x [274] l.5005 Sort name of section.
 @<Check for |prest| with a fully spanned cache block@>;
 @y
 @<Check for \9{p}|prest| with a fully spanned cache block@>;
 @z
 
-@x [275] l.5027
+@x [275] l.5027 Sort name of section.
 @<Check for |prest| with a fully spanned cache block@>=
 @y
 @<Check for \9{p}|prest| with a fully spanned cache block@>=
@@ -2387,7 +2381,7 @@ case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
 case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
 @z
 
-@x [278] l.5055
+@x [278] l.5055 Sort name of section.
 @ @<Check for a hit in pending writes@>=
 @y
 @ @<Check for \9{a}a hit in pending writes@>=
@@ -2435,13 +2429,13 @@ case st_ready:@+ switch (data->i) {
  case STHT>>1:@+if (data->z.o.l&4) data->x.o.l=data->b.o.h;
 @z
 
-@x [281] l.5131
+@x [281] l.5131 Sort name of section.
   fin_st: @<Insert |data->b.o| into the proper field of |data->x.o|,
 @y
   fin_st: @<Insert \9{d}|data->b.o| into the proper field of |data->x.o|,
 @z
 
-@x [282] l.5138
+@x [282] l.5138 Sort name of section.
 @ @<Insert |data->b.o| into the proper field...@>=
 @y
 @ @<Insert \9{d}|data->b.o| into the proper field...@>=
@@ -2464,14 +2458,14 @@ case st_ready:@+ switch (data->i) {
   data->b.o=shift_right(shift_left(data->b.o,i),j,true);
 @z
 
-@x [282] l.5147
+@x [282] l.5147 Use bit-fiddling functions from MMIX-ARITH.
   data->x.o.h^=mask.h&(data->x.o.h^data->b.o.h);
   data->x.o.l^=mask.l&(data->x.o.l^data->b.o.l);
 @y
   data->x.o = oxor(data->x.o, oand(mask, oxor(data->x.o, data->b.o)));
 @z
 
-@x [285] l.5204
+@x [285] l.5204 Private variables.
 int fetch_lo, fetch_hi; /* the active region of that buffer */
 coroutine fetch_co;
 control fetch_ctl;
@@ -2488,7 +2482,7 @@ static control fetch_ctl;
  case 0: @<Wait\9{2}, if necessary, until the instruction pointer is known@>;
 @z
 
-@x [288] l.5231
+@x [288] l.5230
    data->state=1;@+ data->interrupt=0;@+ data->x.o=data->z.o=zero_octa;
  case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @y
@@ -2503,7 +2497,7 @@ static control fetch_ctl;
   @/@t\4@>@<Other cases for the fetch coroutine@>@;
 @z
 
-@x [290] l.5244
+@x [290] l.5244 Sort name of section.
 @ @<Wait, if necessary, until the instruction pointer is known@>=
 @y
 @ @<Wait\9{2}, if necessary, until the instruction pointer is known@>=
@@ -2554,7 +2548,7 @@ case fetch_ready:@+if (self->lockloc)
     register fetch *new_tail=tail==fetch_bot?fetch_top:tail-1;
 @z
 
-@x [303] l.5426
+@x [303] l.5426 Private variable.
 bool sleepy; /* have we just emitted the page table emulation call? */
 @y
 static bool sleepy; /* have we just emitted the page table emulation call? */
@@ -2567,20 +2561,20 @@ if (inst_ptr.o.l==breakpoint.l && inst_ptr.o.h==breakpoint.h
   && breakpoint_hit==false )
 @z
 
-@x [305] l.5450
+@x [305] l.5450 Private variable.
 int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @y
 static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @z
 
-@x [308] l.5505
+@x [308] l.5505 Block-local variable.
 @<Prepare for exceptional trip handler@>=
 {
 @y
 @<Prepare for exceptional trip handler@>=
 {@+register int m;
 @z
-@x [308] l.5516
+@x [308] l.5516 Compound literal.
   data->go.o.h=0, data->go.o.l=m;
 @y
   data->go.o=(octa){0,m};
@@ -2607,13 +2601,13 @@ case trip: if (!g[rJ].up->known) goto stall;
 case trip: if (!g[rJ].up->known) goto stall;
 @z
 
-@x [314] l.5586
+@x [314] l.5586 Sort name of section.
 @<Check for external interrupt@>=
 @y
 @<Check for \9{e}external interrupt@>=
 @z
 
-@x [315] l.5607
+@x [315] l.5607 Private variables.
 bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 bool nullifying; /* stopping dispatch to nullify a load/store command */
 @y
@@ -2621,19 +2615,19 @@ static bool trying_to_interrupt; /* encouraging interruptible operations to paus
 static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @z
 
-@x [320] l.5682
+@x [320] l.5682 Type.
 @d pack_bytes(a,b,c,d) ((((((unsigned)(a)<<8)+(b))<<8)+(c))<<8)+(d)
 @y
 @d pack_bytes(a,b,c,d) ((((((byte)(a)<<8)+(b))<<8)+(c))<<8)+(d)
 @z
 
-@x [320] l.5688
+@x [320] l.5688 Compound literal.
   g[rX].o.h=sign_bit, g[rX].o.l=j;
 @y
   g[rX].o=(octa){sign_bit,j};
 @z
 
-@x [323] l.5774
+@x [323] l.5774 Block-local variable.
 @<Resume an interrupted operation@>=
 {
 @y
@@ -2695,13 +2689,13 @@ new_O=new_S=shift_right(cool->z.o,3,1);
 new_O=new_S=shift_right(cool->z.o,3,true);
 @z
 
-@x [337] l.6007
+@x [337] l.6007 Sort name of section.
       @<Insert an instruction to advance gamma@>@;
 @y
       @<Insert \9{a}an instruction to advance gamma@>@;
 @z
 
-@x [337] l.6013
+@x [337] l.6013 Sort name of section.
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert an instruction to advance gamma@>@;
 @y
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert \9{a}an instruction to advance gamma@>@;
@@ -2764,7 +2758,7 @@ case fcmp: j=fcomp(data->y.o,data->z.o);
   data->z.o=(octa){0, data->y.o.l&0x7};
 @z
 
-@x [356] l.6323
+@x [356] l.6323 Sort name of section.
  case 2: case 3: @<Wait if there's an unfinished load ahead of us@>;
 @y
  case 2: case 3: @<Wait\9{3} if there's an unfinished load ahead of us@>;
@@ -2777,19 +2771,19 @@ case fcmp: j=fcomp(data->y.o,data->z.o);
  case 1: data->x.addr=zero_octa;@+goto fin_ex;
 @z
 
-@x [356] l.6327
+@x [356] l.6327 Sort name of section.
   @<Clean the data caches@>;
 @y
   @<Clean the \9{a}data caches@>;
 @z
 
-@x [357] l.6334
+@x [357] l.6334 Sort name of section.
 @ @<Wait if there's an unfinished load ahead of us@>=
 @y
 @ @<Wait\9{3} if there's an unfinished load ahead of us@>=
 @z
 
-@x [357] l.6335
+@x [357] l.6335 Block-local variable.
 {
   register control *cc;
   for (cc=data;cc!=hot;) {
@@ -2804,19 +2798,19 @@ for (control* cc=data;cc!=hot;) {
 }
 @z
 
-@x [361] l.6387
+@x [361] l.6387 Sort name of section.
 @ @<Clean the data caches@>=
 @y
 @ @<Clean the \9{a}data caches@>=
 @z
 
-@x [361] l.6389
+@x [361] l.6389 Sort name of section.
 @<Wait till write buffer is empty@>;
 @y
 @<Wait\9{4} till write buffer is empty@>;
 @z
 
-@x [362] l.6400
+@x [362] l.6400 Sort name of section.
 @ @<Wait till write buffer is empty@>=
 @y
 @ @<Wait\9{4} till write buffer is empty@>=
@@ -2829,25 +2823,25 @@ case 30:@+ if (data!=old_hot) wait(1);
 case 30:@+ if (data!=old_hot) wait(1);
 @z
 
-@x [364] l.6441
+@x [364] l.6441 Sort name of section.
  @<Clean the I-cache block for |data->z.o|, if any@>;
 @y
  @<Clean the \9{i}I-cache block for |data->z.o|, if any@>;
 @z
 
-@x [364] l.6444
+@x [364] l.6444 Sort name of section.
  @<Wait till write buffer is empty@>;
 @y
  @<Wait\9{4} till write buffer is empty@>;
 @z
 
-@x [364] l.6447
+@x [364] l.6447 Sort name of section.
  @<Clean the D-cache block for |data->z.o|, if any@>;
 @y
  @<Clean the \9{d}D-cache block for |data->z.o|, if any@>;
 @z
 
-@x [364] l.6451
+@x [364] l.6451 Sort name of section.
  @<Clean the S-cache block for |data->z.o|, if any@>;
 @y
  @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
@@ -2860,7 +2854,7 @@ case 33:@+ if (data!=old_hot) wait(1);
 case 33:@+ if (data!=old_hot) wait(1);
 @z
 
-@x [364] l.6456
+@x [364] l.6456 Sort name of section.
  @<Wait till write buffer is empty@>;
 @y
  @<Wait\9{4} till write buffer is empty@>;
@@ -2886,19 +2880,19 @@ case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @z
 
-@x [365] l.6474
+@x [365] l.6474 Sort name of section.
 @ @<Clean the I-cache block for |data->z.o|, if any@>=
 @y
 @ @<Clean the \9{i}I-cache block for |data->z.o|, if any@>=
 @z
 
-@x [366] l.6484
+@x [366] l.6484 Sort name of section.
 @ @<Clean the D-cache block for |data->z.o|, if any@>=
 @y
 @ @<Clean the \9{d}D-cache block for |data->z.o|, if any@>=
 @z
 
-@x [367] l.6494
+@x [367] l.6494 Sort name of section.
 @ @<Clean the S-cache block for |data->z.o|, if any@>=
 @y
 @ @<Clean the \9{s}S-cache block for |data->z.o|, if any@>=
@@ -2939,7 +2933,7 @@ case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
   octa trap_loc=incr(g[rWW].o,-4);
 @z
 
-@x [374] l.6590
+@x [374] l.6590 Private variable.
 char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @y
 static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
@@ -2993,20 +2987,20 @@ static octa magic_read(
   octa addr)
 @z
 
-@x [378] l.6626
+@x [378] l.6626 Block-local variables.
   register write_node *q;
   register cacheblock *p;
 @y
 @z
 
-@x [378] l.6628
+@x [378] l.6628 Block-local variables.
   for (q=write_tail;;) {
     if (q==write_head) break;
 @y
   for (write_node* q=write_tail; q!=write_head;) {
 @z
 
-@x [378] l.6634
+@x [378] l.6634 Block-local variables.
     p=cache_search(Dcache,addr);
 @y
     cacheblock* p=cache_search(Dcache,addr);
@@ -3020,20 +3014,20 @@ static void magic_write(
   octa addr, octa val)
 @z
 
-@x [379] l.6659
+@x [379] l.6659 Block-local variables.
   register write_node *q;
   register cacheblock *p;
 @y
 @z
 
-@x [379] l.6661
+@x [379] l.6661 Block-local variables.
   for (q=write_tail;;) {
     if (q==write_head) break;
 @y
   for (write_node* q=write_tail; q!=write_head;) {
 @z
 
-@x [379] l.6667
+@x [379] l.6667 Block-local variables.
     p=cache_search(Dcache,addr);
 @y
     cacheblock* p=cache_search(Dcache,addr);
@@ -3060,7 +3054,7 @@ static int mmgetchars(
   int stop)
 @z
 
-@x [381] l.6724.
+@x [381] l.6724 Variadic function for error reporting.
     fprintf(stderr,"Attempt to get characters from off the page!\n");
 @y
     errprint("Attempt to get characters from off the page!\n");
@@ -3078,7 +3072,7 @@ static void mmputchars(
   octa addr)
 @z
 
-@x [384] l.6781.
+@x [384] l.6781 Variadic function for error reporting.
     fprintf(stderr,"Attempt to put characters off the page!\n");
 @y
     errprint("Attempt to put characters off the page!\n");
@@ -3110,7 +3104,7 @@ static char stdin_chr(void)
     for (p=stdin_buf;p<stdin_buf+sizeof(stdin_buf)-2;p++) if(*p=='\n') break;
 @z
 
-@x [388] l.6836
+@x [388] l.6836 Private variables.
 char stdin_buf[256]; /* standard input to the simulated program */
 char *stdin_buf_start; /* current position in that buffer */
 char *stdin_buf_end; /* current end of that buffer */

@@ -28,7 +28,7 @@
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @#
 @z
-@x [1] l.24
+@x [1] l.24 C99 prototypes for C2x.
 @<Subroutines@>@;
 @y
 @<Prototypes@>@;
@@ -43,7 +43,7 @@ int main(
   int argc,char*argv[])
 @z
 
-@x [1] l.29
+@x [1] l.29 Type.
   register int j,delta,postamble=0;
   register char *p;
 @y
@@ -58,13 +58,13 @@ int main(
   do @<List the next item@>@; while (!postamble);
 @z
 
-@x [2] l.41
+@x [2] l.41 Type.
 listing=1, verbose=0;
 @y
 listing=true, verbose=false;
 @z
 
-@x [2] l.43
+@x [2] l.43 Type.
   if (argv[j][1]=='s') listing=0;
   else if (argv[j][1]=='v') verbose=1;
 @y
@@ -72,7 +72,7 @@ listing=true, verbose=false;
   else if (argv[j][1]=='v') verbose=true;
 @z
 
-@x [4] l.62
+@x [4] l.62 Type.
 int listing; /* are we listing everything? */
 int verbose; /* are we also showing the tetras of input as they are read? */
 @y
@@ -99,7 +99,7 @@ void print_stab(void);
 Here we need to define only the basic constants used for interpretation.
 @y
 @z
-@x [6] l.76
+@x [6] l.76 Reuse code.
 @d mm 0x98 /* the escape code of \.{mmo} format */
 @d lop_quote 0x0 /* the quotation lopcode */
 @d lop_loc 0x1 /* the location lopcode */
@@ -170,7 +170,7 @@ void read_tet()
 @y
 void read_tet(void)
 @z
-@x [9] l.135
+@x [9] l.135 Improved syntax.
   yz=(buf[2]<<8)+buf[3];
 @y
   yz=(y<<8)+z;
@@ -183,7 +183,7 @@ byte read_byte()
 byte read_byte(void)
 @z
 
-@x [11] l.152
+@x [11] l.152 Improved syntax.
 @ @<Glob...@>=
 @y
 @ @d y buf[2] /* the next-to-least significant byte */
@@ -198,13 +198,13 @@ byte read_byte(void)
  @/@t\4@>@<Cases for lopcodes in the main loop@>@;
 @z
 
-@x [13] l.176
+@x [13] l.176 Sort name of section.
   if (listing) @<List |tet| as a normal item@>;
 @y
   if (listing) @<List \9{t}|tet| as a normal item@>;
 @z
 
-@x [15] l.190
+@x [15] l.190 Sort name of section.
 @<List |tet| as a normal item@>=
 @y
 @<List \9{t}|tet| as a normal item@>=
@@ -216,14 +216,14 @@ cur_loc.h=cur_loc.l=0;
 cur_loc=zero_octa;
 @z
 
-@x [18] l.225
+@x [18] l.225 Improved syntax.
 @d y buf[2] /* the next-to-least significant byte */
 @d z buf[3] /* the least significant byte */
 
 @y
 @z
 
-@x [19] l.256
+@x [19] l.256 Fix typo.
  if (delta&0xfe000000) err("increment of lop_fixrx is too large");
 @.increment...too large@>
 @y
@@ -231,7 +231,7 @@ cur_loc=zero_octa;
 @.Increment...too large@>
 @z
 
-@x [20] l.281
+@x [20] l.281 Simpler code.
      *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
 @y
      memcpy(p,buf,4);

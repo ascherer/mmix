@@ -12,7 +12,7 @@
 
 @z
 
-@x [3] l.92
+@x [3] l.92 Better documentation for global variable 'l'.
 \bull localregs (default 256), number of local registers in ring;
 @y
 \bull localregs (default 256), number |lring_size| of local registers
@@ -26,7 +26,7 @@ in the \.{mmix-pipe} module, which defines and discusses the data structures
 in the {\mc MMIX-PIPE} module, which defines and discusses the data structures
 @z
 
-@x [8] l.345
+@x [8] l.345 Variadic function for error reporting.
 by building some simple infrastructure. First we need some macros to
 print error messages.
 
@@ -74,7 +74,7 @@ static void get_token(void) /* set |token| to the next token of the configuratio
   while (true) { /* scan past white space */
 @z
 
-@x [10] l.382
+@x [10] l.382 Variadic function for error reporting.
         panic(errprint1("config file line too long: `%s...'",buffer));
 @.config file line...@>
 @y
@@ -126,19 +126,19 @@ static cache* new_cache(
   char *name)
 @z
 
-@x [16] l.524
+@x [16] l.524 Variadic function for error reporting.
   if (!c) panic(errprint1("Can't allocate %s",name));
 @y
   if (!c) panic("Can't allocate %s",name);
 @z
 
-@x [18] l.576
+@x [18] l.576 Variadic function for error reporting.
 if (!funit) panic(errprint0("Can't allocate the functional units"));
 @y
 if (!funit) panic("Can't allocate the functional units");
 @z
 
-@x [19] l.600
+@x [19] l.600 Variadic function for error reporting.
   panic(errprint1(
    "Configuration syntax error: Specification can't start with `%s'",token));
 @y
@@ -146,7 +146,7 @@ if (!funit) panic("Can't allocate the functional units");
    "Configuration syntax error: Specification can't start with `%s'",token);
 @z
 
-@x [20] l.608
+@x [20] l.608 Variadic function for error reporting.
   if (n<PV[j].minval) panic(errprint2(
 @.Configuration error...@>
      "Configuration error: %s must be >= %d",PV[j].name,PV[j].minval));
@@ -182,7 +182,7 @@ static void pcs( /* subroutine to process a cache spec */
   cache *c)
 @z
 
-@x [23] l.659
+@x [23] l.659 Variadic function for error reporting.
   if (j==CPV_size) panic(errprint1(
      "Configuration syntax error: `%s' isn't a cache parameter name",token));
 @y
@@ -190,7 +190,7 @@ static void pcs( /* subroutine to process a cache spec */
      "Configuration syntax error: `%s' isn't a cache parameter name",token);
 @z
 
-@x [23] l.663
+@x [23] l.663 Variadic function for error reporting.
   if (n<CPV[j].minval) panic(errprint2(
      "Configuration error: %s must be >= %d",CPV[j].name,CPV[j].minval));
 @y
@@ -198,7 +198,7 @@ static void pcs( /* subroutine to process a cache spec */
      "Configuration error: %s must be >= %d",CPV[j].name,CPV[j].minval);
 @z
 
-@x [23] l.666
+@x [23] l.666 Variadic function for error reporting.
   if (n>CPV[j].maxval) panic(errprint2(
      "Configuration error: %s must be <= %d",CPV[j].name,CPV[j].maxval));
   if (CPV[j].power_of_two && (n&(n-1))) panic(errprint1(
@@ -210,7 +210,7 @@ static void pcs( /* subroutine to process a cache spec */
      "Configuration error: %s must be power of 2",CPV[j].name);
 @z
 
-@x [24] l.693
+@x [24] l.693 Variadic function for error reporting.
     if (n==0) panic(errprint0(
       "Configuration error: Pipeline cycles must be positive"));
 @.Configuration error...@>
@@ -230,7 +230,7 @@ static void pcs( /* subroutine to process a cache spec */
       "Configuration error: More than %d pipeline stages",pipe_limit);
 @z
 
-@x [25] l.711
+@x [25] l.711 Variadic function for error reporting.
   if (strlen(token)>15) panic(errprint1(
        "Configuration error: `%s' is more than 15 characters long",token));
 @y
@@ -238,7 +238,7 @@ static void pcs( /* subroutine to process a cache spec */
        "Configuration error: `%s' is more than 15 characters long",token);
 @z
 
-@x [25] l.716
+@x [25] l.716 Variadic function for error reporting.
   if (strlen(token)!=64) panic(errprint1(
        "Configuration error: unit %s doesn't have 64 hex digit specs",
                    funit[funit_count].name));
@@ -248,7 +248,7 @@ static void pcs( /* subroutine to process a cache spec */
                    funit[funit_count].name);
 @z
 
-@x [25] l.723
+@x [25] l.723 Variadic function for error reporting.
     else panic(errprint1(
         "Configuration error: `%c' is not a hex digit",token[j]));
 @y
@@ -292,7 +292,7 @@ static int int_stages[max_real_command+1];
 static int stages[256]; /* stages as function of |mmix_opcode| */
 @z
 
-@x [29] l.807
+@x [29] l.807 Variadic function for error reporting.
 if (n==0) panic(errprint1(
        "Configuration error: unit %s doesn't do anything",funit[j].name));
 @y
@@ -320,7 +320,7 @@ static void alloc_cache(
   char *name)
 @z
 
-@x [31] l.832
+@x [31] l.832 Variadic function for error reporting.
   if (c->bb<c->gg) panic(errprint1(
       "Configuration error: blocksize of %s is less than granularity",name));
 @.Configuration error...@>
@@ -334,7 +334,7 @@ static void alloc_cache(
       "Configuration error: blocksize of %s must be 8",name);
 @z
 
-@x [31] l.843
+@x [31] l.843 Variadic function for error reporting.
   if (c->a+c->b+c->c>=32) panic(errprint1(
      "Configuration error: %s has >= 4 gigabytes of data",name));
   if (c->gg!=8 && !(c->mode&WRITE_ALLOC)) panic(errprint2(
@@ -348,7 +348,7 @@ static void alloc_cache(
         name,c->gg);
 @z
 
-@x [31] l.851
+@x [31] l.851 Variadic function for error reporting.
   if (!c->inbuf.dirty) panic(errprint1(
      "Can't allocate dirty bits for inbuffer of %s",name));
 @y
@@ -356,7 +356,7 @@ static void alloc_cache(
      "Can't allocate dirty bits for inbuffer of %s",name);
 @z
 
-@x [31] l.855
+@x [31] l.855 Variadic function for error reporting.
     if (!c->inbuf.data) panic(errprint1(
      "Can't allocate data for inbuffer of %s",name));
   c->outbuf.dirty=(char*)calloc(c->bb>>c->g,sizeof(char));
@@ -376,7 +376,7 @@ static void alloc_cache(
      "Can't allocate data for outbuffer of %s",name);
 @z
 
-@x [32] l.866
+@x [32] l.866 Use constant value from MMIX-ARITH.
 @ @d sign_bit 0x80000000
 
 @<Allocate the cache sets for cache |c|@>=
@@ -384,7 +384,7 @@ static void alloc_cache(
 @ @<Allocate the cache sets for cache |c|@>=
 @z
 
-@x [32] l.870
+@x [32] l.870 Variadic function for error reporting.
 if (!c->set) panic(errprint1(
      "Can't allocate cache sets for %s",name));
 @y
@@ -392,7 +392,7 @@ if (!c->set) panic(
      "Can't allocate cache sets for %s",name);
 @z
 
-@x [32] l.875
+@x [32] l.875 Variadic function for error reporting.
   if (!c->set[j]) panic(errprint2(
     "Can't allocate cache blocks for set %d of %s",j,name));
 @y
@@ -400,7 +400,7 @@ if (!c->set) panic(
     "Can't allocate cache blocks for set %d of %s",j,name);
 @z
 
-@x [32] l.880
+@x [32] l.880 Variadic function for error reporting.
     if (!c->set[j][k].dirty) panic(errprint3(
       "Can't allocate dirty bits for block %d of set %d of %s",k,j,name));
     c->set[j][k].data=(octa *)calloc(c->bb>>3,sizeof(octa));
@@ -414,7 +414,7 @@ if (!c->set) panic(
       "Can't allocate data for block %d of set %d of %s",k,j,name);
 @z
 
-@x [33] l.891
+@x [33] l.891 Variadic function for error reporting.
   if (!c->victim) panic(errprint1(
       "Can't allocate blocks for victim cache of %s",name));
 @y
@@ -422,7 +422,7 @@ if (!c->set) panic(
       "Can't allocate blocks for victim cache of %s",name);
 @z
 
-@x [33] l.896
+@x [33] l.896 Variadic function for error reporting.
     if (!c->victim[k].dirty) panic(errprint2(
       "Can't allocate dirty bits for block %d of victim cache of %s",
                        k,name));
@@ -432,7 +432,7 @@ if (!c->set) panic(
                        k,name);
 @z
 
-@x [33] l.901
+@x [33] l.901 Variadic function for error reporting.
     if (!c->victim[k].data) panic(errprint2(
       "Can't allocate data for block %d of victim cache of %s",k,name));
 @y
@@ -440,7 +440,7 @@ if (!c->set) panic(
       "Can't allocate data for block %d of victim cache of %s",k,name);
 @z
 
-@x [34] l.909
+@x [34] l.909 Variadic function for error reporting.
   if (!c->reader) panic(errprint1(
 @.Can't allocate...@>
         "Can't allocate readers for %s",name));
@@ -450,7 +450,7 @@ if (!c->set) panic(
         "Can't allocate readers for %s",name);
 @z
 
-@x [35] l.935
+@x [35] l.935 Variadic function for error reporting.
   if (Scache->bb<Icache->bb) panic(errprint0(
      "Configuration error: Scache blocks smaller than Icache blocks"));
 @.Configuration error...@>
@@ -468,7 +468,7 @@ if (!c->set) panic(
      "Configuration error: Scache granularity differs from the Dcache");
 @z
 
-@x [36] l.964
+@x [36] l.964 Variadic function for error reporting.
 if (!ring) panic(errprint0("Can't allocate the scheduling ring"));
 @.Can't allocate...@>
 {@+register coroutine *p;
@@ -486,7 +486,7 @@ for (coroutine* p=ring;p<ring+ring_size;p++) {
 }
 @z
 
-@x [37] l.976
+@x [37] l.976 Variadic function for error reporting.
 if (hash_prime<=mem_chunks_max) panic(errprint0(
   "Configuration error: hashprime must exceed memchunksmax"));
 @.Configuration error...@>
@@ -500,7 +500,7 @@ mem_hash=(chunknode *)calloc(hash_prime+1,sizeof(chunknode));
 if (!mem_hash) panic("Can't allocate the hash table");
 @z
 
-@x [37] l.983
+@x [37] l.983 Variadic function for error reporting.
 if (!mem_hash[0].chunk) panic(errprint0("Can't allocate chunk 0"));
 mem_hash[hash_prime].chunk=(octa*)calloc(1<<13,sizeof(octa));
 if (!mem_hash[hash_prime].chunk) panic(errprint0("Can't allocate 0 chunk"));
@@ -510,25 +510,25 @@ mem_hash[hash_prime].chunk=(octa*)calloc(1<<13,sizeof(octa));
 if (!mem_hash[hash_prime].chunk) panic("Can't allocate 0 chunk");
 @z
 
-@x [37] l.988
+@x [37] l.988 Variadic function for error reporting.
 if (!fetch_bot) panic(errprint0("Can't allocate the fetch buffer"));
 @y
 if (!fetch_bot) panic("Can't allocate the fetch buffer");
 @z
 
-@x [37] l.991
+@x [37] l.991 Variadic function for error reporting.
 if (!reorder_bot) panic(errprint0("Can't allocate the reorder buffer"));
 @y
 if (!reorder_bot) panic("Can't allocate the reorder buffer");
 @z
 
-@x [37] l.994
+@x [37] l.994 Variadic function for error reporting.
 if (!wbuf_bot) panic(errprint0("Can't allocate the write buffer"));
 @y
 if (!wbuf_bot) panic("Can't allocate the write buffer");
 @z
 
-@x [37] l.998
+@x [37] l.998 Variadic function for error reporting.
   if (bp_a+bp_b+bp_c>=31) panic(errprint0(
      "Configuration error: Branch table has >= 2 gigabytes of data"));
   bp_table=(char*)calloc(1<<(bp_a+bp_b+bp_c),sizeof(char));
@@ -549,7 +549,7 @@ l=(specnode*)calloc(lring_size,sizeof(specnode));
 if (!l) panic("Can't allocate local registers");
 @z
 
-@x [37] l.1008
+@x [37] l.1008 Variadic function for error reporting.
 if (!fetched) panic(errprint0("Can't allocate prefetch buffer"));
 dispatch_stat=(int*)calloc(dispatch_max+1,sizeof(int));
 if (!dispatch_stat) panic(errprint0("Can't allocate dispatch counts"));
@@ -592,7 +592,7 @@ void MMIX_config(
   char *filename)
 @z
 
-@x [38] l.1031
+@x [38] l.1031 Variadic function for error reporting.
     panic(errprint1("Can't open configuration file %s",filename));
 @y
     panic("Can't open configuration file %s",filename);

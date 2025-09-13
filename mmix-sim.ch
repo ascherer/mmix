@@ -194,7 +194,7 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
-@x [15] l.669
+@x [15] l.669 Use constant value from MMIX-ARITH.
 @d sign_bit ((unsigned)0x80000000)
 
 @y
@@ -209,7 +209,7 @@ void print_int(
   octa o)
 @z
 
-@x [17] l.743
+@x [17] l.743 C99 prototype for C2x.
 mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
 mem_node* new_mem()
 @y
@@ -245,7 +245,7 @@ mem_tetra* mem_find(
   register mem_node *p=last_mem;
 @z
 
-@x [23] l.830
+@x [23] l.830 Improved interfaces.
 Here we need to define only the basic constants used for interpretation.
 
 @d mm 0x98 /* the escape code of \.{mmo} format */
@@ -267,12 +267,12 @@ Here we need to define only the basic constants used for interpretation.
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
 @z
 
-@x [24] l.867
+@x [24] l.867 Purge unused variable.
 byte_count=0;
 @y
 @z
 
-@x [25] l.869
+@x [25] l.869 Clearer syntax.
 @ @<Glob...@>=
 @y
 @ @d ybyte buf[2] /* the next-to-least significant byte */
@@ -280,7 +280,7 @@ byte_count=0;
 @<Glob...@>=
 @z
 
-@x [25] l.872
+@x [25] l.872 Purge unused variable.
 int byte_count; /* index of the next-to-be-read byte */
 @y
 @z
@@ -292,7 +292,7 @@ void read_tet()
 void read_tet(void)
 @z
 
-@x [26] l.894
+@x [26] l.894 Clearer syntax.
   yzbytes=(buf[2]<<8)+buf[3];
 @y
   yzbytes=(ybyte<<8)+zbyte;
@@ -313,19 +313,19 @@ byte read_byte()
 @ (This section remains empty for historic reasons.)
 @z
 
-@x [29] l.926
+@x [29] l.926 Improved formatting.
    @t\4@>@<Cases for lopcodes in the main loop@>@;
 @y
 @/ @t\4@>@<Cases for lopcodes in the main loop@>@;
 @z
 
-@x [29] l.932
+@x [29] l.932 Sort name of section.
   @<Load |tet| as a normal item@>;
 @y
   @<Load \9{t}|tet| as a normal item@>;
 @z
 
-@x [30] l.942
+@x [30] l.942 Sort name of section.
 @<Load |tet| as a normal item@>=
 @y
 @<Load \9{t}|tet| as a normal item@>=
@@ -343,7 +343,7 @@ do @<Load the next item@>@;@+while (!postamble);
 do @<Load the next item@>@; while (!postamble);
 @z
 
-@x [33] l.974
+@x [33] l.974 Clearer syntax.
 @d ybyte buf[2] /* the next-to-least significant byte */
 @d zbyte buf[3] /* the least significant byte */
 
@@ -367,7 +367,7 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
  mmo_load(incr(cur_loc,-delta<<2),tet);
 @z
 
-@x [35] l.1023
+@x [35] l.1023 Clearer syntax.
      *p=buf[0];@+*(p+1)=buf[1];@+*(p+2)=buf[2];@+*(p+3)=buf[3];
 @y
      @+ memcpy(p,buf,4);
@@ -404,7 +404,7 @@ void make_map()
 void make_map(void)
 @z
 
-@x [43] l.1124
+@x [43] l.1124 CWEB coding trick.
 in hopes that other operating systems provide a similar way to do the job.
 @y
 in hopes that other operating systems provide a similar way to do the job.
@@ -441,7 +441,7 @@ void print_line(
 @y
   @+ char buf[11];
 @z
-@x [45] l.1157
+@x [45] l.1157 Avoid compiler warning.
   sprintf(buf,"%d:    ",k);
 @y
   sprintf(buf,"%d:    ",k&65535); @+
@@ -454,7 +454,7 @@ void show_line()
 void show_line(void)
 @z
 
-@x [47] l.1179
+@x [47] l.1179 Block-local variable.
   register int k;
 @y
 @z
@@ -469,7 +469,7 @@ void show_line(void)
       else printf("     ...\n"); /* indicate the gap */ }
 @z
 
-@x [47] l.1187
+@x [47] l.1187 Block-local variable.
   }@+else@+ for (k=shown_line+1;k<=cur_line;k++) print_line(k);
 @y
   }@+else@+ for (int k=shown_line+1;k<=cur_line;k++) print_line(k);
@@ -496,7 +496,7 @@ void print_freqs(
 @y
 @z
 
-@x [50] l.1232
+@x [50] l.1232 Block-local variable.
   for (j=0;j<512;j++) if (p->dat[j].freq)
 @y
   for (int j=0;j<512;j++) if (p->dat[j].freq)
@@ -508,7 +508,7 @@ void print_freqs(
   octa cur_loc=incr(p->loc,4*j);
 @z
 
-@x [55] l.1313
+@x [55] l.1313 Improved formatting.
 @!rB,@!rD,@!rE,@!rH,@!rJ,@!rM,@!rR,@!rBB,
  @!rC,@!rN,@!rO,@!rS,@!rI,@!rT,@!rTT,@!rK,@!rQ,@!rU,@!rV,@!rG,@!rL,
  @!rA,@!rF,@!rP,@!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
@@ -519,7 +519,7 @@ void print_freqs(
 @!rW,@!rX,@!rY,@!rZ,@!rWW,@!rXX,@!rYY,@!rZZ} @!special_reg;
 @z
 
-@x [56] l.1318
+@x [56] l.1318 Improved formatting.
 char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
  "rC","rN","rO","rS","rI","rT","rTT","rK","rQ","rU","rV","rG","rL",
  "rA","rF","rP","rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
@@ -530,7 +530,7 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
  "rW","rX","rY","rZ","rWW","rXX","rYY","rZZ"};
 @z
 
-@x [57] l.1322
+@x [57] l.1322 Improved formatting.
 @ Here are the bit codes for arithmetic exceptions. These codes, except
 |H_BIT|, are defined also in {\mc MMIX-ARITH}.
 @y
@@ -566,7 +566,7 @@ op_info info[256]={@t\1@>@/
 @<Info for logical and control commands@>@t\2@>@/};
 @z
 
-@x [66] l.1468
+@x [66] l.1468 Improved formatting.
 {"TRAP",0x0a,255,0,5,"%r"},@|
 {"FCMP",0x2a,0,0,1,"%l = %.y cmp %.z = %x"},@|
 {"FUN",0x2a,0,0,1,"%l = [%.y(||)%.z] = %x"},@|
@@ -696,7 +696,7 @@ op_info info[256]={@t\1@>@/
 {"SRU",0x2a,0,0,1,"%l = %#y >> %#z = %#x"},@/
 @z
 
-@x [67] l.1534
+@x [67] l.1534 Improved formatting.
 {"BN",0x50,0,0,1,"%b<0? %t%g"},@|
 {"BNB",0x50,0,0,1,"%b<0? %t%g"},@|
 {"BZ",0x50,0,0,1,"%b==0? %t%g"},@|
@@ -826,7 +826,7 @@ op_info info[256]={@t\1@>@/
 {"ZSEV",0x2a,0,0,1,"%l = %y even? %z: 0 = %x"},@/
 @z
 
-@x [68] l.1600
+@x [68] l.1600 Improved formatting.
 {"LDB",0x2a,0,1,1,"%l = M1[%#y+%#z] = %x"},@|
 {"LDBI",0x29,0,1,1,"%l = M1[%#y%?+] = %x"},@|
 {"LDBU",0x2a,0,1,1,"%l = M1[%#y+%#z] = %#x"},@|
@@ -956,7 +956,7 @@ op_info info[256]={@t\1@>@/
 {"PUSHGO",0xaa,0,0,3,"%lrO=%#b, rL=%a, rJ=%#x, -> %#y+%#z"},@/
 @z
 
-@x [69] l.1666
+@x [69] l.1666 Improved formatting.
 {"OR",0x2a,0,0,1,"%l = %#y | %#z = %#x"},@|
 {"ORI",0x29,0,0,1,"%l = %#y | %z = %#x"},@|
 {"ORN",0x2a,0,0,1,"%l = %#y |~ %#z = %#x"},@|
@@ -1086,7 +1086,7 @@ op_info info[256]={@t\1@>@/
 {"GET",0x20,0,0,1,"%l = %s = %#x"},@/
 @z
 
-@x [71] l.1742
+@x [71] l.1742 Sort name of section.
   if (f&X_is_source_bit) @<Set |b| from register X@>;
   if (info[op].third_operand) @<Set |b| from special register@>;
 @y
@@ -1094,7 +1094,7 @@ op_info info[256]={@t\1@>@/
   if (info[op].third_operand) @<Set \9{b}|b| from special register@>;
 @z
 
-@x [74] l.1772
+@x [74] l.1772 Sort name of section.
 @ @<Set |b| from register X@>=
 @y
 @ @<Set \9{b}|b| from register X@>=
@@ -1138,7 +1138,7 @@ g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   ABSTIME}; /* see comment and warning above */
 @z
 
-@x [79] l.1838
+@x [79] l.1838 Sort name of section.
 @ @<Set |b| from special register@>=
 @y
 @ @<Set \9{b}|b| from special register@>=
@@ -1218,13 +1218,13 @@ case NXOR: case NXORI:
  x=oor(oand(y,b), oandn(z,b)); @+
 @z
 
-@x [87] l.1987
+@x [87] l.1987 Compound literal.
  x.h=byte_diff(y.h,z.h);@+x.l=byte_diff(y.l,z.l);@+goto store_x;
 @y
  x=(octa){byte_diff(y.h,z.h),byte_diff(y.l,z.l)};@+goto store_x;
 @z
 
-@x [87] l.1989
+@x [87] l.1989 Compound literal.
  x.h=wyde_diff(y.h,z.h);@+x.l=wyde_diff(y.l,z.l);@+goto store_x;
 @y
  x=(octa){wyde_diff(y.h,z.h),wyde_diff(y.l,z.l)};@+goto store_x;
@@ -1310,13 +1310,13 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
    b=(octa){ll->tet, (ll+1)->tet};
 @z
 
-@x [97] l.2208
+@x [97] l.2208 Sort name of section.
     else if (xx==rL) @<Set $L=z=\min(z,L)$@>@;
 @y
     else if (xx==rL) @<Set \9{l}$L=z=\min(z,L)$@>@;
 @z
 
-@x [98] l.2213
+@x [98] l.2213 Sort name of section.
 @ @<Set $L=z=\min(z,L)$@>=
 @y
 @ @<Set \9{l}$L=z=\min(z,L)$@>=
@@ -1334,19 +1334,19 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
-@x [103] l.2295
+@x [103] l.2295 Compound literal.
 if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
 @y
 if (k==rZ+1) x=(octa){G<<24, g[rA].l};
 @z
 
-@x [104] l.2313
+@x [104] l.2313 Sort name of section.
    @<Load |g[k]| from the register stack@>;
 @y
    @<Load \9{g}|g[k]| from the register stack@>;
 @z
 
-@x [105] l.2328
+@x [105] l.2328 Sort name of section.
 @ @<Load |g[k]| from the register stack@>=
 @y
 @ @<Load \9{g}|g[k]| from the register stack@>=
@@ -1470,7 +1470,7 @@ static void mmputchars(
   octa addr)
 @z
 
-@x [117] l.2528
+@x [117] l.2528 Sort name of section.
     if ((a.l&0x3) || m>size-4) @<Load and write one byte@>@;
     else @<Load and write four bytes@>;
 @y
@@ -1478,13 +1478,13 @@ static void mmputchars(
     else @<Load \9{a}and write four bytes@>;
 @z
 
-@x [118] l.2533
+@x [118] l.2533 Sort name of section.
 @ @<Load and write one byte@>=
 @y
 @ @<Load \9{a}and write one byte@>=
 @z
 
-@x [119] l.2540
+@x [119] l.2540 Sort name of section.
 @ @<Load and write four bytes@>=
 @y
 @ @<Load \9{a}and write four bytes@>=
@@ -1577,11 +1577,11 @@ void show_stats(verbose)
 void show_stats(
   bool verbose)
 @z
-@x [140] l.2866
+@x [140] l.2866 Block-local variable.
   octa o;
 @y
 @z
-@x [140] l.2872
+@x [140] l.2872 Block-local variable.
   if (!verbose) return;
   o = halted? incr(inst_ptr,-4): inst_ptr;
   printf("  (%s at location #%08x%08x)\n",
@@ -1678,7 +1678,7 @@ void catchint(
   interrupt=true;
 @z
 
-@x [149] l.3084
+@x [149] l.3084 Improved formatting.
   @t\4@>@<Cases that change |cur_disp_mode|@>;
 @y
 @/@t\4@>@<Cases that change |cur_disp_mode|@>;
@@ -1728,13 +1728,13 @@ octa scan_hex(
   octa o=zero_octa;
 @z
 
-@x [157] l.3248
+@x [157] l.3248 Sort name of section.
   if (k<32) @<Set |g[k]=val| only if permissible@>;
 @y
   if (k<32) @<Set \9{g}|g[k]=val| only if permissible@>;
 @z
 
-@x [158] l.3259
+@x [158] l.3259 Sort name of section.
 @<Set |g[k]=val| only if permissible@>=
 @y
 @<Set \9{g}|g[k]=val| only if permissible@>=
@@ -1782,19 +1782,19 @@ void show_breaks(
   mem_node *p)
 @z
 
-@x [162] l.3351
+@x [162] l.3351 Block-local variables.
   register int j;
   octa cur_loc;
 @y
 @z
 
-@x [162] l.3354
+@x [162] l.3354 Block-local variables.
   for (j=0;j<512;j++) if (p->dat[j].bkpt) {
 @y
   for (int j=0;j<512;j++) if (p->dat[j].bkpt) {
 @z
 
-@x [162] l.3355
+@x [162] l.3355 Block-local variables.
     cur_loc=incr(p->loc,4*j);
 @y
     octa cur_loc=incr(p->loc,4*j);
@@ -1822,13 +1822,13 @@ void dump(
   mem_node *p)
 @z
 
-@x [165] l.3417
+@x [165] l.3417 Block-local variables.
   register int j;
   octa cur_loc;
 @y
 @z
 
-@x [165] l.3420
+@x [165] l.3420 Block-local variables.
   for (j=0;j<512;j+=2) if (p->dat[j].tet || p->dat[j+1].tet) {
     cur_loc=incr(p->loc,4*j);
 @y

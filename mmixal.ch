@@ -7,19 +7,19 @@
 
 @z
 
-@x [18] l.577
+@x [18] l.577 Fix code format.
 $$\.{AA LOC @@+8;BB LOC @@+8;CC LOC @@+8;DD LOC @@+8;EE LOC @@+8}$$
 @y
 $$\.{AA LOC @@+8; BB LOC @@+8; CC LOC @@+8; DD LOC @@+8; EE LOC @@+8}$$
 @z
 
-@x [18] l.618
+@x [18] l.618 Fix code format.
 instructions `\.{sp}~\.{GREG}~\.{0;fp}~\.{GREG}~\.0'; these instructions
 @y
 instructions `\.{sp}~\.{GREG}~\.{0;} \.{fp}~\.{GREG}~\.0'; these instructions
 @z
 
-@x [22] l.710
+@x [22] l.710 Improved interface.
 @d mm 0x98
 @y
 @(mmix-lop.h@>=
@@ -28,7 +28,7 @@ instructions `\.{sp}~\.{GREG}~\.{0;} \.{fp}~\.{GREG}~\.0'; these instructions
 #define mm 0x98 /* the escape code of \.{mmo} format */
 @z
 
-@x [24] l.915
+@x [24] l.915 Improved interface.
 @d lop_quote 0x0 /* the quotation lopcode */
 @d lop_loc 0x1 /* the location lopcode */
 @d lop_skip 0x2 /* the skip lopcode */
@@ -192,7 +192,7 @@ void listing_clear()
 void listing_clear(void)
 @z
 
-@x [45] l.1219
+@x [45] l.1219 Variadic macro for error reporting.
 @d err(m) {@+report_error(m);@+if (m[0]!='*') goto bypass;@+}
 @d derr(m,p) {@+sprintf(err_buf,m,p);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
@@ -203,7 +203,7 @@ void listing_clear(void)
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @z
 
-@x [45] l.1224
+@x [45] l.1224 Variadic macro for error reporting.
 @d panic(m) {@+sprintf(err_buf,"!%s",m);@+report_error(err_buf);@+}
 @d dpanic(m,p) {@+err_buf[0]='!';@+sprintf(err_buf+1,m,p);@+
 @y
@@ -229,7 +229,7 @@ unsigned char mmo_buf[4];
 int mmo_ptr;
 @z
 
-@x [47] l.1268
+@x [47] l.1268 Variadic macro for error reporting.
      dpanic("Can't write on %s",obj_file_name)
 @y
      panic("Can't write on %s",obj_file_name)
@@ -291,7 +291,7 @@ void mmo_lopp( /* output a loader operation with two-byte operand */
   char x,
   unsigned short yz)
 @z
-@x [48] l.1326
+@x [48] l.1326 Reuse mmo_lop function
   mmo_buf[0]=mm;@+ mmo_buf[1]=x;@+
   mmo_buf[2]=yz>>8;@+ mmo_buf[3]=yz&0xff;
   mmo_out();
@@ -771,7 +771,7 @@ while (1) {
 while (true) {
 @z
 
-@x [86] l.2373
+@x [86] l.2373 Variadic macro for error reporting.
  if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
  derr("syntax error after character `%c'",*(p-2));
 @y
@@ -803,7 +803,7 @@ acc.h=acc.l=0;
 acc=zero_octa;
 @z
 
-@x [97] l.2471
+@x [97] l.2471 Variadic macro for error reporting.
   derr("syntax error at `%c'",*(p-2));
 @y
   err("syntax error at `%c'",*(p-2));
@@ -816,7 +816,7 @@ acc=zero_octa;
  case '&': rt_op=and;@+break;
 @z
 
-@x [97] l.2478
+@x [97] l.2478 Variadic macro for error reporting.
  default: derr("syntax error at `%c'",*(p-1));
 @y
  default: err("syntax error at `%c'",*(p-1));
@@ -829,25 +829,25 @@ acc=zero_octa;
  @t\4@>@<Cases for unary operators@>@;
 @z
 
-@x [100] l.2525
+@x [100] l.2525 Variadic macro for error reporting.
                  derr("can %s pure values only",verb)
 @y
                  err("can %s pure values only",verb)
 @z
 
-@x [100] l.2533
+@x [100] l.2533 Compound literal.
  top_val.equiv.h=~top_val.equiv.h, top_val.equiv.l=~top_val.equiv.l;
 @y
  top_val.equiv=onot(top_val.equiv); @+
 @z
 
-@x [100] l.2541
+@x [100] l.2541 Compound literal.
  top_val.equiv.h=0, top_val.equiv.l=top_val.link->sym->serial;
 @y
  top_val.equiv=(octa){0,top_val.link->sym->serial};
 @z
 
-@x [101] l.2546
+@x [101] l.2546 Variadic macro for error reporting.
       derr("can %s pure values only",verb)
 @y
       err("can %s pure values only",verb)
@@ -859,61 +859,61 @@ acc=zero_octa;
  else next_val.equiv=shift_right(next_val.equiv,top_val.equiv.l,true);
 @z
 
-@x [101] l.2582
+@x [101] l.2582 Use bit-fiddling function from MMIX-ARITH.
  next_val.equiv.h&=top_val.equiv.h, next_val.equiv.l&=top_val.equiv.l;
 @y
  next_val.equiv = oand(next_val.equiv,top_val.equiv); @+
 @z
 
-@x [101] l.2585
+@x [101] l.2585 Use bit-fiddling function from MMIX-ARITH.
  next_val.equiv.h|=top_val.equiv.h, next_val.equiv.l|=top_val.equiv.l;
 @y
  next_val.equiv = oor(next_val.equiv,top_val.equiv); @+
 @z
 
-@x [101] l.2588
+@x [101] l.2588 Use bit-fiddling function from MMIX-ARITH.
  next_val.equiv.h^=top_val.equiv.h, next_val.equiv.l^=top_val.equiv.l;
 @y
  next_val.equiv = oxor(next_val.equiv,top_val.equiv); @+
 @z
 
-@x [102] l.2604
+@x [102] l.2604 Variadic macro for error reporting.
   derr("cannot use `%s' in special mode",op_field);
 @y
   err("cannot use `%s' in special mode",op_field);
 @z
 
-@x [102] l.2607
+@x [102] l.2607 Variadic macro for error reporting.
   derr("*label field of `%s' instruction is ignored",op_field);
 @y
   err("*label field of `%s' instruction is ignored",op_field);
 @z
 
-@x [102] l.2615
+@x [102] l.2615 Sort name of section.
 @<Do the operation@>;
 @y
 @<Do the \9{o}operation@>;
 @z
 
-@x [103] l.2624
+@x [103] l.2624 Variadic macro for error reporting.
   if (*p && !isspace(*p)) derr("label syntax error at `%c'",*p);
 @y
   if (*p && !isspace(*p)) err("label syntax error at `%c'",*p);
 @z
 
-@x [103] l.2629
+@x [103] l.2629 Variadic macro for error reporting.
   derr("improper local label `%s'",lab_field);
 @y
   err("improper local label `%s'",lab_field);
 @z
 
-@x [104] l.2640
+@x [104] l.2640 Variadic macro for error reporting.
 if (!isspace(*p) && *p && op_field[0]) derr("opcode syntax error at `%c'",*p);
 @y
 if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
 @z
 
-@x [104] l.2644
+@x [104] l.2644 Variadic macro for error reporting.
   if (op_field[0]) derr("unknown operation code `%s'",op_field);
 @.unknown operation code@>
   if (lab_field[0]) derr("*no opcode; label `%s' will be ignored",lab_field);
@@ -929,19 +929,19 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   acc=(octa){-1, -(1<<j)};
 @z
 
-@x [109] l.2730
+@x [109] l.2730 Compound literal.
   }@+else if (opcode==GREG) cur_loc.h=0, cur_loc.l=cur_greg, new_link=REGISTER;
 @y
   }@+else if (opcode==GREG) cur_loc=(octa){0,cur_greg}, new_link=REGISTER;
 @z
 
-@x [109] l.2734
+@x [109] l.2734 Variadic macro for error reporting.
       if (pp->serial) derr("symbol `%s' is already defined",lab_field);
 @y
       if (pp->serial) err("symbol `%s' is already defined",lab_field);
 @z
 
-@x [109] l.2737
+@x [109] l.2737 Variadic macro for error reporting.
       derr("*redefinition of predefined symbol `%s'",lab_field);
 @y
       err("*redefinition of predefined symbol `%s'",lab_field);
@@ -960,7 +960,7 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   octa o=ominus(cur_loc,qq->equiv);
 @z
 
-@x [114] l.2795
+@x [114] l.2795 Variadic macro for error reporting.
     dderr("*relative address in location #%08x%08x not divisible by 4",
 @y
     err("*relative address in location #%08x%08x not divisible by 4",
@@ -972,7 +972,7 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
   o=shift_right(o,2,false);@+
 @z
 
-@x [114] l.2812
+@x [114] l.2812 Variadic macro for error reporting.
   if (k) dderr("relative address in location #%08x%08x is too far away",
                qq->equiv.h,qq->equiv.l);
 @y
@@ -992,13 +992,13 @@ if (new_link==DEFINED) {
 } }
 @z
 
-@x [116] l.2825
+@x [116] l.2825 Sort name of section.
 @ @<Do the operation@>=
 @y
 @ @<Do the \9{o}operation@>=
 @z
 
-@x [116] l.2830
+@x [116] l.2830 Variadic macro for error reporting.
     derr("opcode `%s' needs more than one operand",op_field);
 @y
     err("opcode `%s' needs more than one operand",op_field);
@@ -1039,7 +1039,7 @@ default: err("too many operands for opcode `%s'",op_field);
     else err("*constant doesn't fit in %d bytes",k); }
 @z
 
-@x [119] l.2883
+@x [119] l.2883 Sort names of sections.
 @<Do the Z field@>;
 @<Do the Y field@>;
 assemble_X: @<Do the X field@>;
@@ -1049,97 +1049,97 @@ assemble_X: @<Do the X field@>;
 assemble_X: @<Do the \9{x}X field@>;
 @z
 
-@x [121] l.2896
+@x [121] l.2896 Sort name of section.
 @ @<Do the Z field@>=
 @y
 @ @<Do the \9{z}Z field@>=
 @z
 
-@x [121] l.2901
+@x [121] l.2901 Variadic macro for error reporting.
     derr("*Z field of `%s' should not be a register number",op_field);
 @y
     err("*Z field of `%s' should not be a register number",op_field);
 @z
 
-@x [121] l.2905
+@x [121] l.2905 Variadic macro for error reporting.
   derr("*Z field of `%s' should be a register number",op_field);
 @y
   err("*Z field of `%s' should be a register number",op_field);
 @z
 
-@x [122] l.2911
+@x [122] l.2911 Sort name of section.
 @ @<Do the Y field@>=
 @y
 @ @<Do the \9{y}Y field@>=
 @z
 
-@x [122] l.2916
+@x [122] l.2916 Variadic macro for error reporting.
     derr("*Y field of `%s' should not be a register number",op_field);
 @y
     err("*Y field of `%s' should not be a register number",op_field);
 @z
 
-@x [122] l.2919
+@x [122] l.2919 Variadic macro for error reporting.
   derr("*Y field of `%s' should be a register number",op_field);
 @y
   err("*Y field of `%s' should be a register number",op_field);
 @z
 
-@x [123] l.2926
+@x [123] l.2926 Sort name of section.
 @ @<Do the X field@>=
 @y
 @ @<Do the \9{x}X field@>=
 @z
 
-@x [123] l.2931
+@x [123] l.2931 Variadic macro for error reporting.
     derr("*X field of `%s' should not be a register number",op_field);
 @y
     err("*X field of `%s' should not be a register number",op_field);
 @z
 
-@x [123] l.2934
+@x [123] l.2934 Variadic macro for error reporting.
   derr("*X field of `%s' should be a register number",op_field);
 @y
   err("*X field of `%s' should be a register number",op_field);
 @z
 
-@x [124] l.2944
+@x [124] l.2944 Sort name of section.
     @<Assemble YZ as a future reference and |goto assemble_X|@>@;
 @y
     @<Assemble \9{y}YZ as a future reference and |goto assemble_X|@>@;
 @z
 
-@x [124] l.2949
+@x [124] l.2949 Variadic macro for error reporting.
     derr("*YZ field of `%s' should not be a register number",op_field);
 @y
     err("*YZ field of `%s' should not be a register number",op_field);
 @z
 
-@x [124] l.2956
+@x [124] l.2956 Sort name of section.
     @<Assemble YZ as a memory address and |goto assemble_X|@>;
 @y
     @<Assemble \9{y}YZ as a memory address and |goto assemble_X|@>;
 @z
 
-@x [124] l.2960
+@x [124] l.2960 Variadic macro for error reporting.
     derr("*YZ field of `%s' should be a register number",op_field);
 @y
     err("*YZ field of `%s' should be a register number",op_field);
 @z
 
-@x [124] l.2963
+@x [124] l.2963 Sort name of section.
     @<Assemble YZ as a relative address and |goto assemble_X|@>;
 @y
     @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>;
 @z
 
-@x [125] l.2971
+@x [125] l.2971 Sort name of section.
 @ @<Assemble YZ as a future reference...@>=
 @y
 @ @<Assemble \9{y}YZ as a future reference...@>=
 @z
 
-@x [126] l.2984
+@x [126] l.2984 Sort name of section.
 @ @<Assemble YZ as a relative address and |goto assemble_X|@>=
 @y
 @ @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>=
@@ -1153,7 +1153,7 @@ assemble_X: @<Do the \9{x}X field@>;
   dest=shift_right(val_stack[1].equiv,2,false);
 @z
 
-@x [127] l.3006
+@x [127] l.3006 Sort name of section.
 @ @<Assemble YZ as a memory address and |goto assemble_X|@>=
 @y
 @ @<Assemble \9{y}YZ as a memory address and |goto assemble_X|@>=
@@ -1167,49 +1167,49 @@ assemble_X: @<Do the \9{x}X field@>;
   k=0;
 @z
 
-@x [127] l.3017
+@x [127] l.3017 Sort name of section.
   else @<Assemble instructions to put supplementary data in \$255@>;
 @y
   else @<Assemble \9{i}instructions to put supplementary data in \$255@>;
 @z
 
-@x [128] l.3026
+@x [128] l.3026 Sort name of section.
 @<Assemble instructions to put supplementary data in \$255@>=
 @y
 @<Assemble \9{i}instructions to put supplementary data in \$255@>=
 @z
 
-@x [129] l.3047
+@x [129] l.3047 Sort name of section.
     @<Assemble XYZ as a future reference and |goto assemble_inst|@>@;
 @y
     @<Assemble \9{x}XYZ as a future reference and |goto assemble_inst|@>@;
 @z
 
-@x [129] l.3052
+@x [129] l.3052 Variadic macro for error reporting.
     derr("*operand of `%s' should not be a register number",op_field);
 @y
     err("*operand of `%s' should not be a register number",op_field);
 @z
 
-@x [129] l.3056
+@x [129] l.3056 Variadic macro for error reporting.
     derr("*operand of `%s' should be a register number",op_field);
 @y
     err("*operand of `%s' should be a register number",op_field);
 @z
 
-@x [129] l.3058
+@x [129] l.3058 Sort name of section.
     @<Assemble XYZ as a relative address and |goto assemble_inst|@>;
 @y
     @<Assemble \9{x}XYZ as a relative address and |goto assemble_inst|@>;
 @z
 
-@x [130] l.3067
+@x [130] l.3067 Sort name of section.
 @ @<Assemble XYZ as a future reference...@>=
 @y
 @ @<Assemble \9{x}XYZ as a future reference...@>=
 @z
 
-@x [131] l.3080
+@x [131] l.3080 Sort name of section.
 @ @<Assemble XYZ as a relative address...@>=
 @y
 @ @<Assemble \9{x}XYZ as a relative address...@>=
@@ -1275,25 +1275,25 @@ int main(
     while (true) {
 @z
 
-@x [138] l.3218
+@x [138] l.3218 Variadic macro for error reporting.
 if (!src_file) dpanic("Can't open the source file %s",src_file_name);
 @y
 if (!src_file) panic("Can't open the source file %s",src_file_name);
 @z
 
-@x [138] l.3227
+@x [138] l.3227 Variadic macro for error reporting.
 if (!obj_file) dpanic("Can't open the object file %s",obj_file_name);
 @y
 if (!obj_file) panic("Can't open the object file %s",obj_file_name);
 @z
 
-@x [138] l.3230
+@x [138] l.3230 Variadic macro for error reporting.
   if (!listing_file) dpanic("Can't open the listing file %s",listing_name);
 @y
   if (!listing_file) panic("Can't open the listing file %s",listing_name);
 @z
 
-@x [142] l.3254
+@x [142] l.3254 Variadic macro for error reporting.
   dpanic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);
 @y
   panic("Danger: Must reduce the number of GREGs by %d",lreg-greg+1);

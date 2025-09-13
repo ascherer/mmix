@@ -100,7 +100,7 @@ typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra;
 @z
 
-@x [4] l.66 RAII.
+@x [4] l.66 Move constants to interface; reuse empty section.
 @ @d sign_bit ((unsigned)0x80000000)
 
 @<Glob...@>=
@@ -218,7 +218,7 @@ octa omult(octa y, octa z)
 @y
 @z
 
-@x [9] l.173
+@x [9] l.173 Improved interface.
 @ @<Glob...@>=
 octa aux; /* secondary output of subroutines with multiple outputs */
 bool overflow; /* set by certain subroutines for signed arithmetic */
@@ -333,7 +333,7 @@ octa oand(octa y, octa z) /* compute $y\land z$ */
 { @+ return (octa){y.h&z.h, y.l&z.l}; @+ }
 @z
 
-@x [25] l.354 C99 prototypes for C2x.
+@x [25] l.354 C99 prototypes for C2x; add missing bit-fiddling functions.
 octa oandn @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa oandn(y,z) /* compute $y\land\bar z$ */
   octa y,z;
@@ -359,7 +359,7 @@ octa onor(octa y, octa z) /* compute $\overline{y\lor z}$ */
 @#
 @z
 
-@x [25] l.362 C99 prototypes for C2x.
+@x [25] l.362 C99 prototypes for C2x; oxor was never used before.
 octa oxor @,@,@[ARGS((octa,octa))@];@+@t}\6{@>
 octa oxor(y,z) /* compute $y\oplus z$ */
   octa y,z;
@@ -425,7 +425,7 @@ octa bool_mult(
 @y
   for (k=0,o=y,x=zero_octa;o.h||o.l;k++,o=shift_right(o,8,true))
 @z
-@x [29] l.447
+@x [29] l.447 Use new bit-fiddling functions.
       if (xor) x.h^=a&c, x.l^=b&c;
       else x.h|=a&c, x.l|=b&c;
 @y
@@ -433,7 +433,7 @@ octa bool_mult(
       else x=oor(x,(octa){a&c,b&c});
 @z
 
-@x [30] l.463
+@x [30] l.463 Improved interface.
 @<Glob...@>=
 int cur_round; /* the current rounding mode */
 @y
@@ -441,13 +441,13 @@ int cur_round; /* the current rounding mode */
 Extern int cur_round; /* the current rounding mode */
 @z
 
-@x [31] l.489
+@x [31] l.489 Improved interface.
 tiny, |X_BIT| if and only if the result is inexact.
 @y
 tiny, |X_BIT| if and only if the result is inexact.
 A~full list of these codes is defined in {\mc MMIX-PIPE}.
 @z
-@x [31] l.500
+@x [31] l.500 Improved interface.
 @d V_BIT (1<<14) /* integer overflow */
 @d D_BIT (1<<15) /* integer divide check */
 @y
@@ -468,7 +468,7 @@ static octa fpack(
   int r) /* the rounding mode */
 @z
 
-@x [31] l.516
+@x [31] l.516 Compound literal.
       if (e<-54) o.h=0, o.l=1;
 @y
       if (e<-54) o=(octa){0,1};
@@ -480,7 +480,7 @@ static octa fpack(
         o=shift_right(f,-e,true);
 @z
 
-@x [32] l.529
+@x [32] l.529 Improved interface.
 @ @<Glob...@>=
 int exceptions; /* bits possibly destined for rA */
 @y
@@ -803,7 +803,7 @@ else o=shift_right(zf,d,1),oo=shift_left(o,d);
 else o=shift_right(zf,d,true),oo=shift_left(o,d);
 @z
 
-@x [54] l.973
+@x [54] l.973 C99 prototypes for C2x.
 @<Subr...@>=
 static void bignum_times_ten @,@,@[ARGS((bignum*))@];
 static void bignum_dec @,@,@[ARGS((bignum*,bignum*,tetra))@];
@@ -817,7 +817,7 @@ void print_float(
   octa x)
 @z
 
-@x [57] l.1055
+@x [57] l.1055 Compound literals.
   f.h=0x3fffff, f.l=0xffffffff;
   g.h=0x400000, g.l=2;
 @y
@@ -899,7 +899,7 @@ int scan_const(
   next_char=s;@+return -1;
 @z
 
-@x [69] l.1360
+@x [69] l.1360 Improved interface.
 @ @<Glob...@>=
 octa val; /* value returned by |scan_const| */
 char *next_char; /* pointer returned by |scan_const| */
