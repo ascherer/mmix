@@ -1926,6 +1926,15 @@ p=use_and_fix(ITcache,p);
 @r @ The following check is performed at the beginning of every cycle.
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
+@x [314]
+    inst_ptr.o=g[rTT].o;@+inst_ptr.p=NULL;
+  }
+}
+@y
+    inst_ptr.o=g[rTT].o;@+inst_ptr.p=NULL;
+  } @+
+}
+@z
 
 @x [316]
 @<Deissue all but the hottest command@>=
@@ -2109,6 +2118,14 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @%
 @$a {MMIX-PIPE}44 \&{specnode}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@z
+
+@x [347]
+    goto illegal_inst;
+  break;
+@y
+    goto illegal_inst; @+
+  break;
 @z
 
 @x [348]

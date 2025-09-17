@@ -533,17 +533,19 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
 @x [57] l.1322 Improved formatting.
 @ Here are the bit codes for arithmetic exceptions. These codes, except
 |H_BIT|, are defined also in {\mc MMIX-ARITH}.
-@y
-@ Here are the bit codes for arithmetic exceptions. A~full list of these
-codes is defined in {\mc MMIX-PIPE}.
-@z
-@x [57] l.1326
+
+@d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
-@y
-@z
-@x [57] l.1328
+@d U_BIT (1<<10) /* floating underflow */
 @d O_BIT (1<<11) /* floating overflow */
+@d I_BIT (1<<12) /* floating invalid operation */
+@d W_BIT (1<<13) /* float-to-fix overflow */
+@d V_BIT (1<<14) /* integer overflow */
+@d D_BIT (1<<15) /* integer divide check */
+@d H_BIT (1<<16) /* trip */
 @y
+@ The bit codes for arithmetic exceptions
+are defined in {\mc MMIX-ARITH}.
 @z
 
 @x [62] l.1409 RAII.

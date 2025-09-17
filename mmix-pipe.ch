@@ -640,6 +640,27 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @z
 
+@x [54] l.1172
+cases also apply to the upper half of~rQ; the next eight apply to~rA.
+@y
+cases also apply to the upper half of~rQ; the next eight apply to~rA.
+|X_BIT| and beyond are defined in {\mc MMIX-ARITH}.
+@z
+@x [54] l.1183
+@d X_BIT (1<<8) /* floating inexact */
+@d Z_BIT (1<<9) /* floating division by zero */
+@d U_BIT (1<<10) /* floating underflow */
+@d O_BIT (1<<11) /* floating overflow */
+@d I_BIT (1<<12) /* floating invalid operation */
+@d W_BIT (1<<13) /* float-to-fix overflow */
+@d V_BIT (1<<14) /* integer overflow */
+@d D_BIT (1<<15) /* integer divide check */
+@d H_BIT (1<<16) /* trip handler bit */
+@d F_BIT (1<<17) /* forced trap bit */
+@d E_BIT (1<<18) /* external (dynamic) trap bit */
+@y
+@z
+
 @x [54] l.1196 Private variable.
 char bit_code_map[]="EFHDVWIOUZXrwxnkbsp";
 @y
