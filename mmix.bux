@@ -31,7 +31,18 @@
 @$byte_diff {MMIX-ARITH}27 \&{tetra} (\,)@>
 @$wyde_diff {MMIX-ARITH}28 \&{tetra} (\,)@>
 @$bool_mult {MMIX-ARITH}29 \&{octa} (\,)@>
-@$cur_round {MMIX-ARITH}30 \&{int}@>
+@$ROUND_OFF {MMIX-ARITH}30 =1@>
+@$ROUND_UP {MMIX-ARITH}30 =2@>
+@$ROUND_DOWN {MMIX-ARITH}30 =3@>
+@$ROUND_NEAR {MMIX-ARITH}30 =4@>
+@$X_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{8})$@>
+@$Z_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{9})$@>
+@$U_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{10})$@>
+@$O_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{11})$@>
+@$I_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{12})$@>
+@$W_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{13})$@>
+@$E_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{18})$@>
+@$cur_round {MMIX-ARITH}32 \&{int}@>
 @$exceptions {MMIX-ARITH}32 \&{int}@>
 @$load_sf {MMIX-ARITH}39 \&{octa} (\,)@>
 @$store_sf {MMIX-ARITH}40 \&{tetra} (\,)@>

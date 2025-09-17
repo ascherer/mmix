@@ -34,18 +34,6 @@ static octa fpack(octa,int,char,int);
 @z
 
 @x [31]
-@^accuracy loss@>
-@y
-@^accuracy loss@>
-@-X_BIT@>
-@-Z_BIT@>
-@-U_BIT@>
-@-O_BIT@>
-@-I_BIT@>
-@-W_BIT@>
-@-E_BIT@>
-@z
-@x [31]
   char s, /* the sign */
   int r) /* the rounding mode */
 {
@@ -55,30 +43,10 @@ static octa fpack(octa,int,char,int);
 { @+
 @z
 
-@x [36]
-@ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
+@x [35]
+o >>= 2;
 @y
-@r @ The |funpack| routine is, roughly speaking, the opposite of |fpack|.
-@z
-
-@x [39]
-  if (s=='-') x.h|=sign_bit;
-  return x;
-}
-@y
-  if (s=='-') x.h|=sign_bit;
-  return x;
-}
-@r
-@z
-
-@x [43]
-if (x.h||x.l) xf.l|=1; /* adjust the sticky bit */
-return fpack(xf,xe,xs,cur_round);
-@y
-if (x.h||x.l) xf.l|=1; /* adjust the sticky bit */
-return fpack(xf,xe,xs,cur_round);
-@r
+o >>= 2; @+
 @z
 
 @x [46]
@@ -123,10 +91,10 @@ If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
 If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
 @z
 
-@x [60]
-@ Here, for example, is how we go from $f$ to $10f$, assuming that
+@x [61]
+@ And here is how we test whether $f<g$, $f=g$, or $f>g$, using any
 @y
-@r @ Here, for example, is how we go from $f$ to $10f$, assuming that
+@r @ And here is how we test whether $f<g$, $f=g$, or $f>g$, using any
 @z
 
 @x [63]
@@ -157,17 +125,13 @@ But no harm is done, because |bignum_compare| is not used.
 @z
 
 @x [65]
-and we do not terminate the process when $f=0$ or $g=1$.
+@ When |e| is large, we use the stated algorithm by considering $f$ and
+$g$ to be fractions whose denominator is a power of~10.
 @y
-and we do not terminate the process when $f=0$ or $g=1$.
+@r @ When |e| is large, we use the stated algorithm by considering $f$ and
+$g$ to be fractions whose denominator is a power of~10.
 @$x {MMIX-ARITH}54 \&{octa}@>
 @$tt {MMIX-ARITH}66 \&{bignum}@>
-@z
-
-@x [67]
-@ At this point the significant digits are in string |s|, and |s[0]!='0'|.
-@y
-@r @ At this point the significant digits are in string |s|, and |s[0]!='0'|.
 @z
 
 @x [68]
