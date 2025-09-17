@@ -1334,6 +1334,17 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
+@x [100] l.2227
+@ @d ROUND_OFF 1
+@d ROUND_UP 2
+@d ROUND_DOWN 3
+@d ROUND_NEAR 4
+
+@<Get ready to update rA@>=
+@y
+@ @<Get ready to update rA@>=
+@z
+
 @x [103] l.2295 Compound literal.
 if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
 @y

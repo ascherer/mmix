@@ -433,12 +433,28 @@ octa bool_mult(
       else x=oor(x,(octa){a&c,b&c});
 @z
 
-@x [30] l.463 Improved interface.
+@x [30] l.458 Improved interface.
+@d ROUND_OFF 1
+@d ROUND_UP 2
+@d ROUND_DOWN 3
+@d ROUND_NEAR 4
+
 @<Glob...@>=
 int cur_round; /* the current rounding mode */
 @y
-@<External variables@>=
-Extern int cur_round; /* the current rounding mode */
+@<Exported constants@>=
+#define ROUND_OFF 1
+#define ROUND_UP 2
+#define ROUND_DOWN 3
+#define ROUND_NEAR 4
+@#
+#define X_BIT (1<<8) /* floating inexact */
+#define Z_BIT (1<<9) /* floating division by zero */
+#define U_BIT (1<<10) /* floating underflow */
+#define O_BIT (1<<11) /* floating overflow */
+#define I_BIT (1<<12) /* floating invalid operation */
+#define W_BIT (1<<13) /* float-to-fix overflow */
+#define E_BIT (1<<18) /* external (dynamic) trap bit */
 @z
 
 @x [31] l.489 Improved interface.
@@ -447,9 +463,17 @@ tiny, |X_BIT| if and only if the result is inexact.
 tiny, |X_BIT| if and only if the result is inexact.
 A~full list of these codes is defined in {\mc MMIX-PIPE}.
 @z
-@x [31] l.500 Improved interface.
+@x [31] l.494 Improved interface.
+@d X_BIT (1<<8) /* floating inexact */
+@d Z_BIT (1<<9) /* floating division by zero */
+@d U_BIT (1<<10) /* floating underflow */
+@d O_BIT (1<<11) /* floating overflow */
+@d I_BIT (1<<12) /* floating invalid operation */
+@d W_BIT (1<<13) /* float-to-fix overflow */
 @d V_BIT (1<<14) /* integer overflow */
 @d D_BIT (1<<15) /* integer divide check */
+@d E_BIT (1<<18) /* external (dynamic) trap bit */
+
 @y
 @z
 
@@ -485,6 +509,7 @@ static octa fpack(
 int exceptions; /* bits possibly destined for rA */
 @y
 @ @<External variables@>=
+Extern int cur_round; /* the current rounding mode */
 Extern int exceptions; /* bits possibly destined for rA */
 @z
 

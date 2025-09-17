@@ -2739,6 +2739,14 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
                             wyde_diff(data->y.o.l,data->z.o.l)};@+ break;
 @z
 
+@x [346] l.6151
+@d ROUND_OFF 1
+@d ROUND_UP 2
+@d ROUND_DOWN 3
+@d ROUND_NEAR 4
+@y
+@z
+
 @x [348] l.6199 Change from MMIX home.
  case FEQLE: goto cmp_fin;
 @y

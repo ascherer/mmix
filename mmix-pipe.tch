@@ -2101,10 +2101,10 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @z
 
 @x [346]
-@d ROUND_NEAR 4
+@d set_round cur_round=(data->ra.o.l<0x10000? ROUND_NEAR: data->ra.o.l>>16)
 @y
-@d ROUND_NEAR 4
-@t}\ifx\undefined\eightpoint\else\vskip1cm\fi{@>
+@d set_round cur_round=(data->ra.o.l<0x10000? ROUND_NEAR: data->ra.o.l>>16)
+@t}\ifx\undefined\eightpoint\else\vskip1.5cm\fi{@>
 @-x@>
 @%
 @$a {MMIX-PIPE}44 \&{specnode}@>
