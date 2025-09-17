@@ -454,6 +454,10 @@ int cur_round; /* the current rounding mode */
 #define O_BIT (1<<11) /* floating overflow */
 #define I_BIT (1<<12) /* floating invalid operation */
 #define W_BIT (1<<13) /* float-to-fix overflow */
+#define V_BIT (1<<14) /* integer overflow */
+#define D_BIT (1<<15) /* integer divide check */
+#define H_BIT (1<<16) /* trip handler bit */
+#define F_BIT (1<<17) /* forced trap bit */
 #define E_BIT (1<<18) /* external (dynamic) trap bit */
 @z
 

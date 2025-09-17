@@ -41,6 +41,10 @@
 @$O_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{11})$@>
 @$I_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{12})$@>
 @$W_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{13})$@>
+@$V_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{14})$@>
+@$D_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{15})$@>
+@$H_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{16})$@>
+@$F_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{17})$@>
 @$E_BIT {MMIX-ARITH}30 =$(\T{1}\LL\T{18})$@>
 @$cur_round {MMIX-ARITH}32 \&{int}@>
 @$exceptions {MMIX-ARITH}32 \&{int}@>
