@@ -461,12 +461,6 @@ int cur_round; /* the current rounding mode */
 #define E_BIT (1<<18) /* external (dynamic) trap bit */
 @z
 
-@x [31] l.489 Improved interface.
-tiny, |X_BIT| if and only if the result is inexact.
-@y
-tiny, |X_BIT| if and only if the result is inexact.
-A~full list of these codes is defined in {\mc MMIX-PIPE}.
-@z
 @x [31] l.494 Improved interface.
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
