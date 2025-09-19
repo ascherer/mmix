@@ -739,12 +739,6 @@ mem_locker.name="Locker";
 @z
 
 @x [131]
-@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=
-@y
-@<Wait\9{1} for input data if necessary; set |state=1| if it's there@>=@+
-@z
-
-@x [131]
 if (data->y.p) {
 @y
 if (data->y.p) { @+
@@ -753,16 +747,6 @@ if (data->y.p) { @+
 if (data->z.p) {
 @y
 if (data->z.p) { @+
-@z
-@x [131]
-if (data->b.p) {
-@y
-if (data->b.p) { @+
-@z
-@x [131]
-if (data->ra.p) {
-@y
-if (data->ra.p) { @+
 @z
 
 @x [132]
@@ -786,11 +770,12 @@ unit is |self+1|.
 @-s@> @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
-@x [138]
-@ Here are the basic boolean operations, which account for 24 of \MMIX's
+@x [136]
+@ The default pipeline times use only one stage; they
 @y
-@r @ Here are the basic boolean operations, which account for 24 of \MMIX's
+@r @ The default pipeline times use only one stage; they
 @z
+
 @x [138]
 case or: data->x.o=oor(data->y.o, data->z.o); @+ break;
 case orn: data->x.o=oorn(data->y.o, data->z.o); @+ break;
