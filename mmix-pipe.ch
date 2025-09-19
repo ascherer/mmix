@@ -1169,6 +1169,25 @@ static coroutine Dlocker; /* another */
 static control vanish_ctl; /* such coroutines share a common control block */
 @z
 
+@x [129] l.2450
+defined below.
+@y
+defined below.
+
+The total number of stages
+supported by this simulator is limited to 90, since
+it must never interfere with the |stage| numbers for special coroutines.
+(The author doesn't feel guilty about making this restriction.)
+@z
+
+@x [129] l.2461 Move pipe_limit here.
+#define cleanup 91 /* coroutine for cleaning the caches */
+@y
+#define cleanup 91 /* coroutine for cleaning the caches */
+@#
+#define pipe_limit 90
+@z
+
 @x [130] l.2469
  case 0: @<Wait for input data if necessary; set |state=1| if it's there@>;
  case 1: @<Begin execution of an operation@>;
@@ -1213,6 +1232,19 @@ static control vanish_ctl; /* such coroutines share a common control block */
   @<Special cases for states in later stages@>;
 @y
   @/@t\4@>@<Special cases for states in later stages@>;
+@z
+
+@x [136] l.2576
+can be overridden by |MMIX_config|. The total number of stages
+supported by this simulator is limited to 90, since
+it must never interfere with the |stage| numbers for special coroutines
+defined below. (The author doesn't feel guilty about making this restriction.)
+@y
+can be overridden by |MMIX_config|.
+@z
+@x [136] l.2582
+#define pipe_limit 90
+@y
 @z
 
 @x [138] l.2597 'oxor' was never used before.

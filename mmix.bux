@@ -525,7 +525,7 @@
 @$fill_from_virt {MMIX-PIPE}129 =93@>
 @$write_from_wbuf {MMIX-PIPE}129 =92@>
 @$cleanup {MMIX-PIPE}129 =91@>
-@$pipe_limit {MMIX-PIPE}136 =90@>
+@$pipe_limit {MMIX-PIPE}129 =90@>
 @$pipe_seq {MMIX-PIPE}136 \&{unsigned} \&{char} [\,]@>
 @$bp_a {MMIX-PIPE}150 \&{int}@>
 @$bp_b {MMIX-PIPE}150 \&{int}@>
