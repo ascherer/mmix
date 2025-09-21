@@ -654,7 +654,7 @@ if (new_link==DEFINED) {
 @r @ @<Assemble \9{y}YZ as a relative address and |goto assemble_X|@>=
 @z
 
-@x [130
+@x [130]
 @ @<Assemble \9{x}XYZ as a future reference...@>=
 @y
 @r @ @<Assemble \9{x}XYZ as a future reference...@>=
