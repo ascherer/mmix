@@ -13,24 +13,10 @@
 @z
 
 @x [2]
-static octa fpack(octa,int,char,int);
+@(mmix-arith.h@>=
 @y
-@%
-@$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
-@$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
-@$funpack {MMIX-ARITH}37 \&{static} \&{ftype} (\,)@>
-@$sfunpack {MMIX-ARITH}38 \&{static} \&{ftype} (\,)@>
-@$bignum_times_ten {MMIX-ARITH}60 \&{static} \&{void} (\,)@>
-@$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
-@$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
-@$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
-static octa fpack(octa,int,char,int);
-@z
-
-@x [3]
-@ The definition of type \&{tetra}
-@y
-@r @ The definition of type \&{tetra}
+@-MMIX_ARITH_H@>
+@(mmix-arith.h@>=
 @z
 
 @x [31]
@@ -226,11 +212,19 @@ if (ye>=ze) { @+
 }
 @z
 
-@x [96]
-@(mmix-arith.h@>=
+@x [97]
+static octa fpack(octa,int,char,int);
 @y
-@-MMIX_ARITH_H@>
-@(mmix-arith.h@>=
+@%
+@$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
+@$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
+@$funpack {MMIX-ARITH}37 \&{static} \&{ftype} (\,)@>
+@$sfunpack {MMIX-ARITH}38 \&{static} \&{ftype} (\,)@>
+@$bignum_times_ten {MMIX-ARITH}60 \&{static} \&{void} (\,)@>
+@$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
+@$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
+@$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
+static octa fpack(octa,int,char,int);
 @z
 
 @x [98]

@@ -46,7 +46,7 @@ typedef enum{@+false,true@+} bool;
 @<External routines@>@;
 @z
 
-@x [2] l.44 C99 prototypes for C2x.
+@x [2] l.44 Improved module structure with interface.
 @ Subroutines of this program are declared first with a prototype,
 as in {\mc ANSI C}, then with an old-style \CEE/ function definition.
 Here are some preprocessor commands that make this work correctly with both
@@ -60,24 +60,23 @@ new-style and old-style compilers.
 #define ARGS(list) ()
 #endif
 @y
-@ Subroutines of this program are declared and defined with a prototype,
-as in {\mc ANSI C}.
-@^prototypes for functions@>
+@ Each user of its functionality should include the following header file.
 
-@s ftype int
-@s octa int
-@s tetra int
-
-@<Internal...@>=
-static octa fpack(octa,int,char,int);
-static tetra sfpack(octa,int,char,int);
-static ftype funpack(octa,octa*,int*,char*);
-static ftype sfunpack(tetra,octa*,int*,char*);
+@(mmix-arith.h@>=
+#ifndef MMIX_ARITH_H
+#define MMIX_ARITH_H
 @#
-static void bignum_times_ten(bignum*);
-static int bignum_compare(bignum*,bignum*);
-static void bignum_dec(bignum*,bignum*,tetra);
-static void bignum_double(bignum*);
+#include <stdbool.h> /* |@!bool| */
+#include <stdint.h>  /* |@!uint32_t| */
+@#
+#define Extern extern
+@<Tetrabyte and octabyte type definitions@>@;
+@<Exported constants@>@;
+@<External variables@>@;
+@<External prototypes@>@;
+#undef Extern
+@#
+#endif /* |MMIX_ARITH_H| */
 @z
 
 @x [3] l.57 Use standard C99 types.
@@ -1208,26 +1207,9 @@ yf=shift_right(yf,1,true);
 @x [96] l.1845 Improved module structure with interface.
 @* Index.
 @y
-@* Public interface. This program module is central to the whole \MMIX\ system.
-Each user of its functionality should include the following header file.
+@* Public interface stuff.
 
-@(mmix-arith.h@>=
-#ifndef MMIX_ARITH_H
-#define MMIX_ARITH_H
-@#
-#include <stdbool.h> /* |@!bool| */
-#include <stdint.h>  /* |@!uint32_t| */
-@#
-#define Extern extern
-@<Tetrabyte and octabyte type definitions@>@;
-@<Exported constants@>@;
-@<External variables@>@;
-@<External prototypes@>@;
-#undef Extern
-@#
-#endif /* |MMIX_ARITH_H| */
-
-@ @<Exported constants@>=
+@<Exported constants@>=
 #define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
 #define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
 #define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
@@ -1235,6 +1217,20 @@ Each user of its functionality should include the following header file.
 @#
 #define sign_bit ((tetra)0x80000000)
 
+@ Subroutines of this program are declared and defined with a prototype,
+as in {\mc ANSI C}.
+@^prototypes for functions@>
+
+@<Internal...@>=
+static octa fpack(octa,int,char,int);
+static tetra sfpack(octa,int,char,int);
+static ftype funpack(octa,octa*,int*,char*);
+static ftype sfunpack(tetra,octa*,int*,char*);
+@#
+static void bignum_times_ten(bignum*);
+static int bignum_compare(bignum*,bignum*);
+static void bignum_dec(bignum*,bignum*,tetra);
+static void bignum_double(bignum*);
 @ @<External proto...@>=
 @^prototypes for functions@>
 Extern void print_octa(octa);
