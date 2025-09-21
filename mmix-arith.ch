@@ -300,7 +300,7 @@ octa signed_odiv(
 @x [24] l.332 GCC warning. Change from MMIX home.
  case 0+0: return q;
 @y
-  @=/* else fall through */@>@;
+  @=/* fall through */@>@;
  case 0+0: default: return q;
 @z
 
@@ -674,7 +674,7 @@ octa fmult(
 @x [42] l.734 GCC warning.
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 @y
-  @=/* else fall through */@>@;
+  @=/* fall through */@>@;
 case 4*zro+nan: case 4*num+nan: case 4*inf+nan:
 @z
 
@@ -1023,7 +1023,7 @@ octa fintegerize(
 @x [86] l.1625 GCC warning. Change from MMIX home.
  case inf: case zro: return z;
 @y
-  @=/* else fall through */@>@;
+  @=/* fall through */@>@;
  case inf: case zro: default: return z;
 @z
 
