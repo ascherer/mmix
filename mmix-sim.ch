@@ -1659,7 +1659,7 @@ void scan_option(
 @x [143] l.2967 GCC warning
  case 'P': profiling=true;@+return;
 @y
-  @=/* else fall through */@>@;
+  @=/* fall through */@>@;
  case 'P': profiling=true;@+return;
 @z
 

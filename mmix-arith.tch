@@ -54,11 +54,6 @@ octa fplus(
 @y
   @+ @=/* else fall through */@>@;
 @z
-@x [46]
-  @=/* else fall through */@>@;
-@y
-  @+ @=/* else fall through */@>@;
-@z
 
 @x [54]
 representation that will be input as precisely the same value.

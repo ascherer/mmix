@@ -635,9 +635,9 @@ void scan_option(
 @-arg@> @-usage@> @-k@>
 @z
 @x [143]
-  @=/* else fall through */@>@;
+  @=/* fall through */@>@;
 @y
-  @+ @=/* else fall through */@>@;
+  @+ @=/* fall through */@>@;
 @z
 
 @x [144]
