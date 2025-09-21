@@ -64,11 +64,11 @@
 @$floatit {MMIX-ARITH}89 \&{octa} (\,)@>
 @$froot {MMIX-ARITH}91 \&{octa} (\,)@>
 @$fremstep {MMIX-ARITH}93 \&{octa} (\,)@>
-@$zero_octa {MMIX-ARITH}97 \&{octa}@>
-@$neg_one {MMIX-ARITH}97 \&{octa}@>
-@$inf_octa {MMIX-ARITH}97 \&{octa}@>
-@$standard_NaN {MMIX-ARITH}97 \&{octa}@>
-@$sign_bit {MMIX-ARITH}97 \&{tetra}@>
+@$zero_octa {MMIX-ARITH}96 \&{octa}@>
+@$neg_one {MMIX-ARITH}96 \&{octa}@>
+@$inf_octa {MMIX-ARITH}96 \&{octa}@>
+@$standard_NaN {MMIX-ARITH}96 \&{octa}@>
+@$sign_bit {MMIX-ARITH}96 \&{tetra}@>
 
 @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
