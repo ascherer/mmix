@@ -69,9 +69,10 @@ new-style and old-style compilers.
 #include <stdbool.h> /* |@!bool| */
 #include <stdint.h>  /* |@!uint32_t| */
 @#
-#define Extern extern
 @<Tetrabyte and octabyte type definitions@>@;
 @<Exported constants@>@;
+@#
+#define Extern extern
 @<External variables@>@;
 @<External prototypes@>@;
 #undef Extern
@@ -108,12 +109,13 @@ octa neg_one={-1,-1}; /* |neg_one.h=neg_one.l=-1| */
 octa inf_octa={0x7ff00000,0}; /* floating point $+\infty$ */
 octa standard_NaN={0x7ff80000,0}; /* floating point NaN(.5) */
 @y
-@ @<External routines@>=
-void print_octa(octa o)
-{
-  if (o.h) printf("%x%08x",o.h,o.l);
-  else printf("%x",o.l);
-}
+@ @<Exported constants@>=
+#define sign_bit ((tetra)0x80000000)
+@#
+#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
+#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
+#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
+#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
 @z
 
 @x [5] l.77 C99 prototypes for C2x.
@@ -225,7 +227,7 @@ bool overflow; /* set by certain subroutines for signed arithmetic */
 @ The identifier \&{Extern} is used in {\mc MMIX-ARITH} to
 declare variables that are accessed in other modules. Actually
 all appearances of `\&{Extern}' are defined to be blank here, but
-`\&{Extern}' will become `\&{extern}' in the header file |@(mmix-arith.h@>|.
+`\&{Extern}' becomes `\&{extern}' in the header file |@(mmix-arith.h@>|.
 
 @d Extern  /* blank for us, \&{extern} for them */
 @f Extern extern
@@ -1208,34 +1210,12 @@ yf=shift_right(yf,1,true);
 @* Index.
 @y
 @* Public interface stuff.
-
-@<Exported constants@>=
-#define zero_octa @[(octa){0,0}@] /* |zero_octa.h=zero_octa.l=0| */
-#define neg_one @[(octa){-1,-1}@] /* |neg_one.h=neg_one.l=-1| */
-#define inf_octa @[(octa){0x7ff00000,0}@] /* floating point $+\infty$ */
-#define standard_NaN @[(octa){0x7ff80000,0}@] /* floating point NaN(.5) */
-@#
-#define sign_bit ((tetra)0x80000000)
-
-@ Subroutines of this program are declared and defined with a prototype,
+Subroutines of this program are declared and defined with a prototype,
 as in {\mc ANSI C}.
 @^prototypes for functions@>
 
-@<Internal...@>=
-static octa fpack(octa,int,char,int);
-static tetra sfpack(octa,int,char,int);
-static ftype funpack(octa,octa*,int*,char*);
-static ftype sfunpack(tetra,octa*,int*,char*);
-@#
-static void bignum_times_ten(bignum*);
-static int bignum_compare(bignum*,bignum*);
-static void bignum_dec(bignum*,bignum*,tetra);
-static void bignum_double(bignum*);
-@ @<External proto...@>=
+@<External proto...@>=
 @^prototypes for functions@>
-Extern void print_octa(octa);
-  /* standard output format */
-@#
 Extern octa oplus(octa,octa);
   /* unsigned $y+z$ */
 Extern octa ominus(octa,octa);
@@ -1312,6 +1292,17 @@ Extern octa froot(octa,int);
   /* floating point $x=\sqrt z$ */
 Extern octa fremstep(octa,octa,int);
   /* floating point $x\,{\rm rem}\,z=y\,{\rm rem}\,z$ */
+
+@ @<Internal...@>=
+static octa fpack(octa,int,char,int);
+static tetra sfpack(octa,int,char,int);
+static ftype funpack(octa,octa*,int*,char*);
+static ftype sfunpack(tetra,octa*,int*,char*);
+@#
+static void bignum_times_ten(bignum*);
+static int bignum_compare(bignum*,bignum*);
+static void bignum_dec(bignum*,bignum*,tetra);
+static void bignum_double(bignum*);
 
 @* Index.
 @z
