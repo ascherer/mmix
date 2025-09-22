@@ -32,7 +32,7 @@ Readers of this program should be familiar with the explanation of \MMIX's
 @y
 #include "mmix-pipe.h" /* we use our own interface first;
   see |@(mmix-pipe.h@>| */
-#include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, etc. */
+#include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, |@!print_octa|, etc. */
 @#
 #include <stdarg.h> /* |@!vfprintf|, |@!va_start|, |@!va_end| */
 @#
@@ -73,7 +73,7 @@ Extern int verbose; /* controls the level of diagnostic output */
 #include <stdlib.h> /* we'll override |div| and |random| below */
 @#
 #include "mmix-arith.h"
-  /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, |@!print_octa|, etc. */
+  /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, etc. */
 @#
 @z
 
@@ -322,7 +322,7 @@ for the assembler and for the non-pipelined simulator.
 @s octa int
 @z
 
-@x [18] l.336 Move 'print_octa' to MMIX-ARITH.
+@x [18] l.336 Move 'print_octa' to MMIX-IO.
 @ @<Internal proto...@>=
 static void print_octa @,@,@[ARGS((octa))@];
 

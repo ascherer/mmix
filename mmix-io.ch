@@ -61,6 +61,7 @@ typedef struct {tetra h,l;} octa; /* two tetrabytes make one octabyte */
 extern void mmix_io_init(void);
 extern void mmix_fake_stdin(FILE*);
 extern void print_trip_warning(int,octa);
+extern void print_octa(octa);
 @#
 extern octa mmix_fopen(unsigned char,octa,octa,@/
 @t\qquad@>
@@ -465,4 +466,17 @@ void print_trip_warning(
 char *trip_warning[]={
 @y
 static char *trip_warning[]={
+@z
+
+@x [25] l.403
+@* Index.
+@y
+@ @<Subroutines@>=
+void print_octa(octa o)
+{
+  if (o.h) printf("%x%08x",o.h,o.l);
+  else printf("%x",o.l);
+}
+
+@* Index.
 @z

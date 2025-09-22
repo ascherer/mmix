@@ -207,31 +207,11 @@ if (ye>=ze) { @+
 }
 @z
 
-@x [97]
-static octa fpack(octa,int,char,int);
+@x [96]
+@<External proto...@>=
 @y
+@-sim@> @-u@> @<External proto...@>=
 @%
-@$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
-@$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
-@$funpack {MMIX-ARITH}37 \&{static} \&{ftype} (\,)@>
-@$sfunpack {MMIX-ARITH}38 \&{static} \&{ftype} (\,)@>
-@$bignum_times_ten {MMIX-ARITH}60 \&{static} \&{void} (\,)@>
-@$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
-@$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
-@$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
-static octa fpack(octa,int,char,int);
-@z
-
-@x [98]
-@ @<External proto...@>=
-@y
-@ @-sim@> @-u@> @<External proto...@>=
-@z
-@x [98]
-Extern void print_octa(octa);
-@y
-@%
-@$print_octa {MMIX-ARITH}4 \&{void} (\,)@>
 @$oplus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$ominus {MMIX-ARITH}5 \&{octa} (\,)@>
 @$incr {MMIX-ARITH}6 \&{octa} (\,)@>
@@ -268,5 +248,20 @@ Extern void print_octa(octa);
 @$floatit {MMIX-ARITH}89 \&{octa} (\,)@>
 @$froot {MMIX-ARITH}91 \&{octa} (\,)@>
 @$fremstep {MMIX-ARITH}93 \&{octa} (\,)@>
-Extern void print_octa(octa);
+@z
+
+@x [97]
+@ @<Internal...@>=
+@y
+@r @ @<Internal...@>=
+@%
+@$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
+@$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
+@$funpack {MMIX-ARITH}37 \&{static} \&{ftype} (\,)@>
+@$sfunpack {MMIX-ARITH}38 \&{static} \&{ftype} (\,)@>
+@$bignum_times_ten {MMIX-ARITH}60 \&{static} \&{void} (\,)@>
+@$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
+@$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
+@$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
+static octa fpack(octa,int,char,int);
 @z

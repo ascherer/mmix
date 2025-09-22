@@ -59,8 +59,7 @@ represents unsigned 32-bit integers.
 @s octa int
 
 @c
-#include "mmix-arith.h"
-  /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit|, |@!print_octa| */
+#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!sign_bit| */
 @z
 
 @x [10] l.560 Stuff from MMIX-ARITH.
@@ -1443,7 +1442,7 @@ Here we need only write three primitive
 interfaces on which they depend.
 
 @c
-#include "mmix-io.h" /* |@!mmix_io_init| */
+#include "mmix-io.h" /* |@!mmix_io_init|, |@!print_octa| */
 
 @ The following three functions are used in {\mc MMIX-IO} as ``mixins'' in
 section \X108:Trips and traps\X.  Similar functions are defined in the
