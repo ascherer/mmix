@@ -312,6 +312,12 @@ void print_freqs(
 @d trace_bit (1<<3)
 @z
 
+@x [64]
+@ Much of the simulation is table-driven, based on a static data
+@y
+@r @ Much of the simulation is table-driven, based on a static data
+@z
+
 @x [72]
 @<Set |z| from register Z@>=
 @y
