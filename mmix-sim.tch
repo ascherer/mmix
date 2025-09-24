@@ -15,7 +15,7 @@
 @x [2]
 \bull \.{-r}\quad Trace details of the register stack. This option
 @y
-\ifx\undefined\eightpoint \else \vfill \vbox{} \vskip2cm \fi
+\ifx\undefined\eightpoint\else\vbox to1.2cm{}\fi
 \bull \.{-r}\quad Trace details of the register stack. This option
 @z
 
@@ -118,9 +118,11 @@ $$\displaylines{
 \ifx\undefined\ninepoint \else \begingroup \ninepoint \fi
 @z
 @x [8]
+1H       BYTE "Trouble writing StdOut!",\#a,0\cr
 \noalign{\smallskip}
 @y
-\noalign{\smallskip}
+1H       BYTE "Trouble writing StdOut!",\#a,0\cr
+\noalign{\ifx\undefined\eightpoint\smallskip\else\vbox to4mm{}\fi}
 @z
 @x [8]
 }$$
@@ -365,7 +367,7 @@ octa *l; /* local registers */
 @d SUBSUBVERSION 3 /* further qualification to version number */
 @y
 @d SUBSUBVERSION 3 /* further qualification to version number */
-@t}\ifx\undefined\eightpoint\else\vskip2cm\fi{@>
+@t}\ifx\undefined\eightpoint\vskip-4mm\else\vbox to2.2cm{}\fi{@>
 @z
 @x [77]
 g[rT].h=0x80000005;

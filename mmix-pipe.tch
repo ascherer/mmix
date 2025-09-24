@@ -165,7 +165,8 @@ static coroutine *queuelist(int);
 the address of the subsequent instruction.
 @y
 the address of the subsequent instruction.
-\ifx\undefined\eightpoint \else \vfill\vbox{}\vskip5mm \fi
+
+\ifx\undefined\eightpoint\else\vbox to1cm{}\fi
 @z
 
 @x [47]
@@ -1487,7 +1488,7 @@ static void print_write_buffer(void);
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
 @y
-\ifx\undefined\eightpoint \else \vfill\vbox{}\vskip1cm \fi
+\ifx\undefined\eightpoint\else\vbox to2cm{}\fi
 @<Commit to memory...@>=
 { register write_node *q=write_tail;
 @-p@> @-q@>

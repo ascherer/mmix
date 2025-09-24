@@ -88,6 +88,12 @@ $$\begingroup\ninepoint
 @ Most of the parameters are variables declared in the header
 @z
 @x [15]
+static cpv_spec CPV[]={@|
+@y
+@t}\ifx\undefined\eightpoint\vskip-5.5mm\else\vbox to3.2cm{}\fi{@>@#
+static cpv_spec CPV[]={@|
+@z
+@x [15]
 {"mul4", mul4, 10},@|
 @y
 {"mul4", mul4, 10},
@@ -217,6 +223,12 @@ int_stages[mul]=n; @+
 @-wdif@> @-xor@> @-zset@>
 @%
 @$mul0 {MMIX-PIPE}49 =$\,0,\dots,\\{resum}=89$, \&{internal\_opcode}@>
+@z
+@x [28]
+  ld,ld,ld,ld,ld,ld,ld,ld,@|
+@y
+@t}\ifx\undefined\eightpoint\else\vbox to4mm{}\fi{@>
+  ld,ld,ld,ld,ld,ld,ld,ld,@|
 @z
 
 @x [29]
