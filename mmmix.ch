@@ -168,10 +168,10 @@ static FILE *prog_file;
 static bool undump_octa @,@,@[ARGS((void))@];@+@t}\6{@>
 static bool undump_octa()
 @y
-@d oops { @+
-  fprintf(stderr,"Premature end of file on %s!\n",prog_file_name); @+
+@d oops {
+  fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
 @.Premature end of file...@>
-  return false; @+ }
+  return false; }
 
 @<Sub...@>=
 static bool undump_octa(void)
@@ -194,13 +194,13 @@ oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
 @y
   t1=fgetc(prog_file);@+ if (t1==EOF) oops;
   t2=fgetc(prog_file);@+ if (t2==EOF) oops;
-  t3=fgetc(prog_file);@+ if (t3==EOF) oops;
-  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@/
+  t3=fgetc(prog_file);@+ if (t3==EOF) oops;@#
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@#
   t0=fgetc(prog_file);@+ if (t0==EOF) oops;
   t1=fgetc(prog_file);@+ if (t1==EOF) oops;
   t2=fgetc(prog_file);@+ if (t2==EOF) oops;
-  t3=fgetc(prog_file);@+ if (t3==EOF) oops;
-  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;@/
+  t3=fgetc(prog_file);@+ if (t3==EOF) oops;@#
+  cur_dat.l=(t0<<24)+(t1<<16)+(t2<<8)+t3;@#
   return true;
 @z
 
