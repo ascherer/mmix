@@ -95,7 +95,7 @@ byte read_byte(void);
 void print_stab(void);
 @z
 
-@x [6] l.74
+@x [6] l.74 Reuse code.
 Here we need to define only the basic constants used for interpretation.
 @y
 @z
@@ -237,13 +237,13 @@ cur_loc=zero_octa;
      memcpy(p,buf,4);
 @z
 
-@x [21] l.302
+@x [21] l.302 Use standard 'bool'.
  while(1) {
 @y
  while (true) {
 @z
 
-@x [22] l.316
+@x [22] l.316 Use standard 'bool'.
 case lop_post: postamble=1;
 @y
 case lop_post: postamble=true;

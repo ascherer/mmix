@@ -358,7 +358,7 @@ trie_node *trie_search(
   Char *s)
 @z
 
-@x [57] l.1493
+@x [57] l.1493 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -705,31 +705,31 @@ trie_node* prune(
   trie_node* t)
 @z
 
-@x [73] l.2154
+@x [73] l.2154 Use standard 'bool'.
   register int useful=0;
 @y
   bool useful=false;
 @z
 
-@x [73] l.2156
+@x [73] l.2156 Use standard 'bool'.
     if (t->sym->serial) useful=1;
 @y
     if (t->sym->serial) useful=true;
 @z
 
-@x [73] l.2161
+@x [73] l.2161 Use standard 'bool'.
     if (t->left) useful=1;
 @y
     if (t->left) useful=true;
 @z
 
-@x [73] l.2165
+@x [73] l.2165 Use standard 'bool'.
     if (t->mid) useful=1;
 @y
     if (t->mid) useful=true;
 @z
 
-@x [73] l.2169
+@x [73] l.2169 Use standard 'bool'.
     if (t->right) useful=1;
 @y
     if (t->right) useful=true;
@@ -765,7 +765,7 @@ void out_stab(
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
-@x [85] l.2341
+@x [85] l.2341 Use standard 'bool'.
 while (1) {
 @y
 while (true) {
@@ -1263,13 +1263,13 @@ int main(
   char *argv[])
 @z
 
-@x [136] l.3183
+@x [136] l.3183 Use standard 'bool'.
   while(1) {
 @y
   while (true) {
 @z
 
-@x [136] l.3185
+@x [136] l.3185 Use standard 'bool'.
     while(1) {
 @y
     while (true) {

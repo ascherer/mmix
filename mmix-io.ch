@@ -280,7 +280,7 @@ octa mmix_fgets(
 @y
 @z
 
-@x [14] l.187
+@x [14] l.187 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -336,7 +336,7 @@ octa mmix_fwrite(
   int @[@] (*mmgetchars)(char*,int,octa,int) @,)
 @z
 
-@x [18] l.284
+@x [18] l.284 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -367,7 +367,7 @@ octa mmix_fputs(
   octa o=zero_octa;
 @z
 
-@x [19] l.307
+@x [19] l.307 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -398,7 +398,7 @@ octa mmix_fputws(
   octa o=zero_octa;
 @z
 
-@x [20] l.331
+@x [20] l.331 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -468,7 +468,7 @@ char *trip_warning[]={
 static char *trip_warning[]={
 @z
 
-@x [25] l.403
+@x [25] l.403 Move 'print_octa' from MMIX-PIPE and 'print_hex' from MMIX-SIM.
 @* Index.
 @y
 @ @<Subroutines@>=

@@ -547,7 +547,7 @@ static tetra sfpack(
   int r) /* the rounding mode */
 @z
 
-@x [35] l.588
+@x [35] l.588 Simplification.
 o = o>>2;
 @y
 o >>= 2;
@@ -794,7 +794,7 @@ octa fplus(
     zf=shift_right(o,d,true);
 @z
 
-@x [50] l.879
+@x [50] l.879 Use standard 'bool'.
 or |e| is negative. It returns 1 if |s=0| and $y\approx z\ (e)$ or if
 |s!=0| and $y\sim z\ (e)$,
 @y
@@ -887,7 +887,7 @@ ff.dat[k]=shift_right(f,magic_offset-e-28*k,true).l&0xfffffff;
 gg.dat[k]=shift_right(g,magic_offset-e-28*k,true).l&0xfffffff;
 @z
 
-@x [65] l.1262
+@x [65] l.1262 Use standard 'bool'.
   while (1) {
 @y
   while (true) {

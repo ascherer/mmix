@@ -372,7 +372,7 @@ fixr: tmp=incr(cur_loc,-(delta>=0x1000000? (delta&0xffffff)-(1<<j): delta)<<2);
      @+ memcpy(p,buf,4);
 @z
 
-@x [36] l.1033
+@x [36] l.1033 Use standard 'bool'.
 case lop_spec:@+ while(1) {
 @y
 case lop_spec:@+ while (true) {
@@ -415,13 +415,13 @@ from the function of the same name.
 @f mstat int /* `\&{mstat}' will be equivalent to `\&{struct stat}' */
 @f stat x /* but function `|stat|' will not be treated as a reserved word */
 @z
-@x [43] l.1127
+@x [43] l.1127 Do not export this.
 @<Preprocessor macros@>=
 @y
 @c
 @z
 
-@x [44] l.1134
+@x [44] l.1134 CWEB coding trick.
   struct stat stat_buf;
 @y
   @+ struct mstat stat_buf;
@@ -435,7 +435,7 @@ void print_line(k)
 void print_line(
   int k)
 @z
-@x [45] l.1153
+@x [45] l.1153 Format.
   char buf[11];
 @y
   @+ char buf[11];
@@ -1335,7 +1335,7 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
-@x [100] l.2227
+@x [100] l.2227 Move to MMIX-ARITH.
 @ @d ROUND_OFF 1
 @d ROUND_UP 2
 @d ROUND_DOWN 3
@@ -1617,7 +1617,7 @@ void show_stats(
 @#
 @z
 
-@x [141] l.2888
+@x [141] l.2888 Use '@h' macros.
 @<Preprocessor macros@>@;
 @y
 @h
@@ -1638,7 +1638,7 @@ int main(
   char *argv[])
 @z
 
-@x [141] l.2903
+@x [141] l.2903 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
