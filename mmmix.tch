@@ -36,24 +36,6 @@ if (strlen(prog_file_name)>4 &&
 @y
 if (strlen(prog_file_name)>4 && @|
 @z
-@x [4]
-  @<Input an \MMIX\ binary file@>@;
-else @<Input a rudimentary hexadecimal file@>;
-@y
-  { @<Input an \MMIX\ binary file@>; } @+
-else { @<Input a rudimentary hexadecimal file@>; }
-@z
-
-@x [6]
-@ @<Input a rudimentary hexadecimal file@>=
-{
-@y
-@ @<Input a rudimentary hexadecimal file@>=
-@z
-@x [6]
-}
-@y
-@z
 
 @x [7]
 @ @<Change the current location@>=
@@ -61,31 +43,10 @@ else { @<Input a rudimentary hexadecimal file@>; }
 @r @ @<Change the current location@>=
 @z
 
-@x [9]
-@<Input an \MMIX\ binary file@>=
-{
-@y
-@<Input an \MMIX\ binary file@>=
-@z
-@x [9]
-    new_chunk=true;
-@y
-    new_chunk=true; @+
-@z
-@x [9]
-}
-@y
-@z
-
 @x [10]
-@d oops { @+
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@#
 @y
-@d oops @+ { @+
-@z
-@x [10]
-  register int t0,t1,t2,t3;
-@y
-  @+ register int t0,t1,t2,t3;
+  cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@t}\vskip1cm{@>@#
 @z
 
 @x [13]
