@@ -68,7 +68,7 @@ static void get_token() /* set |token| to the next token of the configuration fi
 static void get_token(void) /* set |token| to the next token of the configuration file */
 @z
 
-@x [10] l.376
+@x [10] l.376 Use standard 'bool'.
   while(1) { /* scan past white space */
 @y
   while (true) { /* scan past white space */

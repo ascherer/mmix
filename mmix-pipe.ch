@@ -125,42 +125,42 @@ as in {\mc ANSI C}.
 
 @d issue_bit (1<<0)
 @z
-@x [8] l.187
+@x [8] l.187 Non-exported values.
 #define pipe_bit (1<<1)
 @y
 @d pipe_bit (1<<1)
 @z
-@x [8] l.189
+@x [8] l.189 Non-exported values.
 #define coroutine_bit (1<<2)
 @y
 @d coroutine_bit (1<<2)
 @z
-@x [8] l.191
+@x [8] l.191 Non-exported values.
 #define schedule_bit (1<<3)
 @y
 @d schedule_bit (1<<3)
 @z
-@x [8] l.193
+@x [8] l.193 Non-exported values.
 #define uninit_mem_bit (1<<4)
 @y
 @d uninit_mem_bit (1<<4)
 @z
-@x [8] l.195
+@x [8] l.195 Non-exported values.
 #define interactive_read_bit (1<<5)
 @y
 @d interactive_read_bit (1<<5)
 @z
-@x [8] l.197
+@x [8] l.197 Non-exported values.
 #define show_spec_bit (1<<6)
 @y
 @d show_spec_bit (1<<6)
 @z
-@x [8] l.199
+@x [8] l.199 Non-exported values.
 #define show_pred_bit (1<<7)
 @y
 @d show_pred_bit (1<<7)
 @z
-@x [8] l.201
+@x [8] l.201 Non-exported values.
 #define show_wholecache_bit (1<<8)
 @y
 @d show_wholecache_bit (1<<8)
@@ -640,13 +640,13 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @z
 
-@x [54] l.1172
+@x [54] l.1172 Move commen BIT values to MMIX-ARITH.
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 @y
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 |X_BIT| and beyond are defined in {\mc MMIX-ARITH}.
 @z
-@x [54] l.1183
+@x [54] l.1183 Move commen BIT values to MMIX-ARITH.
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
 @d U_BIT (1<<10) /* floating underflow */
@@ -834,7 +834,7 @@ unsigned char flags[256]={@|@t\1\1@>
 static unsigned char flags[256]={@|@t\1\1@>
 @z
 
-@x [85] l.1804
+@x [85] l.1804 Use 'fall through' comments in tangled C code.
       } /* otherwise fall through, will wait on |cool->go| */
  case go: case pushgo: case trap: case resume: case syncid:
 @y
@@ -1073,7 +1073,7 @@ mem.addr.h=mem.addr.l=-1;
 mem.addr=neg_one;
 @z
 
-@x [117] l.2234
+@x [117] l.2234 Use 'fall through' comments in tangled C code.
 case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
 case pst:
 @y
@@ -1083,7 +1083,7 @@ case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
 case pst:
 @z
 
-@x [119] l.2271
+@x [119] l.2271 Use 'fall through' comments in tangled C code.
 case pushj: {@+register int x=cool->xx;
 @y
 @+@=/* fall through */@>@;
@@ -1102,7 +1102,7 @@ case pushj: {@+register int x=cool->xx;
   cool->x.known=true, cool->x.o=(octa){0, x};
 @z
 
-@x [119] l.2286
+@x [119] l.2286 Use 'fall through' comments in tangled C code.
 case go: inst_ptr.p=&cool->go;@+break;
 @y
 @+@=/* else fall through */@>@;
@@ -1147,7 +1147,7 @@ case go: inst_ptr.p=&cool->go;@+break;
 @+ @t}\6\4{@>
 @z
 
-@x [125] l.2416
+@x [125] l.2416 Use 'fall through' comments in tangled C code.
  case 0:@<Simulate an action of the fetch coroutine@>;
  case 1:@<Simulate the first stage of an execution pipeline@>;
  default:@<Simulate later stages of an execution pipeline@>;
@@ -1169,7 +1169,7 @@ static coroutine Dlocker; /* another */
 static control vanish_ctl; /* such coroutines share a common control block */
 @z
 
-@x [129] l.2450
+@x [129] l.2450 Move 'pipe_limit' here.
 defined below.
 @y
 defined below.
@@ -1180,7 +1180,7 @@ it must never interfere with the |stage| numbers for special coroutines.
 (The author doesn't feel guilty about making this restriction.)
 @z
 
-@x [129] l.2461 Move pipe_limit here.
+@x [129] l.2461 Move 'pipe_limit' here.
 #define cleanup 91 /* coroutine for cleaning the caches */
 @y
 #define cleanup 91 /* coroutine for cleaning the caches */
@@ -1188,7 +1188,7 @@ it must never interfere with the |stage| numbers for special coroutines.
 #define pipe_limit 90
 @z
 
-@x [130] l.2469
+@x [130] l.2469 Sort name of section; add 'fall through' comment.
  case 0: @<Wait for input data if necessary; set |state=1| if it's there@>;
  case 1: @<Begin execution of an operation@>;
 @y
@@ -1219,7 +1219,7 @@ it must never interfere with the |stage| numbers for special coroutines.
   default:@+;
 @z
 
-@x [135] l.2568
+@x [135] l.2568 Add 'fall through' comment.
  case 0: panic(confusion("switch2"));
  case 1: @<Begin execution of a stage-two operation@>;
 @y
@@ -1234,7 +1234,7 @@ it must never interfere with the |stage| numbers for special coroutines.
   @/@t\4@>@<Special cases for states in later stages@>;
 @z
 
-@x [136] l.2576
+@x [136] l.2576 Move 'pipe_limit' up.
 can be overridden by |MMIX_config|. The total number of stages
 supported by this simulator is limited to 90, since
 it must never interfere with the |stage| numbers for special coroutines
@@ -1242,7 +1242,7 @@ defined below. (The author doesn't feel guilty about making this restriction.)
 @y
 can be overridden by |MMIX_config|.
 @z
-@x [136] l.2582
+@x [136] l.2582 Move 'pipe_limit' up.
 #define pipe_limit 90
 @y
 @z
@@ -1298,7 +1298,7 @@ case mux: data->x.o=oor(oand(data->y.o, data->b.o),
                         oandn(data->z.o, data->b.o));
 @z
 
-@x [143] l.2675
+@x [143] l.2675 Add 'fall through' comment.
 case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @y
 @=/* else fall through */@>@;
@@ -1908,7 +1908,7 @@ void mem_write(
                  mem_chunks));
 @z
 
-@x [215] l.3828
+@x [215] l.3828 Add 'fall through' comment.
   case 1: set_lock(self,mem_lock);
 @y
   @+@=/* fall through */@>@;
@@ -1924,14 +1924,14 @@ void mem_write(
   octa addr=c->outbuf.tag;@+ off=(addr.l&0xffff)>>3;
 @z
 
-@x [217] l.3876
+@x [217] l.3876 Add 'fall through' comment.
 case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
 @y
 @+@=/* fall through */@>@;
 case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
-@x [217] l.3882
+@x [217] l.3882 Add 'fall through' comment.
   case 1: set_lock(self,Scache->lock);
 @y
   @+@=/* fall through */@>@;
@@ -1944,7 +1944,7 @@ case flush_to_S: {@+register cache *c=(cache *)data->ptr_a;
     if (block_diff) @<Copy \9{s}|Scache->inbuf| to slot |p|@>@;
 @z
 
-@x [217] l.3893
+@x [217] l.3893 Add 'fall through' comment.
   case 4: copy_block(c,&(c->outbuf),Scache,p);
 @y
   @=/* fall through */@>@;
@@ -1970,42 +1970,42 @@ Scache->outbuf.tag.l=c->outbuf.tag.l&(-Scache->bb);
 Scache->outbuf.tag=(octa){c->outbuf.tag.h, c->outbuf.tag.l&(-Scache->bb)};
 @z
 
-@x [222] l.3970
+@x [222] l.3970 Add 'fall through' comment.
 case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
 @y
 @+@=/* fall through */@>@;
 case fill_from_mem: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
-@x [222] l.3982
+@x [222] l.3982 Add 'fall through' comment.
   case 2:@+if (c!=Scache) {
 @y
   @+@=/* fall through */@>@;
   case 2:@+if (c!=Scache) {
 @z
 
-@x [224] l.4012
+@x [224] l.4012 Add 'fall through' comment.
 case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
 @y
 @+@=/* fall through */@>@;
 case fill_from_S: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
-@x [224] l.4019
+@x [224] l.4019 Add 'fall through' comment.
   case 1: @<Start the S-cache filler@>;
 @y
   @+@=/* fall through */@>@;
   case 1: @<Start the S-cache filler@>;
 @z
 
-@x [224] l.4031
+@x [224] l.4031 Add 'fall through' comment.
   case 3: @<Copy data from |p| into |c->inbuf|@>;
 @y
   @+@=/* fall through */@>@;
   case 3: @<Copy \9{d}data from |p| into |c->inbuf|@>;
 @z
 
-@x [224] l.4035
+@x [224] l.4035 Add 'fall through' comment.
   case 5:@+ if (c->lock) wait(1);
 @y
   @+@=/* fall through */@>@;
@@ -2028,7 +2028,7 @@ static control clean_ctl;
 static lockvar clean_lock;
 @z
 
-@x [232] l.4135
+@x [232] l.4135 Add 'fall through' comment.
 case cleanup: p=(cacheblock*)data->ptr_b;
 @y
 @+@=/* fall through */@>@;
@@ -2049,7 +2049,7 @@ case cleanup: p=(cacheblock*)data->ptr_b;
   data->y.o=(octa){i, j};
 @z
 
-@x [233] l.4166
+@x [233] l.4166 Add 'fall through' comment.
 case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
 @y
 @+@=/* fall through */@>@;
@@ -2062,14 +2062,14 @@ case 3:@+ if (Dcache->lock || (j=get_reader(Dcache))<0) wait(1);
   data->y.o=(octa){i, j};
 @z
 
-@x [234] l.4213
+@x [234] l.4213 Add 'fall through' comment.
 case 8:@+ if (Scache->lock) wait(1);
 @y
 @+@=/* fall through */@>@;
 case 8:@+ if (Scache->lock) wait(1);
 @z
 
-@x [234] l.4224
+@x [234] l.4224 Add 'fall through' comment.
 case 9:@+if (self->lockloc) release_lock(self,Dcache->lock);
 @y
 @+@=/* fall through */@>@;
@@ -2096,21 +2096,21 @@ DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 page_bad=true; /* variable delared below */
 @z
 
-@x [237] l.4304
+@x [237] l.4304 Add 'fall through' comment.
 case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
 @y
 @+@=/* fall through */@>@;
 case fill_from_virt: {@+register cache *c=(cache *)data->ptr_a;
 @z
 
-@x [237] l.4312
+@x [237] l.4312 Add 'fall through' comment.
   case 1:@+if (data->b.p) {
 @y
   @+@=/* fall through */@>@;
   case 1:@+if (data->b.p) {
 @z
 
-@x [237] l.4319
+@x [237] l.4319 Add 'fall through' comment.
   case 2:@+if (c->lock) wait(1);
 @y
   @+@=/* fall through */@>@;
@@ -2292,33 +2292,33 @@ static octa *write_search(
   octa addr)
 @z
 
-@x [255] l.4557
+@x [255] l.4557 Use standard 'bool'.
 qloop:@+ for (;;) {
 @y
 qloop:@+ while (true) {
 @z
 
-@x [256] l.4585
+@x [256] l.4585 Use standard 'bool'.
   if (hot->i!=sync) for (;;) {
 @y
   if (hot->i!=sync) while (true) {
 @z
 
-@x [257] l.4610
+@x [257] l.4610 Add 'fall through' comment.
 case write_from_wbuf:
 @y
 @+@=/* fall through */@>@;
 case write_from_wbuf:
 @z
 
-@x [257] l.4615
+@x [257] l.4615 Add 'fall through' comment.
   case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
 @y
   @+@=/* fall through */@>@;
   case 5:@+if (write_head==wbuf_bot) write_head=wbuf_top;@+ else write_head--;
 @z
 
-@x [257] l.4617
+@x [257] l.4617 Add 'fall through' comment.
   case 0:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @y
   @+@=/* fall through */@>@;
@@ -2346,7 +2346,7 @@ Dcache->outbuf.tag=(octa){write_head->addr.h,
   write_head->addr.l&(-Dcache->bb)};
 @z
 
-@x [265] l.4750
+@x [265] l.4750 Add 'fall through' comment.
 case ld: case ldunc: case ldvts:
 @y
 @+@=/* fall through */@>@;
@@ -2377,7 +2377,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
 
-@x [272] l.4948
+@x [272] l.4948 Add 'fall through' comment.
  case DT_retry:@+if (DTcache->lock || (j=get_reader(DTcache))<0) wait(1);
 @y
  @+@=/* fall through */@>@;
@@ -2396,7 +2396,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    { if (data->i==preld || data->i==prest) goto fin_ex;@+else goto emulate_virt;}
 @z
 
-@x [273] l.4987
+@x [273] l.4987 Add 'fall through' comment.
  case DT_hit:@+ if (data->i==preld || data->i==prest) goto fin_ex;
 @y
  @+@=/* fall through */@>@;
@@ -2427,7 +2427,7 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
    ((data->y.o.l+(data->xx&(Dcache->bb-1))+1)^data->y.o.l)>=(tetra)(Dcache->bb))
 @z
 
-@x [276] l.5035
+@x [276] l.5035 Add 'fall through' comment.
 case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
 @y
 @+@=/* fall through */@>@;
@@ -2452,7 +2452,7 @@ case prest_win:@+ if (data!=old_hot || Dlocker.next) wait(1);
     case LDPTE>>1:@+if ((data->x.o.l&0x1ff8)!=(tetra)page_n) data->x.o=zero_octa;
 @z
 
-@x [280] l.5101
+@x [280] l.5101 Add 'fall through' comment.
 case st_ready:@+ switch (data->i) {
 @y
 @+@=/* fall through */@>@;
@@ -2468,14 +2468,14 @@ case st_ready:@+ switch (data->i) {
  default: goto do_syncid;
 @z
 
-@x [281] l.5117
+@x [281] l.5117 Add 'fall through' comment.
  default: data->x.o=data->b.o;@+goto fin_ex;
 @y
  @+@=/* fall through */@>@;
  default: data->x.o=data->b.o;@+goto fin_ex;
 @z
 
-@x [281] l.5125
+@x [281] l.5125 Add 'fall through' comment.
  case STHT>>1:@+if (data->z.o.l&4) data->x.o.l=data->b.o.h;
 @y
  @+@=/* else fall through */@>@;
@@ -2528,14 +2528,14 @@ static coroutine fetch_co;
 static control fetch_ctl;
 @z
 
-@x [288] l.5228
+@x [288] l.5228 Add 'fall through' comment.
  case 0: @<Wait, if necessary, until the instruction pointer is known@>;
 @y
  @+@=/* fall through */@>@;
  case 0: @<Wait\9{2}, if necessary, until the instruction pointer is known@>;
 @z
 
-@x [288] l.5230
+@x [288] l.5230 Add 'fall through' comment.
    data->state=1;@+ data->interrupt=0;@+ data->x.o=data->z.o=zero_octa;
  case 1: start_fetch:@+ if (data->y.o.h&sign_bit)
 @y
@@ -2579,14 +2579,14 @@ static control fetch_ctl;
      { if (data->i==prego) goto fin_ex;@+else goto new_fetch; }
 @z
 
-@x [298] l.5366
+@x [298] l.5366 Add 'fall through' comment.
  case IT_hit:@+if (data->i==prego) goto fin_ex;@+else goto known_phys;
 @y
  @+@=/* fall through */@>@;
  case IT_hit:@+if (data->i==prego) goto fin_ex;@+else goto known_phys;
 @z
 
-@x [301] l.5399
+@x [301] l.5399 Add 'fall through' comment.
 case fetch_ready:@+if (self->lockloc)
 @y
 @+@=/* fall through */@>@;
@@ -2633,21 +2633,21 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
   data->go.o=(octa){0,m};
 @z
 
-@x [310] l.5540
+@x [310] l.5540 Add 'fall through' comment.
 case 4:@+if (dispatch_lock) wait(1);
 @y
 @+@=/* fall through */@>@;
 case 4:@+if (dispatch_lock) wait(1);
 @z
 
-@x [310] l.5543
+@x [310] l.5543 Add 'fall through' comment.
 case 5:@+if (data!=old_hot) wait(1);
 @y
 @+@=/* fall through */@>@;
 case 5:@+if (data!=old_hot) wait(1);
 @z
 
-@x [312] l.5571
+@x [312] l.5571 Add 'fall through' comment.
 case trip: if (!g[rJ].up->known) goto stall;
 @y
 @+@=/* fall through */@>@;
@@ -2688,35 +2688,35 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 {@+register int m;
 @z
 
-@x [323] l.5782
+@x [323] l.5782 Add 'fall through' comment.
  case RESUME_CONT: resuming+=1+cool->zz;
 @y
  @+@=/* fall through */@>@;
  case RESUME_CONT: resuming+=1+cool->zz;
 @z
 
-@x [323] l.5789
+@x [323] l.5789 Add 'fall through' comment.
  case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
 @y
  @+@=/* fall through */@>@;
  case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
 @z
 
-@x [323] l.5801
+@x [323] l.5801 Add 'fall through' comment.
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
 @y
  @+@=/* else fall through */@>@;
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
 @z
 
-@x [327] l.5859
+@x [327] l.5859 Add 'fall through' comment.
 case incgamma: case save: data->i=st; goto switch1;
 @y
 @+@=/* else fall through */@>@;
 case incgamma: case save: data->i=st; goto switch1;
 @z
 
-@x [329] l.5888
+@x [329] l.5888 Add 'fall through' comment.
   case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
            new_Q.l |= data->z.o.l &~ g[rQ].o.l;
            data->z.o.l |= new_Q.l;@+
@@ -2729,7 +2729,7 @@ case incgamma: case save: data->i=st; goto switch1;
   case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
 @z
 
-@x [331] l.5926
+@x [331] l.5926 Add 'fall through' comment.
 case pushgo: add_go: data->go.o=oplus(data->y.o,data->z.o);
 @y
 @+@=/* fall through */@>@;
@@ -2754,7 +2754,7 @@ new_O=new_S=shift_right(cool->z.o,3,true);
  case 1:@+if (cool_O.l!=cool_S.l) @<Insert \9{a}an instruction to advance gamma@>@;
 @z
 
-@x [337] l.6015
+@x [337] l.6015 Add 'fall through' comment.
  case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
 @y
  @+@=/* fall through */@>@;
@@ -2792,7 +2792,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
                             wyde_diff(data->y.o.l,data->z.o.l)};@+ break;
 @z
 
-@x [346] l.6151
+@x [346] l.6151 Move to MMIX-ARITH.
 @d ROUND_OFF 1
 @d ROUND_UP 2
 @d ROUND_DOWN 3
@@ -2806,7 +2806,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
  case FEQLE: default: goto cmp_fin;
 @z
 
-@x [348] l.6202
+@x [348] l.6202 Add 'fall through' comment.
 case fcmp: j=fcomp(data->y.o,data->z.o);
 @y
 @+@=/* fall through */@>@;
@@ -2825,7 +2825,7 @@ case fcmp: j=fcomp(data->y.o,data->z.o);
  case 2: case 3: @<Wait\9{3} if there's an unfinished load ahead of us@>;
 @z
 
-@x [356] l.6325
+@x [356] l.6325 Add 'fall through' comment.
  case 1: data->x.addr=zero_octa;@+goto fin_ex;
 @y
  @+@=/* fall through */@>@;
@@ -2877,7 +2877,7 @@ for (control* cc=data;cc!=hot;) {
 @ @<Wait\9{4} till write buffer is empty@>=
 @z
 
-@x [364] l.6437
+@x [364] l.6437 Add 'fall through' comment.
 case 30:@+ if (data!=old_hot) wait(1);
 @y
 @+@=/* fall through */@>@;
@@ -2908,7 +2908,7 @@ case 30:@+ if (data!=old_hot) wait(1);
  @<Clean the \9{s}S-cache block for |data->z.o|, if any@>;
 @z
 
-@x [364] l.6454
+@x [364] l.6454 Add 'fall through' comment.
 case 33:@+ if (data!=old_hot) wait(1);
 @y
 @+@=/* fall through */@>@;
@@ -2927,14 +2927,14 @@ case 33:@+ if (data!=old_hot) wait(1);
    { if (data->i==syncd) goto fin_ex;@+ else goto next_sync; }
 @z
 
-@x [364] l.6462
+@x [364] l.6462 Add 'fall through' comment.
 case 34:@+if (!clean_co.next) goto next_sync;
 @y
 @+@=/* fall through */@>@;
 case 34:@+if (!clean_co.next) goto next_sync;
 @z
 
-@x [364] l.6469
+@x [364] l.6469 Add 'fall through' comment.
 case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @y
 @+@=/* fall through */@>@;
