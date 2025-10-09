@@ -7,9 +7,9 @@
 \ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
 \else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
 
-\ifx\undefined\eightpoint \input pdfwebtocfront \else
+\ifpdf \ifx\undefined\eightpoint \input pdfwebtocfront \else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
-\fi
+\fi \fi
 @z
 
 @x [2]
@@ -47,7 +47,7 @@ if (strlen(prog_file_name)>4 && @|
   cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;@#
 @y
   cur_dat.h=(t0<<24)+(t1<<16)+(t2<<8)+t3;
-@t}\ifx\undefined\eightpoint\else\vskip1cm{\fi@>@#
+@t}\ifx\undefined\eightpoint\else\vskip1cm\fi{@>@#
 @z
 
 @x [13]
