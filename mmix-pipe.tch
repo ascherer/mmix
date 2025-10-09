@@ -7,9 +7,9 @@
 \ifpdflua \pdfhorigin=0.5in \pdfvorigin=0.5in
 \else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
 
-\ifx\undefined\eightpoint \input pdfwebtocfront \else
+\ifpdf \ifx\undefined\eightpoint \input pdfwebtocfront \else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
-\fi
+\fi \fi
 @z
 
 @x [5]
