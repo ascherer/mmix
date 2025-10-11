@@ -1,1 +1,3 @@
 @i mmix.bux
+
+@$verbose {MMOTYPE}4 \&{bool}@>

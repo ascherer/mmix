@@ -86,7 +86,7 @@
 @$print_trip_warning {MMIX-IO}23 \&{void} (\,)@>
 @$print_octa {MMIX-IO}25 \&{void} (\,)@>
 
-@$verbose {MMIX-PIPE}4 \&{int}@>
+@$verbose {MMIX-PIPE}8 \&{int}@>
 @$MMIX_init {MMIX-PIPE}10 \&{void} (\,)@>
 @$MMIX_run {MMIX-PIPE}10 \&{void} (\,)@>
 @$MMIX_silent {MMIX-PIPE}11 \&{int} (\,)@>
