@@ -33,7 +33,7 @@ $$\begingroup\ninepoint
 @x [3]
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
 @y
-\break
+\ifpdf \break \fi
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
 @z
 
