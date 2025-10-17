@@ -154,6 +154,23 @@ trie_node* prune(trie_node*);
 void out_stab(trie_node*);
 @z
 
+@x [37] l.1084 Recalculate filename_count.
+Char *filename[257];
+@y
+Char *filename[256];
+@z
+
+@x [38] l.1110 Recalculate filename_count.
+      if (k==filename_count) {
+        if (filename_count==256)
+          panic("Capacity exceeded: More than 256 file names");
+        filename_count++;
+      }
+@y
+      if ((k==filename_count) && (++filename_count==256))
+        panic("Capacity exceeded: More than 256 file names");
+@z
+
 @x [39] l.1122 We use '@h', so section is renamed.
 @<Preprocessor definitions@>=
 @y

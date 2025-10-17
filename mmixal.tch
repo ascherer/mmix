@@ -133,6 +133,18 @@ the remainder in~|aux|.
 @<Prototypes@>=
 @z
 
+@x [35]
+  while(j!='\n' && j!= EOF) j=fgetc(src_file);
+@y
+@+while(j!='\n' && j!= EOF) j=fgetc(src_file);
+@z
+
+@x [38]
+  for (p=buffer+1;isspace(*p);p++);
+@y
+@+for (p=buffer+1;isspace(*p);p++);
+@z
+
 @x [45]
 @d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @y
