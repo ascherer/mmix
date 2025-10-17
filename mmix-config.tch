@@ -8,7 +8,8 @@
 \else \global\hoffset=-0.5in \global\voffset=-0.5in \fi \fi
 
 \ifpdf \ifx\undefined\eightpoint \input pdfwebtocfront \let\ninepoint=\relax
-\else {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
+\else
+{\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 \fi \else \let\ninepoint=\relax \fi
 @z
 
