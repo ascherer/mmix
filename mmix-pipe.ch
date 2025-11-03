@@ -1143,7 +1143,7 @@ case go: inst_ptr.p=&cool->go;@+break;
   switch(self->stage) {
 @y
   switch(self->stage) {
-@+ register cacheblock *p,*q;
+@+ @<Block-local variables@>@;
 @+ @t}\6\4{@>
 @z
 
@@ -2333,9 +2333,8 @@ case write_from_wbuf:
 
 @x [258] l.4638 Block-local variable.
 @ @<Local var...@>=
-register cacheblock *p,*q;
 @y
-@ (This section remains empty for historic reasons.)
+@ @<Block-local var...@>=
 @z
 
 @x [259] l.4649 Compound literal.

@@ -726,11 +726,6 @@ typically have |data->state=0| when a coroutine is first fired~up.
   }
 @-c@> @-t@>
 @z
-@x [125]
-@+ register cacheblock *p,*q;
-@y
-@+ register cacheblock *p,*q; @-p@> @-q@>
-@z
 
 @x [128]
 mem_locker.name="Locker";
@@ -1184,7 +1179,7 @@ of the present program are left to the interested reader.
 @$data {MMIX-PIPE}124 \&{register} \&{control}${*}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [217]
                    /* |p| not moved */
@@ -1201,7 +1196,7 @@ of the present program are left to the interested reader.
 p=alloc_slot(Scache,c->outbuf.tag);
 @y
 p=alloc_slot(Scache,c->outbuf.tag); @+
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [219]
@@ -1219,7 +1214,7 @@ p=alloc_slot(Scache,c->outbuf.tag); @+
   register octa *d=p->data;
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [221]
@@ -1251,14 +1246,14 @@ is present.
 is present.
 @-c@> @-cc@>
 @%
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [225]
 p=alloc_slot(Scache,data->z.o);
 @y
 p=alloc_slot(Scache,data->z.o); @+
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [225]
 set_lock(&Scache->filler,mem_lock);
@@ -1291,7 +1286,7 @@ clean_co.name="Clean";
 @ @<Cases for control of special...@>=
 @y
 @ @<Cases for control of special...@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [233]
@@ -1301,7 +1296,7 @@ clean_co.name="Clean";
 @%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [233]
   set_lock(self,Dcache->lock);
@@ -1359,7 +1354,7 @@ clean_co.name="Clean";
 @%
 @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [234]
@@ -1503,7 +1498,13 @@ static void print_write_buffer(void);
 to fill a block.
 @y
 to fill a block.
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
+@z
+
+@x [258]
+@ @<Block-local var...@>=
+@y
+@ @-p@> @-q@> @<Block-local var...@>=
 @z
 
 @x [259]
@@ -1533,7 +1534,7 @@ set_lock(&mem_locker,mem_lock); /* a coroutine of type |vanish| */
 @<Try to put the contents of location |write_head->addr| into the D-cache@>=
 @y
 @<Try to put the contents of location |write_head->addr| into the D-cache@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [261]
 if (Scache) set_lock(&Dcache->filler,Scache->lock)@;
@@ -1557,14 +1558,14 @@ Perhaps the simulator is being too lenient here.
 Perhaps the simulator is being too lenient here.
 @%
 @$g {MMIX-PIPE}167 \&{int}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [263]
   flush_cache(Dcache,p,true);
 @y
   flush_cache(Dcache,p,true);
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [265]
@@ -1605,7 +1606,7 @@ Perhaps the simulator is being too lenient here.
 @<Look up the address in the DT-cache...@>=
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [268]
@@ -1622,8 +1623,8 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @%
 @$c {MMIX-PIPE}167 \&{int}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @$x {MMIX-PIPE}44 \&{specnode}@>
 @$y {MMIX-PIPE}44 \&{spec}@>
 @z
@@ -1643,7 +1644,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @-m@>
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [271]
@@ -1655,7 +1656,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @-m@>
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 @x [271]
   data->z.o=data->y.o;@+ data->z.o.h -= sign_bit;
@@ -1679,7 +1680,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @<Special cases for states in later stages@>=
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [273]
@@ -1688,7 +1689,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @r @ The second stage might also want to fill the D-cache (and perhaps
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [274]
@@ -1697,7 +1698,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @ @<Try to get the contents of location |data->z.o| in the D-cache@>=
 @%
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [275]
@@ -1713,7 +1714,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @ @<Special cases for states in later stages@>=
 @%
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [278]
@@ -1793,22 +1794,22 @@ fetch_co.name="Fetch";
 @ @d got_IT 19   /* |state| when IT-cache entry has been computed */
 @y
 @r @ @d got_IT 19   /* |state| when IT-cache entry has been computed */
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [292]
 @<Do a simultaneous lookup in the I-cache@>=
 @y
 @<Do a simultaneous lookup in the I-cache@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [293]
 p=use_and_fix(ITcache,p);
 @y
 p=use_and_fix(ITcache,p);
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [294]
@@ -1816,14 +1817,14 @@ p=use_and_fix(ITcache,p);
 @y
 @ At this point |inst_ptr.o| equals |data->y.o|.
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [295]
 @ @<Begin fetch without I-cache lookup@>=
 @y
 @ @<Begin fetch without I-cache lookup@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [296]
@@ -1831,7 +1832,7 @@ p=use_and_fix(ITcache,p);
 @y
 @ @<Begin fetch with known physical address@>=
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [298]
@@ -1839,7 +1840,7 @@ p=use_and_fix(ITcache,p);
 @y
 @ @<Other cases for the fetch coroutine@>=
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [300]
@@ -1847,7 +1848,7 @@ p=use_and_fix(ITcache,p);
 @y
 @r @ @<Try to get the contents of location |data->z.o| in the I-cache@>=
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$q {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [301]
@@ -1998,7 +1999,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @-c@>
 @%
 @$b {MMIX-PIPE}44 \&{spec}@>
-@$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [327]
@@ -2141,14 +2142,14 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @ @<Do stage 1 of \.{LDVTS}@>=
 @y
 @ @<Do stage 1 of \.{LDVTS}@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [354]
 @ @<Special cases for states in later stages@>=
 @y
 @ @<Special cases for states in later stages@>=
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [357]
@@ -2194,7 +2195,7 @@ p=cache_search(Icache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Icache,data->z.o)) {
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [366]
@@ -2202,7 +2203,7 @@ p=cache_search(Dcache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Dcache,data->z.o)) {
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [367]
@@ -2210,7 +2211,7 @@ p=cache_search(Scache,data->z.o);
 if (p) {
 @y
 if (p=cache_search(Scache,data->z.o)) {
-@% @$p {MMIX-PIPE}125 \&{register} \&{cacheblock} ${*}$@>
+@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [368]
