@@ -1831,6 +1831,19 @@ static cacheblock* alloc_slot(
   cache *c,
   octa alf) /* key that probably isn't in the cache */
 @z
+@x [205] l.3652 Block-local variables.
+  register cacheblock *p,*q;
+@y
+  @+@t}\6{@> @<Block-local var...@>@; @#
+@z
+@x [205] l.3669 Amend 'else' case.
+  p->tag.h |= sign_bit;@+ return p;
+@y
+  else {
+    p->tag.h |= sign_bit; /* invalidate the tag */
+    return p;
+  }
+@z
 
 @x [208] l.3719 Merge MMIX-MEM.
 @ The separately compiled procedures |spec_read()| and |spec_write()| have the

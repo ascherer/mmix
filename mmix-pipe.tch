@@ -1053,9 +1053,9 @@ pointers escape into other data structures.
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${*}$@>
 @$p {MMIX-PIPE}196 \&{cacheblock} ${*}$@>
-@$p {MMIX-PIPE}205 \&{register} \&{cacheblock} ${*}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @$q {MMIX-PIPE}196 \&{register} \&{cacheblock} ${*}$@>
-@$q {MMIX-PIPE}205 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [199]
@@ -1102,11 +1102,13 @@ static void flush_cache(
 @z
 
 @x [205]
-  register cacheblock *p,*q;
+  @+@t}\6{@> @<Block-local var...@>@; @#
 @y
-  register cacheblock *p,*q;
-@-p@> @-q@>
+  @+@t}\6{@> @<Block-local var...@>@; @#
 @-c@> @-alf@> @-s@>
+@%
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
+@$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${*}$@>
 @z
 
 @x [208]
