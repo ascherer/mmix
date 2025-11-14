@@ -95,7 +95,7 @@ static FILE *prog_file;
 @.Can't open...@>
 @z
 
-@x [6] l.130
+@x [6] l.130 Use standard 'bool'.
   while (1) {
 @y
   while (true) {
@@ -273,7 +273,7 @@ cur_dat.h=0, cur_dat.l=7; /* generate a PTE with \.{rwx} permission */
 cur_dat=seven_octa; /* generate a PTE with \.{rwx} permission */
 @z
 
-@x [13] l.371
+@x [13] l.371 Use standard 'bool'.
 while (1) {
 @y
 while (true) {

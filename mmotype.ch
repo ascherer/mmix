@@ -43,7 +43,7 @@ int main(
   int argc,char*argv[])
 @z
 
-@x [1] l.29 Type.
+@x [1] l.29 Use standard 'bool'.
   register int j,delta,postamble=0;
   register char *p;
 @y
@@ -58,13 +58,13 @@ int main(
   do @<List the next item@>@; while (!postamble);
 @z
 
-@x [2] l.41 Type.
+@x [2] l.41 Use standard 'bool'.
 listing=1, verbose=0;
 @y
 listing=true, verbose=false;
 @z
 
-@x [2] l.43 Type.
+@x [2] l.43 Use standard 'bool'.
   if (argv[j][1]=='s') listing=0;
   else if (argv[j][1]=='v') verbose=1;
 @y
@@ -72,7 +72,7 @@ listing=true, verbose=false;
   else if (argv[j][1]=='v') verbose=true;
 @z
 
-@x [4] l.62 Type.
+@x [4] l.62 Use standard 'bool'.
 int listing; /* are we listing everything? */
 int verbose; /* are we also showing the tetras of input as they are read? */
 @y
