@@ -80,7 +80,7 @@ for the simulators.
 #include "mmix-arith.h" /* |@!tetra|, |@!octa| */
 @z
 
-@x [27] l.960 Variables from MMIX-ARITH.
+@x [27] l.960 Variables from MMIX-ARITH. Reuse empty section.
 @ @<Glob...@>=
 extern octa zero_octa; /* |zero_octa.h=zero_octa.l=0| */
 extern octa neg_one; /* |neg_one.h=neg_one.l=-1| */
@@ -970,7 +970,7 @@ if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
     do @<Fix prior references to this label@>@; while (pp->link);
 @z
 
-@x [114] l.2792 ß RAII.
+@x [114] l.2792 RAII.
   octa o;
   o=ominus(cur_loc,qq->equiv);
 @y

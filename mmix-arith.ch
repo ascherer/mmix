@@ -100,7 +100,7 @@ typedef uint8_t byte; /* a monobyte */
 typedef uint32_t tetra;
 @z
 
-@x [4] l.66 Move constants to interface; reuse empty section.
+@x [4] l.66 Move constants to interface.
 @ @d sign_bit ((unsigned)0x80000000)
 
 @<Glob...@>=
