@@ -47,7 +47,7 @@ typedef enum {@!false,@!true}@+@!bool;
 \.{"mmix-arith.h"}.
 @z
 
-@x [10] l.555 Use standard C99 type.
+@x [10] l.555 Stuff from MMIX-ARITH.
 represents unsigned 32-bit integers. The definition of \&{tetra}
 given here should be changed, if necessary, to agree with the
 definition in that module.
@@ -297,7 +297,7 @@ void read_tet(void)
   yzbytes=(ybyte<<8)+zbyte;
 @z
 
-@x [27] l.898 C99 prototypes for C2x.
+@x [27] l.898 Purge unused function.
 @ @<Sub...@>=
 byte read_byte @,@,@[ARGS((void))@];@+@t}\6{@>
 byte read_byte()
@@ -330,7 +330,7 @@ byte read_byte()
 @<Load \9{t}|tet| as a normal item@>=
 @z
 
-@x [32] l.961 RAII.
+@x [32] l.961 RAII with compound literal.
 cur_loc.h=cur_loc.l=0;
 @y
 cur_loc=zero_octa;
@@ -1611,7 +1611,7 @@ void show_stats(
 @y
 @z
 
-@x [141] l.2887 Improved module structure with interfaces.
+@x [141] l.2887 Different approach for ABSTIME.
 #include "abstime.h"
 @y
 @#
