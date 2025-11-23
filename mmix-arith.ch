@@ -309,7 +309,7 @@ octa signed_odiv(
 @x [25] l.342 Add missing bit-fiddling functions.
 implement directly, but three of them occur often enough to deserve
 @y
-implement directly, and they occur often enough to deserve
+implement directly, but they occur often enough to deserve
 @z
 
 @x [25] l.345 Add missing bit-fiddling functions.
