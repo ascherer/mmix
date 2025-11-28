@@ -19,7 +19,6 @@
 @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
 @$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
-@$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
 
 @$stage {MMIX-PIPE}23 \&{int}@>
 @$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
