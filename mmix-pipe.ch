@@ -33,9 +33,6 @@ Readers of this program should be familiar with the explanation of \MMIX's
 #include "mmix-pipe.h" /* we use our own interface first;
   see |@(mmix-pipe.h@>| */
 #include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, |@!print_octa|, etc. */
-@#
-#include <stdarg.h> /* |@!vfprintf|, |@!va_start|, |@!va_end| */
-@#
 @z
 
 @x [3] l.130 Improved module structure with interfaces.
@@ -271,6 +268,8 @@ register int i,j;
 @d panic(x)@+ {@+errprint0("Panic: ");@+x;@+errprint0("!\n");@+expire();@+}
 @d confusion(m) errprint1("This can't happen: %s",m)
 @y
+@d errprint(f,...) fprintf(stderr,
+   @[f @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@])
 @d panic(x)@+ {@+errprint("Panic: ");@+x;@+errprint("!\n");@+expire();@+}
 @d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
 @z
@@ -281,18 +280,9 @@ static void expire @,@,@[ARGS((void))@];
 @ @<Sub...@>=
 static void expire() /* the last gasp before dying */
 @y
-static void errprint(const char*, ...);
 static void expire(void);
 
 @ @<Sub...@>=
-static void errprint(const char *fmt, ...)
-{
-  va_list ap;
-  va_start(ap, fmt);
-  (void) vfprintf(stderr, fmt, ap);
-  va_end(ap);
-}
-@#
 static void expire(void) /* the last gasp before dying */
 @z
 

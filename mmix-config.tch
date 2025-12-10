@@ -66,15 +66,10 @@ $$\begingroup\ninepoint
 @z
 
 @x [8]
-  va_list ap;
-  va_start(ap, fmt);
-  (void) vfprintf(stderr, fmt, ap);
-  va_end(ap);@/
+@d panic(x,...) {@+fprintf(stderr,
 @y
-  @+ va_list ap;
-  va_start(ap, fmt); @+
-  (void) vfprintf(stderr, fmt, ap); @+
-  va_end(ap);@/
+@-x@> @-__VA_ARGS__@> @-__VA_OPT__@>
+@d panic(x,...) {@+fprintf(stderr,
 @z
 
 @x [10]
@@ -83,16 +78,22 @@ $$\begingroup\ninepoint
   @+ static char buffer[BUF_SIZE]; /* input lines go here */
 @z
 
+@x [11]
+@ The |get_int| routine is called when we wish to input a decimal value.
+@y
+@r @ The |get_int| routine is called when we wish to input a decimal value.
+@z
+
 @x [15]
 @ Most of the parameters are external variables declared in the header
 @y
 @ Most of the parameters are variables declared in the header
 @z
 @x [15]
-static cpv_spec CPV[]={@|
+static op_spec OP[]={@|
 @y
-@t}\ifx\undefined\eightpoint\vskip-5.5mm\else\vbox to3.2cm{}\fi{@>@#
-static cpv_spec CPV[]={@|
+@t}\ifx\undefined\eightpoint\vskip-5.5mm\else\vbox to1.4cm{}\fi{@>@#
+static op_spec OP[]={@|
 @z
 @x [15]
 {"mul4", mul4, 10},@|

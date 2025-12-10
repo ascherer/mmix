@@ -42,7 +42,7 @@ bypass the library names here.
 @d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
 @y
 @d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
-@-x@> @-m@> @-__VA_ARGS__@>
+@-f@> @-x@> @-m@> @-__VA_ARGS__@> @-__VA_OPT__@>
 @z
 
 @x [19]
