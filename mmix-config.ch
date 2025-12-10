@@ -36,19 +36,12 @@ print error messages.
 @d errprint3(f,a,b,c) fprintf(stderr,f,a,b,c)
 @d panic(x)@+ {@+x;@+errprint0("!\n");@+exit(-1);@+}
 @y
-by building some simple infrastructure. First we need a function to
+by building some simple infrastructure. First we need a macro to
 print error messages.
 
-@<Subroutines@>=
-static void panic(const char *fmt, ...)
-{
-  va_list ap;
-  va_start(ap, fmt);
-  (void) vfprintf(stderr, fmt, ap);
-  va_end(ap);@/
-  fprintf(stderr, "!\n");
-  exit(-1);
-}
+@d panic(x,...) {@+fprintf(stderr,
+   @[x @& "!\n" @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);@+
+   exit(-1);@+}
 @z
 
 @x [9] l.359 Factor out private stuff.
@@ -572,7 +565,6 @@ if (!dispatch_stat) panic("Can't allocate dispatch counts");
 #include "mmix-pipe.h" /* |@!internal_opcode| and much more */
 @#
 #include <stdio.h> /* |@!fopen|, |@!fgets|, |@!sscanf|, |@!rewind| */
-#include <stdarg.h> /* |@!vfprintf|, |@!va_start|, |@!va_end| */
 #include <ctype.h> /* |@!isspace| */
 #include <string.h> /* |@!strcpy|, |@!strlen|, |@!strcmp| */
 #include <limits.h> /* |@!INT_MAX| */
@@ -612,7 +604,6 @@ extern void MMIX_config(char *); /* public prototype */
 #endif /* |MMIX_CONFIG_H| */
 
 @ @<Private prototypes@>=
-static void panic(const char*, ...);
 static void get_token(void);
 static int get_int(void);
 static cache* new_cache(char*);
