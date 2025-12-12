@@ -220,6 +220,12 @@ mem_tetra* mem_find(
 @z
 
 @x [30]
+@ In a normal situation, the newly read tetrabyte is simply supposed
+@y
+@r @ In a normal situation, the newly read tetrabyte is simply supposed
+@z
+
+@x [30]
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val
 @y
 @d mmo_load(loc,val) ll=mem_find(loc), ll->tet^=val

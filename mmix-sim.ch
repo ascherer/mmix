@@ -111,7 +111,7 @@ void dump(mem_node*);
 void dump_tet(tetra);
 @z
 
-@x [12] l.577 Move 'print_hex' to MMIX-ARITH.
+@x [12] l.577 Move 'print_hex' to MMIX-IO as 'print_octa'.
 @ @<Sub...@>=
 void print_hex @,@,@[ARGS((octa))@];@+@t}\6{@>
 void print_hex(o)
@@ -284,6 +284,16 @@ int byte_count; /* index of the next-to-be-read byte */
 @y
 @z
 
+@x [26]
+@d mmo_err { 
+     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
+@.Bad object file@>
+     exit(-4);
+   }
+
+@y
+@z
+
 @x [26] l.890 C99 prototypes for C2x.
 void read_tet @,@,@[ARGS((void))@];@+@t}\6{@>
 void read_tet()
@@ -309,7 +319,12 @@ byte read_byte()
   return b;
 }
 @y
-@ (This section remains empty for historic reasons.)
+@ @d mmo_err {  @+
+     fprintf(stderr,"Bad object file! (Try running MMOtype.)\n"); @+
+@.Bad object file@>
+     exit(-4); @+
+   }
+
 @z
 
 @x [29] l.926 Improved formatting.

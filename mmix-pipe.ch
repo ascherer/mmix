@@ -324,7 +324,13 @@ static void print_octa(o)
   else printf("%x",o.l);
 }
 @y
-@ @<External proto...@>=
+@ Function |read_hex| was originally defined in program {\mc MMMIX} and used in
+module {\mc MMIX-MEM}. Simultaneously, function |print_octa| can be better
+placed in module {\mc MMIX-IO} for reuse, so there are two free sections
+available. As {\mc MMIX-MEM} has been fully disolved into {\mc MMIX-PIPE}
+below, we can place |read_hex| here.
+
+@<External proto...@>=
 Extern octa read_hex(char *);
   /* see {\mc MMMIX} */
 
