@@ -471,7 +471,9 @@ static char *trip_warning[]={
 @x [25] l.403 Move 'print_octa' from MMIX-PIPE and 'print_hex' from MMIX-SIM.
 @* Index.
 @y
-@ @<Subroutines@>=
+@ Identical functions from {\mc MMIX-PIPE} and {\mc MMIX-SIM} are merged here.
+
+@<Subroutines@>=
 void print_octa(octa o)
 {
   if (o.h) printf("%x%08x",o.h,o.l);

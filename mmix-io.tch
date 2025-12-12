@@ -109,6 +109,12 @@ octa mmix_fputws(
 @% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
 @z
 
+@x [22]
+  register long x;
+@y
+@+register long x;
+@z
+
 @x [24]
 static char *trip_warning[]={
 @y
