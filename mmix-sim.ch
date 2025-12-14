@@ -284,7 +284,7 @@ int byte_count; /* index of the next-to-be-read byte */
 @y
 @z
 
-@x [26]
+@x [26] Move macro to empty section 27.
 @d mmo_err { 
      fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
 @.Bad object file@>

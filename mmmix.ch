@@ -204,7 +204,7 @@ oops: fprintf(stderr,"Premature end of file on %s!\n",prog_file_name);
   return true;
 @z
 
-@x [11] l.242
+@x [11] l.242 Use standard 'bool'.
 while (1) {
 @y
 while (true) {
