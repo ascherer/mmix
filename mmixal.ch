@@ -160,7 +160,7 @@ Char *filename[257];
 Char *filename[256];
 @z
 
-@x [38] l.1110 Recalculate filename_count.
+@x [38] l.1109 Recalculate filename_count.
       if (k==filename_count) {
         if (filename_count==256)
           panic("Capacity exceeded: More than 256 file names");
@@ -788,12 +788,47 @@ while (1) {
 while (true) {
 @z
 
+@x [86] l.2354 Fix bracketing for section 94.
+else if (isdigit(*p)) {
+  if (*(p+1)=='F') @<Scan a forward local@>@;
+  else if (*(p+1)=='B') @<Scan a backward local@>@;
+  else @<Scan a decimal constant@>;
+}@+else@+ switch(*p++) {
+@y
+else if (isdigit(*p)) @+ switch(*(p+1)) {
+ case 'F': @<Scan a forward local@>@; @+ break;
+ case 'B': @<Scan a backward local@>@; @+ break;
+ default: @<Scan a decimal constant@>@;
+}
+else@+ switch(*p++) {
+@z
+
 @x [86] l.2373 Variadic macro for error reporting.
  if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
  derr("syntax error after character `%c'",*(p-2));
 @y
  if (*(p-1)) err("syntax error at character `%c'",*(p-1));
  err("syntax error after character `%c'",*(p-2));
+@z
+
+@x [88] l.2392 Fix bracketing for section 94.
+@ @<Scan a forward local@>=
+{
+  tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+}
+@y
+@ @<Scan a forward local@>=
+tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+@z
+
+@x [89] l.2397 Fix bracketing for section 94.
+@ @<Scan a backward local@>=
+{
+  tt=&backward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+}
+@y
+@ @<Scan a backward local@>=
+tt=&backward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
 @z
 
 @x [92] l.2421 Compound literal.
