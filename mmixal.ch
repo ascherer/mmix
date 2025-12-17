@@ -803,6 +803,13 @@ else if (isdigit(*p)) @+ switch(*(p+1)) {
 else@+ switch(*p++) {
 @z
 
+@x [86] l.2364
+ case '+': goto scan_open;
+@y
+ @+ @=/* fall through */@>@;
+ case '+': goto scan_open;
+@z
+
 @x [86] l.2373 Variadic macro for error reporting.
  if (*(p-1)) derr("syntax error at character `%c'",*(p-1));
  derr("syntax error after character `%c'",*(p-2));
