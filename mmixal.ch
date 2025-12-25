@@ -766,10 +766,34 @@ void out_stab(
 @y
 @z
 
+@x [75] l.2209
+  *sym_ptr++=(m&0x80? '?': t->ch); /* Unicode? not yet */
+@y
+  *sym_ptr++=(m&0x80? '?': t->ch); /* Unicode? not yet */
+  if (sym_ptr==&sym_buf[sym_length_max])
+    panic("Oops, the symbol is too long!");
+@.Oops...too long@>
+@z
+
 @x [76] l.2231 Change from MMIX home.
   for (j=1;j<4;j++) if (x<(1<<(8*j))) break;
 @y
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
+@z
+
+@x [77] l.2235
+@ We make room for symbols up to 999 bytes long. Strictly speaking,
+the program should check if this limit is exceeded; but really!
+@y
+@ We make room for symbols up to 999 bytes long.
+
+@d sym_length_max 1000
+@z
+
+@x [77] l.2239
+Char sym_buf[1000];
+@y
+Char sym_buf[sym_length_max];
 @z
 
 @x [78] l.2250 Block-local variable.
@@ -780,6 +804,15 @@ void out_stab(
   register sym_node *pp=t->sym;
   *sym_ptr='\0';
   fprintf(listing_file," %s = ",sym_buf+1);
+@z
+
+@x [79] l.2263
+  *sym_ptr=(m&0x80? '?': t->ch); /* Unicode? not yet */
+@y
+  *sym_ptr=(m&0x80? '?': t->ch); /* Unicode? not yet */
+  if (sym_ptr==&sym_buf[sym_length_max])
+    panic("Oops, the symbol is too long!");
+@.Oops...too long@>
 @z
 
 @x [85] l.2341 Use standard 'bool'.
