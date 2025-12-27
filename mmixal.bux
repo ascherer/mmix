@@ -1,9 +1,5 @@
 @i mmix.bux
 
-@$mmo_tetra {MMIXAL}48 \&{void} (\,)@>
-@$mmo_lop {MMIXAL}48 \&{void} (\,)@>
-@$mmo_lopp {MMIXAL}48 \&{void} (\,)@>
-
 @$DEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,1@>
 @$REGISTER {MMIXAL}58 =(\&{sym\_node} ${*}$)\,2@>
 @$PREDEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,3@>

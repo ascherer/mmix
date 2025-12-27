@@ -159,23 +159,10 @@ the remainder in~|aux|.
 @-buf@>
 @z
 
-@x [48]
-void mmo_tetra( /* output a tetrabyte */
+@x [49]
+@ The |mmo_loc| subroutine makes the current location in the object file
 @y
-@-mmo_tetra@>
-void mmo_tetra( /* output a tetrabyte */
-@z
-@x [48]
-void mmo_lop( /* output a loader operation */
-@y
-@-mmo_lop@>
-void mmo_lop( /* output a loader operation */
-@z
-@x [48]
-void mmo_lopp( /* output a loader operation with two-byte operand */
-@y
-@-mmo_lopp@>
-void mmo_lopp( /* output a loader operation with two-byte operand */
+@r @ The |mmo_loc| subroutine makes the current location in the object file
 @z
 
 @x [52]

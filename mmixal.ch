@@ -277,8 +277,8 @@ void mmo_lopp @,@,@[ARGS((char,unsigned short))@];
 void mmo_tetra(t) /* output a tetrabyte */
   tetra t;
 @y
-void mmo_tetra( /* output a tetrabyte */
-  tetra t)
+void mmo_tetra(
+  tetra t) /* output a tetrabyte */
 @z
 
 @x [48] l.1307 C99 prototypes for C2x.
@@ -294,9 +294,9 @@ void mmo_lop(x,y,z) /* output a loader operation */
   char x;
   unsigned char y,z;
 @y
-void mmo_lop( /* output a loader operation */
+void mmo_lop(
   char x,
-  unsigned char y, unsigned char z)
+  unsigned char y, unsigned char z) /* output a loader operation */
 @z
 
 @x [48] l.1322 C99 prototypes for C2x.
@@ -304,9 +304,9 @@ void mmo_lopp(x,yz) /* output a loader operation with two-byte operand */
   char x;
   unsigned short yz;
 @y
-void mmo_lopp( /* output a loader operation with two-byte operand */
+void mmo_lopp(
   char x,
-  unsigned short yz)
+  unsigned short yz) /* output a loader operation with two-byte operand */
 @z
 @x [48] l.1326 Reuse mmo_lop function
   mmo_buf[0]=mm;@+ mmo_buf[1]=x;@+
