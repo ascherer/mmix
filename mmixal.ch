@@ -808,11 +808,13 @@ Char sym_buf[sym_length_max];
 
 @x [79] l.2263
   *sym_ptr=(m&0x80? '?': t->ch); /* Unicode? not yet */
+  *(sym_ptr+1)='\0';
 @y
-  *sym_ptr=(m&0x80? '?': t->ch); /* Unicode? not yet */
+  *sym_ptr++=(m&0x80? '?': t->ch); /* Unicode? not yet */
   if (sym_ptr==&sym_buf[sym_length_max])
     panic("Oops, the symbol is too long!");
 @.Oops...too long@>
+  *sym_ptr--='\0';
 @z
 
 @x [85] l.2341 Use standard 'bool'.
