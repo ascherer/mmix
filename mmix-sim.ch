@@ -48,11 +48,15 @@ typedef enum {@!false,@!true}@+@!bool;
 @z
 
 @x [10] l.555 Stuff from MMIX-ARITH.
+of writing (1999) was limited in that way. It uses subroutines
+from the {\mc MMIX-ARITH} module, assuming only that type \&{tetra}
 represents unsigned 32-bit integers. The definition of \&{tetra}
 given here should be changed, if necessary, to agree with the
 definition in that module.
+@^system dependencies@>
 @y
-represents unsigned 32-bit integers.
+of writing (1999) was limited in that way. It uses subroutines
+from the {\mc MMIX-ARITH} module.
 @s uint32_t int
 @s byte int
 @s tetra int
