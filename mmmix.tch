@@ -74,7 +74,7 @@ if (strlen(prog_file_name)>4 && @|
   printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-PIPE}86 \&{Extern} \&{specnode} ${*}$@>
+@$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
 @z
 
 @x [19]

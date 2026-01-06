@@ -60,8 +60,8 @@
 @$fepscomp {MMIX-ARITH}50 \&{int} (\,)@>
 @$print_float {MMIX-ARITH}54 \&{void} (\,)@>
 @$scan_const {MMIX-ARITH}68 \&{int} (\,)@>
-@$val {MMIX-ARITH}69 \&{Extern} \&{octa}@>
-@$next_char {MMIX-ARITH}69 \&{Extern} \&{char} ${*}$@>
+@$val {MMIX-ARITH}69 \&{octa}@>
+@$next_char {MMIX-ARITH}69 \&{char} ${*}$@>
 @$fcomp {MMIX-ARITH}85 \&{int} (\,)@>
 @$fintegerize {MMIX-ARITH}86 \&{octa} (\,)@>
 @$fixit {MMIX-ARITH}88 \&{octa} (\,)@>
