@@ -1391,7 +1391,12 @@ static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 convenience. Whenever rV changes, we recompute all these variables.
 @y
 convenience. Whenever rV changes, we recompute all these variables.
-@-b@> @-f@> @-n@> @-r@> @-s@>
+@%
+@$b {MMIX-DOC}45 =field of \\{rV}@>
+@$f {MMIX-DOC}45 =field of \\{rV}@>
+@$n {MMIX-DOC}45 =field of \\{rV}@>
+@$r {MMIX-DOC}45 =field of \\{rV}@>
+@$s {MMIX-DOC}45 =field of \\{rV}@>
 @z
 
 @x [239]
