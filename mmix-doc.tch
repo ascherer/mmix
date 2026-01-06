@@ -1,4 +1,10 @@
 @x [0]
+\def\title{MMIX}
+@y
+\def\title{MMIX-DOC}
+@z
+
+@x [0]
 \input pdfwebtocfront
 @y
 \ifx\undefined\pdfpagewidth \else
