@@ -169,6 +169,7 @@ the remainder in~|aux|.
 @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
 @y
 @r @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
+@-l@>
 @z
 
 @x [57]
@@ -503,6 +504,12 @@ the remainder in~|aux|.
 {"TRIP", 0xff, 0x27554},
 @z
 
+@x [68]
+  tetra h,l;
+@y
+  tetra h,l; @-h@> @-l@>
+@z
+
 @x [69]
 {"ROUND_OFF",0,1},
 @y
@@ -517,6 +524,15 @@ the remainder in~|aux|.
 {"TextWrite",0,1},
 @y
 {"TextWrite",0,1},@|
+@z
+
+@x [70]
+  pp->equiv=(octa){predefs[j].h, predefs[j].l};
+@y
+  pp->equiv=(octa){predefs[j].h, predefs[j].l};
+@%
+@$h {MMIXAL}68 \&{tetra}@>
+@$l {MMIXAL}68 \&{tetra}@>
 @z
 
 @x [73]
