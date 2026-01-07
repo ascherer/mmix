@@ -838,6 +838,14 @@ static unsigned char flags[256]={@|@t\1\1@>
  case go: case pushgo: case trap: case resume: case syncid:
 @z
 
+@x [86] l.1840
+rB is internally the same as g[0], because |rB=0|.
+@y
+rB is internally the same as g[0], because |rB=0|.
+@!@:g}{\|g (global registers)@>
+@!@:l}{\|l (ring of local registers)@>
+@z
+
 @x [88] l.1857 Private variable.
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
