@@ -47,7 +47,7 @@ typedef enum {@!false,@!true}@+@!bool;
 \.{"mmix-arith.h"}.
 @z
 
-@x [10] l.555 Stuff from MMIX-ARITH.
+@x [10] l.553 Stuff from MMIX-ARITH.
 of writing (1999) was limited in that way. It uses subroutines
 from the {\mc MMIX-ARITH} module, assuming only that type \&{tetra}
 represents unsigned 32-bit integers. The definition of \&{tetra}
@@ -1124,6 +1124,14 @@ op_info info[256]={@t\1@>@/
 register int G,L,O; /* accessible copies of key registers */
 @y
 register int G,L,O=0; /* accessible copies of key registers */
+@z
+
+@x [76] l.1782
+octa g[256]; /* global registers */
+@y
+@!@:g}{\|g (global registers)@>
+@!@:l}{\|l (ring of local registers)@>
+octa g[256]; /* global registers */
 @z
 
 @x [77] l.1792 Different approach for ABSTIME.
