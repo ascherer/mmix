@@ -556,7 +556,7 @@ the remainder in~|aux|.
 @x [85]
 p=operand_list;
 @y
-p=operand_list; @$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
+p=operand_list;
 @z
 
 @x [93]

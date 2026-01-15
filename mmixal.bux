@@ -1,5 +1,7 @@
 @i mmix.bux
 
+@$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
+
 @$DEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,1@>
 @$REGISTER {MMIXAL}58 =(\&{sym\_node} ${*}$)\,2@>
 @$PREDEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,3@>
