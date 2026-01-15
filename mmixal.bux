@@ -19,6 +19,10 @@
 @$TETRA {MMIXAL}62 =\T{\^10a}@>
 @$OCTA {MMIXAL}62 =\T{\^10b}@>
 
+@$tt {MMIXAL}65 \&{register} \&{trie\_node} ${*}$@>
+@$pp {MMIXAL}65 \&{register} \&{sym\_node} ${*}$@>
+@$qq {MMIXAL}65 \&{register} \&{sym\_node} ${*}$@>
+
 @$negate {MMIXAL}82 =0@>
 @$serialize {MMIXAL}82 =1@>
 @$complement {MMIXAL}82 =2@>

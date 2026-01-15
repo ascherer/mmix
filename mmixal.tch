@@ -164,6 +164,19 @@ the remainder in~|aux|.
 @y
 @r @ The |mmo_loc| subroutine makes the current location in the object file
 @z
+@x [49]
+  octa o;
+@y
+  octa o;
+@-o@>
+@z
+
+@x [50]
+  register int j; register Char *p;
+@y
+  register int j; register Char *p;
+@-j@> @-p@>
+@z
 
 @x [52]
 @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
@@ -183,6 +196,12 @@ the remainder in~|aux|.
 @d isletter(c) (isalpha(c)||c=='_'||c==':'||(unsigned int)(c)>126)
 @-c@>
 @z
+@x [57]
+  register trie_node *tt=t;
+@y
+  register trie_node *tt=t;
+@-tt@> @-p@>
+@z
 
 @x [58]
 @d DEFINED (sym_node*)1 /* code value for octabyte equivalents */
@@ -192,9 +211,16 @@ the remainder in~|aux|.
 @z
 
 @x [59]
+@d recycle_fixup(pp) pp->link=sym_avail, sym_avail=pp
+@y
+@d recycle_fixup(pp) pp->link=sym_avail, sym_avail=pp
+@-pp@>
+@z
+@x [59]
   register sym_node *p=sym_avail;
 @y
   @+ register sym_node *p=sym_avail;
+@-p@>
 @z
 @x [59]
     p=next_sym_node;
@@ -535,6 +561,13 @@ the remainder in~|aux|.
 @$l {MMIXAL}68 \&{tetra}@>
 @z
 
+@x [72]
+rooted at~|t|, we
+@y
+rooted at~|t|, we
+@-t@>
+@z
+
 @x [73]
   bool useful=false;
 @y
@@ -545,6 +578,12 @@ the remainder in~|aux|.
 @ The initial `\.:' of each fully qualified symbol is omitted here, since most
 @y
 @r @ The initial `\.:' of each fully qualified symbol is omitted here, since most
+@z
+@x [78]
+  register sym_node *pp=t->sym;
+@y
+  register sym_node *pp=t->sym;
+@-pp@>
 @z
 
 @x [84]
