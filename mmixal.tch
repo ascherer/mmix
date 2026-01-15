@@ -145,10 +145,17 @@ the remainder in~|aux|.
 @+for (p=buffer+1;isspace(*p);p++);
 @z
 
+@x [44]
+  register int j,k;
+@y
+  register int j,k;
+@-j@> @-k@>
+@z
+
 @x [45]
 @d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @y
-@-__VA_OPT__@> @-__VA_ARGS__@>
+@-__VA_OPT__@> @-__VA_ARGS__@> @-m@>
 @d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @z
 
@@ -182,7 +189,7 @@ the remainder in~|aux|.
 @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
 @y
 @r @ Here is a basic subroutine that assembles |k| bytes starting at |cur_loc|.
-@-l@>
+@-j@> @-l@>
 @z
 
 @x [57]
@@ -574,6 +581,30 @@ rooted at~|t|, we
   @+ bool useful=false;
 @z
 
+@x [74]
+  register int m=0,j;
+@y
+  register int m=0,j;
+@-m@> @-j@>
+@z
+
+@x [75]
+character in |sym_buf|.
+@y
+character in |sym_buf|.
+@%
+@$m {MMIXAL}74 \&{int}@>
+@z
+
+@x [76]
+@ @<Encode the length of |t->sym->equiv|@>=
+@y
+@ @<Encode the length of |t->sym->equiv|@>=
+@%
+@$j {MMIXAL}74 \&{int}@>
+@$m {MMIXAL}74 \&{int}@>
+@z
+
 @x [78]
 @ The initial `\.:' of each fully qualified symbol is omitted here, since most
 @y
@@ -586,6 +617,14 @@ rooted at~|t|, we
 @-pp@>
 @z
 
+@x [79]
+@ @<Report an undefined symbol@>=
+@y
+@ @<Report an undefined symbol@>=
+@%
+@$m {MMIXAL}74 \&{int}@>
+@z
+
 @x [84]
 @ @<Init...@>=
 @y
@@ -596,6 +635,13 @@ rooted at~|t|, we
 p=operand_list;
 @y
 p=operand_list;
+@z
+
+@x [90]
+|backward_local_host[j]| masquerade as nodes of the trie.
+@y
+|backward_local_host[j]| masquerade as nodes of the trie.
+@-j@>
 @z
 
 @x [93]
