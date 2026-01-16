@@ -314,7 +314,6 @@
 @$inst_ptr {MMIX-SIM}61 \&{octa}@>
 
 @$g {MMIX-SIM}76 \&{octa} [\,]@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @$lring_size {MMIX-SIM}76 \&{int}@>
 
 @$decimal {MMIX-SIM}135 =0@>
