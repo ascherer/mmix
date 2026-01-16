@@ -474,6 +474,14 @@ int register_truth(
 @y
 @r @ To complete our simulation of \MMIX's register stack, we need
 @z
+@x [102]
+ l[(O+L)&lring_mask].l=L, L++;
+@y
+ l[(O+L)&lring_mask].l=L, L++;
+@%
+@$l {MMIX-ARITH}3 \&{tetra}@>
+@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@z
 
 @x [104]
 case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
