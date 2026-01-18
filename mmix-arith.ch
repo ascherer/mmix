@@ -308,8 +308,11 @@ octa signed_odiv(
 
 @x [25] l.342 Add missing bit-fiddling functions.
 implement directly, but three of them occur often enough to deserve
+packaging as subroutines.
 @y
 implement directly, but they occur often enough to deserve
+packaging as subroutines; these nicely plug into the code
+in section~138 of {\mc MMIX-PIPE} and section~86 of {\mc MMIX-SIM}.
 @z
 
 @x [25] l.345 Add missing bit-fiddling functions.
