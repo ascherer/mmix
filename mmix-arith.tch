@@ -36,15 +36,6 @@ o >>= 2; @+
 @z
 
 @x [46]
-octa fplus(
-  octa y, octa z)
-{
-@y
-octa fplus(
-  octa y, octa z)
-{ @+
-@z
-@x [46]
   ftype yt=funpack(y,&yf,&ye,&ys),@|zt=funpack(z,&zf,&ze,&zs);
 @y
   ftype yt=funpack(y,&yf,&ye,&ys),zt=funpack(z,&zf,&ze,&zs);
