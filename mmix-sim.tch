@@ -282,6 +282,12 @@ void print_line(
 @-k@> @-buf@>
 @z
 
+@x [45]
+  char buf[11];
+@y
+  @+ char buf[11];
+@z
+
 @x [47]
 void show_line(void)
 @y

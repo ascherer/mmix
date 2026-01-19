@@ -758,7 +758,7 @@ if (new_link==DEFINED) {
 @+@t}\6\4\4{@>
 @z
 @x [136]
-  register int j,k; /* all-purpose integers */
+  register int j,k; /* all-purpose integers */ @+@t}\6{@>
 @y
-  @+ register int j,k; /* all-purpose integers */
+  @+ register int j,k; /* all-purpose integers */ @+@t}\6{@>
 @z

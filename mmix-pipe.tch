@@ -1490,7 +1490,7 @@ static void print_write_buffer(void);
 @<Commit to memory...@>=
 {@+register write_node *q=write_tail;
 @y
-\ifx\undefined\eightpoint\else\vbox to2cm{}\fi
+\ifx\undefined\eightpoint\else\vbox to1.2cm{}\fi
 @<Commit to memory...@>=
 { register write_node *q=write_tail;
 @-p@> @-q@>
@@ -2288,12 +2288,6 @@ static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @ The subroutine |mmgetchars(buf,size,addr,stop)| reads characters
 @y
 @r @ The subroutine |mmgetchars(buf,size,addr,stop)| reads characters
-@z
-
-@x [384]
-  register unsigned char *p;
-@y
-  @+ register unsigned char *p;
 @z
 
 @x [385]

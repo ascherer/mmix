@@ -109,18 +109,8 @@ octa mmix_fputws(
 @% @$mmgetchars {MMIX-IO}4 \&{int} (\,), ``mixin''@>
 @z
 
-@x [22]
-  register long x;
-@y
-@+register long x;
-@z
-
 @x [24]
 static char *trip_warning[]={
-@y
-static char *trip_warning[]={ @|
-@z
-@x [24]
 "TRIP",
 "integer divide check",
 "integer overflow",
@@ -130,6 +120,7 @@ static char *trip_warning[]={ @|
 "floating point underflow",
 "floating point division by zero",
 @y
+static char *trip_warning[]={ @+
 "TRIP", @|
 "integer divide check", @|
 "integer overflow", @|

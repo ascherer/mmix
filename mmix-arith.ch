@@ -133,7 +133,7 @@ octa oplus(octa y, octa z) /* compute $y+z$ */
   x.h=y.h+z.h;@+
   x.l=y.l+z.l;
 @y
-{@+ octa x = {y.h+z.h, y.l+z.l};
+{ octa x = {y.h+z.h, y.l+z.l};
 @z
 
 @x [5] l.88 C99 prototypes for C2x.
@@ -149,7 +149,7 @@ octa ominus(octa y, octa z) /* compute $y-z$ */
   x.h=y.h-z.h;@+
   x.l=y.l-z.l;
 @y
-{@+ octa x={y.h-z.h, y.l-z.l};
+{ octa x={y.h-z.h, y.l-z.l};
 @z
 
 @x [6] l.101 C99 prototypes for C2x.
@@ -167,7 +167,7 @@ octa incr(octa y, int delta) /* compute $y+\delta$ */
 {@+ octa x;
   x.h=y.h;@+ x.l=y.l+delta;
 @y
-{@+ octa x={y.h, y.l+delta};
+{ octa x={y.h, y.l+delta};
 @z
 
 @x [6] l.110 Format improvement. (if-block requires braces.)
