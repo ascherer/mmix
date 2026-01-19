@@ -1357,6 +1357,14 @@ int main(
   char *argv[])
 @z
 
+@x [136] l.3179
+  register int j,k; /* all-purpose integers */
+  @<Local variables@>;
+@y
+  register int j,k; /* all-purpose integers */ @+@t}\6{@>
+  @<Local variables@>; @#
+@z
+
 @x [136] l.3183 Use standard 'bool'.
   while(1) {
 @y

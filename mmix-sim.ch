@@ -454,11 +454,6 @@ void print_line(k)
 void print_line(
   int k)
 @z
-@x [45] l.1153 Format.
-  char buf[11];
-@y
-  @+ char buf[11];
-@z
 @x [45] l.1157 Avoid compiler warning.
   sprintf(buf,"%d:    ",k);
 @y
@@ -1292,7 +1287,7 @@ int register_truth(
 @x [91] l.2072 RAII.
 {@+register int b;
 @y
-{@+register int b=0;
+{ register int b=0;
 @z
 
 @x [91] l.2075 Change from MMIX home.

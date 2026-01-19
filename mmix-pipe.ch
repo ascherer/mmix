@@ -537,18 +537,26 @@ static void unschedule(
   coroutine *c)
 @z
 
+@x [33] l.565
+{@+register coroutine *p;
+@y
+{ register coroutine *p;
+@z
+
 @x [34] l.583 C99 prototypes for C2x.
 static coroutine *queuelist @,@,@[ARGS((int))@];
 
 @ @<Sub...@>=
 static coroutine* queuelist(t)
   int t;
+{@+register coroutine *p, *q=&sentinel, *r;
 @y
 static coroutine *queuelist(int);
 
 @ @<Sub...@>=
 static coroutine* queuelist(
   int t)
+{ register coroutine *p, *q=&sentinel, *r;
 @z
 
 @x [36] l.600 Private variable.
@@ -922,12 +930,14 @@ static spec specval @,@,@[ARGS((specnode*))@];
 @ @<Sub...@>=
 static spec specval(r)
   specnode *r;
+{@+spec res;
 @y
 static spec specval(specnode*);
 
 @ @<Sub...@>=
 static spec specval(
   specnode *r)
+{ spec res;
 @z
 
 @x [94] l.1929 C99 prototypes for C2x.
@@ -1358,6 +1368,7 @@ static int register_truth @,@,@[ARGS((octa,mmix_opcode))@];
 static int register_truth(o,op)
   octa o;
   mmix_opcode op;
+{@+register int b;
 @y
 static int register_truth(octa,mmix_opcode);
 
@@ -1365,6 +1376,7 @@ static int register_truth(octa,mmix_opcode);
 static int register_truth(
   octa o,
   mmix_opcode op)
+{ register int b;
 @z
 
 @x [157] l.2968 Change from MMIX home.
@@ -2300,6 +2312,7 @@ static octa* write_search @,@,@[ARGS((control*,octa))@];
 static octa *write_search(ctl,addr)
   control *ctl;
   octa addr;
+{@+register specnode *p=(ctl->mem_x? ctl->x.up: (specnode*)ctl->ptr_a);
 @y
 static octa* write_search(control*,octa);
 
@@ -2307,6 +2320,7 @@ static octa* write_search(control*,octa);
 static octa *write_search(
   control *ctl,
   octa addr)
+{ register specnode *p=(ctl->mem_x? ctl->x.up: (specnode*)ctl->ptr_a);
 @z
 
 @x [255] l.4557 Use standard 'bool'.
