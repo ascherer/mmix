@@ -843,7 +843,7 @@ void print_float(
   octa x)
 @z
 
-@x [54] l.981
+@x [54] l.981 Add space after 'variables'.
   @<Local variables for |print_float|@>;
 @y
   @<Local variables for |print_float|@>;@#

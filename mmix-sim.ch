@@ -288,7 +288,7 @@ int byte_count; /* index of the next-to-be-read byte */
 @y
 @z
 
-@x [26] Move macro to empty section 27.
+@x [26] l.883 Move macro to empty section 27.
 @d mmo_err {
      fprintf(stderr,"Bad object file! (Try running MMOtype.)\n");
 @.Bad object file@>
@@ -1121,7 +1121,7 @@ register int G,L,O; /* accessible copies of key registers */
 register int G,L,O=0; /* accessible copies of key registers */
 @z
 
-@x [76] l.1782
+@x [76] l.1782 Document one-letter global variables.
 octa g[256]; /* global registers */
 @y
 @!@:g}{\|g (global registers)@>
@@ -1660,7 +1660,7 @@ int main(
   char *argv[])
 @z
 
-@x [141] l.2897
+@x [141] l.2897 Add space after 'variables'.
   @<Local registers@>;
 @y
   @<Local registers@>;@#
