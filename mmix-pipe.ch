@@ -230,6 +230,12 @@ void MMIX_run(
   octa breakpoint)
 @z
 
+@x [10] l.240
+  @<Local variables@>;
+@y
+  @<Local variables@>;@#
+@z
+
 @x [10] l.256 Change from MMIX home.
  cease:;
 @y
