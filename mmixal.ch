@@ -766,7 +766,7 @@ void out_stab(
 @y
 @z
 
-@x [75] l.2209
+@x [75] l.2209 Protect against buffer overwrite.
   *sym_ptr++=(m&0x80? '?': t->ch); /* Unicode? not yet */
 @y
   *sym_ptr++=(m&0x80? '?': t->ch); /* Unicode? not yet */
@@ -781,7 +781,7 @@ void out_stab(
   for (j=1;j<4;j++) if (x<(tetra)(1<<(8*j))) break;
 @z
 
-@x [77] l.2235
+@x [77] l.2235 Protect against buffer overwrite.
 @ We make room for symbols up to 999 bytes long. Strictly speaking,
 the program should check if this limit is exceeded; but really!
 @y
@@ -790,7 +790,7 @@ the program should check if this limit is exceeded; but really!
 @d sym_length_max 1000
 @z
 
-@x [77] l.2239
+@x [77] l.2239 Protect against buffer overwrite.
 Char sym_buf[1000];
 @y
 Char sym_buf[sym_length_max];
@@ -806,7 +806,7 @@ Char sym_buf[sym_length_max];
   fprintf(listing_file," %s = ",sym_buf+1);
 @z
 
-@x [79] l.2263
+@x [79] l.2263 Protect against buffer overwrite.
   *sym_ptr=(m&0x80? '?': t->ch); /* Unicode? not yet */
   *(sym_ptr+1)='\0';
 @y
@@ -838,7 +838,7 @@ else if (isdigit(*p)) @+ switch(*(p+1)) {
 else@+ switch(*p++) {
 @z
 
-@x [86] l.2364
+@x [86] l.2364 Compiler warning.
  case '+': goto scan_open;
 @y
  @+ @=/* fall through */@>@;
@@ -1357,7 +1357,7 @@ int main(
   char *argv[])
 @z
 
-@x [136] l.3179
+@x [136] l.3179 Add space after 'variables'.
   register int j,k; /* all-purpose integers */
   @<Local variables@>;
 @y

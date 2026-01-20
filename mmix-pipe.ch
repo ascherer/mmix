@@ -230,7 +230,7 @@ void MMIX_run(
   octa breakpoint)
 @z
 
-@x [10] l.240
+@x [10] l.240 Add space after 'variables'.
   @<Local variables@>;
 @y
   @<Local variables@>;@#
@@ -543,7 +543,7 @@ static void unschedule(
   coroutine *c)
 @z
 
-@x [33] l.565
+@x [33] l.565 Consistent format.
 {@+register coroutine *p;
 @y
 { register coroutine *p;
@@ -852,7 +852,7 @@ static unsigned char flags[256]={@|@t\1\1@>
  case go: case pushgo: case trap: case resume: case syncid:
 @z
 
-@x [86] l.1840
+@x [86] l.1840 Document one-letter global variables.
 rB is internally the same as g[0], because |rB=0|.
 @y
 rB is internally the same as g[0], because |rB=0|.
