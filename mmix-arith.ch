@@ -843,6 +843,12 @@ void print_float(
   octa x)
 @z
 
+@x [54] l.981
+  @<Local variables for |print_float|@>;
+@y
+  @<Local variables for |print_float|@>;@#
+@z
+
 @x [57] l.1055 Compound literals.
   f.h=0x3fffff, f.l=0xffffffff;
   g.h=0x400000, g.l=2;

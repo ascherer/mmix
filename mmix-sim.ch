@@ -1660,6 +1660,12 @@ int main(
   char *argv[])
 @z
 
+@x [141] l.2897
+  @<Local registers@>;
+@y
+  @<Local registers@>;@#
+@z
+
 @x [141] l.2903 Use standard 'bool'.
   while (1) {
 @y
