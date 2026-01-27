@@ -145,6 +145,16 @@ void mmix_io_init()
 void mmix_io_init(void)
 @z
 
+@x [7] l.83 Compound literal.
+  sfile[0].fp=stdin, sfile[0].mode=1;
+  sfile[1].fp=stdout, sfile[1].mode=2;
+  sfile[2].fp=stderr, sfile[2].mode=2;
+@y
+  sfile[0] = (sim_file_info){stdin, 1};
+  sfile[1] = (sim_file_info){stdout, 2};
+  sfile[2] = (sim_file_info){stderr, 2};
+@z
+
 @x [8] l.93 Decouple 'mixins'.
 octa mmix_fopen @,@,@[ARGS((unsigned char,octa,octa))@];@+@t}\6{@>
 octa mmix_fopen(handle,name,mode)
