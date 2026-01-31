@@ -209,6 +209,15 @@ void listing_clear()
 void listing_clear(void)
 @z
 
+@x [45] l.1217
+also on the optional listing file.
+@y
+also on the optional listing file.
+[Although tempting, it is impossible to reduce |panic| to
+|err(@["!"@&m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@])@;|, because
+label |bypass| is only accessible in |main|.]
+@z
+
 @x [45] l.1219 Variadic macro for error reporting.
 @d err(m) {@+report_error(m);@+if (m[0]!='*') goto bypass;@+}
 @d derr(m,p) {@+sprintf(err_buf,m,p);
