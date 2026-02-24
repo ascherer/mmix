@@ -61,6 +61,7 @@ Extern int verbose; /* controls the level of diagnostic output */
 
 @x [5] l.152 Improved module structure with interfaces.
 @(mmix-pipe.h@>=
+#define Extern extern
 @y
 @(mmix-pipe.h@>=
 #ifndef MMIX_PIPE_H
@@ -74,9 +75,13 @@ Extern int verbose; /* controls the level of diagnostic output */
 @#
 @z
 
-@x [5] l.157 Improved module structure with interfaces.
+@x [5] l.156 Improved module structure with interfaces.
+@<External variables@>@;
 @<External prototypes@>@;
 @y
+@#
+#define Extern extern
+@<External variables@>@;
 @<External prototypes@>@;
 #undef Extern
 @#
