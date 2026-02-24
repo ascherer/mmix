@@ -713,9 +713,7 @@ when the page table method isn't implemented in hardware.
 typically have |data->state=0| when a coroutine is first fired~up.
 @y
 typically have |data->state=0| when a coroutine is first fired~up.
-@%
-@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
-@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
+@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
 
 @x [125]
@@ -1903,6 +1901,7 @@ p=use_and_fix(ITcache,p);
 @%
 @$a {MMIX-PIPE}44 \&{specnode}@>
 @$b {MMIX-PIPE}44 \&{spec}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [313]
@@ -2028,6 +2027,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @y
 @r @ The instruction \.{UNSAVE} $z$ generates a sequence of internal instructions
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [334]
@@ -2066,6 +2066,7 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @y
 @ @<Generate an instruction to save |g[yy]|@>=
 @% @$b {MMIX-PIPE}44 \&{spec}@>
+@$op {MMIX-PIPE}75 \&{register} \&{mmix\_opcode}@>
 @z
 
 @x [340]
