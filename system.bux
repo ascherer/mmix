@@ -40,6 +40,7 @@
 @$rename "<stdio.h>" \zip@>
 @$remove "<stdio.h>" \zip@>
 @$rewind "<stdio.h>" \zip@>
+@$snprintf "<stdio.h>" \zip@>
 @$sprintf "<stdio.h>" \zip@>
 @$sscanf "<stdio.h>" \zip@>
 @$stderr "<stdio.h>" \zip@>
@@ -47,6 +48,7 @@
 @$stdout "<stdio.h>" \zip@>
 @$ungetc "<stdio.h>" \zip@>
 
+@$abort "<stdlib.h>" \zip@>
 @$calloc "<stdlib.h>" \zip@>
 @$exit "<stdlib.h>" \zip@>
 @$free "<stdlib.h>" \zip@>
