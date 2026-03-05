@@ -298,7 +298,7 @@ while (true) {
 @:g}{\|g (global registers)@>
 @z
 
-@x [16] l.430 Avoid cyclic dependeny. Move this part to MMIX-MEM.
+@x [16] l.430 Avoid cyclic dependency. Move this part to MMIX-MEM.
 int n,m; /* temporary integer */
 octa bp={-1,-1}; /* breakpoint */
 octa tmp; /* an octabyte of temporary interest */
@@ -340,7 +340,7 @@ so we had better move it ``down'' (together with the |static| variable~|d|
 in the previous section).
 Instead, we place some internal prototypes here.
 We also have room for the variadic macro |panic| used in error situations.
-[Former module {\mc MMIX-MEM} has been fully disolved into main module
+[Former module {\mc MMIX-MEM} has been fully dissolved into main module
 {\mc MMIX-PIPE} to avoid further design discrepancies.]
 
 @d panic(r,m,...) {@+fprintf(stderr,

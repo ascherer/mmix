@@ -338,7 +338,7 @@ static void print_octa(o)
 @ Function |read_hex| was originally defined in program {\mc MMMIX} and used in
 module {\mc MMIX-MEM}. Simultaneously, function |print_octa| can be better
 placed in module {\mc MMIX-IO} for reuse, so there are two free sections
-available. As {\mc MMIX-MEM} has been fully disolved into {\mc MMIX-PIPE}
+available. As {\mc MMIX-MEM} has been fully dissolved into {\mc MMIX-PIPE}
 below, we can place |read_hex| here.
 
 @<External proto...@>=
@@ -655,13 +655,13 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 static char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",
 @z
 
-@x [54] l.1172 Move commen BIT values to MMIX-ARITH.
+@x [54] l.1172 Move common BIT values to MMIX-ARITH.
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 @y
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 |X_BIT| and beyond are defined in {\mc MMIX-ARITH}.
 @z
-@x [54] l.1183 Move commen BIT values to MMIX-ARITH.
+@x [54] l.1183 Move common BIT values to MMIX-ARITH.
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
 @d U_BIT (1<<10) /* floating underflow */
@@ -2133,7 +2133,7 @@ DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @y
 DTcache->filler_ctl.ptr_c=(void*)&DPTco[0];
 @#
-page_bad=true; /* variable delared below */
+page_bad=true; /* variable declared below */
 @z
 
 @x [237] l.4304 Add 'fall through' comment.
