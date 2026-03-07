@@ -127,6 +127,18 @@ read from the |CPV| table.)
 @<Count and allocate the functional units@>=
 @z
 
+@x [20]
+@ @<If |token| is a parameter name, process a PV spec@>=
+@y
+@ @<If |token| is a parameter name, process a PV spec@>=
+@%
+@$name {MMIX-CONFIG}12 \&{char} $[\,]$@>
+@$minval {MMIX-CONFIG}12 \&{int}@>
+@$maxval {MMIX-CONFIG}12 \&{int}@>
+@$power_of_two {MMIX-CONFIG}12 \&{bool}@>
+@$v {MMIX-CONFIG}12 \&{int} ${*}$@>
+@z
+
 @x [21]
 @ @<If |token| is a cache name, process a cache spec@>=
 @y
@@ -164,6 +176,8 @@ static void pcs( /* subroutine to process a cache spec */
   cache *c)
 {
 @y
+@%
+@$name {MMIX-CONFIG}13 \&{char} $[\,]$@>
 static void pcs(cache *c) /* subroutine to process a cache spec */
 { @+
 @z
@@ -285,15 +299,21 @@ static void alloc_cache(
 @x [34]
 @ @<Allocate reader coroutines for cache |c|@>=
 @y
-@ @% @$coroutine {MMIX-PIPE}167 \&{struct}@>
+@ @%
+@$coroutine {MMIX-PIPE}167 \&{struct}@>
+@$name {MMIX-CONFIG}31 \&{char} ${*}$@>
+@$name {MMIX-PIPE}23 \&{char} ${*}$@>
 @<Allocate reader coroutines for cache |c|@>=
 @z
 
 @x [35]
 @ @<Allocate the caches@>=
 @y
-@ @-bb@> @-gg@>
-@<Allocate the caches@>=
+@ @<Allocate the caches@>=
+@%
+@$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$gg {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [36]
@@ -305,19 +325,21 @@ static void alloc_cache(
 scheduler and schedulee.
 @y
 scheduler and schedulee.
-@-bb@> @-name@>
 @$j {MMIX-CONFIG}38 \&{int}@>
 @$n {MMIX-CONFIG}38 \&{int}@>
+@%
+@$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@$bb {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [37]
 @ @s chunknode int
 @y
 @ @s chunknode int
-@-bb@>
 @$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
 @%
 @$specnode {MMIX-PIPE}40 \&{struct}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
 @$write_node {MMIX-PIPE}246 \&{struct}@>
 @z
 
