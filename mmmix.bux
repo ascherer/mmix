@@ -1,3 +1,6 @@
 @i mmix.bux
 
 @$P_BIT {MMIX-PIPE}54 =$(\T{1}\LL\T{0})$@>
+@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
+@$set {MMIX-PIPE}167 \&{cacheset} ${*}$@>
+@$tag {MMIX-PIPE}167 \&{octa}@>
