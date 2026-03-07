@@ -220,8 +220,8 @@ int_stages[mul]=n; @+
 @-fix@> @-flot@> @-fmul@> @-frem@> @-fsqrt@> @-fsub@> @-funeq@> @-get@>
 @-go@> @-ld@> @-mor@> @-mul@> @-mul0@> @-mul8@> @-mux@> @-nand@>
 @-noop@> @-nor@> @-nxor@> @-odif@> @-or@> @-orn@> @-pbr@> @-pop@>
-@-prego@> @-pushgo@> @-pushj@> @-put@> @-resume@> @-sadd@> @-save@> @-sh@>
-@-st@> @-sub@> @-subu@> @-sync@> @-tdif@> @-trap@> @-trip@> @-unsave@>
+@-prego@> @-pushgo@> @-pushj@> @-put@> @-resume@> @-sadd@> @-save@> @-set@>
+@-sh@> @-st@> @-sub@> @-subu@> @-sync@> @-tdif@> @-trap@> @-trip@> @-unsave@>
 @-wdif@> @-xor@> @-zset@>
 @%
 @$mul0 {MMIX-PIPE}49 =$\,0,\dots,\\{resum}=89$, \&{internal\_opcode}@>
