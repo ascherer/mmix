@@ -332,6 +332,34 @@ void print_freqs(
 @r @ Much of the simulation is table-driven, based on a static data
 @z
 
+@x [66]
+{"16ADDUI",0x29,0,0,1,"%l = %#y <<4+ %z = %#x"},
+@t}\vadjust{\break}{@>@/
+@y
+{"16ADDUI",0x29,0,0,1,"%l = %#y <<4+ %z = %#x"},@/
+@z
+
+@x [67]
+{"CSEVI",0x39,0,0,1,"%l = %y even? %z: %b = %x"},
+@t}\vadjust{\break}{@>@/
+@y
+{"CSEVI",0x39,0,0,1,"%l = %y even? %z: %b = %x"},@/
+@z
+
+@x [68]
+{"STSFI",0x19,0,1,1,"%(M4[%#y%?+]%) = %.b, M8[%#w]=%#a"},
+@t}\vadjust{\break}{@>@/
+@y
+{"STSFI",0x19,0,1,1,"%(M4[%#y%?+]%) = %.b, M8[%#w]=%#a"},@/
+@z
+
+@x [69]
+{"JMPB",0x40,0,0,1,"-> %#z"},
+@t}\vadjust{\break}{@>@/
+@y
+{"JMPB",0x40,0,0,1,"-> %#z"},@/
+@z
+
 @x [72]
 @<Set |z| from register Z@>=
 @y
