@@ -18,7 +18,15 @@
 \ifx\undefined\eightpoint\else\vbox to1.2cm{}\fi
 \bull \.{-r}\quad Trace details of the register stack. This option
 @z
+@x [2]
+\vadjust{\break}
+@y
+@z
 
+@x [3]
+\vadjust{\break}
+@y
+@z
 @x [3]
 \bull \.{T}, \.{D}, \.{P}, \.{S} sets the ``current segment'' to
 @y

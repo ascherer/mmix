@@ -7,6 +7,20 @@
 
 @z
 
+@x [2] l.108 Nicer page break.
+halts or pauses for a breakpoint.
+@y
+halts or pauses for a breakpoint.
+\vadjust{\break}
+@z
+
+@x [3] l.189 Nicer page break.
+cause a break in simulation after $250\upsilon$ have elapsed.
+@y
+cause a break in simulation after $250\upsilon$ have elapsed.
+\vadjust{\break}
+@z
+
 @x [4] l.250 Issue #15.
 on that file. It returns 0 if the file was opened successfully; otherwise
 @y
