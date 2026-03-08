@@ -24,6 +24,13 @@ Readers of this program should be familiar with the explanation of \MMIX\
 Readers of this program should be familiar with the explanation of \MMIX's
 @z
 
+@x [2] l.82 Nicer page break.
+if we are very lucky.)
+@y
+if we are very lucky.)
+\vadjust{\break}
+@z
+
 @x [3] l.125 Improved module structure with interfaces.
 #include <stdio.h>
 #include <stdlib.h>
@@ -637,6 +644,13 @@ char *opcode_name[]={@|
 static char *opcode_name[]={@|
 @z
 
+@x [49] l.940 Nicer page break
+@!nxor, /* \.{NXOR[I]} */
+@y
+@!nxor, /* \.{NXOR[I]} */
+@t}\vadjust{\break}{@>@/
+@z
+
 @x [50] l.992 Private variable.
 char *internal_op_name[]={
 @y
@@ -722,6 +736,13 @@ Most of them are implementation-dependent, but a few are defined in general.
 @d REBOOT_SIGNAL (1<<4) /* it's time to start over */
 @d INTERVAL_TIMEOUT (1<<6) /* the timer register, rI, has reached zero */
 @d STACK_OVERFLOW (1<<7) /* data has been stored on the rC page */
+@z
+
+@x [59] l.1301 Nicer page break.
+possibilities are allowed by |MMIX_config|.
+@y
+possibilities are allowed by |MMIX_config|.
+\vadjust{\goodbreak}
 @z
 
 @x [62] l.1423 C99 prototypes for C2x.
@@ -1431,6 +1452,13 @@ void print_stats(void)
   for (j=0;j<=dispatch_max;j++)
 @y
   for (int j=0;j<=dispatch_max;j++)
+@z
+
+@x [164] l.3099 Nicer page break.
+they also usually have $c=0$.
+@y
+they also usually have $c=0$.
+\vadjust{\break}
 @z
 
 @x [169] l.3223 C99 prototypes for C2x.
@@ -2417,6 +2445,12 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
   @+@=/* fall through */@>@;
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
+@x [271] l.4906 Nicer page break.
+  m=write_search(data,data->z.o);
+@y
+@t}\vadjust{\break}{@>@/
+  m=write_search(data,data->z.o);
+@z
 
 @x [272] l.4948 Add 'fall through' comment.
  case DT_retry:@+if (DTcache->lock || (j=get_reader(DTcache))<0) wait(1);
@@ -3039,6 +3073,7 @@ case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
 char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
 @y
 static char arg_count[]={1,3,1,3,3,3,3,2,2,2,1};
+@t}\vadjust{\break}{@>@/
 @z
 
 @x [375] l.6594 Decouple 'mixins'.

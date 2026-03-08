@@ -56,6 +56,11 @@ representation that will be input as precisely the same value.
 @$s {MMIX-ARITH}66 \&{char} [\,]@>
 @z
 
+@x [55]
+\vadjust{\break}
+@y
+@z
+
 @x [59]
 If |f| points to a \&{bignum}, its radix-$2^{28}$ digits are
 @y
@@ -104,6 +109,10 @@ $g$ to be fractions whose denominator is a power of~10.
 $g$ to be fractions whose denominator is a power of~10.
 @$x {MMIX-ARITH}54 \&{octa}@>
 @$tt {MMIX-ARITH}66 \&{bignum}@>
+@z
+@x [65]
+\vadjust{\break}
+@y
 @z
 
 @x [68]

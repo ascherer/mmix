@@ -849,6 +849,13 @@ void print_float(
   @<Local variables for |print_float|@>;@#
 @z
 
+@x [55] l.1018 Nicer page break.
+respectively.
+@y
+respectively.
+\vadjust{\break}
+@z
+
 @x [57] l.1055 Compound literals.
   f.h=0x3fffff, f.l=0xffffffff;
   g.h=0x400000, g.l=2;
@@ -895,6 +902,12 @@ ff.dat[k]=shift_right(f,magic_offset-e-28*k,true).l&0xfffffff;
 gg.dat[k]=shift_right(g,magic_offset-e-28*k,true).l&0xfffffff;
 @z
 
+@x [65] l.1253 Nicer page break.
+and we do not terminate the process when $f=0$ or $g=1$.
+@y
+and we do not terminate the process when $f=0$ or $g=1$.
+\vadjust{\break}
+@z
 @x [65] l.1262 Use standard 'bool'.
   while (1) {
 @y
