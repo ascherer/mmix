@@ -472,6 +472,12 @@ void stack_load(void)
 @$l {MMIX-SIM}76 \&{octa} ${*}$@>
 @z
 
+@x [86]
+case OR: case ORI: case ORH: case ORMH: case ORML: case ORL:
+@y
+case OR: case ORI: case ORH: case ORMH: case ORML: case ORL: @/
+@z
+
 @x [90]
   @=/* else fall through */@>@;
 @y
