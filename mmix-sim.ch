@@ -215,6 +215,8 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @d sign_bit ((unsigned)0x80000000)
 
 @y
+@d hi o.h
+@d lo o.l
 @z
 
 @x [15] l.672 C99 prototypes for C2x.
@@ -224,6 +226,12 @@ void print_int(o)
 @y
 void print_int(
   octa o)
+@z
+
+@x [15] l.676
+  register tetra hi=o.h, lo=o.l, r, t;
+@y
+  register tetra r, t;
 @z
 
 @x [17] l.743 C99 prototype for C2x.
