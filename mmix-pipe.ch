@@ -2867,6 +2867,13 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
                             wyde_diff(data->y.o.l,data->z.o.l)};@+ break;
 @z
 
+@x [344] l.6113
+             data->x.o.l=data->y.o.l-data->z.o.l;@+ break;
+@y
+             data->x.o.l=data->y.o.l-data->z.o.l;
+   break;
+@z
+
 @x [346] l.6151 Move to MMIX-ARITH.
 @d ROUND_OFF 1
 @d ROUND_UP 2
