@@ -840,11 +840,23 @@ else if (isdigit(*p)) {
 }@+else@+ switch(*p++) {
 @y
 else if (isdigit(*p)) @+ switch(*(p+1)) {
- case 'F': @<Scan a forward local@>@; @+ break;
- case 'B': @<Scan a backward local@>@; @+ break;
+ case 'F': @<Scan a forward local@>@;
+ case 'B': @<Scan a backward local@>@;
  default: @<Scan a decimal constant@>@;
 }
 else@+ switch(*p++) {
+@z
+
+@x [86] l.2359 These four cases end with goto.
+ case '#': @<Scan a hexadecimal constant@>;@+break;
+ case '\'': @<Scan a character constant@>;@+break;
+ case '\"': @<Scan a string constant@>;@+break;
+ case '@@': @<Scan the current location@>;@+break;
+@y
+ case '#': @<Scan a hexadecimal constant@>@;
+ case '\'': @<Scan a character constant@>@;
+ case '\"': @<Scan a string constant@>@;
+ case '@@': @<Scan the current location@>@;
 @z
 
 @x [86] l.2364 Compiler warning.
