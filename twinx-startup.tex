@@ -14,6 +14,13 @@
 % special TeX macro from 'mmix-doc.w'
 \def\NNIX{\hbox{\mc NNIX}}
 
+\def\\#1{\leavevmode\hbox{\it % searchable underline in PDF/HINT
+  \def\_{\kern-.08em\hbox{\tt\char`\_}\kern-.08em}%
+  #1\/\kern.05em}} % italic type for identifiers
+\def\&#1{\leavevmode\hbox{\bf % searchable underline in PDF/HINT
+  \def\_{\kern-.05em\hbox{\tt\char`\_}\kern-.05em}%
+  %\def\_{\kern.04em\vbox{\hrule width.3em height .6pt}\kern.08em}%
+  #1\/\kern.05em}} % boldface type for reserved words
 \pageno=101 % dummy page number
 \preinx % pre-index text on full pagewidth
 \line{\smash{\titlefont MASTER INDEX}\quad\hrulefill}\bigskip
