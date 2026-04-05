@@ -35,3 +35,8 @@
   \ifacrohint\def\_{\kern-.05em\hbox{\tt\char`\_}\kern-.05em}\else
   \def\_{\kern.04em\vbox{\hrule width.3em height .6pt}\kern.08em}\fi
   #1\/\kern.05em}} % boldface type for reserved words
+
+\ifpdf
+\sanitizecommand{\MMIX}{MMIX}
+\sanitizecommand{\MMIXAL}{MMIXAL}
+\fi
