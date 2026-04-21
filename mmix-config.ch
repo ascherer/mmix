@@ -534,12 +534,12 @@ if (!wbuf_bot) panic("Can't allocate the write buffer");
 @z
 
 @x [37] l.1003 Change from MMIX home.
-l=(specnode*)calloc(lring_size,sizeof(specnode));
-if (!l) panic(errprint0("Can't allocate local registers"));
+lring=(specnode*)calloc(lring_size,sizeof(specnode));
+if (!lring) panic(errprint0("Can't allocate local registers"));
 @y
-l=(specnode*)calloc(lring_size,sizeof(specnode));
+lring=(specnode*)calloc(lring_size,sizeof(specnode));
 @:l}{\|l (ring of local registers)@>
-if (!l) panic("Can't allocate local registers");
+if (!lring) panic("Can't allocate local registers");
 @z
 
 @x [37] l.1008 Variadic function for error reporting.

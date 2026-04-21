@@ -268,7 +268,7 @@ int MMIX_silent(void)
   @<Local variables@>;@#
   while (true) {
     @<Perform one machine cycle@>;
-    if (halted) return specval(&g[255]).o.l;
+    if (halted) return specval(&globreg[255]).o.l;
   }
 }
 @z
@@ -917,23 +917,23 @@ a trivial program that computes the value of the standard library function
 @z
 
 @x [89] l.1883 Compound literal.
-  g[j].addr.h=sign_bit, g[j].addr.l=j, g[j].known=true;
+  globreg[j].addr.h=sign_bit, globreg[j].addr.l=j, globreg[j].known=true;
 @y
-  g[j].addr=(octa){sign_bit, j}, g[j].known=true;
+  globreg[j].addr=(octa){sign_bit, j}, globreg[j].known=true;
 @z
 
 @x [89] l.1887 Compound literal.
-g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
-g[rN].o.l=ABSTIME; /* see comment and warning above */
+globreg[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+globreg[rN].o.l=ABSTIME; /* see comment and warning above */
 @y
-g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+globreg[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   ABSTIME}; /* see comment and warning above */
 @z
 
 @x [89] l.1890 Compound literal.
-  l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
+  lring[j].addr.h=sign_bit, lring[j].addr.l=256+j, lring[j].known=true;
 @y
-  l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
+  lring[j].addr=(octa){sign_bit, 256+j}, lring[j].known=true;
 @z
 
 @x [90] l.1895 C99 prototypes for C2x.
@@ -2723,10 +2723,10 @@ case 5:@+if (data!=old_hot) wait(1);
 @z
 
 @x [312] l.5571 Add 'fall through' comment.
-case trip: if (!g[rJ].up->known) goto stall;
+case trip: if (!globreg[rJ].up->known) goto stall;
 @y
 @+@=/* fall through */@>@;
-case trip: if (!g[rJ].up->known) goto stall;
+case trip: if (!globreg[rJ].up->known) goto stall;
 @z
 
 @x [314] l.5586 Sort name of section.
@@ -2750,9 +2750,9 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @z
 
 @x [320] l.5688 Compound literal.
-  g[rX].o.h=sign_bit, g[rX].o.l=j;
+  globreg[rX].o.h=sign_bit, globreg[rX].o.l=j;
 @y
-  g[rX].o=(octa){sign_bit,j};
+  globreg[rX].o=(octa){sign_bit,j};
 @z
 
 @x [323] l.5774 Block-local variable.
@@ -2792,16 +2792,16 @@ case incgamma: case save: data->i=st; goto switch1;
 @z
 
 @x [329] l.5888 Add 'fall through' comment.
-  case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
-           new_Q.l |= data->z.o.l &~ g[rQ].o.l;
+  case rQ: new_Q.h |= data->z.o.h &~ globreg[rQ].o.h;@+
+           new_Q.l |= data->z.o.l &~ globreg[rQ].o.l;
            data->z.o.l |= new_Q.l;@+
            data->z.o.h |= new_Q.h;@+break;
-  case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=g[rL].o.l;
+  case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=globreg[rL].o.l;
 @y
-  case rQ: new_Q = oor(new_Q,oandn(data->z.o,g[rQ].o));
+  case rQ: new_Q = oor(new_Q,oandn(data->z.o,globreg[rQ].o));
            data->z.o = oor(data->z.o,new_Q);
   @+@=/* fall through */@>@;
-  case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
+  case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,globreg[rL].o.l};
 @z
 
 @x [331] l.5926 Add 'fall through' comment.
@@ -2843,10 +2843,10 @@ cool->x.known=true, cool->x.o=(octa){0, cool_L};
 @z
 
 @x [342] l.6065 Compound literal.
-    data->x.o.h=g[rG].o.l<<24;
-    data->x.o.l=g[rA].o.l;
+    data->x.o.h=globreg[rG].o.l<<24;
+    data->x.o.l=globreg[rA].o.l;
 @y
-    data->x.o=(octa){g[rG].o.l<<24, g[rA].o.l};
+    data->x.o=(octa){globreg[rG].o.l<<24, globreg[rA].o.l};
 @z
 
 @x [343] l.6087 Issue #16.
@@ -3048,32 +3048,32 @@ case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
 @z
 
 @x [372] l.6566 Change from MMIX home.
-case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma);@+break;
+case Fopen: globreg[rBB].o=mmix_fopen(zz,mb,ma);@+break;
 @y
-case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma,mmgetchars);@+break;
+case Fopen: globreg[rBB].o=mmix_fopen(zz,mb,ma,mmgetchars);@+break;
 @z
 
 @x [372] l.6568 Decouple 'mixins'.
-case Fread: g[rBB].o=mmix_fread(zz,mb,ma);@+break;
-case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma);@+break;
-case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
-case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
-case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o);@+break;
-case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o);@+break;
+case Fread: globreg[rBB].o=mmix_fread(zz,mb,ma);@+break;
+case Fgets: globreg[rBB].o=mmix_fgets(zz,mb,ma);@+break;
+case Fgetws: globreg[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
+case Fwrite: globreg[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
+case Fputs: globreg[rBB].o=mmix_fputs(zz,globreg[rBB].o);@+break;
+case Fputws: globreg[rBB].o=mmix_fputws(zz,globreg[rBB].o);@+break;
 @y
-case Fread: g[rBB].o=mmix_fread(zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma,mmgetchars);@+break;
-case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o,mmgetchars);@+break;
-case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
+case Fread: globreg[rBB].o=mmix_fread(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgets: globreg[rBB].o=mmix_fgets(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgetws: globreg[rBB].o=mmix_fgetws(zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fwrite: globreg[rBB].o=mmix_fwrite(zz,mb,ma,mmgetchars);@+break;
+case Fputs: globreg[rBB].o=mmix_fputs(zz,globreg[rBB].o,mmgetchars);@+break;
+case Fputws: globreg[rBB].o=mmix_fputws(zz,globreg[rBB].o,mmgetchars);@+break;
 @z
 
 @x [373] l.6583 RAII.
   octa trap_loc;
-  trap_loc=incr(g[rWW].o,-4);
+  trap_loc=incr(globreg[rWW].o,-4);
 @y
-  octa trap_loc=incr(g[rWW].o,-4);
+  octa trap_loc=incr(globreg[rWW].o,-4);
 @z
 
 @x [374] l.6590 Private variable.
@@ -3179,9 +3179,9 @@ static void magic_write(
 
 @x [380] l.6695 RAII.
   octa arg_loc;
-  arg_loc=g[rBB].o;
+  arg_loc=globreg[rBB].o;
 @y
-  octa arg_loc=g[rBB].o;
+  octa arg_loc=globreg[rBB].o;
 @z
 
 @x [381] l.6714 Factor out private stuff (mixins).

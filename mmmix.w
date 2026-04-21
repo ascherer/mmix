@@ -281,12 +281,12 @@ if (cur_loc.h!=3) {
 inst_ptr.o=mem_read(incr(cur_loc,-8*14)); /* \.{Main} */
 inst_ptr.p=NULL;
 cur_loc.h=0x60000000;
-g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
+globreg[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 cur_dat.l=0xf0;
 if (mem_read(cur_dat).h) inst_ptr.o=cur_dat; /* start at |0xf0| if nonzero */
 head->inst=(UNSAVE<<24)+255, tail--; /* prefetch a fabricated command */
 head->loc=incr(inst_ptr.o,-4); /* in case the \.{UNSAVE} is interrupted */
-g[rT].o.h=0x80000005, g[rTT].o.h=0x80000006;
+globreg[rT].o.h=0x80000005, globreg[rTT].o.h=0x80000006;
 cur_dat.h=(RESUME<<24)+1, cur_dat.l=0, cur_loc.h=5, cur_loc.l=0;
 mem_write(cur_loc,cur_dat); /* the primitive trap handler */
 cur_dat.l=cur_dat.h, cur_dat.h=(NEGI<<24)+(255<<16)+1;
@@ -306,8 +306,8 @@ cur_dat.h=2, cur_loc.l=6<<13;
 mem_write(cur_loc,cur_dat); /* PTE for the pool segment */
 cur_dat.h=3, cur_loc.l=9<<13;
 mem_write(cur_loc,cur_dat); /* PTE for the stack segment */
-g[rK].o=neg_one; /* enable all interrupts */
-g[rV].o.h=0x369c2004;
+globreg[rK].o=neg_one; /* enable all interrupts */
+globreg[rV].o.h=0x369c2004;
 page_bad=false, page_r=4<<(32-13), page_s=32, page_mask.l=0xffffffff;
 page_b[1]=3, page_b[2]=6, page_b[3]=9, page_b[4]=12;
 
@@ -421,7 +421,7 @@ case '@@': inst_ptr.o=read_hex(buffer+1);@+goto new_inst_ptr;
 case 'k': inst_ptr.o.h^=0x80000000; /* shortcut to kernel mode */
   if (!ticks.l && head) head->loc.h^=0x80000000; /* fix the \.{UNSAVE} loc */
 new_inst_ptr:@+if (inst_ptr.o.h&0x80000000)
-    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+    globreg[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
   inst_ptr.p=NULL;@+continue;
 case 'b': bp=read_hex(buffer+1);@+continue;
 case 'v': verbose=read_hex(buffer+1).l;@+continue;
@@ -466,7 +466,7 @@ case '-':@+ if (sscanf(buffer+1,"%d",&n)!=1 || n<0) goto what_say;
   continue;
 case 'l':@+ if (sscanf(buffer+1,"%d",&n)!=1 || n<0) goto what_say;
   if (n>=lring_size) goto what_say;
-  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
 case 'm': tmp=mem_read(read_hex(buffer+1));
   printf("  m[%s]=%08x%08x\n",buffer+1,tmp.h,tmp.l);@+continue;
 
@@ -479,10 +479,10 @@ case 'g':@+ if (sscanf(buffer+1,"%d",&n)!=1 || n<0) goto what_say;
   if (n>=256) goto what_say;
   if (n==rO || n==rS) {
     if (hot==cool) /* pipeline empty */
-      g[rO].o=sl3(cool_O), g[rS].o=sl3(cool_S);
-    else g[rO].o=sl3(hot->cur_O), g[rS].o=sl3(hot->cur_S);
+      globreg[rO].o=sl3(cool_O), globreg[rS].o=sl3(cool_S);
+    else globreg[rO].o=sl3(hot->cur_O), globreg[rS].o=sl3(hot->cur_S);
   }
-  printf("  g[%d]=%08x%08x\n",n,g[n].o.h,g[n].o.l);
+  printf("  g[%d]=%08x%08x\n",n,globreg[n].o.h,globreg[n].o.l);
   continue;
 
 @ @<Sub...@>=
@@ -502,7 +502,7 @@ case 'D': print_cache(buffer[1]=='T'? DTcache: Dcache,@/
 case 'S': print_cache(Scache,buffer[1]=='*');@+continue;
 case 'p': print_pipe();@+print_locks();@+continue;
 case 's': print_stats();@+continue;
-case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
+case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) globreg[rI].o=incr(zero_octa,n);
   continue;
 
 @ @<Cases...@>=
@@ -534,7 +534,7 @@ case 'd':@+if (ticks.l)
    ITcache->set[0][0].data[0]=seven_octa;
    DTcache->set[0][0].tag=zero_octa;
    DTcache->set[0][0].data[0]=seven_octa;
-   g[rK].o=neg_one;
+   globreg[rK].o=neg_one;
    page_bad=false;
    page_mask=neg_one;
    inst_ptr.p=(specnode*)1;

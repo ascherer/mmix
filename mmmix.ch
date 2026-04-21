@@ -243,9 +243,9 @@ if (cur_loc.h!=3)
 @z
 
 @x [12] l.284 Change from MMIX home.
-g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
+globreg[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @y
-g[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
+globreg[255].o=incr(cur_loc,-8); /* place to \.{UNSAVE} */
 @:g}{\|g (global registers)@>
 @z
 
@@ -292,9 +292,9 @@ while (true) {
 @z
 
 @x [15] l.424 Change from MMIX home.
-    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+    globreg[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
 @y
-    g[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
+    globreg[rK].o.h&=-2; /* disable interrupts on |P_BIT| */
 @:g}{\|g (global registers)@>
 @z
 
@@ -352,9 +352,9 @@ static octa sl3(octa);
 @z
 
 @x [18] l.469 Change from MMIX home.
-  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
 @y
-  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
 @:l}{\|l (ring of local registers)@>
 @z
 
@@ -382,9 +382,9 @@ static octa sl3( /* shift left by 3 bits */
 @z
 
 @x [21] l.505 Change from MMIX home.
-case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
+case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) globreg[rI].o=incr(zero_octa,n);
 @y
-case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
+case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) globreg[rI].o=incr(zero_octa,n);
 @:g}{\|g (global registers)@>
 @z
 
@@ -397,9 +397,9 @@ case 'i':@+ if (sscanf(buffer+1,"%d",&n)==1) g[rI].o=incr(zero_octa,n);
 @z
 
 @x [23] l.537 Change from MMIX home.
-   g[rK].o=neg_one;
+   globreg[rK].o=neg_one;
 @y
-   g[rK].o=neg_one;
+   globreg[rK].o=neg_one;
 @:g}{\|g (global registers)@>
 @z
 

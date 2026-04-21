@@ -1798,9 +1798,9 @@ is made in the common case that the speculative value of~rJ is known.
     @<Restart the fetch coroutine@>;
     switch (i) {
  case jmp: case br: case pbr: case pushj: inst_ptr=cool->z;@+ break;
- case pop:@+if (g[rJ].up->known &&
+ case pop:@+if (globreg[rJ].up->known &&
           j<dispatch_max && !dispatch_lock && !nullifying) {
-      inst_ptr.o=incr(g[rJ].up->o,yz<<2), inst_ptr.p=NULL;@+break;
+      inst_ptr.o=incr(globreg[rJ].up->o,yz<<2), inst_ptr.p=NULL;@+break;
       } /* otherwise fall through, will wait on |cool->go| */   
  case go: case pushgo: case trap: case resume: case syncid:
     inst_ptr.p=UNKNOWN_SPEC;@+ break;
@@ -1840,8 +1840,8 @@ global registers g[32], g[33], \dots~\thinspace. For example,
 rB is internally the same as g[0], because |rB=0|.
 
 @<External v...@>=
-Extern specnode g[256]; /* global registers and special registers */
-Extern specnode *l; /* the ring of local registers */
+Extern specnode globreg[256]; /* global registers and special registers */
+Extern specnode *lring; /* the ring of local registers */
 Extern int lring_size; /* the number of on-chip local registers
          (must be a power of~2) */
 Extern int max_rename_regs, max_mem_slots; /* capacity of reorder buffer */
@@ -1880,15 +1880,15 @@ rename_regs=max_rename_regs;
 mem_slots=max_mem_slots;
 lring_mask=lring_size-1;
 for (j=0;j<256;j++) {
-  g[j].addr.h=sign_bit, g[j].addr.l=j, g[j].known=true;
-  g[j].up=g[j].down=&g[j];
+  globreg[j].addr.h=sign_bit, globreg[j].addr.l=j, globreg[j].known=true;
+  globreg[j].up=globreg[j].down=&globreg[j];
 }
-g[rG].o.l=255;
-g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
-g[rN].o.l=ABSTIME; /* see comment and warning above */
+globreg[rG].o.l=255;
+globreg[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+globreg[rN].o.l=ABSTIME; /* see comment and warning above */
 for (j=0;j<lring_size;j++) {
-  l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
-  l[j].up=l[j].down=&l[j];
+  lring[j].addr.h=sign_bit, lring[j].addr.l=256+j, lring[j].known=true;
+  lring[j].up=lring[j].down=&lring[j];
 }
 
 @ @<Internal proto...@>=
@@ -1990,8 +1990,8 @@ cool->rl.known=true; cool->rl.up=NULL;
 cool->need_b=cool->need_ra=
   cool->ren_x=cool->mem_x=cool->ren_a=cool->set_l=false;
 cool->arith_exc=cool->denin=cool->denout=0;
-if ((head->loc.h&sign_bit) && !(g[rU].o.h&0x8000)) cool->usage=false;
-else cool->usage=((op&(g[rU].o.h>>16))==g[rU].o.h>>24? true: false);
+if ((head->loc.h&sign_bit) && !(globreg[rU].o.h&0x8000)) cool->usage=false;
+else cool->usage=((op&(globreg[rU].o.h>>16))==globreg[rU].o.h>>24? true: false);
 new_O=cool->cur_O=cool_O;@+ new_S=cool->cur_S=cool_S;
 cool->interrupt=head->interrupt;
 cool->hist=peek_hist;
@@ -2016,10 +2016,10 @@ We don't really need to know the value of~rG until twelve other registers
 have been unsaved, so we aren't fussy about it here.
 
 @<Make sure |cool_L| and |cool_G| are up to date@>=
-if (!g[rL].up->known) goto stall;
-cool_L=g[rL].up->o.l;
-if (!g[rG].up->known && !(op==UNSAVE && cool->xx==1)) goto stall;
-cool_G=g[rG].up->o.l;
+if (!globreg[rL].up->known) goto stall;
+cool_L=globreg[rL].up->o.l;
+if (!globreg[rG].up->known && !(op==UNSAVE && cool->xx==1)) goto stall;
+cool_G=globreg[rG].up->o.l;
 
 @ @<Install the operand fields of the |cool| block@>=
 if (resuming)
@@ -2037,21 +2037,21 @@ else{
 
 @ @<Set |cool->z| from register Z@>=
 {
-  if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
-  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
+  if (cool->zz>=cool_G) cool->z=specval(&globreg[cool->zz]);
+  else if (cool->zz<cool_L) cool->z=specval(&lring[(cool_O.l+cool->zz)&lring_mask]);
 }
 
 @ @<Set |cool->y| from register Y@>=
 {
-  if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
-  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
+  if (cool->yy>=cool_G) cool->y=specval(&globreg[cool->yy]);
+  else if (cool->yy<cool_L) cool->y=specval(&lring[(cool_O.l+cool->yy)&lring_mask]);
 }
 
 @ @<Set |cool->b| from register X@>=
 {
-  if (cool->xx>=cool_G) cool->b=specval(&g[cool->xx]);
+  if (cool->xx>=cool_G) cool->b=specval(&globreg[cool->xx]);
   else if (cool->xx<cool_L)
-    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
+    cool->b=specval(&lring[(cool_O.l+cool->xx)&lring_mask]);
   if (f&rel_addr_bit) cool->need_b=true; /* |br|, |pbr| */
 }
 
@@ -2099,9 +2099,9 @@ which need~rA. So we use |cool->ra| instead, when rA is needed.
 @<Set |cool->b| and/or |cool->ra| from special register@>=
 {
   if (third_operand[op]==rA || third_operand[op]==rE)
-    cool->need_ra=true, cool->ra=specval(&g[rA]);
+    cool->need_ra=true, cool->ra=specval(&globreg[rA]);
   if (third_operand[op]!=rA)
-    cool->need_b=true, cool->b=specval(&g[third_operand[op]]);
+    cool->need_b=true, cool->b=specval(&globreg[third_operand[op]]);
 }
 
 @ @<Set |cool->z| as an immediate wyde@>=
@@ -2120,10 +2120,10 @@ case 3: cool->z.o.l=yz;@+break;
 {
   if (cool->xx>=cool_G) {
     if (i!=pushgo && i!=pushj && i!=cswap)
-      cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
+      cool->ren_x=true,spec_install(&globreg[cool->xx],&cool->x);
   }@+else if (cool->xx<cool_L) {
     if (i!=cswap) cool->ren_x=true,
-      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+      spec_install(&lring[(cool_O.l+cool->xx)&lring_mask],&cool->x);
   }@+else { /* we need to increase L before issuing |head->inst| */
  increase_L:@+ if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
@@ -2144,11 +2144,11 @@ in the ring of local registers.
 @<Insert an instruction to advance beta and L@>=
 {
   cool->i=incrl;
-  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+  spec_install(&lring[(cool_O.l+cool_L)&lring_mask],&cool->x);
   cool->need_b=cool->need_ra=false;
   cool->y=cool->z=zero_spec;
   cool->x.known=true; /* |cool->x.o=zero_octa| */
-  spec_install(&g[rL],&cool->rl);
+  spec_install(&globreg[rL],&cool->rl);
   cool->rl.o.l=cool_L+1;
   cool->ren_x=cool->set_l=true;
   op=SETH; /* this instruction to be handled by the simplest units */
@@ -2164,7 +2164,7 @@ from the local register ring to virtual memory location |cool_S<<3|.
   cool->need_b=cool->need_ra=false;
   cool->i=incgamma;
   new_S=incr(cool_S,1);
-  cool->b=specval(&l[cool_S.l&lring_mask]);
+  cool->b=specval(&lring[cool_S.l&lring_mask]);
   cool->y.p=NULL, cool->y.o=shift_left(cool_S,3);
   cool->z=zero_spec;
   cool->mem_x=true, spec_install(&mem,&cool->x);
@@ -2186,10 +2186,10 @@ The value of $\beta$ may need to be decreased too (by decreasing~rL).
       cool->i=or; /* we'll preserve the main result by moving it down */
       head->inst-=0x10000; /* decrease X field of \.{POP} in fetch buffer */
       op=OR;
-      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
-      spec_install(&l[(cool_O.l+cool->xx-2)&lring_mask],&cool->x);
+      cool->y=specval(&lring[(cool_O.l+cool->xx-1)&lring_mask]);
+      spec_install(&lring[(cool_O.l+cool->xx-2)&lring_mask],&cool->x);
     }@+else { /* decrease rL by 1 */
-      spec_install(&g[rL],&cool->rl);
+      spec_install(&globreg[rL],&cool->rl);
       cool->rl.o.l=cool_L-1;
       cool->set_l=true;
     }
@@ -2198,7 +2198,7 @@ The value of $\beta$ may need to be decreased too (by decreasing~rL).
     cool->i=decgamma;
     new_S=incr(cool_S,-1);
     cool->y.p=NULL, cool->y.o=shift_left(new_S,3);
-    spec_install(&l[new_S.l&lring_mask],&cool->x);
+    spec_install(&lring[new_S.l&lring_mask],&cool->x);
     op=LDOU; /* this instruction needs to be handled by load/store unit */
     cool->ptr_a=(void*)mem.up;
   }
@@ -2228,8 +2228,8 @@ from memory before they write it.
 
 @<Special cases of instruction dispatch@>=
 case cswap: cool->ren_a=true;
-  spec_install(cool->xx>=cool_G? &g[cool->xx]:
-      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
+  spec_install(cool->xx>=cool_G? &globreg[cool->xx]:
+      &lring[(cool_O.l+cool->xx)&lring_mask],&cool->a);
   cool->i=pst;
 case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
 case pst:
@@ -2249,12 +2249,12 @@ case put:@+ if (cool->yy!=0 || cool->xx>=32) goto illegal_inst;
    if (cool->xx<=18 && !(cool->loc.h&sign_bit)) goto privileged_inst;
  }
  if (cool->xx==8 || (cool->xx>=15 && cool->xx<=20)) freeze_dispatch=true;
- cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
+ cool->ren_x=true, spec_install(&globreg[cool->xx],&cool->x);@+break;
 @#
 case get:@+ if (cool->yy || cool->zz>=32) goto illegal_inst;
  if (cool->zz==rO) cool->z.o=shift_left(cool_O,3);
  else if (cool->zz==rS) cool->z.o=shift_left(cool_S,3);
- else cool->z=specval(&g[cool->zz]);@+break;
+ else cool->z=specval(&globreg[cool->zz]);@+break;
 illegal_inst: cool->interrupt |= B_BIT;@+goto noop_inst;
 case ldvts:@+ if (cool->loc.h&sign_bit) break;
 privileged_inst:  cool->interrupt |= K_BIT;
@@ -2273,12 +2273,12 @@ case pushj: {@+register int x=cool->xx;
     if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
     x=cool_L;@+ cool_L++;
-    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
+    cool->ren_x=true, spec_install(&lring[(cool_O.l+x)&lring_mask],&cool->x);
   }
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
-  cool->ren_a=true, spec_install(&g[rJ],&cool->a);
+  cool->ren_a=true, spec_install(&globreg[rJ],&cool->a);
   cool->a.known=true, cool->a.o=incr(cool->loc,4);
-  cool->set_l=true, spec_install(&g[rL],&cool->rl);
+  cool->set_l=true, spec_install(&globreg[rL],&cool->rl);
   cool->rl.o.l=cool_L-x-1;
   new_O=incr(cool_O,x+1);
 }@+break;
@@ -2295,11 +2295,11 @@ in order to maintain the condition $\rm rS\le rO$.
 
 @<Special cases of instruction dispatch@>=
 case pop:@+if (cool->xx && cool_L>=cool->xx)
-      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+      cool->y=specval(&lring[(cool_O.l+cool->xx-1)&lring_mask]);
 pop_unsave:@+if (cool_S.l==cool_O.l)
     @<Insert an instruction to decrease gamma@>;
   {@+register tetra x; register int new_L;
-    register specnode *p=l[(cool_O.l-1)&lring_mask].up;
+    register specnode *p=lring[(cool_O.l-1)&lring_mask].up;
     if (p->known) x=(p->o.l)&0xff;@+ else goto stall;
     if ((tetra)(cool_O.l-cool_S.l)<=x)
       @<Insert an instruction to decrease gamma@>;
@@ -2308,8 +2308,8 @@ pop_unsave:@+if (cool_S.l==cool_O.l)
     else new_L=x;
     if (new_L>cool_G) new_L=cool_G;
     if (x<new_L)
-      cool->ren_x=true, spec_install(&l[(cool_O.l-1)&lring_mask],&cool->x);
-    cool->set_l=true, spec_install(&g[rL],&cool->rl);
+      cool->ren_x=true, spec_install(&lring[(cool_O.l-1)&lring_mask],&cool->x);
+    cool->set_l=true, spec_install(&globreg[rL],&cool->rl);
     cool->rl.o.l=new_L;
     if (cool->i==pop) {
       cool->z.o.l=yz<<2;
@@ -2319,8 +2319,8 @@ pop_unsave:@+if (cool_S.l==cool_O.l)
   }
 
 @ @<Special cases of instruction dispatch@>=
-case mulu: cool->ren_a=true, spec_install(&g[rH],&cool->a);@+break;
-case div: case divu: cool->ren_a=true, spec_install(&g[rR],&cool->a);@+break;
+case mulu: cool->ren_a=true, spec_install(&globreg[rH],&cool->a);@+break;
+case div: case divu: cool->ren_a=true, spec_install(&globreg[rR],&cool->a);@+break;
 
 @ It's tempting to say that we could avoid taking up space in the reorder
 buffer when no operation needs to be done.
@@ -2342,7 +2342,7 @@ when the page table method isn't implemented in hardware.
 @<Special cases of instruction dispatch@>=
 case noop:@+if (cool->interrupt&F_BIT) {
    cool->go.o=cool->y.o=cool->loc;
-   inst_ptr=specval(&g[rT]);
+   inst_ptr=specval(&globreg[rT]);
  }
  break;
 
@@ -2741,15 +2741,15 @@ each clock cycle.
   if (nullifying) @<Nullify the hottest instruction@>@;
   else {
     if (hot->i==get && hot->zz==rQ)
-      new_Q=oandn(g[rQ].o,hot->x.o);
+      new_Q=oandn(globreg[rQ].o,hot->x.o);
     else if (hot->i==put && hot->xx==rQ)
       hot->x.o.h |= new_Q.h, hot->x.o.l |= new_Q.l;
     if (hot->mem_x) @<Commit to memory if possible, otherwise |break|@>;
     if (hot->stack_alert) stack_overflow=true;
     else if (stack_overflow && !hot->interim) {
-      g[rQ].o.l|=STACK_OVERFLOW, new_Q.l|=STACK_OVERFLOW,stack_overflow=false;
+      globreg[rQ].o.l|=STACK_OVERFLOW, new_Q.l|=STACK_OVERFLOW,stack_overflow=false;
       if (verbose&issue_bit) {
-        printf(" setting rQ=");@+print_octa(g[rQ].o);@+printf("\n");
+        printf(" setting rQ=");@+print_octa(globreg[rQ].o);@+printf("\n");
       }
     }
     if (verbose&issue_bit) {
@@ -2758,10 +2758,10 @@ each clock cycle.
     if (hot->ren_x) rename_regs++,hot->x.up->o=hot->x.o,spec_rem(&(hot->x));
     if (hot->ren_a) rename_regs++,hot->a.up->o=hot->a.o,spec_rem(&(hot->a));
     if (hot->set_l) hot->rl.up->o=hot->rl.o,spec_rem(&(hot->rl));
-    if (hot->arith_exc) g[rA].o.l |= hot->arith_exc;
+    if (hot->arith_exc) globreg[rA].o.l |= hot->arith_exc;
     if (hot->usage) {
-      g[rU].o.l++;@+ if (g[rU].o.l==0) {
-        g[rU].o.h++;@+ if ((g[rU].o.h&0x7fff)==0) g[rU].o.h-=0x8000;
+      globreg[rU].o.l++;@+ if (globreg[rU].o.l==0) {
+        globreg[rU].o.h++;@+ if ((globreg[rU].o.h&0x7fff)==0) globreg[rU].o.h-=0x8000;
       }
     }
   }
@@ -2812,23 +2812,23 @@ is |trap|, |put|, or~|resume|).
 @<Check for security violation, |break| if so@>=
 {
   if (hot->loc.h&sign_bit) {
-    if ((g[rK].o.h&P_BIT) && !(hot->interrupt&P_BIT)) {
+    if ((globreg[rK].o.h&P_BIT) && !(hot->interrupt&P_BIT)) {
       hot->interrupt |= P_BIT;
-      g[rQ].o.h |= P_BIT;
+      globreg[rQ].o.h |= P_BIT;
       new_Q.h |= P_BIT;
       if (verbose&issue_bit) {
-        printf(" setting rQ=");@+print_octa(g[rQ].o);@+printf("\n");
+        printf(" setting rQ=");@+print_octa(globreg[rQ].o);@+printf("\n");
       }
       break;
     }
-  }@+else if ((g[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
+  }@+else if ((globreg[rK].o.h&0xff)!=0xff && !(hot->interrupt&S_BIT)) {
     hot->interrupt |= S_BIT;
-    g[rQ].o.h |= S_BIT;
+    globreg[rQ].o.h |= S_BIT;
     new_Q.h |= S_BIT;
-    g[rK].o.h |= S_BIT;
+    globreg[rK].o.h |= S_BIT;
     if (verbose&issue_bit) {
-      printf(" setting rQ=");@+print_octa(g[rQ].o);
-      printf(", rK=");@+print_octa(g[rK].o);@+printf("\n");
+      printf(" setting rQ=");@+print_octa(globreg[rQ].o);
+      printf(", rK=");@+print_octa(globreg[rK].o);@+printf("\n");
     }
     break;
   }
@@ -4849,7 +4849,7 @@ this protects the privacy of other users.
 @<Check the protection bits and get the physical address@>=
 if (data->stack_alert) {
   if (data->z.o.l&(PW_BIT>>PROT_OFFSET)) data->stack_alert=false;
-  else data->z.o=g[rC].o; /* use the continuation page for stack overflow */
+  else data->z.o=globreg[rC].o; /* use the continuation page for stack overflow */
 }
 j=PRW_BITS;
 if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
@@ -5155,13 +5155,13 @@ the hot seat, thereby allowing us non-speculative access to~rP.
 
 @<Finish a \.{CSWAP}@>=
 if (data!=old_hot) wait(1);
-if (data->x.o.h==g[rP].o.h && data->x.o.l==g[rP].o.l) {
+if (data->x.o.h==globreg[rP].o.h && data->x.o.l==globreg[rP].o.l) {
   data->a.o.l=1; /* |data->a.o.h| is zero */
   data->x.o=data->b.o;
 }@+else {
-  g[rP].o=data->x.o; /* |data->a.o| is zero */
+  globreg[rP].o=data->x.o; /* |data->a.o| is zero */
   if (verbose&issue_bit) {
-    printf(" setting rP=");@+print_octa(g[rP].o);@+printf("\n");
+    printf(" setting rP=");@+print_octa(globreg[rP].o);@+printf("\n");
   }
 }
 data->i=cswap; /* cosmetic change, affects the trace output only */
@@ -5542,14 +5542,14 @@ case 4:@+if (dispatch_lock) wait(1);
 state_5: data->state=5;
 case 5:@+if (data!=old_hot) wait(1);
   if ((data->interrupt&F_BIT) && data->i!=trap) {
-    inst_ptr.o=g[rT].o, inst_ptr.p=NULL;
+    inst_ptr.o=globreg[rT].o, inst_ptr.p=NULL;
     if (is_load_store(data->i)) nullifying=true;
   }
   if (data->interrupt&0xff) {
-    g[rQ].o.h |= data->interrupt&0xff;
+    globreg[rQ].o.h |= data->interrupt&0xff;
     new_Q.h |= data->interrupt&0xff;
     if (verbose&issue_bit) {
-      printf(" setting rQ=");@+print_octa(g[rQ].o);@+printf("\n");
+      printf(" setting rQ=");@+print_octa(globreg[rQ].o);@+printf("\n");
     }
   }
   goto die;
@@ -5565,14 +5565,14 @@ case 5: goto state_5;
 case trap:@+ if ((flags[op]&X_is_dest_bit) &&
                 cool->xx<cool_G && cool->xx>=cool_L)
     goto increase_L;
-  if (!g[rT].up->known || !g[rJ].up->known) goto stall;
-  inst_ptr=specval(&g[rT]); /* traps and emulated ops */
-  cool->need_b=true, cool->b=specval(&g[255]);
-case trip: if (!g[rJ].up->known) goto stall;
-  cool->ren_x=true, spec_install(&g[255],&cool->x);
-  cool->x.known=true, cool->x.o=g[rJ].up->o;
+  if (!globreg[rT].up->known || !globreg[rJ].up->known) goto stall;
+  inst_ptr=specval(&globreg[rT]); /* traps and emulated ops */
+  cool->need_b=true, cool->b=specval(&globreg[255]);
+case trip: if (!globreg[rJ].up->known) goto stall;
+  cool->ren_x=true, spec_install(&globreg[255],&cool->x);
+  cool->x.known=true, cool->x.o=globreg[rJ].up->o;
   if (i==trip) cool->go.o=zero_octa;
-  cool->ren_a=true, spec_install(&g[i==trap? rBB: rB],&cool->a);@+break;
+  cool->ren_a=true, spec_install(&globreg[i==trap? rBB: rB],&cool->a);@+break;
 
 @ @<Cases for stage 1 execution@>=
 case trap: data->interrupt |= F_BIT;@+ data->a.o=data->b.o;@+ goto fin_ex;
@@ -5584,22 +5584,22 @@ it is ready to be committed and not already marked for tripping
 or trapping.
 
 @<Check for external interrupt@>=
-g[rI].o=incr(g[rI].o,-1);
-if (g[rI].o.l==0 && g[rI].o.h==0) {
-  g[rQ].o.l |= INTERVAL_TIMEOUT, new_Q.l |= INTERVAL_TIMEOUT;
+globreg[rI].o=incr(globreg[rI].o,-1);
+if (globreg[rI].o.l==0 && globreg[rI].o.h==0) {
+  globreg[rQ].o.l |= INTERVAL_TIMEOUT, new_Q.l |= INTERVAL_TIMEOUT;
     if (verbose&issue_bit) {
-      printf(" setting rQ=");@+print_octa(g[rQ].o);@+printf("\n");
+      printf(" setting rQ=");@+print_octa(globreg[rQ].o);@+printf("\n");
     }
   }
 trying_to_interrupt=false;
-if (((g[rQ].o.h&g[rK].o.h)||(g[rQ].o.l&g[rK].o.l)) && cool!=hot &&@|
+if (((globreg[rQ].o.h&globreg[rK].o.h)||(globreg[rQ].o.l&globreg[rK].o.l)) && cool!=hot &&@|
      !(hot->interrupt&(E_BIT+F_BIT+H_BIT)) && !doing_interrupt &&@|
      !(hot->i==resum)) {
   if (hot->owner) trying_to_interrupt=true;
   else {
     hot->interrupt |= E_BIT;
     @<Deissue all but the hottest command@>;
-    inst_ptr.o=g[rTT].o;@+inst_ptr.p=NULL;
+    inst_ptr.o=globreg[rTT].o;@+inst_ptr.p=NULL;
   }
 }
 
@@ -5638,7 +5638,7 @@ while we save enough of the machine state to resume the computation later.
 
 @<Begin an interruption and |break|@>=
 {
-  if (!(hot->interrupt&H_BIT)) g[rK].o=zero_octa; /* trap */
+  if (!(hot->interrupt&H_BIT)) globreg[rK].o=zero_octa; /* trap */
   if (((hot->interrupt&H_BIT)&&hot->i!=trip) ||@|
       ((hot->interrupt&F_BIT)&&hot->i!=trap) ||@|
       (hot->interrupt&E_BIT)) doing_interrupt=3, suppress_dispatch=true;
@@ -5661,15 +5661,15 @@ switch (doing_interrupt--) {
 
 @ @<Set resumption registers $\rm(rB,\$255)$ or $\rm(rBB,\$255)$@>=
 j=hot->interrupt&H_BIT;
-g[j?rB:rBB].o=g[255].o;
-g[255].o=g[rJ].o;
+globreg[j?rB:rBB].o=globreg[255].o;
+globreg[255].o=globreg[rJ].o;
 if (verbose&issue_bit) {
   if (j) {
-    printf(" setting rB=");@+print_octa(g[rB].o);
+    printf(" setting rB=");@+print_octa(globreg[rB].o);
   }@+else {
-    printf(" setting rBB=");@+print_octa(g[rBB].o);
+    printf(" setting rBB=");@+print_octa(globreg[rBB].o);
   }
-  printf(", $255=");@+print_octa(g[255].o);@+printf("\n");
+  printf(", $255=");@+print_octa(globreg[255].o);@+printf("\n");
 }
 
 @ Here's where we manufacture the ``ropcodes'' for resumption.
@@ -5684,15 +5684,15 @@ if (verbose&issue_bit) {
 @<Set resumption registers $\rm(rW,rX)$ or $\rm(rWW,rXX)$@>=
 j=pack_bytes(hot->op,hot->xx,hot->yy,hot->zz);
 if (hot->interrupt&H_BIT) { /* trip */
-  g[rW].o=incr(hot->loc,4);
-  g[rX].o.h=sign_bit, g[rX].o.l=j;
+  globreg[rW].o=incr(hot->loc,4);
+  globreg[rX].o.h=sign_bit, globreg[rX].o.l=j;
   if (verbose&issue_bit) {
-    printf(" setting rW=");@+print_octa(g[rW].o);
-    printf(", rX=");@+print_octa(g[rX].o);@+printf("\n");
+    printf(" setting rW=");@+print_octa(globreg[rW].o);
+    printf(", rX=");@+print_octa(globreg[rX].o);@+printf("\n");
   }
 }@+else { /* trap */
-  g[rWW].o=hot->go.o;
-  g[rXX].o.l=j;
+  globreg[rWW].o=hot->go.o;
+  globreg[rXX].o.l=j;
   if (hot->interrupt&F_BIT) { /* forced */
     if (hot->i!=trap) j=RESUME_TRANS; /* emulate page translation */
     else if (hot->op==TRAP) j=0x80; /* |TRAP| */
@@ -5706,26 +5706,26 @@ if (hot->interrupt&H_BIT) { /* trip */
     else if (is_load_store(hot->i)) j=RESUME_AGAIN;
     else j=0x80; /* normal external interruption */
   }
-  g[rXX].o.h=(j<<24)+(hot->interrupt&0xff);
+  globreg[rXX].o.h=(j<<24)+(hot->interrupt&0xff);
   if (verbose&issue_bit) {
-    printf(" setting rWW=");@+print_octa(g[rWW].o);
-    printf(", rXX=");@+print_octa(g[rXX].o);@+printf("\n");
+    printf(" setting rWW=");@+print_octa(globreg[rWW].o);
+    printf(", rXX=");@+print_octa(globreg[rXX].o);@+printf("\n");
   }
 }
       
 @ @<Set resumption registers $\rm(rY,rZ)$ or $\rm(rYY,rZZ)$@>=
 j=hot->interrupt&H_BIT;
-if ((hot->interrupt&F_BIT) && hot->op==SWYM) g[rYY].o=hot->go.o;
-else g[j?rY:rYY].o=hot->y.o;
-if (hot->i==st || hot->i==pst) g[j?rZ:rZZ].o=hot->x.o;
-else g[j?rZ:rZZ].o=hot->z.o;
+if ((hot->interrupt&F_BIT) && hot->op==SWYM) globreg[rYY].o=hot->go.o;
+else globreg[j?rY:rYY].o=hot->y.o;
+if (hot->i==st || hot->i==pst) globreg[j?rZ:rZZ].o=hot->x.o;
+else globreg[j?rZ:rZZ].o=hot->z.o;
 if (verbose&issue_bit) {
   if (j) {
-    printf(" setting rY=");@+print_octa(g[rY].o);
-    printf(", rZ=");@+print_octa(g[rZ].o);@+printf("\n");
+    printf(" setting rY=");@+print_octa(globreg[rY].o);
+    printf(", rZ=");@+print_octa(globreg[rZ].o);@+printf("\n");
   }@+else {
-    printf(" setting rYY=");@+print_octa(g[rYY].o);
-    printf(", rZZ=");@+print_octa(g[rZZ].o);@+printf("\n");
+    printf(" setting rYY=");@+print_octa(globreg[rYY].o);
+    printf(", rZZ=");@+print_octa(globreg[rZZ].o);@+printf("\n");
   }
 }
 
@@ -5738,7 +5738,7 @@ occurring at this very moment, changing the registers needed for resumption.
 
 @<Special cases of instruction dispatch@>=
 case resume:@+ if (cool!=old_hot) goto stall;
-  inst_ptr=specval(&g[cool->zz? rWW:rW]);
+  inst_ptr=specval(&globreg[cool->zz? rWW:rW]);
   if (!(cool->loc.h&sign_bit)) {
     if (cool->zz) cool->interrupt |= K_BIT;
     else if (inst_ptr.o.h&sign_bit) cool->interrupt |= P_BIT;
@@ -5749,12 +5749,12 @@ case resume:@+ if (cool!=old_hot) goto stall;
     cool->go.o=inst_ptr.o;
     if (cool->zz) {
       @<Magically do an I/O operation, if |cool->loc| is rT@>;
-      cool->ren_a=true, spec_install(&g[rK],&cool->a);
-      cool->a.known=true, cool->a.o=g[255].o;
-      cool->ren_x=true, spec_install(&g[255],&cool->x);
-      cool->x.known=true, cool->x.o=g[rBB].o;
+      cool->ren_a=true, spec_install(&globreg[rK],&cool->a);
+      cool->a.known=true, cool->a.o=globreg[255].o;
+      cool->ren_x=true, spec_install(&globreg[255],&cool->x);
+      cool->x.known=true, cool->x.o=globreg[rBB].o;
     }
-    cool->b= specval(&g[cool->zz? rXX:rX]);
+    cool->b= specval(&globreg[cool->zz? rXX:rX]);
     if (!(cool->b.o.h&sign_bit)) @<Resume an interrupted operation@>;
   }@+break;
 
@@ -5794,7 +5794,7 @@ the \.{SWYM} altogether.
       head->interrupt|=B_BIT;
   head->noted=false;@+break;
  case RESUME_TRANS:@+if (cool->zz) {
-    cool->y=specval(&g[rYY]), cool->z=specval(&g[rZZ]);
+    cool->y=specval(&globreg[rYY]), cool->z=specval(&globreg[rZZ]);
     if ((cool->b.o.l>>24)!=SWYM) goto resume_again;
     cool->i=resume;@+break; /* see ``subtle point'' above */
   }       
@@ -5806,14 +5806,14 @@ the \.{SWYM} altogether.
 @ @<Insert special operands when resuming an interrupted operation@>=
 {
   if (resuming&1) {
-    cool->y=specval(&g[rY]);
-    cool->z=specval(&g[rZ]);
+    cool->y=specval(&globreg[rY]);
+    cool->z=specval(&globreg[rZ]);
   }@+else {
-    cool->y=specval(&g[rYY]);
-    cool->z=specval(&g[rZZ]);
+    cool->y=specval(&globreg[rYY]);
+    cool->z=specval(&globreg[rZZ]);
   }
   if (resuming>=3) { /* |RESUME_SET| */
-    cool->need_ra=true, cool->ra=specval(&g[rA]);
+    cool->need_ra=true, cool->ra=specval(&globreg[rA]);
   }
   cool->usage=false;
 }
@@ -5871,7 +5871,7 @@ Likewise, rQ must not be prematurely gotten.
 @<Cases for stage 1...@>=
 case get:@+ if (data->zz>=21 || data->zz==rK || data->zz==rQ) {
    if (data!=old_hot) wait(1);
-   data->z.o=g[data->zz].o;
+   data->z.o=globreg[data->zz].o;
  }
  data->x.o=data->z.o;@+goto fin_ex;
 
@@ -5885,12 +5885,12 @@ case put:@+if (data->xx==8 || (data->xx>=15 && data->xx<=20)) {
    if (data!=old_hot) wait(1);
    switch (data->xx) {
   case rV: @<Update the \\{page} variables@>;@+break;
-  case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
-           new_Q.l |= data->z.o.l &~ g[rQ].o.l;
+  case rQ: new_Q.h |= data->z.o.h &~ globreg[rQ].o.h;@+
+           new_Q.l |= data->z.o.l &~ globreg[rQ].o.l;
            data->z.o.l |= new_Q.l;@+
            data->z.o.h |= new_Q.h;@+break;
-  case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=g[rL].o.l;
-     else if (data->z.o.l>g[rL].o.l) data->z.o.l=g[rL].o.l;
+  case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=globreg[rL].o.l;
+     else if (data->z.o.l>globreg[rL].o.l) data->z.o.l=globreg[rL].o.l;
   default: break;
   case rG: @<Update rG@>;@+break;
    }
@@ -5904,14 +5904,14 @@ seat, and holding |dispatch_lock|.)
 
 @<Update rG@>=
 if (data->z.o.h!=0 || data->z.o.l>=256 ||
-      data->z.o.l<g[rL].o.l || data->z.o.l<32)
-  data->interrupt |= B_BIT, data->z.o=g[rG].o;
-else if (data->z.o.l<g[rG].o.l) {
+      data->z.o.l<globreg[rL].o.l || data->z.o.l<32)
+  data->interrupt |= B_BIT, data->z.o=globreg[rG].o;
+else if (data->z.o.l<globreg[rG].o.l) {
     data->interim=true; /* potentially interruptible */
     for (j=0;j<commit_max;j++) {
-      g[rG].o.l--;
-      g[g[rG].o.l].o=zero_octa;
-      if (data->z.o.l==g[rG].o.l) break;
+      globreg[rG].o.l--;
+      globreg[globreg[rG].o.l].o=zero_octa;
+      if (data->z.o.l==globreg[rG].o.l) break;
     }
     if (j==commit_max) {
       if (!trying_to_interrupt) wait(1);
@@ -5963,16 +5963,16 @@ case unsave:@+if (cool->interrupt&B_BIT) cool->i=noop;
 break; /* this takes us to |dispatch_done| */   
 
 @ @<Generate an instruction to unsave |g[yy]|@>=
-cool->ren_x=true, spec_install(&g[cool->yy],&cool->x);
+cool->ren_x=true, spec_install(&globreg[cool->yy],&cool->x);
 new_O=new_S=incr(cool_O,-1);
 cool->z.o=shift_left(new_O,3);
 cool->ptr_a=(void*)mem.up;
 
 @ @<Set up the first phase of unsaving@>=
-cool->ren_x=true, spec_install(&g[rG],&cool->x);
-cool->ren_a=true, spec_install(&g[rA],&cool->a);
+cool->ren_x=true, spec_install(&globreg[rG],&cool->x);
+cool->ren_a=true, spec_install(&globreg[rA],&cool->a);
 new_O=new_S=shift_right(cool->z.o,3,1);
-cool->set_l=true, spec_install(&g[rL],&cool->rl);
+cool->set_l=true, spec_install(&globreg[rL],&cool->rl);
 cool->ptr_a=(void*)mem.up;
 
 @ @<Get ready for the next step of \.{UNSAVE}@>=
@@ -6025,9 +6025,9 @@ instructions, the value |cool->zz=1| will get things restarted properly.
 
 @<Set up the first phase of saving@>=
 cool->zz=1;
-cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+cool->ren_x=true, spec_install(&lring[(cool_O.l+cool_L)&lring_mask],&cool->x);
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
-cool->set_l=true, spec_install(&g[rL],&cool->rl);
+cool->set_l=true, spec_install(&globreg[rL],&cool->rl);
 new_O=incr(cool_O,cool_L+1);
 
 @ @<Generate an instruction to save |g[yy]|@>=
@@ -6036,7 +6036,7 @@ cool->mem_x=true, spec_install(&mem,&cool->x);
 cool->z.o=shift_left(cool_O,3);
 new_O=new_S=incr(cool_O,1);
 if (cool->zz==3 && cool->yy>rZ) @<Do the final \.{SAVE}@>@;
-else cool->b=specval(&g[cool->yy]);
+else cool->b=specval(&globreg[cool->yy]);
 
 @ The final \.{SAVE} instruction not only stores rG and rA, it also
 places the final address in global register~X.
@@ -6045,7 +6045,7 @@ places the final address in global register~X.
 {
   cool->i=save;
   cool->interim=false;
-  cool->ren_a=true, spec_install(&g[cool->xx],&cool->a);
+  cool->ren_a=true, spec_install(&globreg[cool->xx],&cool->a);
 }
 
 @ @<Get ready for the next step of \.{SAVE}@>=
@@ -6062,8 +6062,8 @@ switch (cool->zz) {
   if (data->interim) data->x.o=data->b.o;
   else {
     if (data!=old_hot) wait(1); /* we need the hottest value of rA */
-    data->x.o.h=g[rG].o.l<<24;
-    data->x.o.l=g[rA].o.l;
+    data->x.o.h=globreg[rG].o.l<<24;
+    data->x.o.l=globreg[rA].o.l;
     data->a.o=data->y.o;
   }
   goto fin_ex;
@@ -6554,36 +6554,36 @@ typedef enum{
 @!Fwrite,@!Fputs,@!Fputws,@!Fseek,@!Ftell} @!sys_call;
 
 @ @<Magically do an I/O operation, if |cool->loc| is rT@>=
-if (cool->loc.l==g[rT].o.l && cool->loc.h==g[rT].o.h) {
+if (cool->loc.l==globreg[rT].o.l && cool->loc.h==globreg[rT].o.h) {
   register unsigned char yy,zz; octa ma,mb;
-  if (g[rXX].o.l&0xffff0000) goto magic_done;
-  yy=g[rXX].o.l>>8, zz=g[rXX].o.l&0xff;
+  if (globreg[rXX].o.l&0xffff0000) goto magic_done;
+  yy=globreg[rXX].o.l>>8, zz=globreg[rXX].o.l&0xff;
   if (yy>max_sys_call) goto magic_done;
    @<Prepare memory arguments $|ma|={\rm M}[a]$ and $|mb|={\rm M}[b]$ 
            if needed@>;
   switch (yy) {
 case Halt: @<Either halt or print warning@>;@+break;
-case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma);@+break;
-case Fclose: g[rBB].o=mmix_fclose(zz);@+break;
-case Fread: g[rBB].o=mmix_fread(zz,mb,ma);@+break;
-case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma);@+break;
-case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
-case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
-case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o);@+break;
-case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o);@+break;
-case Fseek: g[rBB].o=mmix_fseek(zz,g[rBB].o);@+break;
-case Ftell: g[rBB].o=mmix_ftell(zz);@+break;
+case Fopen: globreg[rBB].o=mmix_fopen(zz,mb,ma);@+break;
+case Fclose: globreg[rBB].o=mmix_fclose(zz);@+break;
+case Fread: globreg[rBB].o=mmix_fread(zz,mb,ma);@+break;
+case Fgets: globreg[rBB].o=mmix_fgets(zz,mb,ma);@+break;
+case Fgetws: globreg[rBB].o=mmix_fgetws(zz,mb,ma);@+break;
+case Fwrite: globreg[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
+case Fputs: globreg[rBB].o=mmix_fputs(zz,globreg[rBB].o);@+break;
+case Fputws: globreg[rBB].o=mmix_fputws(zz,globreg[rBB].o);@+break;
+case Fseek: globreg[rBB].o=mmix_fseek(zz,globreg[rBB].o);@+break;
+case Ftell: globreg[rBB].o=mmix_ftell(zz);@+break;
 }
-magic_done: g[255].o=neg_one; /* this will enable interrupts */
+magic_done: globreg[255].o=neg_one; /* this will enable interrupts */
 }
 
 @ @<Either halt or print warning@>=
 if (!zz) halted=true;
 else if (zz==1) {
   octa trap_loc;
-  trap_loc=incr(g[rWW].o,-4);
+  trap_loc=incr(globreg[rWW].o,-4);
   if (!(trap_loc.h || trap_loc.l>=0xf0))
-    print_trip_warning(trap_loc.l>>4,incr(g[rW].o,-4));
+    print_trip_warning(trap_loc.l>>4,incr(globreg[rW].o,-4));
 }
 
 @ @<Glob...@>=
@@ -6693,10 +6693,10 @@ a $2^{32}$-byte page of physical addresses starting at $2^{32}i$.
 @<Prepare memory arguments...@>=
 if (arg_count[yy]==3) {
   octa arg_loc;
-  arg_loc=g[rBB].o;
+  arg_loc=globreg[rBB].o;
   if (arg_loc.h&0x9fffffff) mb=zero_octa;
   else arg_loc.h>>=29, mb=magic_read(arg_loc);
-  arg_loc=incr(g[rBB].o,8);
+  arg_loc=incr(globreg[rBB].o,8);
   if (arg_loc.h&0x9fffffff) ma=zero_octa;
   else arg_loc.h>>=29, ma=magic_read(arg_loc);
 }
