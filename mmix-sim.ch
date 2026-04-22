@@ -1148,11 +1148,11 @@ register int G,L,O=0; /* accessible copies of key registers */
 @z
 
 @x [76] l.1782 Document one-letter global variables.
-octa g[256]; /* global registers */
+octa globreg[256]; /* global registers */
 @y
 @!@:g}{\|g (global registers)@>
 @!@:l}{\|l (ring of local registers)@>
-octa g[256]; /* global registers */
+octa globreg[256]; /* global registers */
 @z
 
 @x [77] l.1792 Different approach for ABSTIME.
@@ -1180,10 +1180,10 @@ a trivial program that computes the value of the standard library function
 @z
 
 @x [77] l.1807 Compound literal.
-g[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
-g[rN].l=ABSTIME; /* see comment and warning above */
+globreg[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+globreg[rN].l=ABSTIME; /* see comment and warning above */
 @y
-g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+globreg[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   ABSTIME}; /* see comment and warning above */
 @z
 
@@ -1395,9 +1395,9 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
 @x [103] l.2295 Compound literal.
-if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
+if (k==rZ+1) x.h=G<<24, x.l=globreg[rA].l;
 @y
-if (k==rZ+1) x=(octa){G<<24, g[rA].l};
+if (k==rZ+1) x=(octa){G<<24, globreg[rA].l};
 @z
 
 @x [104] l.2313 Sort name of section.
@@ -1413,9 +1413,9 @@ if (k==rZ+1) x=(octa){G<<24, g[rA].l};
 @z
 
 @x [105] l.2335 Compound literal.
-}@+else g[k].h=ll->tet, g[k].l=(ll+1)->tet;
+}@+else globreg[k].h=ll->tet, globreg[k].l=(ll+1)->tet;
 @y
-}@+else g[k]=(octa){ll->tet, (ll+1)->tet};
+}@+else globreg[k]=(octa){ll->tet, (ll+1)->tet};
 @z
 
 @x [107] l.2366 GCC warning.
@@ -1426,35 +1426,35 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
 @x [108] l.2388 Compound literal.
- g[rXX].h=sign_bit, g[rXX].l=inst;
- g[rYY]=y, g[rZZ]=z;
+ globreg[rXX].h=sign_bit, globreg[rXX].l=inst;
+ globreg[rYY]=y, globreg[rZZ]=z;
  z.h=0, z.l=zz;
 @y
- g[rXX]=(octa){sign_bit, inst};
- g[rYY]=y, g[rZZ]=z;
+ globreg[rXX]=(octa){sign_bit, inst};
+ globreg[rYY]=y, globreg[rZZ]=z;
  z=(octa){0, zz};
 @z
 
 @x [108] l.2395 Decouple 'mixins'.
-case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
+case Fopen: globreg[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
 @y
-case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
+case Fopen: globreg[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
 @z
 
 @x [108] l.2397 Decouple 'mixins'.
-case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
-case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
-case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
-case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
-case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
-case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
+case Fread: globreg[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
+case Fgets: globreg[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
+case Fgetws: globreg[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
+case Fwrite: globreg[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
+case Fputs: globreg[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
+case Fputws: globreg[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
 @y
-case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
-case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
-case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
+case Fread: globreg[rBB]=mmix_fread((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgets: globreg[rBB]=mmix_fgets((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgetws: globreg[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fwrite: globreg[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
+case Fputs: globreg[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
+case Fputws: globreg[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
 @z
 
 @x [111] l.2433 Compound literal.
@@ -1565,10 +1565,10 @@ static char stdin_chr(void)
 
 @x [123] l.2600 Compound literal.
   inst_ptr.h=0, inst_ptr.l=k<<4;
-  g[rX].h=sign_bit, g[rX].l=inst;
+  globreg[rX].h=sign_bit, globreg[rX].l=inst;
 @y
   inst_ptr=(octa){0, k<<4};
-  g[rX]=(octa){sign_bit, inst};
+  globreg[rX]=(octa){sign_bit, inst};
 @z
 
 @x [125] l.2630 GCC warning.
