@@ -134,41 +134,49 @@ as in {\mc ANSI C}.
 
 @d issue_bit (1<<0)
 @z
+
 @x [8] l.187 Non-exported values.
 #define pipe_bit (1<<1)
 @y
 @d pipe_bit (1<<1)
 @z
+
 @x [8] l.189 Non-exported values.
 #define coroutine_bit (1<<2)
 @y
 @d coroutine_bit (1<<2)
 @z
+
 @x [8] l.191 Non-exported values.
 #define schedule_bit (1<<3)
 @y
 @d schedule_bit (1<<3)
 @z
+
 @x [8] l.193 Non-exported values.
 #define uninit_mem_bit (1<<4)
 @y
 @d uninit_mem_bit (1<<4)
 @z
+
 @x [8] l.195 Non-exported values.
 #define interactive_read_bit (1<<5)
 @y
 @d interactive_read_bit (1<<5)
 @z
+
 @x [8] l.197 Non-exported values.
 #define show_spec_bit (1<<6)
 @y
 @d show_spec_bit (1<<6)
 @z
+
 @x [8] l.199 Non-exported values.
 #define show_pred_bit (1<<7)
 @y
 @d show_pred_bit (1<<7)
 @z
+
 @x [8] l.201 Non-exported values.
 #define show_wholecache_bit (1<<8)
 @y
@@ -213,6 +221,7 @@ void MMIX_init()
 @y
 void MMIX_init(void)
 @z
+
 @x [10] l.222 Block-local variables.
   register int i,j;
 @y
@@ -676,6 +685,7 @@ cases also apply to the upper half of~rQ; the next eight apply to~rA.
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 |X_BIT| and beyond are defined in {\mc MMIX-ARITH}.
 @z
+
 @x [54] l.1183 Move common BIT values to MMIX-ARITH.
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
@@ -893,10 +903,11 @@ rB is internally the same as g[0], because |rB=0|.
 @!@:g}{\|g (global registers)@>
 @!@:l}{\|l (ring of local registers)@>
 @z
-@x [86] l.1843 Global and local registers.
-Extern specnode *lring; /* the ring of local registers */
+
+@x [86] l.1844 Global and local registers.
+Extern specnode *l; /* the ring of local registers */
 @y
-Extern specnode *lring; /* the ring of local registers */
+Extern specnode *l; /* the ring of local registers */
 @z
 
 @x [88] l.1857 Private variable.
@@ -936,7 +947,7 @@ a trivial program that computes the value of the standard library function
 @:g}{\|g (global registers)@>
 @z
 
-@x [89] l.1886 Compound literal.
+@x [89] l.1887 Compound literal.
 g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
 g[rN].o.l=ABSTIME; /* see comment and warning above */
 @y
@@ -945,9 +956,10 @@ g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
 @z
 
 @x [89] l.1890 Compound literal.
-  lring[j].addr.h=sign_bit, lring[j].addr.l=256+j, lring[j].known=true;
+  l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
 @y
-  lring[j].addr=(octa){sign_bit, 256+j}, lring[j].known=true;
+  l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [90] l.1895 C99 prototypes for C2x.
@@ -1049,11 +1061,13 @@ if (!g[rL].up->known) goto stall;
 @y
   if (f&0x10) @<Set \9{c}|cool->b| from register X@>@;
 @z
+
 @x [103] l.2030 Sort name of section.
     @<Set |cool->b| and/or |cool->ra| from special register@>;
 @y
     @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>;
 @z
+
 @x [103] l.2032 Sort name of section.
   else if (f&0x2) @<Set |cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set |cool->z| as an immediate wyde@>;
@@ -1061,6 +1075,7 @@ if (!g[rL].up->known) goto stall;
   else if (f&0x2) @<Set \9{c}|cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set \9{c}|cool->z| as an immediate wyde@>;
 @z
+
 @x [103] l.2035 Sort name of section.
   else if (f&0x8) @<Set |cool->y| from register Y@>@;
 @y
@@ -1075,9 +1090,12 @@ if (!g[rL].up->known) goto stall;
 
 @x [104] l.2040 Global and local registers.
   if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
+  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
 @y
   if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
 @:g}{\|g (global registers)@>
+  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [105] l.2044 Sort name of section.
@@ -1085,11 +1103,15 @@ if (!g[rL].up->known) goto stall;
 @y
 @ @<Set \9{c}|cool->y| from register Y@>=
 @z
+
 @x [105] l.2046 Global and loca lregisters.
   if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
+  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
 @y
   if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
 @:g}{\|g (global registers)@>
+  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [106] l.2050 Sort name of section.
@@ -1103,6 +1125,13 @@ if (!g[rL].up->known) goto stall;
 @y
   if (cool->xx>=cool_G) cool->b=specval(&g[cool->xx]);
 @:g}{\|g (global registers)@>
+@z
+
+@x [106] l.2054 Global and local registers.
+    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
+@y
+    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [107] l.2062 Private variable.
@@ -1137,6 +1166,13 @@ static unsigned char third_operand[256]={@|@t\1\1@>
 @:g}{\|g (global registers)@>
 @z
 
+@x [110] l.2126 Global and local registers.
+      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+@y
+      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [110] l.2129 Sort name of section.
       @<Insert an instruction to advance gamma@>@;
     else @<Insert an instruction to advance beta and L@>;
@@ -1163,6 +1199,13 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @<Insert \9{a}an instruction to advance beta and L@>=
 @z
 
+@x [112] l.2147 Global and local registers.
+  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@y
+  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [112] l.2151 Global and local registers.
   spec_install(&g[rL],&cool->rl);
 @y
@@ -1176,10 +1219,24 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @<Insert \9{a}an instruction to advance gamma@>=
 @z
 
+@x [113] l.2167 Global and local registers.
+  cool->b=specval(&l[cool_S.l&lring_mask]);
+@y
+  cool->b=specval(&l[cool_S.l&lring_mask]);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [114] l.2181 Sort name of section.
 @<Insert an instruction to decrease gamma@>=
 @y
 @<Insert \9{a}an instruction to decrease gamma@>=
+@z
+
+@x [114] l.2189 Global and local registers.
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@y
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [114] l.2192 Global and local rergisters.
@@ -1197,9 +1254,12 @@ mem.addr=neg_one;
 
 @x [117] l.2231 Global and local registers.
   spec_install(cool->xx>=cool_G? &g[cool->xx]:
+      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
 @y
   spec_install(cool->xx>=cool_G? &g[cool->xx]:
 @:g}{\|g (global registers)@>
+      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [117] l.2234 Use 'fall through' comments in tangled C code.
@@ -1232,6 +1292,13 @@ case pushj: {@+register int x=cool->xx;
       @<Insert \9{a}an instruction to advance gamma@>@;
 @z
 
+@x [119] l.2276 Global and local registers.
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
+@y
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [119] l.2278 Compound literal.
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
@@ -1250,6 +1317,13 @@ case go: inst_ptr.p=&cool->go;@+break;
 @y
 @+@=/* else fall through */@>@;
 case go: inst_ptr.p=&cool->go;@+break;
+@z
+
+@x [120] l.2298 Global and local registers.
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@y
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [120] l.2300 Sort name of section.
@@ -1303,6 +1377,7 @@ case mulu: cool->ren_a=true, spec_install(&g[rH],&cool->a);@+break;
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @s cacheblock int
 @z
+
 @x [125] l.2415 Block-local variables.
   switch(self->stage) {
 @y
@@ -1360,6 +1435,7 @@ it must never interfere with the |stage| numbers for special coroutines.
  @+@=/* fall through */@>@;
  case 1: @<Begin execution of an operation@>;
 @z
+
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
@@ -1406,6 +1482,7 @@ defined below. (The author doesn't feel guilty about making this restriction.)
 @y
 can be overridden by |MMIX_config|.
 @z
+
 @x [136] l.2582 Move 'pipe_limit' up.
 #define pipe_limit 90
 @y
@@ -1502,6 +1579,7 @@ static bool stack_overflow; /* stack overflow not yet reported */
 @y
   if (bp_table) {@+register int m;
 @z
+
 @x [151] l.2889 Block-local variable.
     h=bp_table[m];
     if (h&bp_npower) predicted^=0x10;
@@ -2018,11 +2096,13 @@ static cacheblock* alloc_slot(
   cache *c,
   octa alf) /* key that probably isn't in the cache */
 @z
+
 @x [205] l.3652 Block-local variables.
   register cacheblock *p,*q;
 @y
   @+@t}\6{@> @<Block-local var...@>@; @#
 @z
+
 @x [205] l.3669 Amend 'else' case.
   p->tag.h |= sign_bit;@+ return p;
 @y
@@ -2578,12 +2658,14 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @y
 @ @<Do load/store stage 1 with known physical address@>=
 @z
+
 @x [271] l.4901 Change from MMIX home.
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
   @+@=/* fall through */@>@;
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
+
 @x [271] l.4906 Nicer page break.
   m=write_search(data,data->z.o);
 @y
@@ -2848,6 +2930,7 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @<Prepare for exceptional trip handler@>=
 {@+register int m;
 @z
+
 @x [308] l.5516 Compound literal.
   data->go.o.h=0, data->go.o.l=m;
 @y
@@ -2894,6 +2977,7 @@ case trip: if (!g[rJ].up->known) goto stall;
 @y
 @<Check for \9{e}external interrupt@>=
 @z
+
 @x [314] l.5587 Global and local registers.
 g[rI].o=incr(g[rI].o,-1);
 @y
@@ -3043,6 +3127,7 @@ cool->ren_x=true, spec_install(&g[rG],&cool->x);
 cool->ren_x=true, spec_install(&g[rG],&cool->x);
 @:g}{\|g (global registers)@>
 @z
+
 @x [334] l.5974 Issue #16.
 new_O=new_S=shift_right(cool->z.o,3,1);
 @y
@@ -3068,11 +3153,19 @@ new_O=new_S=shift_right(cool->z.o,3,true);
  case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
 @z
 
+@x [338] l.6028 Global and local registers.
+cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@y
+cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [338] l.6029 Compound literal.
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 @y
 cool->x.known=true, cool->x.o=(octa){0, cool_L};
 @z
+
 @x [338] l.6030 Global and local registers.
 cool->set_l=true, spec_install(&g[rL],&cool->rl);
 @y

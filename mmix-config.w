@@ -1000,8 +1000,8 @@ else { /* a branch prediction table is desired */
   bp_table=(char*)calloc(1<<(bp_a+bp_b+bp_c),sizeof(char));
   if (!bp_table) panic(errprint0("Can't allocate the branch table"));
 }
-lring=(specnode*)calloc(lring_size,sizeof(specnode));
-if (!lring) panic(errprint0("Can't allocate local registers"));
+l=(specnode*)calloc(lring_size,sizeof(specnode));
+if (!l) panic(errprint0("Can't allocate local registers"));
 j=bus_words;
 if (Icache && (Icache->bb>>3)>j) j=Icache->bb>>3;
 fetched=(octa*)calloc(j,sizeof(octa));

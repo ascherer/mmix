@@ -352,9 +352,9 @@ static octa sl3(octa);
 @z
 
 @x [18] l.469 Change from MMIX home.
-  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @y
-  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 @:l}{\|l (ring of local registers)@>
 @z
 

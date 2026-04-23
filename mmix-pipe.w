@@ -1841,7 +1841,7 @@ rB is internally the same as g[0], because |rB=0|.
 
 @<External v...@>=
 Extern specnode g[256]; /* global registers and special registers */
-Extern specnode *lring; /* the ring of local registers */
+Extern specnode *l; /* the ring of local registers */
 Extern int lring_size; /* the number of on-chip local registers
          (must be a power of~2) */
 Extern int max_rename_regs, max_mem_slots; /* capacity of reorder buffer */
@@ -1887,8 +1887,8 @@ g[rG].o.l=255;
 g[rN].o.h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
 g[rN].o.l=ABSTIME; /* see comment and warning above */
 for (j=0;j<lring_size;j++) {
-  lring[j].addr.h=sign_bit, lring[j].addr.l=256+j, lring[j].known=true;
-  lring[j].up=lring[j].down=&lring[j];
+  l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
+  l[j].up=l[j].down=&l[j];
 }
 
 @ @<Internal proto...@>=
@@ -2038,20 +2038,20 @@ else{
 @ @<Set |cool->z| from register Z@>=
 {
   if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
-  else if (cool->zz<cool_L) cool->z=specval(&lring[(cool_O.l+cool->zz)&lring_mask]);
+  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
 }
 
 @ @<Set |cool->y| from register Y@>=
 {
   if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
-  else if (cool->yy<cool_L) cool->y=specval(&lring[(cool_O.l+cool->yy)&lring_mask]);
+  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
 }
 
 @ @<Set |cool->b| from register X@>=
 {
   if (cool->xx>=cool_G) cool->b=specval(&g[cool->xx]);
   else if (cool->xx<cool_L)
-    cool->b=specval(&lring[(cool_O.l+cool->xx)&lring_mask]);
+    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
   if (f&rel_addr_bit) cool->need_b=true; /* |br|, |pbr| */
 }
 
@@ -2123,7 +2123,7 @@ case 3: cool->z.o.l=yz;@+break;
       cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
   }@+else if (cool->xx<cool_L) {
     if (i!=cswap) cool->ren_x=true,
-      spec_install(&lring[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
   }@+else { /* we need to increase L before issuing |head->inst| */
  increase_L:@+ if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
@@ -2144,7 +2144,7 @@ in the ring of local registers.
 @<Insert an instruction to advance beta and L@>=
 {
   cool->i=incrl;
-  spec_install(&lring[(cool_O.l+cool_L)&lring_mask],&cool->x);
+  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
   cool->need_b=cool->need_ra=false;
   cool->y=cool->z=zero_spec;
   cool->x.known=true; /* |cool->x.o=zero_octa| */
@@ -2164,7 +2164,7 @@ from the local register ring to virtual memory location |cool_S<<3|.
   cool->need_b=cool->need_ra=false;
   cool->i=incgamma;
   new_S=incr(cool_S,1);
-  cool->b=specval(&lring[cool_S.l&lring_mask]);
+  cool->b=specval(&l[cool_S.l&lring_mask]);
   cool->y.p=NULL, cool->y.o=shift_left(cool_S,3);
   cool->z=zero_spec;
   cool->mem_x=true, spec_install(&mem,&cool->x);
@@ -2186,8 +2186,8 @@ The value of $\beta$ may need to be decreased too (by decreasing~rL).
       cool->i=or; /* we'll preserve the main result by moving it down */
       head->inst-=0x10000; /* decrease X field of \.{POP} in fetch buffer */
       op=OR;
-      cool->y=specval(&lring[(cool_O.l+cool->xx-1)&lring_mask]);
-      spec_install(&lring[(cool_O.l+cool->xx-2)&lring_mask],&cool->x);
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+      spec_install(&l[(cool_O.l+cool->xx-2)&lring_mask],&cool->x);
     }@+else { /* decrease rL by 1 */
       spec_install(&g[rL],&cool->rl);
       cool->rl.o.l=cool_L-1;
@@ -2198,7 +2198,7 @@ The value of $\beta$ may need to be decreased too (by decreasing~rL).
     cool->i=decgamma;
     new_S=incr(cool_S,-1);
     cool->y.p=NULL, cool->y.o=shift_left(new_S,3);
-    spec_install(&lring[new_S.l&lring_mask],&cool->x);
+    spec_install(&l[new_S.l&lring_mask],&cool->x);
     op=LDOU; /* this instruction needs to be handled by load/store unit */
     cool->ptr_a=(void*)mem.up;
   }
@@ -2229,7 +2229,7 @@ from memory before they write it.
 @<Special cases of instruction dispatch@>=
 case cswap: cool->ren_a=true;
   spec_install(cool->xx>=cool_G? &g[cool->xx]:
-      &lring[(cool_O.l+cool->xx)&lring_mask],&cool->a);
+      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
   cool->i=pst;
 case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
 case pst:
@@ -2273,7 +2273,7 @@ case pushj: {@+register int x=cool->xx;
     if (((cool_S.l-cool_O.l-cool_L-1)&lring_mask)==0)
       @<Insert an instruction to advance gamma@>@;
     x=cool_L;@+ cool_L++;
-    cool->ren_x=true, spec_install(&lring[(cool_O.l+x)&lring_mask],&cool->x);
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
   }
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
   cool->ren_a=true, spec_install(&g[rJ],&cool->a);
@@ -2295,11 +2295,11 @@ in order to maintain the condition $\rm rS\le rO$.
 
 @<Special cases of instruction dispatch@>=
 case pop:@+if (cool->xx && cool_L>=cool->xx)
-      cool->y=specval(&lring[(cool_O.l+cool->xx-1)&lring_mask]);
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
 pop_unsave:@+if (cool_S.l==cool_O.l)
     @<Insert an instruction to decrease gamma@>;
   {@+register tetra x; register int new_L;
-    register specnode *p=lring[(cool_O.l-1)&lring_mask].up;
+    register specnode *p=l[(cool_O.l-1)&lring_mask].up;
     if (p->known) x=(p->o.l)&0xff;@+ else goto stall;
     if ((tetra)(cool_O.l-cool_S.l)<=x)
       @<Insert an instruction to decrease gamma@>;
@@ -2308,7 +2308,7 @@ pop_unsave:@+if (cool_S.l==cool_O.l)
     else new_L=x;
     if (new_L>cool_G) new_L=cool_G;
     if (x<new_L)
-      cool->ren_x=true, spec_install(&lring[(cool_O.l-1)&lring_mask],&cool->x);
+      cool->ren_x=true, spec_install(&l[(cool_O.l-1)&lring_mask],&cool->x);
     cool->set_l=true, spec_install(&g[rL],&cool->rl);
     cool->rl.o.l=new_L;
     if (cool->i==pop) {
@@ -6025,7 +6025,7 @@ instructions, the value |cool->zz=1| will get things restarted properly.
 
 @<Set up the first phase of saving@>=
 cool->zz=1;
-cool->ren_x=true, spec_install(&lring[(cool_O.l+cool_L)&lring_mask],&cool->x);
+cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 cool->set_l=true, spec_install(&g[rL],&cool->rl);
 new_O=incr(cool_O,cool_L+1);

@@ -466,7 +466,7 @@ case '-':@+ if (sscanf(buffer+1,"%d",&n)!=1 || n<0) goto what_say;
   continue;
 case 'l':@+ if (sscanf(buffer+1,"%d",&n)!=1 || n<0) goto what_say;
   if (n>=lring_size) goto what_say;
-  printf("  l[%d]=%08x%08x\n",n,lring[n].o.h,lring[n].o.l);@+continue;
+  printf("  l[%d]=%08x%08x\n",n,l[n].o.h,l[n].o.l);@+continue;
 case 'm': tmp=mem_read(read_hex(buffer+1));
   printf("  m[%s]=%08x%08x\n",buffer+1,tmp.h,tmp.l);@+continue;
 
