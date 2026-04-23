@@ -1155,7 +1155,8 @@ op_info info[256]={@t\1@>@/
 @y
   if (zz>=G) z=g[zz];
 @:g}{\|g (global registers)@>
-  else if (zz<L) z=lring[(O+zz)&lring_mask];
+  else if (zz<L) z=l[(O+zz)&lring_mask];
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [73] l.1768 Global and local registers.
@@ -1164,7 +1165,8 @@ op_info info[256]={@t\1@>@/
 @y
   if (yy>=G) y=g[yy];
 @:g}{\|g (global registers)@>
-  else if (yy<L) y=lring[(O+yy)&lring_mask];
+  else if (yy<L) y=l[(O+yy)&lring_mask];
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [74] l.1772 Sort name of section.
@@ -1179,7 +1181,8 @@ op_info info[256]={@t\1@>@/
 @y
   if (xx>=G) b=g[xx];
 @:g}{\|g (global registers)@>
-  else if (xx<L) b=lring[(O+xx)&lring_mask];
+  else if (xx<L) b=l[(O+xx)&lring_mask];
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [75] l.1779 RAII.
@@ -1194,7 +1197,7 @@ octa *l; /* local registers */
 @y
 octa g[256]; /* global registers */
 @!@:g}{\|g (global registers)@>
-octa *lring; /* local registers */
+octa *l; /* local registers */
 @!@:l}{\|l (ring of local registers)@>
 @z
 
@@ -1233,10 +1236,9 @@ g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
 
 @x [77] l.1817 Global and local registers.
 l=(octa*)calloc(lring_size,sizeof(octa));
-if (!l) panic("No room for the local registers");
 @y
-lring=(octa*)calloc(lring_size,sizeof(octa));
-if (!lring) panic("No room for the local registers");
+l=(octa*)calloc(lring_size,sizeof(octa));
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [79] l.1838 Sort name of section.
@@ -1268,7 +1270,8 @@ if (xx>=G) {
 @x [80] l.1848 Global and local registers.
   x_ptr=&l[(O+xx)&lring_mask];
 @y
-  x_ptr=&lring[(O+xx)&lring_mask];
+  x_ptr=&l[(O+xx)&lring_mask];
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [80] l.1849 Change from MMIX home.
@@ -1281,7 +1284,8 @@ if (xx>=G) {
   l[(O+L)&lring_mask]=zero_octa;
   L=g[rL].l=L+1;
 @y
-  lring[(O+L)&lring_mask]=zero_octa;
+  l[(O+L)&lring_mask]=zero_octa;
+@:l}{\|l (ring of local registers)@>
   L=g[rL].l=L+1;
 @:g}{\|g (global registers)@>
 @z
@@ -1302,16 +1306,9 @@ void stack_store(void)
 
 @x [82] l.1870 Global and local registers.
   ll->tet=l[k].h;@+test_store_bkpt(ll);
-  (ll+1)->tet=l[k].l;@+test_store_bkpt(ll+1);
 @y
-  ll->tet=lring[k].h;@+test_store_bkpt(ll);
-  (ll+1)->tet=lring[k].l;@+test_store_bkpt(ll+1);
-@z
-
-@x [82] l.1876 Global and local registers.
-              g[rS].h,g[rS].l,k,l[k].h,l[k].l);
-@y
-              g[rS].h,g[rS].l,k,lring[k].h,lring[k].l);
+  ll->tet=l[k].h;@+test_store_bkpt(ll);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [83] l.1886 C99 prototypes for C2x.
@@ -1330,16 +1327,9 @@ void stack_load(void)
 
 @x [83] l.1894 Global and local registers.
   l[k].h=ll->tet;@+test_load_bkpt(ll);
-  l[k].l=(ll+1)->tet;@+test_load_bkpt(ll+1);
 @y
-  lring[k].h=ll->tet;@+test_load_bkpt(ll);
-  lring[k].l=(ll+1)->tet;@+test_load_bkpt(ll+1);
-@z
-
-@x [83] l.1900 Global and local registers.
-              k,g[rS].h,g[rS].l,l[k].h,l[k].l);
-@y
-              k,g[rS].h,g[rS].l,lring[k].h,lring[k].l);
+  l[k].h=ll->tet;@+test_load_bkpt(ll);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [86] l.1945 Add missing bit-fiddling functions to MMIX-ARITH.
@@ -1555,7 +1545,8 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @x [101] l.2248 Global and local registers.
  x.l=xx;@+l[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
 @y
- x.l=xx;@+lring[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
+ x.l=xx;@+l[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [101] l.2250 Global and local registers.
@@ -1565,28 +1556,11 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @:g}{\|g (global registers)@>
 @z
 
-@x [101] l.2254 Global and local registers.
-case POP:@+if (xx!=0 && xx<=L) y=l[(O+xx-1)&lring_mask];
-@y
-case POP:@+if (xx!=0 && xx<=L) y=lring[(O+xx-1)&lring_mask];
-@z
-
-@x [101] l.2256 Global and local registers.
- k=l[(O-1)&lring_mask].l&0xff;
-@y
- k=lring[(O-1)&lring_mask].l&0xff;
-@z
-
-@x [101] l.2261 Global and local registers.
-   l[(O-1)&lring_mask]=y;
-@y
-   lring[(O-1)&lring_mask]=y;
-@z
-
 @x [102] l.2274 Global and local registers.
  l[(O+L)&lring_mask].l=L, L++;
 @y
- lring[(O+L)&lring_mask].l=L, L++;
+ l[(O+L)&lring_mask].l=L, L++;
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [102] l.2276 Global and local registers.
@@ -1625,7 +1599,8 @@ if (k==rZ+1) x=(octa){G<<24, g[rA].l};
 @x [104] l.2321 Global and local registers.
  k=l[S&lring_mask].l&0xff;
 @y
- k=lring[S&lring_mask].l&0xff;
+ k=l[S&lring_mask].l&0xff;
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [105] l.2328 Sort name of section.
@@ -2078,17 +2053,12 @@ octa scan_hex(
   octa o=zero_octa;
 @z
 
-@x [157] l.3243 Global and local registers.
- case 'l': l[cur_disp_addr.l&lring_mask]=val;@+break;
-@y
- case 'l': lring[cur_disp_addr.l&lring_mask]=val;@+break;
-@z
-
 @x [157] l.3245 Global and local registers.
   if (k<L) l[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
 @y
-  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
+  if (k<L) l[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
 @:g}{\|g (global registers)@>
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [157] l.3248 Sort name of section.
@@ -2122,17 +2092,12 @@ octa scan_hex(
     if (val.h==0 && val.l<(tetra)L) L=val.l;
 @z
 
-@x [159] l.3278 Global and local registers.
-  printf("l[%d]=",k);@+ aux=l[k];@+ break;
-@y
-  printf("l[%d]=",k);@+ aux=lring[k];@+ break;
-@z
-
 @x [159] l.3280 Global and local registers.
   if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=l[(O+k)&lring_mask];
   else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
 @y
-  if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=lring[(O+k)&lring_mask];
+  if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=l[(O+k)&lring_mask];
+@:l}{\|l (ring of local registers)@>
   else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
 @:g}{\|g (global registers)@>
 @z
