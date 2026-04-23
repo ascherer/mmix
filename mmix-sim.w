@@ -1760,19 +1760,19 @@ actually hold the values rO/8 and rS/8, modulo |lring_size|.)
 @<Set |z| from register Z@>=
 {
   if (zz>=G) z=g[zz];
-  else if (zz<L) z=lring[(O+zz)&lring_mask];
+  else if (zz<L) z=l[(O+zz)&lring_mask];
 }
 
 @ @<Set |y| from register Y@>=
 {
   if (yy>=G) y=g[yy];
-  else if (yy<L) y=lring[(O+yy)&lring_mask];
+  else if (yy<L) y=l[(O+yy)&lring_mask];
 }
 
 @ @<Set |b| from register X@>=
 {
   if (xx>=G) b=g[xx];
-  else if (xx<L) b=lring[(O+xx)&lring_mask];
+  else if (xx<L) b=l[(O+xx)&lring_mask];
 }
   
 @ @<Local...@>=
@@ -1814,8 +1814,8 @@ lring_mask=lring_size-1;
 if (lring_size&lring_mask)
   panic("The number of local registers must be a power of 2");
 @.The number of local...@>
-lring=(octa*)calloc(lring_size,sizeof(octa));
-if (!lring) panic("No room for the local registers");
+l=(octa*)calloc(lring_size,sizeof(octa));
+if (!l) panic("No room for the local registers");
 @.No room...@>
 cur_round=ROUND_NEAR;
 
@@ -1845,12 +1845,12 @@ if (xx>=G) {
 }@+else {
   while (xx>=L) @<Increase rL@>;
   sprintf(lhs,"$%d=l[%d]",xx,(O+xx)&lring_mask);
-  x_ptr=&lring[(O+xx)&lring_mask];
+  x_ptr=&l[(O+xx)&lring_mask];
 }
 
 @ @<Increase rL@>=
 {
-  lring[(O+L)&lring_mask]=zero_octa;
+  l[(O+L)&lring_mask]=zero_octa;
   L=g[rL].l=L+1;
   if (((S-O-L)&lring_mask)==0) stack_store();
 }
@@ -1867,13 +1867,13 @@ void stack_store()
 {
   register mem_tetra *ll=mem_find(g[rS]);
   register int k=S&lring_mask;
-  ll->tet=lring[k].h;@+test_store_bkpt(ll);
-  (ll+1)->tet=lring[k].l;@+test_store_bkpt(ll+1);
+  ll->tet=l[k].h;@+test_store_bkpt(ll);
+  (ll+1)->tet=l[k].l;@+test_store_bkpt(ll+1);
   if (stack_tracing) {
     tracing=true;
     if (cur_line) show_line();
     printf("             M8[#%08x%08x]=l[%d]=#%08x%08x, rS+=8\n",
-              g[rS].h,g[rS].l,k,lring[k].h,lring[k].l);
+              g[rS].h,g[rS].l,k,l[k].h,l[k].l);
   }
   g[rS]=incr(g[rS],8),  S++;
 }
@@ -1891,13 +1891,13 @@ void stack_load()
   S--, g[rS]=incr(g[rS],-8);
   ll=mem_find(g[rS]);
   k=S&lring_mask;
-  lring[k].h=ll->tet;@+test_load_bkpt(ll);
-  lring[k].l=(ll+1)->tet;@+test_load_bkpt(ll+1);
+  l[k].h=ll->tet;@+test_load_bkpt(ll);
+  l[k].l=(ll+1)->tet;@+test_load_bkpt(ll+1);
   if (stack_tracing) {
     tracing=true;
     if (cur_line) show_line();
     printf("             rS-=8, l[%d]=M8[#%08x%08x]=#%08x%08x\n",
-              k,g[rS].h,g[rS].l,lring[k].h,lring[k].l);
+              k,g[rS].h,g[rS].l,l[k].h,l[k].l);
   }
 }
 
@@ -2245,20 +2245,20 @@ push:@+if (xx>=G) {
    xx=L++;
    if (((S-O-L)&lring_mask)==0) stack_store();
  }
- x.l=xx;@+lring[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
+ x.l=xx;@+l[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
  sprintf(lhs,"l[%d]=%d, ",(O+xx)&lring_mask,xx);
  x=g[rJ]=incr(loc,4);
  L-=xx+1;@+ O+=xx+1;
  b=g[rO]=incr(g[rO],(xx+1)<<3);
 sync_L: a.l=g[rL].l=L;@+break;
-case POP:@+if (xx!=0 && xx<=L) y=lring[(O+xx-1)&lring_mask];
+case POP:@+if (xx!=0 && xx<=L) y=l[(O+xx-1)&lring_mask];
  if (g[rS].l==g[rO].l) stack_load();
- k=lring[(O-1)&lring_mask].l&0xff;
+ k=l[(O-1)&lring_mask].l&0xff;
  while ((tetra)(O-S)<=(tetra)k) stack_load();
  L=k+(xx<=L? xx: L+1);
  if (L>G) L=G;
  if (L>k) {
-   lring[(O-1)&lring_mask]=y;
+   l[(O-1)&lring_mask]=y;
    if (y.h) sprintf(lhs,"l[%d]=#%x%08x, ",(O-1)&lring_mask,y.h,y.l);
    else sprintf(lhs,"l[%d]=#%x, ",(O-1)&lring_mask,y.l);
  }@+else lhs[0]='\0';
@@ -2271,7 +2271,7 @@ to implement \.{SAVE} and \.{UNSAVE}.
 
 @<Cases for ind...@>=
 case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
- lring[(O+L)&lring_mask].l=L, L++;
+ l[(O+L)&lring_mask].l=L, L++;
  if (((S-O-L)&lring_mask)==0) stack_store();
  O+=L;@+ g[rO]=incr(g[rO],L<<3);
  L=g[rL].l=0;
@@ -2318,7 +2318,7 @@ case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
  }
  S=g[rS].l>>3;
  stack_load();
- k=lring[S&lring_mask].l&0xff;
+ k=l[S&lring_mask].l&0xff;
  for (j=0;j<k;j++) stack_load();
  O=S;@+ g[rO]=g[rS];
  L=k>G? G: k;
@@ -3240,9 +3240,9 @@ if (*p=='"') {
 
 @ @<Set the current octabyte to |val|@>=
 switch (cur_disp_mode) {
- case 'l': lring[cur_disp_addr.l&lring_mask]=val;@+break;
+ case 'l': l[cur_disp_addr.l&lring_mask]=val;@+break;
  case '$': k=cur_disp_addr.l&0xff;
-  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
+  if (k<L) l[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
   break;
  case 'g': k=cur_disp_addr.l&0xff;
   if (k<32) @<Set |g[k]=val| only if permissible@>;
@@ -3275,9 +3275,9 @@ if (k>=9 && k!=rI) {
 @ @<Display the current octabyte@>=
 switch (cur_disp_mode) {
  case 'l': k=cur_disp_addr.l&lring_mask;
-  printf("l[%d]=",k);@+ aux=lring[k];@+ break;
+  printf("l[%d]=",k);@+ aux=l[k];@+ break;
  case '$': k=cur_disp_addr.l&0xff;
-  if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=lring[(O+k)&lring_mask];
+  if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=l[(O+k)&lring_mask];
   else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
   else printf("$%d=",k), aux=zero_octa;
   break;
