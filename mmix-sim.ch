@@ -211,7 +211,7 @@ extern int scan_const @,@,@[ARGS((char* buf))@];
 @y
 @z
 
-@x [15] l.669 Use constant value from MMIX-ARITH.
+@x [15] l.669 Use constant value from MMIX-ARITH. Use preproc items.
 @d sign_bit ((unsigned)0x80000000)
 
 @y
@@ -228,7 +228,7 @@ void print_int(
   octa o)
 @z
 
-@x [15] l.676
+@x [15] l.676 Use preproc items.
   register tetra hi=o.h, lo=o.l, r, t;
 @y
   register tetra r, t;
@@ -437,6 +437,13 @@ inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 inst_ptr=(octa){(ll-2)->tet, (ll-1)->tet}; /* \.{Main} */
 @z
 
+@x [37] l.1058 Global and local registers.
+g[255]=incr(aux,12*8); /* we will \.{UNSAVE} from here, to get going */
+@y
+g[255]=incr(aux,12*8); /* we will \.{UNSAVE} from here, to get going */
+@:g}{\|g (global registers)@>
+@z
+
 @x [42] l.1102 C99 prototypes for C2x.
 void make_map @,@,@[ARGS((void))@];@+@t}\6{@>
 void make_map()
@@ -581,6 +588,13 @@ char *special_name[32]={"rB","rD","rE","rH","rJ","rM","rR","rBB",@|
 @y
 @ The bit codes for arithmetic exceptions
 are defined in {\mc MMIX-ARITH}.
+@z
+
+@x [60] l.1360 Global and local registers.
+  if (resuming) loc=incr(inst_ptr,-4), inst=g[rX].l;
+@y
+  if (resuming) loc=incr(inst_ptr,-4), inst=g[rX].l;
+@:g}{\|g (global registers)@>
 @z
 
 @x [62] l.1409 RAII.
@@ -1135,10 +1149,31 @@ op_info info[256]={@t\1@>@/
   if (info[op].third_operand) @<Set \9{b}|b| from special register@>;
 @z
 
+@x [72] l.1762 Global and local registers.
+  if (zz>=G) z=g[zz];
+@y
+  if (zz>=G) z=g[zz];
+@:g}{\|g (global registers)@>
+@z
+
+@x [73] l.1768 Global and local registers.
+  if (yy>=G) y=g[yy];
+@y
+  if (yy>=G) y=g[yy];
+@:g}{\|g (global registers)@>
+@z
+
 @x [74] l.1772 Sort name of section.
 @ @<Set |b| from register X@>=
 @y
 @ @<Set \9{b}|b| from register X@>=
+@z
+
+@x [74] l.1774 Global and local registers.
+  if (xx>=G) b=g[xx];
+@y
+  if (xx>=G) b=g[xx];
+@:g}{\|g (global registers)@>
 @z
 
 @x [75] l.1779 RAII.
@@ -1148,11 +1183,13 @@ register int G,L,O=0; /* accessible copies of key registers */
 @z
 
 @x [76] l.1782 Document one-letter global variables.
-octa globreg[256]; /* global registers */
+octa g[256]; /* global registers */
+octa *l; /* local registers */
 @y
+octa g[256]; /* global registers */
 @!@:g}{\|g (global registers)@>
+octa *lring; /* local registers */
 @!@:l}{\|l (ring of local registers)@>
-octa globreg[256]; /* global registers */
 @z
 
 @x [77] l.1792 Different approach for ABSTIME.
@@ -1180,10 +1217,11 @@ a trivial program that computes the value of the standard library function
 @z
 
 @x [77] l.1807 Compound literal.
-globreg[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
-globreg[rN].l=ABSTIME; /* see comment and warning above */
+g[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+g[rN].l=ABSTIME; /* see comment and warning above */
 @y
-globreg[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+g[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
+@:g}{\|g (global registers)@>
   ABSTIME}; /* see comment and warning above */
 @z
 
@@ -1193,16 +1231,37 @@ globreg[rN]=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
 @ @<Set \9{b}|b| from special register@>=
 @z
 
+@x [79] l.1839 Global and local registers.
+b=g[info[op].third_operand];
+@y
+b=g[info[op].third_operand];
+@:g}{\|g (global registers)@>
+@z
+
 @x [80] l.1842 Change from MMIX home.
 if (xx>=G) {
 @y
 { if (xx>=G) {
 @z
 
+@x [80] l.1844 Global and local registers.
+  x_ptr=&g[xx];
+@y
+  x_ptr=&g[xx];
+@:g}{\|g (global registers)@>
+@z
+
 @x [80] l.1849 Change from MMIX home.
 }
 @y
 } }
+@z
+
+@x [81] l.1854 Global and local registers.
+  L=g[rL].l=L+1;
+@y
+  L=g[rL].l=L+1;
+@:g}{\|g (global registers)@>
 @z
 
 @x [82] l.1865 C99 prototypes for C2x.
@@ -1212,11 +1271,25 @@ void stack_store()
 void stack_store(void)
 @z
 
+@x [82] l.1868 Global and local registers.
+  register mem_tetra *ll=mem_find(g[rS]);
+@y
+  register mem_tetra *ll=mem_find(g[rS]);
+@:g}{\|g (global registers)@>
+@z
+
 @x [83] l.1886 C99 prototypes for C2x.
 void stack_load @,@,@[ARGS((void))@];@+@t}\6{@>
 void stack_load()
 @y
 void stack_load(void)
+@z
+
+@x [83] l.1891 Global and local registers.
+  S--, g[rS]=incr(g[rS],-8);
+@y
+  S--, g[rS]=incr(g[rS],-8);
+@:g}{\|g (global registers)@>
 @z
 
 @x [86] l.1945 Add missing bit-fiddling functions to MMIX-ARITH.
@@ -1279,6 +1352,13 @@ case NXOR: case NXORI:
  x=(octa){wyde_diff(y.h,z.h),wyde_diff(y.l,z.l)};@+goto store_x;
 @z
 
+@x [88] l.2004 Global and local registers.
+case MULU: case MULUI: x=omult(y,z);@+a=g[rH]=aux;@+goto store_x;
+@y
+case MULU: case MULUI: x=omult(y,z);@+a=g[rH]=aux;@+goto store_x;
+@:g}{\|g (global registers)@>
+@z
+
 @x [89] l.2027 Change from MMIX home.
  round_mode=(y.l? y.l: cur_round);@+goto store_fx;
 @y
@@ -1322,6 +1402,13 @@ int register_truth(
  default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
 @z
 
+@x [93] l.2117 Global and local registers.
+   if (g[rI].l<=2 && g[rI].l && g[rI].h==0) tracing=breakpoint=true;
+@y
+   if (g[rI].l<=2 && g[rI].l && g[rI].h==0) tracing=breakpoint=true;
+@:g}{\|g (global registers)@>
+@z
+
 @x [94] l.2141 Compound literal.
  x.h=ll->tet;@+ x.l=(ll+1)->tet;
 @y
@@ -1347,6 +1434,13 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @z
 
+@x [96] l.2183 Global and local registers.
+ a=g[rP];
+@y
+ a=g[rP];
+@:g}{\|g (global registers)@>
+@z
+
 @x [96] l.2185 Compound literal.
    x.h=0, x.l=1;
 @y
@@ -1357,6 +1451,13 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
    b.h=ll->tet, b.l=(ll+1)->tet;
 @y
    b=(octa){ll->tet, (ll+1)->tet};
+@z
+
+@x [97] l.2200 Global and local registers.
+  x=g[zz];
+@y
+  x=g[zz];
+@:g}{\|g (global registers)@>
 @z
 
 @x [97] l.2208 Sort name of section.
@@ -1383,6 +1484,13 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
   if (z.h!=0 || z.l>255 || z.l<(tetra)L || z.l<32) goto illegal_inst;
 @z
 
+@x [99] l.2223 Global and local registers.
+  for (j=z.l; j<G; j++) g[j]=zero_octa;
+@y
+  for (j=z.l; j<G; j++) g[j]=zero_octa;
+@:g}{\|g (global registers)@>
+@z
+
 @x [100] l.2227 Move to MMIX-ARITH.
 @ @d ROUND_OFF 1
 @d ROUND_UP 2
@@ -1394,10 +1502,38 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @ @<Get ready to update rA@>=
 @z
 
-@x [103] l.2295 Compound literal.
-if (k==rZ+1) x.h=G<<24, x.l=globreg[rA].l;
+@x [101] l.2250 Global and local registers.
+ x=g[rJ]=incr(loc,4);
 @y
-if (k==rZ+1) x=(octa){G<<24, globreg[rA].l};
+ x=g[rJ]=incr(loc,4);
+@:g}{\|g (global registers)@>
+@z
+
+@x [102] l.2276 Global and local registers.
+ O+=L;@+ g[rO]=incr(g[rO],L<<3);
+@y
+ O+=L;@+ g[rO]=incr(g[rO],L<<3);
+@:g}{\|g (global registers)@>
+@z
+
+@x [103] l.2294 Global and local registers.
+ll=mem_find(g[rS]);
+@y
+ll=mem_find(g[rS]);
+@:g}{\|g (global registers)@>
+@z
+
+@x [103] l.2295 Compound literal.
+if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
+@y
+if (k==rZ+1) x=(octa){G<<24, g[rA].l};
+@z
+
+@x [104] l.2311 Global and local registers.
+ z.l&=-8;@+g[rS]=incr(z,8);
+@y
+ z.l&=-8;@+g[rS]=incr(z,8);
+@:g}{\|g (global registers)@>
 @z
 
 @x [104] l.2313 Sort name of section.
@@ -1412,10 +1548,11 @@ if (k==rZ+1) x=(octa){G<<24, globreg[rA].l};
 @ @<Load \9{g}|g[k]| from the register stack@>=
 @z
 
-@x [105] l.2335 Compound literal.
-}@+else globreg[k].h=ll->tet, globreg[k].l=(ll+1)->tet;
+@x [105] l.2329 Global and local registers.
+g[rS]=incr(g[rS],-8);
 @y
-}@+else globreg[k]=(octa){ll->tet, (ll+1)->tet};
+g[rS]=incr(g[rS],-8);
+@:g}{\|g (global registers)@>
 @z
 
 @x [107] l.2366 GCC warning.
@@ -1426,35 +1563,45 @@ case LDVTS: case LDVTSI: privileged_inst: strcpy(lhs,"!privileged");
 @z
 
 @x [108] l.2388 Compound literal.
- globreg[rXX].h=sign_bit, globreg[rXX].l=inst;
- globreg[rYY]=y, globreg[rZZ]=z;
+ g[rXX].h=sign_bit, g[rXX].l=inst;
+ g[rYY]=y, g[rZZ]=z;
  z.h=0, z.l=zz;
 @y
- globreg[rXX]=(octa){sign_bit, inst};
- globreg[rYY]=y, globreg[rZZ]=z;
+ g[rXX]=(octa){sign_bit, inst};
+@:g}{\|g (global registers)@>
+ g[rYY]=y, g[rZZ]=z;
  z=(octa){0, zz};
 @z
 
 @x [108] l.2395 Decouple 'mixins'.
-case Fopen: globreg[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
+case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
 @y
-case Fopen: globreg[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
+case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma,mmgetchars);@+break;
+@:g}{\|g (global registers)@>
 @z
 
 @x [108] l.2397 Decouple 'mixins'.
-case Fread: globreg[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
-case Fgets: globreg[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
-case Fgetws: globreg[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
-case Fwrite: globreg[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
-case Fputs: globreg[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
-case Fputws: globreg[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
+case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
+case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
+case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
+case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
+case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
 @y
-case Fread: globreg[rBB]=mmix_fread((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgets: globreg[rBB]=mmix_fgets((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fgetws: globreg[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
-case Fwrite: globreg[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
-case Fputs: globreg[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
-case Fputws: globreg[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
+case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+@:g}{\|g (global registers)@>
+case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma,mmputchars,stdin_chr);@+break;
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma,mmgetchars);@+break;
+case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b,mmgetchars);@+break;
+case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b,mmgetchars);@+break;
+@z
+
+@x [109] l.2412 Global and local registers.
+  print_trip_warning(loc.l>>4,incr(g[rW],-4));
+@y
+  print_trip_warning(loc.l>>4,incr(g[rW],-4));
+@:g}{\|g (global registers)@>
 @z
 
 @x [111] l.2433 Compound literal.
@@ -1563,12 +1710,27 @@ static char stdin_chr(void)
     if (!fgets(stdin_buf,sizeof(stdin_buf),stdin))
 @z
 
+@x [122] l.2586 Global and local registers.
+if ((exc&(U_BIT+X_BIT))==U_BIT && !(g[rA].l&U_BIT)) exc &=~U_BIT;
+@y
+if ((exc&(U_BIT+X_BIT))==U_BIT && !(g[rA].l&U_BIT)) exc &=~U_BIT;
+@:g}{\|g (global registers)@>
+@z
+
 @x [123] l.2600 Compound literal.
   inst_ptr.h=0, inst_ptr.l=k<<4;
-  globreg[rX].h=sign_bit, globreg[rX].l=inst;
+  g[rX].h=sign_bit, g[rX].l=inst;
 @y
   inst_ptr=(octa){0, k<<4};
-  globreg[rX]=(octa){sign_bit, inst};
+  g[rX]=(octa){sign_bit, inst};
+@:g}{\|g (global registers)@>
+@z
+
+@x [124] l.2613 Global and local registers.
+inst_ptr=z=g[rW];
+@y
+inst_ptr=z=g[rW];
+@:g}{\|g (global registers)@>
 @z
 
 @x [125] l.2630 GCC warning.
@@ -1583,6 +1745,27 @@ static char stdin_chr(void)
 @y
   @=/* else fall through */@>@;
  case RESUME_AGAIN:@+if ((b.l>>24)==RESUME) goto illegal_inst;
+@z
+
+@x [126] l.2642 Global and local registers.
+    y=g[rZ];
+@y
+    y=g[rZ];
+@:g}{\|g (global registers)@>
+@z
+
+@x [127] l.2657 Global and local registers.
+  if ((!(loc.h&sign_bit)||(g[rU].h&0x8000)) &&@|
+@y
+  if ((!(loc.h&sign_bit)||(g[rU].h&0x8000)) &&@|
+@:g}{\|g (global registers)@>
+@z
+
+@x [131] l.2718 Global and local registers.
+  if (exc) printf(", rA=#%05x", g[rA].l);
+@y
+  if (exc) printf(", rA=#%05x", g[rA].l);
+@:g}{\|g (global registers)@>
 @z
 
 @x [137] l.2820 Untangle variables from functions.
@@ -1641,6 +1824,14 @@ void show_stats(
   octa o;
 @y
 @z
+
+@x [140] l.2868 Global and local registers.
+  g[rU].l,g[rU].l==1? "": "s",@|
+@y
+  g[rU].l,g[rU].l==1? "": "s",@|
+@:g}{\|g (global registers)@>
+@z
+
 @x [140] l.2872 Block-local variable.
   if (!verbose) return;
   o = halted? incr(inst_ptr,-4): inst_ptr;
@@ -1696,6 +1887,13 @@ int main(
   while (1) {
 @y
   while (true) {
+@z
+
+@x [141] l.2916 Global and local registers.
+  return g[255].l; /* provide rudimentary feedback for non-interactive runs */
+@y
+  return g[255].l; /* provide rudimentary feedback for non-interactive runs */
+@:g}{\|g (global registers)@>
 @z
 
 @x [143] l.2946 C99 prototypes for C2x.
@@ -1794,6 +1992,13 @@ octa scan_hex(
   octa o=zero_octa;
 @z
 
+@x [157] l.3245 Global and local registers.
+  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
+@y
+  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
+@:g}{\|g (global registers)@>
+@z
+
 @x [157] l.3248 Sort name of section.
   if (k<32) @<Set |g[k]=val| only if permissible@>;
 @y
@@ -1812,10 +2017,24 @@ octa scan_hex(
     if (val.h!=0 || val.l>255 || val.l<(tetra)L || val.l<32) break;
 @z
 
+@x [158] l.3267 Global and local registers.
+    for (j=val.l; j<G; j++) g[j]=zero_octa;
+@y
+    for (j=val.l; j<G; j++) g[j]=zero_octa;
+@:g}{\|g (global registers)@>
+@z
+
 @x [158] l.3270 Change from MMIX home.
     if (val.h==0 && val.l<L) L=val.l;
 @y
     if (val.h==0 && val.l<(tetra)L) L=val.l;
+@z
+
+@x [159] l.3281 Global and local registers.
+  else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
+@y
+  else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
+@:g}{\|g (global registers)@>
 @z
 
 @x [159] l.3289 Compound literal.
@@ -1876,6 +2095,13 @@ x=(octa){0x40000000, 0x8};
 x.h=0, x.l=0xf0;
 @y
 x=(octa){0, 0xf0};
+@z
+
+@x [164] l.3393 Global and local registers.
+g[rX].l=((tetra)UNSAVE<<24)+255;
+@y
+g[rX].l=((tetra)UNSAVE<<24)+255;
+@:g}{\|g (global registers)@>
 @z
 
 @x [165] l.3412 C99 prototypes for C2x.

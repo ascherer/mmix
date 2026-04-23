@@ -1055,7 +1055,7 @@ G=zbyte;@+ L=0;
 for (j=G+G;j<256+256;j++,ll++,aux.l+=4) read_tet(), ll->tet=tet;
 inst_ptr.h=(ll-2)->tet, inst_ptr.l=(ll-1)->tet; /* \.{Main} */
 (ll+2*12)->tet=G<<24;
-globreg[255]=incr(aux,12*8); /* we will \.{UNSAVE} from here, to get going */
+g[255]=incr(aux,12*8); /* we will \.{UNSAVE} from here, to get going */
 
 @* Loading and printing source lines.
 The loaded program generally contains cross references to the lines
@@ -1357,7 +1357,7 @@ the master switch that controls most of the action.
 
 @<Perform one instruction@>=
 {
-  if (resuming) loc=incr(inst_ptr,-4), inst=globreg[rX].l;
+  if (resuming) loc=incr(inst_ptr,-4), inst=g[rX].l;
   else @<Fetch the next instruction@>;
   op=inst>>24;@+xx=(inst>>16)&0xff;@+yy=(inst>>8)&0xff;@+zz=inst&0xff;
   f=info[op].flags;@+yz=inst&0xffff;
@@ -1759,19 +1759,19 @@ actually hold the values rO/8 and rS/8, modulo |lring_size|.)
 
 @<Set |z| from register Z@>=
 {
-  if (zz>=G) z=globreg[zz];
+  if (zz>=G) z=g[zz];
   else if (zz<L) z=lring[(O+zz)&lring_mask];
 }
 
 @ @<Set |y| from register Y@>=
 {
-  if (yy>=G) y=globreg[yy];
+  if (yy>=G) y=g[yy];
   else if (yy<L) y=lring[(O+yy)&lring_mask];
 }
 
 @ @<Set |b| from register X@>=
 {
-  if (xx>=G) b=globreg[xx];
+  if (xx>=G) b=g[xx];
   else if (xx<L) b=lring[(O+xx)&lring_mask];
 }
   
@@ -1779,8 +1779,8 @@ actually hold the values rO/8 and rS/8, modulo |lring_size|.)
 register int G,L,O; /* accessible copies of key registers */
 
 @ @<Glob...@>=
-octa globreg[256]; /* global registers */
-octa *lring; /* local registers */
+octa g[256]; /* global registers */
+octa *l; /* local registers */
 int lring_size; /* the number of local registers (a power of 2) */
 int lring_mask; /* one less than |lring_size| */
 int S; /* congruent to $\rm rS\GG 3$ modulo |lring_size| */
@@ -1803,12 +1803,12 @@ fail in February of 2106.)
 @d SUBSUBVERSION 1 /* further qualification to version number */
 
 @<Initialize...@>=
-globreg[rK]=neg_one;
-globreg[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
-globreg[rN].l=ABSTIME; /* see comment and warning above */
-globreg[rT].h=0x80000005;
-globreg[rTT].h=0x80000006;
-globreg[rV].h=0x369c2004;
+g[rK]=neg_one;
+g[rN].h=(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8);
+g[rN].l=ABSTIME; /* see comment and warning above */
+g[rT].h=0x80000005;
+g[rTT].h=0x80000006;
+g[rV].h=0x369c2004;
 if (lring_size<256) lring_size=256;
 lring_mask=lring_size-1;
 if (lring_size&lring_mask)
@@ -1836,12 +1836,12 @@ it were \.{ADDU}.
 }  
 
 @ @<Set |b| from special register@>=
-b=globreg[info[op].third_operand];
+b=g[info[op].third_operand];
 
 @ @<Install register~X as the destination...@>=
 if (xx>=G) {
   sprintf(lhs,"$%d=g[%d]",xx,xx);
-  x_ptr=&globreg[xx];
+  x_ptr=&g[xx];
 }@+else {
   while (xx>=L) @<Increase rL@>;
   sprintf(lhs,"$%d=l[%d]",xx,(O+xx)&lring_mask);
@@ -1851,7 +1851,7 @@ if (xx>=G) {
 @ @<Increase rL@>=
 {
   lring[(O+L)&lring_mask]=zero_octa;
-  L=globreg[rL].l=L+1;
+  L=g[rL].l=L+1;
   if (((S-O-L)&lring_mask)==0) stack_store();
 }
 
@@ -1865,7 +1865,7 @@ location~rS and advancing rS.
 void stack_store @,@,@[ARGS((void))@];@+@t}\6{@>
 void stack_store()
 {
-  register mem_tetra *ll=mem_find(globreg[rS]);
+  register mem_tetra *ll=mem_find(g[rS]);
   register int k=S&lring_mask;
   ll->tet=lring[k].h;@+test_store_bkpt(ll);
   (ll+1)->tet=lring[k].l;@+test_store_bkpt(ll+1);
@@ -1873,9 +1873,9 @@ void stack_store()
     tracing=true;
     if (cur_line) show_line();
     printf("             M8[#%08x%08x]=l[%d]=#%08x%08x, rS+=8\n",
-              globreg[rS].h,globreg[rS].l,k,lring[k].h,lring[k].l);
+              g[rS].h,g[rS].l,k,lring[k].h,lring[k].l);
   }
-  globreg[rS]=incr(globreg[rS],8),  S++;
+  g[rS]=incr(g[rS],8),  S++;
 }
 
 @ The |stack_load| routine is essentially the inverse of |stack_store|.
@@ -1888,8 +1888,8 @@ void stack_load()
 {
   register mem_tetra *ll;
   register int k;
-  S--, globreg[rS]=incr(globreg[rS],-8);
-  ll=mem_find(globreg[rS]);
+  S--, g[rS]=incr(g[rS],-8);
+  ll=mem_find(g[rS]);
   k=S&lring_mask;
   lring[k].h=ll->tet;@+test_load_bkpt(ll);
   lring[k].l=(ll+1)->tet;@+test_load_bkpt(ll+1);
@@ -1897,7 +1897,7 @@ void stack_load()
     tracing=true;
     if (cur_line) show_line();
     printf("             rS-=8, l[%d]=M8[#%08x%08x]=#%08x%08x\n",
-              k,globreg[rS].h,globreg[rS].l,lring[k].h,lring[k].l);
+              k,g[rS].h,g[rS].l,lring[k].h,lring[k].l);
   }
 }
 
@@ -2001,11 +2001,11 @@ and the auxiliary output is placed in~|a|.
 case MUL: case MULI: x=signed_omult(y,z);
 test_overflow:@+if (overflow) exc|=V_BIT;
  goto store_x;
-case MULU: case MULUI: x=omult(y,z);@+a=globreg[rH]=aux;@+goto store_x;
+case MULU: case MULUI: x=omult(y,z);@+a=g[rH]=aux;@+goto store_x;
 case DIV: case DIVI:@+if (!z.l && !z.h) aux=y, exc|=D_BIT, overflow=false;
  else x=signed_odiv(y,z);
- a=globreg[rR]=aux;@+goto test_overflow;
-case DIVU: case DIVUI: x=odiv(b,y,z);@+a=globreg[rR]=aux;@+goto store_x;
+ a=g[rR]=aux;@+goto test_overflow;
+case DIVU: case DIVUI: x=odiv(b,y,z);@+a=g[rR]=aux;@+goto store_x;
 
 @ The floating point routines of {\mc MMIX-ARITH} record exceptional
 events in a variable called |exceptions|. Here we simply merge those bits into
@@ -2114,8 +2114,8 @@ case PBNP: case PBNPB: case PBEV: case PBEVB:@/
  if (good) good_guesses++;
  else {
    bad_guesses++, sclock.l+=2; /* penalty is $2\upsilon$ for bad guess */
-   if (globreg[rI].l<=2 && globreg[rI].l && globreg[rI].h==0) tracing=breakpoint=true;
-   globreg[rI]=incr(globreg[rI],-2);
+   if (g[rI].l<=2 && g[rI].l && g[rI].h==0) tracing=breakpoint=true;
+   g[rI]=incr(g[rI],-2);
  }
  break;
 
@@ -2180,7 +2180,7 @@ the operands around so that they will appear correctly in the trace output.
 @<Cases for ind...@>=
 case CSWAP: case CSWAPI: w.l&=-8;@+ll=mem_find(w);
  test_load_bkpt(ll);@+test_load_bkpt(ll+1);
- a=globreg[rP];
+ a=g[rP];
  if (ll->tet==a.h && (ll+1)->tet==a.l) {
    x.h=0, x.l=1;
    test_store_bkpt(ll);@+test_store_bkpt(ll+1);
@@ -2188,7 +2188,7 @@ case CSWAP: case CSWAPI: w.l&=-8;@+ll=mem_find(w);
    strcpy(rhs,"M8[%#w]=%#b");
  }@+else {
    b.h=ll->tet, b.l=(ll+1)->tet;
-   globreg[rP]=b;
+   g[rP]=b;
    strcpy(rhs,"rP=%#b");
  }
  goto check_ld;
@@ -2197,7 +2197,7 @@ case CSWAP: case CSWAPI: w.l&=-8;@+ll=mem_find(w);
 
 @<Cases for ind...@>=
 case GET:@+if (yy!=0 || zz>=32) goto illegal_inst;
-  x=globreg[zz];
+  x=g[zz];
   goto store_x;
 case PUT: case PUTI:@+ if (yy!=0 || xx>=32) goto illegal_inst;
   strcpy(rhs,"%z = %#z");
@@ -2208,7 +2208,7 @@ case PUT: case PUTI:@+ if (yy!=0 || xx>=32) goto illegal_inst;
     else if (xx==rL) @<Set $L=z=\min(z,L)$@>@;
     else if (xx==rG) @<Get ready to update rG@>;
   }
-  globreg[xx]=z;@+zz=xx;@+break;
+  g[xx]=z;@+zz=xx;@+break;
 
 @ @<Set $L=z=\min(z,L)$@>=
 {
@@ -2220,7 +2220,7 @@ case PUT: case PUTI:@+ if (yy!=0 || xx>=32) goto illegal_inst;
 @ @<Get ready to update rG@>=
 {
   if (z.h!=0 || z.l>255 || z.l<L || z.l<32) goto illegal_inst;
-  for (j=z.l; j<G; j++) globreg[j]=zero_octa;
+  for (j=z.l; j<G; j++) g[j]=zero_octa;
   G=z.l;
 }
 
@@ -2247,12 +2247,12 @@ push:@+if (xx>=G) {
  }
  x.l=xx;@+lring[(O+xx)&lring_mask]=x; /* the ``hole'' records the amount pushed */
  sprintf(lhs,"l[%d]=%d, ",(O+xx)&lring_mask,xx);
- x=globreg[rJ]=incr(loc,4);
+ x=g[rJ]=incr(loc,4);
  L-=xx+1;@+ O+=xx+1;
- b=globreg[rO]=incr(globreg[rO],(xx+1)<<3);
-sync_L: a.l=globreg[rL].l=L;@+break;
+ b=g[rO]=incr(g[rO],(xx+1)<<3);
+sync_L: a.l=g[rL].l=L;@+break;
 case POP:@+if (xx!=0 && xx<=L) y=lring[(O+xx-1)&lring_mask];
- if (globreg[rS].l==globreg[rO].l) stack_load();
+ if (g[rS].l==g[rO].l) stack_load();
  k=lring[(O-1)&lring_mask].l&0xff;
  while ((tetra)(O-S)<=(tetra)k) stack_load();
  L=k+(xx<=L? xx: L+1);
@@ -2262,8 +2262,8 @@ case POP:@+if (xx!=0 && xx<=L) y=lring[(O+xx-1)&lring_mask];
    if (y.h) sprintf(lhs,"l[%d]=#%x%08x, ",(O-1)&lring_mask,y.h,y.l);
    else sprintf(lhs,"l[%d]=#%x, ",(O-1)&lring_mask,y.l);
  }@+else lhs[0]='\0';
- y=globreg[rJ];@+ z.l=yz<<2;@+ inst_ptr=oplus(y,z);
- O-=k+1;@+ b=globreg[rO]=incr(globreg[rO],-((k+1)<<3));
+ y=g[rJ];@+ z.l=yz<<2;@+ inst_ptr=oplus(y,z);
+ O-=k+1;@+ b=g[rO]=incr(g[rO],-((k+1)<<3));
  goto sync_L;
 
 @ To complete our simulation of \MMIX's register stack, we need
@@ -2273,9 +2273,9 @@ to implement \.{SAVE} and \.{UNSAVE}.
 case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
  lring[(O+L)&lring_mask].l=L, L++;
  if (((S-O-L)&lring_mask)==0) stack_store();
- O+=L;@+ globreg[rO]=incr(globreg[rO],L<<3);
- L=globreg[rL].l=0;
- while (globreg[rO].l!=globreg[rS].l) stack_store();
+ O+=L;@+ g[rO]=incr(g[rO],L<<3);
+ L=g[rL].l=0;
+ while (g[rO].l!=g[rS].l) stack_store();
  for (k=G;;) {
    @<Store |g[k]| in the register stack@>;
    if (k==255) k=rB;
@@ -2283,32 +2283,32 @@ case SAVE:@+if (xx<G || yy!=0 || zz!=0) goto illegal_inst;
    else if (k==rZ+1) break;
    else k++;
  }
- O=S, globreg[rO]=globreg[rS];
- x=incr(globreg[rO],-8);@+goto store_x;
+ O=S, g[rO]=g[rS];
+ x=incr(g[rO],-8);@+goto store_x;
 
 @ This part of the program naturally has a lot in common with the
 |stack_store| subroutine. (There's a little white lie in the
 section name; if |k|~is |rZ+1|, we store rG and~rA, not |g[k]|.)
 
 @<Store |g[k]| in the register stack...@>=
-ll=mem_find(globreg[rS]);
-if (k==rZ+1) x.h=G<<24, x.l=globreg[rA].l;
-else x=globreg[k];
+ll=mem_find(g[rS]);
+if (k==rZ+1) x.h=G<<24, x.l=g[rA].l;
+else x=g[k];
 ll->tet=x.h;@+test_store_bkpt(ll);
 (ll+1)->tet=x.l;@+test_store_bkpt(ll+1);
 if (stack_tracing) {
   tracing=true;
   if (cur_line) show_line();
   if (k>=32) printf("             M8[#%08x%08x]=g[%d]=#%08x%08x, rS+=8\n",
-            globreg[rS].h,globreg[rS].l,k,x.h,x.l);
+            g[rS].h,g[rS].l,k,x.h,x.l);
   else printf("             M8[#%08x%08x]=%s=#%08x%08x, rS+=8\n",
-            globreg[rS].h,globreg[rS].l,k==rZ+1? "(rG,rA)": special_name[k],x.h,x.l);
+            g[rS].h,g[rS].l,k==rZ+1? "(rG,rA)": special_name[k],x.h,x.l);
 }
-S++, globreg[rS]=incr(globreg[rS],8);
+S++, g[rS]=incr(g[rS],8);
 
 @ @<Cases for ind...@>=
 case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
- z.l&=-8;@+globreg[rS]=incr(z,8);
+ z.l&=-8;@+g[rS]=incr(z,8);
  for (k=rZ+1;;) {
    @<Load |g[k]| from the register stack@>;
    if (k==rP) k=rR;
@@ -2316,32 +2316,32 @@ case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
    else if (k==G) break;
    else k--;
  }
- S=globreg[rS].l>>3;
+ S=g[rS].l>>3;
  stack_load();
  k=lring[S&lring_mask].l&0xff;
  for (j=0;j<k;j++) stack_load();
- O=S;@+ globreg[rO]=globreg[rS];
+ O=S;@+ g[rO]=g[rS];
  L=k>G? G: k;
- globreg[rL].l=L;@+a=globreg[rL];
- globreg[rG].l=G;@+break;
+ g[rL].l=L;@+a=g[rL];
+ g[rG].l=G;@+break;
 
 @ @<Load |g[k]| from the register stack@>=
-globreg[rS]=incr(globreg[rS],-8);
-ll=mem_find(globreg[rS]);
+g[rS]=incr(g[rS],-8);
+ll=mem_find(g[rS]);
 test_load_bkpt(ll);@+test_load_bkpt(ll+1);
 if (k==rZ+1) {
-  x.l=G=globreg[rG].l=ll->tet>>24, a.l=globreg[rA].l=(ll+1)->tet&0x3ffff;
-  if (G<32) x.l=G=globreg[rG].l=32;
-}@+else globreg[k].h=ll->tet, globreg[k].l=(ll+1)->tet;
+  x.l=G=g[rG].l=ll->tet>>24, a.l=g[rA].l=(ll+1)->tet&0x3ffff;
+  if (G<32) x.l=G=g[rG].l=32;
+}@+else g[k].h=ll->tet, g[k].l=(ll+1)->tet;
 if (stack_tracing) {
   tracing=true;
   if (cur_line) show_line();
   if (k>=32) printf("             rS-=8, g[%d]=M8[#%08x%08x]=#%08x%08x\n",
-            k,globreg[rS].h,globreg[rS].l,ll->tet,(ll+1)->tet);
+            k,g[rS].h,g[rS].l,ll->tet,(ll+1)->tet);
   else if (k==rZ+1) printf("             (rG,rA)=M8[#%08x%08x]=#%08x%08x\n",
-            globreg[rS].h,globreg[rS].l,ll->tet,(ll+1)->tet);
+            g[rS].h,g[rS].l,ll->tet,(ll+1)->tet);
   else printf("             rS-=8, %s=M8[#%08x%08x]=#%08x%08x\n",
-            special_name[k],globreg[rS].h,globreg[rS].l,ll->tet,(ll+1)->tet);
+            special_name[k],g[rS].h,g[rS].l,ll->tet,(ll+1)->tet);
 }
 
 @ The cache maintenance instructions don't affect this simulation,
@@ -2384,32 +2384,32 @@ mentioned in the introduction.
 case TRIP: exc|=H_BIT;@+break;
 case TRAP:@+if (xx!=0 || yy>max_sys_call) goto privileged_inst;
  strcpy(rhs,trap_format[yy]);
- globreg[rWW]=inst_ptr;
- globreg[rXX].h=sign_bit, globreg[rXX].l=inst;
- globreg[rYY]=y, globreg[rZZ]=z;
+ g[rWW]=inst_ptr;
+ g[rXX].h=sign_bit, g[rXX].l=inst;
+ g[rYY]=y, g[rZZ]=z;
  z.h=0, z.l=zz;
  a=incr(b,8);
  @<Prepare memory arguments $|ma|={\rm M}[a]$ and $|mb|={\rm M}[b]$ if needed@>;
  switch (yy) {
-case Halt: @<Either halt or print warning@>;@+globreg[rBB]=globreg[255];@+break;
-case Fopen: globreg[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
-case Fclose: globreg[rBB]=mmix_fclose((unsigned char)zz);@+break;
-case Fread: globreg[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
-case Fgets: globreg[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
-case Fgetws: globreg[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
-case Fwrite: globreg[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
-case Fputs: globreg[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
-case Fputws: globreg[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
-case Fseek: globreg[rBB]=mmix_fseek((unsigned char)zz,b);@+break;
-case Ftell: globreg[rBB]=mmix_ftell((unsigned char)zz);@+break;
+case Halt: @<Either halt or print warning@>;@+g[rBB]=g[255];@+break;
+case Fopen: g[rBB]=mmix_fopen((unsigned char)zz,mb,ma);@+break;
+case Fclose: g[rBB]=mmix_fclose((unsigned char)zz);@+break;
+case Fread: g[rBB]=mmix_fread((unsigned char)zz,mb,ma);@+break;
+case Fgets: g[rBB]=mmix_fgets((unsigned char)zz,mb,ma);@+break;
+case Fgetws: g[rBB]=mmix_fgetws((unsigned char)zz,mb,ma);@+break;
+case Fwrite: g[rBB]=mmix_fwrite((unsigned char)zz,mb,ma);@+break;
+case Fputs: g[rBB]=mmix_fputs((unsigned char)zz,b);@+break;
+case Fputws: g[rBB]=mmix_fputws((unsigned char)zz,b);@+break;
+case Fseek: g[rBB]=mmix_fseek((unsigned char)zz,b);@+break;
+case Ftell: g[rBB]=mmix_ftell((unsigned char)zz);@+break;
 }
- x=globreg[255]=globreg[rBB];@+break;
+ x=g[255]=g[rBB];@+break;
 
 @ @<Either halt or print warning@>=
 if (!zz) halted=breakpoint=true;
 else if (zz==1) {
   if (loc.h || loc.l>=0x90) goto privileged_inst;
-  print_trip_warning(loc.l>>4,incr(globreg[rW],-4));
+  print_trip_warning(loc.l>>4,incr(g[rW],-4));
 }@+else goto privileged_inst;
 
 @ @<Glob...@>=
@@ -2583,12 +2583,12 @@ Underflow that is exact and not enabled is ignored. (This applies
 also to underflow that was triggered by |RESUME_SET|.)
 
 @<Check for trip interrupt@>=
-if ((exc&(U_BIT+X_BIT))==U_BIT && !(globreg[rA].l&U_BIT)) exc &=~U_BIT;
+if ((exc&(U_BIT+X_BIT))==U_BIT && !(g[rA].l&U_BIT)) exc &=~U_BIT;
 if (exc) {
   if (exc&tracing_exceptions) tracing=true;
-  j=exc&(globreg[rA].l|H_BIT); /* find all exceptions that have been enabled */
+  j=exc&(g[rA].l|H_BIT); /* find all exceptions that have been enabled */
   if (j) @<Initiate a trip interrupt@>;
-  globreg[rA].l |= exc>>8;
+  g[rA].l |= exc>>8;
 }
 
 @ @<Initiate a trip interrupt@>=
@@ -2596,22 +2596,22 @@ if (exc) {
   tripping=true;
   for (k=0; !(j&H_BIT); j<<=1, k++) ;
   exc&=~(H_BIT>>k); /* trips taken are not logged as events */
-  globreg[rW]=inst_ptr;
+  g[rW]=inst_ptr;
   inst_ptr.h=0, inst_ptr.l=k<<4;
-  globreg[rX].h=sign_bit, globreg[rX].l=inst;
-  if ((op&0xe0)==STB) globreg[rY]=w, globreg[rZ]=b;
-  else globreg[rY]=y, globreg[rZ]=z;
-  globreg[rB]=globreg[255];
-  globreg[255]=globreg[rJ];
-  if (op==TRIP) w=globreg[rW], x=globreg[rX], a=globreg[255];
+  g[rX].h=sign_bit, g[rX].l=inst;
+  if ((op&0xe0)==STB) g[rY]=w, g[rZ]=b;
+  else g[rY]=y, g[rZ]=z;
+  g[rB]=g[255];
+  g[255]=g[rJ];
+  if (op==TRIP) w=g[rW], x=g[rX], a=g[255];
 }
 
 @ We are finally ready for the last case.
 
 @<Cases for ind...@>=
 case RESUME:@+if (xx || yy || zz) goto illegal_inst;
-inst_ptr=z=globreg[rW];
-b=globreg[rX];
+inst_ptr=z=g[rW];
+b=g[rX];
 if (!(b.h&sign_bit)) @<Prepare to perform a ropcode@>;
 break;
 
@@ -2639,13 +2639,13 @@ If so, the ropcode will actually be obeyed on the next fetch phase.
 @ @<Install special operands when resuming an interrupted operation@>=
 if (rop==RESUME_SET) {
     op=ORI;
-    y=globreg[rZ];
+    y=g[rZ];
     z=zero_octa;
-    exc=globreg[rX].h&0xff00;
+    exc=g[rX].h&0xff00;
     f=X_is_dest_bit;
 }@+else { /* |RESUME_CONT| */
-  y=globreg[rY];
-  z=globreg[rZ];
+  y=g[rY];
+  z=g[rZ];
 }
 
 @ We don't want to count the \.{UNSAVE} that bootstraps the whole process.
@@ -2654,13 +2654,13 @@ if (rop==RESUME_SET) {
 if (sclock.l || sclock.h || !resuming) {
   sclock.h+=info[op].mems; /* clock goes up by $2^{32}$ for each $\mu$ */
   sclock=incr(sclock,info[op].oops); /* clock goes up by 1 for each $\upsilon$ */
-  if ((!(loc.h&sign_bit)||(globreg[rU].h&0x8000)) &&@|
-    ((op&(globreg[rU].h>>16))==(globreg[rU].h>>24))) {
-      globreg[rU].l++;
-      if (globreg[rU].l==0)@+{@+globreg[rU].h++;@+if ((globreg[rU].h&0x7fff)==0) globreg[rU].h-=0x8000;@+}
+  if ((!(loc.h&sign_bit)||(g[rU].h&0x8000)) &&@|
+    ((op&(g[rU].h>>16))==(g[rU].h>>24))) {
+      g[rU].l++;
+      if (g[rU].l==0)@+{@+g[rU].h++;@+if ((g[rU].h&0x7fff)==0) g[rU].h-=0x8000;@+}
   } /* usage counter counts matched instructions simulated */
-  if (globreg[rI].l<=info[op].oops && globreg[rI].l && globreg[rI].h==0) tracing=breakpoint=true;
-  globreg[rI]=incr(globreg[rI],-info[op].oops); /* interval $\upsilon$ timer counts down */
+  if (g[rI].l<=info[op].oops && g[rI].l && g[rI].h==0) tracing=breakpoint=true;
+  g[rI]=incr(g[rI],-info[op].oops); /* interval $\upsilon$ timer counts down */
 }
 
 @* Tracing. After an instruction has been executed, we often want
@@ -2715,7 +2715,7 @@ else {
   if (z.l==0 && (op==ADDUI||op==ORI)) p="%l = %y = %#x"; /* \.{LDA}, \.{SET} */
   else p=info[op].trace_format;
   for (;*p;p++) @<Interpret character |*p| in the trace format@>;
-  if (exc) printf(", rA=#%05x", globreg[rA].l);
+  if (exc) printf(", rA=#%05x", g[rA].l);
   if (tripping) tripping=false, printf(", -> #%02x", inst_ptr.l);
   printf("\n");
 }
@@ -2865,7 +2865,7 @@ void show_stats(verbose)
 {
   octa o;
   printf("  %d instruction%s, %d mem%s, %d oop%s; %d good guess%s, %d bad\n",
-  globreg[rU].l,globreg[rU].l==1? "": "s",@|
+  g[rU].l,g[rU].l==1? "": "s",@|
   sclock.h,sclock.h==1? "": "s",@|
   sclock.l,sclock.l==1? "": "s",@|
   good_guesses,good_guesses==1? "": "es",bad_guesses);
@@ -2913,7 +2913,7 @@ int main(argc,argv)
   }
  end_simulation:@+if (profiling) @<Print all the frequency counts@>;
   if (interacting || profiling || showing_stats) show_stats(true);
-  return globreg[255].l; /* provide rudimentary feedback for non-interactive runs */
+  return g[255].l; /* provide rudimentary feedback for non-interactive runs */
 }
 
 @ Here we process the command line options; when we finish, |*cur_arg|
@@ -3242,11 +3242,11 @@ if (*p=='"') {
 switch (cur_disp_mode) {
  case 'l': lring[cur_disp_addr.l&lring_mask]=val;@+break;
  case '$': k=cur_disp_addr.l&0xff;
-  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) globreg[k]=val;
+  if (k<L) lring[(O+k)&lring_mask]=val;@+else if (k>=G) g[k]=val;
   break;
  case 'g': k=cur_disp_addr.l&0xff;
   if (k<32) @<Set |g[k]=val| only if permissible@>;
-  globreg[k]=val;@+break;
+  g[k]=val;@+break;
  case 'M':@+if (!(cur_disp_addr.h&sign_bit)) {
     ll=mem_find(cur_disp_addr);
     ll->tet=val.h;@+ (ll+1)->tet=val.l;
@@ -3264,7 +3264,7 @@ if (k>=9 && k!=rI) {
     cur_round=(val.l>=0x10000? val.l>>16: ROUND_NEAR);
   }@+else if (k==rG) {
     if (val.h!=0 || val.l>255 || val.l<L || val.l<32) break;
-    for (j=val.l; j<G; j++) globreg[j]=zero_octa;
+    for (j=val.l; j<G; j++) g[j]=zero_octa;
     G=val.l;
   }@+else if (k==rL) {
     if (val.h==0 && val.l<L) L=val.l;
@@ -3278,11 +3278,11 @@ switch (cur_disp_mode) {
   printf("l[%d]=",k);@+ aux=lring[k];@+ break;
  case '$': k=cur_disp_addr.l&0xff;
   if (k<L) printf("$%d=l[%d]=",k,(O+k)&lring_mask), aux=lring[(O+k)&lring_mask];
-  else if (k>=G) printf("$%d=g[%d]=",k,k), aux=globreg[k];
+  else if (k>=G) printf("$%d=g[%d]=",k,k), aux=g[k];
   else printf("$%d=",k), aux=zero_octa;
   break;
  case 'g': k=cur_disp_addr.l&0xff;
-  printf("g[%d]=",k);@+ aux=globreg[k];@+ break;
+  printf("g[%d]=",k);@+ aux=g[k];@+ break;
  case 'M':@+if (cur_disp_addr.h&sign_bit) aux=zero_octa;
   else {
     ll=mem_find(cur_disp_addr);
@@ -3390,7 +3390,7 @@ if (ll->tet) inst_ptr=x;
 @^initialization of a user program@>
 resuming=true;
 rop=RESUME_AGAIN;
-globreg[rX].l=((tetra)UNSAVE<<24)+255;
+g[rX].l=((tetra)UNSAVE<<24)+255;
 if (dump_file) {
   x.l=1;
   dump(mem_root);
