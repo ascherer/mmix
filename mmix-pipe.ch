@@ -134,41 +134,49 @@ as in {\mc ANSI C}.
 
 @d issue_bit (1<<0)
 @z
+
 @x [8] l.187 Non-exported values.
 #define pipe_bit (1<<1)
 @y
 @d pipe_bit (1<<1)
 @z
+
 @x [8] l.189 Non-exported values.
 #define coroutine_bit (1<<2)
 @y
 @d coroutine_bit (1<<2)
 @z
+
 @x [8] l.191 Non-exported values.
 #define schedule_bit (1<<3)
 @y
 @d schedule_bit (1<<3)
 @z
+
 @x [8] l.193 Non-exported values.
 #define uninit_mem_bit (1<<4)
 @y
 @d uninit_mem_bit (1<<4)
 @z
+
 @x [8] l.195 Non-exported values.
 #define interactive_read_bit (1<<5)
 @y
 @d interactive_read_bit (1<<5)
 @z
+
 @x [8] l.197 Non-exported values.
 #define show_spec_bit (1<<6)
 @y
 @d show_spec_bit (1<<6)
 @z
+
 @x [8] l.199 Non-exported values.
 #define show_pred_bit (1<<7)
 @y
 @d show_pred_bit (1<<7)
 @z
+
 @x [8] l.201 Non-exported values.
 #define show_wholecache_bit (1<<8)
 @y
@@ -213,6 +221,7 @@ void MMIX_init()
 @y
 void MMIX_init(void)
 @z
+
 @x [10] l.222 Block-local variables.
   register int i,j;
 @y
@@ -260,6 +269,7 @@ typedef enum {@!false, @!true, @!wow}@+bool; /* slightly extended booleans */
 @ The |MMIX_silent()| routine is a noninteractive variant of |MMIX_run()|:
 It will return the value of register |g[255].l| when executing a
 \.{TRAP} \.{0,Halt,0} instruction.
+@:g}{\|g (global registers)@>
 
 @<External routines@>=
 int MMIX_silent(void)
@@ -675,6 +685,7 @@ cases also apply to the upper half of~rQ; the next eight apply to~rA.
 cases also apply to the upper half of~rQ; the next eight apply to~rA.
 |X_BIT| and beyond are defined in {\mc MMIX-ARITH}.
 @z
+
 @x [54] l.1183 Move common BIT values to MMIX-ARITH.
 @d X_BIT (1<<8) /* floating inexact */
 @d Z_BIT (1<<9) /* floating division by zero */
@@ -870,6 +881,13 @@ unsigned char flags[256]={@|@t\1\1@>
 static unsigned char flags[256]={@|@t\1\1@>
 @z
 
+@x [85] l.1801 Global and local registers.
+ case pop:@+if (g[rJ].up->known &&
+@y
+ case pop:@+if (g[rJ].up->known &&
+@:g}{\|g (global registers)@>
+@z
+
 @x [85] l.1804 Use 'fall through' comments in tangled C code.
       } /* otherwise fall through, will wait on |cool->go| */
  case go: case pushgo: case trap: case resume: case syncid:
@@ -884,6 +902,12 @@ rB is internally the same as g[0], because |rB=0|.
 rB is internally the same as g[0], because |rB=0|.
 @!@:g}{\|g (global registers)@>
 @!@:l}{\|l (ring of local registers)@>
+@z
+
+@x [86] l.1844 Global and local registers.
+Extern specnode *l; /* the ring of local registers */
+@y
+Extern specnode *l; /* the ring of local registers */
 @z
 
 @x [88] l.1857 Private variable.
@@ -920,6 +944,7 @@ a trivial program that computes the value of the standard library function
   g[j].addr.h=sign_bit, g[j].addr.l=j, g[j].known=true;
 @y
   g[j].addr=(octa){sign_bit, j}, g[j].known=true;
+@:g}{\|g (global registers)@>
 @z
 
 @x [89] l.1887 Compound literal.
@@ -934,6 +959,7 @@ g[rN].o=(octa){(VERSION<<24)+(SUBVERSION<<16)+(SUBSUBVERSION<<8),@|
   l[j].addr.h=sign_bit, l[j].addr.l=256+j, l[j].known=true;
 @y
   l[j].addr=(octa){sign_bit, 256+j}, l[j].known=true;
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [90] l.1895 C99 prototypes for C2x.
@@ -1010,10 +1036,24 @@ static unsigned int cool_hist,peek_hist; /* history bits for branch prediction *
 static octa new_O,new_S; /* values of rO, rS after |cool| */
 @z
 
+@x [100] l.1993 Global and local rergisters.
+if ((head->loc.h&sign_bit) && !(g[rU].o.h&0x8000)) cool->usage=false;
+@y
+if ((head->loc.h&sign_bit) && !(g[rU].o.h&0x8000)) cool->usage=false;
+@:g}{\|g (global registers)@>
+@z
+
 @x [101] l.2009 Improved typography.
 @<Special cases of instruction dispatch@>@;
 @y
 @/@t\4@>@<Special cases of instruction dispatch@>@;
+@z
+
+@x [102] l.2019 Global and local registers.
+if (!g[rL].up->known) goto stall;
+@y
+if (!g[rL].up->known) goto stall;
+@:g}{\|g (global registers)@>
 @z
 
 @x [103] l.2028 Sort name of section.
@@ -1021,11 +1061,13 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
 @y
   if (f&0x10) @<Set \9{c}|cool->b| from register X@>@;
 @z
+
 @x [103] l.2030 Sort name of section.
     @<Set |cool->b| and/or |cool->ra| from special register@>;
 @y
     @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>;
 @z
+
 @x [103] l.2032 Sort name of section.
   else if (f&0x2) @<Set |cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set |cool->z| as an immediate wyde@>;
@@ -1033,6 +1075,7 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
   else if (f&0x2) @<Set \9{c}|cool->z| from register Z@>@;
   else if ((op&0xf0)==0xe0) @<Set \9{c}|cool->z| as an immediate wyde@>;
 @z
+
 @x [103] l.2035 Sort name of section.
   else if (f&0x8) @<Set |cool->y| from register Y@>@;
 @y
@@ -1045,16 +1088,50 @@ static octa new_O,new_S; /* values of rO, rS after |cool| */
 @ @<Set \9{c}|cool->z| from register Z@>=
 @z
 
+@x [104] l.2040 Global and local registers.
+  if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
+  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
+@y
+  if (cool->zz>=cool_G) cool->z=specval(&g[cool->zz]);
+@:g}{\|g (global registers)@>
+  else if (cool->zz<cool_L) cool->z=specval(&l[(cool_O.l+cool->zz)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [105] l.2044 Sort name of section.
 @ @<Set |cool->y| from register Y@>=
 @y
 @ @<Set \9{c}|cool->y| from register Y@>=
 @z
 
+@x [105] l.2046 Global and loca lregisters.
+  if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
+  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
+@y
+  if (cool->yy>=cool_G) cool->y=specval(&g[cool->yy]);
+@:g}{\|g (global registers)@>
+  else if (cool->yy<cool_L) cool->y=specval(&l[(cool_O.l+cool->yy)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [106] l.2050 Sort name of section.
 @ @<Set |cool->b| from register X@>=
 @y
 @ @<Set \9{c}|cool->b| from register X@>=
+@z
+
+@x [106] l.2052 Global and local registers.
+  if (cool->xx>=cool_G) cool->b=specval(&g[cool->xx]);
+@y
+  if (cool->xx>=cool_G) cool->b=specval(&g[cool->xx]);
+@:g}{\|g (global registers)@>
+@z
+
+@x [106] l.2054 Global and local registers.
+    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
+@y
+    cool->b=specval(&l[(cool_O.l+cool->xx)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [107] l.2062 Private variable.
@@ -1069,10 +1146,31 @@ static unsigned char third_operand[256]={@|@t\1\1@>
 @<Set \9{c}|cool->b| and/or |cool->ra| from special register@>=
 @z
 
+@x [108] l.2102 Global and local registers.
+    cool->need_ra=true, cool->ra=specval(&g[rA]);
+@y
+    cool->need_ra=true, cool->ra=specval(&g[rA]);
+@:g}{\|g (global registers)@>
+@z
+
 @x [109] l.2107 Sort name of section.
 @ @<Set |cool->z| as an immediate wyde@>=
 @y
 @ @<Set \9{c}|cool->z| as an immediate wyde@>=
+@z
+
+@x [110] l.2123 Global and local registers.
+      cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
+@y
+      cool->ren_x=true,spec_install(&g[cool->xx],&cool->x);
+@:g}{\|g (global registers)@>
+@z
+
+@x [110] l.2126 Global and local registers.
+      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+@y
+      spec_install(&l[(cool_O.l+cool->xx)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [110] l.2129 Sort name of section.
@@ -1101,10 +1199,31 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @<Insert \9{a}an instruction to advance beta and L@>=
 @z
 
+@x [112] l.2147 Global and local registers.
+  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@y
+  spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
+@x [112] l.2151 Global and local registers.
+  spec_install(&g[rL],&cool->rl);
+@y
+  spec_install(&g[rL],&cool->rl);
+@:g}{\|g (global registers)@>
+@z
+
 @x [113] l.2162 Sort name of section.
 @<Insert an instruction to advance gamma@>=
 @y
 @<Insert \9{a}an instruction to advance gamma@>=
+@z
+
+@x [113] l.2167 Global and local registers.
+  cool->b=specval(&l[cool_S.l&lring_mask]);
+@y
+  cool->b=specval(&l[cool_S.l&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [114] l.2181 Sort name of section.
@@ -1113,10 +1232,34 @@ rename_regs-=(cool->ren_x?1:0)+(cool->ren_a?1:0);
 @<Insert \9{a}an instruction to decrease gamma@>=
 @z
 
+@x [114] l.2189 Global and local registers.
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@y
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
+@z
+
+@x [114] l.2192 Global and local rergisters.
+      spec_install(&g[rL],&cool->rl);
+@y
+      spec_install(&g[rL],&cool->rl);
+@:g}{\|g (global registers)@>
+@z
+
 @x [116] l.2222 Compound literal.
 mem.addr.h=mem.addr.l=-1;
 @y
 mem.addr=neg_one;
+@z
+
+@x [117] l.2231 Global and local registers.
+  spec_install(cool->xx>=cool_G? &g[cool->xx]:
+      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
+@y
+  spec_install(cool->xx>=cool_G? &g[cool->xx]:
+@:g}{\|g (global registers)@>
+      &l[(cool_O.l+cool->xx)&lring_mask],&cool->a);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [117] l.2234 Use 'fall through' comments in tangled C code.
@@ -1127,6 +1270,13 @@ case pst:
 case st:@+ if ((op&0xfe)==STCO) cool->b.o.l=cool->xx;
 @+@=/* fall through */@>@;
 case pst:
+@z
+
+@x [118] l.2252 Global and local registers.
+ cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
+@y
+ cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
+@:g}{\|g (global registers)@>
 @z
 
 @x [119] l.2271 Use 'fall through' comments in tangled C code.
@@ -1142,10 +1292,24 @@ case pushj: {@+register int x=cool->xx;
       @<Insert \9{a}an instruction to advance gamma@>@;
 @z
 
+@x [119] l.2276 Global and local registers.
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
+@y
+    cool->ren_x=true, spec_install(&l[(cool_O.l+x)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [119] l.2278 Compound literal.
   cool->x.known=true, cool->x.o.h=0, cool->x.o.l=x;
 @y
   cool->x.known=true, cool->x.o=(octa){0, x};
+@z
+
+@x [119] l.2279 Global and local registers.
+  cool->ren_a=true, spec_install(&g[rJ],&cool->a);
+@y
+  cool->ren_a=true, spec_install(&g[rJ],&cool->a);
+@:g}{\|g (global registers)@>
 @z
 
 @x [119] l.2286 Use 'fall through' comments in tangled C code.
@@ -1153,6 +1317,13 @@ case go: inst_ptr.p=&cool->go;@+break;
 @y
 @+@=/* else fall through */@>@;
 case go: inst_ptr.p=&cool->go;@+break;
+@z
+
+@x [120] l.2298 Global and local registers.
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@y
+      cool->y=specval(&l[(cool_O.l+cool->xx-1)&lring_mask]);
+@:l}{\|l (ring of local registers)@>
 @z
 
 @x [120] l.2300 Sort name of section.
@@ -1179,12 +1350,34 @@ case go: inst_ptr.p=&cool->go;@+break;
     if (x<(unsigned int)new_L)
 @z
 
+@x [120] l.2312 Global and local registers.
+    cool->set_l=true, spec_install(&g[rL],&cool->rl);
+@y
+    cool->set_l=true, spec_install(&g[rL],&cool->rl);
+@:g}{\|g (global registers)@>
+@z
+
+@x [121] l.2322 Global and local registers.
+case mulu: cool->ren_a=true, spec_install(&g[rH],&cool->a);@+break;
+@y
+case mulu: cool->ren_a=true, spec_install(&g[rH],&cool->a);@+break;
+@:g}{\|g (global registers)@>
+@z
+
+@x [122] l.2345 Global and local registers.
+   inst_ptr=specval(&g[rT]);
+@y
+   inst_ptr=specval(&g[rT]);
+@:g}{\|g (global registers)@>
+@z
+
 @x [125] l.2404 Improved formatting.
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @y
 @d awaken(c,t)  schedule(c,t,c->ctl->state)
 @s cacheblock int
 @z
+
 @x [125] l.2415 Block-local variables.
   switch(self->stage) {
 @y
@@ -1242,6 +1435,7 @@ it must never interfere with the |stage| numbers for special coroutines.
  @+@=/* fall through */@>@;
  case 1: @<Begin execution of an operation@>;
 @z
+
 @x [130] l.2473 Improved typography.
   @<Special cases for states in the first stage@>;
 @y
@@ -1288,6 +1482,7 @@ defined below. (The author doesn't feel guilty about making this restriction.)
 @y
 can be overridden by |MMIX_config|.
 @z
+
 @x [136] l.2582 Move 'pipe_limit' up.
 #define pipe_limit 90
 @y
@@ -1351,6 +1546,13 @@ case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 case cmpu:@+if (data->y.o.h<data->z.o.h) goto cmp_neg;
 @z
 
+@x [146] l.2744 Global and local registers.
+      new_Q=oandn(g[rQ].o,hot->x.o);
+@y
+      new_Q=oandn(g[rQ].o,hot->x.o);
+@:g}{\|g (global registers)@>
+@z
+
 @x [146] l.2746 Use new bit-fiddling function.
       hot->x.o.h |= new_Q.h, hot->x.o.l |= new_Q.l;
 @y
@@ -1365,11 +1567,19 @@ static octa new_Q; /* when rQ increases in any bit position, so should this */
 static bool stack_overflow; /* stack overflow not yet reported */
 @z
 
+@x [149] l.2815 Global and local registers.
+    if ((g[rK].o.h&P_BIT) && !(hot->interrupt&P_BIT)) {
+@y
+    if ((g[rK].o.h&P_BIT) && !(hot->interrupt&P_BIT)) {
+@:g}{\|g (global registers)@>
+@z
+
 @x [151] l.2886 Block-local variable.
   if (bp_table) {@+register int h;
 @y
   if (bp_table) {@+register int m;
 @z
+
 @x [151] l.2889 Block-local variable.
     h=bp_table[m];
     if (h&bp_npower) predicted^=0x10;
@@ -1886,11 +2096,13 @@ static cacheblock* alloc_slot(
   cache *c,
   octa alf) /* key that probably isn't in the cache */
 @z
+
 @x [205] l.3652 Block-local variables.
   register cacheblock *p,*q;
 @y
   @+@t}\6{@> @<Block-local var...@>@; @#
 @z
+
 @x [205] l.3669 Amend 'else' case.
   p->tag.h |= sign_bit;@+ return p;
 @y
@@ -2428,6 +2640,13 @@ case ld: case ldunc: case ldvts:
     @<Do load/store stage 1 with known physical address@>;
 @z
 
+@x [269] l.4852 Global and local registers.
+  else data->z.o=g[rC].o; /* use the continuation page for stack overflow */
+@y
+  else data->z.o=g[rC].o; /* use the continuation page for stack overflow */
+@:g}{\|g (global registers)@>
+@z
+
 @x [269] l.4855 Change from MMIX home.
 if (((data->z.o.l<<PROT_OFFSET)&j)!=j) {
 @y
@@ -2439,12 +2658,14 @@ if (((data->z.o.l<<PROT_OFFSET)&j)!=(tetra)j) {
 @y
 @ @<Do load/store stage 1 with known physical address@>=
 @z
+
 @x [271] l.4901 Change from MMIX home.
   case st: data->state=st_ready;@+pass_after(1);@+goto passit;
 @y
   @+@=/* fall through */@>@;
   case st: default: data->state=st_ready;@+pass_after(1);@+goto passit;
 @z
+
 @x [271] l.4906 Nicer page break.
   m=write_search(data,data->z.o);
 @y
@@ -2593,6 +2814,13 @@ case st_ready:@+ switch (data->i) {
   data->x.o = oxor(data->x.o, oand(mask, oxor(data->x.o, data->b.o)));
 @z
 
+@x [283] l.5158 Global and local registers.
+if (data->x.o.h==g[rP].o.h && data->x.o.l==g[rP].o.l) {
+@y
+if (data->x.o.h==g[rP].o.h && data->x.o.l==g[rP].o.l) {
+@:g}{\|g (global registers)@>
+@z
+
 @x [285] l.5204 Private variables.
 int fetch_lo, fetch_hi; /* the active region of that buffer */
 coroutine fetch_co;
@@ -2702,6 +2930,7 @@ static int bad_inst_mask[4]={0xfffffe,0xffff,0xffff00,0xfffff8};
 @<Prepare for exceptional trip handler@>=
 {@+register int m;
 @z
+
 @x [308] l.5516 Compound literal.
   data->go.o.h=0, data->go.o.l=m;
 @y
@@ -2722,6 +2951,20 @@ case 5:@+if (data!=old_hot) wait(1);
 case 5:@+if (data!=old_hot) wait(1);
 @z
 
+@x [310] l.5545 Global and local registers.
+    inst_ptr.o=g[rT].o, inst_ptr.p=NULL;
+@y
+    inst_ptr.o=g[rT].o, inst_ptr.p=NULL;
+@:g}{\|g (global registers)@>
+@z
+
+@x [312] l.5568 Global and local registers.
+  if (!g[rT].up->known || !g[rJ].up->known) goto stall;
+@y
+  if (!g[rT].up->known || !g[rJ].up->known) goto stall;
+@:g}{\|g (global registers)@>
+@z
+
 @x [312] l.5571 Add 'fall through' comment.
 case trip: if (!g[rJ].up->known) goto stall;
 @y
@@ -2735,6 +2978,13 @@ case trip: if (!g[rJ].up->known) goto stall;
 @<Check for \9{e}external interrupt@>=
 @z
 
+@x [314] l.5587 Global and local registers.
+g[rI].o=incr(g[rI].o,-1);
+@y
+g[rI].o=incr(g[rI].o,-1);
+@:g}{\|g (global registers)@>
+@z
+
 @x [315] l.5607 Private variables.
 bool trying_to_interrupt; /* encouraging interruptible operations to pause */
 bool nullifying; /* stopping dispatch to nullify a load/store command */
@@ -2743,16 +2993,45 @@ static bool trying_to_interrupt; /* encouraging interruptible operations to paus
 static bool nullifying; /* stopping dispatch to nullify a load/store command */
 @z
 
+@x [317] l.5641 Global and local registers.
+  if (!(hot->interrupt&H_BIT)) g[rK].o=zero_octa; /* trap */
+@y
+  if (!(hot->interrupt&H_BIT)) g[rK].o=zero_octa; /* trap */
+@:g}{\|g (global registers)@>
+@z
+
+@x [319] l.5664 Global and local registers.
+g[j?rB:rBB].o=g[255].o;
+@y
+g[j?rB:rBB].o=g[255].o;
+@:g}{\|g (global registers)@>
+@z
+
 @x [320] l.5682 Type.
 @d pack_bytes(a,b,c,d) ((((((unsigned)(a)<<8)+(b))<<8)+(c))<<8)+(d)
 @y
 @d pack_bytes(a,b,c,d) ((((((byte)(a)<<8)+(b))<<8)+(c))<<8)+(d)
 @z
 
-@x [320] l.5688 Compound literal.
-  g[rX].o.h=sign_bit, g[rX].o.l=j;
+@x [320] l.5687 Compound literal.
+  g[rW].o=incr(hot->loc,4);
 @y
-  g[rX].o=(octa){sign_bit,j};
+  g[rW].o=incr(hot->loc,4);
+@:g}{\|g (global registers)@>
+@z
+
+@x [321] l.5718 Global and local registers.
+if ((hot->interrupt&F_BIT) && hot->op==SWYM) g[rYY].o=hot->go.o;
+@y
+if ((hot->interrupt&F_BIT) && hot->op==SWYM) g[rYY].o=hot->go.o;
+@:g}{\|g (global registers)@>
+@z
+
+@x [322] l.5741 Global and local registers.
+  inst_ptr=specval(&g[cool->zz? rWW:rW]);
+@y
+  inst_ptr=specval(&g[cool->zz? rWW:rW]);
+@:g}{\|g (global registers)@>
 @z
 
 @x [323] l.5774 Block-local variable.
@@ -2777,11 +3056,25 @@ static bool nullifying; /* stopping dispatch to nullify a load/store command */
  case RESUME_AGAIN: resume_again: head->inst=cool->b.o.l;
 @z
 
+@x [323] l.5797 Global and local registers.
+    cool->y=specval(&g[rYY]), cool->z=specval(&g[rZZ]);
+@y
+    cool->y=specval(&g[rYY]), cool->z=specval(&g[rZZ]);
+@:g}{\|g (global registers)@>
+@z
+
 @x [323] l.5801 Add 'fall through' comment.
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
 @y
  @+@=/* else fall through */@>@;
  default: bad_resume: cool->interrupt |= B_BIT, cool->i=noop;
+@z
+
+@x [324] l.5809 Global und local registers.
+    cool->y=specval(&g[rY]);
+@y
+    cool->y=specval(&g[rY]);
+@:g}{\|g (global registers)@>
 @z
 
 @x [327] l.5859 Add 'fall through' comment.
@@ -2791,17 +3084,27 @@ case incgamma: case save: data->i=st; goto switch1;
 case incgamma: case save: data->i=st; goto switch1;
 @z
 
+@x [328] l.5874 Global and local registers.
+   data->z.o=g[data->zz].o;
+@y
+   data->z.o=g[data->zz].o;
+@:g}{\|g (global registers)@>
+@z
+
 @x [329] l.5888 Add 'fall through' comment.
   case rQ: new_Q.h |= data->z.o.h &~ g[rQ].o.h;@+
            new_Q.l |= data->z.o.l &~ g[rQ].o.l;
            data->z.o.l |= new_Q.l;@+
            data->z.o.h |= new_Q.h;@+break;
   case rL:@+ if (data->z.o.h!=0) data->z.o.h=0, data->z.o.l=g[rL].o.l;
+     else if (data->z.o.l>g[rL].o.l) data->z.o.l=g[rL].o.l;
 @y
   case rQ: new_Q = oor(new_Q,oandn(data->z.o,g[rQ].o));
            data->z.o = oor(data->z.o,new_Q);
   @+@=/* fall through */@>@;
   case rL:@+ if (data->z.o.h!=0) data->z.o=(octa){0,g[rL].o.l};
+     else if (data->z.o.l>g[rL].o.l) data->z.o.l=g[rL].o.l;
+@:g}{\|g (global registers)@>
 @z
 
 @x [331] l.5926 Add 'fall through' comment.
@@ -2809,6 +3112,20 @@ case pushgo: add_go: data->go.o=oplus(data->y.o,data->z.o);
 @y
 @+@=/* fall through */@>@;
 case pushgo: add_go: data->go.o=oplus(data->y.o,data->z.o);
+@z
+
+@x [333] l.5966 Global and local registers.
+cool->ren_x=true, spec_install(&g[cool->yy],&cool->x);
+@y
+cool->ren_x=true, spec_install(&g[cool->yy],&cool->x);
+@:g}{\|g (global registers)@>
+@z
+
+@x [334] l.5972 Global and local registers.
+cool->ren_x=true, spec_install(&g[rG],&cool->x);
+@y
+cool->ren_x=true, spec_install(&g[rG],&cool->x);
+@:g}{\|g (global registers)@>
 @z
 
 @x [334] l.5974 Issue #16.
@@ -2836,10 +3153,38 @@ new_O=new_S=shift_right(cool->z.o,3,true);
  case 2: case 3: @<Generate an instruction to save |g[yy]|@>;@+break;
 @z
 
+@x [338] l.6028 Global and local registers.
+cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@y
+cool->ren_x=true, spec_install(&l[(cool_O.l+cool_L)&lring_mask],&cool->x);
+@:l}{\|l (ring of local registers)@>
+@z
+
 @x [338] l.6029 Compound literal.
 cool->x.known=true, cool->x.o.h=0, cool->x.o.l=cool_L;
 @y
 cool->x.known=true, cool->x.o=(octa){0, cool_L};
+@z
+
+@x [338] l.6030 Global and local registers.
+cool->set_l=true, spec_install(&g[rL],&cool->rl);
+@y
+cool->set_l=true, spec_install(&g[rL],&cool->rl);
+@:g}{\|g (global registers)@>
+@z
+
+@x [339] l.6039 Global and local registers.
+else cool->b=specval(&g[cool->yy]);
+@y
+else cool->b=specval(&g[cool->yy]);
+@:g}{\|g (global registers)@>
+@z
+
+@x [340] l.6048 Global and local registers.
+  cool->ren_a=true, spec_install(&g[cool->xx],&cool->a);
+@y
+  cool->ren_a=true, spec_install(&g[cool->xx],&cool->a);
+@:g}{\|g (global registers)@>
 @z
 
 @x [342] l.6065 Compound literal.
@@ -2847,6 +3192,7 @@ cool->x.known=true, cool->x.o=(octa){0, cool_L};
     data->x.o.l=g[rA].o.l;
 @y
     data->x.o=(octa){g[rG].o.l<<24, g[rA].o.l};
+@:g}{\|g (global registers)@>
 @z
 
 @x [343] l.6087 Issue #16.
@@ -3047,6 +3393,13 @@ case 35:@+ if (self->lockloc) *(self->lockloc)=NULL,self->lockloc=NULL;
   data->y.o.l &= -(int)data->b.o.l;
 @z
 
+@x [372] l.6557 Global and local registers.
+if (cool->loc.l==g[rT].o.l && cool->loc.h==g[rT].o.h) {
+@y
+if (cool->loc.l==g[rT].o.l && cool->loc.h==g[rT].o.h) {
+@:g}{\|g (global registers)@>
+@z
+
 @x [372] l.6566 Change from MMIX home.
 case Fopen: g[rBB].o=mmix_fopen(zz,mb,ma);@+break;
 @y
@@ -3061,6 +3414,7 @@ case Fwrite: g[rBB].o=mmix_fwrite(zz,mb,ma);@+break;
 case Fputs: g[rBB].o=mmix_fputs(zz,g[rBB].o);@+break;
 case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o);@+break;
 @y
+@:g}{\|g (global registers)@>
 case Fread: g[rBB].o=mmix_fread(zz,mb,ma,mmputchars,stdin_chr);@+break;
 case Fgets: g[rBB].o=mmix_fgets(zz,mb,ma,mmputchars,stdin_chr);@+break;
 case Fgetws: g[rBB].o=mmix_fgetws(zz,mb,ma,mmputchars,stdin_chr);@+break;
@@ -3074,6 +3428,7 @@ case Fputws: g[rBB].o=mmix_fputws(zz,g[rBB].o,mmgetchars);@+break;
   trap_loc=incr(g[rWW].o,-4);
 @y
   octa trap_loc=incr(g[rWW].o,-4);
+@:g}{\|g (global registers)@>
 @z
 
 @x [374] l.6590 Private variable.
@@ -3182,6 +3537,7 @@ static void magic_write(
   arg_loc=g[rBB].o;
 @y
   octa arg_loc=g[rBB].o;
+@:g}{\|g (global registers)@>
 @z
 
 @x [381] l.6714 Factor out private stuff (mixins).
