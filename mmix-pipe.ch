@@ -904,12 +904,6 @@ rB is internally the same as g[0], because |rB=0|.
 @!@:l}{\|l (ring of local registers)@>
 @z
 
-@x [86] l.1844 Global and local registers.
-Extern specnode *l; /* the ring of local registers */
-@y
-Extern specnode *l; /* the ring of local registers */
-@z
-
 @x [88] l.1857 Private variable.
 int lring_mask; /* for calculations modulo |lring_size| */
 @y
