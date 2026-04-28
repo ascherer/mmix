@@ -19,7 +19,7 @@
 #include <stdlib.h> /* |@!calloc|, |@!free| */
 @#
 @h
-@<Preprocessor macros@>@;
+@<Preprocessor macros@>@#
 @<Type definitions@>@;
 @z
 

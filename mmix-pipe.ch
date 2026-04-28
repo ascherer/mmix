@@ -36,10 +36,12 @@ if we are very lucky.)
 #include <stdlib.h>
 #include <math.h>
 #include "abstime.h"
+@h@#
 @y
 #include "mmix-pipe.h" /* we use our own interface first;
   see |@(mmix-pipe.h@>| */
 #include "mmix-io.h" /* |@!mmix_fopen|, |@!mmix_fclose|, |@!print_octa|, etc. */
+@# @h @#
 @z
 
 @x [3] l.130 Improved module structure with interfaces.

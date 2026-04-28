@@ -753,6 +753,11 @@ if (new_link==DEFINED) {
 @y
 @z
 @x [136]
+@<Preprocessor macros@>@#
+@y
+@<Preprocessor macros@>@;
+@z
+@x [136]
 @#
 @y
 @+@t}\6\4\4{@>

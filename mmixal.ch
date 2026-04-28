@@ -1360,7 +1360,7 @@ if (val_stack[0].equiv.l || val_stack[0].equiv.h) {
 @<Preprocessor definitions@>@;
 @y
 @h
-@<Preprocessor macros@>@;
+@<Preprocessor macros@>@#
 @z
 
 @x [136] l.3173 C99 prototypes for C2x.
