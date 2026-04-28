@@ -26,7 +26,7 @@
 @#
 #include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa|, |@!incr| */
 #include "mmix-lop.h" /* loader opcodes from \MMIXAL\ */
-@#
+@# @h @#
 @z
 @x [1] l.24 C99 prototypes for C2x.
 @<Subroutines@>@;

@@ -1921,7 +1921,7 @@ void show_stats(
 @<Preprocessor macros@>@;
 @y
 @h
-@<Preprocessor macros@>@;
+@<Preprocessor macros@>@#
 @z
 @x [141] l.2891 C99 prototypes for C2x.
 @<Subroutines@>@;
