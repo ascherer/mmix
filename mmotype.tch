@@ -12,12 +12,6 @@
 \fi \fi
 @z
 
-@x [3]
-@ @<Initialize everything@>=
-@y
-@r @ @<Initialize everything@>=
-@z
-
 @x [5]
 @<Prototypes@>=
 @y
