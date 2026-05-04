@@ -1006,6 +1006,7 @@ acc=zero_octa;
 
 @x [102] l.2615 Sort name of section.
 @<Do the operation@>;
+bypass:@;
 @y
 @<Do the \9{o}operation@>;
 @z
@@ -1396,6 +1397,12 @@ int main(
     while(1) {
 @y
     while (true) {
+@z
+
+@x [136] l.3187
+      if (!*buf_ptr) break;
+@y
+bypass: @+ if (!*buf_ptr) break;
 @z
 
 @x [138] l.3218 Variadic macro for error reporting.
