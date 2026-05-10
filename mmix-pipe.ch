@@ -1270,6 +1270,7 @@ case pst:
 
 @x [118] l.2252 Global and local registers.
  cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
+@#
 @y
  cool->ren_x=true, spec_install(&g[cool->xx],&cool->x);@+break;
 @:g}{\|g (global registers)@>
