@@ -130,3 +130,10 @@ static char *trip_warning[]={ @+
 "floating point underflow", @|
 "floating point division by zero", @|
 @z
+
+@x [25]
+void print_octa(octa o) /* aka |@!print_hex| */
+@y
+void print_octa(octa o) /* aka |@!print_hex| */
+@-print_hex@>
+@z

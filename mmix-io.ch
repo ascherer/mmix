@@ -484,7 +484,7 @@ static char *trip_warning[]={
 @ Identical functions from {\mc MMIX-PIPE} and {\mc MMIX-SIM} are merged here.
 
 @<Subroutines@>=
-void print_octa(octa o)
+void print_octa(octa o) /* aka |@!print_hex| */
 {
   if (o.h) printf("%x%08x",o.h,o.l);
   else printf("%x",o.l);
