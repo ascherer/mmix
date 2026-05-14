@@ -1889,7 +1889,7 @@ void show_stats(
 @x [140] l.2868 Global and local registers.
   g[rU].l,g[rU].l==1? "": "s",@|
 @y
-  g[rU].l,g[rU].l==1? "": "s",@|
+  @|g[rU].l,g[rU].l==1? "": "s",@|
 @:g}{\|g (global registers)@>
 @z
 
