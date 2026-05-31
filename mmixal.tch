@@ -44,10 +44,10 @@ Binary operators come in two flavors, strong and weak. The strong ones
 @z
 
 @x [17]
-\bull \<label> \.{OCTA} \<expression list>
+\bull \<label> |OCTA| \<expression list>
 @y
 \ifx\undefined\eightpoint \else \vfill \fi
-\bull \<label> \.{OCTA} \<expression list>
+\bull \<label> |OCTA| \<expression list>
 @z
 
 @x [18]
@@ -487,9 +487,9 @@ the remainder in~|aux|.
 {"SETML", 0xe2, 0x22080},@|
 @z
 @x [63]
-{"SETL", 0xe3, 0x22080},@|
+{"SETL", SETL, 0x22080},@|
 @y
-{"SETL", 0xe3, 0x22080},
+{"SETL", SETL, 0x22080},
 @z
 @x [63]
 {"INCMH", 0xe5, 0x22080},
@@ -502,9 +502,9 @@ the remainder in~|aux|.
 {"INCL", 0xe7, 0x22080},
 @z
 @x [63]
-{"ORH", 0xe8, 0x22080},
+{"ORH", ORH, 0x22080},
 @y
-{"ORH", 0xe8, 0x22080},@|
+{"ORH", ORH, 0x22080},@|
 @z
 @x [63]
 {"ANDNL", 0xef, 0x22080},@|
