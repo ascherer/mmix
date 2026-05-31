@@ -7,6 +7,105 @@
 
 @z
 
+@x [13] l.348 Fix double index entries.
+\bull \.{SET} \.{\$X,\$Y} is equivalent to \.{OR} \.{\$X,\$Y,0}; it sets
+@y
+\bull |SET| \.{\$X,\$Y} is equivalent to \.{OR} \.{\$X,\$Y,0}; it sets
+@z
+
+@x [13] l.351 Fix double index entries.
+@.SET@>
+@y
+@z
+
+@x [16] l.476 Fix double index entries.
+\bull\<label> \.{IS} \<expression>
+@y
+\bull\<label> |IS| \<expression>
+@z
+
+@x [16] l.480 Fix double index entries.
+@.IS@>
+@y
+@z
+
+@x [16] l.482 Fix double index entries.
+\bull\<label> \.{LOC} \<expression>
+@y
+\bull\<label> |LOC| \<expression>
+@z
+
+@x [16] l.486 Fix double index entries.
+@.LOC@>
+@y
+@z
+
+@x [16] l.508 Fix double index entries.
+\bull \.{PREFIX} \<symbol>
+@y
+\bull |PREFIX| \<symbol>
+@z
+
+@x [16] l.511 Fix double index entries.
+@.PREFIX@>
+@y
+@z
+
+@x [17] l.516 Fix double index entries.
+\bull \<label> \.{BYTE} \<expression list>
+@y
+\bull \<label> |BYTE| \<expression list>
+@z
+
+@x [17] l.528 Fix double index entries.
+@.BYTE@>
+@y
+@z
+
+@x [17] l.530 Fix double index entries.
+\bull \<label> \.{WYDE} \<expression list>
+@y
+\bull \<label> |WYDE| \<expression list>
+@z
+
+@x [17] l.536 Fix double index entries.
+@.WYDE@>
+@y
+@z
+
+@x [17] l.538 Fix double index entries.
+\bull \<label> \.{TETRA} \<expression list>
+@y
+\bull \<label> |TETRA| \<expression list>
+@z
+
+@x [17] l.544 Fix double index entries.
+@.TETRA@>
+@y
+@z
+
+@x [17] l.546 Fix double index entries.
+\bull \<label> \.{OCTA} \<expression list>
+@y
+\bull \<label> |OCTA| \<expression list>
+@z
+
+@x [17] l.552 Fix double index entries.
+@.OCTA@>
+@y
+@z
+
+@x [18] l.558 Fix double index entries.
+\bull \<label> \.{GREG} \<expression>
+@y
+\bull \<label> |GREG| \<expression>
+@z
+
+@x [18] l.564 Fix double index entries.
+@.GREG@>
+@y
+@z
+
 @x [18] l.577 Fix code format.
 $$\.{AA LOC @@+8;BB LOC @@+8;CC LOC @@+8;DD LOC @@+8;EE LOC @@+8}$$
 @y
@@ -17,6 +116,39 @@ $$\.{AA LOC @@+8; BB LOC @@+8; CC LOC @@+8; DD LOC @@+8; EE LOC @@+8}$$
 instructions `\.{sp}~\.{GREG}~\.{0;fp}~\.{GREG}~\.0'; these instructions
 @y
 instructions `\.{sp}~\.{GREG}~\.{0;} \.{fp}~\.{GREG}~\.0'; these instructions
+@z
+
+@x [19] l.629 Fix double index entries.
+\bull \.{LOCAL} \<expression>
+@y
+\bull |LOCAL| \<expression>
+@z
+
+@x [19] l.635 Fix double index entries.
+@.LOCAL@>
+@y
+@z
+
+@x [20] l.646 Fix double index entries.
+\bull \.{BSPEC} \<expression>
+@y
+\bull |BSPEC| \<expression>
+@z
+
+@x [20] l.649 Fix double index entries.
+@.BSPEC@>
+@y
+@z
+
+@x [20] l.651 Fix double index entries.
+\bull \.{ESPEC}
+@y
+\bull |ESPEC|
+@z
+
+@x [20] l.654 Fix double index entries.
+@.ESPEC@>
+@y
 @z
 
 @x [22] l.710 Improved interface.
@@ -590,10 +722,18 @@ op_spec op_init_table[]={@|
 {"MXOR", 0xde, 0x240a2},@|
 @z
 
+@x [63] l.1884 Fix double index entry.
+{"SETH", 0xe0, 0x22080},
+@.SETH@>
+@y
+{"SETH", SETH, 0x22080},
+@z
+
 @x [63] l.1890 Format improvement.
 {"SETL", 0xe3, 0x22080},@/
+@.SETL@>
 @y
-{"SETL", 0xe3, 0x22080},@|
+{"SETL", SETL, 0x22080},@|
 @z
 
 @x [63] l.1898 Format improvement.
@@ -602,10 +742,18 @@ op_spec op_init_table[]={@|
 {"INCL", 0xe7, 0x22080},@|
 @z
 
+@x [63] l.1900 Fix double index entry.
+{"ORH", 0xe8, 0x22080},
+@.ORH@>
+@y
+{"ORH", ORH, 0x22080},
+@z
+
 @x [63] l.1906 Format improvement.
 {"ORL", 0xeb, 0x22080},@/
+@.ORL@>
 @y
-{"ORL", 0xeb, 0x22080},@|
+{"ORL", ORL, 0x22080},@|
 @z
 
 @x [63] l.1914 Format improvement.
@@ -632,34 +780,78 @@ op_spec op_init_table[]={@|
 {"TRIP", 0xff, 0x27554},@|
 @z
 
+@x [63] l.1941 Fix double index entry.
+@.SET@>
+@y
+@z
+
 @x [63] l.1942 Format improvement.
 {"LDA", 0x22, 0xa60a2},@/
 @y
 {"LDA", 0x22, 0xa60a2},@|
 @z
 
+@x [63] l.1945 Fix double index entries.
+@.IS@>
+@y
+@z
+
+@x [63] l.1947 Fix double index entries.
+@.LOC@>
+@y
+@z
+
 @x [63] l.1948 Format improvement.
 {"PREFIX", PREFIX, 0x141000},@/
+@.PREFIX@>
 @y
 {"PREFIX", PREFIX, 0x141000},@|
 @z
 
+@x [63] l.1951 Fix double index entries.
+@.BYTE@>
+@y
+@z
+
 @x [63] l.1952 Format improvement.
 {"WYDE", WYDE, 0x11f000},
+@.WYDE@>
 @y
 {"WYDE", WYDE, 0x11f000},@|
 @z
 
+@x [63] l.1955 Fix double index entries.
+@.TETRA@>
+@y
+@z
+
 @x [63] l.1956 Format improvement.
 {"OCTA", OCTA, 0x13f000},@/
+@.OCTA@>
 @y
 {"OCTA", OCTA, 0x13f000},@|
 @z
 
+@x [63] l.1959 Fix double index entries.
+@.BSPEC@>
+@y
+@z
+
 @x [63] l.1960 Format improvement.
 {"ESPEC", ESPEC, 0x141000},@/
+@.ESPEC@>
 @y
 {"ESPEC", ESPEC, 0x141000},@|
+@z
+
+@x [63] l.1963 Format improvement.
+@.GREG@>
+@y
+@z
+
+@x [63] l.1965 Fix double index entries.
+@.LOCAL@>
+@y
 @z
 
 @x [64] l.1974 Compound literal.
