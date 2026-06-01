@@ -50,4 +50,9 @@
 @$reg_val {MMIXAL}82 =1@>
 @$undefined {MMIXAL}82 =2@>
 
+@$SETH {MMIXAL}128 =\T{\^e0}@>
+@$SETL {MMIXAL}128 =\T{\^e3}@>
+@$ORH {MMIXAL}128 =\T{\^e8}@>
+@$ORL {MMIXAL}128 =\T{\^eb}@>
+
 @$k {MMIXAL}136 \&{register} \&{int}@>
