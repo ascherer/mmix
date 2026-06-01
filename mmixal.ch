@@ -205,11 +205,12 @@ typedef enum {@!false,@!true}@+@!bool;
 @y
 for the simulators.
 @s uint32_t int
+@s byte int
 @s tetra int
 @s octa int
 
 @c
-#include "mmix-arith.h" /* |@!tetra|, |@!octa| */
+#include "mmix-arith.h" /* |@!byte|, |@!tetra|, |@!octa| */
 @z
 
 @x [27] l.960 Variables from MMIX-ARITH. Reuse empty section.
@@ -271,13 +272,13 @@ void report_error(char*);
 void mmo_clear(void);
 void mmo_out(void);
 void mmo_tetra(tetra);
-void mmo_byte(unsigned char);
-void mmo_lop(char,unsigned char,unsigned char);
-void mmo_lopp(char,unsigned short);
+void mmo_byte(byte);
+void mmo_lop(byte,byte,byte);
+void mmo_lopp(byte,unsigned short);
 void mmo_loc(void);
 void mmo_sync(void);
 @#
-void assemble(char,tetra,unsigned char);
+void assemble(char,tetra,byte);
 @#
 trie_node* new_trie_node(void);
 trie_node *trie_search(trie_node*,Char*);
@@ -334,6 +335,16 @@ void update_listing_loc(
   listing_loc=(octa){cur_loc.h, (cur_loc.l&-4)|k};
 @z
 
+@x [43] l.1176 Use type 'byte' from MMIX-ARITH.
+unsigned char hold_buf[4]; /* assembled bytes */
+unsigned char held_bits; /* which bytes of |hold_buf| are active? */
+unsigned char listing_bits; /* which of them haven't been listed yet? */
+@y
+byte hold_buf[4]; /* assembled bytes */
+byte held_bits; /* which bytes of |hold_buf| are active? */
+byte listing_bits; /* which of them haven't been listed yet? */
+@z
+
 @x [44] l.1195 C99 prototypes for C2x.
 void listing_clear @,@,@[ARGS((void))@];@+@t}\6{@>
 void listing_clear()
@@ -382,8 +393,8 @@ void report_error(
 int err_count; /* this many errors were found */
 @y
 int err_count; /* this many errors were found */
-unsigned char lop_quote_command[4]={mm,lop_quote,0,1};
-unsigned char mmo_buf[4];
+byte lop_quote_command[4]={mm,lop_quote,0,1};
+byte mmo_buf[4];
 int mmo_ptr;
 @z
 
@@ -427,7 +438,7 @@ void mmo_byte(b)
   unsigned char b;
 @y
 void mmo_byte(
-  unsigned char b)
+  byte b)
 @z
 
 @x [48] l.1314 C99 prototypes for C2x.
@@ -436,8 +447,8 @@ void mmo_lop(x,y,z) /* output a loader operation */
   unsigned char y,z;
 @y
 void mmo_lop(
-  char x,
-  unsigned char y, unsigned char z) /* output a loader operation */
+  byte x,
+  byte y, byte z) /* output a loader operation */
 @z
 
 @x [48] l.1322 C99 prototypes for C2x.
@@ -446,7 +457,7 @@ void mmo_lopp(x,yz) /* output a loader operation with two-byte operand */
   unsigned short yz;
 @y
 void mmo_lopp(
-  char x,
+  byte x,
   unsigned short yz) /* output a loader operation with two-byte operand */
 @z
 @x [48] l.1326 Reuse mmo_lop function
@@ -487,7 +498,7 @@ void assemble(k,dat,x_bits)
 void assemble(
   char k,
   tetra dat,
-  unsigned char x_bits)
+  byte x_bits)
 @z
 
 @x [55] l.1457 C99 prototypes for C2x.
