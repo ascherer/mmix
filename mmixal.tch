@@ -153,10 +153,12 @@ the remainder in~|aux|.
 @z
 
 @x [45]
-@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
+@d err(m,...) {@+snprintf(err_buf,buf_size+60,
+   @[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @y
 @-__VA_OPT__@> @-__VA_ARGS__@> @-m@>
-@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
+@d err(m,...) {@+snprintf(err_buf,buf_size+60,
+   @[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @z
 
 @x [47]
