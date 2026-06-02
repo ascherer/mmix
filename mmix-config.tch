@@ -343,6 +343,28 @@ scheduler and schedulee.
 @$write_node {MMIX-PIPE}246 \&{struct}@>
 @z
 
+@x [38]
+#include <limits.h> /* |@!INT_MAX| */
+@#
+@h
+@#
+@y
+#include <limits.h> /* |@!INT_MAX| */
+@h
+@z
+
+@x [38]
+@<Subroutines@>@;
+@y
+@<Subroutines@>@; @+@t}\6\4\4{@>
+@z
+
+@x [38]
+  @<Allocate the caches@>;
+@y
+  @<Allocate the caches@>; @+
+@z
+
 @x [39]
 @(mmix-config.h@>=
 @y
@@ -350,7 +372,9 @@ scheduler and schedulee.
 @(mmix-config.h@>=
 @z
 @x [39]
+@#
 extern void MMIX_config(char *); /* public prototype */
+@#
 @y
 extern void MMIX_config(char *); /* public prototype */
 @% @$MMIX_config {MMIX-CONFIG}38 \&{void} (\,)@>
