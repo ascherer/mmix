@@ -486,7 +486,7 @@ void print_line(
 @x [45] l.1157 Avoid compiler warning.
   sprintf(buf,"%d:    ",k);
 @y
-  sprintf(buf,"%d:    ",k&65535); @+
+  snprintf(buf,11,"%d:    ",k&65535); @+
 @z
 
 @x [47] l.1176 C99 prototypes for C2x.
@@ -1260,11 +1260,23 @@ if (xx>=G) {
 { if (xx>=G) {
 @z
 
+@x [80] l.1843 Avoid string buffer overflow.
+  sprintf(lhs,"$%d=g[%d]",xx,xx);
+@y
+  snprintf(lhs,32,"$%d=g[%d]",xx,xx);
+@z
+
 @x [80] l.1844 Global and local registers.
   x_ptr=&g[xx];
 @y
   x_ptr=&g[xx];
 @:g}{\|g (global registers)@>
+@z
+
+@x [80] l.1847 Avoid string buffer overflow.
+  sprintf(lhs,"$%d=l[%d]",xx,(O+xx)&lring_mask);
+@y
+  snprintf(lhs,32,"$%d=l[%d]",xx,(O+xx)&lring_mask);
 @z
 
 @x [80] l.1848 Global and local registers.
@@ -1549,11 +1561,25 @@ case STO: case STOI: case STOU: case STOUI: case STUNC: case STUNCI:
 @:l}{\|l (ring of local registers)@>
 @z
 
+@x [101] l.2249 Avoid string buffer overflow.
+ sprintf(lhs,"l[%d]=%d, ",(O+xx)&lring_mask,xx);
+@y
+ snprintf(lhs,32,"l[%d]=%d, ",(O+xx)&lring_mask,xx);
+@z
+
 @x [101] l.2250 Global and local registers.
  x=g[rJ]=incr(loc,4);
 @y
  x=g[rJ]=incr(loc,4);
 @:g}{\|g (global registers)@>
+@z
+
+@x [101] l.2262 Avoid string buffer overflow.
+   if (y.h) sprintf(lhs,"l[%d]=#%x%08x, ",(O-1)&lring_mask,y.h,y.l);
+   else sprintf(lhs,"l[%d]=#%x, ",(O-1)&lring_mask,y.l);
+@y
+   if (y.h) snprintf(lhs,32,"l[%d]=#%x%08x, ",(O-1)&lring_mask,y.h,y.l);
+   else snprintf(lhs,32,"l[%d]=#%x, ",(O-1)&lring_mask,y.l);
 @z
 
 @x [102] l.2274 Global and local registers.

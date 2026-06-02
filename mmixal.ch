@@ -368,7 +368,8 @@ label |bypass| is only accessible in |main|.]
 @d dderr(m,p,q) {@+sprintf(err_buf,m,p,q);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @y
-@d err(m,...) {@+sprintf(err_buf,@[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
+@d err(m,...) {@+snprintf(err_buf,buf_size+60,
+   @[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
    report_error(err_buf);@+if (err_buf[0]!='*') goto bypass;@+}
 @z
 
@@ -376,7 +377,7 @@ label |bypass| is only accessible in |main|.]
 @d panic(m) {@+sprintf(err_buf,"!%s",m);@+report_error(err_buf);@+}
 @d dpanic(m,p) {@+err_buf[0]='!';@+sprintf(err_buf+1,m,p);@+
 @y
-@d panic(m,...) {@+sprintf(err_buf,
+@d panic(m,...) {@+snprintf(err_buf,buf_size+60,
    @["!"@&m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);
 @z
 
@@ -1232,6 +1233,13 @@ if (!isspace(*p) && *p && op_field[0]) derr("opcode syntax error at `%c'",*p);
 if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
 @z
 
+@x [1] l.1 Avoid 'Overfull \hbox' warning.
+pp=trie_search(op_root,op_field)->sym;
+if (!pp) {
+@y
+if (!(pp=trie_search(op_root,op_field)->sym)) {
+@z
+
 @x [104] l.2644 Variadic macro for error reporting.
   if (op_field[0]) derr("unknown operation code `%s'",op_field);
 @.unknown operation code@>
@@ -1612,6 +1620,14 @@ bypass: @+ if (!*buf_ptr) break;
 if (!src_file) dpanic("Can't open the source file %s",src_file_name);
 @y
 if (!src_file) panic("Can't open the source file %s",src_file_name);
+@z
+
+@x [138] l.3221 Avoid string buffer overflow.
+  j=strlen(src_file_name);
+@y
+  j=strlen(src_file_name);
+  if (FILENAME_MAX<j)
+     panic("Can't handle file names longer than %d",FILENAME_MAX);
 @z
 
 @x [138] l.3227 Variadic macro for error reporting.

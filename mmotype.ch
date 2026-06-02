@@ -256,6 +256,26 @@ void print_stab()
 void print_stab(void)
 @z
 
+@x [28] l.425 Avoid string buffer overflow.
+  if (j==15) sprintf(equiv_buf,"$%03d",read_byte());
+@y
+  if (j==15) snprintf(equiv_buf,20,"$%03d",read_byte());
+@z
+
+@x [28] l.428 Avoid string buffer overflow.
+    for (;j>0;j--) sprintf(equiv_buf+strlen(equiv_buf),"%02x",read_byte());
+@y
+    for (;j>0;j--) snprintf(equiv_buf+strlen(equiv_buf),
+      20-strlen(equiv_buf),"%02x",read_byte());
+@z
+
+@x [28] l.433 Avoid string buffer overflow.
+    for (;j>8;j--) sprintf(equiv_buf+strlen(equiv_buf),"%02x",read_byte());
+@y
+    for (;j>8;j--) snprintf(equiv_buf+strlen(equiv_buf),
+      20-strlen(equiv_buf),"%02x",read_byte());
+@z
+
 @x [30] l.457 Change from MMIX home.
 else if (count!=stab_start+yz+1)
   fprintf(stderr,"YZ field at lop_end should have been %d!\n",count-yz-1);
