@@ -7,7 +7,7 @@
 
 @z
 
-@x [1] l.14
+@x [1] l.14 Format types.
 @s tetra int
 @y
 @s byte int

@@ -3210,7 +3210,7 @@ case wdif: data->x.o=(octa){wyde_diff(data->y.o.h,data->z.o.h),
                             wyde_diff(data->y.o.l,data->z.o.l)};@+ break;
 @z
 
-@x [344] l.6113
+@x [344] l.6113 Clang warning about missing line break.
              data->x.o.l=data->y.o.l-data->z.o.l;@+ break;
 @y
              data->x.o.l=data->y.o.l-data->z.o.l;
