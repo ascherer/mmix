@@ -344,19 +344,20 @@ scheduler and schedulee.
 @z
 
 @x [38]
-#include <limits.h> /* |@!INT_MAX| */
-@#
-@h
+#include "mmix-pipe.h" /* |@!internal_opcode| and much more */
 @#
 @y
-#include <limits.h> /* |@!INT_MAX| */
-@h
+#include "mmix-pipe.h" /* |@!internal_opcode| and much more */
 @z
 
 @x [38]
-@<Subroutines@>@;
+#include <limits.h> /* |@!INT_MAX| */
+@#
+@h
+@#
 @y
-@<Subroutines@>@; @+@t}\6\4\4{@>
+#include <limits.h> /* |@!INT_MAX| */
+@h
 @z
 
 @x [38]
