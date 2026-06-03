@@ -352,7 +352,7 @@ void listing_clear()
 void listing_clear(void)
 @z
 
-@x [45] l.1217
+@x [45] l.1217 Label 'bypass' is local to 'main'.
 also on the optional listing file.
 @y
 also on the optional listing file.
@@ -1208,7 +1208,7 @@ acc=zero_octa;
   err("*label field of `%s' instruction is ignored",op_field);
 @z
 
-@x [102] l.2615 Sort name of section.
+@x [102] l.2615 Sort name of section. Label 'bypass' is local to 'main'.
 @<Do the operation@>;
 bypass:@;
 @y
@@ -1610,7 +1610,7 @@ int main(
     while (true) {
 @z
 
-@x [136] l.3187
+@x [136] l.3187 Label 'bypass' is local to 'main'.
       if (!*buf_ptr) break;
 @y
 bypass: @+ if (!*buf_ptr) break;
