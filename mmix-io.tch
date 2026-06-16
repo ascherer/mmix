@@ -110,25 +110,9 @@ octa mmix_fputws(
 @z
 
 @x [24]
-static char *trip_warning[]={
 "TRIP",
-"integer divide check",
-"integer overflow",
-"float-to-fix overflow",
-"invalid floating point operation",
-"floating point overflow",
-"floating point underflow",
-"floating point division by zero",
 @y
-static char *trip_warning[]={ @+
 "TRIP", @|
-"integer divide check", @|
-"integer overflow", @|
-"float-to-fix overflow", @|
-"invalid floating point operation", @|
-"floating point overflow", @|
-"floating point underflow", @|
-"floating point division by zero", @|
 @z
 
 @x [25]
