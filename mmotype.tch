@@ -10,6 +10,8 @@
 \ifpdf \ifx\undefined\eightpoint \input pdfwebtocfront \else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 \fi \fi
+
+\pageno=505
 @z
 
 @x [5]
