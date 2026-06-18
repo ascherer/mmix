@@ -20,8 +20,6 @@
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 \fi
 \startpdf % expand PDF outlines
-\def\contentspagenumber{0}
-\pageno=1
 @z
 
 @x [4]
