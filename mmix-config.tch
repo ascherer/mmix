@@ -11,6 +11,9 @@
 \else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
 \fi \else \let\ninepoint=\relax \fi
+
+\def\contentspagenumber{114}
+\pageno=115
 @z
 
 @x [1]

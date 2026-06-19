@@ -39,6 +39,4 @@
   \fi}
 
 \readsections
-
-@* Index.
 @z
