@@ -22,6 +22,9 @@
   %\def\_{\kern.04em\vbox{\hrule width.3em height .6pt}\kern.08em}%
   #1\/\kern.05em}} % boldface type for reserved words
 \pageno=519 % dummy page number
+\def\pagelabels{/PageLabels << /Nums [ 0 << /S/D/St \the\pageno >> ] >>}
+\ifpdflua\pdfcatalog{\pagelabels}
+\else\special{pdf: docview << \pagelabels >>}\fi}
 \preinx % pre-index text on full pagewidth
 \line{\smash{\titlefont MASTER INDEX}\quad\hrulefill}\bigskip
 \noindent
