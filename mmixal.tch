@@ -11,10 +11,9 @@
 
 \ifpdf \ifx\undefined\eightpoint \input pdfwebtocfront \else
 {\eightpoint \let\ninett=\eighttt \editorsnote \vskip7mm}
-\fi \fi
-
 \def\contentspagenumber{418}
 \pageno=419
+\fi \fi
 @z
 
 @x [3]
