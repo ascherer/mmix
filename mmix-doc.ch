@@ -5,3 +5,11 @@
   \ifpdf \ifpdflua \makebookmarks \fi\fi}
 \input pdfwebtocfront
 @z
+
+@x [10] l.563
+\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
+@.NAND@>
+@y
+\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
+@.NXOR@>
+@z

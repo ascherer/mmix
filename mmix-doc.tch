@@ -42,14 +42,6 @@
 \bull\<NAND \$X,\$Y,\0 `bitwise not-and'.\>
 @z
 
-@x [10]
-\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
-@.NAND@>
-@y
-\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
-@.NXOR@>
-@z
-
 @x [13]
      \<SETML \$X,YZ `set to medium low wyde';
 @y
