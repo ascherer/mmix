@@ -76,11 +76,11 @@
 @x [21]
 When an octabyte represents a floating point number
 @y
-\ifx\undefined\eightpoint\else\vbox to5cm{}\fi
+\ifx\undefined\eightpoint\else\vbox to5.02cm{}\fi
 When an octabyte represents a floating point number
 @z
 
-@x [21]
+@x [22]
 \bull\<FMUL \$X,\$Y,\$Z `floating multiply'.\>
 @y
 \ifx\undefined\eightpoint\else\vbox to1.1cm{}\fi
@@ -121,7 +121,7 @@ When an octabyte represents a floating point number
 @x [29]
 These conventions for parameter passing are admittedly a bit confusing in the
 @y
-\ifx\undefined\eightpoint\else\vbox to3cm{}\fi
+\ifx\undefined\eightpoint\else\vbox to3.2cm{}\fi
 These conventions for parameter passing are admittedly a bit confusing in the
 @z
 
