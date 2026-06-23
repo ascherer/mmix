@@ -28,11 +28,39 @@
 @r @ A programmer's introduction to \MMIX\ appears in ``Volume~1, Fascicle~1,''
 @z
 
+@x [9]
+\bull\<SUB \$X,\$Y,\0 `subtract'.\>
+@y
+\ifx\undefined\eightpoint\else\vbox to10cm{}\fi
+\bull\<SUB \$X,\$Y,\0 `subtract'.\>
+@z
+
+@x [10]
+\bull\<NAND \$X,\$Y,\0 `bitwise not-and'.\>
+@y
+\ifx\undefined\eightpoint\else\vbox to2.6cm{}\fi
+\bull\<NAND \$X,\$Y,\0 `bitwise not-and'.\>
+@z
+
+@x [10]
+\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
+@.NAND@>
+@y
+\bull\<NXOR \$X,\$Y,\0 `bitwise not-exclusive-or'.\>
+@.NXOR@>
+@z
+
 @x [13]
      \<SETML \$X,YZ `set to medium low wyde';
 @y
      \ifx\relax\eightpoint \else \hskip1cm\break \fi
      \<SETML \$X,YZ `set to medium low wyde';
+@z
+
+@x [16]
+@ \MMIX\ knows several ways to shift a register left or right
+@y
+@r @ \MMIX\ knows several ways to shift a register left or right
 @z
 
 @x [16]
@@ -46,6 +74,40 @@
 @y
 @z
 
+@x [20]
+\bull\<DIV \$X,\$Y,\0 `divide'.\>
+@y
+\ifx\undefined\eightpoint\else\vbox to12.8cm{}\fi
+\bull\<DIV \$X,\$Y,\0 `divide'.\>
+@z
+
+@x [21]
+When an octabyte represents a floating point number
+@y
+\ifx\undefined\eightpoint\else\vbox to5cm{}\fi
+When an octabyte represents a floating point number
+@z
+
+@x [21]
+\bull\<FMUL \$X,\$Y,\$Z `floating multiply'.\>
+@y
+\ifx\undefined\eightpoint\else\vbox to1.1cm{}\fi
+\bull\<FMUL \$X,\$Y,\$Z `floating multiply'.\>
+@z
+
+@x [26]
+@ The IEEE standard also defines 32-bit floating point quantities, which
+@y
+@r @ The IEEE standard also defines 32-bit floating point quantities, which
+@z
+
+@x [28]
+@ Since the variants of \.{FIX} and \.{FLOT} involve only one input operand (\$Z
+@y
+\ifx\undefined\eightpoint\else\vbox to9cm{}\fi
+@ Since the variants of \.{FIX} and \.{FLOT} involve only one input operand (\$Z
+@z
+
 @x [29]
 @* Subroutine linkage.
 @y
@@ -53,10 +115,29 @@
 @-G@> @-L@>
 @z
 @x [29]
-These conventions for parameter passing are admittedly a bit confusing in the
+\bull\<PUSHJ \$X,@@+4*YZ[-262144] `push registers and jump'.
+@y
+\ifx\undefined\eightpoint\else\vbox to7cm{}\fi
+\bull\<PUSHJ \$X,@@+4*YZ[-262144] `push registers and jump'.
+@z
+@x [29]
+\bull\<POP X,YZ `pop registers and return from subroutine'.\>
 @y
 \ifx\relax\eightpoint \else \vfill\eject\null\vskip-\baselineskip \fi
+\bull\<POP X,YZ `pop registers and return from subroutine'.\>
+@z
+@x [29]
 These conventions for parameter passing are admittedly a bit confusing in the
+@y
+\ifx\undefined\eightpoint\else\vbox to3cm{}\fi
+These conventions for parameter passing are admittedly a bit confusing in the
+@z
+
+@x [30]
+\bull\<SYNCD X,\$Y,\0 `synchronize data'.\>
+@y
+\ifx\undefined\eightpoint\else\vbox to5.5cm{}\fi
+\bull\<SYNCD X,\$Y,\0 `synchronize data'.\>
 @z
 
 @x [31]
@@ -69,6 +150,13 @@ parallel with ordinary computation.
 
 @y
 parallel with ordinary computation.
+@z
+
+@x [37]
+@ A \.{TRAP} instruction interrupts the computation essentially
+@y
+\ifx\undefined\eightpoint\else\vbox to6cm{}\fi
+@ A \.{TRAP} instruction interrupts the computation essentially
 @z
 
 @x [37]
