@@ -27,6 +27,18 @@
 \def\pagelabels{/PageLabels << /Nums [ 0 << /S/D/St \the\pageno >> ] >>}
 \pdfcatalog{\pagelabels}
 
+% flip page headers; code from twimac.tex
+\newif\iftitle \titletrue
+\def\lheader{\vbox to10pt{}\iftitle\global\titlefalse
+  \else\nineit\rhead\fi\hfil\eightrm\folio}
+\def\rheader{\vbox to10pt{}\eightrm\folio\hfil\nineit\rhead\/}
+\def\normaloutput#1{\setbox2=\vbox{
+      \vbox to 3pc{
+        \hbox to 30.7pc{\ifodd\pageno\lheader\else\rheader\fi}\vfill}
+    \nointerlineskip#1}%
+  \shipout\box2
+  \global\advance\pageno 1 }
+
 \preinx % pre-index text on full pagewidth
 \line{\smash{\titlefont MASTER INDEX}\quad\hrulefill}\bigskip
 \noindent
