@@ -2,24 +2,29 @@
 
 \titletrue
 
-\line{\smash{\titlefont TABLE OF CONTENTS}\quad\hrulefill}\bigskip
-
-\vskip2cm
-
-\def\entry#1{\hbox to.8\hsize{#1}}
+\def\entry#1{\centerline{\hbox to.8\hsize{#1}}}
 
 \setbox42=\hbox{MMIX-CONFIG}
 \def\chap#1{\hbox to\wd42{#1\hss}}
 
 \def\dotfill{\cleaders\hbox{$\mkern7mu . \mkern7mu$}\hfill}
 
-\centerline{\entry{{\bf\phantom{00}1}\dotfill\chap{MMIX-DOC}}} \bigskip\bigskip
-\centerline{\entry{{\bf\phantom{0}65}\dotfill\chap{MMIX-ARITH}}} \medskip
-\centerline{\entry{{\bf115}\dotfill\chap{MMIX-CONFIG}}} \medskip
-\centerline{\entry{{\bf141}\dotfill\chap{MMIX-IO}}} \medskip
-\centerline{\entry{{\bf151}\dotfill\chap{MMIX-PIPE}}} \bigskip\bigskip
-\centerline{\entry{{\bf331}\dotfill\chap{MMIX-SIM}}} \medskip
-\centerline{\entry{{\bf419}\dotfill\chap{MMIXAL}}} \medskip
-\centerline{\entry{{\bf491}\dotfill\chap{MMMIX}}} \medskip
-\centerline{\entry{{\bf505}\dotfill\chap{MMOTYPE}}} \bigskip\bigskip
-\centerline{\entry{{\bf519}\dotfill\chap{\mc MASTER INDEX}}}
+\line{\smash{\titlefont TABLE OF CONTENTS}\quad\hrulefill}\bigskip\bigskip
+
+\entry{\hfill\chap{\sc INTRODUCTION}} \smallskip
+\entry{{\bf\phantom{00}1}\dotfill\chap{MMIX-DOC}} \bigskip
+
+\entry{\hfill\sc LIBRARY \chap{\sc MODULES}} \smallskip
+\entry{{\bf\phantom{0}65}\dotfill\chap{MMIX-ARITH}} \medskip
+\entry{{\bf115}\dotfill\chap{MMIX-CONFIG}} \medskip
+\entry{{\bf141}\dotfill\chap{MMIX-IO}} \medskip
+\entry{{\bf151}\dotfill\chap{MMIX-PIPE}} \bigskip
+
+\entry{\hfill\sc EXECUTABLE \chap{\sc PROGRAMS}} \smallskip
+\entry{{\bf331}\dotfill\chap{MMIX-SIM (\sc aka MMIX)}} \medskip
+\entry{{\bf419}\dotfill\chap{MMIXAL}} \medskip
+\entry{{\bf491}\dotfill\chap{MMMIX}} \medskip
+\entry{{\bf505}\dotfill\chap{MMOTYPE}} \bigskip
+
+\entry{\hfill\sc TABLE OF \chap{\sc REFERENCES}} \smallskip
+\entry{{\bf519}\dotfill\chap{\mc MASTER INDEX}}
