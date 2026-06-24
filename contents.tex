@@ -1,0 +1,20 @@
+\input cttwinxmac
+
+% adjust PDF page dimensions
+\pdfpagewidth=\pagewd \advance\pdfpagewidth by 1in
+\pdfpageheight=\pageht \advance\pdfpageheight by 1.5in
+\pdfhorigin=0.5in \pdfvorigin=0.5in
+
+% set PDF page label
+\pageno=0 % dummy page number
+\def\pagelabels{/PageLabels << /Nums [ 0 << /P(Contents) >> ] >>}
+\pdfcatalog{\pagelabels}
+
+% purge \folio
+\let\leftheadline=\relax
+\let\rightheadline=\relax
+
+% the actual Table of Contents material is in twinx-contents.tex, which
+% should be renamed to twinx-startup.tex when formatting the TOC.
+
+\bye
