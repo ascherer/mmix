@@ -890,6 +890,29 @@ static void bignum_dec(
   tetra r) /* the radix */
 @z
 
+@x [62] l.1162 Boolean variable.
+  register int x,borrow;
+@y
+  register int x;
+  bool borrow;
+@z
+@x [62] l.1165 Boolean variable.
+  for (p=&f->dat[g->b],q=&g->dat[g->b],borrow=0;q>=qq;p--,q--) {
+    x=*p - *q - borrow;
+    if (x>=0) borrow=0, *p=x;
+    else borrow=1, *p=x+r;
+@y
+  for (p=&f->dat[g->b],q=&g->dat[g->b],borrow=false;q>=qq;p--,q--) {
+    x=*p - *q - borrow;
+    if (x>=0) borrow=false, *p=x;
+    else borrow=true, *p=x+r;
+@z
+@x [62] l.1171 Boolean variable.
+    if (*p) borrow=0, *p=*p-1;
+@y
+    if (*p) borrow=false, *p=*p-1;
+@z
+
 @x [63] l.1198 Issue #16.
 ff.dat[k-1]=shift_right(f,magic_offset+28-e-28*k,1).l&0xfffffff;
 gg.dat[k-1]=shift_right(g,magic_offset+28-e-28*k,1).l&0xfffffff;
