@@ -489,6 +489,18 @@ void mmo_sync(void)
   register int j; register Char *p;
 @z
 
+@x [50] l.1373 Boolean variable.
+    filename_passed[cur_file]=1;
+@y
+    filename_passed[cur_file]=true;
+@z
+
+@x [51] l.1391 Boolean variable.
+char filename_passed[256]; /* has a filename been recorded in the output? */
+@y
+bool filename_passed[256]; /* has a filename been recorded in the output? */
+@z
+
 @x [52] l.1399 C99 prototypes for C2x.
 void assemble @,@,@[ARGS((char,tetra,unsigned char))@];@+@t}\6{@>
 void assemble(k,dat,x_bits)
@@ -1233,7 +1245,7 @@ if (!isspace(*p) && *p && op_field[0]) derr("opcode syntax error at `%c'",*p);
 if (!isspace(*p) && *p && op_field[0]) err("opcode syntax error at `%c'",*p);
 @z
 
-@x [1] l.1 Avoid 'Overfull \hbox' warning.
+@x [104] l.2642 Avoid 'Overfull \hbox' warning.
 pp=trie_search(op_root,op_field)->sym;
 if (!pp) {
 @y
