@@ -279,10 +279,12 @@ octa mmix_fgets(
   char @[@] (*stdin_chr)(void) @,)
 @z
 
-@x [14] l.180 RAII.
+@x [14] l.180 RAII. Use 'bool' for Boolean variable.
   octa o;
+  int eof=0;
 @y
   octa o=zero_octa;
+  bool eof=false;
 @z
 
 @x [14] l.186 RAII.
@@ -315,10 +317,12 @@ octa mmix_fgetws(
   char @[@] (*stdin_chr)(void) @,)
 @z
 
-@x [16] l.235 RAII.
+@x [16] l.235 RAII. Use 'bool' for Boolean variable.
   octa o;
+  int eof=0;
 @y
   octa o=zero_octa;
+  bool eof=false;
 @z
 
 @x [16] l.242 RAII.
