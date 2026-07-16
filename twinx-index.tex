@@ -24,8 +24,7 @@
 
 % shift PDF page labels
 \pageno=519 % dummy page number
-\def\pagelabels{/PageLabels << /Nums [ 0 << /S/D/St \the\pageno >> ] >>}
-\pdfcatalog{\pagelabels}
+\pdfcatalog{/PageLabels << /Nums [ 0 << /S/D/St \the\pageno >> ] >>}
 
 % flip page headers; code from twimac.tex
 \newif\iftitle \titletrue
