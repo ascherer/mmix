@@ -1048,17 +1048,19 @@ while (1) {
 while (true) {
 @z
 
-@x [86] l.2354 Fix bracketing for section 94.
+@x [86] l.2353 Fix bracketing for section 94.
+scan_open:@+if (isletter(*p)) @<Scan a symbol@>@;
 else if (isdigit(*p)) {
   if (*(p+1)=='F') @<Scan a forward local@>@;
   else if (*(p+1)=='B') @<Scan a backward local@>@;
   else @<Scan a decimal constant@>;
 }@+else@+ switch(*p++) {
 @y
+scan_open:@+if (isletter(*p)) @<Scan a symbol@>@; /* |symbol_found| */
 else if (isdigit(*p)) @+ switch(*(p+1)) {
- case 'F': @<Scan a forward local@>@;
- case 'B': @<Scan a backward local@>@;
- default: @<Scan a decimal constant@>@;
+ case 'F': @<Scan a forward local@>@;@+ goto symbol_found;
+ case 'B': @<Scan a backward local@>@;@+ goto symbol_found;
+ default: @<Scan a decimal constant@>@; /* |constant_found| */
 }
 else@+ switch(*p++) {
 @z
@@ -1069,10 +1071,10 @@ else@+ switch(*p++) {
  case '\"': @<Scan a string constant@>;@+break;
  case '@@': @<Scan the current location@>;@+break;
 @y
- case '#': @<Scan a hexadecimal constant@>@;
- case '\'': @<Scan a character constant@>@;
- case '\"': @<Scan a string constant@>@;
- case '@@': @<Scan the current location@>@;
+ case '#': @<Scan a hexadecimal constant@>@;@+ goto constant_found;
+ case '\'': @<Scan a character constant@>@;@+ goto constant_found;
+ case '\"': @<Scan a string constant@>@;@+ goto constant_found;
+ case '@@': @<Scan the current location@>@;@+ goto constant_found;
 @z
 
 @x [86] l.2364 Compiler warning.
@@ -1097,7 +1099,7 @@ else@+ switch(*p++) {
 }
 @y
 @ @<Scan a forward local@>=
-tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+tt=&forward_local_host[*p-'0'];@+ p+=2;
 @z
 
 @x [89] l.2397 Fix bracketing for section 94.
@@ -1107,31 +1109,86 @@ tt=&forward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
 }
 @y
 @ @<Scan a backward local@>=
-tt=&backward_local_host[*p-'0'];@+ p+=2;@+ goto symbol_found;
+tt=&backward_local_host[*p-'0'];@+ p+=2;
+@z
+
+@x [92] l.2418 Reshuffle sections.
+@ We have already checked to make sure that the character constant is legal.
+@y
+@ @<Scan a decimal constant@>=
+acc=(octa){0, *p-'0'};
+for (p++;isdigit(*p);p++) {
+  acc=oplus(acc,shift_left(acc,2));
+  acc=incr(shift_left(acc,1),*p-'0');
+}
+constant_found: val_ptr++;
+top_val.link=NULL;
+top_val.equiv=acc;
+top_val.status=pure;
+
+@ @<Scan a hexadecimal constant@>=
+if (!isxdigit(*p)) err("illegal hexadecimal constant");
+@.illegal hexadecimal constant@>
+acc=zero_octa;
+for (;isxdigit(*p);p++) {
+  acc=incr(shift_left(acc,4),*p-'0');
+  if (*p>='a') acc=incr(acc,'0'-'a'+10);
+  else if (*p>='A') acc=incr(acc,'0'-'A'+10);
+}
+
+@ We have already checked to make sure that the character constant is legal.
 @z
 
 @x [92] l.2421 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
-acc=(octa){0, (unsigned char)*p};
+acc=(octa){0, (unsigned char)*p};@+
+@z
+
+@x [92] l.2423 Reshuffle sections.
+goto constant_found;
+@y
 @z
 
 @x [93] l.2426 Compound literal.
 acc.h=0, acc.l=(unsigned char)*p;
 @y
-acc=(octa){0, (unsigned char)*p};
+acc=(octa){0, (unsigned char)*p};@+
 @z
 
-@x [94] l.2435 Compound literal.
+@x [93] l.2432 Reshuffle sections.
+goto constant_found;
+@y
+@z
+
+@x [94] l.2434 Reshuffle sections.
+@ @<Scan a decimal constant@>=
 acc.h=0, acc.l=*p-'0';
+for (p++;isdigit(*p);p++) {
+  acc=oplus(acc,shift_left(acc,2));
+  acc=incr(shift_left(acc,1),*p-'0');
+}
+constant_found: val_ptr++;
+top_val.link=NULL;
+top_val.equiv=acc;
+top_val.status=pure;
+
+@ @<Scan a hexadecimal constant@>=
+if (!isxdigit(*p)) err("illegal hexadecimal constant");
+@.illegal hexadecimal constant@>
+acc.h=acc.l=0;
+for (;isxdigit(*p);p++) {
+  acc=incr(shift_left(acc,4),*p-'0');
+  if (*p>='a') acc=incr(acc,'0'-'a'+10);
+  else if (*p>='A') acc=incr(acc,'0'-'A'+10);
+}
+goto constant_found;
 @y
-acc=(octa){0, *p-'0'};
 @z
 
-@x [95] l.2448 RAII.
-acc.h=acc.l=0;
+@x [96] l.2458 Reshuffle sections.
+goto constant_found;
 @y
-acc=zero_octa;
 @z
 
 @x [97] l.2471 Variadic macro for error reporting.

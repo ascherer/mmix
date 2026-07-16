@@ -654,6 +654,12 @@ p=operand_list;
   p++; @+ acc.l=0; @+ err("*null string is treated as zero");
 @z
 
+@x [98]
+   }@+else {
+@y
+   }@+else @/ {
+@z
+
 @x [100]
 @ @d unary_check(verb) if (top_val.status!=pure)
 @y
@@ -666,11 +672,6 @@ p=operand_list;
 @ @-verb@>@d binary_check(verb)
 @z
 
-@x [104]
-@ We copy the opcode field to a special buffer because we might
-@y
-@r @ We copy the opcode field to a special buffer because we might
-@z
 @x [104]
 while (isletter(*p)||isdigit(*p)) *q++=*p++;
 @y
@@ -695,20 +696,10 @@ while (*p) { @+
   greg--; @+
 @z
 
-@x [109]
-  sym_node *new_link=DEFINED;
+@x [111]
+@ @<Find the symbol table node, |pp|@>=
 @y
-  @+ sym_node *new_link=DEFINED;
-@z
-@x [109]
-  }@+ else if (pp->link==PREDEFINED) pp->serial=++serial_number;
-@y
-  }@+ else @/ if (pp->link==PREDEFINED) pp->serial=++serial_number;
-@z
-@x [109]
-    @<Make special listing to show the label equivalent@>;
-@y
-    { @<Make special listing to show the label equivalent@>; }
+@r @ @<Find the symbol table node, |pp|@>=
 @z
 
 @x [114]
@@ -716,28 +707,6 @@ while (*p) { @+
 @y
 @ @$k {MMIXAL}136 \&{register} \&{int}@>
 @<Fix a future reference from a relative address@>=
-@z
-
-@x [115]
-@ @<Make special listing to show the label equivalent@>=
-@y
-@r @ @<Make special listing to show the label equivalent@>=
-@z
-@x [115]
-{ if (new_link==DEFINED) {
-@y
-if (new_link==DEFINED) {
-@z
-@x [115]
-} }
-@y
-}
-@z
-
-@x [121]
-@ @<Do the \9{z}Z field@>=
-@y
-@r @ @<Do the \9{z}Z field@>=
 @z
 
 @x [126]
