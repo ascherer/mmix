@@ -1222,6 +1222,14 @@ scan_close:@+
  default: err("syntax error at `%c'",*(p-1));
 @z
 
+@x [98] l.2492 Correctly implement intent.
+     if (!*(p-1)) goto operands_done;
+     else rt_op=outer_lp;@+goto hold_op; /* comma */
+@y
+     if (!*(p-1)) goto operands_done; /* jump out of either |while| loop */
+     else {@+rt_op=outer_lp;@+goto hold_op;@+} /* comma doesn't work here */
+@z
+
 @x [98] l.2500 Change from MMIX home.
  @t\4@>@<Cases for unary operators@>@;
 @y
