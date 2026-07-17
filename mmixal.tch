@@ -641,11 +641,30 @@ p=operand_list;
 p=operand_list;
 @z
 
+@x [87]
+@ @<Scan a symbol@>=
+@y
+@ @<Scan a symbol@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
+@$equiv {MMIXAL}82 \&{octa}@>
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@$link {MMIXAL}82 \&{trie\_node} ${*}$@>
+@z
+
 @x [90]
 |backward_local_host[j]| masquerade as nodes of the trie.
 @y
 |backward_local_host[j]| masquerade as nodes of the trie.
 @-j@>
+@z
+
+@x [91]
+@ Initially \.{0H}, \.{1H}, \dots, \.{9H} are defined to be zero.
+@y
+@ Initially \.{0H}, \.{1H}, \dots, \.{9H} are defined to be zero.
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
 @z
 
 @x [93]
@@ -673,6 +692,14 @@ p=operand_list;
 @z
 
 @x [104]
+@<Scan the opcode field...@>=
+@y
+@<Scan the opcode field...@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
+@z
+
+@x [104]
 while (isletter(*p)||isdigit(*p)) *q++=*p++;
 @y
 while (isletter(*p)||isdigit(*p)) *q++=*p++; @+
@@ -696,10 +723,36 @@ while (*p) { @+
   greg--; @+
 @z
 
+@x [109]
+@<Define the label@>=
+@y
+@<Define the label@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
+@$equiv {MMIXAL}82 \&{octa}@>
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@z
+
 @x [111]
 @ @<Find the symbol table node, |pp|@>=
 @y
 @r @ @<Find the symbol table node, |pp|@>=
+@z
+
+@x [112]
+@ @<Fix prior references to this label@>=
+@y
+@ @<Fix prior references to this label@>=
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@z
+
+@x [113]
+@ @<Fix a future reference from an octabyte@>=
+@y
+@ @<Fix a future reference from an octabyte@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
 @z
 
 @x [114]
@@ -707,6 +760,26 @@ while (*p) { @+
 @y
 @ @$k {MMIXAL}136 \&{register} \&{int}@>
 @<Fix a future reference from a relative address@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
+@z
+
+@x [118]
+@ @<Deal with cases where |val_stack[j]| is impure@>=
+@y
+@ @<Deal with cases where |val_stack[j]| is impure@>=
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@$link {MMIXAL}82 \&{trie\_node} ${*}$@>
+@z
+
+@x [125]
+@ @<Assemble \9{y}YZ as a future reference...@>=
+@y
+@ @<Assemble \9{y}YZ as a future reference...@>=
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@$link {MMIXAL}82 \&{trie\_node} ${*}$@>
 @z
 
 @x [126]
@@ -719,6 +792,9 @@ while (*p) { @+
 @ @<Assemble \9{x}XYZ as a future reference...@>=
 @y
 @r @ @<Assemble \9{x}XYZ as a future reference...@>=
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
+@$link {MMIXAL}82 \&{trie\_node} ${*}$@>
 @z
 
 @x [136]
@@ -739,4 +815,20 @@ while (*p) { @+
   register int j,k; /* all-purpose integers */ @+@t}\6{@>
 @y
   @+ register int j,k; /* all-purpose integers */ @+@t}\6{@>
+@z
+
+@x [144]
+@ @<Output the postamble@>=
+@y
+@ @<Output the postamble@>=
+@%
+@$equiv {MMIXAL}58 \&{octa}@>
+@z
+
+@x [145]
+@ @<Report any undefined local symbols@>=
+@y
+@ @<Report any undefined local symbols@>=
+@%
+@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${*}$@>
 @z
