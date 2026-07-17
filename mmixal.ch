@@ -1047,6 +1047,11 @@ while (1) {
 @y
 while (true) {
 @z
+@x [85] l.2343 Move label.
+ scan_close: @<Scan a binary operator or closing token, |rt_op|@>;
+@y
+ @<Scan a binary operator or closing token, |rt_op|@>;
+@z
 
 @x [86] l.2353 Fix bracketing for section 94.
 scan_open:@+if (isletter(*p)) @<Scan a symbol@>@;
@@ -1189,6 +1194,13 @@ goto constant_found;
 @x [96] l.2458 Reshuffle sections.
 goto constant_found;
 @y
+@z
+
+@x [97] l.2460 Move label.
+@ @<Scan a binary operator or closing token, |rt_op|@>=
+@y
+@ @<Scan a binary operator or closing token, |rt_op|@>=
+scan_close:@+
 @z
 
 @x [97] l.2471 Variadic macro for error reporting.
