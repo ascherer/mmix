@@ -560,6 +560,12 @@ sym_node* new_sym_node(
   bool serialize) /* should the new node receive a unique serial number? */
 @z
 
+@x [59] l.1570 Compound literal.
+    sym_avail=p->link;@+p->link=NULL;@+p->serial=0;@+p->equiv=zero_octa;
+@y
+    sym_avail=p->link;@+*p=(sym_node){0,NULL,zero_octa};
+@z
+
 @x [63] l.1643 Format improvement.
 op_spec op_init_table[]={@/
 @y
@@ -1127,9 +1133,7 @@ for (p++;isdigit(*p);p++) {
   acc=incr(shift_left(acc,1),*p-'0');
 }
 constant_found: val_ptr++;
-top_val.link=NULL;
-top_val.equiv=acc;
-top_val.status=pure;
+top_val=(val_node){acc,NULL,pure};
 
 @ @<Scan a hexadecimal constant@>=
 if (!isxdigit(*p)) err("illegal hexadecimal constant");
@@ -1432,6 +1436,14 @@ case 2:@+if (!(op_bits&two_arg_bit)) {
     else err("opcode `%s' must have more than two operands",op_field); }
 @z
 
+@x [116] l.2840 Compound literal.
+  val_stack[1].equiv=zero_octa, val_stack[1].link=NULL,
+    val_stack[1].status=pure; /* insert \.0 as the second operand */
+@y
+  val_stack[1]=(val_node){zero_octa,NULL,pure};
+    /* insert \.0 as the second operand */
+@z
+
 @x [116] l.2842 GCC warning.
 case 3:@+if (!(op_bits&three_arg_bit))
     derr("opcode `%s' must not have three operands",op_field);
@@ -1453,6 +1465,16 @@ default: err("too many operands for opcode `%s'",op_field);
   { if (k==1) err("*constant doesn't fit in one byte")@;
 @.constant doesn't fit...@>
     else err("*constant doesn't fit in %d bytes",k); }
+@z
+
+@x [118] l.2876 Compound literal.
+  qq->link=pp->link;
+  pp->link=qq;
+  qq->serial=fix_o;
+  qq->equiv=cur_loc;
+@y
+  *qq=(sym_node){fix_o,pp->link,cur_loc};
+  pp->link=qq;
 @z
 
 @x [119] l.2883 Sort names of sections.
@@ -1555,6 +1577,16 @@ assemble_X: @<Do the \9{x}X field@>;
 @ @<Assemble \9{y}YZ as a future reference...@>=
 @z
 
+@x [125] l.2975 Compound literal.
+  qq->link=pp->link;
+  pp->link=qq;
+  qq->serial=fix_yz;
+  qq->equiv=cur_loc;
+@y
+  *qq=(sym_node){fix_yz,pp->link,cur_loc};
+  pp->link=qq;
+@z
+
 @x [126] l.2984 Sort name of section.
 @ @<Assemble YZ as a relative address and |goto assemble_X|@>=
 @y
@@ -1623,6 +1655,16 @@ assemble_X: @<Do the \9{x}X field@>;
 @ @<Assemble XYZ as a future reference...@>=
 @y
 @ @<Assemble \9{x}XYZ as a future reference...@>=
+@z
+
+@x [130] l.3071 Compound literal.
+  qq->link=pp->link;
+  pp->link=qq;
+  qq->serial=fix_xyz;
+  qq->equiv=cur_loc;
+@y
+  *qq=(sym_node){fix_xyz,pp->link,cur_loc};
+  pp->link=qq;
 @z
 
 @x [131] l.3080 Sort name of section.
