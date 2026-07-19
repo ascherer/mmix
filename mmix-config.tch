@@ -31,7 +31,7 @@ $$\begingroup\ninepoint
 @:l}{\|l (ring of local registers)@>
 @y
 @:l}{\|l (ring of local registers)@>
-@% @$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
+@% @$l {MMIX-PIPE}86 \&{specnode} ${}{*}{}$@>
 @z
 @x [3]
 \bull memchunksmax (default 1000), maximum number of $2^{16}$-byte chunks of
@@ -138,7 +138,7 @@ read from the |CPV| table.)
 @$minval {MMIX-CONFIG}12 \&{int}@>
 @$maxval {MMIX-CONFIG}12 \&{int}@>
 @$power_of_two {MMIX-CONFIG}12 \&{bool}@>
-@$v {MMIX-CONFIG}12 \&{int} ${*}$@>
+@$v {MMIX-CONFIG}12 \&{int} ${}{*}{}$@>
 @z
 
 @x [21]
@@ -286,7 +286,7 @@ static void alloc_cache(
 @ @<Allocate the cache sets for cache |c|@>=
 @y
 @ @-aa@> @-bb@> @-cc@> @-g@>
-@$c {MMIX-CONFIG}31 \&{cache} ${*}$@>
+@$c {MMIX-CONFIG}31 \&{cache} ${}{*}{}$@>
 @<Allocate the cache sets for cache |c|@>=
 @z
 
@@ -294,7 +294,7 @@ static void alloc_cache(
 @ @<Allocate the victim cache for cache |c|@>=
 @y
 @ @-bb@> @-vv@> @-g@>
-@% @$cacheset {MMIX-PIPE}167 \&{cacheblock} ${*}$@>
+@% @$cacheset {MMIX-PIPE}167 \&{cacheblock} ${}{*}{}$@>
 @<Allocate the victim cache for cache |c|@>=
 @z
 
@@ -303,8 +303,8 @@ static void alloc_cache(
 @y
 @ @%
 @$coroutine {MMIX-PIPE}167 \&{struct}@>
-@$name {MMIX-CONFIG}31 \&{char} ${*}$@>
-@$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@$name {MMIX-CONFIG}31 \&{char} ${}{*}{}$@>
+@$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @<Allocate reader coroutines for cache |c|@>=
 @z
 
@@ -313,7 +313,7 @@ static void alloc_cache(
 @y
 @ @<Allocate the caches@>=
 @%
-@$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @$bb {MMIX-PIPE}167 \&{int}@>
 @$gg {MMIX-PIPE}167 \&{int}@>
 @z
@@ -330,7 +330,7 @@ scheduler and schedulee.
 @$j {MMIX-CONFIG}38 \&{int}@>
 @$n {MMIX-CONFIG}38 \&{int}@>
 @%
-@$name {MMIX-PIPE}23 \&{char} ${*}$@>
+@$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @$bb {MMIX-PIPE}167 \&{int}@>
 @z
 
@@ -338,7 +338,7 @@ scheduler and schedulee.
 @ @s chunknode int
 @y
 @ @s chunknode int
-@$l {MMIX-PIPE}86 \&{specnode} ${*}$@>
+@$l {MMIX-PIPE}86 \&{specnode} ${}{*}{}$@>
 @%
 @$specnode {MMIX-PIPE}40 \&{struct}@>
 @$bb {MMIX-PIPE}167 \&{int}@>
@@ -390,7 +390,7 @@ extern void MMIX_config(char *); /* public prototype */
 @-panic@> @$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
 @-get_token@> @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
 @-get_int@> @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
-@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${*}$(\,)@>
+@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${}{*}{}$(\,)@>
 @-ppol@> @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
 @-pcs@> @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @-lg@> @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>

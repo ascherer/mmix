@@ -100,7 +100,7 @@ gg.b=(gg.dat[k+1]? k+1: k);
 But no harm is done, because |bignum_compare| is not used.
 @y
 But no harm is done, because |bignum_compare| is not used.
-@$p {MMIX-ARITH}66 \&{register} \&{char} ${*}$@>
+@$p {MMIX-ARITH}66 \&{register} \&{char} ${}{*}{}$@>
 @z
 
 @x [65]
@@ -126,7 +126,7 @@ $g$ to be fractions whose denominator is a power of~10.
 The value of |exceptions| set by |scan_const| is not necessarily correct.
 @y
 The value of |exceptions| set by |scan_const| is not necessarily correct.
-@$p {MMIX-ARITH}70 \&{register} \&{char} ${*}$@>
+@$p {MMIX-ARITH}70 \&{register} \&{char} ${}{*}{}$@>
 @z
 
 @x [70]

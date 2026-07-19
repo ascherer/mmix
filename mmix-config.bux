@@ -14,14 +14,14 @@
 @$citm {MMIX-CONFIG}13 =8@>
 @$cotm {MMIX-CONFIG}13 =9@>
 @$prts {MMIX-CONFIG}13 =10@>
-@$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${*}$(\,)@>
+@$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${}{*}{}$(\,)@>
 @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
 @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
 @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
 @$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
 
 @$stage {MMIX-PIPE}23 \&{int}@>
-@$ring {MMIX-PIPE}29 \&{coroutine} ${*}$@>
+@$ring {MMIX-PIPE}29 \&{coroutine} ${}{*}{}$@>
 @$ring_size {MMIX-PIPE}29 \&{int}@>
 @$cache {MMIX-PIPE}167 \&{struct}@>
 @$cacheblock {MMIX-PIPE}167 \&{struct}@>
@@ -29,13 +29,13 @@
 @$mode {MMIX-PIPE}167 \&{int}@>
 @$inbuf {MMIX-PIPE}167 \&{cacheblock}@>
 @$outbuf {MMIX-PIPE}167 \&{cacheblock}@>
-@$data {MMIX-PIPE}167 \&{octa} ${*}$@>
-@$dirty {MMIX-PIPE}167 \&{char} ${*}$@>
+@$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
+@$dirty {MMIX-PIPE}167 \&{char} ${}{*}{}$@>
 @$tag {MMIX-PIPE}167 \&{octa}@>
-@$set {MMIX-PIPE}167 \&{cacheset} ${*}$@>
+@$set {MMIX-PIPE}167 \&{cacheset} ${}{*}{}$@>
 @$victim {MMIX-PIPE}167 \&{cacheset}@>
 @$ports {MMIX-PIPE}167 \&{int}@>
-@$reader {MMIX-PIPE}167 \&{coroutine} ${*}$@>
+@$reader {MMIX-PIPE}167 \&{coroutine} ${}{*}{}$@>
 @$filler {MMIX-PIPE}167 \&{coroutine}@>
 @$flusher {MMIX-PIPE}167 \&{coroutine}@>
 @$no_hardware_PT {MMIX-PIPE}242 \&{bool}@>

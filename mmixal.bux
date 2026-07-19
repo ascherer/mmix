@@ -1,10 +1,10 @@
 @i mmix.bux
 
-@$p {MMIXAL}40 \&{register} \&{Char} ${*}$@>
+@$p {MMIXAL}40 \&{register} \&{Char} ${}{*}{}$@>
 
-@$DEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,1@>
-@$REGISTER {MMIXAL}58 =(\&{sym\_node} ${*}$)\,2@>
-@$PREDEFINED {MMIXAL}58 =(\&{sym\_node} ${*}$)\,3@>
+@$DEFINED {MMIXAL}58 =(\&{sym\_node} ${}{*}{}$)\,1@>
+@$REGISTER {MMIXAL}58 =(\&{sym\_node} ${}{*}{}$)\,2@>
+@$PREDEFINED {MMIXAL}58 =(\&{sym\_node} ${}{*}{}$)\,3@>
 
 @$SET {MMIXAL}62 =\T{\^100}@>
 @$IS {MMIXAL}62 =\T{\^101}@>
@@ -19,9 +19,9 @@
 @$TETRA {MMIXAL}62 =\T{\^10a}@>
 @$OCTA {MMIXAL}62 =\T{\^10b}@>
 
-@$tt {MMIXAL}65 \&{register} \&{trie\_node} ${*}$@>
-@$pp {MMIXAL}65 \&{register} \&{sym\_node} ${*}$@>
-@$qq {MMIXAL}65 \&{register} \&{sym\_node} ${*}$@>
+@$tt {MMIXAL}65 \&{register} \&{trie\_node} ${}{*}{}$@>
+@$pp {MMIXAL}65 \&{register} \&{sym\_node} ${}{*}{}$@>
+@$qq {MMIXAL}65 \&{register} \&{sym\_node} ${}{*}{}$@>
 
 @$negate {MMIXAL}82 =0@>
 @$serialize {MMIXAL}82 =1@>

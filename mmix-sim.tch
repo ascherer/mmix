@@ -152,8 +152,8 @@ $$\displaylines{
 @-dump@> @-dump_tet@>
 @%
 @$print_int {MMIX-SIM}15 \&{void} (\,)@>
-@$new_mem {MMIX-SIM}17 \&{mem\_node} ${*}$(\,)@>
-@$mem_find {MMIX-SIM}20 \&{mem\_tetra} ${*}$(\,)@>
+@$new_mem {MMIX-SIM}17 \&{mem\_node} ${}{*}{}$(\,)@>
+@$mem_find {MMIX-SIM}20 \&{mem\_tetra} ${}{*}{}$(\,)@>
 @$read_tet {MMIX-SIM}26 \&{void} (\,)@>
 @$make_map {MMIX-SIM}42 \&{void} (\,)@>
 @$print_line {MMIX-SIM}45 \&{void} (\,)@>
@@ -214,7 +214,7 @@ mem_tetra* mem_find(
 {@+register mem_node **q;
 @-q@>
 @%
-@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${*}$@>
+@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${}{*}{}$@>
 @z
 
 @x [22]
@@ -225,7 +225,7 @@ mem_tetra* mem_find(
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
 @$l {MMIX-SIM}22 \&{register} \&{mem\_mode} ${**}$@>
-@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${*}$@>
+@$p {MMIX-SIM}20 \&{register} \&{mem\_node} ${}{*}{}$@>
 @$q {MMIX-SIM}21 \&{register} \&{mem\_node} ${**}$@>
 @z
 
@@ -324,8 +324,8 @@ void print_freqs(
 @-cur_loc@>
 @%
 @$j {MMIX-SIM}50 \&{int}@>
-@$name {MMIX-SIM}64 \&{char} ${*}$@>
-@$p {MMIX-SIM}50 \&{mem\_node} ${*}$@>
+@$name {MMIX-SIM}64 \&{char} ${}{*}{}$@>
+@$p {MMIX-SIM}50 \&{mem\_node} ${}{*}{}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
@@ -374,7 +374,7 @@ void print_freqs(
 @<Set |z| from register Z@>=
 @y
 @<Set |z| from register Z@>=
-@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@% @$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 @x [72]
   if (zz>=G) z=g[zz];
@@ -386,7 +386,7 @@ void print_freqs(
 @ @<Set |y| from register Y@>=
 @y
 @ @<Set |y| from register Y@>=
-@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@% @$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 @x [73]
   if (yy>=G) y=g[yy];
@@ -398,7 +398,7 @@ void print_freqs(
 @ @<Set \9{b}|b| from register X@>=
 @y
 @ @<Set \9{b}|b| from register X@>=
-@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@% @$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 @x [74]
   if (xx>=G) b=g[xx];
@@ -430,14 +430,14 @@ g[rTT].h=0x80000006; @+
 l=(octa*)calloc(lring_size,sizeof(octa));
 @y
 l=(octa*)calloc(lring_size,sizeof(octa));
-@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@% @$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [80]
 @ @<Install register~X as the destination...@>=
 @y
 @ @<Install register~X as the destination...@>=
-@% @$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@% @$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [81]
@@ -446,7 +446,7 @@ l=(octa*)calloc(lring_size,sizeof(octa));
 @ @<Increase rL@>=
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [82]
@@ -456,7 +456,7 @@ void stack_store(void)
 @-ll@> @-k@>
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [83]
@@ -471,7 +471,7 @@ void stack_load(void)
 @-ll@> @-k@>
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [86]
@@ -516,7 +516,7 @@ int register_truth(
 @ Pushing and popping are rather delicate, because we want to trace
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [102]
@@ -530,7 +530,7 @@ int register_truth(
  l[(O+L)&lring_mask].l=L, L++;
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [104]
@@ -539,7 +539,7 @@ case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
 case UNSAVE:@+if (xx!=0 || yy!=0) goto illegal_inst;
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @z
 
 @x [105]
@@ -634,9 +634,9 @@ static void mmputchars(
 @-s@>
 @%
 @$a {MMIX-SIM}117 \&{octa}@>
-@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${*}$@>
+@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${}{*}{}$@>
 @$m {MMIX-SIM}117 \&{register} \&{int}@>
-@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${*}$@>
+@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${}{*}{}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
@@ -646,9 +646,9 @@ static void mmputchars(
 @ @<Load \9{a}and write four bytes@>=
 @%
 @$a {MMIX-SIM}117 \&{octa}@>
-@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${*}$@>
+@$ll {MMIX-SIM}117 \&{register} \&{mem\_tetra} ${}{*}{}$@>
 @$m {MMIX-SIM}117 \&{register} \&{int}@>
-@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${*}$@>
+@$p {MMIX-SIM}117 \&{register} \&{unsigned} \&{char} ${}{*}{}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
@@ -733,14 +733,14 @@ char *usage_help[]={@|
 @ @<Open a file for simulated standard input@>=
 @y
 @ @<Open a file for simulated standard input@>=
-@% @$arg {MMIX-SIM}143 \&{char} ${*}$@>
+@% @$arg {MMIX-SIM}143 \&{char} ${}{*}{}$@>
 @z
 
 @x [146]
 @ @<Open a file for dumping binary output@>=
 @y
 @ @<Open a file for dumping binary output@>=
-@% @$arg {MMIX-SIM}143 \&{char} ${*}$@>
+@% @$arg {MMIX-SIM}143 \&{char} ${}{*}{}$@>
 @z
 
 @x [148]
@@ -784,7 +784,7 @@ octa scan_hex(
 @ @<Scan a string constant@>=
 @y
 @ @<Scan a string constant@>=
-@% @$p {MMIX-SIM}154 \&{register} \&{char} ${*}$@>
+@% @$p {MMIX-SIM}154 \&{register} \&{char} ${}{*}{}$@>
 @z
 
 @x [156]
@@ -800,7 +800,7 @@ octa scan_hex(
 @ @<Set the current octabyte to |val|@>=
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 
@@ -810,7 +810,7 @@ octa scan_hex(
 @r @ @<Display the current octabyte@>=
 @%
 @$l {MMIX-ARITH}3 \&{tetra}@>
-@$l {MMIX-SIM}76 \&{octa} ${*}$@>
+@$l {MMIX-SIM}76 \&{octa} ${}{*}{}$@>
 @$tet {MMIX-SIM}16 \&{tetra}@>
 @z
 

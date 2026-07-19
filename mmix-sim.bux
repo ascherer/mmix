@@ -1,7 +1,7 @@
 @i mmix.bux
 
-@$name {MMIX-SIM}38 \&{char} ${*}$@>
-@$p {MMIX-SIM}62 \&{register} \&{char} ${*}$@>
+@$name {MMIX-SIM}38 \&{char} ${}{*}{}$@>
+@$p {MMIX-SIM}62 \&{register} \&{char} ${}{*}{}$@>
 
 @$TRAP {MMIX-SIM}54 =0@>
 @$FCMP {MMIX-SIM}54 =1@>
