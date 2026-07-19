@@ -116,12 +116,6 @@ static void schedule(
 @-p@>
 @z
 
-@x [30]
-@ The all-important |ctl| field of a coroutine, which contains the
-@y
-@r @ The all-important |ctl| field of a coroutine, which contains the
-@z
-
 @x [32]
 coroutine is not assumed to have any valid data in its |ctl| field.
 @y
@@ -162,18 +156,16 @@ static coroutine *queuelist(int);
 @z
 
 @x [39]
-  if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
+  print_cache_locks(ITcache);
 @y
-@t}\ifx\undefined\eightpoint\else\goodbreak\quad\fi{@>
-  if (mem_lock) printf("mem locked by %s:%d\n",mem_lock->name,mem_lock->stage);
+  @+ print_cache_locks(ITcache);
 @z
 
 @x [44]
-the address of the subsequent instruction.
+An actual hardware implementation of \MMIX\ wouldn't need all the information
 @y
-the address of the subsequent instruction.
-
-\ifx\undefined\eightpoint\else\vbox to1cm{}\fi
+\ifx\undefined\eightpoint\else\vbox to2cm{}\fi
+An actual hardware implementation of \MMIX\ wouldn't need all the information
 @z
 
 @x [47]
@@ -1524,11 +1516,6 @@ to fill a block.
 @% @$g {MMIX-PIPE}167 \&{int}@>
 @z
 
-@x [260]
-@ @<Write directly from |write_head| to memory@>=
-@y
-@r @ @<Write directly from |write_head| to memory@>=
-@z
 @x [260]
 set_lock(&mem_locker,mem_lock); /* a coroutine of type |vanish| */
 @y
