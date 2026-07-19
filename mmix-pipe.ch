@@ -471,6 +471,31 @@ extern octa fixit @,@,@[ARGS((octa z,int mode))@];
   panic(errprint("Incorrect implementation of type tetra"));
 @z
 
+@x [23] l.447 Forward declare struct type.
+@s control_struct int
+
+@y
+@z
+
+@x [23] l.450 Forward declare struct type.
+typedef struct coroutine_struct {
+@y
+typedef struct control_struct control;
+typedef struct coroutine_struct coroutine;
+typedef struct specnode_struct specnode;
+@#
+typedef struct coroutine_struct {
+@z
+@x [23] l.453 Forward declare struct type.
+ struct coroutine_struct *next; /* its successor */
+ struct coroutine_struct **lockloc; /* what it might be locking */
+ struct control_struct *ctl; /* its data */
+@y
+ coroutine *next; /* its successor */
+ coroutine **lockloc; /* what it might be locking */
+ control *ctl; /* its data */
+@z
+
 @x [24] l.459 C99 prototypes for C2x.
 static void print_coroutine_id @,@,@[ARGS((coroutine*))@];
 static void errprint_coroutine_id @,@,@[ARGS((coroutine*))@];
@@ -605,6 +630,22 @@ Extern void print_locks(void);
 
 @ @<External r...@>=
 void print_locks(void)
+@z
+
+@x [40] l.660 Forward declare struct type.
+@s specnode_struct int
+
+@y
+@z
+@x [40] l.665 Forward declare struct type.
+  struct specnode_struct *p;
+@y
+  specnode *p;
+@z
+@x [40] l.672 Forward declare struct type.
+  struct specnode_struct *up,*down;
+@y
+  specnode *up,*down;
 @z
 
 @x [41] l.676 Private variable.
@@ -847,6 +888,12 @@ static void print_fetch_buffer(void)
   if (cool==reorder_bot) new_cool=reorder_top;@+else new_cool=cool-1;
 @y
   new_cool=cool==reorder_bot?reorder_top:cool-1;
+@z
+
+@x [76] l.1651 Unnamed struct type.
+typedef struct func_struct{
+@y
+typedef struct {
 @z
 
 @x [78] l.1667 Private variables.

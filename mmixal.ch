@@ -246,6 +246,14 @@ extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
 @y
 @z
 
+@x [30] l.1011 Forward declare struct types.
+typedef char Char; /* bytes that will become wydes some day */
+@y
+typedef char Char; /* bytes that will become wydes some day */
+typedef struct sym_tab_struct sym_node;
+typedef struct ternary_trie_struct trie_node;
+@z
+
 @x [31] l.1013 Stuff from MMIX-ARITH replaced with prototypes.
 @ While we're talking about classic systems versus future systems, we
 might as well define the |ARGS| macro, which makes function prototypes
@@ -514,6 +522,20 @@ void assemble(
   byte x_bits)
 @z
 
+@x [54] l.1444 Forward declare struct type
+@s sym_tab_struct int
+
+@y
+@z
+@x [54] l.1449 Forward declare struct type.
+  struct ternary_trie_struct *left, *mid, *right; /* downward
+                                                 in the ternary trie */
+  struct sym_tab_struct *sym; /* equivalents of symbols */
+@y
+  trie_node *left, *mid, *right; /* downward in the ternary trie */
+  sym_node *sym; /* equivalents of symbols */
+@z
+
 @x [55] l.1457 C99 prototypes for C2x.
 trie_node* new_trie_node @,@,@[ARGS((void))@];@+@t}\6{@>
 trie_node* new_trie_node()
@@ -549,6 +571,11 @@ trie_node *trie_search(
 @x [58] l.1541 CWEB knows this since version 3.5 (1999).
 @s bool int
 @y
+@z
+@x [58] l.1553 Forward declare struct type.
+  struct sym_tab_struct *link; /* |DEFINED| status or link to fixup */
+@y
+  sym_node *link; /* |DEFINED| status or link to fixup */
 @z
 
 @x [59] l.1564 C99 prototypes for C2x.

@@ -234,6 +234,18 @@ void print_int(
   register tetra r, t;
 @z
 
+@x [16] l.730 Forward declare struct type.
+typedef struct mem_node_struct {
+@y
+typedef struct mem_node_struct mem_node;
+typedef struct mem_node_struct {
+@z
+@x [16] l.733 Forward declare struct type.
+  struct mem_node_struct *left, *right; /* pointers to subtrees */
+@y
+  mem_node *left, *right; /* pointers to subtrees */
+@z
+
 @x [17] l.743 C99 prototype for C2x.
 mem_node* new_mem @,@,@[ARGS((void))@];@+@t}\6{@>
 mem_node* new_mem()

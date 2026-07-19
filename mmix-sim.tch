@@ -201,6 +201,12 @@ mem_node* new_mem(void)
 @-p@>
 @z
 
+@x [18]
+@ Initially we start with a chunk for the pool segment, since
+@y
+@r @ Initially we start with a chunk for the pool segment, since
+@z
+
 @x [20]
 mem_tetra* mem_find(
 @y
