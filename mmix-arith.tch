@@ -256,6 +256,7 @@ if (ye>=ze) { @+
 @ @<Internal...@>=
 @y
 @r @ @<Internal...@>=
+@-funpack@>
 @%
 @$fpack {MMIX-ARITH}31 \&{static} \&{octa} (\,)@>
 @$sfpack {MMIX-ARITH}34 \&{static} \&{tetra} (\,)@>
@@ -265,5 +266,4 @@ if (ye>=ze) { @+
 @$bignum_compare {MMIX-ARITH}61 \&{static} \&{int} (\,)@>
 @$bignum_dec {MMIX-ARITH}62 \&{static} \&{void} (\,)@>
 @$bignum_double {MMIX-ARITH}82 \&{static} \&{void} (\,)@>
-static octa fpack(octa,int,char,int);
 @z
