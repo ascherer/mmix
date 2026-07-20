@@ -1113,9 +1113,17 @@ static void flush_cache(
 @$spec_write {MMIX-PIPE}391 \&{static} \&{void} (\,)@>
 @z
 
+@x [209]
+Extern octa mem_read(octa addr);
+@y
+Extern octa mem_read(octa addr);
+@-addr@>
+@z
+
 @x [210]
 octa mem_read(
 @y
+@-addr@>
 @-h@>
 @%
 @$h {MMIX-PIPE}210 \&{register} \&{int}@>
@@ -1129,9 +1137,13 @@ Extern void mem_write(octa addr,octa val);
 @ @<External r...@>=
 @y
 Extern void mem_write(octa addr,octa val);
+@-addr@>
+@-val@>
 
 @r @ @<External r...@>=
 @-h@>
+@-addr@>
+@-val@>
 @%
 @$h {MMIX-PIPE}213 \&{register} \&{int}@>
 @$h {MMIX-ARITH}3 \&{t}etra@>
@@ -1155,6 +1167,7 @@ case flush_to_mem: {@+register cache *c=(cache *)data->ptr_a;
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
 @y
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
+@-addr@>
 @%
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
@@ -1195,6 +1208,7 @@ p=alloc_slot(Scache,c->outbuf.tag); @+
 @ We only need to read |block_diff| bytes, but it's easier to
 @y
 @ We only need to read |block_diff| bytes, but it's easier to
+@-addr@>
 @%
 @$data {MMIX-PIPE}124 \&{register} \&{control}${}{*}{}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
@@ -1487,6 +1501,8 @@ static void print_write_buffer(void);
 @%
 @$addr {MMIX-PIPE}40 \&{octa}@>
 @$addr {MMIX-PIPE}246 \&{octa}@>
+@$i {MMIX-PIPE}40 \&{internal\_opcode}@>
+@$i {MMIX-PIPE}246 \&{internal\_opcode}@>
 @$o {MMIX-PIPE}40 \&{octa}@>
 @$o {MMIX-PIPE}246 \&{octa}@>
 @z
