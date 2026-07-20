@@ -110,9 +110,22 @@ the remainder in~|aux|.
 @-y@> @-z@>
 @z
 
+@x [30]
+typedef struct ternary_trie_struct trie_node;
+@y
+typedef struct ternary_trie_struct trie_node;
+@-sym_node@>
+@-trie_node@>
+@z
+
 @x [31]
 @<Prototypes@>=
 @y
+@-new_trie_node@>
+@-trie_search@>
+@-new_sym_node@>
+@-prune@>
+@-out_stab@>
 @%
 @$flush_listing_line {MMIXAL}41 \&{void} (\,)@>
 @$update_listing_loc {MMIXAL}42 \&{void} (\,)@>
@@ -127,7 +140,7 @@ the remainder in~|aux|.
 @$mmo_loc {MMIXAL}49 \&{void} (\,)@>
 @$mmo_sync {MMIXAL}50 \&{void} (\,)@>
 @$assemble {MMIXAL}52 \&{void} (\,)@>
-@$new_trie_node {MMIXAL}55 \&{trie\_node} ${}{*}{}$(\,)@>
+@$new_trie_node {MMIXAL}55 \&{trie\_node} ${}{*}(\,){}$@>
 @$trie_search {MMIXAL}57 \&{trie\_node} ${}{*}{}$(\,)@>
 @$new_sync_mode {MMIXAL}59 \&{sym\_node} ${}{*}{}$(\,)@>
 @$prune {MMIXAL}73 \&{trie\_node} ${}{*}{}$(\,)@>
@@ -648,7 +661,7 @@ p=operand_list;
 @%
 @$equiv {MMIXAL}58 \&{octa}@>
 @$equiv {MMIXAL}82 \&{octa}@>
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @$link {MMIXAL}82 \&{trie\_node} ${}{*}{}$@>
 @z
 
@@ -664,7 +677,7 @@ p=operand_list;
 @y
 @ Initially \.{0H}, \.{1H}, \dots, \.{9H} are defined to be zero.
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @z
 
 @x [93]
@@ -730,7 +743,7 @@ while (*p) { @+
 @%
 @$equiv {MMIXAL}58 \&{octa}@>
 @$equiv {MMIXAL}82 \&{octa}@>
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @z
 
 @x [111]
@@ -744,7 +757,7 @@ while (*p) { @+
 @y
 @ @<Fix prior references to this label@>=
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @z
 
 @x [113]
@@ -769,7 +782,7 @@ while (*p) { @+
 @y
 @ @<Deal with cases where |val_stack[j]| is impure@>=
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @$link {MMIXAL}82 \&{trie\_node} ${}{*}{}$@>
 @z
 
@@ -778,7 +791,7 @@ while (*p) { @+
 @y
 @ @<Assemble \9{y}YZ as a future reference...@>=
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @$link {MMIXAL}82 \&{trie\_node} ${}{*}{}$@>
 @z
 
@@ -793,7 +806,7 @@ while (*p) { @+
 @y
 @r @ @<Assemble \9{x}XYZ as a future reference...@>=
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @$link {MMIXAL}82 \&{trie\_node} ${}{*}{}$@>
 @z
 
@@ -830,5 +843,5 @@ while (*p) { @+
 @y
 @ @<Report any undefined local symbols@>=
 @%
-@$link {MMIXAL}58 \&{struct} \&{sym\_tab\_struct} ${}{*}{}$@>
+@$link {MMIXAL}58 \&{sym\_node} ${}{*}{}$@>
 @z
