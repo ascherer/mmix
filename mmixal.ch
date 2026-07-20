@@ -246,9 +246,14 @@ extern octa odiv @,@,@[ARGS((octa x,octa y,octa z))@];
 @y
 @z
 
-@x [30] l.1011 Forward declare struct types.
+@x [30] l.1010 Forward declare struct types.
+@<Type...@>=
 typedef char Char; /* bytes that will become wydes some day */
 @y
+@s sym_tab_struct int
+@s ternary_trie_struct int
+
+@<Type...@>=
 typedef char Char; /* bytes that will become wydes some day */
 typedef struct sym_tab_struct sym_node;
 typedef struct ternary_trie_struct trie_node;
@@ -269,7 +274,6 @@ with a prototype, then with an old-style definition.
 #endif
 @y
 @ Each subroutine below is declared and defined with a prototype.
-@s trie_node int
 
 @<Prototypes@>=
 void flush_listing_line(char*);
@@ -522,11 +526,12 @@ void assemble(
   byte x_bits)
 @z
 
-@x [54] l.1444 Forward declare struct type
+@x [54] l.1444 Forward declare struct type.
 @s sym_tab_struct int
 
 @y
 @z
+
 @x [54] l.1449 Forward declare struct type.
   struct ternary_trie_struct *left, *mid, *right; /* downward
                                                  in the ternary trie */
@@ -568,7 +573,8 @@ trie_node *trie_search(
   while (true) {
 @z
 
-@x [58] l.1541 CWEB knows this since version 3.5 (1999).
+@x [58] l.1540 CWEB knows this since version 3.5 (1999).
+@s sym_node int
 @s bool int
 @y
 @z
