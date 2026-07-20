@@ -121,6 +121,15 @@ read from the |CPV| table.)
 @-ports@> @-name@>
 @z
 
+@x [17]
+@ @<Initialize to defaults@>=
+@y
+@ @<Initialize to defaults@>=
+@%
+@$v {MMIX-CONFIG}12 \&{int} ${}{*}{}$@>
+@$v {MMIX-CONFIG}14 \&{internal\_opcode}@>
+@z
+
 @x [18]
 @<Count and allocate the functional units@>=
 @y
@@ -188,8 +197,8 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @x [24]
 @ @<If |token| is an operation name, process a pipe spec@>=
 @y
-@ @$j {MMIX-CONFIG}38 \&{register} \&{int}@>
-@$n {MMIX-CONFIG}38 \&{register} \&{int}@>
+@ @$j {MMIX-CONFIG}38 \&{register} \&{register} \&{int}@>
+@$n {MMIX-CONFIG}38 \&{register} \&{register} \&{int}@>
 @%
 @$name {MMIX-CONFIG}14 \&{char} [\,]@>
 @<If |token| is an operation name, process a pipe spec@>=
@@ -202,6 +211,8 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @%
 @$name {MMIX-PIPE}76 \&{char} [\,]@>
 @$ops {MMIX-PIPE}76 \&{tetra} [\,]@>
+@$v {MMIX-CONFIG}13 \&{c\_param}@>
+@$v {MMIX-CONFIG}14 \&{internal\_opcode}@>
 @z
 
 @x [26]
@@ -339,8 +350,8 @@ static void alloc_cache(
 scheduler and schedulee.
 @y
 scheduler and schedulee.
-@$j {MMIX-CONFIG}38 \&{int}@>
-@$n {MMIX-CONFIG}38 \&{int}@>
+@$j {MMIX-CONFIG}38 \&{register} \&{int}@>
+@$n {MMIX-CONFIG}38 \&{register} \&{int}@>
 @%
 @$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @$bb {MMIX-PIPE}167 \&{int}@>
@@ -399,7 +410,6 @@ extern void MMIX_config(char *); /* public prototype */
 @ @<Private prototypes@>=
 @y
 @ @% @$replace_policy {MMIX-PIPE}23 \&{enum}@>
-@-panic@> @$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
 @-get_token@> @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
 @-get_int@> @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
 @-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${}{*}{}$(\,)@>

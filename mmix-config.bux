@@ -1,6 +1,5 @@
 @i mmix.bux
 
-@$panic {MMIX-CONFIG}8 \&{static} \&{void} (\,)@>
 @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
 @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
 @$assoc {MMIX-CONFIG}13 =0@>
