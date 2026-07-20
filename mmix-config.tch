@@ -124,9 +124,10 @@ read from the |CPV| table.)
 @x [18]
 @<Count and allocate the functional units@>=
 @y
-@-name@>
-@-ops@>
 @<Count and allocate the functional units@>=
+@%
+@$name {MMIX-PIPE}76 \&{char} [\,]@>
+@$ops {MMIX-PIPE}76 \&{tetra} [\,]@>
 @z
 
 @x [20]
@@ -134,7 +135,7 @@ read from the |CPV| table.)
 @y
 @ @<If |token| is a parameter name, process a PV spec@>=
 @%
-@$name {MMIX-CONFIG}12 \&{char} $[\,]$@>
+@$name {MMIX-CONFIG}12 \&{char} [\,]@>
 @$minval {MMIX-CONFIG}12 \&{int}@>
 @$maxval {MMIX-CONFIG}12 \&{int}@>
 @$power_of_two {MMIX-CONFIG}12 \&{bool}@>
@@ -179,7 +180,7 @@ static void pcs( /* subroutine to process a cache spec */
 {
 @y
 @%
-@$name {MMIX-CONFIG}13 \&{char} $[\,]$@>
+@$name {MMIX-CONFIG}13 \&{char} [\,]@>
 static void pcs(cache *c) /* subroutine to process a cache spec */
 { @+
 @z
@@ -189,19 +190,27 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @y
 @ @$j {MMIX-CONFIG}38 \&{register} \&{int}@>
 @$n {MMIX-CONFIG}38 \&{register} \&{int}@>
+@%
+@$name {MMIX-CONFIG}14 \&{char} [\,]@>
 @<If |token| is an operation name, process a pipe spec@>=
 @z
 
 @x [25]
 @ @<Process a functional spec@>=
 @y
-@ @-name@> @-ops@> @<Process a functional spec@>=
+@ @<Process a functional spec@>=
+@%
+@$name {MMIX-PIPE}76 \&{char} [\,]@>
+@$ops {MMIX-PIPE}76 \&{tetra} [\,]@>
 @z
 
 @x [26]
 @<Allocate coroutines in each functional unit@>=
 @y
-@-k@> @-co@> @-name@> @-stage@>
+@-k@> @-co@> @-stage@>
+@%
+@$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
+@$name {MMIX-PIPE}76 \&{char} [\,]@>
 @<Allocate coroutines in each functional unit@>=
 @z
 @x [26]
@@ -252,7 +261,10 @@ int_stages[mul]=n; @+
 @x [29]
 @ @<Determine the number of stages...@>=
 @y
-@ @-name@> @-ops@> @<Determine the number of stages...@>=
+@ @<Determine the number of stages...@>=
+@%
+@$name {MMIX-PIPE}76 \&{char} [\,]@>
+@$ops {MMIX-PIPE}76 \&{tetra} [\,]@>
 @z
 
 @x [30]
