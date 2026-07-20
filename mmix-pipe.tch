@@ -1758,6 +1758,7 @@ If the lower $b+c$ bits of the virtual and physical addresses differ,
 @y
 @<Finish a store command@>=
 @%
+@$addr {MMIX-PIPE}40 \&{octa}@>
 @$b {MMIX-PIPE}44 \&{spec}@>
 @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @z
@@ -1845,6 +1846,13 @@ p=use_and_fix(ITcache,p);
 @ @<Begin fetch with known physical address@>=
 @% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
+@z
+
+@x [297]
+@ @<Read from memory into |fetched|@>=
+@y
+@ @<Read from memory into |fetched|@>=
+@-addr@>
 @z
 
 @x [298]
@@ -2165,6 +2173,13 @@ case do_resume_trans: resume_trans: {@+register cache*c=(cache*)data->ptr_a;
 @y
 @ @<Special cases for states in later stages@>=
 @% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
+@z
+
+@x [356]
+ case 1: data->x.addr=zero_octa;@+goto fin_ex;
+@y
+ case 1: data->x.addr=zero_octa;@+goto fin_ex;
+@% @$addr {MMIX-PIPE}40 \&{octa}@>
 @z
 
 @x [357]
