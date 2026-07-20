@@ -169,11 +169,11 @@ An actual hardware implementation of \MMIX\ wouldn't need all the information
 @z
 
 @x [47]
-@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}mmix_opcode;
 
 @ @<Glob...@>=
 @y
-@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}mmix_opcode;
 
 @r @ @<Glob...@>=
 @z

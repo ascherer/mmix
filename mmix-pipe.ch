@@ -691,17 +691,38 @@ static void print_control_block(
   control *c)
 @z
 
+@x [47] l.816 Relaxed syntax.
+typedef enum{@/
+@y
+typedef enum{
+@z
+@x [47] l.848 Relaxed syntax.
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+@y
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}mmix_opcode;
+@z
+
 @x [48] l.851 Private variable.
 char *opcode_name[]={@|
 @y
 static char *opcode_name[]={@|
 @z
 
+@x [49] l.898 Relaxed syntax.
+typedef enum{@/
+@y
+typedef enum{
+@z
 @x [49] l.940 Nicer page break
 @!nxor, /* \.{NXOR[I]} */
 @y
 @!nxor, /* \.{NXOR[I]} */
 @t}\vadjust{\break}{@>@/
+@z
+@x [49] l.989 Relaxed syntax.
+}@! internal_opcode;
+@y
+} internal_opcode;
 @z
 
 @x [50] l.992 Private variable.

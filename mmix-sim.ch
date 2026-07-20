@@ -562,6 +562,17 @@ void print_freqs(
   octa cur_loc=incr(p->loc,4*j);
 @z
 
+@x [54] l.1275 Relaxed syntax.
+typedef enum{@/
+@y
+typedef enum{
+@z
+@x [54] l.1307 Relaxed syntax.
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}@+@!mmix_opcode;
+@y
+@!POP,@!RESUME,@!SAVE,@!UNSAVE,@!SYNC,@!SWYM,@!GET,@!TRIP}mmix_opcode;
+@z
+
 @x [55] l.1313 Improved formatting.
 @!rB,@!rD,@!rE,@!rH,@!rJ,@!rM,@!rR,@!rBB,
  @!rC,@!rN,@!rO,@!rS,@!rI,@!rT,@!rTT,@!rK,@!rQ,@!rU,@!rV,@!rG,@!rL,
