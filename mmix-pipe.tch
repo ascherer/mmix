@@ -1545,7 +1545,7 @@ static void print_write_buffer(void);
 @%
 @$addr {MMIX-PIPE}40 \&{octa}@>
 @$addr {MMIX-PIPE}246 \&{octa}@>
-@$i {MMIX-PIPE}40 \&{internal\_opcode}@>
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
 @$i {MMIX-PIPE}246 \&{internal\_opcode}@>
 @$o {MMIX-PIPE}40 \&{octa}@>
 @$o {MMIX-PIPE}246 \&{octa}@>
