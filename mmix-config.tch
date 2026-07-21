@@ -112,13 +112,27 @@ static op_spec OP[]={@|
 read from the |CPV| table.)
 @y
 read from the |CPV| table.)
-@-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
-@-repl@> @-vrepl@> @-mode@>
-@-access_time@> @-copy_in_time@> @-copy_out_time@>
-@-filler@> @-ctl@> @-filler_ctl@>
-@-ptr_a@> @-go@>
-@-flusher@> @-flusher_ctl@>
-@-ports@> @-name@>
+@%
+@$aa {MMIX-PIPE}167 \&{int}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$cc {MMIX-PIPE}167 \&{int}@>
+@$gg {MMIX-PIPE}167 \&{int}@>
+@$vv {MMIX-PIPE}167 \&{int}@>
+@$repl {MMIX-PIPE}167 \&{replace\_policy}@>
+@$vrepl {MMIX-PIPE}167 \&{replace\_policy}@>
+@$mode {MMIX-PIPE}167 \&{int}@>
+@$access_time {MMIX-PIPE}167 \&{int}@>
+@$copy_in_time {MMIX-PIPE}167 \&{int}@>
+@$copy_out_time {MMIX-PIPE}167 \&{int}@>
+@$filler {MMIX-PIPE}167 \&{coroutine}@>
+@$ctl {MMIX-PIPE}23 \&{control}@>
+@$filler_ctl {MMIX-PIPE}167 \&{control}@>
+@$ptr_a {MMIX-PIPE}44 \&{void} ${}{*}{}$@>
+@$go {MMIX-PIPE}44 \&{specnode}@>
+@$flusher {MMIX-PIPE}167 \&{coroutine}@>
+@$flusher_ctl {MMIX-PIPE}167 \&{control}@>
+@$ports {MMIX-PIPE}167 \&{int}@>
+@$name {MMIX-PIPE}167 \&{char} ${}{*}{}$@>
 @z
 
 @x [17]
@@ -172,15 +186,27 @@ read from the |CPV| table.)
 @x [22]
   else token_prescanned=true; /* oops, we should rescan that token */
 }
-
-@ @<Sub...@>=
 @y
   else token_prescanned=true; /* oops, we should rescan that token */
 }
-
-@ @-aa@> @-bb@> @-cc@> @-gg@> @-vv@>
-@-access_time@> @-copy_in_time@> @-copy_out_time@>
-@-mode@> @-ports@> @-repl@> @-vrepl@>
+@z
+@x [23]
+@ @<Sub...@>=
+@y
+@
+@%
+@$aa {MMIX-PIPE}167 \&{int}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$cc {MMIX-PIPE}167 \&{int}@>
+@$gg {MMIX-PIPE}167 \&{int}@>
+@$vv {MMIX-PIPE}167 \&{int}@>
+@$repl {MMIX-PIPE}167 \&{replace\_policy}@>
+@$vrepl {MMIX-PIPE}167 \&{replace\_policy}@>
+@$mode {MMIX-PIPE}167 \&{int}@>
+@$access_time {MMIX-PIPE}167 \&{int}@>
+@$copy_in_time {MMIX-PIPE}167 \&{int}@>
+@$copy_out_time {MMIX-PIPE}167 \&{int}@>
+@$ports {MMIX-PIPE}167 \&{int}@>
 @<Sub...@>=
 @z
 @x [23]
@@ -218,7 +244,10 @@ static void pcs(cache *c) /* subroutine to process a cache spec */
 @x [26]
 @<Allocate coroutines in each functional unit@>=
 @y
-@-k@> @-co@> @-stage@>
+@$k {MMIX-PIPE}76 \&{int}@>
+@$co {MMIX-PIPE}76 \&{coroutine} ${}{*}{}$@>
+@$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
+@$stage {MMIX-PIPE}23 \&{int}@>
 @%
 @$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @$name {MMIX-PIPE}76 \&{char} [\,]@>
@@ -288,7 +317,17 @@ themselves.
 @x [31]
 static void alloc_cache(
 @y
-@-a@> @-aa@> @-b@> @-bb@> @-c@> @-cc@> @-g@> @-gg@> @-v@> @-vv@>
+@%
+@$a {MMIX-PIPE}167 \&{int}@>
+@$aa {MMIX-PIPE}167 \&{int}@>
+@$b {MMIX-PIPE}167 \&{int}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$c {MMIX-PIPE}167 \&{int}@>
+@$cc {MMIX-PIPE}167 \&{int}@>
+@$g {MMIX-PIPE}167 \&{int}@>
+@$gg {MMIX-PIPE}167 \&{int}@>
+@$v {MMIX-PIPE}167 \&{int}@>
+@$vv {MMIX-PIPE}167 \&{int}@>
 static void alloc_cache(
 @z
 @x [31]
@@ -308,16 +347,23 @@ static void alloc_cache(
 @x [32]
 @ @<Allocate the cache sets for cache |c|@>=
 @y
-@ @-aa@> @-bb@> @-cc@> @-g@>
+@ @%
 @$c {MMIX-CONFIG}31 \&{cache} ${}{*}{}$@>
+@$aa {MMIX-PIPE}167 \&{int}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$cc {MMIX-PIPE}167 \&{int}@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @<Allocate the cache sets for cache |c|@>=
 @z
 
 @x [33]
 @ @<Allocate the victim cache for cache |c|@>=
 @y
-@ @-bb@> @-vv@> @-g@>
-@% @$cacheset {MMIX-PIPE}167 \&{cacheblock} ${}{*}{}$@>
+@ @%
+@$cacheset {MMIX-PIPE}167 \&{cacheblock} ${}{*}{}$@>
+@$bb {MMIX-PIPE}167 \&{int}@>
+@$vv {MMIX-PIPE}167 \&{int}@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @<Allocate the victim cache for cache |c|@>=
 @z
 
