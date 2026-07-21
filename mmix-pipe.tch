@@ -872,6 +872,12 @@ static int issued_between(
 @y
 @r @ If more than one functional unit is able to process branch instructions and
 @z
+@x [160]
+i=issued_between(data,cool);
+@y
+i=issued_between(data,cool);
+@% @$i {MMIX-PIPE}12 \&{register} \&{int}@>
+@z
 
 @x [162]
   for (int j=0;j<=dispatch_max;j++)
@@ -1393,7 +1399,9 @@ static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 static char *DPTname[5]={"DPT0","DPT1","DPT2","DPT3","DPT4"};
 
 @r @ @<Initialize e...@>=
-@% @$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@%
+@$i {MMIX-PIPE}44 \&{internal\_opcode}@>
+@$j {MMIX-PIPE}20 \&{register} \&{int}@>
 @$name {MMIX-PIPE}23 \&{char} ${}{*}{}$@>
 @z
 
