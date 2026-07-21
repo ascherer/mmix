@@ -423,6 +423,13 @@ static void print_fetch_buffer(void)
 @-op@> @$i {MMIX-PIPE}12 \&{register} \&{int}@>
 @z
 
+@x [76]
+  char name[16]; /* symbolic designation */
+@y
+  char name[16]; /* symbolic designation */
+@-name@>
+@z
+
 @x [78]
 @ It is convenient to have
 @y
