@@ -935,6 +935,7 @@ requested to be verbose.
 @y
 requested to be verbose.
 @%
+@$c {MMIX-PIPE}176 \&{cache} ${}{*}{}$@>
 @$i {MMIX-PIPE}176 \&{register} \&{int}@>
 @$j {MMIX-PIPE}176 \&{register} \&{int}@>
 @z
@@ -1189,6 +1190,7 @@ case flush_to_mem: {@+register cache *c=(cache *)data->ptr_a;
 @ @<Write the dirty data of |c->outbuf| and wait for the bus@>=
 @-addr@>
 @%
+@$c {MMIX-PIPE}215 \&{register} \&{cache} ${}{*}{}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
 @$g {MMIX-PIPE}167 \&{int}@>
 @$tag {MMIX-PIPE}167 \&{octa}@>
@@ -1221,7 +1223,9 @@ of the present program are left to the interested reader.
 p=alloc_slot(Scache,c->outbuf.tag);
 @y
 p=alloc_slot(Scache,c->outbuf.tag); @+
-@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
+@%
+@$c {MMIX-PIPE}217 \&{register} \&{cache} ${}{*}{}$@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
 @z
 
 @x [219]
@@ -1230,6 +1234,7 @@ p=alloc_slot(Scache,c->outbuf.tag); @+
 @ We only need to read |block_diff| bytes, but it's easier to
 @-addr@>
 @%
+@$c {MMIX-PIPE}217 \&{register} \&{cache} ${}{*}{}$@>
 @$data {MMIX-PIPE}124 \&{register} \&{control} ${}{*}{}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
 @z
@@ -1247,7 +1252,9 @@ p=alloc_slot(Scache,c->outbuf.tag); @+
 @ Here we assume that the granularity is~8.
 @y
 @ Here we assume that the granularity is~8.
-@% @$g {MMIX-PIPE}167 \&{int}@>
+@%
+@$c {MMIX-PIPE}217 \&{register} \&{cache} ${}{*}{}$@>
+@$g {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [222]
@@ -1262,6 +1269,7 @@ cycle, so that there will be two wakeup calls.
 @y
 cycle, so that there will be two wakeup calls.
 @%
+@$c {MMIX-PIPE}222 \&{register} \&{cache} ${}{*}{}$@>
 @$data {MMIX-PIPE}124 \&{register} \&{control} ${}{*}{}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
 @z
@@ -1285,6 +1293,14 @@ p=alloc_slot(Scache,data->z.o); @+
 set_lock(&Scache->filler,mem_lock);
 @y
 set_lock(&Scache->filler,mem_lock); @+
+@z
+
+@x [226]
+  c->inbuf.tag=data->z.o;@+c->inbuf.tag.l &=-c->bb;
+@y
+  c->inbuf.tag=data->z.o;@+c->inbuf.tag.l &=-c->bb;
+@%
+@$c {MMIX-PIPE}224 \&{register} \&{cache} ${}{*}{}$@>
 @z
 
 @x [227]
@@ -1462,14 +1478,18 @@ convenience. Whenever rV changes, we recompute all these variables.
 @<Start up auxiliary coroutines to compute the page table entry@>=
 @y
 @<Start up auxiliary coroutines to compute the page table entry@>=
-@% @$b {MMIX-PIPE}44 \&{spec}@>
+@%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$co {MMIX-PIPE}237 \&{register} \&{coroutine} ${}{*}{}$@>
 @z
 
 @x [244]
 @<Issue $j$ pseudo-instructions to compute a page table entry@>=
 @y
 @<Issue $j$ pseudo-instructions to compute a page table entry@>=
-@% @$b {MMIX-PIPE}44 \&{spec}@>
+@%
+@$b {MMIX-PIPE}44 \&{spec}@>
+@$co {MMIX-PIPE}237 \&{register} \&{coroutine} ${}{*}{}$@>
 @z
 
 @x [245]
@@ -1478,6 +1498,8 @@ convenience. Whenever rV changes, we recompute all these variables.
 @r @ At this point the translation of the given virtual address |data->y.o| is
 @%
 @$b {MMIX-PIPE}44 \&{spec}@>
+@$c {MMIX-PIPE}237 \&{register} \&{cache} ${}{*}{}$@>
+@$cc {MMIX-PIPE}237 \&{register} \&{coroutine} ${}{*}{}$@>
 @$data {MMIX-PIPE}124 \&{register} \&{control} ${}{*}{}$@>
 @$data {MMIX-PIPE}167 \&{octa} ${}{*}{}$@>
 @z
@@ -1579,6 +1601,7 @@ Dcache->filler_ctl.z.o=write_head->addr;
 @y
 set_lock(self,Dcache->fill_lock); @+
 Dcache->filler_ctl.z.o=write_head->addr;
+@$o {MMIX-PIPE}40 \&{octa}@>
 data->ptr_b=Dcache->filler_ctl.ptr_b=(void *)p;
 @z
 
@@ -1836,7 +1859,10 @@ fetch_co.name="Fetch";
 @<Do a simultaneous lookup in the I-cache@>=
 @y
 @<Do a simultaneous lookup in the I-cache@>=
-@% @$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
+@%
+@$b {MMIX-PIPE}167 \&{int}@>
+@$c {MMIX-PIPE}167 \&{int}@>
+@$p {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
 @$q {MMIX-PIPE}258 \&{register} \&{cacheblock} ${}{*}{}$@>
 @z
 
