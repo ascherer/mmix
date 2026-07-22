@@ -311,7 +311,10 @@ int_stages[mul]=n; @+
 themselves.
 @y
 themselves.
-@-b@> @-bb@> @-lg@>
+@-lg@>
+@%
+@$b {MMIX-PIPE}167 \&{int}@>
+@$bb {MMIX-PIPE}167 \&{int}@>
 @z
 
 @x [31]
@@ -456,12 +459,12 @@ extern void MMIX_config(char *); /* public prototype */
 @ @<Private prototypes@>=
 @y
 @ @% @$replace_policy {MMIX-PIPE}23 \&{enum}@>
-@-get_token@> @$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
-@-get_int@> @$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
-@-new_cache@> @$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${}{*}{}$(\,)@>
-@-ppol@> @$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
-@-pcs@> @$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
-@-lg@> @$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
-@-alloc_cache@> @$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
+@$get_token {MMIX-CONFIG}10 \&{static} \&{void} (\,)@>
+@$get_int {MMIX-CONFIG}11 \&{static} \&{int} (\,)@>
+@$new_cache {MMIX-CONFIG}16 \&{static} \&{cache} ${}{*}{}$(\,)@>
+@$ppol {MMIX-CONFIG}22 \&{static} \&{void} (\,)@>
+@$pcs {MMIX-CONFIG}23 \&{static} \&{void} (\,)@>
+@$lg {MMIX-CONFIG}30 \&{static} \&{int} (\,)@>
+@$alloc_cache {MMIX-CONFIG}31 \&{static} \&{void} (\,)@>
 @<Private prototypes@>=
 @z
