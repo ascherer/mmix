@@ -121,11 +121,6 @@ typedef struct ternary_trie_struct trie_node;
 @x [31]
 @<Prototypes@>=
 @y
-@-new_trie_node@>
-@-trie_search@>
-@-new_sym_node@>
-@-prune@>
-@-out_stab@>
 @%
 @$flush_listing_line {MMIXAL}41 \&{void} (\,)@>
 @$update_listing_loc {MMIXAL}42 \&{void} (\,)@>
