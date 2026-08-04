@@ -84,10 +84,9 @@ if (strlen(prog_file_name)>4 && @|
 @y
 @r @ The register stack pointers, rO and rS, are not kept up to date
 @z
-
-@x [20]
-static octa sl3( /* shift left by 3 bits */
-  octa y)
+@x [19]
+@d sl3(y) shift_left(y,3) /* shift left by 3 bits */
 @y
-static octa sl3( octa y) /* shift left by 3 bits */
+@d sl3(y) shift_left(y,3) /* shift left by 3 bits */
+@-y@>
 @z

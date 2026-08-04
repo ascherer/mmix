@@ -348,7 +348,6 @@ We also have room for the variadic macro |panic| used in error situations.
 
 @<Proto...@>=
 static bool undump_octa(void);
-static octa sl3(octa);
 @z
 
 @x [18] l.469 Change from MMIX home.
@@ -358,27 +357,30 @@ static octa sl3(octa);
 @:l}{\|l (ring of local registers)@>
 @z
 
-@x [19] l.475 Change from MMIX home.
+@x [19] l.475 Change from MMIX home. Reuse MMIX-ARITH::shift_left.
 examining the pipeline.
 @y
 examining the pipeline.
 @:g}{\|g (global registers)@>
+
+@d sl3(y) shift_left(y,3) /* shift left by 3 bits */
 @z
 
-@x [20] l.489 C99 prototypes for C2x.
+@x [20] l.488 Reuse MMIX-ARITH::shift_left. Untangle private stuff.
+@ @<Sub...@>=
 static octa sl3 @,@,@[ARGS((octa))@];@+@t}\6{@>
 static octa sl3(y) /* shift left by 3 bits */
   octa y;
-@y
-static octa sl3( /* shift left by 3 bits */
-  octa y)
-@z
-
-@x [20] l.494 Compound literal.
+{
+  register tetra yhl=y.h<<3, ylh=y.l>>29;
     y.h=yhl+ylh;@+ y.l<<=3;
   return y;
+}
 @y
-  return (octa){yhl+ylh, y.l<<3};
+@ @<Glob...@>=
+static bool silent=false;
+static bool bad_address;
+static octa seven_octa={0,7};
 @z
 
 @x [21] l.505 Change from MMIX home.
@@ -414,7 +416,8 @@ case '!':@+
      printf("unit %s %d\n",funit[j].name,funit[j].k);
 @z
 
-@x [25] l.556 Untangle private stuff from MMIX-ARITH.
+@x [25] l.555 Untangle private stuff from MMIX-ARITH.
+@ @<Glob...@>=
 bool silent=false;
 bool bad_address;
 extern bool page_bad;
@@ -428,7 +431,4 @@ extern octa incr @,@,@[ARGS((octa y,int delta))@];
 extern void mmix_io_init @,@,@[ARGS((void))@];
 extern void MMIX_config @,@,@[ARGS((char*))@];
 @y
-static bool silent=false;
-static bool bad_address;
-static octa seven_octa={0,7};
 @z
