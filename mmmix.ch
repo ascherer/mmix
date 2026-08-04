@@ -40,13 +40,6 @@ char *config_file_name, *prog_file_name;
 static char *config_file_name, *prog_file_name;
 @z
 
-@x [2] l.46 Prototypes.
-@<Subroutines@>@;
-@y
-@<Prototypes@>@;
-@<Subroutines@>@;
-@z
-
 @x [2] l.48 C99 prototypes for C2x.
 int main(argc,argv)
   int argc;
@@ -338,16 +331,12 @@ static octa tmp; /* an octabyte of temporary interest */
 @ Function |read_hex| is used in {\mc MMIX-MEM} (referenced as |extern|),
 so we had better move it ``down'' (together with the |static| variable~|d|
 in the previous section).
-Instead, we place some internal prototypes here.
-We also have room for the variadic macro |panic| used in error situations.
+Instead, we have room for the variadic macro |panic| used in error situations.
 [Former module {\mc MMIX-MEM} has been fully dissolved into main module
 {\mc MMIX-PIPE} to avoid further design discrepancies.]
 
 @d panic(r,m,...) {@+fprintf(stderr,
   @[m @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@]);@+exit(r);@+}
-
-@<Proto...@>=
-static bool undump_octa(void);
 @z
 
 @x [18] l.469 Change from MMIX home.
