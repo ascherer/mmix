@@ -1081,6 +1081,14 @@ Char sym_buf[sym_length_max];
   *sym_ptr--='\0';
 @z
 
+@x [82] l.2301 Format improvement.
+typedef enum {@!negate,@!serialize,@!complement,@!registerize,@!inner_lp,@|
+ @!plus,@!minus,@!times,@!over,@!frac,@!mod,@!shl,@!shr,@!and,@!or,@!xor,@|
+@y
+typedef enum {@!negate,@!serialize,@!complement,@!registerize,@!inner_lp,@/
+ @!plus,@!minus,@!times,@!over,@!frac,@!mod,@!shl,@!shr,@!and,@!or,@!xor,@/
+@z
+
 @x [85] l.2341 Use standard 'bool'.
 while (1) {
 @y
