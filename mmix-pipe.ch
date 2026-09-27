@@ -301,7 +301,8 @@ register int i,j;
 @d errprint(f,...) fprintf(stderr,
    @[f @,@, __VA_OPT__(@=,@>) @,@, __VA_ARGS__@])
 @d panic(x)@+ {@+errprint("Panic: ");@+x;@+errprint("!\n");@+expire();@+}
-@d confusion(m,...) panic(errprint("This can't happen: %s",m); __VA_ARGS__)
+@d confusion(m,...) panic(errprint("This can't happen: %s",m) @,@,
+   __VA_OPT__(@=;@>) @,@, __VA_ARGS__)
 @z
 
 @x [13] l.279 C99 prototypes for C2x. Variadic function for error reporting.
