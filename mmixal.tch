@@ -110,14 +110,6 @@ the remainder in~|aux|.
 @-y@> @-z@>
 @z
 
-@x [30]
-typedef struct ternary_trie_struct trie_node;
-@y
-typedef struct ternary_trie_struct trie_node;
-@-sym_node@>
-@-trie_node@>
-@z
-
 @x [31]
 @<Prototypes@>=
 @y

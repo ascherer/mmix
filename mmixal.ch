@@ -255,8 +255,6 @@ typedef char Char; /* bytes that will become wydes some day */
 
 @<Type...@>=
 typedef char Char; /* bytes that will become wydes some day */
-typedef struct sym_tab_struct sym_node;
-typedef struct ternary_trie_struct trie_node;
 @z
 
 @x [31] l.1013 Stuff from MMIX-ARITH replaced with prototypes.
@@ -274,6 +272,9 @@ with a prototype, then with an old-style definition.
 #endif
 @y
 @ Each subroutine below is declared and defined with a prototype.
+
+@s sym_node int
+@s trie_node int
 
 @<Prototypes@>=
 void flush_listing_line(char*);
@@ -532,6 +533,14 @@ void assemble(
 @y
 @z
 
+@x [54] l.1447 Forward declare struct type.
+typedef struct ternary_trie_struct {
+@y
+typedef struct sym_tab_struct sym_node;
+typedef struct ternary_trie_struct trie_node;
+@#
+typedef struct ternary_trie_struct {
+@z
 @x [54] l.1449 Forward declare struct type.
   struct ternary_trie_struct *left, *mid, *right; /* downward
                                                  in the ternary trie */

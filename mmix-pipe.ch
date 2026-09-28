@@ -483,7 +483,6 @@ typedef struct coroutine_struct {
 @y
 typedef struct control_struct control;
 typedef struct coroutine_struct coroutine;
-typedef struct specnode_struct specnode;
 @#
 typedef struct coroutine_struct {
 @z
@@ -637,6 +636,13 @@ void print_locks(void)
 @s specnode_struct int
 
 @y
+@z
+@x [40] l.663 Forward declare struct type.
+typedef struct {
+@y
+typedef struct specnode_struct specnode;
+@#
+typedef struct {
 @z
 @x [40] l.665 Forward declare struct type.
   struct specnode_struct *p;
