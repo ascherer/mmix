@@ -1471,10 +1471,16 @@ int register_truth(
 { register int b=0;
 @z
 
-@x [91] l.2075 Change from MMIX home.
+@x [91] l.2074 Change from MMIX home. Use preproc items.
+ case 0: b=o.h>>31;@+break; /* negative? */
  case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
+ case 2: b=(o.h<sign_bit && (o.h||o.l));@+break; /* positive? */
+ case 3: b=o.l&0x1;@+break; /* odd? */
 @y
- default: case 1: b=(o.h==0 && o.l==0);@+break; /* zero? */
+ case 0: b=hi>>31;@+break; /* negative? */
+ default: case 1: b=(hi==0 && lo==0);@+break; /* zero? */
+ case 2: b=(hi<sign_bit && (hi||lo));@+break; /* positive? */
+ case 3: b=lo&0x1;@+break; /* odd? */
 @z
 
 @x [93] l.2117 Global and local registers.
@@ -1893,10 +1899,16 @@ void trace_print(
   octa o)
 @z
 
-@x [137] l.2835 Change from MMIX home.
+@x [137] l.2833 Use preproc items.
+ case zhex: printf("%08x%08x",o.h,o.l);@+return;
+@y
+ case zhex: printf("%08x%08x",hi,lo);@+return;
+@z
+
+@x [137] l.2835 Change from MMIX home. Use preproc items.
  case handle:@+if (o.h==0 && o.l<3) printf(stream_name[o.l]);
 @y
- case handle:@+if (o.h==0 && o.l<3) printf("%s",stream_name[o.l]);
+ case handle:@+if (hi==0 && lo<3) printf("%s",stream_name[lo]);
 @z
 
 @x [138] l.2846 Change from MMIX home.
@@ -1942,7 +1954,7 @@ void show_stats(
 @:g}{\|g (global registers)@>
 @z
 
-@x [140] l.2872 Block-local variable.
+@x [140] l.2872 Block-local variable. Use preproc items.
   if (!verbose) return;
   o = halted? incr(inst_ptr,-4): inst_ptr;
   printf("  (%s at location #%08x%08x)\n",
@@ -1951,7 +1963,7 @@ void show_stats(
   if (verbose) {
     octa o = halted? incr(inst_ptr,-4): inst_ptr;
     printf("  (%s at location #%08x%08x)\n",
-      halted? "halted": "now", o.h, o.l);
+      halted? "halted": "now", hi, lo);
   }
 @z
 
@@ -2164,6 +2176,12 @@ void print_string(o)
 @y
 void print_string(
   octa o)
+@z
+
+@x [160] l.3307 Use preproc items.
+    b=((k<4? o.h>>(8*(3-k)): o.l>>(8*(7-k))))&0xff;
+@y
+    b=((k<4? hi>>(8*(3-k)): lo>>(8*(7-k))))&0xff;
 @z
 
 @x [161] l.3329 Fixing possible buffer overrun in b command (MMIX home, DEK).
